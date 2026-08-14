@@ -181,9 +181,9 @@ def main():
         star = " *" if pv < .05 else ""
         print(f"{m:<34} {np.mean(cs):>8.3f} {np.mean(ts):>8.3f} {obs:>+8.3f} "
               f"[{lo:>+.3f},{hi:>+.3f}] {pv:>8.4f}{star}")
-    print("\nNOTE: treatment docs average ~11 words longer than control. Length is a")
-    print("confound in this corpus version; a null here is interpretable, a positive")
-    print("result needs the length-matched corpus (v0.2) before it means anything.")
+    print("\nNOTE: 12 prompts is below the 25-prompt floor in METHODOLOGY.md. This round")
+    print("estimates the effect and its variance, not a publishable effect size — report")
+    print("H4 as an interval, not a finding, until Round 1.")
 
     # ---------------- H3: cross-model agreement ----------------
     hdr("H3. CROSS-MODEL AGREEMENT  (Kendall's W on document citation rates)")
