@@ -14,12 +14,10 @@ other, replacing generic phrasing with specific figures rather than *adding* the
 `corpus_v0.1.json` no longer exists on disk — it was never run against real models, so there
 was nothing to preserve under the immutability rule.
 
-### 2. Pre-register the pilot
-Write `preregistrations/2026-08-pilot.md` — hypotheses H1–H5, corpus hash, model list, runs
-per cell, primary metric (target CPR), analysis plan, and the stopping rule. Commit it
-*before* running.
-
-*Done when:* committed, with a git timestamp preceding the first record in `results/runs.jsonl`.
+### 2. Pre-register the pilot — done (2026-08-13)
+`preregistrations/2026-08-pilot.md` — hypotheses H1–H5, corpus hash `491dad19cb3cd9b0`,
+8-model list, 24 runs/cell, primary metric (target CPR), full analysis plan, reporting rules,
+and stopping rule. Committed before `results/runs.jsonl` exists.
 
 ### 3. First real run
 `python3 run_pilot.py --dry-run`, confirm cost, then run. Expect ~4,608 calls.
