@@ -20,8 +20,8 @@ PLANTED = {
     "slot_logodds": [0.75, 0.10, -0.35, -0.40, 0.05, 0.60],
     "treatment_logodds": 0.34,          # ~OR 1.40
     "model_baseline_logodds": {         # per-model intercept
-        "anthropic/claude-haiku-4.5": 0.30, "openai/gpt-5.2-mini": 0.10,
-        "google/gemini-3-flash": -0.15, "x-ai/grok-4-mini": -0.30,
+        "anthropic/claude-haiku-4.5": 0.30, "openai/gpt-5.4-mini": 0.10,
+        "google/gemini-3-flash-preview": -0.15, "x-ai/grok-4.3": -0.30,
         "moonshotai/kimi-k2": 0.05, "deepseek/deepseek-chat": -0.20,
         "meta-llama/llama-4-maverick": -0.45, "mistralai/mistral-medium-3": 0.00,
     },

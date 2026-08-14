@@ -30,9 +30,9 @@ HARNESS_VERSION = "0.1.0"
 # input tokens alone; the pilot is about metric validity, not model ranking.
 DEFAULT_MODELS = [
     "anthropic/claude-haiku-4.5",
-    "openai/gpt-5.2-mini",
-    "google/gemini-3-flash",
-    "x-ai/grok-4-mini",
+    "openai/gpt-5.4-mini",
+    "google/gemini-3-flash-preview",
+    "x-ai/grok-4.3",
     "moonshotai/kimi-k2",
     "deepseek/deepseek-chat",
     "meta-llama/llama-4-maverick",
