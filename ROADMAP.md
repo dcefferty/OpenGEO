@@ -19,14 +19,31 @@ was nothing to preserve under the immutability rule.
 8-model list, 24 runs/cell, primary metric (target CPR), full analysis plan, reporting rules,
 and stopping rule. Committed before `results/runs.jsonl` exists.
 
-### 3. First real run
-`python3 run_pilot.py --dry-run`, confirm cost, then run. Expect ~4,608 calls.
-
-*Done when:* `results/runs.jsonl` is complete with <2% error rate and `analyze.py` runs clean.
+### 3. First real run — done (2026-08-14)
+4,608 calls, 0 errors, `analyze.py` runs clean. Two attempts: the first hit a bug (3 of 8
+pre-registered model IDs were invalid on OpenRouter, unrelated to a mid-run credit exhaustion)
+— see the deviation logged in `preregistrations/2026-08-pilot.md` and the archived failed
+attempt at `results/runs_attempt1_failed.jsonl`. The corrected second attempt is clean.
 
 **Check before trusting anything:** the per-model no-cite rate in the DATA HEALTH section. A
 model that frequently fails to emit parseable `[n]` citations is an instruction-following
 failure, not a low-visibility signal. Exclude it explicitly; never average it in.
+**`moonshotai/kimi-k2` triggers this here — 34.4% no-cite rate, an order of magnitude above
+every other model (next highest: 1.7%).** Its CPR (0.545) and its H4 result (the only
+individually significant one, p=0.0227) are not trustworthy until re-run with that excluded.
+
+Real-data highlights (all subject to the scope-honesty caveat below):
+- H4 pooled (all 8 models): delta +0.001, 95% CI [-0.030, +0.026], p=0.96 — a clean null,
+  consistent with the pre-registration's power expectation at 12 prompts.
+- H2 (position): mean PSI 0.102, but η² for target slot is only 0.003 vs. η²=0.483 for
+  content format and η²=0.484 for prompt identity — position matters less than *what kind of
+  document* it is. `product`-format documents cite at 0.232 vs. 0.90+ for every other format.
+- H3 (cross-model agreement): cross-model W 0.801 vs. within-model baseline 0.785 — gap
+  −0.015. **Not supported** — models agree with each other about as much as they agree with
+  themselves. Contradicts the "AI visibility is engine-specific" narrative, at least on this
+  corpus.
+- H1 (reliability): Spearman-Brown ≥ 0.91 for 7 of 8 models; kimi-k2 at 0.691 tracks its
+  citation-parsing problem above.
 
 ---
 
