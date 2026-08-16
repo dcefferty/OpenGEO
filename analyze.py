@@ -48,6 +48,57 @@ def perm_test_paired(d, n=20000):
     return obs, p
 
 
+def two_way_ss(y, f_idx, m_idx, n_f, n_m):
+    """Balanced two-way sum-of-squares decomposition of y by two integer-coded
+    factors (format index, model index). Returns SS_total, SS_a, SS_b,
+    SS_interaction, SS_residual, plus the per-level means needed to build an
+    additive (no-interaction) fit for the permutation null."""
+    y = np.asarray(y, dtype=float)
+    grand = y.mean()
+    ss_total = np.sum((y - grand) ** 2)
+
+    f_cnt = np.bincount(f_idx, minlength=n_f)
+    f_sum = np.bincount(f_idx, weights=y, minlength=n_f)
+    f_mean = np.divide(f_sum, f_cnt, out=np.zeros(n_f), where=f_cnt > 0)
+    ss_f = np.sum(f_cnt * (f_mean - grand) ** 2)
+
+    m_cnt = np.bincount(m_idx, minlength=n_m)
+    m_sum = np.bincount(m_idx, weights=y, minlength=n_m)
+    m_mean = np.divide(m_sum, m_cnt, out=np.zeros(n_m), where=m_cnt > 0)
+    ss_m = np.sum(m_cnt * (m_mean - grand) ** 2)
+
+    cell_idx = f_idx * n_m + m_idx
+    c_cnt = np.bincount(cell_idx, minlength=n_f * n_m)
+    c_sum = np.bincount(cell_idx, weights=y, minlength=n_f * n_m)
+    c_mean = np.divide(c_sum, c_cnt, out=np.zeros(n_f * n_m), where=c_cnt > 0)
+    ss_cells = np.sum(c_cnt * (c_mean - grand) ** 2)
+
+    ss_int = ss_cells - ss_f - ss_m
+    ss_resid = ss_total - ss_cells
+    return ss_total, ss_f, ss_m, ss_int, ss_resid, f_mean, m_mean, c_mean.reshape(n_f, n_m)
+
+
+def interaction_perm_test(y, f_idx, m_idx, n_f, n_m, n_perm=2000):
+    """Freedman-Lane permutation test for a format x model interaction: fit the
+    additive (no-interaction) model, permute its residuals, and see how often a
+    reshuffled dataset produces as much 'extra' cell structure as the real one."""
+    ss_total, ss_f, ss_m, ss_int_obs, ss_resid, f_mean, m_mean, grid = \
+        two_way_ss(y, f_idx, m_idx, n_f, n_m)
+    grand = y.mean()
+    fit = f_mean[f_idx] + m_mean[m_idx] - grand
+    resid = y - fit
+
+    null = np.empty(n_perm)
+    for k in range(n_perm):
+        y_star = fit + RNG.permutation(resid)
+        _, _, _, ss_int_k, _, _, _, _ = two_way_ss(y_star, f_idx, m_idx, n_f, n_m)
+        null[k] = ss_int_k
+    p = (np.sum(null >= ss_int_obs) + 1) / (n_perm + 1)
+    return dict(ss_total=ss_total, ss_format=ss_f, ss_model=ss_m,
+                ss_interaction=ss_int_obs, ss_residual=ss_resid, p=p,
+                grid=grid, f_mean=f_mean, m_mean=m_mean)
+
+
 def kendall_w(rank_matrix):
     """rank_matrix: (m raters x n items) of ranks. Returns W in [0,1]."""
     r = np.asarray(rank_matrix, dtype=float)
@@ -315,6 +366,49 @@ def main():
         print(f"{f:<12} {k/len(sub):>7.3f} [{lo:.3f}, {hi:.3f}]{'':>3} {len(sub):>6}   "
               f"{np.min(per):.2f}-{np.max(per):.2f}")
 
+    print("\nformat x model interaction (does the format effect differ by model, beyond")
+    print("each factor's own average effect?):\n")
+    f_map = {f: i for i, f in enumerate(fmts)}
+    m_map = {m: i for i, m in enumerate(models)}
+    f_idx = np.array([f_map[r["target_format"]] for r in recs])
+    m_idx = np.array([m_map[r["model"]] for r in recs])
+    y_bin = np.array([r["target_cited"] for r in recs], dtype=float)
+    inter = interaction_perm_test(y_bin, f_idx, m_idx, len(fmts), len(models))
+
+    print(f"{'model':<32} " + " ".join(f"{f:>10}" for f in fmts))
+    for mi, m in enumerate(models):
+        row = inter["grid"][:, mi]
+        print(f"{m:<32} " + " ".join(f"{v:>10.3f}" for v in row))
+
+    eta2_f = inter["ss_format"] / inter["ss_total"]
+    eta2_m = inter["ss_model"] / inter["ss_total"]
+    eta2_i = inter["ss_interaction"] / inter["ss_total"]
+    print(f"\n  eta^2 format       = {eta2_f:.3f}")
+    print(f"  eta^2 model        = {eta2_m:.3f}")
+    print(f"  eta^2 interaction  = {eta2_i:.3f}   p = {inter['p']:.4f} "
+          f"(Freedman-Lane permutation test, 2000 perms)")
+    dominates = eta2_i > eta2_f and eta2_i > eta2_m and inter["p"] < 0.05
+    print("\n  H5 falsification condition: format x model interaction dominates main effects.")
+    if dominates:
+        print("  H5 FALSIFIED — interaction is both the largest term and significant: the")
+        print("  format effect is model-specific, not a universal property of the format.")
+    else:
+        print("  H5 SUPPORTED — interaction does not dominate the main effects (either smaller")
+        print("  than eta^2 format/model, or not distinguishable from noise). The format effect")
+        print("  is broadly consistent across models, even though its size varies.")
+    print("\n  CAVEAT 1: target_format is nested within prompt in this 12-prompt design (2")
+    print("  prompts per format) — format's eta^2 and prompt's eta^2 below are nearly")
+    print("  identical because they are almost the same partition of the data. This test")
+    print("  cannot cleanly separate 'format' from 'these two specific prompts'; it needs")
+    print("  more prompts per format to do that.")
+    print("\n  CAVEAT 2: this test operates on raw CPR (probability), not log-odds. Verified")
+    print("  against make_mock.py's purely additive-in-log-odds ground truth (no planted")
+    print("  interaction): it still finds eta^2=0.048, p<0.001 there. That is not a bug --")
+    print("  models sit at different points on the sigmoid, so identical additive log-odds")
+    print("  bumps produce different probability swings per model, which this test reads as")
+    print("  'interaction'. A real effect here is entangled with this scale artifact and")
+    print("  cannot be separated from it without a logit-scale model.")
+
     # how much of the variance is format vs model vs prompt vs slot?
     hdr("VARIANCE DECOMPOSITION  (what actually drives citation?)")
     print("Between-group variance in target CPR attributable to each factor.")
@@ -340,6 +434,7 @@ def main():
     print(f"  mean PSI (position)         : {pooled_psi:.3f}")
     if ws:
         print(f"  Kendall's W (model agreement): {np.mean(ws):.3f}")
+    print(f"  format x model interaction  : eta^2={eta2_i:.3f}  p={inter['p']:.4f}")
     print(f"  target CPR overall          : {np.mean([r['target_cited'] for r in recs]):.3f}")
     print("\nRemember: this is the synthesis stage only, with retrieval held constant.")
     print("It says nothing about whether a page gets retrieved in the first place.")
