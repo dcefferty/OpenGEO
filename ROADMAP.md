@@ -58,10 +58,29 @@ use a different model family than the one under test, and report judge-model sen
 *Why it matters:* nobody in the GEO industry reports fidelity. It is the clearest open space
 in the metric set.
 
-### 5. Power analysis for Round 1
-Use the pilot's observed variance components to size Round 1 properly: how many prompts, how
-many runs, to detect an OR of 1.3 at 80% power. The simulation approach is in
-`METHODOLOGY.md` §5.2.
+### 5. Power analysis for Round 1 — done (2026-08-16)
+`size_round1.py` resamples the pilot's real (prompt, model) control-condition cells (bootstrap,
+not the `METHODOLOGY.md` §5.2 Beta(1.2,3) assumption) and simulates the same sign-flip
+permutation test `analyze.py` uses.
+
+**The headline finding isn't a number, it's that the original table's assumption was wrong.**
+Real control CPR averages 0.867, with 67% of (prompt, model) cells at a literal 100% ceiling —
+vs. the assumed Beta(1.2,3) prior (mean 0.288). A treatment effect has almost no room to move
+against a near-ceiling baseline: at the pilot's own scale (12 prompts x 24 runs/arm), real power
+for OR=1.3 is 0.34, vs. 0.87 under the old assumption at the identical size. This is a ~2.5x
+miss, not a rounding error.
+
+*Recommended design:* **50 prompts x 24 runs/arm = 16,800 calls, power ~0.96 for OR=1.3.** Kept
+runs/arm >= 24 deliberately — some cheaper configurations (e.g. 100 x 10) reach similar power on
+paper but violate the 24-runs/cell reliability floor in `CLAUDE.md`, which exists for a
+different reason (split-half reliability) than statistical power and shouldn't be silently
+traded away. 25 x 30 (10,500 calls, power 0.80) is viable but has no margin.
+
+*The more consequential fix is corpus design, not N.* If Round 1's target documents aren't the
+obviously-best match among only 6 candidates — i.e., control CPR sits in a more sensitive
+30-70% range instead of 87%+ — power at the *pilot's own* 12x24 scale would be 0.87 instead of
+0.34. Ceiling avoidance is free; more calls is not. Corpus construction for Round 1 should
+prioritize this over simply scaling up the pilot's prompt style.
 
 ### 6. Round 1 as a Princeton replication
 Re-run GEO-bench's intervention set (statistics, quotations, citations, fluency, keyword
