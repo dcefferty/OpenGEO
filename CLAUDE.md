@@ -93,13 +93,29 @@ Needs `OPENROUTER_API_KEY`. Python 3.9+; numpy for analysis, stdlib only for the
 
 ## Current state
 
-Pilot is built and verified against mock data, on corpus **v0.2** (length-matched: target pair
-deltas are within ±3 words, mean ~0 — the v0.1 corpus confounded claim density with length by
-~11 words on average, which is why v0.1 no longer exists on disk). **It has not yet been run
-against real models.**
+The v0.2 pilot ran clean against real models (4,608 calls, 0 errors, pre-registered in
+`preregistrations/2026-08-pilot.md`) but H4 (claim density → citation) came back a clean null
+— pooled delta +0.001, CI includes zero. Diagnosis: control-condition CPR averaged 0.867 with
+67% of (prompt, model) cells at a literal 100% ceiling, because the broad "what should I look
+for in X" style questions let every one of the 6 candidate documents answer *something*, so
+citation stopped discriminating on content at all.
 
-See `ROADMAP.md` for the prioritized backlog. Next up: pre-register the pilot
-(`preregistrations/`), then the first real run.
+**Corpus v0.3** (`corpus/corpus_v0.3.json`, under construction in `corpus/build_corpus.py`)
+fixes this: each of the 12 questions was narrowed to ask for one specific fact that only the
+treatment variant states outright, and — the part that actually mattered — each control
+document was rewritten to share *no* topical surface with that fact, not just the literal
+number. A control that merely omits the number but still gestures at the same topic (e.g.
+"be wary of tools that charge per seat") still gets cited; models will quote even a loosely
+adjacent phrase as justification. Validated prompt-by-prompt against real models before the
+full run (see git history on `corpus/build_corpus.py` for the per-prompt diagnosis trail —
+several first-draft fixes failed for subtle reasons worth reading if touching this corpus
+again). Full v0.3 run (`results/runs_v0.3.jsonl`, 4,608 calls, 0 errors): H4 pooled delta
++0.493, CI [+0.352, +0.641], p=0.0005, individually significant for all 8 models.
+
+v0.3 has not been pre-registered as a numbered round — it's the corpus-design validation that
+Round 1 will be built from, not Round 1 itself. See `ROADMAP.md` for what's next: scaling
+this same recipe to the sizing analysis's recommended 50 prompts × 24 runs, then
+pre-registering and running Round 1 for real.
 
 ## Scope honesty
 

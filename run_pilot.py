@@ -146,6 +146,9 @@ def main():
                          "usable threshold between n=16 and n=24. Do not use 10.")
     ap.add_argument("--models", nargs="*", default=DEFAULT_MODELS)
     ap.add_argument("--conditions", nargs="*", default=["control", "treatment"])
+    ap.add_argument("--prompts", nargs="*", default=None,
+                    help="prompt_ids to run, e.g. for validating a single revised prompt "
+                         "before committing a full corpus rewrite. Default: all prompts.")
     ap.add_argument("--temperature", type=float, default=1.0,
                     help="1.0 samples the model's natural distribution, which is what "
                          "a real user gets; do not lower this to reduce variance")
@@ -157,6 +160,12 @@ def main():
     corpus = json.loads(pathlib.Path(args.corpus).read_text())
     docs_by_id = {d["doc_id"]: d for d in corpus["documents"]}
     prompts = corpus["prompts"]
+    if args.prompts:
+        wanted = set(args.prompts)
+        prompts = [p for p in prompts if p["prompt_id"] in wanted]
+        missing = wanted - {p["prompt_id"] for p in prompts}
+        if missing:
+            sys.exit(f"unknown prompt_id(s): {sorted(missing)}")
 
     cells = [(m, p, c, r)
              for m in args.models

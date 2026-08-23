@@ -1,0 +1,998 @@
+{
+  "corpus_version": "0.3",
+  "n_prompts": 12,
+  "n_docs": 72,
+  "formats": [
+    "blog",
+    "news",
+    "docs",
+    "product",
+    "forum",
+    "reference"
+  ],
+  "domains": [
+    "consumer_product",
+    "finance",
+    "health",
+    "local_services",
+    "saas",
+    "travel"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "saas_uptime",
+      "domain": "saas",
+      "question": "What check interval and monthly price should a 5-person engineering team expect for uptime monitoring?",
+      "target_doc_id": "saas_uptime__blog",
+      "target_format": "blog",
+      "doc_ids": [
+        "saas_uptime__blog",
+        "saas_uptime__news",
+        "saas_uptime__docs",
+        "saas_uptime__product",
+        "saas_uptime__forum",
+        "saas_uptime__reference"
+      ]
+    },
+    {
+      "prompt_id": "saas_pwmgr",
+      "domain": "saas",
+      "question": "How fast does access get revoked when someone leaves, and how long are activity logs kept, with a business password manager?",
+      "target_doc_id": "saas_pwmgr__docs",
+      "target_format": "docs",
+      "doc_ids": [
+        "saas_pwmgr__blog",
+        "saas_pwmgr__news",
+        "saas_pwmgr__docs",
+        "saas_pwmgr__product",
+        "saas_pwmgr__forum",
+        "saas_pwmgr__reference"
+      ]
+    },
+    {
+      "prompt_id": "cons_shoes",
+      "domain": "consumer_product",
+      "question": "At what mileage should I replace my running shoes, and how much does rotating two pairs extend their life?",
+      "target_doc_id": "cons_shoes__forum",
+      "target_format": "forum",
+      "doc_ids": [
+        "cons_shoes__blog",
+        "cons_shoes__news",
+        "cons_shoes__docs",
+        "cons_shoes__product",
+        "cons_shoes__forum",
+        "cons_shoes__reference"
+      ]
+    },
+    {
+      "prompt_id": "cons_espresso",
+      "domain": "consumer_product",
+      "question": "How long does this espresso machine take to heat up, and what's the warranty length?",
+      "target_doc_id": "cons_espresso__product",
+      "target_format": "product",
+      "doc_ids": [
+        "cons_espresso__blog",
+        "cons_espresso__news",
+        "cons_espresso__docs",
+        "cons_espresso__product",
+        "cons_espresso__forum",
+        "cons_espresso__reference"
+      ]
+    },
+    {
+      "prompt_id": "health_creatine",
+      "domain": "health",
+      "question": "What's the recommended daily creatine dose for maintenance, and how much for an optional loading phase?",
+      "target_doc_id": "health_creatine__reference",
+      "target_format": "reference",
+      "doc_ids": [
+        "health_creatine__blog",
+        "health_creatine__news",
+        "health_creatine__docs",
+        "health_creatine__product",
+        "health_creatine__forum",
+        "health_creatine__reference"
+      ]
+    },
+    {
+      "prompt_id": "health_sleep",
+      "domain": "health",
+      "question": "How many minutes off are consumer sleep trackers from lab-measured sleep time, and what's their stage-classification agreement rate?",
+      "target_doc_id": "health_sleep__news",
+      "target_format": "news",
+      "doc_ids": [
+        "health_sleep__blog",
+        "health_sleep__news",
+        "health_sleep__docs",
+        "health_sleep__product",
+        "health_sleep__forum",
+        "health_sleep__reference"
+      ]
+    },
+    {
+      "prompt_id": "fin_savings",
+      "domain": "finance",
+      "question": "How long do promotional savings rates typically last before dropping, and what's the FDIC coverage limit per depositor?",
+      "target_doc_id": "fin_savings__blog",
+      "target_format": "blog",
+      "doc_ids": [
+        "fin_savings__blog",
+        "fin_savings__news",
+        "fin_savings__docs",
+        "fin_savings__product",
+        "fin_savings__forum",
+        "fin_savings__reference"
+      ]
+    },
+    {
+      "prompt_id": "fin_index",
+      "domain": "finance",
+      "question": "What's this index fund's expense ratio, and what's the minimum investment for a lump-sum purchase?",
+      "target_doc_id": "fin_index__product",
+      "target_format": "product",
+      "doc_ids": [
+        "fin_index__blog",
+        "fin_index__news",
+        "fin_index__docs",
+        "fin_index__product",
+        "fin_index__forum",
+        "fin_index__reference"
+      ]
+    },
+    {
+      "prompt_id": "local_hvac",
+      "domain": "local_services",
+      "question": "At what repair cost, relative to a new system, should I consider replacing instead of repairing my HVAC?",
+      "target_doc_id": "local_hvac__docs",
+      "target_format": "docs",
+      "doc_ids": [
+        "local_hvac__blog",
+        "local_hvac__news",
+        "local_hvac__docs",
+        "local_hvac__product",
+        "local_hvac__forum",
+        "local_hvac__reference"
+      ]
+    },
+    {
+      "prompt_id": "local_movers",
+      "domain": "local_services",
+      "question": "How far below competing quotes does a typical moving scam estimate run, and what deposit percentage should be considered a red flag?",
+      "target_doc_id": "local_movers__news",
+      "target_format": "news",
+      "doc_ids": [
+        "local_movers__blog",
+        "local_movers__news",
+        "local_movers__docs",
+        "local_movers__product",
+        "local_movers__forum",
+        "local_movers__reference"
+      ]
+    },
+    {
+      "prompt_id": "travel_points",
+      "domain": "travel",
+      "question": "Roughly how much net value per year does an airline card deliver for a casual traveller after the annual fee?",
+      "target_doc_id": "travel_points__forum",
+      "target_format": "forum",
+      "doc_ids": [
+        "travel_points__blog",
+        "travel_points__news",
+        "travel_points__docs",
+        "travel_points__product",
+        "travel_points__forum",
+        "travel_points__reference"
+      ]
+    },
+    {
+      "prompt_id": "travel_visa",
+      "domain": "travel",
+      "question": "How much more does a 'cancel for any reason' travel insurance rider typically cost compared to a standard policy?",
+      "target_doc_id": "travel_visa__reference",
+      "target_format": "reference",
+      "doc_ids": [
+        "travel_visa__blog",
+        "travel_visa__news",
+        "travel_visa__docs",
+        "travel_visa__product",
+        "travel_visa__forum",
+        "travel_visa__reference"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "saas_uptime__blog",
+      "prompt_id": "saas_uptime",
+      "format": "blog",
+      "domain": "saas",
+      "is_target": true,
+      "variants": {
+        "control": "Choosing uptime monitoring for a small team comes down to a few things. Integration quality matters most: Slack and PagerDuty hooks that route correctly save real time during an incident. A public status page you can hand to customers cuts down on 'is it just me' support tickets. Most teams over-buy on enterprise dashboards they will never touch. Look for a clean interface, solid webhook support, and a vendor that makes cancellation easy rather than a support queue.",
+        "treatment": "Choosing uptime monitoring for a small team comes down to a few things. Check interval matters most: 30-second checks catch outages a 5-minute interval misses roughly 40% of the time for short incidents. Alert routing should support at least 3 escalation tiers. Most teams over-buy here. Enterprise tiers start around $400/month and are built for organisations with dedicated SRE staff; a five-person team rarely needs that. Expect to pay $20-50/month for 50 monitors at 60-second intervals, and avoid per-seat pricing."
+      }
+    },
+    {
+      "doc_id": "saas_uptime__news",
+      "prompt_id": "saas_uptime",
+      "format": "news",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "Monitoring vendor Pingscale raised a Series B this quarter, citing growth among smaller engineering teams. The company said its customer base has shifted toward organisations under 50 engineers, a segment it described as historically underserved by incumbent monitoring suites. Analysts noted consolidation across the observability category, with several vendors bundling uptime checks into broader platforms.",
+        "treatment": "Monitoring vendor Pingscale raised a Series B this quarter, citing growth among smaller engineering teams. The company said its customer base has shifted toward organisations under 50 engineers, a segment it described as historically underserved by incumbent monitoring suites. Analysts noted consolidation across the observability category, with several vendors bundling uptime checks into broader platforms."
+      }
+    },
+    {
+      "doc_id": "saas_uptime__docs",
+      "prompt_id": "saas_uptime",
+      "format": "docs",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "Monitor configuration. Each monitor accepts a `check_interval` (minimum 30s on paid plans, 300s on free), a `timeout` value, and an optional `regions` array to run checks from multiple points of presence. Alerts are configured separately via notification channels. A monitor enters DOWN state after `failure_threshold` consecutive failed checks, default 2. Set `follow_redirects: false` to treat a 301 as a failure.",
+        "treatment": "Monitor configuration. Each monitor accepts a `check_interval` (minimum 30s on paid plans, 300s on free), a `timeout` value, and an optional `regions` array to run checks from multiple points of presence. Alerts are configured separately via notification channels. A monitor enters DOWN state after `failure_threshold` consecutive failed checks, default 2. Set `follow_redirects: false` to treat a 301 as a failure."
+      }
+    },
+    {
+      "doc_id": "saas_uptime__product",
+      "prompt_id": "saas_uptime",
+      "format": "product",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "StatusKit — uptime monitoring for teams that ship fast. HTTP, TCP and cron job monitoring with global check locations. Public status pages included on every plan. Integrations with Slack, PagerDuty and webhooks. Free tier available for up to 10 monitors. No credit card required to start.",
+        "treatment": "StatusKit — uptime monitoring for teams that ship fast. HTTP, TCP and cron job monitoring with global check locations. Public status pages included on every plan. Integrations with Slack, PagerDuty and webhooks. Free tier available for up to 10 monitors. No credit card required to start."
+      }
+    },
+    {
+      "doc_id": "saas_uptime__forum",
+      "prompt_id": "saas_uptime",
+      "format": "forum",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "r/devops — We're four engineers and we tried three of these. Honestly the biggest thing nobody tells you is that the check interval on the cheap plans is way too long. We had a 4-minute outage that just never got caught. Also watch out for alert fatigue, we had everything routing to one channel and people started ignoring it within a month. Set up escalation properly from day one.",
+        "treatment": "r/devops — We're four engineers and we tried three of these. Honestly the biggest thing nobody tells you is that the check interval on the cheap plans is way too long. We had a 4-minute outage that just never got caught. Also watch out for alert fatigue, we had everything routing to one channel and people started ignoring it within a month. Set up escalation properly from day one."
+      }
+    },
+    {
+      "doc_id": "saas_uptime__reference",
+      "prompt_id": "saas_uptime",
+      "format": "reference",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "Uptime monitoring is the practice of checking the availability of a network service at regular intervals from one or more external vantage points. It is distinguished from application performance monitoring, which instruments internal code paths. Common check types include HTTP(S) status checks, TCP port checks, ICMP ping, and synthetic transaction monitoring.",
+        "treatment": "Uptime monitoring is the practice of checking the availability of a network service at regular intervals from one or more external vantage points. It is distinguished from application performance monitoring, which instruments internal code paths. Common check types include HTTP(S) status checks, TCP port checks, ICMP ping, and synthetic transaction monitoring."
+      }
+    },
+    {
+      "doc_id": "saas_pwmgr__blog",
+      "prompt_id": "saas_pwmgr",
+      "format": "blog",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "Business password managers solve a different problem from consumer ones. The consumer version optimises for one person's convenience. The business version has to handle people joining and leaving, shared credentials that shouldn't be personally owned, and an audit trail somebody in compliance will eventually ask for. That last part is what usually forces the upgrade.",
+        "treatment": "Business password managers solve a different problem from consumer ones. The consumer version optimises for one person's convenience. The business version has to handle people joining and leaving, shared credentials that shouldn't be personally owned, and an audit trail somebody in compliance will eventually ask for. That last part is what usually forces the upgrade."
+      }
+    },
+    {
+      "doc_id": "saas_pwmgr__news",
+      "prompt_id": "saas_pwmgr",
+      "format": "news",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "Following a breach disclosure at a mid-size logistics firm last month, security researchers renewed calls for businesses to move off shared spreadsheets for credential storage. The firm confirmed that an unrotated shared credential contributed to the incident. Industry groups have pushed for wider adoption of managed credential tooling.",
+        "treatment": "Following a breach disclosure at a mid-size logistics firm last month, security researchers renewed calls for businesses to move off shared spreadsheets for credential storage. The firm confirmed that an unrotated shared credential contributed to the incident. Industry groups have pushed for wider adoption of managed credential tooling."
+      }
+    },
+    {
+      "doc_id": "saas_pwmgr__docs",
+      "prompt_id": "saas_pwmgr",
+      "format": "docs",
+      "domain": "saas",
+      "is_target": true,
+      "variants": {
+        "control": "Deployment. Business plans include a browser extension that autofills credentials across every major browser, plus a dedicated admin app separate from the personal vault interface. Shared folders can be organised by team or project, alongside individual vault items. The reporting dashboard flags weak or reused passwords across the whole organisation. Recovery runs through an admin rather than a personal recovery key — the main behavioural difference from consumer plans.",
+        "treatment": "Deployment. Business plans support SCIM directory integration, so deprovisioning completes within 5 minutes of a directory change versus manual removal averaging 4 days. Shared vaults grant access at group level. Administrators can require MFA and review an activity log with 90-day retention on standard plans, 365-day on enterprise. Recovery runs through an admin rather than a personal recovery key — the main behavioural difference from consumer plans."
+      }
+    },
+    {
+      "doc_id": "saas_pwmgr__product",
+      "prompt_id": "saas_pwmgr",
+      "format": "product",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "VaultCore Business — credential management with SSO, SCIM provisioning and shared vaults. Role-based access control. SOC 2 Type II certified. Deploy across your organisation in under an hour. Volume pricing available.",
+        "treatment": "VaultCore Business — credential management with SSO, SCIM provisioning and shared vaults. Role-based access control. SOC 2 Type II certified. Deploy across your organisation in under an hour. Volume pricing available."
+      }
+    },
+    {
+      "doc_id": "saas_pwmgr__forum",
+      "prompt_id": "saas_pwmgr",
+      "format": "forum",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "r/sysadmin — The thing that actually made us switch wasn't security, it was offboarding. We had someone leave and it took two weeks to work out what they had access to. With directory sync it's just automatic now. The audit log has also saved us during a customer security questionnaire more than once.",
+        "treatment": "r/sysadmin — The thing that actually made us switch wasn't security, it was offboarding. We had someone leave and it took two weeks to work out what they had access to. With directory sync it's just automatic now. The audit log has also saved us during a customer security questionnaire more than once."
+      }
+    },
+    {
+      "doc_id": "saas_pwmgr__reference",
+      "prompt_id": "saas_pwmgr",
+      "format": "reference",
+      "domain": "saas",
+      "is_target": false,
+      "variants": {
+        "control": "A password manager is software that stores and retrieves credentials from an encrypted vault. Enterprise deployments typically add centralised policy enforcement, directory service integration for lifecycle management, shared vault structures for team-owned credentials, and administrative audit logging.",
+        "treatment": "A password manager is software that stores and retrieves credentials from an encrypted vault. Enterprise deployments typically add centralised policy enforcement, directory service integration for lifecycle management, shared vault structures for team-owned credentials, and administrative audit logging."
+      }
+    },
+    {
+      "doc_id": "cons_shoes__blog",
+      "prompt_id": "cons_shoes",
+      "format": "blog",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "Marathon training shoes need to survive a lot more mileage than most people plan for. The temptation is to buy the lightest racing shoe you can find, but you'll spend most of your training in easy miles, and that's where cushioning and durability matter. Many runners end up rotating two pairs — one for long runs, one for speed work.",
+        "treatment": "Marathon training shoes need to survive a lot more mileage than most people plan for. The temptation is to buy the lightest racing shoe you can find, but you'll spend most of your training in easy miles, and that's where cushioning and durability matter. Many runners end up rotating two pairs — one for long runs, one for speed work."
+      }
+    },
+    {
+      "doc_id": "cons_shoes__news",
+      "prompt_id": "cons_shoes",
+      "format": "news",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "World Athletics confirmed it will maintain existing stack height limits for road racing through the next season, ending speculation about further restrictions. Shoe manufacturers had lobbied for clarity ahead of product cycles. The ruling affects competitive racing only and does not apply to recreational training footwear.",
+        "treatment": "World Athletics confirmed it will maintain existing stack height limits for road racing through the next season, ending speculation about further restrictions. Shoe manufacturers had lobbied for clarity ahead of product cycles. The ruling affects competitive racing only and does not apply to recreational training footwear."
+      }
+    },
+    {
+      "doc_id": "cons_shoes__docs",
+      "prompt_id": "cons_shoes",
+      "format": "docs",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "Fit guide. Measure both feet in the afternoon, when they are largest. Allow a thumb's width between the longest toe and the end of the shoe. The heel should hold without slipping when laced. Width is measured at the widest part of the forefoot. If you are between sizes, size up rather than down for distances above 10km.",
+        "treatment": "Fit guide. Measure both feet in the afternoon, when they are largest. Allow a thumb's width between the longest toe and the end of the shoe. The heel should hold without slipping when laced. Width is measured at the widest part of the forefoot. If you are between sizes, size up rather than down for distances above 10km."
+      }
+    },
+    {
+      "doc_id": "cons_shoes__product",
+      "prompt_id": "cons_shoes",
+      "format": "product",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "Meridian Long Run — daily trainer built for high-mileage weeks. Dual-density foam midsole with a breathable engineered mesh upper. Suitable for neutral gait. Available in standard and wide fittings. Free returns within 30 days.",
+        "treatment": "Meridian Long Run — daily trainer built for high-mileage weeks. Dual-density foam midsole with a breathable engineered mesh upper. Suitable for neutral gait. Available in standard and wide fittings. Free returns within 30 days."
+      }
+    },
+    {
+      "doc_id": "cons_shoes__forum",
+      "prompt_id": "cons_shoes",
+      "format": "forum",
+      "domain": "consumer_product",
+      "is_target": true,
+      "variants": {
+        "control": "r/running — Ran three marathons now. Honest advice: don't overthink the shoe, overthink your training load. Nearly everyone I know who got injured added too much weekly volume too fast. Fit matters more than people think too — a shoe that's slightly too narrow will wreck a long run even if it's brand new. Try things on in the afternoon when your feet are largest, not first thing in the morning.",
+        "treatment": "r/running — Ran three marathons now. Honest advice: don't overthink the shoe, overthink the mileage. Nearly everyone I know who got injured added more than 10% weekly volume. Midsole foam compresses meaningfully by around 300-500 miles, so replace around then rather than waiting for visible wear. Rotating two pairs extended my shoe life by roughly 20%. Racing shoes feel amazing but I got about 150 miles out of mine before they went flat."
+      }
+    },
+    {
+      "doc_id": "cons_shoes__reference",
+      "prompt_id": "cons_shoes",
+      "format": "reference",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "Running shoes are commonly categorised by gait support (neutral, stability, motion control), by stack height and heel-to-toe drop, and by intended use (daily trainer, tempo, racing). Midsole materials include EVA, TPU and PEBA-based foams, which differ in weight, energy return and rate of compression over distance.",
+        "treatment": "Running shoes are commonly categorised by gait support (neutral, stability, motion control), by stack height and heel-to-toe drop, and by intended use (daily trainer, tempo, racing). Midsole materials include EVA, TPU and PEBA-based foams, which differ in weight, energy return and rate of compression over distance."
+      }
+    },
+    {
+      "doc_id": "cons_espresso__blog",
+      "prompt_id": "cons_espresso",
+      "format": "blog",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "The break-even maths on a home espresso machine is more complicated than it looks. People compare the machine price against their daily coffee spend and conclude it pays for itself quickly. That ignores the grinder, which matters more than the machine, and it ignores the months of bad shots while you learn. Worth it if you enjoy the process, questionable if you just want caffeine.",
+        "treatment": "The break-even maths on a home espresso machine is more complicated than it looks. People compare the machine price against their daily coffee spend and conclude it pays for itself quickly. That ignores the grinder, which matters more than the machine, and it ignores the months of bad shots while you learn. Worth it if you enjoy the process, questionable if you just want caffeine."
+      }
+    },
+    {
+      "doc_id": "cons_espresso__news",
+      "prompt_id": "cons_espresso",
+      "format": "news",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "Coffee futures climbed again this quarter on the back of constrained supply from major growing regions, with roasters signalling further retail price increases. Several specialty chains have already adjusted menu pricing. Home equipment retailers reported a corresponding uptick in machine sales.",
+        "treatment": "Coffee futures climbed again this quarter on the back of constrained supply from major growing regions, with roasters signalling further retail price increases. Several specialty chains have already adjusted menu pricing. Home equipment retailers reported a corresponding uptick in machine sales."
+      }
+    },
+    {
+      "doc_id": "cons_espresso__docs",
+      "prompt_id": "cons_espresso",
+      "format": "docs",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "Maintenance schedule. Backflush the group head weekly with a blind basket and detergent. Descale according to water hardness — more frequently in hard water areas. Replace gaskets when you notice steam escaping around the portafilter. Empty and rinse the drip tray daily. Do not use vinegar as a descaling agent on machines with aluminium boilers.",
+        "treatment": "Maintenance schedule. Backflush the group head weekly with a blind basket and detergent. Descale according to water hardness — more frequently in hard water areas. Replace gaskets when you notice steam escaping around the portafilter. Empty and rinse the drip tray daily. Do not use vinegar as a descaling agent on machines with aluminium boilers."
+      }
+    },
+    {
+      "doc_id": "cons_espresso__product",
+      "prompt_id": "cons_espresso",
+      "format": "product",
+      "domain": "consumer_product",
+      "is_target": true,
+      "variants": {
+        "control": "Crema One — a semi-automatic espresso machine for the home. Stainless steel construction with a professional-style portafilter and a powerful steam wand for milk drinks. Compact enough for a standard counter and pairs well with any grinder. Includes a starter kit and a guide covering dial-in basics and common first-week mistakes.",
+        "treatment": "Crema One — a semi-automatic espresso machine for the home. Stainless steel construction, 58mm portafilter, and a steam wand rated for 4oz milk texturing in about 25 seconds. Heats to brew temperature in 6 minutes and holds 9 bars at the group. Includes a starter kit and guide, plus a two-year warranty."
+      }
+    },
+    {
+      "doc_id": "cons_espresso__forum",
+      "prompt_id": "cons_espresso",
+      "format": "forum",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "r/espresso — The advice everyone gives and nobody listens to: spend more on the grinder than the machine. I had a decent machine and a bad grinder for a year and every shot was a lottery. Swapped the grinder and suddenly the same machine was fine. Also budget for a scale and a distribution tool, they're cheap and they matter.",
+        "treatment": "r/espresso — The advice everyone gives and nobody listens to: spend more on the grinder than the machine. I had a decent machine and a bad grinder for a year and every shot was a lottery. Swapped the grinder and suddenly the same machine was fine. Also budget for a scale and a distribution tool, they're cheap and they matter."
+      }
+    },
+    {
+      "doc_id": "cons_espresso__reference",
+      "prompt_id": "cons_espresso",
+      "format": "reference",
+      "domain": "consumer_product",
+      "is_target": false,
+      "variants": {
+        "control": "Espresso is a brewing method in which hot water is forced through finely ground coffee at high pressure, conventionally around 9 bars. Key variables include grind size, dose, water temperature, pressure and extraction time. Semi-automatic machines require the user to control shot duration manually.",
+        "treatment": "Espresso is a brewing method in which hot water is forced through finely ground coffee at high pressure, conventionally around 9 bars. Key variables include grind size, dose, water temperature, pressure and extraction time. Semi-automatic machines require the user to control shot duration manually."
+      }
+    },
+    {
+      "doc_id": "health_creatine__blog",
+      "prompt_id": "health_creatine",
+      "format": "blog",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "Creatine is one of the few supplements with a genuinely large evidence base behind it, which is unusual in a category full of noise. It's been studied for decades, mostly in the context of resistance training. The effects are real but modest, and they're specific — it helps with short, high-intensity efforts rather than endurance.",
+        "treatment": "Creatine is one of the few supplements with a genuinely large evidence base behind it, which is unusual in a category full of noise. It's been studied for decades, mostly in the context of resistance training. The effects are real but modest, and they're specific — it helps with short, high-intensity efforts rather than endurance."
+      }
+    },
+    {
+      "doc_id": "health_creatine__news",
+      "prompt_id": "health_creatine",
+      "format": "news",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "Interest in creatine has broadened beyond athletic populations, with researchers presenting work on cognitive and age-related applications at a nutrition conference this month. Several presenters cautioned that evidence outside exercise performance remains considerably less mature than the performance literature.",
+        "treatment": "Interest in creatine has broadened beyond athletic populations, with researchers presenting work on cognitive and age-related applications at a nutrition conference this month. Several presenters cautioned that evidence outside exercise performance remains considerably less mature than the performance literature."
+      }
+    },
+    {
+      "doc_id": "health_creatine__docs",
+      "prompt_id": "health_creatine",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "Usage. Creatine monohydrate is typically taken daily, with timing relative to training appearing to matter little. A loading phase is optional and shortens the time to muscle saturation. Take with fluid. Some people report mild gastrointestinal discomfort at higher single doses, which is usually resolved by splitting the dose.",
+        "treatment": "Usage. Creatine monohydrate is typically taken daily, with timing relative to training appearing to matter little. A loading phase is optional and shortens the time to muscle saturation. Take with fluid. Some people report mild gastrointestinal discomfort at higher single doses, which is usually resolved by splitting the dose."
+      }
+    },
+    {
+      "doc_id": "health_creatine__product",
+      "prompt_id": "health_creatine",
+      "format": "product",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "PureForm Creatine Monohydrate — micronised for easier mixing. Unflavoured and additive-free. Third-party tested for banned substances. Available in 300g and 1kg tubs. Subscribe and save on repeat deliveries.",
+        "treatment": "PureForm Creatine Monohydrate — micronised for easier mixing. Unflavoured and additive-free. Third-party tested for banned substances. Available in 300g and 1kg tubs. Subscribe and save on repeat deliveries."
+      }
+    },
+    {
+      "doc_id": "health_creatine__forum",
+      "prompt_id": "health_creatine",
+      "format": "forum",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "r/fitness — Been taking it for years. The weight gain in the first couple of weeks is water, not fat, and it freaks people out unnecessarily. Don't bother with the fancy forms, monohydrate is the one that's actually been studied. Cheapest supplement I buy and the only one I'd say is clearly doing something.",
+        "treatment": "r/fitness — Been taking it for years. The weight gain in the first couple of weeks is water, not fat, and it freaks people out unnecessarily. Don't bother with the fancy forms, monohydrate is the one that's actually been studied. Cheapest supplement I buy and the only one I'd say is clearly doing something."
+      }
+    },
+    {
+      "doc_id": "health_creatine__reference",
+      "prompt_id": "health_creatine",
+      "format": "reference",
+      "domain": "health",
+      "is_target": true,
+      "variants": {
+        "control": "Creatine is a nitrogenous organic acid found naturally in muscle tissue, where it participates in the regeneration of adenosine triphosphate. Supplementation increases intramuscular phosphocreatine stores, which is associated with improved performance in short-duration, high-intensity activity. Creatine monohydrate is the most extensively studied form, with a large evidence base spanning strength, power and sprint performance. It is generally regarded as well tolerated in healthy adults with no established long-term concerns.",
+        "treatment": "Creatine is a nitrogenous organic acid found in muscle tissue, where it participates in ATP regeneration. Supplementation raises intramuscular phosphocreatine stores by approximately 20%, associated with performance improvements of roughly 5-15% in short-duration, high-intensity activity. Standard maintenance dosing is 3-5g daily; an optional 20g/day loading phase over 5-7 days reaches saturation faster. Monohydrate is the most studied form, with over 500 published trials, and is well tolerated in healthy adults."
+      }
+    },
+    {
+      "doc_id": "health_sleep__blog",
+      "prompt_id": "health_sleep",
+      "format": "blog",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "Sleep trackers occupy an odd space. They're not medical devices, they're often wrong about the specifics, and yet plenty of people find them useful anyway. The value tends to come from the trend rather than the nightly number — noticing that late caffeine wrecks your sleep is useful even if the sleep stage breakdown is guesswork.",
+        "treatment": "Sleep trackers occupy an odd space. They're not medical devices, they're often wrong about the specifics, and yet plenty of people find them useful anyway. The value tends to come from the trend rather than the nightly number — noticing that late caffeine wrecks your sleep is useful even if the sleep stage breakdown is guesswork."
+      }
+    },
+    {
+      "doc_id": "health_sleep__news",
+      "prompt_id": "health_sleep",
+      "format": "news",
+      "domain": "health",
+      "is_target": true,
+      "variants": {
+        "control": "A university sleep laboratory published a comparison of consumer sleep trackers against polysomnography this month, the largest such study run at that site in several years. The work was presented at a sleep medicine conference and drew responses from several device makers, who broadly welcomed independent scrutiny of wrist-based measurement. Reviewers noted the study's sample skewed toward healthy young adults and called for much broader follow-up work.",
+        "treatment": "Researchers published a comparison of consumer sleep trackers against polysomnography this month. Devices estimated total sleep time within about 20 minutes of the laboratory standard, but sleep-stage classification agreement fell to roughly 50-65% depending on stage, with deep sleep the least reliable. Devices overestimated total sleep time by 15-20 minutes on average. The authors cautioned against treating stage data as clinically meaningful; manufacturers have acknowledged the limits of wrist-based measurement."
+      }
+    },
+    {
+      "doc_id": "health_sleep__docs",
+      "prompt_id": "health_sleep",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "Wear guidance. Wear the band snugly one finger-width above the wrist bone. A loose fit is the most common cause of inaccurate readings. Charge during the day rather than overnight to avoid gaps. Sleep data syncs automatically when the device is in range. Manual sleep entry is available if the device was not worn.",
+        "treatment": "Wear guidance. Wear the band snugly one finger-width above the wrist bone. A loose fit is the most common cause of inaccurate readings. Charge during the day rather than overnight to avoid gaps. Sleep data syncs automatically when the device is in range. Manual sleep entry is available if the device was not worn."
+      }
+    },
+    {
+      "doc_id": "health_sleep__product",
+      "prompt_id": "health_sleep",
+      "format": "product",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "RestBand 3 — sleep and recovery tracking with a seven-day battery. Tracks heart rate variability, resting heart rate and skin temperature overnight. Silent alarm. Water-resistant. Companion app for iOS and Android with no subscription required.",
+        "treatment": "RestBand 3 — sleep and recovery tracking with a seven-day battery. Tracks heart rate variability, resting heart rate and skin temperature overnight. Silent alarm. Water-resistant. Companion app for iOS and Android with no subscription required."
+      }
+    },
+    {
+      "doc_id": "health_sleep__forum",
+      "prompt_id": "health_sleep",
+      "format": "forum",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "r/sleep — I found mine useful for about three months and then it started stressing me out. Kept waking up and immediately checking my score, which is obviously counterproductive. Take the stage data with a big pinch of salt but the trends over weeks were genuinely informative for me.",
+        "treatment": "r/sleep — I found mine useful for about three months and then it started stressing me out. Kept waking up and immediately checking my score, which is obviously counterproductive. Take the stage data with a big pinch of salt but the trends over weeks were genuinely informative for me."
+      }
+    },
+    {
+      "doc_id": "health_sleep__reference",
+      "prompt_id": "health_sleep",
+      "format": "reference",
+      "domain": "health",
+      "is_target": false,
+      "variants": {
+        "control": "Actigraphy estimates sleep and wake states from movement data, typically collected at the wrist. It is validated for estimating sleep timing and duration but has limited ability to discriminate sleep stages, which in clinical settings are scored from electroencephalography, electrooculography and electromyography during polysomnography.",
+        "treatment": "Actigraphy estimates sleep and wake states from movement data, typically collected at the wrist. It is validated for estimating sleep timing and duration but has limited ability to discriminate sleep stages, which in clinical settings are scored from electroencephalography, electrooculography and electromyography during polysomnography."
+      }
+    },
+    {
+      "doc_id": "fin_savings__blog",
+      "prompt_id": "fin_savings",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": true,
+      "variants": {
+        "control": "Choosing a high-yield savings account is mostly about looking past the headline rate. A clean mobile app matters more day to day than people expect — check whether you can open sub-accounts for different savings goals easily. Customer service responsiveness is worth testing before you commit real money. Institutions offering headline-grabbing returns sometimes make up the difference with a clunkier transfer process.",
+        "treatment": "Choosing a high-yield savings account is mostly about looking past the headline rate. Promotional rates typically expire after 3-6 months, often dropping 1-2 percentage points to the ongoing rate. Check for minimum balances, whether the rate tiers above a threshold, and transfer settlement time, which ranges from same-day to 5 business days. In the US, confirm FDIC insurance, which covers $250,000 per depositor."
+      }
+    },
+    {
+      "doc_id": "fin_savings__news",
+      "prompt_id": "fin_savings",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "Deposit rates edged lower across several online banks this month following the latest central bank decision, though they remain well above those offered by traditional high-street institutions. Analysts expect further compression if the rate environment continues to soften.",
+        "treatment": "Deposit rates edged lower across several online banks this month following the latest central bank decision, though they remain well above those offered by traditional high-street institutions. Analysts expect further compression if the rate environment continues to soften."
+      }
+    },
+    {
+      "doc_id": "fin_savings__docs",
+      "prompt_id": "fin_savings",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "Opening an account. You will need government-issued identification, a tax identification number and an external account for funding. Initial transfers may be held before funds become available for withdrawal. Interest is calculated daily and credited monthly. Rate changes take effect on the date published and are not guaranteed.",
+        "treatment": "Opening an account. You will need government-issued identification, a tax identification number and an external account for funding. Initial transfers may be held before funds become available for withdrawal. Interest is calculated daily and credited monthly. Rate changes take effect on the date published and are not guaranteed."
+      }
+    },
+    {
+      "doc_id": "fin_savings__product",
+      "prompt_id": "fin_savings",
+      "format": "product",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "Harbor Savings — a high-yield savings account with no monthly fees and no minimum balance. Rate applies to your entire balance with no tiers. Unlimited transfers to linked accounts. Mobile deposit available. Member FDIC.",
+        "treatment": "Harbor Savings — a high-yield savings account with no monthly fees and no minimum balance. Rate applies to your entire balance with no tiers. Unlimited transfers to linked accounts. Mobile deposit available. Member FDIC."
+      }
+    },
+    {
+      "doc_id": "fin_savings__forum",
+      "prompt_id": "fin_savings",
+      "format": "forum",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "r/personalfinance — The mistake I made was chasing rates. Moved my emergency fund three times in a year for maybe forty dollars of extra interest and a lot of admin. Pick something decent, make sure it's insured, and then leave it alone. The difference between the best rate and a good rate is small on realistic balances.",
+        "treatment": "r/personalfinance — The mistake I made was chasing rates. Moved my emergency fund three times in a year for maybe forty dollars of extra interest and a lot of admin. Pick something decent, make sure it's insured, and then leave it alone. The difference between the best rate and a good rate is small on realistic balances."
+      }
+    },
+    {
+      "doc_id": "fin_savings__reference",
+      "prompt_id": "fin_savings",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "A high-yield savings account is a deposit account offering an interest rate above the market average, typically offered by online-only institutions with lower overhead. Rates are variable and may change without notice. In the United States, deposits at member institutions are insured by the FDIC up to statutory limits.",
+        "treatment": "A high-yield savings account is a deposit account offering an interest rate above the market average, typically offered by online-only institutions with lower overhead. Rates are variable and may change without notice. In the United States, deposits at member institutions are insured by the FDIC up to statutory limits."
+      }
+    },
+    {
+      "doc_id": "fin_index__blog",
+      "prompt_id": "fin_index",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "For most long-term investors the index fund versus ETF question matters far less than people expect. Both give you diversified exposure at low cost. The differences are mechanical — how you buy them, when they price, how tax works in some jurisdictions. The choice between them is unlikely to be the thing that determines your outcome.",
+        "treatment": "For most long-term investors the index fund versus ETF question matters far less than people expect. Both give you diversified exposure at low cost. The differences are mechanical — how you buy them, when they price, how tax works in some jurisdictions. The choice between them is unlikely to be the thing that determines your outcome."
+      }
+    },
+    {
+      "doc_id": "fin_index__news",
+      "prompt_id": "fin_index",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "Passive vehicles continued to attract inflows this quarter while active funds saw outflows, extending a trend now well over a decade old. Fund industry observers noted continued fee compression across both mutual fund and exchange-traded structures.",
+        "treatment": "Passive vehicles continued to attract inflows this quarter while active funds saw outflows, extending a trend now well over a decade old. Fund industry observers noted continued fee compression across both mutual fund and exchange-traded structures."
+      }
+    },
+    {
+      "doc_id": "fin_index__docs",
+      "prompt_id": "fin_index",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "Placing an order. Exchange-traded funds trade during market hours and execute at the prevailing market price; you may use limit or market orders. Mutual fund orders are accepted throughout the day but execute once at the net asset value calculated after market close. Automatic recurring investment is supported for mutual funds and, on some platforms, for ETFs via fractional shares.",
+        "treatment": "Placing an order. Exchange-traded funds trade during market hours and execute at the prevailing market price; you may use limit or market orders. Mutual fund orders are accepted throughout the day but execute once at the net asset value calculated after market close. Automatic recurring investment is supported for mutual funds and, on some platforms, for ETFs via fractional shares."
+      }
+    },
+    {
+      "doc_id": "fin_index__product",
+      "prompt_id": "fin_index",
+      "format": "product",
+      "domain": "finance",
+      "is_target": true,
+      "variants": {
+        "control": "BroadMarket Total Index Fund — diversified exposure to the total market in a single holding, built for investors who want a straightforward core position without picking stocks. Dividends reinvest automatically. Trusted by long-term investors as a simple way to stay invested through market cycles.",
+        "treatment": "BroadMarket Total Index Fund — diversified exposure to roughly 3,700 holdings in a single fund. Expense ratio of 0.03%, versus a 0.42% average for comparable active funds. No minimum on automatic investment plans; $3,000 minimum for lump-sum purchases. Dividends reinvest automatically."
+      }
+    },
+    {
+      "doc_id": "fin_index__forum",
+      "prompt_id": "fin_index",
+      "format": "forum",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "r/investing — Genuinely does not matter for most people. I have both because of which account they're in. If you're going to be making regular automatic contributions the mutual fund is slightly less hassle since you can buy fractional amounts without thinking about it. That's about the size of the difference.",
+        "treatment": "r/investing — Genuinely does not matter for most people. I have both because of which account they're in. If you're going to be making regular automatic contributions the mutual fund is slightly less hassle since you can buy fractional amounts without thinking about it. That's about the size of the difference."
+      }
+    },
+    {
+      "doc_id": "fin_index__reference",
+      "prompt_id": "fin_index",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "variants": {
+        "control": "Index funds and exchange-traded funds are both pooled investment vehicles that track a specified benchmark. They differ principally in trading mechanics: ETF shares trade on an exchange throughout the session, while mutual fund shares are transacted directly with the fund at the net asset value struck after the close. Tax treatment of in-kind redemptions differs by jurisdiction.",
+        "treatment": "Index funds and exchange-traded funds are both pooled investment vehicles that track a specified benchmark. They differ principally in trading mechanics: ETF shares trade on an exchange throughout the session, while mutual fund shares are transacted directly with the fund at the net asset value struck after the close. Tax treatment of in-kind redemptions differs by jurisdiction."
+      }
+    },
+    {
+      "doc_id": "local_hvac__blog",
+      "prompt_id": "local_hvac",
+      "format": "blog",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "The repair-or-replace decision usually comes down to age, the cost of the repair relative to a new system, and how your energy bills have trended. Contractors have an obvious incentive to recommend replacement, which doesn't make them wrong, but it's worth getting a second opinion on anything expensive.",
+        "treatment": "The repair-or-replace decision usually comes down to age, the cost of the repair relative to a new system, and how your energy bills have trended. Contractors have an obvious incentive to recommend replacement, which doesn't make them wrong, but it's worth getting a second opinion on anything expensive."
+      }
+    },
+    {
+      "doc_id": "local_hvac__news",
+      "prompt_id": "local_hvac",
+      "format": "news",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "Regulatory changes to refrigerant standards are affecting availability of parts for older residential systems, with several contractors reporting longer lead times on components. Homeowners with ageing equipment may find some repairs harder to source than in previous years.",
+        "treatment": "Regulatory changes to refrigerant standards are affecting availability of parts for older residential systems, with several contractors reporting longer lead times on components. Homeowners with ageing equipment may find some repairs harder to source than in previous years."
+      }
+    },
+    {
+      "doc_id": "local_hvac__docs",
+      "prompt_id": "local_hvac",
+      "format": "docs",
+      "domain": "local_services",
+      "is_target": true,
+      "variants": {
+        "control": "Service life and replacement guidance. Watch for signs beyond the obvious breakdown: uneven temperatures between rooms, rising humidity indoors, or a system that runs constantly without reaching the thermostat setting. Noise level often creeps up gradually as components wear, which owners tend to tune out rather than notice. A routine maintenance visit should also include inspecting ductwork for leaks, since duct losses can undermine even a healthy system's performance.",
+        "treatment": "Service life and replacement guidance. Residential systems typically last 15-20 years with regular maintenance, with efficiency declining measurably after year 12. Consider replacement when a single repair exceeds 30% of new-equipment cost, when the unit is over 15 years old and the repair exceeds $500, or when it uses R-22 refrigerant, phased out in 2020 and now costing several times its former price. Annual servicing extends operating life by 3-5 years."
+      }
+    },
+    {
+      "doc_id": "local_hvac__product",
+      "prompt_id": "local_hvac",
+      "format": "product",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "ComfortLine Heat Pump — variable-speed residential heat pump with a high seasonal efficiency rating. Quiet operation. Compatible with most existing ductwork. Ten-year registered parts warranty. Ask your local dealer about financing.",
+        "treatment": "ComfortLine Heat Pump — variable-speed residential heat pump with a high seasonal efficiency rating. Quiet operation. Compatible with most existing ductwork. Ten-year registered parts warranty. Ask your local dealer about financing."
+      }
+    },
+    {
+      "doc_id": "local_hvac__forum",
+      "prompt_id": "local_hvac",
+      "format": "forum",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "r/hvacadvice — Got three quotes and they ranged by about eight thousand dollars for the same job, which tells you something. Two said replace immediately, one said the repair would buy me a few more years and he was right, that was four years ago. Always get multiple opinions on the big stuff.",
+        "treatment": "r/hvacadvice — Got three quotes and they ranged by about eight thousand dollars for the same job, which tells you something. Two said replace immediately, one said the repair would buy me a few more years and he was right, that was four years ago. Always get multiple opinions on the big stuff."
+      }
+    },
+    {
+      "doc_id": "local_hvac__reference",
+      "prompt_id": "local_hvac",
+      "format": "reference",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "Heating, ventilation and air conditioning systems provide thermal comfort and indoor air quality. Residential efficiency is commonly expressed using seasonal ratings such as SEER for cooling and HSPF for heat pump heating. Regulatory minimum efficiency standards vary by region and have generally increased over time.",
+        "treatment": "Heating, ventilation and air conditioning systems provide thermal comfort and indoor air quality. Residential efficiency is commonly expressed using seasonal ratings such as SEER for cooling and HSPF for heat pump heating. Regulatory minimum efficiency standards vary by region and have generally increased over time."
+      }
+    },
+    {
+      "doc_id": "local_movers__blog",
+      "prompt_id": "local_movers",
+      "format": "blog",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "Moving scams follow a recognisable pattern. A quote comes in far below the others, it's given without anyone looking at your belongings, and then the price changes once your possessions are on the truck. The defence is boring but effective: get in-person estimates, check registration, and never pay a large deposit up front.",
+        "treatment": "Moving scams follow a recognisable pattern. A quote comes in far below the others, it's given without anyone looking at your belongings, and then the price changes once your possessions are on the truck. The defence is boring but effective: get in-person estimates, check registration, and never pay a large deposit up front."
+      }
+    },
+    {
+      "doc_id": "local_movers__news",
+      "prompt_id": "local_movers",
+      "format": "news",
+      "domain": "local_services",
+      "is_target": true,
+      "variants": {
+        "control": "Consumer protection officials issued renewed warnings about moving fraud ahead of peak season, describing a pattern in which companies quote low, then demand additional payment before releasing belongings. Officials said the tactic is showing up on more review sites and social platforms than in previous years. Several firms named in complaints have since changed their operating names, which officials called a recurring evasion tactic.",
+        "treatment": "Consumer protection officials issued renewed warnings about moving fraud ahead of peak season. Complaints follow a consistent pattern: an estimate 30-50% below competing quotes, no in-person survey, and a demand for extra payment before belongings are released. Complaints roughly double between May and September; officials urged verifying a company's USDOT number and treating deposits above 20% of the quoted total as a warning sign."
+      }
+    },
+    {
+      "doc_id": "local_movers__docs",
+      "prompt_id": "local_movers",
+      "format": "docs",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "Booking process. An estimate may be binding, non-binding, or binding-not-to-exceed. A binding estimate fixes the price for the listed inventory; adding items may change it. Request a written inventory before loading. Carriers are required to provide a statement of your rights and responsibilities. Retain copies of the bill of lading, which serves as your contract.",
+        "treatment": "Booking process. An estimate may be binding, non-binding, or binding-not-to-exceed. A binding estimate fixes the price for the listed inventory; adding items may change it. Request a written inventory before loading. Carriers are required to provide a statement of your rights and responsibilities. Retain copies of the bill of lading, which serves as your contract."
+      }
+    },
+    {
+      "doc_id": "local_movers__product",
+      "prompt_id": "local_movers",
+      "format": "product",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "ClearPath Moving — licensed and insured local and long-distance moving. Free in-home or video survey. Binding written estimates with no surprise charges on moving day. Packing services available. Background-checked crews.",
+        "treatment": "ClearPath Moving — licensed and insured local and long-distance moving. Free in-home or video survey. Binding written estimates with no surprise charges on moving day. Packing services available. Background-checked crews."
+      }
+    },
+    {
+      "doc_id": "local_movers__forum",
+      "prompt_id": "local_movers",
+      "format": "forum",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "r/moving — Red flag for me was they wouldn't do a walkthrough, not even over video. Said they could quote from a room count. Every legitimate company I've dealt with since insisted on actually seeing the stuff. The cheap quote is cheap because it isn't the real quote.",
+        "treatment": "r/moving — Red flag for me was they wouldn't do a walkthrough, not even over video. Said they could quote from a room count. Every legitimate company I've dealt with since insisted on actually seeing the stuff. The cheap quote is cheap because it isn't the real quote."
+      }
+    },
+    {
+      "doc_id": "local_movers__reference",
+      "prompt_id": "local_movers",
+      "format": "reference",
+      "domain": "local_services",
+      "is_target": false,
+      "variants": {
+        "control": "Household goods carriers operating across state lines in the United States are required to register with the Federal Motor Carrier Safety Administration and are assigned a USDOT number. Estimates may be binding or non-binding. The bill of lading constitutes the contract of carriage between shipper and carrier.",
+        "treatment": "Household goods carriers operating across state lines in the United States are required to register with the Federal Motor Carrier Safety Administration and are assigned a USDOT number. Estimates may be binding or non-binding. The bill of lading constitutes the contract of carriage between shipper and carrier."
+      }
+    },
+    {
+      "doc_id": "travel_points__blog",
+      "prompt_id": "travel_points",
+      "format": "blog",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Points programmes are designed by people who are very good at maths, and the value they return is calibrated accordingly. For frequent travellers with predictable routes the economics can work. For someone taking a couple of trips a year, the annual fee and the mental overhead often exceed whatever the points end up being worth.",
+        "treatment": "Points programmes are designed by people who are very good at maths, and the value they return is calibrated accordingly. For frequent travellers with predictable routes the economics can work. For someone taking a couple of trips a year, the annual fee and the mental overhead often exceed whatever the points end up being worth."
+      }
+    },
+    {
+      "doc_id": "travel_points__news",
+      "prompt_id": "travel_points",
+      "format": "news",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Two major carriers adjusted award pricing this quarter, moving further toward dynamic pricing tied to cash fares. Consumer advocates said the changes reduce the predictability that made award charts valuable. The carriers described the changes as bringing award pricing in line with demand.",
+        "treatment": "Two major carriers adjusted award pricing this quarter, moving further toward dynamic pricing tied to cash fares. Consumer advocates said the changes reduce the predictability that made award charts valuable. The carriers described the changes as bringing award pricing in line with demand."
+      }
+    },
+    {
+      "doc_id": "travel_points__docs",
+      "prompt_id": "travel_points",
+      "format": "docs",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Redeeming awards. Award availability is released on a rolling basis and varies by route and cabin. Taxes and carrier-imposed surcharges are payable at booking and are not covered by miles. Changes to award bookings may incur a fee depending on fare family and elite status. Miles expire after a period of account inactivity.",
+        "treatment": "Redeeming awards. Award availability is released on a rolling basis and varies by route and cabin. Taxes and carrier-imposed surcharges are payable at booking and are not covered by miles. Changes to award bookings may incur a fee depending on fare family and elite status. Miles expire after a period of account inactivity."
+      }
+    },
+    {
+      "doc_id": "travel_points__product",
+      "prompt_id": "travel_points",
+      "format": "product",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "SkyLine Rewards Card — earn miles on every purchase with bonus categories on travel and dining. Priority boarding and a free checked bag on eligible fares. Annual fee waived for the first year. Terms apply.",
+        "treatment": "SkyLine Rewards Card — earn miles on every purchase with bonus categories on travel and dining. Priority boarding and a free checked bag on eligible fares. Annual fee waived for the first year. Terms apply."
+      }
+    },
+    {
+      "doc_id": "travel_points__forum",
+      "prompt_id": "travel_points",
+      "format": "forum",
+      "domain": "travel",
+      "is_target": true,
+      "variants": {
+        "control": "r/awardtravel — Something people don't mention enough: approval odds depend heavily on how many other cards you've opened recently, not just your credit score. I got denied for one application despite great credit, then approved for a similar card two months later after cooling off. Redemption booking windows can be brutal too — some routes only release award seats 11 months out, then nothing shows up again until 30 days before departure.",
+        "treatment": "r/awardtravel — Honest take for casual travellers: probably not worth it. I ran the numbers after two years. Sign-up bonus was worth about $600 in redemptions. Ongoing earn averaged 1.4 cents per dollar against a $95 annual fee, netting around $160 a year on my roughly $18,000 of annual spend. If you fly 20+ segments a year it's different, but most of the value is the one-time sign-up bonus."
+      }
+    },
+    {
+      "doc_id": "travel_points__reference",
+      "prompt_id": "travel_points",
+      "format": "reference",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Frequent flyer programmes award miles based on spending, distance flown, or fare class, depending on the carrier. Redemption values vary widely; dynamic award pricing ties the miles required to prevailing cash fares rather than a fixed chart. Co-branded credit cards are typically issued by a financial institution under licence from the carrier.",
+        "treatment": "Frequent flyer programmes award miles based on spending, distance flown, or fare class, depending on the carrier. Redemption values vary widely; dynamic award pricing ties the miles required to prevailing cash fares rather than a fixed chart. Co-branded credit cards are typically issued by a financial institution under licence from the carrier."
+      }
+    },
+    {
+      "doc_id": "travel_visa__blog",
+      "prompt_id": "travel_visa",
+      "format": "blog",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Most people buy travel insurance the way they buy any insurance, which is to say by picking the cheapest option and never reading it. The exclusions are where the policies actually differ. Pre-existing conditions, adventure activities and cancellation reasons are the three places people most often discover they weren't covered.",
+        "treatment": "Most people buy travel insurance the way they buy any insurance, which is to say by picking the cheapest option and never reading it. The exclusions are where the policies actually differ. Pre-existing conditions, adventure activities and cancellation reasons are the three places people most often discover they weren't covered."
+      }
+    },
+    {
+      "doc_id": "travel_visa__news",
+      "prompt_id": "travel_visa",
+      "format": "news",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Insurers reported a rise in claims related to trip disruption over the past year, attributing much of the increase to weather events and air traffic disruption. Several providers have revised policy wording around cancellation triggers, narrowing some categories that were previously covered.",
+        "treatment": "Insurers reported a rise in claims related to trip disruption over the past year, attributing much of the increase to weather events and air traffic disruption. Several providers have revised policy wording around cancellation triggers, narrowing some categories that were previously covered."
+      }
+    },
+    {
+      "doc_id": "travel_visa__docs",
+      "prompt_id": "travel_visa",
+      "format": "docs",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Making a claim. Notify the insurer as soon as practicable after the event. Retain all original receipts, medical reports and any police report where relevant. Claims for trip cancellation require documentation of the covered reason. Emergency medical evacuation must be arranged through the assistance line to be covered; costs incurred without prior authorisation may be declined.",
+        "treatment": "Making a claim. Notify the insurer as soon as practicable after the event. Retain all original receipts, medical reports and any police report where relevant. Claims for trip cancellation require documentation of the covered reason. Emergency medical evacuation must be arranged through the assistance line to be covered; costs incurred without prior authorisation may be declined."
+      }
+    },
+    {
+      "doc_id": "travel_visa__product",
+      "prompt_id": "travel_visa",
+      "format": "product",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "Voyager Cover — single-trip and annual multi-trip travel insurance. Emergency medical, trip cancellation and baggage cover. 24-hour assistance line. Optional adventure sports extension. Get a quote in under two minutes.",
+        "treatment": "Voyager Cover — single-trip and annual multi-trip travel insurance. Emergency medical, trip cancellation and baggage cover. 24-hour assistance line. Optional adventure sports extension. Get a quote in under two minutes."
+      }
+    },
+    {
+      "doc_id": "travel_visa__forum",
+      "prompt_id": "travel_visa",
+      "format": "forum",
+      "domain": "travel",
+      "is_target": false,
+      "variants": {
+        "control": "r/travel — Read the exclusions, seriously. I had a policy that didn't cover anything involving a motorbike, which I found out in Vietnam. Also 'cancel for any reason' is a specific expensive add-on and it is not what standard cancellation cover means, a lot of people assume it is.",
+        "treatment": "r/travel — Read the exclusions, seriously. I had a policy that didn't cover anything involving a motorbike, which I found out in Vietnam. Also 'cancel for any reason' is a specific expensive add-on and it is not what standard cancellation cover means, a lot of people assume it is."
+      }
+    },
+    {
+      "doc_id": "travel_visa__reference",
+      "prompt_id": "travel_visa",
+      "format": "reference",
+      "domain": "travel",
+      "is_target": true,
+      "variants": {
+        "control": "Travel insurance is a class of insurance covering financial losses associated with travelling. Common coverage areas include emergency medical expenses, medical evacuation, trip cancellation and interruption, and loss of baggage. Policies typically exclude pre-existing medical conditions unless declared, and may exclude certain adventure activities. Coverage terms vary substantially between providers, so read the policy wording closely.",
+        "treatment": "Travel insurance is a class of insurance covering financial losses associated with travelling. Coverage commonly includes emergency medical expenses, medical evacuation, trip cancellation, and baggage loss — evacuation alone can exceed $100,000 from remote regions. Policies exclude pre-existing conditions unless declared, typically a 60-180 day look-back. 'Cancel for any reason' riders add roughly 40-50% to the premium."
+      }
+    }
+  ],
+  "corpus_sha256": "bbd0fd15974a33af"
+}

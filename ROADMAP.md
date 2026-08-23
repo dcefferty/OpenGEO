@@ -82,9 +82,30 @@ obviously-best match among only 6 candidates — i.e., control CPR sits in a mor
 0.34. Ceiling avoidance is free; more calls is not. Corpus construction for Round 1 should
 prioritize this over simply scaling up the pilot's prompt style.
 
+### 5b. Ceiling-fix corpus (v0.3) — done (2026-08-23)
+Acted on item 5's corpus-design finding rather than just sizing around it. Rewrote all 12
+prompts in `corpus/build_corpus.py`: narrowed each question to one specific fact, then rewrote
+each control document to share *no* topical surface with that fact — not just the number.
+First-draft fixes failed in two distinct ways worth remembering if this corpus is touched
+again: (1) a control that drops the number but keeps a literal keyword the question also uses
+(e.g. "minimum" in both) gets quoted verbatim as a citation hook even when the model says it
+can't answer; (2) a control that keeps the same *qualitative conclusion* as the question, or as
+an unrelated distractor document, gets cited as mutually-reinforcing evidence even with zero
+keyword overlap and no number. Every prompt was validated against real models — individually at
+first, then a full 4,608-call run — before being treated as done; several looked fine on
+read-through and still failed until tested.
+
+*Result:* H4 pooled delta went from +0.001 (v0.2, null) to **+0.493, CI [+0.352, +0.641],
+p=0.0005** on v0.3, individually significant for all 8 models including `kimi-k2`. Condition
+(claim density) is now the largest variance driver (η²=0.315, was 0.000). H1/H2/H3/H5 all
+replicate their v0.2 verdicts. Full results: `results/runs_v0.3.jsonl`.
+
+v0.3 is corpus-design validation, not a pre-registered round — see item 6.
+
 ### 6. Round 1 as a Princeton replication
 Re-run GEO-bench's intervention set (statistics, quotations, citations, fluency, keyword
-stuffing, authority claims) against real 2026 models on the v0.2 corpus, ≥25 prompts.
+stuffing, authority claims) against real 2026 models, scaled from the v0.3 corpus recipe to
+item 5's recommended 50 prompts × 24 runs/arm, ≥25 prompts. Pre-register before collection.
 
 *Why this one:* "we re-ran the most-cited GEO study against real engines and here is what held
 up" is a headline the industry has to read, because it has been quoting those numbers for two

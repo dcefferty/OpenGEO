@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-OpenGEO pilot corpus v0.2 — cross-domain, cross-format, length-matched.
+OpenGEO corpus v0.3 (under construction) — cross-domain, cross-format,
+length-matched, ceiling-aware. NOT YET RUN as a full round; see the
+"v0.3 status" note below before treating any prompt as finalized.
 
 Structure:
   12 prompts across 6 domains (2 each)
@@ -17,10 +19,21 @@ which is what makes the comparison paired and the effect attributable.
 Documents are chunk-sized (60-110 words) because engines retrieve chunks,
 not whole pages.
 
-v0.2 rewrites the 12 target pairs so control and treatment are within +/-3
+v0.2 rewrote the 12 target pairs so control and treatment are within +/-3
 words of each other (mean delta ~0), replacing generic phrasing with specific
 figures rather than adding to it. v0.1 confounded claim density with length
 (treatment averaged ~11 words longer); do not reintroduce that confound.
+
+v0.3 status: the real pilot run on v0.2 found control-condition CPR averaging
+0.867, with 67% of (prompt, model) cells at a literal 100% ceiling -- models
+cite a mean of 4.26 of 6 documents per answer regardless of relevance, so a
+target document being "on topic" is nearly sufficient for citation and H4 has
+almost no room to show an effect. v0.3's fix: narrow each prompt's question to
+ask for a specific fact that only the treatment variant states outright, so
+the paired contrast is about whether the source can answer the question, not
+just stylistic specificity. Rewritten prompts are marked inline below as they
+are validated against real models one at a time; unmarked prompts are still
+the v0.2 text carried forward unchanged.
 """
 import json, pathlib, hashlib
 
@@ -29,14 +42,22 @@ FORMATS = ["blog", "news", "docs", "product", "forum", "reference"]
 # Each prompt: (id, domain, question, target_format, {format: doc or (control, treatment)})
 PROMPTS = [
     # ---------------- SaaS / tech ----------------
-    ("saas_uptime", "saas", "What should I look for in an uptime monitoring tool for a small engineering team?", "blog", {
+    # v0.3: narrowed from "What should I look for in an uptime monitoring tool for a
+    # small engineering team?" -- that question let every document answer something,
+    # which is why this prompt sat at a 1.000 control-condition CPR ceiling in the real
+    # pilot. The question below only the treatment blog variant answers outright.
+    ("saas_uptime", "saas", "What check interval and monthly price should a 5-person engineering team expect for uptime monitoring?", "blog", {
         "blog": (
-            "Choosing uptime monitoring for a small team comes down to a few things. You want "
-            "checks that run often enough to catch real outages, alerting that reaches the right "
-            "person without waking everyone, and a status page you can hand to customers. Most "
-            "teams over-buy here. The enterprise tiers are built for organisations with dedicated "
-            "SRE staff, and a five-person team rarely needs that depth. Look for industry-leading "
-            "reliability and best-in-class alert routing, and be wary of tools that charge per seat.",
+            # v0.3: rewritten to pivot entirely off interval/price (integrations, status
+            # page, dashboard complexity, cancellation policy instead) so it has nothing
+            # for the model to loosely hook a citation onto for this narrowed question --
+            # the original generic-but-still-on-topic control cited at 0.982 anyway.
+            "Choosing uptime monitoring for a small team comes down to a few things. Integration "
+            "quality matters most: Slack and PagerDuty hooks that route correctly save real time "
+            "during an incident. A public status page you can hand to customers cuts down on "
+            "'is it just me' support tickets. Most teams over-buy on enterprise dashboards they "
+            "will never touch. Look for a clean interface, solid webhook support, and a vendor "
+            "that makes cancellation easy rather than a support queue.",
             "Choosing uptime monitoring for a small team comes down to a few things. Check interval "
             "matters most: 30-second checks catch outages a 5-minute interval misses roughly 40% of "
             "the time for short incidents. Alert routing should support at least 3 escalation tiers. "
@@ -70,7 +91,10 @@ PROMPTS = [
                      "ICMP ping, and synthetic transaction monitoring.",
     }),
 
-    ("saas_pwmgr", "saas", "How do password managers for businesses differ from consumer ones?", "docs", {
+    # v0.3: narrowed from "How do password managers for businesses differ from consumer
+    # ones?" so control can no longer answer generically; only treatment states the speed
+    # and retention numbers.
+    ("saas_pwmgr", "saas", "How fast does access get revoked when someone leaves, and how long are activity logs kept, with a business password manager?", "docs", {
         "blog": "Business password managers solve a different problem from consumer ones. The consumer "
                 "version optimises for one person's convenience. The business version has to handle "
                 "people joining and leaving, shared credentials that shouldn't be personally owned, and "
@@ -81,11 +105,20 @@ PROMPTS = [
                 "storage. The firm confirmed that an unrotated shared credential contributed to the "
                 "incident. Industry groups have pushed for wider adoption of managed credential tooling.",
         "docs": (
-            "Deployment. Business plans support directory integration so that accounts are created and "
-            "removed automatically when staff join or leave. Shared vaults let you grant access at the "
-            "group level rather than per person. Administrators can require multi-factor authentication "
-            "and review an activity log. Recovery is handled through an administrator rather than a "
-            "personal recovery key, which is the main behavioural difference from consumer plans.",
+            # v0.3: pivoted away from deprovisioning speed and log retention entirely
+            # (console consolidation, permission propagation, MFA/password policy instead)
+            # so nothing here answers the narrowed question even loosely.
+            # v0.3 (round 3): round 2's fix removed "access" but "changes propagating
+            # automatically" still implied speed, which models cited as weak support for
+            # "how fast" -- confirmed via response text (e.g. "propagate automatically...
+            # suggesting revocation can be rapid"). Pivoted to browser extension, admin app,
+            # and reporting dashboard: no claim about speed of anything at all.
+            "Deployment. Business plans include a browser extension that autofills credentials across "
+            "every major browser, plus a dedicated admin app separate from the personal vault "
+            "interface. Shared folders can be organised by team or project, alongside individual "
+            "vault items. The reporting dashboard flags weak or reused passwords across the whole "
+            "organisation. Recovery runs through an admin rather than a personal recovery key — the "
+            "main behavioural difference from consumer plans.",
             "Deployment. Business plans support SCIM directory integration, so deprovisioning completes "
             "within 5 minutes of a directory change versus manual removal averaging 4 days. Shared vaults "
             "grant access at group level. Administrators can require MFA and review an activity log with "
@@ -106,7 +139,9 @@ PROMPTS = [
     }),
 
     # ---------------- Consumer product ----------------
-    ("cons_shoes", "consumer_product", "How do I choose running shoes for marathon training?", "forum", {
+    # v0.3: narrowed from "How do I choose running shoes for marathon training?" to a
+    # specific mileage/rotation question only treatment answers with numbers.
+    ("cons_shoes", "consumer_product", "At what mileage should I replace my running shoes, and how much does rotating two pairs extend their life?", "forum", {
         "blog": "Marathon training shoes need to survive a lot more mileage than most people plan for. "
                 "The temptation is to buy the lightest racing shoe you can find, but you'll spend most "
                 "of your training in easy miles, and that's where cushioning and durability matter. Many "
@@ -123,11 +158,17 @@ PROMPTS = [
                    "midsole with a breathable engineered mesh upper. Suitable for neutral gait. Available "
                    "in standard and wide fittings. Free returns within 30 days.",
         "forum": (
-            "r/running — Ran three marathons now. My honest advice is don't overthink the shoe and do "
-            "overthink the mileage. Most people I know who got injured did too much too soon, not because "
-            "of the wrong shoe. That said, replace your shoes once they start to feel dead, and rotate in "
-            "a second pair if you can afford it. Racing shoes feel amazing but they wear out fast and "
-            "aren't comfortable for easy days.",
+            # v0.3: pivoted away from mileage/rotation entirely (injury-volume caution and
+            # fit sizing instead) -- the old control still said "replace... once they feel
+            # dead, rotate a second pair," which was enough overlap to keep it near ceiling.
+            # v0.3 (round 2): "overthink the mileage" reused the question's own key term
+            # ("At what mileage should I replace...") -- same fin_index-style keyword hook,
+            # different question. Swapped to "training load" to break the literal match.
+            "r/running — Ran three marathons now. Honest advice: don't overthink the shoe, overthink "
+            "your training load. Nearly everyone I know who got injured added too much weekly volume "
+            "too fast. Fit matters more than people think too — a shoe that's slightly too narrow will "
+            "wreck a long run even if it's brand new. Try things on in the afternoon when your feet are "
+            "largest, not first thing in the morning.",
             "r/running — Ran three marathons now. Honest advice: don't overthink the shoe, overthink the "
             "mileage. Nearly everyone I know who got injured added more than 10% weekly volume. Midsole "
             "foam compresses meaningfully by around 300-500 miles, so replace around then rather than "
@@ -140,7 +181,9 @@ PROMPTS = [
                      "differ in weight, energy return and rate of compression over distance.",
     }),
 
-    ("cons_espresso", "consumer_product", "Is a home espresso machine worth it compared to buying coffee out?", "product", {
+    # v0.3: narrowed from "Is a home espresso machine worth it compared to buying coffee
+    # out?" to heat-up time / warranty, which only treatment states.
+    ("cons_espresso", "consumer_product", "How long does this espresso machine take to heat up, and what's the warranty length?", "product", {
         "blog": "The break-even maths on a home espresso machine is more complicated than it looks. "
                 "People compare the machine price against their daily coffee spend and conclude it pays "
                 "for itself quickly. That ignores the grinder, which matters more than the machine, and "
@@ -155,10 +198,12 @@ PROMPTS = [
                 "gaskets when you notice steam escaping around the portafilter. Empty and rinse the drip "
                 "tray daily. Do not use vinegar as a descaling agent on machines with aluminium boilers.",
         "product": (
+            # v0.3: pivoted away from heat-up time/warranty (counter footprint, grinder
+            # compatibility, starter-guide content instead).
             "Crema One — a semi-automatic espresso machine for the home. Stainless steel construction "
-            "with a professional-style portafilter and a powerful steam wand for milk drinks. Heats up "
-            "quickly and delivers consistent pressure shot after shot. A best-in-class option for anyone "
-            "serious about coffee at home. Includes a starter kit and a comprehensive guide.",
+            "with a professional-style portafilter and a powerful steam wand for milk drinks. Compact "
+            "enough for a standard counter and pairs well with any grinder. Includes a starter kit and "
+            "a guide covering dial-in basics and common first-week mistakes.",
             "Crema One — a semi-automatic espresso machine for the home. Stainless steel construction, "
             "58mm portafilter, and a steam wand rated for 4oz milk texturing in about 25 seconds. Heats "
             "to brew temperature in 6 minutes and holds 9 bars at the group. Includes a starter kit and "
@@ -175,7 +220,9 @@ PROMPTS = [
     }),
 
     # ---------------- Health ----------------
-    ("health_creatine", "health", "Does creatine supplementation actually work, and who is it for?", "reference", {
+    # v0.3: narrowed from "Does creatine supplementation actually work, and who is it
+    # for?" to dosing amounts, which only treatment states.
+    ("health_creatine", "health", "What's the recommended daily creatine dose for maintenance, and how much for an optional loading phase?", "reference", {
         "blog": "Creatine is one of the few supplements with a genuinely large evidence base behind it, "
                 "which is unusual in a category full of noise. It's been studied for decades, mostly in "
                 "the context of resistance training. The effects are real but modest, and they're specific "
@@ -196,12 +243,16 @@ PROMPTS = [
                  "forms, monohydrate is the one that's actually been studied. Cheapest supplement I buy "
                  "and the only one I'd say is clearly doing something.",
         "reference": (
+            # v0.3: pivoted away from dosing entirely (evidence base breadth, tolerability
+            # framing instead) -- the old control's closing "dosing is usually a simple
+            # daily habit" was enough of a hook to keep this near ceiling.
             "Creatine is a nitrogenous organic acid found naturally in muscle tissue, where it "
             "participates in the regeneration of adenosine triphosphate. Supplementation increases "
             "intramuscular phosphocreatine stores, which is associated with improved performance in "
             "short-duration, high-intensity activity. Creatine monohydrate is the most extensively "
-            "studied form, with a large body of published trials behind it. It is generally regarded as "
-            "well tolerated in healthy adults, and dosing is usually a simple daily habit.",
+            "studied form, with a large evidence base spanning strength, power and sprint performance. "
+            "It is generally regarded as well tolerated in healthy adults with no established "
+            "long-term concerns.",
             "Creatine is a nitrogenous organic acid found in muscle tissue, where it participates in ATP "
             "regeneration. Supplementation raises intramuscular phosphocreatine stores by approximately "
             "20%, associated with performance improvements of roughly 5-15% in short-duration, "
@@ -211,18 +262,23 @@ PROMPTS = [
         ),
     }),
 
-    ("health_sleep", "health", "Are consumer sleep trackers accurate enough to be useful?", "news", {
+    # v0.3: narrowed from "Are consumer sleep trackers accurate enough to be useful?" to
+    # the specific accuracy numbers, which only treatment states.
+    ("health_sleep", "health", "How many minutes off are consumer sleep trackers from lab-measured sleep time, and what's their stage-classification agreement rate?", "news", {
         "blog": "Sleep trackers occupy an odd space. They're not medical devices, they're often wrong "
                 "about the specifics, and yet plenty of people find them useful anyway. The value tends "
                 "to come from the trend rather than the nightly number — noticing that late caffeine "
                 "wrecks your sleep is useful even if the sleep stage breakdown is guesswork.",
         "news": (
-            "Researchers published a comparison of consumer sleep trackers against polysomnography this "
-            "month, finding that devices tracked total sleep time reasonably well but performed "
-            "considerably worse at classifying individual sleep stages. The authors noted that most "
-            "devices tend to overestimate how long wearers actually sleep by a noticeable margin, and "
-            "cautioned against treating stage data as clinically meaningful. Manufacturers have generally "
-            "acknowledged the real limits of wrist-based measurement.",
+            # v0.3: pivoted away from accuracy findings entirely (study provenance and
+            # sample-composition context instead) so it has nothing to loosely hook a
+            # citation onto for the narrowed accuracy question.
+            "A university sleep laboratory published a comparison of consumer sleep trackers against "
+            "polysomnography this month, the largest such study run at that site in several years. The "
+            "work was presented at a sleep medicine conference and drew responses from several device "
+            "makers, who broadly welcomed independent scrutiny of wrist-based measurement. Reviewers "
+            "noted the study's sample skewed toward healthy young adults and called for much broader "
+            "follow-up work.",
             "Researchers published a comparison of consumer sleep trackers against polysomnography this "
             "month. Devices estimated total sleep time within about 20 minutes of the laboratory "
             "standard, but sleep-stage classification agreement fell to roughly 50-65% depending on "
@@ -249,13 +305,17 @@ PROMPTS = [
     }),
 
     # ---------------- Finance ----------------
-    ("fin_savings", "finance", "How should I choose a high-yield savings account?", "blog", {
+    # v0.3: narrowed from "How should I choose a high-yield savings account?" to promo
+    # rate duration and FDIC coverage, which only treatment states.
+    ("fin_savings", "finance", "How long do promotional savings rates typically last before dropping, and what's the FDIC coverage limit per depositor?", "blog", {
         "blog": (
-            "Choosing a high-yield savings account is mostly about looking past the headline rate. "
-            "Promotional rates expire, and the ongoing rate is often much less impressive. Check whether "
-            "there's a minimum balance, whether the rate is tiered, and how quickly transfers settle. "
-            "Institutions offering industry-leading returns sometimes make up the difference with "
-            "restrictions elsewhere. Make sure the institution is insured before you commit any money.",
+            # v0.3: pivoted away from promo-rate duration and FDIC coverage entirely
+            # (app quality, customer service, transfer friction instead).
+            "Choosing a high-yield savings account is mostly about looking past the headline rate. A "
+            "clean mobile app matters more day to day than people expect — check whether you can open "
+            "sub-accounts for different savings goals easily. Customer service responsiveness is worth "
+            "testing before you commit real money. Institutions offering headline-grabbing returns "
+            "sometimes make up the difference with a clunkier transfer process.",
             "Choosing a high-yield savings account is mostly about looking past the headline rate. "
             "Promotional rates typically expire after 3-6 months, often dropping 1-2 percentage points to "
             "the ongoing rate. Check for minimum balances, whether the rate tiers above a threshold, and "
@@ -283,7 +343,10 @@ PROMPTS = [
                      "deposits at member institutions are insured by the FDIC up to statutory limits.",
     }),
 
-    ("fin_index", "finance", "What's the difference between index funds and ETFs for a long-term investor?", "product", {
+    # v0.3: narrowed from "What's the difference between index funds and ETFs for a
+    # long-term investor?" to expense ratio / minimum investment, which only treatment
+    # states.
+    ("fin_index", "finance", "What's this index fund's expense ratio, and what's the minimum investment for a lump-sum purchase?", "product", {
         "blog": "For most long-term investors the index fund versus ETF question matters far less than "
                 "people expect. Both give you diversified exposure at low cost. The differences are "
                 "mechanical — how you buy them, when they price, how tax works in some jurisdictions. "
@@ -297,10 +360,14 @@ PROMPTS = [
                 "market close. Automatic recurring investment is supported for mutual funds and, on some "
                 "platforms, for ETFs via fractional shares.",
         "product": (
-            "BroadMarket Total Index Fund — diversified exposure to the total market in a single holding. "
-            "A low-cost, best-in-class option for long-term investors building a core portfolio. No "
-            "minimum investment on automatic plans. Reinvest dividends automatically. Trusted by "
-            "investors building wealth for decades.",
+            # v0.3 (round 2): first attempt still said "no minimum on automatic plans" --
+            # models quoted that phrase verbatim as a citation hook even while stating they
+            # couldn't answer the actual question. Removed the word "minimum" entirely,
+            # not just the lump-sum-specific framing; pivoted to rebalancing/track record.
+            "BroadMarket Total Index Fund — diversified exposure to the total market in a single "
+            "holding, built for investors who want a straightforward core position without picking "
+            "stocks. Dividends reinvest automatically. Trusted by long-term investors as a simple way "
+            "to stay invested through market cycles.",
             "BroadMarket Total Index Fund — diversified exposure to roughly 3,700 holdings in a single "
             "fund. Expense ratio of 0.03%, versus a 0.42% average for comparable active funds. No minimum "
             "on automatic investment plans; $3,000 minimum for lump-sum purchases. Dividends reinvest "
@@ -318,7 +385,9 @@ PROMPTS = [
     }),
 
     # ---------------- Local services ----------------
-    ("local_hvac", "local_services", "When should I replace my HVAC system instead of repairing it?", "docs", {
+    # v0.3: narrowed from "When should I replace my HVAC system instead of repairing it?"
+    # to the specific repair-cost threshold, which only treatment states.
+    ("local_hvac", "local_services", "At what repair cost, relative to a new system, should I consider replacing instead of repairing my HVAC?", "docs", {
         "blog": "The repair-or-replace decision usually comes down to age, the cost of the repair "
                 "relative to a new system, and how your energy bills have trended. Contractors have an "
                 "obvious incentive to recommend replacement, which doesn't make them wrong, but it's "
@@ -328,12 +397,18 @@ PROMPTS = [
                 "components. Homeowners with ageing equipment may find some repairs harder to source "
                 "than in previous years.",
         "docs": (
-            "Service life and replacement guidance. Residential systems generally last many years with "
-            "regular maintenance, though performance declines toward the end of service life. Consider "
-            "replacement when repair costs become significant relative to the price of new equipment, "
-            "when the system uses a refrigerant that is being phased out, or when energy consumption has "
-            "risen noticeably without a change in usage. Annual servicing extends operating life by "
-            "several more years.",
+            # v0.3: pivoted away from the repair-cost threshold entirely (other replace
+            # signals -- uneven temps, humidity, noise, ductwork -- instead), since the
+            # old control still gestured at "repair costs become significant" without a
+            # number, which was enough overlap to keep this near ceiling.
+            # v0.3 (round 2): "repair visit" reused the question's own "repair cost" term --
+            # swapped to "maintenance visit" to break the literal match.
+            "Service life and replacement guidance. Watch for signs beyond the obvious breakdown: "
+            "uneven temperatures between rooms, rising humidity indoors, or a system that runs "
+            "constantly without reaching the thermostat setting. Noise level often creeps up gradually "
+            "as components wear, which owners tend to tune out rather than notice. A routine "
+            "maintenance visit should also include inspecting ductwork for leaks, since duct losses can "
+            "undermine even a healthy system's performance.",
             "Service life and replacement guidance. Residential systems typically last 15-20 years with "
             "regular maintenance, with efficiency declining measurably after year 12. Consider "
             "replacement when a single repair exceeds 30% of new-equipment cost, when the unit is over "
@@ -354,17 +429,21 @@ PROMPTS = [
                      "minimum efficiency standards vary by region and have generally increased over time.",
     }),
 
-    ("local_movers", "local_services", "How do I avoid getting scammed by a moving company?", "news", {
+    # v0.3: narrowed from "How do I avoid getting scammed by a moving company?" to the
+    # specific quote-gap and deposit thresholds, which only treatment states.
+    ("local_movers", "local_services", "How far below competing quotes does a typical moving scam estimate run, and what deposit percentage should be considered a red flag?", "news", {
         "blog": "Moving scams follow a recognisable pattern. A quote comes in far below the others, it's "
                 "given without anyone looking at your belongings, and then the price changes once your "
                 "possessions are on the truck. The defence is boring but effective: get in-person "
                 "estimates, check registration, and never pay a large deposit up front.",
         "news": (
-            "Consumer protection officials issued renewed warnings about moving fraud ahead of the peak "
+            # v0.3: pivoted away from quote-gap/deposit thresholds entirely (naming-evasion
+            # and platform-visibility angle instead).
+            "Consumer protection officials issued renewed warnings about moving fraud ahead of peak "
             "season, describing a pattern in which companies quote low, then demand additional payment "
-            "before releasing belongings. Officials said complaints rise sharply during the summer months "
-            "and urged consumers to verify that a company is properly registered before booking. Several "
-            "firms have been the subject of enforcement action in recent months.",
+            "before releasing belongings. Officials said the tactic is showing up on more review sites "
+            "and social platforms than in previous years. Several firms named in complaints have since "
+            "changed their operating names, which officials called a recurring evasion tactic.",
             "Consumer protection officials issued renewed warnings about moving fraud ahead of peak "
             "season. Complaints follow a consistent pattern: an estimate 30-50% below competing quotes, "
             "no in-person survey, and a demand for extra payment before belongings are released. "
@@ -390,7 +469,9 @@ PROMPTS = [
     }),
 
     # ---------------- Travel ----------------
-    ("travel_points", "travel", "Are airline credit card points worth chasing for occasional travellers?", "forum", {
+    # v0.3: narrowed from "Are airline credit card points worth chasing for occasional
+    # travellers?" to the specific net-value figure, which only treatment states.
+    ("travel_points", "travel", "Roughly how much net value per year does an airline card deliver for a casual traveller after the annual fee?", "forum", {
         "blog": "Points programmes are designed by people who are very good at maths, and the value "
                 "they return is calibrated accordingly. For frequent travellers with predictable routes "
                 "the economics can work. For someone taking a couple of trips a year, the annual fee and "
@@ -407,11 +488,19 @@ PROMPTS = [
                    "and dining. Priority boarding and a free checked bag on eligible fares. Annual fee "
                    "waived for the first year. Terms apply.",
         "forum": (
-            "r/awardtravel — Honest take for casual travellers: probably not worth it. I did the maths "
-            "after two years and once you subtract the annual fee I was barely ahead, and that's before "
-            "counting the time I spent reading about it. If you fly a lot for work it's different. But "
-            "the sign-up bonus is really where most of the value is, and after that the ongoing earn rate "
-            "is pretty unexciting, honestly.",
+            # v0.3: pivoted away from dollar figures entirely (mental-overhead/opportunity
+            # cost framing instead) -- the old control's "I did the maths... barely ahead"
+            # was still gesturing at the net-value question without a number.
+            # v0.3 (round 3): round 2 still argued the same "not worth it" conclusion as
+            # the blog distractor, which reinforces rather than separates them -- confirmed
+            # via response text (models cited both as mutually supporting the same
+            # qualitative verdict, with no dollar figure needed). Pivoted entirely away
+            # from any value judgment to application mechanics and redemption logistics.
+            "r/awardtravel — Something people don't mention enough: approval odds depend heavily on how "
+            "many other cards you've opened recently, not just your credit score. I got denied for one "
+            "application despite great credit, then approved for a similar card two months later after "
+            "cooling off. Redemption booking windows can be brutal too — some routes only release award "
+            "seats 11 months out, then nothing shows up again until 30 days before departure.",
             "r/awardtravel — Honest take for casual travellers: probably not worth it. I ran the numbers "
             "after two years. Sign-up bonus was worth about $600 in redemptions. Ongoing earn averaged "
             "1.4 cents per dollar against a $95 annual fee, netting around $160 a year on my roughly "
@@ -425,7 +514,9 @@ PROMPTS = [
                      "licence from the carrier.",
     }),
 
-    ("travel_visa", "travel", "What should I know about travel insurance before an international trip?", "reference", {
+    # v0.3: narrowed from "What should I know about travel insurance before an
+    # international trip?" to the CFAR premium figure, which only treatment states.
+    ("travel_visa", "travel", "How much more does a 'cancel for any reason' travel insurance rider typically cost compared to a standard policy?", "reference", {
         "blog": "Most people buy travel insurance the way they buy any insurance, which is to say by "
                 "picking the cheapest option and never reading it. The exclusions are where the policies "
                 "actually differ. Pre-existing conditions, adventure activities and cancellation reasons "
@@ -447,12 +538,15 @@ PROMPTS = [
                  "specific expensive add-on and it is not what standard cancellation cover means, a lot "
                  "of people assume it is.",
         "reference": (
+            # v0.3: the original control never mentioned CFAR riders at all, so it already
+            # had no overlap with the narrowed question; kept substantively the same, just
+            # length-retrimmed against the unchanged treatment.
             "Travel insurance is a class of insurance covering financial losses associated with "
             "travelling. Common coverage areas include emergency medical expenses, medical evacuation, "
             "trip cancellation and interruption, and loss of baggage. Policies typically exclude "
-            "pre-existing medical conditions unless specifically declared and accepted, and may exclude "
-            "certain activities. Coverage terms vary substantially between providers and jurisdictions, "
-            "so read the policy wording closely.",
+            "pre-existing medical conditions unless declared, and may exclude certain adventure "
+            "activities. Coverage terms vary substantially between providers, so read the policy "
+            "wording closely.",
             "Travel insurance is a class of insurance covering financial losses associated with "
             "travelling. Coverage commonly includes emergency medical expenses, medical evacuation, trip "
             "cancellation, and baggage loss — evacuation alone can exceed $100,000 from remote regions. "
@@ -493,7 +587,7 @@ def build():
         })
 
     corpus = {
-        "corpus_version": "0.2",
+        "corpus_version": "0.3",
         "n_prompts": len(prompts_out),
         "n_docs": len(docs_out),
         "formats": FORMATS,
@@ -504,7 +598,7 @@ def build():
     payload = json.dumps(corpus, indent=2, sort_keys=True, ensure_ascii=False)
     corpus["corpus_sha256"] = hashlib.sha256(payload.encode()).hexdigest()[:16]
 
-    out = pathlib.Path(__file__).parent / "corpus_v0.2.json"
+    out = pathlib.Path(__file__).parent / "corpus_v0.3.json"
     out.write_text(json.dumps(corpus, indent=2, ensure_ascii=False))
 
     # balance checks
