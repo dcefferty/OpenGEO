@@ -113,9 +113,23 @@ again). Full v0.3 run (`results/runs_v0.3.jsonl`, 4,608 calls, 0 errors): H4 poo
 +0.493, CI [+0.352, +0.641], p=0.0005, individually significant for all 8 models.
 
 v0.3 has not been pre-registered as a numbered round — it's the corpus-design validation that
-Round 1 will be built from, not Round 1 itself. See `ROADMAP.md` for what's next: scaling
-this same recipe to the sizing analysis's recommended 50 prompts × 24 runs, then
-pre-registering and running Round 1 for real.
+Round 1 will be built from, not Round 1 itself.
+
+**Corpus v0.4** scales the validated v0.3 recipe from 12 to 48 prompts (24 domains × 2, 8
+prompts per format). Validation surfaced a subtler failure mode than v0.3's: even with zero
+literal keyword overlap, a control document could still fail if any sentence gave a
+qualitative or directional answer in different words (e.g. "a CPU-bound game won't benefit
+much" answers a frame-rate-improvement question without using those words). Caught only by
+testing against real models, not by inspection or keyword scripts. Full v0.4 run
+(`results/runs_v0.4.jsonl`, 18,432 calls, 0 final errors after a mid-run API-key spending
+limit was hit and removed): H4 pooled delta +0.482, CI [+0.404, +0.563], p<0.0001,
+individually significant for all 8 models.
+
+**v0.4 was not pre-registered before collection**, so it is strong scaled-up confirmatory
+evidence, not yet the citable "Round 1" by this project's own standard. See `ROADMAP.md`
+item 6 for the two paths forward: a fresh pre-registered run on this corpus, or publishing
+this run explicitly labeled as exploratory and reserving "Round 1" for the next genuinely
+new intervention.
 
 ## Scope honesty
 

@@ -102,14 +102,35 @@ replicate their v0.2 verdicts. Full results: `results/runs_v0.3.jsonl`.
 
 v0.3 is corpus-design validation, not a pre-registered round — see item 6.
 
-### 6. Round 1 as a Princeton replication
-Re-run GEO-bench's intervention set (statistics, quotations, citations, fluency, keyword
-stuffing, authority claims) against real 2026 models, scaled from the v0.3 corpus recipe to
-item 5's recommended 50 prompts × 24 runs/arm, ≥25 prompts. Pre-register before collection.
+### 6. Round 1 as a Princeton replication — run, but not yet pre-registered (2026-08-25)
+Scaled the v0.3 recipe from 12 to 48 prompts (corpus v0.4, 24 domains × 2, item 5's sizing
+target) and ran it for real: 18,432 calls. Two operational snags along the way, both
+resolved without data loss — a mid-run `403 Key limit exceeded` (a spending cap configured
+on the API key itself, not the account; removed by the user, then `--resume` picked up
+cleanly) and, during corpus construction, a harder-to-catch failure mode than v0.3's: even
+after removing literal keyword overlap, a control document could still fail if *any*
+sentence gave a qualitative/directional answer to the question in different words (e.g. "a
+CPU-bound game won't benefit much" answers "how much frame-rate improvement," and "worth
+every penny" answers a cost question, neither using the question's own vocabulary). Caught
+by testing prompts against real models, not by inspection — a purely keyword-based audit
+script missed all of these.
 
-*Why this one:* "we re-ran the most-cited GEO study against real engines and here is what held
-up" is a headline the industry has to read, because it has been quoting those numbers for two
-years. If it fails to replicate, that is the finding.
+*Result:* H4 pooled delta +0.482, 95% CI [+0.404, +0.563], p<0.0001, individually
+significant for all 8 models (including kimi-k2, p<0.0001) — the tightest, most
+unambiguous version of this finding yet. Condition remains the dominant variance driver
+(eta^2=0.305). H1/H2/H3/H5 all replicate. Full results: `results/runs_v0.4.jsonl`.
+
+**This was not pre-registered before collection**, so per this project's own credibility
+standard it is strong scaled-up confirmatory evidence, not yet "the" citable Round 1. Before
+publishing this as a headline result, either (a) write and commit a pre-registration for a
+fresh run on this same v0.4 corpus, or (b) if re-running is wasteful given how unambiguous
+this result already is, publish it explicitly labeled as exploratory/non-pre-registered and
+reserve "Round 1" for the next genuinely new intervention or corpus. Don't retroactively
+call this pre-registered — that defeats the point of the practice.
+
+*Why replication matters:* "we re-ran the most-cited GEO study against real engines and here
+is what held up" is a headline the industry has to read, because it has been quoting those
+numbers for two years.
 
 ### 7. Publish
 Results as CC-BY, code MIT. Raw `runs.jsonl` published alongside the analysis — the raw data
