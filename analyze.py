@@ -232,9 +232,17 @@ def main():
         star = " *" if pv < .05 else ""
         print(f"{m:<34} {np.mean(cs):>8.3f} {np.mean(ts):>8.3f} {obs:>+8.3f} "
               f"[{lo:>+.3f},{hi:>+.3f}] {pv:>8.4f}{star}")
-    print("\nNOTE: 12 prompts is below the 25-prompt floor in METHODOLOGY.md. This round")
-    print("estimates the effect and its variance, not a publishable effect size — report")
-    print("H4 as an interval, not a finding, until Round 1.")
+    floor = 25
+    if len(prompts) < floor:
+        print(f"\nNOTE: {len(prompts)} prompts is below the {floor}-prompt floor in "
+              "METHODOLOGY.md. This round")
+        print("estimates the effect and its variance, not a publishable effect size — report")
+        print("H4 as an interval, not a finding, until a larger round.")
+    else:
+        print(f"\nNOTE: {len(prompts)} prompts clears the {floor}-prompt floor in "
+              "METHODOLOGY.md's scope-honesty rule.")
+        print("That rule is about sample size only — it says nothing about whether this round")
+        print("was pre-registered. Check the run's provenance separately before citing it.")
 
     # ---------------- H3: cross-model agreement ----------------
     hdr("H3. CROSS-MODEL AGREEMENT  (Kendall's W on document citation rates)")
