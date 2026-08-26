@@ -128,13 +128,26 @@ this result already is, publish it explicitly labeled as exploratory/non-pre-reg
 reserve "Round 1" for the next genuinely new intervention or corpus. Don't retroactively
 call this pre-registered — that defeats the point of the practice.
 
+**Decision (2026-08-25): (b).** Re-running an experiment to satisfy pre-registration after
+already seeing the result twice, at two scales, doesn't buy the credibility pre-registration
+exists to provide — it would be theater, not rigor. Published as exploratory instead; see
+item 7. "Round 1" stays reserved for the next genuinely new intervention, run under a
+pre-registration committed before any data exists.
+
 *Why replication matters:* "we re-ran the most-cited GEO study against real engines and here
 is what held up" is a headline the industry has to read, because it has been quoting those
 numbers for two years.
 
-### 7. Publish
-Results as CC-BY, code MIT. Raw `runs.jsonl` published alongside the analysis — the raw data
-being downloadable *is* the differentiator. Include nulls with equal prominence.
+### 7. Publish — done for the v0.4 exploratory round (2026-08-25)
+`results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md` — full H1-H5 results
+including the H3 null, variance decomposition, limitations, and reproduction steps. Code
+MIT, data CC-BY per `LICENSE`. Raw `results/runs_v0.4.jsonl` stays in the main tree
+(referenced, not duplicated, to avoid bloating the repo with a second 50MB+ copy) with its
+git commit pinned in the report for provenance.
+
+Still open: a genuinely pre-registered Round 1 (a new intervention or corpus, pre-registration
+committed before collection) remains undone — this item covers publishing what exists, not
+producing the citable "Round 1" that item 6 explicitly declined to claim.
 
 ---
 
