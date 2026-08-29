@@ -159,7 +159,36 @@ corpus/corpus_kwstuff_v2.json`:
 
 Logged here with a timestamp before analysis, not made silently.
 
-*(none yet)*
+**2026-08-28 — spot check failed the go/no-go gate; full round not run.**
+Ran the pre-committed validation spot check: 6 prompts (one per format —
+saas_uptime, local_hvac, travel_points, cons_espresso, health_creatine,
+local_movers), all 8 models, both conditions, 24 runs/cell = 2,304 calls, 0
+errors, 0 `model_returned` mismatches
+(`results/runs_kwstuff_v2_spotcheck.jsonl`).
+
+**Result: `moderate`-condition CPR was 0.911–0.984 across all 6 spot-checked
+prompts** — the same ceiling as v1's failed baseline (v1's reused-treatment
+control sat at ~0.985), not the mid-range result the redesign intended.
+
+**Diagnosis:** the redesign's premise — that answering only *one* of a
+question's two target facts would land CPR somewhere between v0.4's true
+orthogonal control (pooled 0.503) and its full-answer treatment (pooled
+0.985) — was wrong. Splicing in even one concrete, on-topic, keyword-matching
+fact sentence is sufficient by itself to push CPR to the same ceiling as
+answering both facts; these models do not appear to discriminate on
+*completeness* of the answer, only on whether the document contains *any*
+specific, on-topic content at all versus none. `moderate` is functionally
+equivalent to `treatment` from the model's perspective, not a midpoint.
+v0.4's real orthogonal control (zero specific facts on either target fact,
+pooled CPR 0.503) is the only version of these documents with genuine
+headroom on either side — confirmed by re-reading `corpus_v0.4.json`'s
+actual `control` text for the 6 spot-checked prompts, not by inference.
+
+**Per the stopping rule's stated gate,** this is a genuine ceiling failure,
+not a favorable-looking result being used to justify continuing — the full
+18,432-call round is NOT run against `corpus_kwstuff_v2.json`. A `kwstuff-v3`
+redesign is required; see `preregistrations/2026-08-kwstuff-v3.md` (once
+written) for the corrected design.
 
 ---
 
