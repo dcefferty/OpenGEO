@@ -126,10 +126,40 @@ limit was hit and removed): H4 pooled delta +0.482, CI [+0.404, +0.563], p<0.000
 individually significant for all 8 models.
 
 **v0.4 was not pre-registered before collection**, so it is strong scaled-up confirmatory
-evidence, not yet the citable "Round 1" by this project's own standard. See `ROADMAP.md`
-item 6 for the two paths forward: a fresh pre-registered run on this corpus, or publishing
-this run explicitly labeled as exploratory and reserving "Round 1" for the next genuinely
-new intervention.
+evidence, not yet the citable "Round 1" by this project's own standard. Published
+2026-08-25 explicitly labeled exploratory:
+`results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md`.
+
+**Keyword-stuffing intervention (H6)** — a genuinely new intervention, chosen and
+pre-registered specifically so a fully pre-registered-before-collection round would
+exist. Took three corpus designs to get a real answer, and the two failures are worth
+knowing about before touching this intervention again:
+
+- **v1** reused v0.4's `treatment` text (already ~98.5% CPR) as its "natural" baseline
+  — no headroom, uninformative null (pooled delta −0.001, p=0.57).
+- **v2** tried a "half-specific" baseline (one of two target facts stated, one left
+  orthogonal), theorizing partial completeness would land mid-range. A pre-committed
+  real-model spot check falsified that before the full round ran: half a specific
+  answer gets cited at the same ~0.91–0.98 ceiling as a whole one. These models
+  discriminate on presence-vs-absence of *any* specific fact, not on completeness.
+  Full diagnosis in `preregistrations/2026-08-kwstuff-v2.md`.
+- **v3** went back to v0.4's *actual* orthogonal control text (already measured,
+  pooled CPR 0.503, confirmed non-ceiling) and stuffed keywords into it unmodified,
+  with no new facts added. Spot check confirmed real headroom (per-prompt CPR
+  0.17–0.87). Full run (`results/runs_kwstuff_v3.jsonl`, 18,432 calls, 0 errors):
+  **H6 falsified** — pooled delta +0.038, 95% CI [+0.004, +0.075], p=0.045 (7 models,
+  `kimi-k2` excluded per standing rule). Keyword stuffing did not decrease citation;
+  it modestly but measurably *increased* it. Small effect (η²=0.002, dwarfed by
+  prompt/domain variance), but the direction is consistently positive across models,
+  not one outlier. Pre-registered 2026-08-28, before any real-model call. Published:
+  `results/published/2026-08-29-kwstuff-v3/REPORT.md`.
+
+**Process lesson for future interventions:** neither v1's "reuse already-validated
+content wholesale" nor v2's "recombine already-validated pieces" assumption held up
+without a real-model check. A pre-committed spot check *after* pre-registration but
+*before* the full round — cheap (~$1-2, ~2,300 calls) relative to a wasted full round
+(~$5-14, 18,432 calls) — is now the standing practice for any new corpus design in this
+project, not an exception.
 
 ## Scope honesty
 
