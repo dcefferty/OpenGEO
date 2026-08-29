@@ -166,7 +166,30 @@ corpus/corpus_kwstuff_v3.json`:
 
 Logged here with a timestamp before analysis, not made silently.
 
-*(none yet)*
+**2026-08-28 — spot check passed the go/no-go gate; full round cleared to run.**
+Ran the pre-committed validation spot check: same 6 prompts as v2's for a clean
+comparison (saas_uptime, local_hvac, travel_points, cons_espresso,
+health_creatine, local_movers), all 8 models, both conditions, 24 runs/cell =
+2,304 calls, 1 error (0.04%, well under the 2% threshold — a single
+`deepseek/deepseek-chat` call with no `finish_reason`), 0 `model_returned`
+mismatches (`results/runs_kwstuff_v3_spotcheck.jsonl`).
+
+**Result: no ceiling, no floor.** Per-model pooled CPR (via `analyze.py`) ranged
+0.368–0.843 for `orthogonal` and 0.437–0.882 for `stuffed`, none pinned near
+0% or 100%. Per-prompt CPR (pooled across the 7 non-`kimi-k2` models) ranged
+0.173 (travel_points) to 0.870 (cons_espresso) for `orthogonal` — genuine
+spread, not a repeat of v1's or v2's uniform ceiling. Pooled H6 delta on this
+6-prompt subset: +0.082, 95% CI [-0.033, +0.200], p=0.339 — correctly
+underpowered at n=6 (below the 25-prompt floor), not interpreted as a finding,
+but the CI is a real (if wide) interval, not degenerate the way v1's and v2's
+zero-variance cells were.
+
+`kimi-k2`'s no-cite rate on this spot check (17.0%) is elevated but consistent
+with its known behavior on v0.4 (13.3%) — not a new problem, and it stays
+excluded from pooled figures per the standing rule.
+
+**Per the stopping rule's stated gate, this clears the full 18,432-call round
+to run** — no design change triggered.
 
 ---
 
