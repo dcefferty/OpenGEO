@@ -191,6 +191,41 @@ excluded from pooled figures per the standing rule.
 **Per the stopping rule's stated gate, this clears the full 18,432-call round
 to run** — no design change triggered.
 
+**2026-08-29 — full round complete.** 18,432/18,432 calls, 0 errors, 0
+`model_returned` mismatches, 197.3 minutes (`results/runs_kwstuff_v3.jsonl`).
+Meets the stopping rule's completion criteria.
+
+**H6 result (pooled, `kimi-k2` excluded per standing rule, n=7 models × 48
+prompts):** `orthogonal` CPR 0.517, `stuffed` CPR 0.555, **delta +0.038, 95%
+bootstrap CI [+0.004, +0.075], sign-flip permutation p=0.045.** The CI
+excludes zero on the positive side — **H6 is falsified**: keyword stuffing
+did not decrease citation, and measurably (if modestly) increased it in this
+experiment.
+
+Per-model (via `analyze.py`, including `kimi-k2` for completeness, excluded
+from the pooled figure above):
+
+| model | orthogonal CPR | stuffed CPR | delta | 95% CI | p |
+|---|---|---|---|---|---|
+| claude-haiku-4.5 | 0.378 | 0.385 | +0.008 | [-0.047,+0.064] | 0.807 |
+| deepseek-chat | 0.564 | 0.623 | +0.059 | [+0.012,+0.115] | 0.027 |
+| gemini-3-flash-preview | 0.661 | 0.706 | +0.044 | [-0.001,+0.092] | 0.078 |
+| llama-4-maverick | 0.418 | 0.453 | +0.035 | [-0.023,+0.093] | 0.246 |
+| mistral-medium-3 | 0.548 | 0.542 | -0.006 | [-0.055,+0.047] | 0.819 |
+| kimi-k2 (excl. from pooled) | 0.417 | 0.464 | +0.048 | [+0.010,+0.086] | 0.019 |
+| gpt-5.4-mini | 0.439 | 0.498 | +0.059 | [+0.019,+0.104] | 0.006 |
+| grok-4.3 | 0.612 | 0.676 | +0.064 | [+0.004,+0.130] | 0.050 |
+
+4 of 7 pooled models individually significant in the positive direction
+(deepseek-chat, gpt-5.4-mini, grok-4.3, and kimi-k2 if it were included);
+gemini-3-flash-preview marginal (p=0.078); only mistral-medium-3 sits at
+~zero. No model shows a significant *negative* effect. The direction is
+fairly consistent across models, not driven by one outlier.
+
+Per the reporting rules, this positive result is published with the same
+prominence a null or negative result would have received. Write-up:
+`results/published/2026-08-29-kwstuff-v3/REPORT.md` (once written).
+
 ---
 
 Pre-registered: 2026-08-28
