@@ -110,9 +110,60 @@ in a shallow lexical-overlap sense, more insistently *about* uptime monitoring t
 that mentions it twice gracefully. If citation selection leans on that kind of surface
 signal, stuffing is not being penalized for reading badly; it is winning a relevance
 contest it was never supposed to be able to enter. This is speculative and not
-something this round's data can confirm mechanistically — it would take a
-sentence-level attribution study (Group C metrics, not yet built — see
-`METRICS.md`) to test directly.
+something this round's data alone can confirm mechanistically — it would take a
+sentence-level attribution study to test directly. That study now exists; see below.
+
+## Follow-up: does stuffing win citations it doesn't earn? (Group C fidelity check)
+
+**Added 2026-08-30.** The mechanism speculated above predicts stuffing wins on
+*relevance signaling*, independent of whether the model's claims about the stuffed
+document are actually true. If so, stuffed citations should show *lower fidelity* —
+more hallucinated or misattributed claims — than natural ones, even though both get
+cited. `METRICS.md`'s Group C metrics (C1 Claim Fidelity Rate, C2 Distortion Rate)
+test exactly this, via ALCE-style entailment judging (arXiv 2305.14627) of every
+answer sentence attributed to the target document, using a judge model outside the
+8-model test panel to avoid self-preference bias (`judge_fidelity.py`).
+
+This is retrospective analysis on `results/runs_kwstuff_v3.jsonl` — no new answers
+were generated, so it needed no separate pre-registration, only the same honesty
+standard applied everywhere else in this project.
+
+**A 500-item pilot suggested a dramatic effect** — stuffed content's attributed claims
+looked nearly twice as likely to be unsupported (NOT_SUPPORTED share 0.253 vs 0.136).
+**It did not replicate at full scale.** Judging all 11,657 target-attributed sentences
+with `qwen/qwen3.8-max` and analyzing per-prompt (not pooled naively — the same
+discipline as everywhere else, since naive pooling conflates prompt-level variance
+with the condition effect):
+
+| Metric | Mean per-prompt delta (stuffed − orthogonal) | 95% CI | p |
+|---|---|---|---|
+| C1 strict (SUPPORTED) | −0.015 | [−0.052, +0.032] | 0.547 |
+| NOT_SUPPORTED share (≈C2) | −0.009 | [−0.038, +0.018] | 0.537 |
+
+Both null. **A second, different-vendor judge (`z-ai/glm-5.3`) replicated the null**
+on the same full 11,657-item set — different absolute calibration (glm-5.3 is more
+lenient overall, C1 strict ≈0.50–0.55 vs qwen's ≈0.34–0.40) but the same small,
+non-significant, same-direction delta (C1 strict −0.011, p=0.664; NOT_SUPPORTED
+−0.002, p=0.858). The two judges agreed on 85.4% of exact 3-way labels and 93.2% on
+the higher-stakes SUPPORTED/PARTIAL-vs-NOT_SUPPORTED distinction, on the 9,275 items
+both judged without truncation.
+
+**C3 (Verbatim Retention)** — cheap, no judge needed — was flat between conditions at
+both pilot and full scale: 37.0% vs 34.0% share of attributed sentences containing a
+4+-word verbatim span from the source, mean longest overlap 2.26 vs 1.98 words.
+
+**Conclusion: the speculated mechanism is not supported.** Stuffing increases citation
+*rate* without measurably changing citation *fidelity* — when stuffed content gets
+cited, the model's claims about it are, on average, exactly as trustworthy as claims
+about naturally-written content. The honest combined picture across H6 and this
+follow-up is smaller than the pilot teased: stuffing wins more citations, full stop,
+not "wins citations it doesn't deserve." Reported with equal prominence to the
+headline H6 result, per this project's own reporting rule — a null on a mechanism this
+project floated itself is not a result to bury.
+
+Full data: `results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl`,
+`results/fidelity_kwstuff-v3_glm-5.3_full.jsonl`. Pilot data (superseded, kept for the
+record of what didn't replicate): `results/fidelity_kwstuff-v3_qwen3.8-max_pilot.jsonl`.
 
 ## The other hypotheses — published with equal prominence
 
@@ -157,9 +208,17 @@ much practical leverage relative to what content actually says.
   weakness, not a visibility signal. Excluded from pooled figures; its own per-model
   result is directionally consistent with the pooled finding and does not change the
   conclusion either way.
-- **The mechanism is not measured directly here.** The "topical relevance via lexical
-  overlap" explanation above is a plausible reading of the result, not something this
-  round's data confirms at the sentence level.
+- **The lexical-overlap mechanism is speculative and, per the Group C follow-up above,
+  not the whole story** — it predicted a fidelity gap that didn't materialize at full
+  scale. Something is still driving models to cite repetitive content more often;
+  this project doesn't yet know what.
+- **Group C judge limitations.** Both judge models sometimes truncated before reaching
+  a conclusion even at a 1500-token budget (qwen3.8-max 10.9%, glm-5.3 11.5% of judged
+  items) — the primary C1/C2 figures exclude these as missing data (`stop`-only)
+  rather than guessing from a cut-off reasoning trace. The two judges disagree
+  meaningfully on the SUPPORTED/PARTIAL boundary (glm-5.3 is systematically more
+  lenient) even though they agree 93.2% of the time on the higher-stakes distortion
+  question — absolute C1 numbers should be read judge-relative, not as ground truth.
 - **Format is nested within prompt** (8 prompts per format) and the H5 interaction
   test operates on raw CPR rather than log-odds — same two caveats as v0.4's report;
   see the CAVEAT text printed by `analyze.py`'s H5 section for the exact statement.
@@ -173,12 +232,21 @@ much practical leverage relative to what content actually says.
 ```bash
 python3 corpus/build_corpus_kwstuff_v3.py                              # regenerates corpus_kwstuff_v3.json; verify sha matches c414f8fcae725096
 python3 analyze.py --runs results/runs_kwstuff_v3.jsonl --corpus corpus/corpus_kwstuff_v3.json
+
+# Group C fidelity check
+python3 judge_fidelity.py --runs results/runs_kwstuff_v3.jsonl --corpus corpus/corpus_kwstuff_v3.json \
+    --judge-model qwen/qwen3.8-max --out results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl
+python3 judge_fidelity.py --runs results/runs_kwstuff_v3.jsonl --corpus corpus/corpus_kwstuff_v3.json \
+    --judge-model z-ai/glm-5.3 --out results/fidelity_kwstuff-v3_glm-5.3_full.jsonl
 ```
 
-The pooled H6 figures above (kimi-k2 excluded) are computed directly from the raw
-per-run records rather than `analyze.py`'s built-in "ALL MODELS POOLED" line, which
-includes all 8 models — see `preregistrations/2026-08-kwstuff-v3.md` for the exact
-recomputation.
+The pooled H6 figures above (kimi-k2 excluded) and the Group C per-prompt paired
+statistics are computed directly from the raw per-run/per-item records rather than
+`analyze.py`'s built-in "ALL MODELS POOLED" line (which includes all 8 models) — see
+`preregistrations/2026-08-kwstuff-v3.md` for the H6 recomputation. The Group C output
+files contain duplicate `item_key` rows for any item that failed and was retried via
+`--resume` (both runs hit a mid-run `402 Payment Required` from account balance, not a
+harness bug); the last occurrence per `item_key` is authoritative.
 
 Raw data (`results/runs_kwstuff_v3.jsonl`) and corpus (`corpus/corpus_kwstuff_v3.json`)
 are committed at git commit `8546889` and after. Every run record carries full
