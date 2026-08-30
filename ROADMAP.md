@@ -145,9 +145,27 @@ MIT, data CC-BY per `LICENSE`. Raw `results/runs_v0.4.jsonl` stays in the main t
 (referenced, not duplicated, to avoid bloating the repo with a second 50MB+ copy) with its
 git commit pinned in the report for provenance.
 
-Still open: a genuinely pre-registered Round 1 (a new intervention or corpus, pre-registration
-committed before collection) remains undone — this item covers publishing what exists, not
-producing the citable "Round 1" that item 6 explicitly declined to claim.
+Still open (at the time of writing): a genuinely pre-registered Round 1 (a new intervention or
+corpus, pre-registration committed before collection) remains undone — this item covers
+publishing what exists, not producing the citable "Round 1" that item 6 explicitly declined to
+claim.
+
+### 7b. Keyword-stuffing intervention (H6) — the citable Round 1 — done (2026-08-29)
+The genuinely new, pre-registered-before-collection round item 6 left open. Took three corpus
+designs to get a real answer — see `preregistrations/2026-08-kwstuff-v3.md` and `CLAUDE.md`
+Current State for the full v1/v2 failure diagnosis (both hit the same reused-content ceiling
+problem from different directions). v3's baseline reused v0.4's already-measured real
+orthogonal control text verbatim and stuffed keywords into it with no new facts added.
+Pre-committed real-model spot check (2,304 calls) confirmed real headroom before the full round
+ran — now standing practice for any new corpus design, not an exception.
+
+*Result:* full run (`results/runs_kwstuff_v3.jsonl`, 18,432 calls, 0 errors). **H6 falsified**
+— pooled delta +0.038, 95% CI [+0.004, +0.075], p=0.045 (7 models, kimi-k2 excluded). Keyword
+stuffing modestly *increases* citation rather than decreasing it, contrary to the hypothesis
+and to conventional SEO wisdom. Small effect (η²=0.002 vs. η²=0.279 for prompt identity) but
+consistently positive direction, not one outlier model. H3 (cross-model agreement, "not
+supported") replicates cleanly on this second independent corpus. Published:
+`results/published/2026-08-29-kwstuff-v3/REPORT.md`.
 
 ---
 
