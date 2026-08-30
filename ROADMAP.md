@@ -49,14 +49,27 @@ Real-data highlights (all subject to the scope-honesty caveat below):
 
 ## P1 — making the result publishable
 
-### 4. Fidelity metrics (Group C)
-`METRICS.md` defines Claim Fidelity Rate and Distortion Rate but `analyze.py` does not compute
-them. Implement via entailment checking of each attributed sentence against its cited document,
-following ALCE's citation-precision construction (arXiv 2305.14627). Needs a judge model —
-use a different model family than the one under test, and report judge-model sensitivity.
+### 4. Fidelity metrics (Group C) — done (2026-08-30)
+`judge_fidelity.py`: ALCE-style entailment judging (arXiv 2305.14627) of every answer sentence
+attributed to a cited target document, applied retrospectively to `results/runs_kwstuff_v3.jsonl`
+(no new model-panel calls, no pre-registration needed — not a new causal intervention). Judge
+model outside the 8-model test panel per the "different family" requirement; a second,
+different-vendor judge run for the sensitivity check this item called for.
 
-*Why it matters:* nobody in the GEO industry reports fidelity. It is the clearest open space
-in the metric set.
+Three iterations to get the harness right, each a real bug caught before the full-scale spend:
+a mandatory-reasoning judge model returning empty content at a too-small token budget; a label
+parser grabbing the first (often tentative) label mention in a reasoning trace instead of the
+last; and truncation itself differing by condition, which would have confounded the exact
+comparison the metric exists to make. A 500-item pilot suggested a dramatic fidelity gap between
+conditions that did **not** replicate at full scale (11,657 items) under proper per-prompt paired
+analysis — confirmed null by both judges (85.4% exact label agreement, 93.2% on the
+distortion-or-not question). Full result and the pilot's non-replication:
+`results/published/2026-08-29-kwstuff-v3/REPORT.md`'s Group C follow-up section.
+
+*Why it matters:* nobody in the GEO industry reports fidelity. It was the clearest open space
+in the metric set — now measured, on this project's own citable Round 1, and it says the
+keyword-stuffing effect (item 7b) is a pure citation-count effect, not a "wins citations through
+distortion" effect.
 
 ### 5. Power analysis for Round 1 — done (2026-08-16)
 `size_round1.py` resamples the pilot's real (prompt, model) control-condition cells (bootstrap,

@@ -154,6 +154,17 @@ knowing about before touching this intervention again:
   not one outlier. Pre-registered 2026-08-28, before any real-model call. Published:
   `results/published/2026-08-29-kwstuff-v3/REPORT.md`.
 
+**Group C fidelity follow-up (2026-08-30)** — `judge_fidelity.py`, the first
+implementation of `METRICS.md`'s Claim Fidelity Rate / Distortion Rate (ALCE-style
+entailment judging, judge model outside the 8-model test panel). Tested the report's
+own speculated mechanism for H6 — does stuffing win citations partly through
+distortion, not just repetition? A 500-item pilot suggested yes (dramatically); it did
+**not** replicate at full scale (11,657 items, proper per-prompt paired analysis),
+confirmed null by two independent different-vendor judges (qwen3.8-max and glm-5.3,
+93.2% agreement on the distortion question). Keyword stuffing wins citations without
+measurably lower fidelity — a pure citation-count effect, not a "cheats its way in"
+effect. See ROADMAP.md item 4 and the REPORT.md's Group C section.
+
 **Process lesson for future interventions:** neither v1's "reuse already-validated
 content wholesale" nor v2's "recombine already-validated pieces" assumption held up
 without a real-model check. A pre-committed spot check *after* pre-registration but
