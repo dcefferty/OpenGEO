@@ -165,6 +165,17 @@ confirmed null by two independent different-vendor judges (qwen3.8-max and glm-5
 measurably lower fidelity — a pure citation-count effect, not a "cheats its way in"
 effect. See ROADMAP.md item 4 and the REPORT.md's Group C section.
 
+**Calibration study v1 (2026-08-30)** — first real measurement of the gap this project
+has asserted since the beginning: API-plane results (this project's primary
+measurement plane throughout) vs. what an ordinary logged-out user actually sees.
+OpenAI only (Perplexity's logged-out UI blocks search entirely behind a signup wall,
+confirmed by direct testing — itself a finding). 12 prompts: **divergence coefficient
+0.368, 95% CI [0.139, 0.625]**, driven mostly by the API plane returning zero
+citations on 3/12 prompts where the logged-out consumer UI cited real sources for the
+same question — a hint that the API plane may undercount citation activity relative
+to real usage. See ROADMAP.md item 8 and
+`results/published/2026-08-30-calibration-v1/REPORT.md`.
+
 **Process lesson for future interventions:** neither v1's "reuse already-validated
 content wholesale" nor v2's "recombine already-validated pieces" assumption held up
 without a real-model check. A pre-committed spot check *after* pre-registration but

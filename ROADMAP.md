@@ -184,13 +184,33 @@ supported") replicates cleanly on this second independent corpus. Published:
 
 ## P2 — the harder, more valuable work
 
-### 8. Calibration study
+### 8. Calibration study — v1 done (2026-08-30), API vs. logged-out UI only
 API vs logged-out UI vs logged-in UI divergence on a prompt subset. Graphite documented that
 these "vary significantly" and that tracking tools "should not be used as ground truth," but
 published no magnitude. Nobody has. Small n, quarterly, manual collection acceptable.
 
 *Why it matters:* converts the project's main methodological weakness into a novel published
 result.
+
+*v1 result:* `calibration_api.py` (new) queries OpenAI + Perplexity via OpenRouter's `web`
+plugin / native search (72 calls, 0 errors, ~$1.50). **Perplexity's logged-out web UI blocks
+search entirely behind a signup wall** — confirmed by direct testing, not assumed — so the
+plane comparison covers OpenAI only for v1; logged-in UI deferred entirely. 12 prompts,
+manually collected on chatgpt.com logged out, compared against the API plane's cited-domain
+sets: **divergence coefficient 0.368, 95% CI [0.139, 0.625]** (1 − mean Jaccard similarity).
+Driven mostly by asymmetric citation propensity, not disagreement about sources — for 3 of 12
+prompts the API plane returned zero citations while the logged-out consumer UI cited real
+sources for the identical question, suggesting this project's primary measurement plane may
+undercount citation activity relative to what an ordinary user sees. Full result, including
+the model-identity confound this design can't rule out: `calibration_prompts.py`,
+`calibration_api.py`, `results/calibration_api.jsonl`, `results/calibration_ui_logged_out.jsonl`,
+`results/published/2026-08-30-calibration-v1/REPORT.md`.
+
+Still open: logged-in UI plane (needs real personal accounts, explicitly deferred), Gemini and
+Claude engines (scoped to 2 engines for v1 per this item's own "start with 2" precedent),
+temporal replication (single day, single session), and resolving whether the API-vs-UI gap is
+plane identity or model identity (API plane used gpt-5.4-mini deliberately; logged-out UI's
+default model for an anonymous session isn't confirmed).
 
 ### 9. Tier 2 live-web field experiment
 Real pages, randomized within-site pairs, published, measured after recrawl. Budget an 8-week
