@@ -143,5 +143,79 @@ discipline has been spending effort to avoid.
 
 ## Deviations
 
-None yet. Any deviation from the above gets appended here with its date and reason,
-before the affected analysis is run.
+Logged here with a timestamp before analysis, not made silently.
+
+**2026-09-11 — spot check run; gate FAILED as written; full round NOT run pending a
+decision on the gate itself.**
+
+Ran the pre-committed spot check: 6 prompts (one per target format — `auto_evcharger`,
+`edu_certification`, `career_negotiate`, `health_sleep`, `auto_dashcam`,
+`career_resume`), all 8 models, all 4 conditions, 12 runs/cell = **2,304 calls, 0
+errors, 0 `model_returned` mismatches** (`results/spot_lengthonly.jsonl`). Actual spend
+$1.98.
+
+**Gate as written fails.** This file committed the gate as "`control` must reproduce its
+v0.4 mid-range CPR (roughly 0.38–0.60 per model)". Only 2 of 8 models land in that band:
+
+| model | control CPR | 95% Wilson |
+|---|---|---|
+| anthropic/claude-haiku-4.5 | 0.597 | [0.482, 0.703] |
+| deepseek/deepseek-chat | 0.694 | [0.580, 0.789] |
+| google/gemini-3-flash-preview | 0.847 | [0.747, 0.912] |
+| meta-llama/llama-4-maverick | 0.639 | [0.524, 0.740] |
+| mistralai/mistral-medium-3 | 0.222 | [0.142, 0.331] |
+| moonshotai/kimi-k2 | 0.500 | [0.387, 0.613] |
+| openai/gpt-5.4-mini | 0.653 | [0.538, 0.752] |
+| x-ai/grok-4.3 | 0.819 | [0.715, 0.891] |
+
+Pooled control CPR 0.622 against the 0.503 reference this file cited.
+
+**Diagnosis: the gate was mis-specified, and the error is in this pre-registration, not
+in the corpus.** The 0.503 reference is v0.4's control pooled over all **48** prompts.
+The spot check runs **6**. Those are different denominators, and per-prompt control CPR
+on this corpus spans 0.219–0.896, so a 6-prompt subset cannot be expected to land on the
+48-prompt mean.
+
+The correct comparison is v0.4's own control restricted to these same 6 prompts, from
+`results/runs_v0.4.jsonl`:
+
+| | control CPR | n |
+|---|---|---|
+| v0.4 control, all 48 prompts | 0.503 | 9,216 |
+| **v0.4 control, these 6 prompts** | **0.646** | 1,152 |
+| **lengthonly control, these 6 prompts** | **0.622** | 576 |
+
+Delta −0.024. The `control` variant is byte-identical to v0.4's by construction, and it
+behaves identically in practice. Per-model agreement with v0.4 on the same 6 prompts is
+within sampling noise for 7 of 8 models (−0.076 to +0.153).
+
+**New data-health exclusion: `mistralai/mistral-medium-3`.** No-cite rate 17.7%, above
+the standing 10% threshold, and its control CPR fell 0.590 → 0.222 versus v0.4 on
+identical text. This is an instruction-following regression in the model since v0.4 ran,
+not a corpus effect. It joins `kimi-k2` (20.5% here, 34.4% on v0.4) on the exclusion
+list. v0.4's published round did not exclude mistral; any future round should.
+
+**Residual limitation even under the corrected gate.** With both excluded models
+removed, `gemini-3-flash-preview` (0.847) and `grok-4.3` (0.819) sit high enough that an
+*increase* in CPR has compressed headroom on them. A *decrease* is detectable throughout.
+Since H7 is two-sided and this file explicitly declines to predict a direction, this
+weakens but does not void the design on 2 of 6 usable models.
+
+**Disclosure.** Per-condition descriptive CPRs for all four conditions were computed and
+seen before this entry was written. They are not reported here and played no part in the
+diagnosis above, which rests entirely on `control`-vs-`control` comparisons. Recording
+that they were seen, because amending a gate after any look at outcome data is exactly
+what pre-registration exists to constrain.
+
+**Status: the full 36,864-call round (~$32) is NOT run.** Proceeding requires amending
+the gate after seeing data, which is a real methodological cost even when the diagnosis
+is sound. That decision is the repo owner's, not the contributor's. Options, in the
+order this contributor would rank them:
+
+1. **Re-specify the gate against a subset-matched reference and re-run the spot check on
+   a larger prompt sample** (e.g. 18 prompts, ~1,700 calls at 12 runs) — restores the
+   gate's meaning without amending it on the basis of a run already seen.
+2. **Amend the gate to the subset-matched form** (`control` within ±0.10 of v0.4's
+   control on the same prompts) and proceed, with this entry standing as the record.
+3. **Redesign** to raise headroom on gemini and grok, as kwstuff went through three
+   times.
