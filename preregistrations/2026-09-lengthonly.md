@@ -219,3 +219,89 @@ order this contributor would rank them:
    control on the same prompts) and proceed, with this entry standing as the record.
 3. **Redesign** to raise headroom on gemini and grok, as kwstuff went through three
    times.
+
+**2026-09-11 — model panel narrowed to answer-engine models; gate amended; full round
+authorised by the repo owner.**
+
+Two changes, both made at the owner's direction after the spot check above, and both
+recorded here rather than applied silently.
+
+**1. Panel narrowed from 8 models to 5, selected and ranked by market share.** The
+pre-registered panel was inherited from v0.4 and mixes models that back consumer answer
+engines with models that do not. This benchmark exists to tell someone what to change
+about their content, so the panel is the engines their readers actually use, ordered by
+how much traffic each commands (Similarweb Gen AI worldwide traffic share, August 2026 —
+see `engine_weights.py` for the numbers, the source, and the caveats):
+
+| engine | share | model | in round |
+|---|---|---|---|
+| ChatGPT (incl. Copilot) | 54.7% | `openai/gpt-5.4-mini` | yes |
+| Gemini | 27.8% | `google/gemini-3-flash-preview` | yes |
+| Claude | 9.2% | `anthropic/claude-haiku-4.5` | yes |
+| DeepSeek | 3.6% | `deepseek/deepseek-chat` | yes |
+| Grok | 2.5% | `x-ai/grok-4.3` | yes |
+| Perplexity | 1.1% | `perplexity/sonar` | **no — not measurable in Tier 1** |
+
+The panel covers **98.9%** of measured gen-AI traffic across the engines this harness can
+test.
+
+Dropped, with reasons:
+
+- `moonshotai/kimi-k2` (20.5% no-cite) and `mistralai/mistral-medium-3` (17.7%) —
+  excluded by the standing data-health rule, independent of this change.
+- `meta-llama/llama-4-maverick` — passes data health, but Meta AI does not appear as a
+  named platform in the traffic series used here, and Llama's usage is overwhelmingly as
+  a component in other products rather than as an answer engine people optimise for.
+
+**A correction made in the course of this change, recorded because it was an error of
+judgement and not of data.** An earlier version of this entry dropped
+`deepseek/deepseek-chat` on the grounds that it does not back a consumer answer engine.
+The traffic series contradicts that: DeepSeek holds 3.6% share, *above* Grok's 2.5%,
+which the same entry retained. It is reinstated. The round had completed 223 calls under
+the 4-model panel when this was caught; those rows are valid (same corpus, same
+conditions) and were kept, with the round resumed rather than restarted. DeepSeek was
+also one of the two best-headroom models in the spot check (control CPR 0.694), so the
+correction improves the design as well as its rationale.
+
+**Cost of the narrowing, stated plainly:** `gemini-3-flash-preview` (control CPR 0.847)
+and `grok-4.3` (0.819) sit high enough that **detecting an *increase* in CPR is
+compressed on two of the five engines**. A decrease remains detectable throughout. H7 is
+two-sided and this file declines to predict a direction, so the round is still
+informative, but it is better powered against one tail than the other. Reinstating
+DeepSeek (0.694) mitigates this; it does not remove it. Recorded here so no later reader
+has to infer it.
+
+**Weighted pooling.** Because share is so uneven — ChatGPT alone is 55.9% of the panel's
+normalised weight, Grok 2.6% — an unweighted pool over five engines would assert an equal
+split that is false by more than an order of magnitude. Pooled figures for this round are
+therefore reported **share-weighted**, with per-engine results remaining primary and
+reproducible. The weights are a documented, swappable parameter in `engine_weights.py`,
+not a finding; that file also states the tension in using vendor-panel numbers inside a
+project that rejects vendor-panel numbers, and why they are still the best available.
+
+**2. `perplexity/sonar` was evaluated and cannot be used.** Perplexity is the most
+GEO-targeted engine in existence and its absence from this panel is a real gap, so it
+was tested directly. Sonar **ignores supplied sources and performs live web search**: given
+2 numbered sources and an instruction to use only those, it returned citations
+`[2][4][9][10][12][15]` — indices drawn from its own web results, not the supplied set.
+
+This is structurally incompatible with the Tier 1 constraint that retrieval is held
+constant (`CLAUDE.md`), and the failure is silent rather than loud: `parse_citations`
+bounds-checks against the document count, so out-of-range web citations are dropped and
+Sonar would be recorded as a near-total no-cite model rather than an incompatible one. A
+future round that adds it without this check would read the corruption as a finding.
+
+**This is a limitation of the Tier 1 design, not of this corpus:** the engine most people
+most want to optimise for is the one this harness structurally cannot measure. It belongs
+in the Tier 2 line of work alongside the calibration study.
+
+**3. Gate amended.** Per the diagnosis in the preceding entry, the gate is restated in
+subset-matched form — `control` must fall within ±0.10 of v0.4's control CPR **on the
+same prompts**, rather than against the 48-prompt pooled mean. On the spot check this is
+0.622 vs 0.646, delta −0.024: **passes**. The original numeric band was an
+operationalisation error (mismatched denominators); the gate's purpose — confirm the
+baseline is not at a ceiling or floor — is served by the corrected form. Amended after
+seeing spot-check data, at the owner's direction, with the preceding entry as the record.
+
+**Round authorised:** 5 models × 48 prompts × 4 conditions × 24 runs = **23,040 calls**,
+projected ~$25 from measured spot-check token spend.
