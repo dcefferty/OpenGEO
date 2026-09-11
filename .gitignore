@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .env
 results/runs.jsonl
+
+# In-flight round output. Committed only once the run completes, so a partial
+# file never reads as a finished result.
+results/runs_lengthonly.jsonl
