@@ -161,6 +161,18 @@ not "wins citations it doesn't deserve." Reported with equal prominence to the
 headline H6 result, per this project's own reporting rule — a null on a mechanism this
 project floated itself is not a result to bury.
 
+**Baseline misattribution, independent of stuffing** *(added 2026-09-10)*. Pooling both
+conditions, the share of cited sentences a judge found the page did not support at all
+was **0.1345** (glm-5.3, 95% CI 0.1048–0.1701, 10,316 sentences) to **0.2029**
+(qwen3.8-max, 95% CI 0.1581–0.2553, 10,378 sentences) — roughly one cited sentence in
+seven to one in five, depending on the judge. Clean judgments only, last row per item,
+bootstrap over prompts (10,000 resamples, seed 20260830), reproduced by
+`python3 fidelity_baseline.py results/fidelity_kwstuff-v3_glm-5.3_full.jsonl
+results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl`. Read it judge-relative, as with
+every absolute C1/C2 figure here, and in context: every target page in this round is one
+that does *not* directly answer the question asked — the situation where misattribution
+is most likely. Pages that answer outright may fare better.
+
 Full data: `results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl`,
 `results/fidelity_kwstuff-v3_glm-5.3_full.jsonl`. Pilot data (superseded, kept for the
 record of what didn't replicate): `results/fidelity_kwstuff-v3_qwen3.8-max_pilot.jsonl`.

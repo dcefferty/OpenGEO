@@ -65,6 +65,12 @@ Changing any of these breaks the experiment. If a change seems to require it, st
   builder and regenerate; never hand-edit `corpus_v0.2.json`.
 - **Corpus versions are immutable once a round has run against them.** Changes get a new
   version number, because a changed denominator makes the trend line fiction.
+- **The public page is generated, never edited.** A round is published by adding its entry
+  to `results/findings.json` — every figure citing the round's committed report — and
+  running `build_findings.py`. Prose claims like "every model" carry named assertions in
+  the ledger; if new data breaks one, the build refuses. Fix the sentence, not the
+  assertion. In-progress rounds may not carry result data, by the same no-interim-analysis
+  rule every pre-registration states.
 
 ## Commands
 
@@ -77,6 +83,9 @@ python3 analyze.py --runs results/runs.jsonl
 
 python3 make_mock.py                                # synthetic data, known effects
 python3 analyze.py --runs results/mock.jsonl        # must recover them
+
+python3 build_findings.py --check                   # validate results/findings.json
+python3 build_findings.py                           # regenerate docs/index.html
 ```
 
 Needs `OPENROUTER_API_KEY`. Python 3.9+; numpy for analysis, stdlib only for the runner.
