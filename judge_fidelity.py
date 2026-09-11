@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-OpenGEO fidelity judge — Group C metrics (METRICS.md): C1 Claim Fidelity Rate,
+OpenGEO fidelity judge — Group C metrics (METHODOLOGY.md §4): C1 Claim Fidelity Rate,
 C2 Distortion Rate, C3 Verbatim Retention.
 
 "Nobody in the GEO industry reports this." Every prior round in this project measured

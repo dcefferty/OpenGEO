@@ -37,7 +37,7 @@ statistics, quotations, citations -- to a document without holding length
 fixed. If padding alone moves citation, some unknown share of every one of
 those figures is word count. If padding alone does nothing, CPR is robust to
 length in a way position-adjusted word count provably is not, which is a
-concrete argument for the metric choice METRICS.md already makes on principle.
+concrete argument for the metric choice METHODOLOGY.md §4 already makes on principle.
 
 Either result is worth having, and the null is the more useful one.
 
