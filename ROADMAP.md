@@ -1,234 +1,166 @@
 # Roadmap
 
-Ordered by what makes the project real, not by what is most fun to build.
-Each task states its acceptance criterion so it can be picked up cold.
+Where this project is going, and where it has been. The technical spec is
+`METHODOLOGY.md`; the findings themselves are on the published page and in
+`results/findings.json`.
+
+Open items state an acceptance criterion so they can be picked up cold. Completed items
+are kept at their original numbers, because published reports and pre-registrations cite
+them by number.
 
 ---
 
-## P0 — before the first real run
+## Why this project exists
 
-### 1. Length-matched corpus v0.2 — done (2026-08-11)
-Rewrote the 12 target-document pairs so control and treatment are within ±3 words of each
-other, replacing generic phrasing with specific figures rather than *adding* them.
-`corpus/corpus_v0.2.json` (sha `491dad19cb3cd9b0`): target length delta min=-3 max=3 mean=-0.2.
-`corpus_v0.1.json` no longer exists on disk — it was never run against real models, so there
-was nothing to preserve under the immutability rule.
+Two gaps in the field, established by research already done. Do not re-litigate them.
 
-### 2. Pre-register the pilot — done (2026-08-13)
-`preregistrations/2026-08-pilot.md` — hypotheses H1–H5, corpus hash `491dad19cb3cd9b0`,
-8-model list, 24 runs/cell, primary metric (target CPR), full analysis plan, reporting rules,
-and stopping rule. Committed before `results/runs.jsonl` exists.
+**1. Nothing is reproducible.** Every published GEO benchmark number comes from a
+proprietary panel — 27M prompts, 700K conversations, 100.7M runs. Nobody outside those
+companies can verify, replicate or re-run any of it, and the vendor publishing the
+benchmark is the vendor selling against it.
 
-### 3. First real run — done (2026-08-14)
-4,608 calls, 0 errors, `analyze.py` runs clean. Two attempts: the first hit a bug (3 of 8
-pre-registered model IDs were invalid on OpenRouter, unrelated to a mid-run credit exhaustion)
-— see the deviation logged in `preregistrations/2026-08-pilot.md` and the archived failed
-attempt at `results/runs_attempt1_failed.jsonl`. The corrected second attempt is clean.
+**2. Almost nothing is causal.** Everything published is observational. The causal
+question — *if I change X on my page, does citation go up, by how much, on which engines*
+— has been answered publicly about twice: the Princeton GEO paper, and a single Profound
+A/B reported as **not statistically significant**. And the Princeton result has a
+disqualifying limitation the marketing discourse omits: **GEO-bench never queried a real
+generative engine.** It simulated one — Google top-5 retrieval, then GPT-3.5 synthesis.
+Its "+41% from adding statistics" describes a 2023 research pipeline, not ChatGPT, and is
+now quoted across hundreds of agency posts as settled fact about live engines.
 
-**Check before trusting anything:** the per-model no-cite rate in the DATA HEALTH section. A
-model that frequently fails to emit parseable `[n]` citations is an instruction-following
-failure, not a low-visibility signal. Exclude it explicitly; never average it in.
-**`moonshotai/kimi-k2` triggers this here — 34.4% no-cite rate, an order of magnitude above
-every other model (next highest: 1.7%).** Its CPR (0.545) and its H4 result (the only
-individually significant one, p=0.0227) are not trustworthy until re-run with that excluded.
-
-Real-data highlights (all subject to the scope-honesty caveat below):
-- H4 pooled (all 8 models): delta +0.001, 95% CI [-0.030, +0.026], p=0.96 — a clean null,
-  consistent with the pre-registration's power expectation at 12 prompts.
-- H2 (position): mean PSI 0.102, but η² for target slot is only 0.003 vs. η²=0.483 for
-  content format and η²=0.484 for prompt identity — position matters less than *what kind of
-  document* it is. `product`-format documents cite at 0.232 vs. 0.90+ for every other format.
-- H3 (cross-model agreement): cross-model W 0.801 vs. within-model baseline 0.785 — gap
-  −0.015. **Not supported** — models agree with each other about as much as they agree with
-  themselves. Contradicts the "AI visibility is engine-specific" narrative, at least on this
-  corpus.
-- H1 (reliability): Spearman-Brown ≥ 0.91 for 7 of 8 models; kimi-k2 at 0.691 tracks its
-  citation-parsing problem above.
+So the project is **the open, reproducible, causal benchmark for GEO**. Statistical
+discipline is table stakes adopted from prior work and cited. The contribution is running
+real controlled experiments on real engines with open data and an open harness, so the
+results can be checked. A funded vendor cannot credibly occupy that position.
 
 ---
 
-## P1 — making the result publishable
+## Open work
 
-### 4. Fidelity metrics (Group C) — done (2026-08-30)
-`judge_fidelity.py`: ALCE-style entailment judging (arXiv 2305.14627) of every answer sentence
-attributed to a cited target document, applied retrospectively to `results/runs_kwstuff_v3.jsonl`
-(no new model-panel calls, no pre-registration needed — not a new causal intervention). Judge
-model outside the 8-model test panel per the "different family" requirement; a second,
-different-vendor judge run for the sensitivity check this item called for.
+### 8. Calibration study — v1 done, three gaps open
+v1 measured API vs logged-out UI for one engine: divergence 0.368, 95% CI [0.139, 0.625]
+(`results/published/2026-08-30-calibration-v1/REPORT.md`). Still open:
 
-Three iterations to get the harness right, each a real bug caught before the full-scale spend:
-a mandatory-reasoning judge model returning empty content at a too-small token budget; a label
-parser grabbing the first (often tentative) label mention in a reasoning trace instead of the
-last; and truncation itself differing by condition, which would have confounded the exact
-comparison the metric exists to make. A 500-item pilot suggested a dramatic fidelity gap between
-conditions that did **not** replicate at full scale (11,657 items) under proper per-prompt paired
-analysis — confirmed null by both judges (85.4% exact label agreement, 93.2% on the
-distortion-or-not question). Full result and the pilot's non-replication:
-`results/published/2026-08-29-kwstuff-v3/REPORT.md`'s Group C follow-up section.
+- **Logged-in UI plane.** Needs real personal accounts; deliberately deferred.
+- **More engines.** v1 covered OpenAI only. Perplexity's logged-out UI blocks search behind
+  a signup wall, so it cannot be compared this way at all.
+- **Plane or model?** The API plane used `gpt-5.4-mini`; the model behind an anonymous
+  chatgpt.com session is not confirmed, so part of the gap may be model identity.
+- **Temporal replication.** v1 was a single session on a single day.
 
-*Why it matters:* nobody in the GEO industry reports fidelity. It was the clearest open space
-in the metric set — now measured, on this project's own citable Round 1, and it says the
-keyword-stuffing effect (item 7b) is a pure citation-count effect, not a "wins citations through
-distortion" effect.
-
-### 5. Power analysis for Round 1 — done (2026-08-16)
-`size_round1.py` resamples the pilot's real (prompt, model) control-condition cells (bootstrap,
-not the `METHODOLOGY.md` §5.2 Beta(1.2,3) assumption) and simulates the same sign-flip
-permutation test `analyze.py` uses.
-
-**The headline finding isn't a number, it's that the original table's assumption was wrong.**
-Real control CPR averages 0.867, with 67% of (prompt, model) cells at a literal 100% ceiling —
-vs. the assumed Beta(1.2,3) prior (mean 0.288). A treatment effect has almost no room to move
-against a near-ceiling baseline: at the pilot's own scale (12 prompts x 24 runs/arm), real power
-for OR=1.3 is 0.34, vs. 0.87 under the old assumption at the identical size. This is a ~2.5x
-miss, not a rounding error.
-
-*Recommended design:* **50 prompts x 24 runs/arm = 16,800 calls, power ~0.96 for OR=1.3.** Kept
-runs/arm >= 24 deliberately — some cheaper configurations (e.g. 100 x 10) reach similar power on
-paper but violate the 24-runs/cell reliability floor in `CLAUDE.md`, which exists for a
-different reason (split-half reliability) than statistical power and shouldn't be silently
-traded away. 25 x 30 (10,500 calls, power 0.80) is viable but has no margin.
-
-*The more consequential fix is corpus design, not N.* If Round 1's target documents aren't the
-obviously-best match among only 6 candidates — i.e., control CPR sits in a more sensitive
-30-70% range instead of 87%+ — power at the *pilot's own* 12x24 scale would be 0.87 instead of
-0.34. Ceiling avoidance is free; more calls is not. Corpus construction for Round 1 should
-prioritize this over simply scaling up the pilot's prompt style.
-
-### 5b. Ceiling-fix corpus (v0.3) — done (2026-08-23)
-Acted on item 5's corpus-design finding rather than just sizing around it. Rewrote all 12
-prompts in `corpus/build_corpus.py`: narrowed each question to one specific fact, then rewrote
-each control document to share *no* topical surface with that fact — not just the number.
-First-draft fixes failed in two distinct ways worth remembering if this corpus is touched
-again: (1) a control that drops the number but keeps a literal keyword the question also uses
-(e.g. "minimum" in both) gets quoted verbatim as a citation hook even when the model says it
-can't answer; (2) a control that keeps the same *qualitative conclusion* as the question, or as
-an unrelated distractor document, gets cited as mutually-reinforcing evidence even with zero
-keyword overlap and no number. Every prompt was validated against real models — individually at
-first, then a full 4,608-call run — before being treated as done; several looked fine on
-read-through and still failed until tested.
-
-*Result:* H4 pooled delta went from +0.001 (v0.2, null) to **+0.493, CI [+0.352, +0.641],
-p=0.0005** on v0.3, individually significant for all 8 models including `kimi-k2`. Condition
-(claim density) is now the largest variance driver (η²=0.315, was 0.000). H1/H2/H3/H5 all
-replicate their v0.2 verdicts. Full results: `results/runs_v0.3.jsonl`.
-
-v0.3 is corpus-design validation, not a pre-registered round — see item 6.
-
-### 6. Round 1 as a Princeton replication — run, but not yet pre-registered (2026-08-25)
-Scaled the v0.3 recipe from 12 to 48 prompts (corpus v0.4, 24 domains × 2, item 5's sizing
-target) and ran it for real: 18,432 calls. Two operational snags along the way, both
-resolved without data loss — a mid-run `403 Key limit exceeded` (a spending cap configured
-on the API key itself, not the account; removed by the user, then `--resume` picked up
-cleanly) and, during corpus construction, a harder-to-catch failure mode than v0.3's: even
-after removing literal keyword overlap, a control document could still fail if *any*
-sentence gave a qualitative/directional answer to the question in different words (e.g. "a
-CPU-bound game won't benefit much" answers "how much frame-rate improvement," and "worth
-every penny" answers a cost question, neither using the question's own vocabulary). Caught
-by testing prompts against real models, not by inspection — a purely keyword-based audit
-script missed all of these.
-
-*Result:* H4 pooled delta +0.482, 95% CI [+0.404, +0.563], p<0.0001, individually
-significant for all 8 models (including kimi-k2, p<0.0001) — the tightest, most
-unambiguous version of this finding yet. Condition remains the dominant variance driver
-(eta^2=0.305). H1/H2/H3/H5 all replicate. Full results: `results/runs_v0.4.jsonl`.
-
-**This was not pre-registered before collection**, so per this project's own credibility
-standard it is strong scaled-up confirmatory evidence, not yet "the" citable Round 1. Before
-publishing this as a headline result, either (a) write and commit a pre-registration for a
-fresh run on this same v0.4 corpus, or (b) if re-running is wasteful given how unambiguous
-this result already is, publish it explicitly labeled as exploratory/non-pre-registered and
-reserve "Round 1" for the next genuinely new intervention or corpus. Don't retroactively
-call this pre-registered — that defeats the point of the practice.
-
-**Decision (2026-08-25): (b).** Re-running an experiment to satisfy pre-registration after
-already seeing the result twice, at two scales, doesn't buy the credibility pre-registration
-exists to provide — it would be theater, not rigor. Published as exploratory instead; see
-item 7. "Round 1" stays reserved for the next genuinely new intervention, run under a
-pre-registration committed before any data exists.
-
-*Why replication matters:* "we re-ran the most-cited GEO study against real engines and here
-is what held up" is a headline the industry has to read, because it has been quoting those
-numbers for two years.
-
-### 7. Publish — done for the v0.4 exploratory round (2026-08-25)
-`results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md` — full H1-H5 results
-including the H3 null, variance decomposition, limitations, and reproduction steps. Code
-MIT, data CC-BY per `LICENSE`. Raw `results/runs_v0.4.jsonl` stays in the main tree
-(referenced, not duplicated, to avoid bloating the repo with a second 50MB+ copy) with its
-git commit pinned in the report for provenance.
-
-Still open (at the time of writing): a genuinely pre-registered Round 1 (a new intervention or
-corpus, pre-registration committed before collection) remains undone — this item covers
-publishing what exists, not producing the citable "Round 1" that item 6 explicitly declined to
-claim.
-
-### 7b. Keyword-stuffing intervention (H6) — the citable Round 1 — done (2026-08-29)
-The genuinely new, pre-registered-before-collection round item 6 left open. Took three corpus
-designs to get a real answer — see `preregistrations/2026-08-kwstuff-v3.md` and `CLAUDE.md`
-Current State for the full v1/v2 failure diagnosis (both hit the same reused-content ceiling
-problem from different directions). v3's baseline reused v0.4's already-measured real
-orthogonal control text verbatim and stuffed keywords into it with no new facts added.
-Pre-committed real-model spot check (2,304 calls) confirmed real headroom before the full round
-ran — now standing practice for any new corpus design, not an exception.
-
-*Result:* full run (`results/runs_kwstuff_v3.jsonl`, 18,432 calls, 0 errors). **H6 falsified**
-— pooled delta +0.038, 95% CI [+0.004, +0.075], p=0.045 (7 models, kimi-k2 excluded). Keyword
-stuffing modestly *increases* citation rather than decreasing it, contrary to the hypothesis
-and to conventional SEO wisdom. Small effect (η²=0.002 vs. η²=0.279 for prompt identity) but
-consistently positive direction, not one outlier model. H3 (cross-model agreement, "not
-supported") replicates cleanly on this second independent corpus. Published:
-`results/published/2026-08-29-kwstuff-v3/REPORT.md`.
-
----
-
-## P2 — the harder, more valuable work
-
-### 8. Calibration study — v1 done (2026-08-30), API vs. logged-out UI only
-API vs logged-out UI vs logged-in UI divergence on a prompt subset. Graphite documented that
-these "vary significantly" and that tracking tools "should not be used as ground truth," but
-published no magnitude. Nobody has. Small n, quarterly, manual collection acceptable.
-
-*Why it matters:* converts the project's main methodological weakness into a novel published
-result.
-
-*v1 result:* `calibration_api.py` (new) queries OpenAI + Perplexity via OpenRouter's `web`
-plugin / native search (72 calls, 0 errors, ~$1.50). **Perplexity's logged-out web UI blocks
-search entirely behind a signup wall** — confirmed by direct testing, not assumed — so the
-plane comparison covers OpenAI only for v1; logged-in UI deferred entirely. 12 prompts,
-manually collected on chatgpt.com logged out, compared against the API plane's cited-domain
-sets: **divergence coefficient 0.368, 95% CI [0.139, 0.625]** (1 − mean Jaccard similarity).
-Driven mostly by asymmetric citation propensity, not disagreement about sources — for 3 of 12
-prompts the API plane returned zero citations while the logged-out consumer UI cited real
-sources for the identical question, suggesting this project's primary measurement plane may
-undercount citation activity relative to what an ordinary user sees. Full result, including
-the model-identity confound this design can't rule out: `calibration_prompts.py`,
-`calibration_api.py`, `results/calibration_api.jsonl`, `results/calibration_ui_logged_out.jsonl`,
-`results/published/2026-08-30-calibration-v1/REPORT.md`.
-
-Still open: logged-in UI plane (needs real personal accounts, explicitly deferred), Gemini and
-Claude engines (scoped to 2 engines for v1 per this item's own "start with 2" precedent),
-temporal replication (single day, single session), and resolving whether the API-vs-UI gap is
-plane identity or model identity (API plane used gpt-5.4-mini deliberately; logged-out UI's
-default model for an anonymous session isn't confirmed).
+*Acceptance:* a divergence coefficient per engine, with the model held constant across
+planes or the confound stated as a limitation, replicated on at least two dates.
 
 ### 9. Tier 2 live-web field experiment
-Real pages, randomized within-site pairs, published, measured after recrawl. Budget an 8-week
-clock — time-to-first-citation runs ~6.8 days median, 37 days P90. Needs 5–10 donor sites.
+Real pages, randomised within-site pairs, published, measured after recrawl. Budget an
+eight-week clock — time-to-first-citation runs ~6.8 days median, 37 days P90. Needs 5–10
+donor sites. This is a partnerships problem before it is a code problem.
+
+*Acceptance:* one completed paired round on donated inventory, published with intervals.
 
 ### 10. Held-out private split
-Contamination defence. Publish only aggregate results from the private half; rotate a fraction
-of public prompts each round.
+Contamination defence. Publish only aggregate results from the private half; rotate a
+fraction of public prompts each round.
+
+*Acceptance:* a private split exists, is excluded from the public corpus, and one round
+reports public and private results side by side.
+
+### 11. Make tactics rankable
+**The largest open research item.** The current corpus proves *specific facts beat no
+facts*, decisively, on every engine — but its treatment arm sits at CPR 0.9981. Statistics,
+attributed quotations, source citations, answer-first structure and FAQ blocks would all
+land at 1.000 and be indistinguishable. You cannot rank what you cannot separate.
+
+The regime that would allow ranking already shows up in the existing data: engines cite
+2.72 of 6 documents per answer on average, narrowing from 3.17 under control to 2.27 under
+treatment. That narrowing is the engine discriminating; the present design gives it nothing
+to discriminate between, because only the target answers the question.
+
+The design is a corpus where **all six documents answer**, so citation measures preference
+rather than presence, with the target varying by tactic. The hard part is building six
+answering documents that do not all saturate — see `METHODOLOGY.md` §9 for the three ways
+that has gone wrong so far.
+
+*Acceptance:* a corpus whose per-document CPR sits near 0.4–0.6 with headroom in both
+directions, confirmed by a pre-committed spot check, followed by a pre-registered round
+producing a ranked table with intervals.
+
+### 12. Finish the length-only round (H7)
+Pre-registered in `preregistrations/2026-09-lengthonly.md`, gate passed, ~2% of 23,040
+calls collected. Publish whatever direction it comes back: a null hardens every other
+result in the repo by showing CPR is robust to the confound the corpus discipline spends
+effort avoiding.
+
+*Acceptance:* full round complete, entry added to `results/findings.json`, page rebuilt.
+
+---
+
+## Completed
+
+| # | Item | Outcome | Records |
+|---|---|---|---|
+| 1 | Length-matched corpus v0.2 | 12 target pairs within ±3 words; sha `491dad19cb3cd9b0` | `corpus/build_corpus.py` |
+| 2 | Pre-register the pilot | H1–H5, corpus hash, 8 models, 24 runs/cell, analysis plan, stopping rule | `preregistrations/2026-08-pilot.md` |
+| 3 | First real run | 4,608 calls, 0 errors. **H4 null** (+0.001, CI includes zero) — diagnosed as a control-arm ceiling, not a true null. `kimi-k2` excluded for a 34.4% no-cite rate | same pre-registration's deviations |
+| 4 | Fidelity metrics (Group C) | `judge_fidelity.py`. A 500-item pilot suggested a large effect; it did **not** replicate at 11,657 items under paired analysis. Confirmed null by two different-vendor judges | `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
+| 5 | Power analysis | `size_round1.py`. Found the spec's own Beta(1.2,3) prior was wrong by ~2.5× in power terms, and that **baseline placement dominates sample size** | `METHODOLOGY.md` §5.2 |
+| 5b | Ceiling-fix corpus (v0.3) | Rewrote 12 prompts so controls share no topical surface with the answer. **H4 +0.493, CI [+0.352, +0.641], p=0.0005** | `results/runs_v0.3.jsonl` |
+| 6 | Scale-up (corpus v0.4) | 48 prompts, 18,432 calls. **H4 +0.482, CI [+0.404, +0.563], p<0.0001**, significant for all 8 models. Not pre-registered, so published as exploratory rather than claimed as Round 1 | `results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md` |
+| 7 | Publish the v0.4 round | Full H1–H5 results including the H3 null, variance decomposition, limitations, reproduction steps | same report |
+| 7b | Keyword stuffing (H6) — the citable Round 1 | Pre-registered before collection; took three corpus designs. **H6 falsified: +0.038, CI [+0.004, +0.075], p=0.045.** Stuffing slightly *increases* citation, and Group C shows it does so without lower fidelity | `preregistrations/2026-08-kwstuff-v3.md`, `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
+| 8 (v1) | Calibration study v1 | **Divergence 0.368, CI [0.139, 0.625].** On 3 of 12 questions the API cited nothing where the logged-out UI cited real sources | `results/published/2026-08-30-calibration-v1/REPORT.md` |
+
+Two notes for anyone following a citation into this file:
+
+- Reports pointing at **items 5b and 6** for the corpus failure-mode diagnosis will find
+  that material, in full and generalised, in `METHODOLOGY.md` §9.
+- The per-round narrative that used to live in `CLAUDE.md` under "Current state" is the
+  table above plus the linked records.
+
+---
+
+## What the failures changed
+
+Three protocol rules exist because a round went wrong first. All three are now in the
+standard rather than in anyone's memory:
+
+- **A pre-committed spot check before every full round** (`METHODOLOGY.md` §5.3). Two
+  keyword-stuffing corpora reused "already-validated" text on the assumption it would
+  behave the same way in a new experiment. It did not, both times.
+- **A gate must be stated against the same prompts it will be checked on** (§5.3). The
+  length-only gate was written against a 48-prompt pooled figure and evaluated on six
+  prompts; it failed on arithmetic, not on the corpus.
+- **Baseline placement over sample size** (§5.2, §9). Ceiling avoidance is free; more calls
+  are not.
 
 ---
 
 ## Explicitly not doing
 
 - A brand-tracking dashboard or per-customer monitoring.
-- Recommendations / audit / "fix your site" tooling. Selling the fix destroys the credibility
-  of the measurement.
+- Recommendations, audits or "fix your site" tooling. Selling the fix destroys the
+  credibility of the measurement.
 - A composite "visibility score."
 - Browser automation as the primary query plane.
+
+---
+
+## The bear case
+
+The strongest version: Profound has a research team, proprietary data at a scale this
+project cannot approach, and a full-time writer publishing exactly this kind of content.
+They may out-publish it on everything except reproducibility — and the market may not value
+reproducibility, because marketers buy dashboards, not benchmarks.
+
+That is largely right about the *market* and largely wrong about the *niche*. The
+defensible ground is narrow and real: this project can run controlled experiments and
+publish the data; they can run controlled experiments and publish conclusions. When those
+disagree, only one is checkable. That matters to journalists, academics, enterprise buyers
+doing vendor diligence, and eventually regulators — none of whom are users, all of whom are
+distribution.
+
+The realistic success case is not a company. It is that OpenGEO becomes the thing people
+cite when they need a number that isn't from a vendor.
 
 ---
 

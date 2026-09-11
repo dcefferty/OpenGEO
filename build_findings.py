@@ -683,6 +683,42 @@ document.addEventListener("mousemove",function(e){if(t.style.opacity==="0")retur
 """
 
 
+ROUND_MARKERS = ("<!-- rounds:start -->", "<!-- rounds:end -->")
+
+
+def write_round_index(L, root):
+    """Refresh the generated round list inside results/published/README.md.
+
+    Same rule as the page: the index of what has been published is derived from the
+    ledger, so it cannot drift out of step with the rounds themselves."""
+    path = root / "results" / "published" / "README.md"
+    if not path.exists():
+        return None
+    text = path.read_text()
+    start, end = ROUND_MARKERS
+    if start not in text or end not in text:
+        return None
+
+    by_report = {}
+    for f in L["findings"]:
+        report = f.get("provenance", {}).get("report")
+        if f.get("public") and report:
+            by_report.setdefault(report, []).append(f)
+
+    lines = []
+    for report in sorted(by_report, reverse=True):
+        folder = report.rsplit("/", 2)[-2]
+        date, name = folder[:10], folder[11:]
+        ids = ", ".join(dict.fromkeys(
+            f["hypothesis"] for f in sorted(by_report[report], key=lambda x: x["order"])))
+        lines.append(f"- **{date} — {name}** · [report]({folder}/REPORT.md) · {ids}")
+
+    body = "\n".join(lines)
+    path.write_text(re.sub(re.escape(start) + r".*?" + re.escape(end),
+                           f"{start}\n\n{body}\n\n{end}", text, flags=re.S))
+    return len(lines)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--ledger", default=str(HERE / "results" / "findings.json"))
@@ -707,9 +743,12 @@ def main():
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(build(L, fragment=args.fragment))
+    n_rounds = None if args.fragment else write_round_index(L, HERE)
     shown = sum(1 for f in L["findings"] if f.get("public") and f["status"] != "in_progress")
     print(f"wrote {out}  ({shown} findings public, "
           f"{sum(1 for f in L['findings'] if not f.get('public'))} kept off the page)")
+    if n_rounds:
+        print(f"wrote results/published/README.md  ({n_rounds} published rounds indexed)")
 
 
 if __name__ == "__main__":

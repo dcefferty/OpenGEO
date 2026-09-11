@@ -23,7 +23,7 @@ fact-dense prose vs the same facts wrapped in unnatural keyword repetition":
 Hypothesis (H6, to be stated formally in the pre-registration before any real-model
 collection): keyword stuffing does NOT increase citation, and plausibly decreases it,
 relative to equally fact-complete natural prose. This is deliberately not a bet that
-mirrors claim density's "specificity helps" finding -- METRICS.md already flags
+mirrors claim density's "specificity helps" finding -- METHODOLOGY.md §4 already flags
 self-promotional tone as a hypothesized negative signal, and no one in the GEO
 industry has tested stuffing against real 2026 models. A null or negative result here
 is a genuinely novel contribution; a positive result would also be worth publishing,

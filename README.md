@@ -1,122 +1,112 @@
-# OpenGEO Pilot v0.1
+# OpenGEO
 
-Metric-validation pilot for the open GEO benchmark. Measures the **synthesis stage** —
-given a fixed candidate set, which sources does a model cite, and why?
+**An open, reproducible, causal benchmark for Generative Engine Optimization.** It changes
+one thing about a document and measures whether AI answer engines cite it more.
 
-Retrieval is held constant by construction, which is the whole point: it is the only way
-to attribute a change in citation rate to the content rather than to domain authority,
-crawl freshness, or index position.
+Two things make it different from the GEO numbers already in circulation. Everything here
+is **reproducible** — the corpus, the harness, and every raw model response ship with the
+result, so anyone can re-run a round and check it. And every result is **causal**: a paired
+design where only the document under test changes between arms, rather than an
+observational comparison of pages that already rank.
 
-See `METRICS.md` for the metric definitions, the hypotheses, and what each vendor claim
-we are testing actually says.
+It is deliberately **not** a brand-visibility tracker, and it will never ship a composite
+"visibility score."
 
-## Run it
+**What it measures, precisely:** the synthesis stage. Documents are supplied to the model
+in context, so retrieval is held constant by construction. A result here says what a model
+does with content it already has — not whether a page gets found in the first place. That
+caveat travels with every number the project publishes.
+
+## Findings
+
+The current results live in one place, generated from a ledger so they can't drift:
+
+- **`docs/index.html`** — the findings page: what moves citation, by how much, with
+  intervals. Served by GitHub Pages once this repo is public.
+- **`results/published/`** — the full report for each round, including the nulls.
+- **`results/findings.json`** — the machine-readable ledger the page is built from.
+
+No figures are written into this README on purpose: every number in the project has exactly
+one source, and duplicating them here is how documentation starts lying.
+
+## Quick start
 
 ```bash
-python3 corpus/build_corpus.py          # regenerate corpus (already built)
-python3 run_pilot.py --dry-run          # cost estimate, no API calls
+python3 corpus/build_corpus.py                   # regenerate the corpus + balance checks
+python3 run_pilot.py --dry-run                   # cost estimate, no API calls
 
 export OPENROUTER_API_KEY=sk-or-...
-python3 run_pilot.py                    # 4,608 calls, ~$1.20-$16 depending on model tier
+python3 run_pilot.py                             # the real thing; --resume after any interruption
 python3 analyze.py --runs results/runs.jsonl
 ```
 
-Interrupted? `python3 run_pilot.py --resume` picks up where it stopped.
-
-Verify the analysis before spending anything:
+Verify the analysis before spending anything — `make_mock.py` plants known effects that
+`analyze.py` must recover:
 
 ```bash
-python3 make_mock.py                    # synthetic data with KNOWN planted effects
+python3 make_mock.py
 python3 analyze.py --runs results/mock.jsonl
 ```
 
-Requires Python 3.9+ and numpy. The runner is standard library only.
+Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
 
-## Design
+## What's in here
 
-| | |
+| Path | What it is |
 |---|---|
-| Prompts | 12, across 6 domains (SaaS, consumer product, health, finance, local services, travel) |
-| Documents | 6 per prompt, one in each format: blog, news, docs, product, forum, reference |
-| Target | 1 document per prompt, with `control` (generic) and `treatment` (claim-dense) variants |
-| Conditions | 2 — only the target changes; the other 5 documents are byte-identical |
-| Position | randomised per run from a recorded seed; target slot logged every run |
-| Models | 8 via OpenRouter (Claude, GPT, Gemini, Grok, Kimi, DeepSeek, Llama, Mistral) |
-| Runs | 24 per cell |
+| `METHODOLOGY.md` | The standard: two-tier design, the metric set, sampling and statistics, corpus construction rules, provenance schema |
+| `ROADMAP.md` | Open work, completed rounds, positioning, kill criteria |
+| `CLAUDE.md` / `AGENTS.md` | Rules for coding agents working in the repo (`AGENTS.md` is a symlink) |
+| `corpus/` | Document text lives in the builders; the JSON corpora are generated and hashed |
+| `preregistrations/` | One file per round, committed **before** collection. The git timestamp is the evidence |
+| `results/` | Raw responses, the findings ledger, and published reports |
+| `docs/` | The generated public findings page |
+| `run_pilot.py` | Tier 1 runner: resumable, logs full provenance per call |
+| `analyze.py` | Metrics and hypothesis tests — permutation and bootstrap only |
+| `judge_fidelity.py`, `fidelity_baseline.py` | Group C fidelity judging and its baseline |
+| `calibration_api.py`, `calibration_prompts.py` | Calibration study, API plane |
+| `build_findings.py` | Builds the findings page from the ledger |
+| `size_round1.py`, `make_mock.py`, `check_variants.py`, `engine_weights.py` | Power sizing, synthetic validation, corpus checks, engine panel |
 
-Format is a **fully paired within-prompt factor** and target format is balanced (each
-format is the target in exactly 2 prompts), so format effects are estimable without
-confounding them with subject matter.
+## How a round works
 
-Document order randomisation is what makes the Position Sensitivity Index free: every run
-lands the target in some slot, so slot effects are estimated from the same calls that
-produce everything else.
+1. **Build a corpus** and hash it. Document text lives in the builder, never in the JSON.
+2. **Pre-register** — hypotheses, corpus hash, models, runs per cell, primary metric,
+   analysis plan, stopping rule — and commit it before collecting anything.
+3. **Spot check** a few hundred calls to confirm the baseline isn't at a ceiling or floor.
+   This is a go/no-go gate on the design, never a peek at the result.
+4. **Run it** to completion. No interim analysis.
+5. **Analyse and publish**, whichever direction it went, then add the round to
+   `results/findings.json` and rebuild the page:
 
-Documents are chunk-sized (28–82 words). Engines retrieve chunks, not whole pages, so this
-is closer to the real pipeline than full articles would be — and it keeps the pilot inside
-budget.
+```bash
+python3 build_findings.py --check                # validate the ledger
+python3 build_findings.py                        # regenerate docs/index.html
+```
 
-## What the mock run already told us
+The build refuses to publish a claim the data no longer supports, a round that carries
+interim numbers, or a finding citing a report that doesn't exist.
 
-The synthetic-data check was not a formality. It found two problems before any money was spent.
+`METHODOLOGY.md` §5.3 and §9 explain why each of those steps is there — all of them come
+from a round that went wrong first.
 
-**1. Kendall's W has a noise floor that swamps the signal.** The first version reported
-cross-model W = 0.15 and called H3 "supported — models disagree." But the mock plants
-*identical* structure across all models, so they should have agreed. The low W was sampling
-noise, not disagreement — a model at finite runs does not even agree with itself. The fix
-computes a within-model split-half W as the baseline; only the gap between cross-model and
-within-model W is evidence. **Any published claim that models rank sources differently, made
-without this baseline, is unsupported** — and this is a claim the vendor literature makes
-routinely.
+## Where things moved
 
-**2. Ten runs per cell is not enough.** Split-half reliability on clean synthetic data with
-a real planted signal:
+The docs were consolidated in September 2026. Older pre-registrations and reports cite the
+previous locations:
 
-| runs/cell | Spearman-Brown |
+| Cited as | Now |
 |---|---|
-| 4 | 0.15 |
-| 10 | 0.21 |
-| 16 | 0.61 |
-| 24 | **0.75** |
-| 40 | 0.75 |
+| `METRICS.md` (Groups A–E, A1, B2, C1…) | `METHODOLOGY.md` §4 — IDs unchanged |
+| `METHODOLOGY.md` §0 (positioning) | `ROADMAP.md` — "Why this project exists" |
+| `METHODOLOGY.md` §9 (build sequence) | `ROADMAP.md` — "Open work" and "Completed" |
+| `METHODOLOGY.md` §10 (risks, kill criteria) | `ROADMAP.md` — "The bear case", "Kill criteria" |
+| `CLAUDE.md` "Current state" | `ROADMAP.md` — "Completed", plus the linked records |
+| `ROADMAP.md` items 5b, 6 (corpus failure modes) | `METHODOLOGY.md` §9 |
 
-Reliability crosses into usable territory between 16 and 24, and plateaus after. The
-industry convention of ~10 runs per prompt is calibrated for *estimating a level* to within
-a few points; it is not sufficient for *detecting a difference*. Default is now 24.
+`METHODOLOGY.md` §1–§8 keep their numbering, so every other section citation still resolves.
 
-The mock also confirmed the pipeline recovers what is planted: the U-shaped position profile
-came back as 0.61 / 0.44 / 0.28 / 0.31 / 0.38 / 0.55 across slots 0–5, and the planted OR of
-1.40 came back as a pooled +6.7pp shift (p = 0.019) — significant pooled, non-significant for
-most individual models, which is exactly the power story 12 prompts predicts.
+## Licence
 
-## Reading the output
-
-The section that matters most is the **variance decomposition** at the end. It reports η² for
-model, prompt, position, format, domain and the content intervention against the same
-outcome. If position outweighs the content condition — as it did by roughly 10× in the mock —
-then the industry's content-optimisation advice is second-order to where you land in the
-retrieval set, and that is the headline.
-
-## Known limitations
-
-- **12 prompts is below the 25-prompt floor** in the methodology spec. This pilot validates
-  metric reliability and estimates variance components for designing Round 1. It is not
-  powered to publish an effect size for H4.
-- **Synthesis stage only.** Says nothing about whether a page gets retrieved at all, which is
-  probably where the larger real-world effects live.
-- **Model routing.** OpenRouter may serve different backends or quantisations over time.
-  `model_returned` is logged per run; check it before comparing across sessions.
-- **Cheap model tiers.** Frontier flagships would blow the budget on input tokens. The pilot
-  tests whether the *metrics* work, not which model is best.
-
-## Files
-
-```
-METRICS.md              metric definitions, hypotheses, vendor-claim analysis
-corpus/build_corpus.py  corpus source (all document text lives here)
-corpus/corpus_v0.2.json generated, hashed, length-matched
-run_pilot.py            OpenRouter runner, resumable, full provenance
-make_mock.py            synthetic data with planted effects
-analyze.py              metrics + H1-H5 tests
-results/runs.jsonl      one JSON record per run
-```
+Code MIT. Data and results CC-BY-4.0 — cite the numbers, quote them, build on them, with
+attribution. See `LICENSE`.
