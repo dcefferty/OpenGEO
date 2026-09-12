@@ -1,0 +1,407 @@
+<title>OpenGEO Status Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#f6f2ea; --raised:#fffdf8; --ink:#191610; --ink-2:#3d372d;
+  --muted:#7c746a; --line:#e0d9cb; --line-2:#cec5b3;
+  --ochre:#a86c14; --teal:#2d6b5f; --clay:#a44026;
+  --ochre-soft:#f0e2c9; --teal-soft:#d9e8e3; --clay-soft:#f3ddd6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14120e; --raised:#1e1b15; --ink:#f0ebe0; --ink-2:#c9c1b2;
+    --muted:#948b7d; --line:#302b22; --line-2:#433c30;
+    --ochre:#d9a04a; --teal:#63b8a4; --clay:#e07a5f;
+    --ochre-soft:#3a2f1a; --teal-soft:#1c332e; --clay-soft:#3a221b;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14120e; --raised:#1e1b15; --ink:#f0ebe0; --ink-2:#c9c1b2;
+  --muted:#948b7d; --line:#302b22; --line-2:#433c30;
+  --ochre:#d9a04a; --teal:#63b8a4; --clay:#e07a5f;
+  --ochre-soft:#3a2f1a; --teal-soft:#1c332e; --clay-soft:#3a221b;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:15.5px/1.6 "Public Sans",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:52px 26px 100px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:12px}
+.eyebrow b{color:var(--ochre);font-weight:600}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+  font-size:clamp(34px,6vw,54px);line-height:1.04;letter-spacing:-.015em;
+  margin:18px 0 0;text-wrap:balance}
+.standfirst{font-size:17.5px;line-height:1.55;color:var(--ink-2);max-width:62ch;margin:16px 0 0}
+.rule{height:1px;background:var(--line);margin:34px 0 0}
+
+h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:28px;
+  letter-spacing:-.01em;margin:52px 0 4px;text-wrap:balance}
+h2 .n{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ochre);
+  letter-spacing:.12em;display:block;margin-bottom:7px;font-weight:600}
+h3{font-size:14px;margin:30px 0 8px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--muted);font-weight:600}
+p{max-width:66ch;margin:0 0 14px}
+.lede{color:var(--ink-2);margin:0 0 20px;max-width:64ch}
+
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:14px 0}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-2);white-space:nowrap}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",monospace;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td{font-weight:600;border-top:1px solid var(--line-2)}
+.up{color:var(--teal);font-weight:600}
+.dn{color:var(--clay);font-weight:600}
+.mut{color:var(--muted)}
+
+.callout{background:var(--raised);border:1px solid var(--line);border-left:3px solid var(--ochre);
+  border-radius:3px;padding:18px 20px;margin:18px 0}
+.callout.bad{border-left-color:var(--clay)}
+.callout.good{border-left-color:var(--teal)}
+.callout p:last-child{margin-bottom:0}
+.callout .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ochre);font-weight:600;margin-bottom:7px}
+.callout.bad .k{color:var(--clay)}
+.callout.good .k{color:var(--teal)}
+
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:16px 0}
+.stat{background:var(--raised);border:1px solid var(--line);border-radius:3px;padding:14px 16px}
+.stat .v{font-family:"IBM Plex Mono",monospace;font-size:23px;font-weight:600;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat .k{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:16px 0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 16px 34px;max-width:64ch}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--ochre);
+  border:1px solid var(--line-2);border-radius:50%;width:21px;height:21px;
+  display:grid;place-items:center}
+ol.steps b{font-weight:600}
+
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12.5px}
+code{font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  background:color-mix(in srgb,var(--ink) 6%,transparent);padding:1px 5px;border-radius:3px}
+
+@page{size:A4;margin:15mm 14mm 16mm}
+@media print{
+  :root{--paper:#fff;--raised:#faf8f3;--ink:#14120d;--ink-2:#3d372d;--muted:#6b6459;
+    --line:#ded7c9;--line-2:#c6bca8;--ochre:#8f5c0f;--teal:#235a4f;--clay:#8e3822;
+    --ochre-soft:#f3e7d0;--teal-soft:#dceae5;--clay-soft:#f6e1da}
+  body{background:#fff;font-size:10pt;line-height:1.48}
+  .wrap{max-width:none;padding:0}
+  h1{font-size:27pt}
+  .standfirst{font-size:11.5pt}
+  h2{font-size:15pt;margin-top:20pt;break-after:avoid;page-break-after:avoid}
+  h3{break-after:avoid;page-break-after:avoid}
+  table,.callout,.grid,.stat,ol.steps li,tr{break-inside:avoid;page-break-inside:avoid}
+  thead{display:table-header-group}
+  table{font-size:8.5pt}
+  th,td{padding:5pt 5pt}
+  .scroll{overflow:visible}
+  .pagebreak{break-before:page;page-break-before:always}
+  footer{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+
+<div class="wrap">
+
+  <div class="eyebrow">
+    <span>OpenGEO</span><span>·</span>
+    <span>Status report</span><span>·</span>
+    <span><b>11 September 2026</b></span><span>·</span>
+    <span>dcefferty/GEO-Bench</span>
+  </div>
+
+  <h1>What we know about improving GEO, and what still blocks a definitive answer.</h1>
+
+  <p class="standfirst">
+    Three rounds are settled, one is in flight, and one structural problem stands
+    between this benchmark and the ranked, actionable answer it exists to produce.
+    This report states all three, with the numbers they rest on.
+  </p>
+
+  <div class="rule"></div>
+
+  <div class="grid">
+    <div class="stat"><div class="v">+0.481</div><div class="k">claim density → citation</div></div>
+    <div class="stat"><div class="v">0.9981</div><div class="k">treatment ceiling</div></div>
+    <div class="stat"><div class="v">0.368</div><div class="k">API vs UI divergence</div></div>
+    <div class="stat"><div class="v">98.9%</div><div class="k">engine traffic covered</div></div>
+  </div>
+
+  <h2><span class="n">01 / SETTLED</span>What is established</h2>
+  <p class="lede">
+    Three results have survived a full pre-registered or scaled confirmatory round.
+    Everything actionable in this report rests on the first one.
+  </p>
+
+  <h3>Claim density raises citation — decisively</h3>
+  <p>
+    Replacing generic, unquantified phrasing with specific figures, holding document
+    length fixed within ±3 words, raises the odds an answer engine cites the page.
+    Corpus v0.4, 18,432 calls, individually significant for every model tested.
+  </p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Engine model</th><th class="n">Control CPR</th><th class="n">Treatment CPR</th><th class="n">Delta</th></tr></thead>
+    <tbody>
+      <tr><td>anthropic/claude-haiku-4.5</td><td class="n">0.383</td><td class="n">0.997</td><td class="n up">+0.614</td></tr>
+      <tr><td>meta-llama/llama-4-maverick</td><td class="n">0.387</td><td class="n">1.000</td><td class="n up">+0.613</td></tr>
+      <tr><td>openai/gpt-5.4-mini</td><td class="n">0.447</td><td class="n">0.998</td><td class="n up">+0.551</td></tr>
+      <tr><td>mistralai/mistral-medium-3</td><td class="n">0.565</td><td class="n">1.000</td><td class="n up">+0.435</td></tr>
+      <tr><td>deepseek/deepseek-chat</td><td class="n">0.591</td><td class="n">0.999</td><td class="n up">+0.408</td></tr>
+      <tr><td>x-ai/grok-4.3</td><td class="n">0.615</td><td class="n">0.993</td><td class="n up">+0.378</td></tr>
+      <tr><td>google/gemini-3-flash-preview</td><td class="n">0.631</td><td class="n">1.000</td><td class="n up">+0.369</td></tr>
+      <tr class="tot"><td>Pooled (7 models)</td><td class="n">0.517</td><td class="n">0.998</td><td class="n up">+0.481</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mut" style="font-size:13px">
+    <code>moonshotai/kimi-k2</code> excluded from pooled figures under the standing
+    data-health rule. Not pre-registered before collection, so recorded as strong
+    confirmatory evidence rather than a citable round.
+  </p>
+
+  <h3>Keyword stuffing does not decrease citation — it slightly raises it</h3>
+  <p>
+    The one fully pre-registered round. Keywords repeated 4–8 times into content that
+    answers the question no better, length-matched, no new facts. <b>H6 falsified:</b>
+    pooled delta <span class="mono">+0.038</span>, 95% CI
+    <span class="mono">[+0.004, +0.075]</span>, p = 0.045 across 7 models. A small
+    effect dwarfed by prompt and domain variance — but consistently positive, not one
+    outlier. A follow-up found it wins citations <em>without</em> measurably lower
+    claim fidelity, confirmed by two independent judges at 93.2% agreement.
+  </p>
+
+  <h3>API-plane results may not transfer to what users see</h3>
+  <p>
+    Divergence between the API-with-search plane and a logged-out consumer UI:
+    <span class="mono">0.368</span>, 95% CI <span class="mono">[0.139, 0.625]</span>,
+    driven mostly by the API returning zero citations on 3 of 12 prompts where the
+    consumer UI cited real sources. Nobody had published a magnitude for this before.
+    It bounds how far any Tier 1 result can be claimed to describe real usage.
+  </p>
+
+  <h2 class="pagebreak"><span class="n">02 / THE BLOCKER</span>Why the corpus cannot rank tactics</h2>
+
+  <div class="callout bad">
+    <div class="k">The ceiling</div>
+    <p>The v0.4 treatment condition sits at <b>CPR 0.9981</b>. Headroom remaining:
+      <b>0.0019</b>.</p>
+  </div>
+
+  <p>
+    That number is the single thing standing between this project and a practitioner-facing
+    answer. The corpus proves <em>specific facts beat no facts</em> — decisively, across
+    every engine. But statistics, attributed quotations, source citations, answer-first
+    structure and FAQ blocks would all land at 1.000 and be indistinguishable. You cannot
+    rank what you cannot separate.
+  </p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Target format</th><th class="n">Treatment CPR</th><th class="n">Headroom</th></tr></thead>
+    <tbody>
+      <tr><td>docs · news · product</td><td class="n">1.0000</td><td class="n dn">0.0000</td></tr>
+      <tr><td>blog</td><td class="n">0.9985</td><td class="n dn">0.0015</td></tr>
+      <tr><td>reference</td><td class="n">0.9963</td><td class="n dn">0.0037</td></tr>
+      <tr><td>forum</td><td class="n">0.9940</td><td class="n dn">0.0060</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    This is the same wall kwstuff-v1 hit at 0.985 and kwstuff-v2 hit at 0.911–0.984. It
+    is structural, not accidental: the control is engineered to be fully orthogonal and
+    the treatment to answer the question outright. Maximum contrast is ideal for an
+    existence proof and useless for a ranking.
+  </p>
+  <p>
+    The obvious fix is already falsified. kwstuff-v2 tested a half-specific baseline on
+    the theory that partial completeness would land mid-range; it saturated at the same
+    ceiling. <b>These models discriminate on presence versus absence of any specific
+    on-topic fact, not on how complete the answer is.</b>
+  </p>
+
+  <h2><span class="n">03 / THE WAY THROUGH</span>Make the documents compete</h2>
+  <p class="lede">
+    In the current design only the target answers the question, so citation measures
+    presence. If all six documents answer it, citation measures preference — which is
+    what ranking tactics requires.
+  </p>
+  <p>
+    The evidence that this regime exists and is currently being wasted is already in the
+    v0.4 data. Engines do not cite one source; they select several, and they narrow when
+    one document answers well.
+  </p>
+  <div class="grid">
+    <div class="stat"><div class="v">2.72</div><div class="k">docs cited per answer, of 6</div></div>
+    <div class="stat"><div class="v">3.17</div><div class="k">docs cited — control</div></div>
+    <div class="stat"><div class="v">2.27</div><div class="k">docs cited — treatment</div></div>
+  </div>
+  <p>
+    That narrowing is the engine discriminating. The present design simply gives it
+    nothing to discriminate between. A corpus where every document answers puts each one
+    near 0.4–0.6 with headroom both ways, and tactics can finally separate.
+  </p>
+  <div class="callout good">
+    <div class="k">The round that would produce the answer</div>
+    <p>Six documents all answering the question. The target varies by tactic —
+      statistics, attributed quotations, source citations, answer-first structure, FAQ —
+      each length-matched against a plain-but-complete baseline, across the five engines
+      weighted by share. Output: a ranked table reading <em>“for ChatGPT, do X; it is
+      worth N points; here is the interval.”</em></p>
+  </div>
+  <p>
+    The hard part is engineering six documents that all answer without saturating. The
+    kwstuff-v2 failure is the map of where that goes wrong, and the reason a
+    pre-committed real-model spot check is now standing practice before any full round.
+  </p>
+
+  <h2 class="pagebreak"><span class="n">04 / IN FLIGHT</span>The length-only round (H7)</h2>
+  <p class="lede">
+    Every corpus version in this project is length-matched within ±3 words because length
+    is assumed to be a confound. That assumption had never been measured. This round
+    measures it.
+  </p>
+  <p>
+    <b>H7: adding words without adding facts does not increase citation.</b> A dose ladder
+    — the same v0.4 control text padded to 1.31×, 1.58× and 2.06× with discourse filler
+    that states no fact, names no entity, contains no numeral, and shares no content word
+    with its own prompt. 5 engines × 48 prompts × 4 conditions × 24 runs =
+    <span class="mono">23,040</span> calls.
+  </p>
+  <p>
+    It is a <b>negative control</b>. If padding does nothing, it hardens every other result
+    in the repo and validates CPR against the confound that inflated the widely-quoted
+    Princeton figures. It will not, by itself, tell anyone what to do.
+  </p>
+
+  <h3>Spot check: the gate failed, and the fault was in the gate</h3>
+  <p>
+    2,304 calls, 0 errors, $1.98. The pre-registered gate asked that control CPR reproduce
+    v0.4's 0.38–0.60 band; only 2 of 8 models did. The diagnosis cleared the corpus: 0.503
+    is v0.4's control pooled over <b>48</b> prompts, the spot check runs <b>6</b>, and
+    per-prompt control CPR spans 0.219–0.896.
+  </p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Comparison</th><th class="n">Control CPR</th><th class="n">n</th></tr></thead>
+    <tbody>
+      <tr><td>v0.4 control, all 48 prompts</td><td class="n">0.503</td><td class="n">9,216</td></tr>
+      <tr><td>v0.4 control, these 6 prompts</td><td class="n">0.646</td><td class="n">1,152</td></tr>
+      <tr class="tot"><td>Length-only control, these 6 prompts</td><td class="n">0.622</td><td class="n">576</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    Delta <span class="mono">−0.024</span>, on text that is byte-identical by construction.
+    The gate was an operationalisation error — mismatched denominators — and was restated
+    in subset-matched form, with the whole sequence logged as a deviation.
+  </p>
+
+  <h3>A finding independent of the round</h3>
+  <p>
+    <code>mistralai/mistral-medium-3</code> now fails data health at <b>17.7%</b> no-cite,
+    and its control CPR fell <span class="mono">0.590 → 0.222</span> versus v0.4 on
+    identical text. That is an instruction-following regression in the model since v0.4
+    ran, not a corpus effect. v0.4's published round did not exclude it; future rounds
+    should. <code>kimi-k2</code> sits at 20.5%, consistent with its known 34.4%.
+  </p>
+
+  <h2><span class="n">05 / THE PANEL</span>Engines, ranked by market share</h2>
+  <p class="lede">
+    This benchmark exists to tell someone what to change. Their traffic is not split evenly
+    across engines, so pooled figures are share-weighted and per-engine results stay primary.
+  </p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Engine</th><th class="n">Share</th><th>Model</th><th class="n">Pool weight</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT (incl. Copilot)</td><td class="n">54.7%</td><td><code>openai/gpt-5.4-mini</code></td><td class="n">55.9%</td></tr>
+      <tr><td>Gemini</td><td class="n">27.8%</td><td><code>google/gemini-3-flash-preview</code></td><td class="n">28.4%</td></tr>
+      <tr><td>Claude</td><td class="n">9.2%</td><td><code>anthropic/claude-haiku-4.5</code></td><td class="n">9.4%</td></tr>
+      <tr><td>DeepSeek</td><td class="n">3.6%</td><td><code>deepseek/deepseek-chat</code></td><td class="n">3.7%</td></tr>
+      <tr><td>Grok</td><td class="n">2.5%</td><td><code>x-ai/grok-4.3</code></td><td class="n">2.6%</td></tr>
+      <tr><td class="mut">Perplexity</td><td class="n mut">1.1%</td><td class="mut">not measurable in Tier 1</td><td class="n mut">—</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mut" style="font-size:13px">
+    Similarweb Gen AI worldwide traffic share, August 2026. Panel covers 98.9% of measured
+    gen-AI traffic. These are vendor-panel numbers inside a project that rejects vendor-panel
+    numbers; they live in one file with their source and date so they can be replaced in a
+    single edit, and the per-engine table never depends on them.
+  </p>
+
+  <div class="callout bad">
+    <div class="k">Perplexity cannot be tested this way</div>
+    <p>Given two numbered sources and instructed to use only those,
+      <code>perplexity/sonar</code> returned citations <span class="mono">[2][4][9][10][12][15]</span>
+      — indices from its own live web results. It breaks the Tier 1 constraint that
+      retrieval is held constant, and the failure is <b>silent</b>: the parser
+      bounds-checks, so Sonar records as a near-total no-cite model rather than an
+      incompatible one. The most GEO-targeted engine in existence is the one this harness
+      structurally cannot measure.</p>
+  </div>
+
+  <h2 class="pagebreak"><span class="n">06 / ACT ON THIS</span>What a practitioner can do today</h2>
+  <p class="lede">
+    Drawn only from what is settled. Everything below rests on the claim-density result;
+    the ranking among tactics is what the competitive-corpus round would establish.
+  </p>
+  <ol class="steps">
+    <li><b>Put a specific, checkable figure on every substantive claim.</b> This is the one
+      intervention with a large, causally-tested effect across every engine measured —
+      <span class="mono">0.517 → 0.998</span> CPR. Replace “significantly faster” with
+      “12 ms median latency, measured January 2026”. Do it without lengthening the page;
+      the effect was measured at fixed length.</li>
+    <li><b>Do not fear keyword repetition, and do not rely on it.</b> Stuffing measured
+      <span class="mono">+0.038</span> — real, positive, and small enough to be dwarfed by
+      prompt and domain variance. It is not a lever worth optimising.</li>
+    <li><b>Do not judge yourself on word-share metrics.</b> An independent replication
+      measured a significant <span class="mono">+29%</span> from meaningless filler alone
+      on a position-adjusted word-count metric. Track whether you were cited at all and
+      what share of citations you won.</li>
+    <li><b>Treat single-engine results as single-engine.</b> The same replication found
+      effects roughly halving between a cheap engine and a stronger one, with only claim
+      density surviving both.</li>
+    <li><b>Remember retrieval.</b> Everything here assumes your page is already in the
+      candidate set. Tier 1 holds retrieval constant by construction and can say nothing
+      about getting there.</li>
+  </ol>
+
+  <h2><span class="n">07 / LIMITS</span>What none of this shows</h2>
+  <p>
+    <b>Retrieval is held constant.</b> These rounds measure the synthesis stage only —
+    which of the pages already in front of an engine it leans on. Crawlability, indexation
+    and freshness act earlier and are not tested.
+  </p>
+  <p>
+    <b>Transfer is unquantified beyond one study.</b> The 0.368 API-versus-UI divergence is
+    the only measurement of the gap, on one vendor, at small n.
+  </p>
+  <p>
+    <b>Only the target is optimised.</b> Results describe the returns to being the only page
+    in a result set doing GEO. If every competitor optimises, the advantage should compress.
+  </p>
+  <p>
+    <b>The corpus is synthetic and frozen.</b> Realistic and varied, and the engines
+    discriminate on it sharply, but it is not a sample of the live web.
+  </p>
+
+  <footer>
+    OpenGEO · dcefferty/GEO-Bench · report generated 11 September 2026 ·
+    settled results from corpus v0.4, kwstuff-v3 and calibration v1 ·
+    length-only round (H7) in flight, 23,040 calls
+  </footer>
+
+</div>
