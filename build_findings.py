@@ -130,6 +130,8 @@ def ctx_paired(f, L, A):
         p_text=p_text(P["p"]),
         delta_min_abs=str(abs(r0(min(deltas) * 100))),
         delta_max_abs=str(abs(r0(max(deltas) * 100))),
+        n_negative=word(sum(1 for m in pm.values() if m["ci"][1] < 0)),
+        n_positive=word(sum(1 for m in pm.values() if m["ci"][0] > 0)),
     )
     if d.get("replications"):
         c["replication_prompts"] = str(d["replications"][0]["prompts"])
@@ -235,6 +237,9 @@ def _overlap(a, b):
 
 ASSERTS = {
     "pooled_ci_excludes_zero": lambda f, A: sig(f["data"]["pooled"]["ci"]),
+    "pooled_ci_spans_zero": lambda f, A: spans_zero(f["data"]["pooled"]["ci"]),
+    "some_model_ci_below_zero": lambda f, A: any(m["ci"][1] < 0 for m in _pm(f)),
+    "no_model_ci_above_zero": lambda f, A: all(m["ci"][0] <= 0 for m in _pm(f)),
     "all_models_ci_above_zero": lambda f, A: all(m["ci"][0] > 0 for m in _pm(f)),
     "no_model_ci_below_zero": lambda f, A: all(m["ci"][1] >= 0 for m in _pm(f)),
     "replications_ci_exclude_zero": lambda f, A: all(sig(r["ci"]) for r in f["data"]["replications"]),
