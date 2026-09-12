@@ -85,14 +85,6 @@ that has gone wrong so far.
 directions, confirmed by a pre-committed spot check, followed by a pre-registered round
 producing a ranked table with intervals.
 
-### 12. Finish the length-only round (H7)
-Pre-registered in `preregistrations/2026-09-lengthonly.md`, gate passed, ~2% of 23,040
-calls collected. Publish whatever direction it comes back: a null hardens every other
-result in the repo by showing CPR is robust to the confound the corpus discipline spends
-effort avoiding.
-
-*Acceptance:* full round complete, entry added to `results/findings.json`, page rebuilt.
-
 ---
 
 ## Completed
@@ -109,6 +101,7 @@ effort avoiding.
 | 7 | Publish the v0.4 round | Full H1–H5 results including the H3 null, variance decomposition, limitations, reproduction steps | same report |
 | 7b | Keyword stuffing (H6) — the citable Round 1 | Pre-registered before collection; took three corpus designs. **H6 falsified: +0.038, CI [+0.004, +0.075], p=0.045.** Stuffing slightly *increases* citation, and Group C shows it does so without lower fidelity | `preregistrations/2026-08-kwstuff-v3.md`, `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
 | 8 (v1) | Calibration study v1 | **Divergence 0.368, CI [0.139, 0.625].** On 3 of 12 questions the API cited nothing where the logged-out UI cited real sources | `results/published/2026-08-30-calibration-v1/REPORT.md` |
+| 12 | Length-only round (H7) | **H7 not falsified: pooled +0.004, CI [−0.024, +0.030], p=0.73** (share-weighted, 5 engines). But three engines cite padded pages *less*, two significantly after correction, and an **unweighted** pool would have falsified H7 at −0.023, CI [−0.042, −0.005] — the headline turns on a documented weighting parameter | `results/published/2026-09-11-lengthonly/REPORT.md` |
 
 Two notes for anyone following a citation into this file:
 
@@ -132,6 +125,9 @@ standard rather than in anyone's memory:
   prompts; it failed on arithmetic, not on the corpus.
 - **Baseline placement over sample size** (§5.2, §9). Ceiling avoidance is free; more calls
   are not.
+- **A pooled figure can hide a directional split** (item 12). H7's share-weighted pool is a
+  clean null while three of five engines point negative; an unweighted pool of the same data
+  falsifies it. Per-engine results stay primary, and any pooled headline states its weighting.
 
 ---
 

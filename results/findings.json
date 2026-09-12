@@ -1,6 +1,6 @@
 {
   "schema": "opengeo-findings/1",
-  "updated": "2026-09-10",
+  "updated": "2026-09-11",
   "repo": "https://github.com/dcefferty/GEO-Bench",
   "traffic_share": {
     "label": "Similarweb, August 2026",
@@ -9,26 +9,57 @@
     "file": "engine_weights.py"
   },
   "engines": [
-    {"name": "ChatGPT",  "model": "openai/gpt-5.4-mini",           "short": "gpt-5.4-mini",           "share": 54.7},
-    {"name": "Gemini",   "model": "google/gemini-3-flash-preview", "short": "gemini-3-flash-preview", "share": 27.8},
-    {"name": "Claude",   "model": "anthropic/claude-haiku-4.5",    "short": "claude-haiku-4.5",       "share": 9.2},
-    {"name": "DeepSeek", "model": "deepseek/deepseek-chat",        "short": "deepseek-chat",          "share": 3.6},
-    {"name": "Grok",     "model": "x-ai/grok-4.3",                 "short": "grok-4.3",               "share": 2.5}
+    {
+      "name": "ChatGPT",
+      "model": "openai/gpt-5.4-mini",
+      "short": "gpt-5.4-mini",
+      "share": 54.7
+    },
+    {
+      "name": "Gemini",
+      "model": "google/gemini-3-flash-preview",
+      "short": "gemini-3-flash-preview",
+      "share": 27.8
+    },
+    {
+      "name": "Claude",
+      "model": "anthropic/claude-haiku-4.5",
+      "short": "claude-haiku-4.5",
+      "share": 9.2
+    },
+    {
+      "name": "DeepSeek",
+      "model": "deepseek/deepseek-chat",
+      "short": "deepseek-chat",
+      "share": 3.6
+    },
+    {
+      "name": "Grok",
+      "model": "x-ai/grok-4.3",
+      "short": "grok-4.3",
+      "share": 2.5
+    }
   ],
   "model_names": {
     "meta-llama/llama-4-maverick": "Llama 4 Maverick",
     "mistralai/mistral-medium-3": "Mistral Medium 3",
     "moonshotai/kimi-k2": "Kimi K2"
   },
-
   "page": {
     "title": "OpenGEO Findings",
     "description": "What gets a page cited by AI answer engines, by how much, and how sure we are — from an open, reproducible benchmark.",
-    "eyebrow": ["OpenGEO", "open benchmark for AI answer engines", "<b>Draft</b> · September 2026"],
+    "eyebrow": [
+      "OpenGEO",
+      "open benchmark for AI answer engines",
+      "<b>Draft</b> · September 2026"
+    ],
     "headline": "Specific facts are what get a page cited by AI answer engines.",
     "standfirst": "OpenGEO changes one thing about a document and measures whether the models behind {engine_names} cite it more. Adding specific figures took a page from being cited {facts_pooled_control_pct0} of the time to {facts_pooled_treatment_pct1}, on every model tested. Repeating keywords moved it by {stuffing_pooled_delta_abs} points. Every number carries its interval, and the tests that found nothing are reported alongside the ones that did.",
     "hero_caption": "What changing a page did to its citation rate",
-    "hero_levers": ["facts", "stuffing"],
+    "hero_levers": [
+      "facts",
+      "stuffing"
+    ],
     "hero_note": "Both changes were measured against the same kind of starting page — one that doesn't answer the question, cited {baseline_range} of the time. The specific-facts effect is probably understated: pages with facts were cited {facts_pooled_treatment_pct1} of the time, so it ran into the ceiling.",
     "limits_heading": "What this can't tell you yet",
     "limits": [
@@ -39,23 +70,58 @@
     ],
     "method_heading": "How it works",
     "method": [
-      {"k": "One change at a time", "text": "Six candidate sources per question. Only the page under test differs between versions; the other five are byte-identical."},
-      {"k": "Asked many times", "text": "<span class=\"num\">{runs_per_cell}</span> runs per question per engine, at default randomness, with source order shuffled every run."},
-      {"k": "Decided in advance", "text": "Rounds marked pre-registered published their hypothesis and analysis plan before a single call was made."},
-      {"k": "Reproducible", "text": "Split-half reliability <span class=\"num\">{reliability_low}–{reliability_high}</span> per engine. Documents, code and every raw response are public."}
+      {
+        "k": "One change at a time",
+        "text": "Six candidate sources per question. Only the page under test differs between versions; the other five are byte-identical."
+      },
+      {
+        "k": "Asked many times",
+        "text": "<span class=\"num\">{runs_per_cell}</span> runs per question per engine, at default randomness, with source order shuffled every run."
+      },
+      {
+        "k": "Decided in advance",
+        "text": "Rounds marked pre-registered published their hypothesis and analysis plan before a single call was made."
+      },
+      {
+        "k": "Reproducible",
+        "text": "Split-half reliability <span class=\"num\">{reliability_low}–{reliability_high}</span> per engine. Documents, code and every raw response are public."
+      }
     ],
     "links": [
-      {"label": "Repository", "path": ""},
-      {"label": "Methodology", "path": "METHODOLOGY.md"},
-      {"label": "Pre-registrations", "path": "preregistrations", "tree": true},
-      {"label": "Raw data", "path": "results", "tree": true},
-      {"label": "Findings ledger", "path": "results/findings.json"}
+      {
+        "label": "Repository",
+        "path": ""
+      },
+      {
+        "label": "Methodology",
+        "path": "METHODOLOGY.md"
+      },
+      {
+        "label": "Pre-registrations",
+        "path": "preregistrations",
+        "tree": true
+      },
+      {
+        "label": "Raw data",
+        "path": "results",
+        "tree": true
+      },
+      {
+        "label": "Findings ledger",
+        "path": "results/findings.json"
+      }
     ],
     "footer": "Draft for review. Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from, and the page is regenerated when a round closes. Code MIT, data and results CC-BY 4.0. Engines are tested through the API models named on each chart.",
-    "design": {"runs_per_cell": 24},
-    "literal_numbers": ["95%", "per 100", "4–8", "CC-BY 4.0"]
+    "design": {
+      "runs_per_cell": 24
+    },
+    "literal_numbers": [
+      "95%",
+      "per 100",
+      "4–8",
+      "CC-BY 4.0"
+    ]
   },
-
   "findings": [
     {
       "alias": "facts",
@@ -64,37 +130,149 @@
       "order": 1,
       "status": "supported",
       "kind": "paired_effect",
-      "evidence": [{"label": "Found twice", "style": "strong"}, {"label": "Not pre-registered"}],
+      "evidence": [
+        {
+          "label": "Found twice",
+          "style": "strong"
+        },
+        {
+          "label": "Not pre-registered"
+        }
+      ],
       "title": "Put the specific answer on the page",
       "lever": "Replace vague claims with specific figures",
       "data": {
         "metric": "citation presence rate",
-        "pooled": {"control": 0.503, "treatment": 0.985, "delta": 0.482, "ci": [0.404, 0.563], "p": "<0.0001", "n_models": 8},
+        "pooled": {
+          "control": 0.503,
+          "treatment": 0.985,
+          "delta": 0.482,
+          "ci": [
+            0.404,
+            0.563
+          ],
+          "p": "<0.0001",
+          "n_models": 8
+        },
         "per_model": {
-          "openai/gpt-5.4-mini":           {"control": 0.447, "treatment": 0.998, "delta": 0.551, "ci": [0.447, 0.654], "p": "<0.0001"},
-          "google/gemini-3-flash-preview": {"control": 0.631, "treatment": 1.000, "delta": 0.369, "ci": [0.270, 0.470], "p": "<0.0001"},
-          "anthropic/claude-haiku-4.5":    {"control": 0.383, "treatment": 0.997, "delta": 0.614, "ci": [0.510, 0.715], "p": "<0.0001"},
-          "deepseek/deepseek-chat":        {"control": 0.591, "treatment": 0.999, "delta": 0.408, "ci": [0.303, 0.510], "p": "<0.0001"},
-          "x-ai/grok-4.3":                 {"control": 0.615, "treatment": 0.993, "delta": 0.378, "ci": [0.281, 0.473], "p": "<0.0001"},
-          "meta-llama/llama-4-maverick":   {"control": 0.387, "treatment": 1.000, "delta": 0.613, "ci": [0.514, 0.708], "p": "<0.0001"},
-          "mistralai/mistral-medium-3":    {"control": 0.565, "treatment": 1.000, "delta": 0.435, "ci": [0.337, 0.530], "p": "<0.0001"},
-          "moonshotai/kimi-k2":            {"control": 0.405, "treatment": 0.896, "delta": 0.491, "ci": [0.402, 0.577], "p": "<0.0001"}
+          "openai/gpt-5.4-mini": {
+            "control": 0.447,
+            "treatment": 0.998,
+            "delta": 0.551,
+            "ci": [
+              0.447,
+              0.654
+            ],
+            "p": "<0.0001"
+          },
+          "google/gemini-3-flash-preview": {
+            "control": 0.631,
+            "treatment": 1.0,
+            "delta": 0.369,
+            "ci": [
+              0.27,
+              0.47
+            ],
+            "p": "<0.0001"
+          },
+          "anthropic/claude-haiku-4.5": {
+            "control": 0.383,
+            "treatment": 0.997,
+            "delta": 0.614,
+            "ci": [
+              0.51,
+              0.715
+            ],
+            "p": "<0.0001"
+          },
+          "deepseek/deepseek-chat": {
+            "control": 0.591,
+            "treatment": 0.999,
+            "delta": 0.408,
+            "ci": [
+              0.303,
+              0.51
+            ],
+            "p": "<0.0001"
+          },
+          "x-ai/grok-4.3": {
+            "control": 0.615,
+            "treatment": 0.993,
+            "delta": 0.378,
+            "ci": [
+              0.281,
+              0.473
+            ],
+            "p": "<0.0001"
+          },
+          "meta-llama/llama-4-maverick": {
+            "control": 0.387,
+            "treatment": 1.0,
+            "delta": 0.613,
+            "ci": [
+              0.514,
+              0.708
+            ],
+            "p": "<0.0001"
+          },
+          "mistralai/mistral-medium-3": {
+            "control": 0.565,
+            "treatment": 1.0,
+            "delta": 0.435,
+            "ci": [
+              0.337,
+              0.53
+            ],
+            "p": "<0.0001"
+          },
+          "moonshotai/kimi-k2": {
+            "control": 0.405,
+            "treatment": 0.896,
+            "delta": 0.491,
+            "ci": [
+              0.402,
+              0.577
+            ],
+            "p": "<0.0001"
+          }
         },
         "replications": [
-          {"round": "corpus v0.3", "prompts": 12, "delta": 0.493, "ci": [0.352, 0.641], "p": "0.0005", "data": "results/runs_v0.3.jsonl"}
+          {
+            "round": "corpus v0.3",
+            "prompts": 12,
+            "delta": 0.493,
+            "ci": [
+              0.352,
+              0.641
+            ],
+            "p": "0.0005",
+            "data": "results/runs_v0.3.jsonl"
+          }
         ]
       },
       "chart": {
         "type": "dumbbell",
-        "arms": ["Vague page", "Same page, specific figures"],
-        "arm_short": ["vague", "specific"],
+        "arms": [
+          "Vague page",
+          "Same page, specific figures"
+        ],
+        "arm_short": [
+          "vague",
+          "specific"
+        ],
         "aria": "Citation rate per engine for the vague and the specific version of each page"
       },
       "text": {
-        "body": ["We took pages that talk around a question and replaced their generic phrasing with the specific figure the question asks for — a price, an interval, a dose — keeping the length within three words. <b>Citation rose on every model we tested, by {delta_min_abs} to {delta_max_abs} points.</b> The same result appeared at {replication_prompts} questions and again at {prompts}."],
+        "body": [
+          "We took pages that talk around a question and replaced their generic phrasing with the specific figure the question asks for — a price, an interval, a dose — keeping the length within three words. <b>Citation rose on every model we tested, by {delta_min_abs} to {delta_max_abs} points.</b> The same result appeared at {replication_prompts} questions and again at {prompts}."
+        ],
         "caption": "Share of runs in which each engine cited the page. Engines ordered by share of AI-assistant web traffic ({share_source}). {others_effect_sentence}; the pooled {pooled_delta_pts} points {pooled_ci_pts} covers all {n_models} models.",
         "for_you": "Where a page says “fast,” “affordable” or “most teams,” say how fast, how much, and how many.",
-        "prov": ["{prompts} questions · {domains} domains", "{calls} engine calls", "{p_text}"]
+        "prov": [
+          "{prompts} questions · {domains} domains",
+          "{calls} engine calls",
+          "{p_text}"
+        ]
       },
       "provenance": {
         "round": "corpus v0.4",
@@ -104,11 +282,17 @@
         "calls": 18432,
         "report": "results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md",
         "preregistration": null,
-        "data": ["results/runs_v0.4.jsonl", "results/runs_v0.3.jsonl"]
+        "data": [
+          "results/runs_v0.4.jsonl",
+          "results/runs_v0.3.jsonl"
+        ]
       },
-      "asserts": ["pooled_ci_excludes_zero", "all_models_ci_above_zero", "replications_ci_exclude_zero"]
+      "asserts": [
+        "pooled_ci_excludes_zero",
+        "all_models_ci_above_zero",
+        "replications_ci_exclude_zero"
+      ]
     },
-
     {
       "alias": "stuffing",
       "hypothesis": "H6",
@@ -116,28 +300,131 @@
       "order": 2,
       "status": "falsified",
       "kind": "paired_effect",
-      "evidence": [{"label": "Pre-registered", "style": "strong"}],
+      "evidence": [
+        {
+          "label": "Pre-registered",
+          "style": "strong"
+        }
+      ],
       "title": "Repeating your keyword helps a little, and doesn't get you misquoted",
       "lever": "Repeat the topic keyword 4–8 times",
       "data": {
         "metric": "citation presence rate",
-        "pooled": {"control": 0.517, "treatment": 0.555, "delta": 0.038, "ci": [0.004, 0.075], "p": "0.045", "n_models": 7},
+        "pooled": {
+          "control": 0.517,
+          "treatment": 0.555,
+          "delta": 0.038,
+          "ci": [
+            0.004,
+            0.075
+          ],
+          "p": "0.045",
+          "n_models": 7
+        },
         "per_model": {
-          "openai/gpt-5.4-mini":           {"control": 0.439, "treatment": 0.498, "delta": 0.059,  "ci": [0.019, 0.104],  "p": "0.006"},
-          "google/gemini-3-flash-preview": {"control": 0.661, "treatment": 0.706, "delta": 0.044,  "ci": [-0.001, 0.092], "p": "0.078"},
-          "anthropic/claude-haiku-4.5":    {"control": 0.378, "treatment": 0.385, "delta": 0.008,  "ci": [-0.047, 0.064], "p": "0.807"},
-          "deepseek/deepseek-chat":        {"control": 0.564, "treatment": 0.623, "delta": 0.059,  "ci": [0.012, 0.115],  "p": "0.027"},
-          "x-ai/grok-4.3":                 {"control": 0.612, "treatment": 0.676, "delta": 0.064,  "ci": [0.004, 0.130],  "p": "0.050"},
-          "meta-llama/llama-4-maverick":   {"control": 0.418, "treatment": 0.453, "delta": 0.035,  "ci": [-0.023, 0.093], "p": "0.246"},
-          "mistralai/mistral-medium-3":    {"control": 0.548, "treatment": 0.542, "delta": -0.006, "ci": [-0.055, 0.047], "p": "0.819"},
-          "moonshotai/kimi-k2":            {"control": 0.417, "treatment": 0.464, "delta": 0.048,  "ci": [0.010, 0.086],  "p": "0.019",
-                                            "excluded": "failing to cite sources reliably (no-cite rate 12.1%)"}
+          "openai/gpt-5.4-mini": {
+            "control": 0.439,
+            "treatment": 0.498,
+            "delta": 0.059,
+            "ci": [
+              0.019,
+              0.104
+            ],
+            "p": "0.006"
+          },
+          "google/gemini-3-flash-preview": {
+            "control": 0.661,
+            "treatment": 0.706,
+            "delta": 0.044,
+            "ci": [
+              -0.001,
+              0.092
+            ],
+            "p": "0.078"
+          },
+          "anthropic/claude-haiku-4.5": {
+            "control": 0.378,
+            "treatment": 0.385,
+            "delta": 0.008,
+            "ci": [
+              -0.047,
+              0.064
+            ],
+            "p": "0.807"
+          },
+          "deepseek/deepseek-chat": {
+            "control": 0.564,
+            "treatment": 0.623,
+            "delta": 0.059,
+            "ci": [
+              0.012,
+              0.115
+            ],
+            "p": "0.027"
+          },
+          "x-ai/grok-4.3": {
+            "control": 0.612,
+            "treatment": 0.676,
+            "delta": 0.064,
+            "ci": [
+              0.004,
+              0.13
+            ],
+            "p": "0.050"
+          },
+          "meta-llama/llama-4-maverick": {
+            "control": 0.418,
+            "treatment": 0.453,
+            "delta": 0.035,
+            "ci": [
+              -0.023,
+              0.093
+            ],
+            "p": "0.246"
+          },
+          "mistralai/mistral-medium-3": {
+            "control": 0.548,
+            "treatment": 0.542,
+            "delta": -0.006,
+            "ci": [
+              -0.055,
+              0.047
+            ],
+            "p": "0.819"
+          },
+          "moonshotai/kimi-k2": {
+            "control": 0.417,
+            "treatment": 0.464,
+            "delta": 0.048,
+            "ci": [
+              0.01,
+              0.086
+            ],
+            "p": "0.019",
+            "excluded": "failing to cite sources reliably (no-cite rate 12.1%)"
+          }
         },
         "compare_to": "facts",
         "fidelity": {
           "metric": "share of cited sentences the page does not support (stuffed − orthogonal, per-prompt paired)",
-          "primary":    {"judge": "qwen/qwen3.8-max", "delta": -0.009, "ci": [-0.038, 0.018], "p": "0.537"},
-          "crosscheck": {"judge": "z-ai/glm-5.3",     "delta": -0.002, "ci": [-0.024, 0.021], "p": "0.858"}
+          "primary": {
+            "judge": "qwen/qwen3.8-max",
+            "delta": -0.009,
+            "ci": [
+              -0.038,
+              0.018
+            ],
+            "p": "0.537"
+          },
+          "crosscheck": {
+            "judge": "z-ai/glm-5.3",
+            "delta": -0.002,
+            "ci": [
+              -0.024,
+              0.021
+            ],
+            "p": "0.858"
+          }
         }
       },
       "chart": {
@@ -147,11 +434,19 @@
         "aria": "Change in citation rate from keyword repetition per engine, with 95% intervals"
       },
       "text": {
-        "body": ["We expected keyword stuffing to do nothing, or to hurt. It helped: repeating a page's topic phrase four to eight times, with no new facts and no extra length, raised citation by <b>{pooled_delta_pts} points {pooled_ci_pts}</b> — roughly {ratio_vs_compare}× smaller than the effect of adding specific figures. No engine went significantly the other way{panel_spans_zero_clause}."],
+        "body": [
+          "We expected keyword stuffing to do nothing, or to hurt. It helped: repeating a page's topic phrase four to eight times, with no new facts and no extra length, raised citation by <b>{pooled_delta_pts} points {pooled_ci_pts}</b> — roughly {ratio_vs_compare}× smaller than the effect of adding specific figures. No engine went significantly the other way{panel_spans_zero_clause}."
+        ],
         "caption": "Change in citation rate from repetition, with 95% intervals. Dots in green have intervals clear of zero. The pooled figure covers {n_models} models, as the pre-registration specified — {others_pool_sentence}. {excluded_sentence}",
-        "after": ["We also checked whether stuffed pages get <em>misrepresented</em> more once cited. They don't: the share of attributed claims the page didn't support moved by <b>{fidelity_delta_pts} points {fidelity_ci_pts}</b>, and a second, independent judge model agreed."],
+        "after": [
+          "We also checked whether stuffed pages get <em>misrepresented</em> more once cited. They don't: the share of attributed claims the page didn't support moved by <b>{fidelity_delta_pts} points {fidelity_ci_pts}</b>, and a second, independent judge model agreed."
+        ],
         "for_you": "Naming your topic plainly helps a little. It is the weaker lever by an order of magnitude — facts first.",
-        "prov": ["hypothesis committed before collection", "{calls} engine calls", "{p_text}"]
+        "prov": [
+          "hypothesis committed before collection",
+          "{calls} engine calls",
+          "{p_text}"
+        ]
       },
       "provenance": {
         "round": "kwstuff-v3",
@@ -161,68 +456,256 @@
         "calls": 18432,
         "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md",
         "preregistration": "preregistrations/2026-08-kwstuff-v3.md",
-        "data": ["results/runs_kwstuff_v3.jsonl",
-                 "results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl",
-                 "results/fidelity_kwstuff-v3_glm-5.3_full.jsonl"]
+        "data": [
+          "results/runs_kwstuff_v3.jsonl",
+          "results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl",
+          "results/fidelity_kwstuff-v3_glm-5.3_full.jsonl"
+        ]
       },
-      "asserts": ["pooled_ci_excludes_zero", "no_model_ci_below_zero",
-                  "at_least_10x_smaller_than_compare", "fidelity_null_under_both_judges"]
+      "asserts": [
+        "pooled_ci_excludes_zero",
+        "no_model_ci_below_zero",
+        "at_least_10x_smaller_than_compare",
+        "fidelity_null_under_both_judges"
+      ]
     },
-
+    {
+      "alias": "length",
+      "hypothesis": "H7",
+      "public": true,
+      "order": 3,
+      "status": "null",
+      "kind": "paired_effect",
+      "evidence": [
+        {
+          "label": "Pre-registered",
+          "style": "strong"
+        }
+      ],
+      "title": "Padding a page with filler does not win it citations",
+      "lever": "Double the word count, add no facts",
+      "data": {
+        "metric": "citation presence rate",
+        "pooled": {
+          "control": 0.496,
+          "treatment": 0.5,
+          "delta": 0.004,
+          "ci": [
+            -0.023,
+            0.031
+          ],
+          "p": "0.764",
+          "n_models": 5
+        },
+        "per_model": {
+          "openai/gpt-5.4-mini": {
+            "control": 0.423,
+            "treatment": 0.431,
+            "delta": 0.008,
+            "ci": [
+              -0.03,
+              0.046
+            ],
+            "p": "0.697"
+          },
+          "google/gemini-3-flash-preview": {
+            "control": 0.646,
+            "treatment": 0.674,
+            "delta": 0.029,
+            "ci": [
+              -0.002,
+              0.058
+            ],
+            "p": "0.070"
+          },
+          "anthropic/claude-haiku-4.5": {
+            "control": 0.385,
+            "treatment": 0.331,
+            "delta": -0.055,
+            "ci": [
+              -0.092,
+              -0.019
+            ],
+            "p": "0.006"
+          },
+          "deepseek/deepseek-chat": {
+            "control": 0.652,
+            "treatment": 0.595,
+            "delta": -0.057,
+            "ci": [
+              -0.098,
+              -0.018
+            ],
+            "p": "0.009"
+          },
+          "x-ai/grok-4.3": {
+            "control": 0.602,
+            "treatment": 0.564,
+            "delta": -0.038,
+            "ci": [
+              -0.069,
+              -0.006
+            ],
+            "p": "0.028"
+          }
+        },
+        "compare_to": "facts"
+      },
+      "chart": {
+        "type": "forest",
+        "pooled_label": "All engines",
+        "pooled_sublabel": "share-weighted · {n_models} engines",
+        "aria": "Change in citation rate from doubling a page's length with filler, per engine, with 95% intervals"
+      },
+      "text": {
+        "body": [
+          "Doubling a page's length with filler that states no fact, names no entity and repeats none of the question's words moved its citation rate by <b>{pooled_delta_pts} points {pooled_ci_pts}</b> — an interval comfortably around zero. Length is invisible in this round's variance decomposition too, behind which question was asked, which domain it came from, and the page's format.",
+          "But the engines disagree about the sign. On {n_negative} of the five a padded page is cited <em>less</em> often, each with an interval clear of zero, and two of those hold up after correcting across the panel. The engines that shrug padding off are the two carrying most of the traffic, which is why the pooled figure lands flat. Nothing here rewards padding on any engine; on some it costs you."
+        ],
+        "caption": "Change in citation rate from doubling length with filler, with 95% intervals. Dots in red have intervals entirely below zero. Pooled across {n_models} engines, weighted by market share. {excluded_sentence}",
+        "after": [
+          "A page's share of the answer's <em>sentences</em> — a fairer test of the word-count metrics used elsewhere in this field — did not move either, on any dose."
+        ],
+        "for_you": "Words are not the lever. Adding length without adding facts is at best neutral, and on several engines it actively costs you citations.",
+        "prov": [
+          "hypothesis committed before collection",
+          "{calls} engine calls",
+          "{p_text}"
+        ]
+      },
+      "provenance": {
+        "round": "lengthonly-v1",
+        "corpus_sha": "91671f3b8a750cd2",
+        "prompts": 48,
+        "domains": 24,
+        "calls": 23040,
+        "report": "results/published/2026-09-11-lengthonly/REPORT.md",
+        "preregistration": "preregistrations/2026-09-lengthonly.md",
+        "data": [
+          "results/runs_lengthonly.jsonl"
+        ]
+      },
+      "asserts": [
+        "pooled_ci_spans_zero",
+        "some_model_ci_below_zero",
+        "no_model_ci_above_zero"
+      ]
+    },
     {
       "alias": "agreement",
       "hypothesis": "H3",
       "public": true,
-      "order": 3,
+      "order": 4,
       "status": "null",
       "kind": "agreement",
-      "evidence": [{"label": "Replicated ×2", "style": "strong"}],
+      "evidence": [
+        {
+          "label": "Replicated ×2",
+          "style": "strong"
+        }
+      ],
       "title": "Engines largely agree on what deserves a citation",
       "data": {
         "metric": "Kendall's W on per-document citation rates, against a within-model split-half floor",
         "rounds": [
-          {"label": "Keyword-stuffing document set", "round": "kwstuff-v3",
-           "cross": 0.798, "cross_ci": [0.761, 0.833], "within": 0.766, "within_ci": [0.729, 0.801]},
-          {"label": "claim-density document set", "round": "corpus v0.4",
-           "cross": 0.803, "within": 0.772}
+          {
+            "label": "Keyword-stuffing document set",
+            "round": "kwstuff-v3",
+            "cross": 0.798,
+            "cross_ci": [
+              0.761,
+              0.833
+            ],
+            "within": 0.766,
+            "within_ci": [
+              0.729,
+              0.801
+            ]
+          },
+          {
+            "label": "claim-density document set",
+            "round": "corpus v0.4",
+            "cross": 0.803,
+            "within": 0.772
+          }
         ]
       },
       "chart": {
         "type": "interval_pair",
-        "labels": ["Different engines, compared with each other", "One engine, compared with its own re-run"],
+        "labels": [
+          "Different engines, compared with each other",
+          "One engine, compared with its own re-run"
+        ],
         "aria": "Kendall's W between engines, and within one engine against its own re-run"
       },
       "text": {
-        "body": ["GEO tools are often sold on the idea that every engine is its own optimisation problem. We measured how closely engines agree on which documents they cite, and compared it with how closely one engine agrees with <em>itself</em> when asked the same thing again. <b>Engines agree with each other about as closely as one engine agrees with its own re-run</b> — the disagreement between them is no bigger than ordinary run-to-run noise."],
+        "body": [
+          "GEO tools are often sold on the idea that every engine is its own optimisation problem. We measured how closely engines agree on which documents they cite, and compared it with how closely one engine agrees with <em>itself</em> when asked the same thing again. <b>Engines agree with each other about as closely as one engine agrees with its own re-run</b> — the disagreement between them is no bigger than ordinary run-to-run noise."
+        ],
         "caption": "Kendall's W: the higher it is, the more alike two rankings of which documents get cited. The within-engine figure is the noise floor any real disagreement would have to clear. {latest_label} shown; the {earlier_label} gave {earlier_cross} against {earlier_within}.",
         "for_you": "A page that earns citations from one engine tends to earn them from the others. The data doesn't support a separate strategy per engine.",
-        "prov": ["measured on two independent document sets", "{calls} engine calls"]
+        "prov": [
+          "measured on two independent document sets",
+          "{calls} engine calls"
+        ]
       },
       "provenance": {
         "round": "kwstuff-v3, corpus v0.4",
         "calls": 36864,
         "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md",
-        "links": [{"label": "earlier round", "path": "results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md"}],
-        "data": ["results/runs_kwstuff_v3.jsonl", "results/runs_v0.4.jsonl"]
+        "links": [
+          {
+            "label": "earlier round",
+            "path": "results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md"
+          }
+        ],
+        "data": [
+          "results/runs_kwstuff_v3.jsonl",
+          "results/runs_v0.4.jsonl"
+        ]
       },
-      "asserts": ["cross_and_within_intervals_overlap"]
+      "asserts": [
+        "cross_and_within_intervals_overlap"
+      ]
     },
-
     {
       "alias": "misattribution",
       "hypothesis": "C2 baseline",
       "public": true,
-      "order": 4,
+      "order": 5,
       "status": "measured",
       "kind": "misattribution",
-      "evidence": [{"label": "Two independent judges", "style": "strong"}],
+      "evidence": [
+        {
+          "label": "Two independent judges",
+          "style": "strong"
+        }
+      ],
       "title": "Engines sometimes credit your page with things it doesn't say",
       "data": {
         "metric": "share of cited sentences a judge finds the page does not support (NOT_SUPPORTED)",
         "method": "fidelity_baseline.py — clean judgments only, last row per item, bootstrap over prompts, 10,000 resamples, seed 20260830",
         "judges": [
-          {"judge": "glm-5.3",     "model": "z-ai/glm-5.3",     "rate": 0.1345, "ci": [0.1048, 0.1701], "sentences": 10316},
-          {"judge": "qwen3.8-max", "model": "qwen/qwen3.8-max", "rate": 0.2029, "ci": [0.1581, 0.2553], "sentences": 10378}
+          {
+            "judge": "glm-5.3",
+            "model": "z-ai/glm-5.3",
+            "rate": 0.1345,
+            "ci": [
+              0.1048,
+              0.1701
+            ],
+            "sentences": 10316
+          },
+          {
+            "judge": "qwen3.8-max",
+            "model": "qwen/qwen3.8-max",
+            "rate": 0.2029,
+            "ci": [
+              0.1581,
+              0.2553
+            ],
+            "sentences": 10378
+          }
         ]
       },
       "chart": {
@@ -233,28 +716,48 @@
         "legend_rest": "supported, or partly supported, by the page"
       },
       "text": {
-        "body": ["Being cited isn't the same as being represented accurately. For every sentence that cited a page, we asked a separate model whether the page actually supports it. <b>Between {low_pct} and {high_pct} of cited sentences made a claim the page doesn't support</b>, depending on which model did the checking. These test pages don't directly answer the question asked — the situation where misattribution is most likely — so pages that do may fare better."],
+        "body": [
+          "Being cited isn't the same as being represented accurately. For every sentence that cited a page, we asked a separate model whether the page actually supports it. <b>Between {low_pct} and {high_pct} of cited sentences made a claim the page doesn't support</b>, depending on which model did the checking. These test pages don't directly answer the question asked — the situation where misattribution is most likely — so pages that do may fare better."
+        ],
         "for_you": "Check what engines actually say when they cite you, not just whether they do.",
-        "prov": ["{sentences} judged sentences", "ALCE-style entailment checking"]
+        "prov": [
+          "{sentences} judged sentences",
+          "ALCE-style entailment checking"
+        ]
       },
       "provenance": {
         "round": "Group C follow-up to kwstuff-v3",
         "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md",
-        "data": ["results/fidelity_kwstuff-v3_glm-5.3_full.jsonl", "results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl"],
-        "links": [{"label": "judging method", "path": "judge_fidelity.py"},
-                  {"label": "computation", "path": "fidelity_baseline.py"}]
+        "data": [
+          "results/fidelity_kwstuff-v3_glm-5.3_full.jsonl",
+          "results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl"
+        ],
+        "links": [
+          {
+            "label": "judging method",
+            "path": "judge_fidelity.py"
+          },
+          {
+            "label": "computation",
+            "path": "fidelity_baseline.py"
+          }
+        ]
       },
       "asserts": []
     },
-
     {
       "alias": "calibration",
       "hypothesis": "CAL-1",
       "public": true,
-      "order": 5,
+      "order": 6,
       "status": "measured",
       "kind": "calibration",
-      "evidence": [{"label": "Early · {n_questions} questions, one engine", "style": "early"}],
+      "evidence": [
+        {
+          "label": "Early · {n_questions} questions, one engine",
+          "style": "early"
+        }
+      ],
       "title": "Tracking tools that query the API may undercount your citations",
       "data": {
         "metric": "1 − mean Jaccard similarity of cited-domain sets, API vs logged-out UI",
@@ -263,44 +766,152 @@
         "api_runs": 3,
         "ui_runs": 1,
         "divergence": 0.368,
-        "divergence_ci": [0.139, 0.625],
+        "divergence_ci": [
+          0.139,
+          0.625
+        ],
         "questions": [
-          {"id": "finance_fedrate",    "q": "Current US federal funds rate",         "api": ["federalreserve.gov"], "web": ["federalreserve.gov"]},
-          {"id": "sports_f1",          "q": "Most recent Formula 1 race winner",     "api": ["formula1.com"],       "web": ["formula1.com"]},
-          {"id": "auto_evcharger",     "q": "Cost to install a home EV charger",     "api": ["afdc.energy.gov", "angi.com", "homeadvisor.com"], "web": ["afdc.energy.gov", "qmerit.com"]},
-          {"id": "tech_keyboard",      "q": "Budget mechanical keyboard under $100", "api": ["rtings.com", "tomsguide.com", "tomshardware.com"], "web": ["rtings.com"]},
-          {"id": "news_weather_sea",   "q": "Seattle weather this week",             "api": [], "web": ["weather.gov", "timeanddate.com"]},
-          {"id": "nutrition_chipotle", "q": "Calories in a Chipotle burrito bowl",   "api": [], "web": ["chipotle.com"]},
-          {"id": "pets_vaccine",       "q": "Core vaccine schedule for puppies",     "api": [], "web": ["aaha.org"]},
-          {"id": "finance_ira",        "q": "Roth vs traditional IRA",               "api": [], "web": []},
-          {"id": "health_creatine",    "q": "Health benefits of creatine",           "api": [], "web": []},
-          {"id": "health_allergies",   "q": "Seasonal allergies vs a cold",          "api": [], "web": []},
-          {"id": "photo_lens",         "q": "Best beginner portrait lens",           "api": [], "web": []},
-          {"id": "ref_mortgage",       "q": "How long a 5-year ARM stays fixed",     "api": [], "web": []}
+          {
+            "id": "finance_fedrate",
+            "q": "Current US federal funds rate",
+            "api": [
+              "federalreserve.gov"
+            ],
+            "web": [
+              "federalreserve.gov"
+            ]
+          },
+          {
+            "id": "sports_f1",
+            "q": "Most recent Formula 1 race winner",
+            "api": [
+              "formula1.com"
+            ],
+            "web": [
+              "formula1.com"
+            ]
+          },
+          {
+            "id": "auto_evcharger",
+            "q": "Cost to install a home EV charger",
+            "api": [
+              "afdc.energy.gov",
+              "angi.com",
+              "homeadvisor.com"
+            ],
+            "web": [
+              "afdc.energy.gov",
+              "qmerit.com"
+            ]
+          },
+          {
+            "id": "tech_keyboard",
+            "q": "Budget mechanical keyboard under $100",
+            "api": [
+              "rtings.com",
+              "tomsguide.com",
+              "tomshardware.com"
+            ],
+            "web": [
+              "rtings.com"
+            ]
+          },
+          {
+            "id": "news_weather_sea",
+            "q": "Seattle weather this week",
+            "api": [],
+            "web": [
+              "weather.gov",
+              "timeanddate.com"
+            ]
+          },
+          {
+            "id": "nutrition_chipotle",
+            "q": "Calories in a Chipotle burrito bowl",
+            "api": [],
+            "web": [
+              "chipotle.com"
+            ]
+          },
+          {
+            "id": "pets_vaccine",
+            "q": "Core vaccine schedule for puppies",
+            "api": [],
+            "web": [
+              "aaha.org"
+            ]
+          },
+          {
+            "id": "finance_ira",
+            "q": "Roth vs traditional IRA",
+            "api": [],
+            "web": []
+          },
+          {
+            "id": "health_creatine",
+            "q": "Health benefits of creatine",
+            "api": [],
+            "web": []
+          },
+          {
+            "id": "health_allergies",
+            "q": "Seasonal allergies vs a cold",
+            "api": [],
+            "web": []
+          },
+          {
+            "id": "photo_lens",
+            "q": "Best beginner portrait lens",
+            "api": [],
+            "web": []
+          },
+          {
+            "id": "ref_mortgage",
+            "q": "How long a 5-year ARM stays fixed",
+            "api": [],
+            "web": []
+          }
         ]
       },
       "chart": {
         "type": "calibration",
-        "columns": ["Question", "OpenAI API", "chatgpt.com, logged out"],
-        "groups": {"both": "Both cited", "web": "Website cited, API didn't",
-                   "api": "API cited, website didn't", "none": "Neither cited"},
+        "columns": [
+          "Question",
+          "OpenAI API",
+          "chatgpt.com, logged out"
+        ],
+        "groups": {
+          "both": "Both cited",
+          "web": "Website cited, API didn't",
+          "api": "API cited, website didn't",
+          "none": "Neither cited"
+        },
         "empty": "no sources"
       },
       "text": {
-        "body": ["Most citation-tracking tools query engines through their API. We asked the same {n_questions} everyday questions through OpenAI's API and on chatgpt.com without an account. <b>On {n_web_only} questions the API cited nothing while the website cited real sources.</b> The reverse {reverse_phrase}, and when both cited, they largely pointed to the same sites."],
+        "body": [
+          "Most citation-tracking tools query engines through their API. We asked the same {n_questions} everyday questions through OpenAI's API and on chatgpt.com without an account. <b>On {n_web_only} questions the API cited nothing while the website cited real sources.</b> The reverse {reverse_phrase}, and when both cited, they largely pointed to the same sites."
+        ],
         "note": "API: {api_runs_word} runs per question, sources pooled. Website: {ui_runs_word} run. The website may use a different model than the API, so some of the gap could be the model rather than the channel.",
         "for_you": "If a monitoring tool queries the API, read its citation counts as a floor rather than a measurement of what people see.",
-        "prov": ["divergence {divergence} {divergence_ci}", "Perplexity untestable: its site requires sign-in to search"]
+        "prov": [
+          "divergence {divergence} {divergence_ci}",
+          "Perplexity untestable: its site requires sign-in to search"
+        ]
       },
       "provenance": {
         "round": "calibration v1",
         "calls": 72,
         "report": "results/published/2026-08-30-calibration-v1/REPORT.md",
-        "data": ["results/calibration_api.jsonl", "results/calibration_ui_logged_out.jsonl"]
+        "data": [
+          "results/calibration_api.jsonl",
+          "results/calibration_ui_logged_out.jsonl"
+        ]
       },
-      "asserts": ["both_cited_rows_share_a_domain"]
+      "asserts": [
+        "both_cited_rows_share_a_domain"
+      ]
     },
-
     {
       "alias": "reliability",
       "hypothesis": "H1",
@@ -309,10 +920,15 @@
       "status": "supported",
       "kind": "reliability",
       "title": "Citation Presence Rate is reliable at 24 runs per cell",
-      "data": {"split_half_min": 0.923, "split_half_max": 0.963, "basis": "Spearman-Brown corrected split-half, per model, kwstuff-v3; corpus v0.4 was at least 0.957 for every model"},
-      "provenance": {"report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"}
+      "data": {
+        "split_half_min": 0.923,
+        "split_half_max": 0.963,
+        "basis": "Spearman-Brown corrected split-half, per model, kwstuff-v3; corpus v0.4 was at least 0.957 for every model"
+      },
+      "provenance": {
+        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"
+      }
     },
-
     {
       "alias": "position",
       "hypothesis": "H2",
@@ -320,12 +936,23 @@
       "order": 91,
       "status": "supported",
       "title": "Position in the candidate set moves citation materially",
-      "data": {"mean_psi": {"kwstuff-v3": 0.109, "corpus v0.4": 0.066},
-               "eta2_slot_vs_condition": {"corpus v0.4": [0.001, 0.305]},
-               "note": "Supported on the pre-registered magnitude test, but slot position is a minor factor next to content. Kept off the public page: in Tier 1, position means slot in a supplied context, which readers would easily mistake for search rank."},
-      "provenance": {"report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"}
+      "data": {
+        "mean_psi": {
+          "kwstuff-v3": 0.109,
+          "corpus v0.4": 0.066
+        },
+        "eta2_slot_vs_condition": {
+          "corpus v0.4": [
+            0.001,
+            0.305
+          ]
+        },
+        "note": "Supported on the pre-registered magnitude test, but slot position is a minor factor next to content. Kept off the public page: in Tier 1, position means slot in a supplied context, which readers would easily mistake for search rank."
+      },
+      "provenance": {
+        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"
+      }
     },
-
     {
       "alias": "interaction",
       "hypothesis": "H5",
@@ -333,21 +960,27 @@
       "order": 92,
       "status": "null",
       "title": "Format × model interaction dominates the main effects",
-      "data": {"eta2": {"kwstuff-v3": {"interaction": 0.029, "format": 0.045, "model": 0.042},
-                        "corpus v0.4": {"interaction": 0.010, "format": 0.021, "model": 0.018}},
-               "caveats": ["format is nested within prompt", "tested on raw CPR, not log-odds"]},
-      "provenance": {"report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"}
-    },
-
-    {
-      "alias": "length",
-      "hypothesis": "H7",
-      "public": true,
-      "order": 99,
-      "status": "in_progress",
-      "title": "Adding words without adding facts does not increase citation",
-      "question_public": "Does padding a page with filler — more words, no new facts — change how often it's cited? Results when the round completes.",
-      "provenance": {"round": "length-only v1", "preregistration": "preregistrations/2026-09-lengthonly.md"}
+      "data": {
+        "eta2": {
+          "kwstuff-v3": {
+            "interaction": 0.029,
+            "format": 0.045,
+            "model": 0.042
+          },
+          "corpus v0.4": {
+            "interaction": 0.01,
+            "format": 0.021,
+            "model": 0.018
+          }
+        },
+        "caveats": [
+          "format is nested within prompt",
+          "tested on raw CPR, not log-odds"
+        ]
+      },
+      "provenance": {
+        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"
+      }
     }
   ]
 }
