@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .env
 results/runs.jsonl
+
+# macOS
+.DS_Store

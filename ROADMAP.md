@@ -81,9 +81,39 @@ rather than presence, with the target varying by tactic. The hard part is buildi
 answering documents that do not all saturate — see `METHODOLOGY.md` §9 for the three ways
 that has gone wrong so far.
 
-*Acceptance:* a corpus whose per-document CPR sits near 0.4–0.6 with headroom in both
-directions, confirmed by a pre-committed spot check, followed by a pre-registered round
-producing a ranked table with intervals.
+**Feasibility probed 2026-09-12/13, three times.** Real US federal text (public domain,
+so no CC-BY-SA conflict) can reach the regime. Full numbers:
+`results/probes/2026-09-12-realtext-feasibility.md`.
+
+- **The lever is how many documents ANSWER, not how many candidates there are.** Probe 3
+  held candidates at ten and varied only the answering count (5 → 9): the five answering
+  documents present in both arms lost 0.142 of citation rate, negative on all five
+  engines, while the filler present in both moved by exactly 0.000. Non-answering
+  candidates are inert. Dilution bites hardest on mid-range documents, which is the only
+  part item 11 can use, making the answering count the knob that places the baseline
+  (`METHODOLOGY.md` §5.2).
+- **Pick questions whose sources disagree about the form of the answer.** Probe 2's
+  sources all say the same thing, so every document was fully responsive or irrelevant —
+  0 of 10 usable as a target. Probe 1's disagree on form (% of calories vs grams per meal
+  vs teaspoons per 1,000 calories), which creates the graded middle.
+- **Screening is mandatory, and more answering documents does not widen the window.**
+  Usable targets went 0 of 10 at five answering documents, 3 of 10 at eight, 2 of 10 at
+  nine. Inclusive engines (grok 7.6 of 10, deepseek 7.1, gemini 6.9) pin documents near
+  1.00; selective ones (gpt 4.1, claude 3.6) pin them near 0.00, and dilution slides a
+  document from one pin to the other. A round needs only one target per question, so two
+  or three usable of ten is enough — but questions that screen empty must be discarded.
+  Budget ~1.5 screened questions per usable one, ~$0.15 each.
+- **Sourcing enough answering documents is the real cost.** A heavily-covered topic
+  yielded 9; another yielded 5. Several agency sites block automated fetching.
+
+*An earlier round of this note said "use ten candidates"; probe 2 falsified that and probe
+3 replaced it with the answering-count mechanism. Recorded because acting on the first
+probe alone would have sent the corpus work down the wrong path.*
+
+*Acceptance:* a question whose authoritative sources differ in framing, an answering-document
+count tuned so the target sits mid-range, and a target that no engine pins at 0.00 or 1.00
+— confirmed by a pre-committed screening run, followed by a pre-registered round producing
+a ranked table with intervals.
 
 ---
 

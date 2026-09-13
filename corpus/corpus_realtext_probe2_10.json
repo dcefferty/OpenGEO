@@ -1,0 +1,218 @@
+{
+  "corpus_version": "realtext-probe2-v0-n10",
+  "intervention": "none -- baseline regime probe for ROADMAP item 11",
+  "n_prompts": 1,
+  "n_docs": 10,
+  "formats": [
+    "blog",
+    "docs",
+    "reference"
+  ],
+  "domains": [
+    "finance"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "finance_creditreport",
+      "domain": "finance",
+      "question": "How long does negative information stay on my credit report?",
+      "target_doc_id": "finance_creditreport__cfpb_howlong",
+      "target_format": "reference",
+      "doc_ids": [
+        "finance_creditreport__cfpb_howlong",
+        "finance_creditreport__ftc_fixing",
+        "finance_creditreport__fdic_reports",
+        "finance_creditreport__cfpb_bankruptcy",
+        "finance_creditreport__cfpb_remove",
+        "finance_creditreport__cfpb_whatis",
+        "finance_creditreport__ftc_disputing",
+        "finance_creditreport__cfpb_getcopy",
+        "finance_creditreport__cfpb_score",
+        "finance_creditreport__ftc_free"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "finance_creditreport__cfpb_howlong",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "How long does information stay on my credit report?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-long-does-information-stay-on-my-credit-report-en-323/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 65,
+      "variants": {
+        "control": "A credit reporting company generally can report most negative information for seven years. Information about a lawsuit or a judgment against you can be reported for seven years or until the statute of limitations runs out, whichever is longer. Bankruptcies can stay on your report for up to ten years. Credit reporting companies may still keep the information on file after they stop reporting it."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__ftc_fixing",
+      "prompt_id": "finance_creditreport",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Fixing Your Credit FAQs",
+        "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 65,
+      "variants": {
+        "control": "Most negative information will stay on your report for seven years, and bankruptcy information will stay on for 10 years. And in some cases, like when you're being considered for a job paying more than $75,000 a year, or you're trying to get a loan or insurance valued at more than $150,000, a credit bureau may include older negative information that wouldn't show up otherwise."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__fdic_reports",
+      "prompt_id": "finance_creditreport",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Credit Reports",
+        "url": "https://www.fdic.gov/consumer-resource-center/credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 58,
+      "variants": {
+        "control": "In most cases, a credit bureau may not report negative information that is more than seven years old or bankruptcies that are more than 10 years old. Consumers should review their reports from each nationwide bureau, because the three do not always hold identical information and an item may appear on one report without appearing on the others."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_bankruptcy",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How long does a bankruptcy appear on credit reports?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-long-does-a-bankruptcy-appear-on-credit-reports-en-325/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 65,
+      "variants": {
+        "control": "If you filed for bankruptcy protection, that information will remain in your credit report up to 10 years from the date of entry of the order or the date of adjudication. Your bankruptcy will stay on your credit report up to 10 years if it is filed under one of the following chapters of the Bankruptcy Code: Chapter 7, Chapter 11, Chapter 12, Chapter 13."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_remove",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Is it possible to remove accurate but negative information?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/is-it-possible-to-remove-accurate-negative-information-from-my-credit-report-en-1249/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 51,
+      "variants": {
+        "control": "You generally cannot have negative information removed from your credit report if it is accurate. Most negative information will remain in your report for seven years. Some types of information remain longer. Anyone promising to remove accurate negative items before that period expires is describing something the law does not allow."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_whatis",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit report?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-report-en-309/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "adjacent",
+      "words": 55,
+      "variants": {
+        "control": "A credit report is a statement that has information about your credit activity and current credit situation such as loan paying history and the status of your credit accounts. Most people have more than one credit report. Credit reporting companies, also known as credit bureaus, collect and store financial data submitted to them by creditors."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__ftc_disputing",
+      "prompt_id": "finance_creditreport",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Disputing Errors on Your Credit Reports",
+        "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "adjacent",
+      "words": 61,
+      "variants": {
+        "control": "Both the credit bureau and the business that supplied the information to a credit bureau have to correct information that is wrong or incomplete in your report. And they have to do it for free. To correct mistakes in your report, contact the credit bureau and the business that reported the inaccurate information, and tell them you want to dispute it."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_getcopy",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How do I get a free copy of my credit reports?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-get-a-copy-of-my-credit-reports-en-5/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "adjacent",
+      "words": 56,
+      "variants": {
+        "control": "You have the right to request one free copy of your credit report each year from each of the three major consumer reporting companies, Equifax, Experian and TransUnion, by visiting AnnualCreditReport.com. Checking your own report does not affect your credit score, and reviewing all three is the only way to see everything being reported about you."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_score",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit score?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-score-en-315/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "adjacent",
+      "words": 60,
+      "variants": {
+        "control": "A credit score is a prediction of your credit behavior, such as how likely you are to pay a loan back on time, based on information from your credit reports. Companies use credit scores to make decisions on whether to offer you a mortgage, credit card, auto loan, and other credit products, as well as for tenant screening and insurance."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__ftc_free",
+      "prompt_id": "finance_creditreport",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Free Credit Reports",
+        "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "adjacent",
+      "words": 54,
+      "variants": {
+        "control": "All three nationwide credit bureaus have permanently extended a program that lets you check your credit report from each once a week for free at AnnualCreditReport.com. In addition, federal law requires each nationwide credit bureau to give you a free copy of your credit report once every 12 months if you ask for it."
+      }
+    }
+  ],
+  "corpus_sha256": "521669639992ce8fd7a4ff853f8111e2ec59dc1962a61424b68c5a91c1198d2e"
+}

@@ -1,0 +1,142 @@
+{
+  "corpus_version": "realtext-probe2-v0-n6",
+  "intervention": "none -- baseline regime probe for ROADMAP item 11",
+  "n_prompts": 1,
+  "n_docs": 6,
+  "formats": [
+    "blog",
+    "docs",
+    "reference"
+  ],
+  "domains": [
+    "finance"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "finance_creditreport",
+      "domain": "finance",
+      "question": "How long does negative information stay on my credit report?",
+      "target_doc_id": "finance_creditreport__cfpb_howlong",
+      "target_format": "reference",
+      "doc_ids": [
+        "finance_creditreport__cfpb_howlong",
+        "finance_creditreport__ftc_fixing",
+        "finance_creditreport__fdic_reports",
+        "finance_creditreport__cfpb_bankruptcy",
+        "finance_creditreport__cfpb_remove",
+        "finance_creditreport__cfpb_whatis"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "finance_creditreport__cfpb_howlong",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "How long does information stay on my credit report?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-long-does-information-stay-on-my-credit-report-en-323/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 65,
+      "variants": {
+        "control": "A credit reporting company generally can report most negative information for seven years. Information about a lawsuit or a judgment against you can be reported for seven years or until the statute of limitations runs out, whichever is longer. Bankruptcies can stay on your report for up to ten years. Credit reporting companies may still keep the information on file after they stop reporting it."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__ftc_fixing",
+      "prompt_id": "finance_creditreport",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Fixing Your Credit FAQs",
+        "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 65,
+      "variants": {
+        "control": "Most negative information will stay on your report for seven years, and bankruptcy information will stay on for 10 years. And in some cases, like when you're being considered for a job paying more than $75,000 a year, or you're trying to get a loan or insurance valued at more than $150,000, a credit bureau may include older negative information that wouldn't show up otherwise."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__fdic_reports",
+      "prompt_id": "finance_creditreport",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Credit Reports",
+        "url": "https://www.fdic.gov/consumer-resource-center/credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 58,
+      "variants": {
+        "control": "In most cases, a credit bureau may not report negative information that is more than seven years old or bankruptcies that are more than 10 years old. Consumers should review their reports from each nationwide bureau, because the three do not always hold identical information and an item may appear on one report without appearing on the others."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_bankruptcy",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How long does a bankruptcy appear on credit reports?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-long-does-a-bankruptcy-appear-on-credit-reports-en-325/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 65,
+      "variants": {
+        "control": "If you filed for bankruptcy protection, that information will remain in your credit report up to 10 years from the date of entry of the order or the date of adjudication. Your bankruptcy will stay on your credit report up to 10 years if it is filed under one of the following chapters of the Bankruptcy Code: Chapter 7, Chapter 11, Chapter 12, Chapter 13."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_remove",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Is it possible to remove accurate but negative information?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/is-it-possible-to-remove-accurate-negative-information-from-my-credit-report-en-1249/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 51,
+      "variants": {
+        "control": "You generally cannot have negative information removed from your credit report if it is accurate. Most negative information will remain in your report for seven years. Some types of information remain longer. Anyone promising to remove accurate negative items before that period expires is describing something the law does not allow."
+      }
+    },
+    {
+      "doc_id": "finance_creditreport__cfpb_whatis",
+      "prompt_id": "finance_creditreport",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit report?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-report-en-309/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "adjacent",
+      "words": 55,
+      "variants": {
+        "control": "A credit report is a statement that has information about your credit activity and current credit situation such as loan paying history and the status of your credit accounts. Most people have more than one credit report. Credit reporting companies, also known as credit bureaus, collect and store financial data submitted to them by creditors."
+      }
+    }
+  ],
+  "corpus_sha256": "caa3d58d4301bef93ebcfe11f884bd9ecd39370a3aa182f1cfb46c6b69ae2c6b"
+}
