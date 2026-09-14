@@ -2,21 +2,24 @@
 """
 OpenGEO -- analysis for the item-11 feasibility probes.
 
-Two probes, each run at six and ten candidate documents on the same question:
+Three probes:
 
-  probe 1  nutrition / added sugars      corpus_realtext_probe{6,10}.json
-  probe 3  nutrition, mechanism arms     corpus_realtext_probe3_{a5,b9}.json
-  probe 2  finance / credit reporting    corpus_realtext_probe2_{6,10}.json
+  probe 1  nutrition / added sugars     6 vs 10 candidates     corpus_realtext_probe{6,10}.json
+  probe 2  finance / credit reporting   6 vs 10 candidates     corpus_realtext_probe2_{6,10}.json
+  probe 3  nutrition / added sugars     10 candidates fixed,   corpus_realtext_probe3_{a5,b9}.json
+                                        5 vs 9 answering
 
-The question both answer: can a corpus of real, all-answering documents produce the
+The question all three answer: can a corpus of real, all-answering documents produce the
 citation regime item 11 needs -- per-document citation well away from 0 and 1, so
 citation measures preference rather than presence?
 
 **The primary reading is the crowding test**, not the mean over all documents. Adding
 weak documents drags the all-document mean down by arithmetic alone, which proves
-nothing. The question that matters is whether the *same six* documents lose citations
-when four more candidates appear beside them. That isolates competition for a limited
-number of citation slots from the composition of the pool.
+nothing. What matters is whether documents present in both runs lose citations when
+the pool around them changes. Probes 1 and 2 read that off the same six documents at
+six and ten candidates, and disagreed, because each confounded candidate count with
+answering count. Probe 3 holds candidates fixed and varies only how many answer, which
+is the test that separates the two.
 
 Standard library plus the repo's Wilson helper. Proportions carry intervals, per
 CLAUDE.md.
