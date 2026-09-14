@@ -32,6 +32,22 @@
 > text with authored additions, not on the federal text this note claimed. Item 11's
 > screening runs on text that passes the verbatim check, and serves as the replication.
 >
+> **The usable-target counts below were also overstated.** The screen treated a document
+> as usable if no engine sat at or beyond 0.04/0.96 — but at 24 runs, 1 citation (0.042)
+> and 23 (0.958) both pass that, and neither leaves room for a tactic to move. Under the
+> rule `screen.py` now enforces — at least 3 citations and 3 non-citations from each
+> boundary on every engine — the counts become:
+>
+> | | reported | under the 3/24 rule |
+> |---|---|---|
+> | probe 1, N=10 | 3 of 10 | **2 of 10** |
+> | probe 2, N=10 | 0 of 10 | 0 of 10 |
+> | probe 3, arm B | 2 of 10 | **1 of 10** |
+>
+> `nhanes_1516` is the target in both surviving cases, so the conclusion that a
+> disagree-in-form question can yield a target holds; the counts in sections 2 and 3b
+> should be read as these.
+>
 > The document text is left exactly as run: the committed results were produced from it,
 > and all six corpus hashes are unchanged by this correction. **Do not reuse these
 > excerpts as source text.**

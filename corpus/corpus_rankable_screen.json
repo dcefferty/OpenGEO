@@ -1,0 +1,235 @@
+{
+  "corpus_version": "rankable-screen-v0",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 1,
+  "n_docs": 9,
+  "formats": [
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "nutrition"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "nutrition_addedsugar",
+      "domain": "nutrition",
+      "question": "How much added sugar should an adult have per day?",
+      "target_doc_id": "nutrition_addedsugar__fda_label",
+      "target_format": "docs",
+      "doc_ids": [
+        "nutrition_addedsugar__fda_label",
+        "nutrition_addedsugar__usda_ers",
+        "nutrition_addedsugar__nhanes_1516",
+        "nutrition_addedsugar__nhanes_1314",
+        "nutrition_addedsugar__nhanes_kids",
+        "nutrition_addedsugar__fns_school",
+        "nutrition_addedsugar__nhlbi_foods",
+        "nutrition_addedsugar__fda_howto",
+        "nutrition_addedsugar__hp2030_nws10"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "nutrition_addedsugar__fda_label",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 62,
+      "source": {
+        "agency": "FDA",
+        "title": "Added Sugars on the Nutrition Facts Label",
+        "url": "https://www.fda.gov/food/nutrition-facts-label/added-sugars-nutrition-facts-label",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7f11e839a4b8668450bc4308ee7fb7265a98f47a7392bea7c2a61a9c127e51e5",
+        "retrieved_utc": "2026-09-14T03:25:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The Dietary Guidelines for Americans recommends limiting calories from added sugars to less than 10 percent of total calories per day. For example, if you consume a 2,000 calorie daily diet, that would be 200 calories or 50 grams of added sugars per day. Consuming too much added sugars can make it difficult to meet nutrient needs while staying within calorie limits."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__usda_ers",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "news",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 104,
+      "source": {
+        "agency": "USDA Economic Research Service",
+        "title": "Adults' added-sugar consumption varies by education",
+        "url": "https://www.ers.usda.gov/data-products/charts-of-note/109690",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d9490c09f7c876f2c05e7a30ea8139e329ec07dc2ca21b1399e0a32867880319",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "On average, all adults aged 20 and over consume more added sugars than recommended, but those with some college education average lower-added sugar intake than those with less education, according to USDA, Economic Research Service (ERS) and University of Georgia researchers. The researchers examined sugar consumption based on density (teaspoons consumed per 1,000 calories) using the latest available national food consumption survey data collected in 2017-18. The Dietary Guidelines for Americans recommend added-sugar intake be limited to no more than 10 percent of caloric intake, which amounts to a density of 5.95 teaspoons for every 1,000 calories based on a 2,000 calorie daily intake."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__nhanes_1516",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 29,
+      "source": {
+        "agency": "USDA ARS Food Surveys Research Group",
+        "title": "Added Sugars in Adults' Diet: What We Eat in America, NHANES 2015-2016",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK589210/",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": "Bookshelf publisher line: Beltsville (MD): United States Department of Agriculture (USDA)",
+        "snapshot_sha256": "a210c512993818bb7c4e9c3e3a7661c0dd1125fccdce26efd7f542b73811ac5b",
+        "retrieved_utc": "2026-09-14T03:25:48+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Overall, 47 percent of adults, 20 years and over, met the 2015-2020 DGA recommendation for added sugars, by limiting added sugars intake to less than 10% of daily calories."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__nhanes_1314",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "partial",
+      "words": 28,
+      "source": {
+        "agency": "USDA ARS Food Surveys Research Group",
+        "title": "Added Sugars Intake of Americans: What We Eat in America, NHANES 2013-2014",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK589475/",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": "FSRG Dietary Data Brief, USDA ARS",
+        "snapshot_sha256": "bbb705a79ad78be2c7f82f29a54ae8248fad0dff6712a88a5de583046e716ead",
+        "retrieved_utc": "2026-09-14T03:25:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "On average, those who met the DGA recommendation consumed 6.7 tsp. eq. (28 g) of added sugars, and those who did not consumed 25.1 tsp. eq. (105 g)."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__nhanes_kids",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "partial",
+      "words": 34,
+      "source": {
+        "agency": "USDA ARS Food Surveys Research Group",
+        "title": "Added Sugars in American Children's Diet: What We Eat in America, NHANES 2015-2016",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK589213/",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": "FSRG Dietary Data Brief, USDA ARS",
+        "snapshot_sha256": "cc98fd0db754743c081cc79e747ba836766a3c91afe32683496d48b664930b56",
+        "retrieved_utc": "2026-09-14T03:35:17+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "About 35 percent of children 2 to 19 years of age met the 2015-2020 DGA recommendation for added sugars, by limiting added sugars intake to less than 10% of total energy for the day."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__fns_school",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "partial",
+      "words": 35,
+      "source": {
+        "agency": "USDA Food and Nutrition Service",
+        "title": "Added Sugars (school nutrition standards)",
+        "url": "https://www.fna.usda.gov/cn/school-nutrition-standards-updates/added-sugars",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b4a14b54af69c7cbe17a777e590b00a281ef9906ec68588cf42cd485da2615dd",
+        "retrieved_utc": "2026-09-14T03:35:16+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "In addition to product-based limits described above, the final rule also establishes a dietary specification limiting added sugars to less than 10 percent of calories across the week in the school lunch and breakfast programs."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__nhlbi_foods",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "none",
+      "words": 28,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Heart-Healthy Living: Choose Heart-Healthy Foods",
+        "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living/healthy-foods",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "31f365fa29de44ffdda9698cc6d03220a4aa267196fd852d71aadd19958ed396",
+        "retrieved_utc": "2026-09-14T03:37:42+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "You should limit the amount of calories you get each day from added sugars. This will help you choose nutrient-rich foods and stay within your daily calorie limit."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__fda_howto",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "none",
+      "words": 67,
+      "source": {
+        "agency": "FDA",
+        "title": "How to Understand and Use the Nutrition Facts Label",
+        "url": "https://www.fda.gov/food/nutrition-facts-label/how-understand-and-use-nutrition-facts-label",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1a71f2db56e518f19d29b9be2ab14faa96f27b6f2e24a922d483e54216807472",
+        "retrieved_utc": "2026-09-14T03:25:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Added Sugars on the Nutrition Facts label include sugars that are added during the processing of foods (such as sucrose or dextrose), foods packaged as sweeteners (such as table sugar), sugars from syrups and honey, and sugars from concentrated fruit or vegetable juices. Diets high in calories from added sugars can make it difficult to meet daily recommended levels of important nutrients while staying within calorie limits."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__hp2030_nws10",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "none",
+      "words": 52,
+      "source": {
+        "agency": "HHS ODPHP (Healthy People 2030)",
+        "title": "Reduce consumption of added sugars by people aged 2 years and over (NWS-10)",
+        "url": "https://odphp.health.gov/healthypeople/objectives-and-data/browse-objectives/nutrition-and-healthy-eating/reduce-consumption-added-sugars-people-aged-2-years-and-over-nws-10",
+        "rights": "US federal work (HHS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9d659a18f1a58c70ec512d452cbf359004591e3ad287de0e4a5ae1b8cb7ef87b",
+        "retrieved_utc": "2026-09-14T03:37:41+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Added sugars in foods and drinks can make it hard for people to get the nutrients they need without getting too many calories. People who eat too much added sugar may be at higher risk for tooth decay and obesity. But many people in the United States consume too much added sugar."
+      }
+    }
+  ],
+  "corpus_sha256": "d367b86ae1f3cbe9d4bb13136d4e1a3201a85ee50c430257d34c8f732890a415"
+}

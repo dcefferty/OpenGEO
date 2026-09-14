@@ -97,8 +97,9 @@ so no CC-BY-SA conflict) can reach the regime. Full numbers:
   0 of 10 usable as a target. Probe 1's disagree on form (% of calories vs grams per meal
   vs teaspoons per 1,000 calories), which creates the graded middle.
 - **Screening is mandatory, and more answering documents does not widen the window.**
-  Usable targets went 0 of 10 at five answering documents, 3 of 10 at eight, 2 of 10 at
-  nine. Inclusive engines (grok 7.6 of 10, deepseek 7.1, gemini 6.9) pin documents near
+  Usable targets went 0 of 10 at five answering documents, 2 of 10 at eight, 1 of 10 at
+  nine, under a rule requiring three citations and three non-citations from each
+  boundary on every engine (first reported as 0/3/2 under a looser cutoff). Inclusive engines (grok 7.6 of 10, deepseek 7.1, gemini 6.9) pin documents near
   1.00; selective ones (gpt 4.1, claude 3.6) pin them near 0.00, and dilution slides a
   document from one pin to the other. A round needs only one target per question, so two
   or three usable of ten is enough — but questions that screen empty must be discarded.
