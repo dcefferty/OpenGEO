@@ -1,0 +1,220 @@
+{
+  "corpus_version": "realtext-probe3-a5",
+  "intervention": "none -- mechanism probe for ROADMAP item 11",
+  "n_prompts": 1,
+  "n_docs": 10,
+  "n_answering": 5,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "nutrition"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "nutrition_addedsugar",
+      "domain": "nutrition",
+      "question": "How much added sugar should an adult eat in a day?",
+      "target_doc_id": "nutrition_addedsugar__fda_label",
+      "target_format": "docs",
+      "doc_ids": [
+        "nutrition_addedsugar__fda_label",
+        "nutrition_addedsugar__cdc_facts",
+        "nutrition_addedsugar__nhanes_1516",
+        "nutrition_addedsugar__usda_ers",
+        "nutrition_addedsugar__cdc_drink",
+        "nutrition_addedsugar__cdc_sodium",
+        "nutrition_addedsugar__nhlbi_activity",
+        "nutrition_addedsugar__fda_foodsafety",
+        "nutrition_addedsugar__cdc_fruitveg",
+        "nutrition_addedsugar__cdc_water"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "nutrition_addedsugar__fda_label",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": true,
+      "source": {
+        "agency": "FDA",
+        "title": "Added Sugars on the Nutrition Facts Label",
+        "url": "https://www.fda.gov/food/nutrition-facts-label/added-sugars-nutrition-facts-label",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 71,
+      "variants": {
+        "control": "The Dietary Guidelines for Americans recommends limiting calories from added sugars to less than 10 percent of total calories per day. For example, if you consume a 2,000 calorie daily diet, that would be 200 calories or 50 grams of added sugars per day. Added sugars are listed separately on the Nutrition Facts label, below Total Sugars, so the amount in a serving can be compared across products before choosing one."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__cdc_facts",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "CDC",
+        "title": "Get the Facts: Added Sugars",
+        "url": "https://www.cdc.gov/nutrition/php/data-research/added-sugars.html",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 68,
+      "variants": {
+        "control": "Adolescents and adults should also limit sugar consumption, with no more than 10 grams of added sugars per meal. Consuming too much added sugar can contribute to health problems such as weight gain and obesity, type 2 diabetes, and heart disease. Added sugars are sugars and syrups put into foods during preparation or processing, and they supply calories while adding few or no other nutrients to the diet."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__nhanes_1516",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "NIH / USDA (NHANES)",
+        "title": "Added Sugars in Adults' Diet: What We Eat in America, NHANES 2015-2016",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK589210/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 63,
+      "variants": {
+        "control": "The Dietary Guidelines for Americans 2015-2020 recommend that Americans limit their added sugars intake to less than 10 percent of daily calories. Among adults, those not meeting the recommendation obtained 19.4 percent of total calories from added sugars, while those meeting it obtained 5.1 percent. The gap between the two groups is therefore far wider than the 10 percent threshold itself would suggest."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__usda_ers",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "news",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "USDA Economic Research Service",
+        "title": "Adults' added-sugar consumption varies by education",
+        "url": "https://www.ers.usda.gov/data-products/charts-of-note/109690",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 69,
+      "variants": {
+        "control": "All adults aged 20 and over consume more added sugars than recommended. The Dietary Guidelines for Americans specify that added-sugar intake be limited to no more than 10 percent of caloric intake, which amounts to a density of 5.95 teaspoons for every 1,000 calories based on a 2,000 calorie daily intake. Consumption data from 2017-18 showed that even college-educated adults exceeded this threshold, at 7.24 teaspoons per 1,000 calories."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__cdc_drink",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "blog",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "CDC",
+        "title": "Rethink Your Drink",
+        "url": "https://www.cdc.gov/healthy-weight-growth/rethink-your-drink/index.html",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "direct",
+      "words": 61,
+      "variants": {
+        "control": "Sugary drinks are the leading source of added sugars in the American diet. For example, a 12-ounce regular soda has more than 10 teaspoons, about 42 grams, of added sugar. That is about 150 calories from sugar. Cutting out two regular sodas per day would reduce total calories by 2,100 in a week and help reduce sugar intake substantially over time."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__cdc_sodium",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "CDC",
+        "title": "About Sodium and Health",
+        "url": "https://www.cdc.gov/salt/about/index.html",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "none",
+      "words": 56,
+      "variants": {
+        "control": "Americans consume more than 3,300 milligrams of sodium per day, on average. This is well above the federal recommendation of less than 2,300 milligrams of sodium daily for teens and adults as part of a healthy eating pattern. Most of that sodium comes from packaged and restaurant food rather than the salt shaker at the table."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__nhlbi_activity",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "blog",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Get Regular Physical Activity",
+        "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living/physical-activity",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "none",
+      "words": 51,
+      "variants": {
+        "control": "Each week, adults should get at least 150 minutes to 300 minutes of moderate-intensity aerobic physical activity, or 75 minutes to 150 minutes of vigorous-intensity aerobic physical activity, or a combination of both moderate-intensity and vigorous-intensity activity. Activity can be spread across the week in whatever pattern is easiest to sustain."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__fda_foodsafety",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Safe Food Handling",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "none",
+      "words": 52,
+      "variants": {
+        "control": "Use an appliance thermometer to be sure the refrigerator temperature is consistently 40 degrees Fahrenheit or below and the freezer temperature is 0 degrees Fahrenheit or below. Refrigerate or freeze meat, poultry, eggs, seafood, and other perishables within two hours of cooking or purchasing them, and within one hour in hot weather."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__cdc_fruitveg",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "news",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "CDC",
+        "title": "State Indicator Report on Fruits and Vegetables",
+        "url": "https://www.cdc.gov/nutrition/php/data-research/fruits-vegetables.html",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "none",
+      "words": 56,
+      "variants": {
+        "control": "In 2015 and 2019, only about 1 in 10 adults met recommendations for fruit and vegetable intake. Eating a diet rich in fruits and vegetables can help protect against serious and costly chronic diseases. Some examples include heart disease, type 2 diabetes, some cancers, and obesity. Intake remains well below recommended levels in every state measured."
+      }
+    },
+    {
+      "doc_id": "nutrition_addedsugar__cdc_water",
+      "prompt_id": "nutrition_addedsugar",
+      "format": "blog",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "CDC",
+        "title": "About Water and Healthier Drinks",
+        "url": "https://www.cdc.gov/healthy-weight-growth/water-healthy-drinks/index.html",
+        "rights": "US federal work, public domain (17 U.S.C. 105)"
+      },
+      "answers": "none",
+      "words": 48,
+      "variants": {
+        "control": "Getting enough water every day is important for health. Drinking water can prevent dehydration, which may cause unclear thinking, mood change, overheating, constipation, and kidney stones. Water has no calories, so replacing other beverages with plain water can help reduce caloric intake over the course of a day."
+      }
+    }
+  ],
+  "corpus_sha256": "1bbb87c1fe12258d13219ca5c3e88cff46c60e33afd9b6b4c5ebc5d7f28e2df8"
+}
