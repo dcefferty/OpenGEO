@@ -36,6 +36,7 @@ output passes through a model, and paraphrase is exactly what this module exists
 catch.
 
     python3 corpus/sources.py fetch URL [URL ...]
+    python3 corpus/sources.py find URL KEYWORD [KEYWORD ...]
     python3 corpus/sources.py check          # verify every registered corpus
 """
 import hashlib
@@ -94,9 +95,25 @@ def key_for(url):
     return hashlib.sha256(url.encode()).hexdigest()[:16]
 
 
+# Known non-federal content served from federal domains. The snapshot store is committed,
+# so saving one of these redistributes copyrighted text even if no corpus ever quotes it.
+# This is a guard against the traps already found, NOT a rights check: a page that passes
+# it still needs its rights established per document in the corpus builder.
+NOT_FEDERAL = {
+    "A.D.A.M., Inc": "MedlinePlus Medical Encyclopedia content licensed from A.D.A.M., Inc.",
+}
+
+
+class RightsError(ValueError):
+    pass
+
+
 def save_text(url, text, method, http_status=None):
     """Store a snapshot. `method` records how the text was obtained, so a reader can
     tell a curl fetch from a browser extraction."""
+    for marker, why in NOT_FEDERAL.items():
+        if marker in text:
+            raise RightsError(f"not snapshotting {url}: {why}")
     SOURCES.mkdir(exist_ok=True)
     snap = {
         "url": url,
@@ -133,7 +150,10 @@ def fetch(url, min_chars=400):
     text = visible_text(body)
     if len(text) < min_chars:
         return None, f"only {len(text)} visible chars -- likely a JavaScript shell"
-    return save_text(url, text, "curl", status), None
+    try:
+        return save_text(url, text, "curl", status), None
+    except RightsError as e:
+        return None, str(e)
 
 
 def load(url):
@@ -144,9 +164,9 @@ def load(url):
 # ---------------------------------------------------------------- verbatim check
 
 _PUNCT = str.maketrans({
-    "‘": "'", "’": "'", "“": '"', "”": '"', "′": "'",
-    "–": "-", "—": "-", "−": "-", " ": " ", " ": " ",
-    " ": " ", "…": "...",
+    "\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"', "\u2032": "'",
+    "\u2013": "-", "\u2014": "-", "\u2212": "-", "\u00a0": " ", "\u2009": " ",
+    "\u202f": " ", "\u2026": "...",
 })
 
 
@@ -169,6 +189,82 @@ def verbatim(excerpt, source_text):
     return False, [s for s in sentences(excerpt) if s not in src]
 
 
+class SpanError(ValueError):
+    pass
+
+
+def _flatten(text):
+    """Punctuation-normalised text on one line, plus the positions where a block
+    boundary (paragraph, list item, heading) was joined into a space."""
+    lines = [re.sub(r"\s+", " ", ln.translate(_PUNCT)).strip() for ln in text.split("\n")]
+    flat, breaks, pos = [], set(), 0
+    for ln in lines:
+        if not ln:
+            continue
+        if flat:
+            breaks.add(pos)
+            pos += 1                      # the joining space
+        flat.append(ln)
+        pos += len(ln)
+    return " ".join(flat), breaks
+
+
+def span(url, start, end, multi_block=False):
+    """Extract an excerpt from a source snapshot as the run of text from `start` through
+    `end`, inclusive. The excerpt is sliced out of the snapshot, never retyped, so it
+    cannot drift from the source.
+
+    Fails if the snapshot is missing, if `start` is absent or appears more than once
+    (an ambiguous anchor could silently select the wrong passage), if `end` does not
+    follow it, or -- unless `multi_block` -- if the span crosses a block boundary, which
+    is how headings, navigation and list debris end up inside an excerpt unnoticed.
+
+    The returned text has whitespace collapsed and typographic punctuation normalised
+    to ASCII. Words, numbers, case and order are exactly the source's."""
+    snap = load(url)
+    if snap is None:
+        raise SpanError(f"no snapshot for {url} -- fetch it first")
+    flat, breaks = _flatten(snap["text"])
+    a, b = norm(start), norm(end)
+    n = flat.count(a)
+    if n != 1:
+        raise SpanError(f"start anchor found {n} times in {url}: {start[:60]!r}")
+    i = flat.index(a)
+    j = flat.find(b, i + len(a) - len(b) if b in a else i)
+    if j < 0:
+        raise SpanError(f"end anchor not found after start in {url}: {end[:60]!r}")
+    j += len(b)
+    excerpt = flat[i:j]
+    marker = re.search(r"\[\s*\d+(?:\s*[,\u2013-]\s*\d+)*\s*\]", excerpt)
+    if marker:
+        # run_pilot.py asks engines to cite as [1], [3]. A source reference marker left
+        # in an excerpt is one an engine can copy into its answer, crediting a document
+        # with a citation it did not earn. Reject rather than strip: stripping would
+        # alter the source text, and a span that avoids the marker is almost always
+        # available.
+        raise SpanError(f"span contains a bracketed reference marker {marker.group()!r}, "
+                        f"which collides with the harness's [n] citation syntax: {start[:50]!r}")
+    if not multi_block and any(i < k < j for k in breaks):
+        raise SpanError(f"span crosses a block boundary in {url}; choose a passage within "
+                        f"one paragraph or pass multi_block=True: {start[:50]!r}")
+    return excerpt
+
+
+def passages(url, *keywords, min_words=12):
+    """Blocks of a snapshot containing any keyword (case-insensitive), for choosing an
+    excerpt. Returned as they will be sliced by span(), so an anchor copied from here
+    resolves. Short blocks -- navigation, labels, table cells -- are skipped."""
+    snap = load(url)
+    if snap is None:
+        return []
+    flat, breaks = _flatten(snap["text"])
+    edges = [0] + sorted(breaks) + [len(flat)]
+    blocks = [flat[a:b].strip() for a, b in zip(edges, edges[1:])]
+    kws = [k.lower() for k in keywords]
+    return [b for b in blocks
+            if len(b.split()) >= min_words and any(k in b.lower() for k in kws)]
+
+
 def check_documents(docs):
     """docs: iterable of dicts with 'doc_id', 'url', 'text'. Returns a list of
     (doc_id, status, detail) for every document that does not pass."""
@@ -186,7 +282,10 @@ def check_documents(docs):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 3 and sys.argv[1] == "fetch":
+    if len(sys.argv) >= 4 and sys.argv[1] == "find":
+        for i, b in enumerate(passages(sys.argv[2], *sys.argv[3:])):
+            print(f"[{i}] ({len(b.split())} words) {b}\n")
+    elif len(sys.argv) >= 3 and sys.argv[1] == "fetch":
         for u in sys.argv[2:]:
             path, err = fetch(u)
             print(f"  {'ok  ' if path else 'FAIL'}  {u}" + (f"  ({err})" if err else ""))
