@@ -103,6 +103,13 @@ so no CC-BY-SA conflict) can reach the regime. Full numbers:
   document from one pin to the other. A round needs only one target per question, so two
   or three usable of ten is enough — but questions that screen empty must be discarded.
   Budget ~1.5 screened questions per usable one, ~$0.15 each.
+- **Every excerpt must pass a mechanical verbatim check.** The probes' excerpts were
+  described as verbatim federal text; an audit found 2 of 25 were — the rest had
+  authored sentences or edits, one of which changed a claim's meaning. The mechanism
+  findings are likely unaffected, but a published corpus cannot attribute words to an
+  agency that did not write them. `corpus/sources.py` snapshots each source page and
+  rejects any excerpt that is not a contiguous run of it; the corpus build fails on a
+  miss rather than warning.
 - **Sourcing enough answering documents is the real cost.** A heavily-covered topic
   yielded 9; another yielded 5. Several agency sites block automated fetching.
 
