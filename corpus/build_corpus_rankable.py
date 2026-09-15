@@ -24,16 +24,17 @@ questions with no such target are discarded before any variant is written.
   which collide with the harness's own citation syntax.
 - **One document per source page.** Two excerpts from one page would be one source
   counted twice.
-- **Answer levels are declared, not inferred.** `direct` states a daily limit for the
-  population asked about; `partial` states it for another population or implies it;
-  `none` is on-topic with no amount. The screen does not use these -- it decides on
+- **Answer levels are declared, not inferred.** `direct` states the amount the question
+  asks for, for the population and context it asks about; `partial` states a related
+  amount (another population, a broader quantity such as total debt rather than housing,
+  or a worked example) or implies it; `none` is on-topic with no amount. The screen does not use these -- it decides on
   citation data alone -- but analysis of what the engines reward does.
 
 Questions are chosen where authoritative sources state the answer in different forms,
 which the probes found is what gives citation a movable middle. A question with one
 canonical answer every source repeats screened empty.
 
-    python3 corpus/build_corpus_rankable.py
+    python3 corpus/build_corpus_rankable.py      # one corpus file per screening batch
 """
 import hashlib
 import json
@@ -43,7 +44,22 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import sources  # noqa: E402
 
-OUT = pathlib.Path(__file__).parent / "corpus_rankable_screen.json"
+CORPUS_DIR = pathlib.Path(__file__).parent
+
+# Each screening run is one batch with its own corpus file, so adding questions never
+# changes a corpus that already has run data. Batch 0 keeps the version string it was
+# run under -- it is recorded in every row of its results file.
+VERSIONS = {0: "rankable-screen-v0"}
+
+
+def out_path(batch):
+    return CORPUS_DIR / f"corpus_rankable_screen_b{batch}.json"
+
+
+def version(batch):
+    return VERSIONS.get(batch, f"rankable-screen-v0-b{batch}")
+
+
 LEVELS = {"direct", "partial", "none"}
 
 USDA = "US federal work (USDA), 17 U.S.C. 105"
@@ -62,6 +78,7 @@ def doc(key, agency, title, url, fmt, answers, rights, start, end, multi_block=F
 QUESTIONS = [
     {
         "id": "nutrition_addedsugar",
+        "batch": 0,
         "domain": "nutrition",
         "question": "How much added sugar should an adult have per day?",
         "docs": [
@@ -122,6 +139,66 @@ QUESTIONS = [
                 "consume too much added sugar."),
         ],
     },
+    {
+        "id": "finance_housingshare",
+        "batch": 1,
+        "domain": "finance",
+        "question": "What share of my income should go to housing costs?",
+        "docs": [
+            doc("huduser_chas", "HUD Office of Policy Development and Research",
+                "CHAS: Background",
+                "https://www.huduser.gov/portal/datasets/cp/CHAS/bg_chas.html",
+                "reference", "direct", "US federal work (HUD), 17 U.S.C. 105",
+                "Cost burden - Monthly housing costs (including utilities) exceeding 30%",
+                "exceeding 50% of monthly income.", multi_block=True),
+            doc("census_2024", "US Census Bureau",
+                "Nearly Half of Renter Households Are Cost-Burdened, Proportions Differ by Race",
+                "https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+                "news", "direct", "US federal work (Census Bureau), 17 U.S.C. 105",
+                "Households are considered cost-burdened when they spend more than 30% of their income on rent",
+                "are considered severely cost-burdened."),
+            doc("census_19m", "US Census Bureau",
+                "More Than 19 Million Renters Burdened by Housing Costs",
+                "https://www.census.gov/newsroom/press-releases/2022/renters-burdened-by-housing-costs.html",
+                "news", "direct", "US federal work (Census Bureau), 17 U.S.C. 105",
+                "Over 40% (19 million) of renter households",
+                "definition of affordable housing."),
+            doc("census_lowinc", "US Census Bureau",
+                "Share of Income Needed to Pay Rent Increased the Most for Low-Income Households",
+                "https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html",
+                "news", "direct", "US federal work (Census Bureau), 17 U.S.C. 105",
+                "When a household has a cost ratio of over 30%, it is considered cost-burdened",
+                "have cost ratios of over 50%."),
+            doc("census_story22", "US Census Bureau",
+                "Renters More Likely Than Homeowners to Spend More Than 30% of Income on Housing",
+                "https://www.census.gov/library/stories/2022/12/housing-costs-burden.html",
+                "news", "direct", "US federal work (Census Bureau), 17 U.S.C. 105",
+                "Over 19 million U.S. renter households spent more than 30%",
+                "rent, mortgage and other housing needs.", multi_block=True),
+            doc("cfpb_qm_blog", "CFPB",
+                "Qualified Mortgages: what are they and what do they mean for you?",
+                "https://www.consumerfinance.gov/about-us/blog/qualified-mortgages-what-are-they-and-what-do-they-mean-for-you/",
+                "blog", "partial", "US federal work (CFPB), 17 U.S.C. 105",
+                "To get a standard Qualified Mortgage, your monthly debt-to-income ratio",
+                "much lower than 43 percent of their income."),
+            doc("cfpb_qm_press", "CFPB",
+                "CFPB Issues Two Final Rules to Promote Access to Responsible, Affordable Mortgage Credit",
+                "https://www.consumerfinance.gov/about-us/newsroom/consumer-financial-protection-bureau-issues-two-final-rules-promote-access-responsible-affordable-mortgage-credit/",
+                "news", "partial", "US federal work (CFPB), 17 U.S.C. 105",
+                "The Bureau has issued two rules related to QM loans.",
+                "a new category for QMs, Seasoned QMs."),
+            doc("cfpb_dti", "CFPB", "What is a debt-to-income ratio?",
+                "https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-why-is-the-43-debt-to-income-ratio-important-en-1791/",
+                "reference", "partial", "US federal work (CFPB), 17 U.S.C. 105",
+                "To calculate your DTI, you add up all your monthly debt payments",
+                "($2,000 is 33% of $6,000.)"),
+            doc("hud_dti_archive", "HUD (FHA)", "HOC Reference Guide: Debt-to-Income Ratio",
+                "https://archives.hud.gov/offices/hsg/sfh/ref/sfhp2-12.cfm",
+                "docs", "partial", "US federal work (HUD), 17 U.S.C. 105",
+                "When either or both of the permissible ratios of 31%/43%",
+                "(Handbook 4155.1, Section 6.D)."),
+        ],
+    },
 ]
 
 
@@ -129,9 +206,9 @@ class BuildError(Exception):
     pass
 
 
-def build():
+def build(batch):
     prompts, documents, problems = [], [], []
-    for q in QUESTIONS:
+    for q in [q for q in QUESTIONS if q["batch"] == batch]:
         seen_urls = set()
         ids = []
         for d in q["docs"]:
@@ -175,40 +252,39 @@ def build():
         raise BuildError("corpus not built:\n  " + "\n  ".join(problems))
 
     corpus = {
-        "corpus_version": "rankable-screen-v0",
+        "corpus_version": version(batch),
         "intervention": "none -- baseline screening corpus for ROADMAP item 11",
         "n_prompts": len(prompts), "n_docs": len(documents),
         "formats": sorted({d["format"] for d in documents}),
-        "domains": sorted({q["domain"] for q in QUESTIONS}),
+        "domains": sorted({q["domain"] for q in QUESTIONS if q["batch"] == batch}),
         "prompts": prompts, "documents": documents,
     }
     blob = json.dumps(corpus, sort_keys=True, separators=(",", ":")).encode()
     corpus["corpus_sha256"] = hashlib.sha256(blob).hexdigest()
-    OUT.write_text(json.dumps(corpus, indent=2, ensure_ascii=False) + "\n")
+    out_path(batch).write_text(json.dumps(corpus, indent=2, ensure_ascii=False) + "\n")
     return corpus
 
 
 def main():
-    try:
-        corpus = build()
-    except BuildError as e:
-        print(e)
-        sys.exit(1)
-    print(f"wrote {OUT.name}  sha256 {corpus['corpus_sha256'][:16]}")
-    print(f"{corpus['n_prompts']} questions, {corpus['n_docs']} documents, every excerpt "
-          "sliced from a snapshot\n")
-    by_q = {}
-    for d in corpus["documents"]:
-        by_q.setdefault(d["prompt_id"], []).append(d)
-    for p in corpus["prompts"]:
-        ds = by_q[p["prompt_id"]]
-        lv = {k: sum(1 for d in ds if d["answers"] == k) for k in ("direct", "partial", "none")}
-        print(f'{p["prompt_id"]}: "{p["question"]}"')
-        print(f"  {len(ds)} documents -- {lv['direct']} direct, {lv['partial']} partial, "
-              f"{lv['none']} none")
-        for d in ds:
-            print(f"  {d['doc_id'].split('__')[1]:<14}{d['answers']:<9}{d['words']:>4}w  "
-                  f"{d['variants']['control'][:78]}")
+    for batch in sorted({q["batch"] for q in QUESTIONS}):
+        try:
+            corpus = build(batch)
+        except BuildError as e:
+            print(f"batch {batch}: {e}")
+            sys.exit(1)
+        print(f"batch {batch}: wrote {out_path(batch).name}  sha256 {corpus['corpus_sha256'][:16]}")
+        by_q = {}
+        for d in corpus["documents"]:
+            by_q.setdefault(d["prompt_id"], []).append(d)
+        for p in corpus["prompts"]:
+            ds = by_q[p["prompt_id"]]
+            lv = {k: sum(1 for d in ds if d["answers"] == k) for k in ("direct", "partial", "none")}
+            print(f'  {p["prompt_id"]}: "{p["question"]}"')
+            print(f"    {len(ds)} documents -- {lv['direct']} direct, {lv['partial']} partial, "
+                  f"{lv['none']} none")
+            for d in ds:
+                print(f"    {d['doc_id'].split('__')[1]:<16}{d['answers']:<9}{d['words']:>4}w  "
+                      f"{d['variants']['control'][:70]}")
         print()
 
 

@@ -1,0 +1,236 @@
+{
+  "corpus_version": "rankable-screen-v0-b1",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 1,
+  "n_docs": 9,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "finance"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "finance_housingshare",
+      "domain": "finance",
+      "question": "What share of my income should go to housing costs?",
+      "target_doc_id": "finance_housingshare__huduser_chas",
+      "target_format": "reference",
+      "doc_ids": [
+        "finance_housingshare__huduser_chas",
+        "finance_housingshare__census_2024",
+        "finance_housingshare__census_19m",
+        "finance_housingshare__census_lowinc",
+        "finance_housingshare__census_story22",
+        "finance_housingshare__cfpb_qm_blog",
+        "finance_housingshare__cfpb_qm_press",
+        "finance_housingshare__cfpb_dti",
+        "finance_housingshare__hud_dti_archive"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "finance_housingshare__huduser_chas",
+      "prompt_id": "finance_housingshare",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 27,
+      "source": {
+        "agency": "HUD Office of Policy Development and Research",
+        "title": "CHAS: Background",
+        "url": "https://www.huduser.gov/portal/datasets/cp/CHAS/bg_chas.html",
+        "rights": "US federal work (HUD), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e1465004e74e482b504da7453c063fcfecdc4daa709ccfa6e5bb4508b7c7d544",
+        "retrieved_utc": "2026-09-15T05:02:51+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Cost burden - Monthly housing costs (including utilities) exceeding 30% of monthly income. Severe cost burden - Monthly housing costs (including utilities) exceeding 50% of monthly income."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_2024",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 47,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Nearly Half of Renter Households Are Cost-Burdened, Proportions Differ by Race",
+        "url": "https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "89b05284912e963a23d43bf83383fb2b2473b71e94722eae180cbcd755eede8f",
+        "retrieved_utc": "2026-09-15T05:02:53+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_19m",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 75,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "More Than 19 Million Renters Burdened by Housing Costs",
+        "url": "https://www.census.gov/newsroom/press-releases/2022/renters-burdened-by-housing-costs.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d5c02a2a85bbc2e04aac8cd947cbc036de92674eee48ed7abc8d68b70b7384c9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_lowinc",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 33,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Share of Income Needed to Pay Rent Increased the Most for Low-Income Households",
+        "url": "https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0188131a895b488d9e37fc08ed66f15b09dd2aa0d78a41124cd81efa180ac352",
+        "retrieved_utc": "2026-09-15T05:02:55+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_story22",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 53,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Renters More Likely Than Homeowners to Spend More Than 30% of Income on Housing",
+        "url": "https://www.census.gov/library/stories/2022/12/housing-costs-burden.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cdd03fe793097e6b0a834a1ac7b523496afc07cf734c8436487987938fd810e9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today. Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_qm_blog",
+      "prompt_id": "finance_housingshare",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 66,
+      "source": {
+        "agency": "CFPB",
+        "title": "Qualified Mortgages: what are they and what do they mean for you?",
+        "url": "https://www.consumerfinance.gov/about-us/blog/qualified-mortgages-what-are-they-and-what-do-they-mean-for-you/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ec2cd37d9a9f4660355c027960d9485e989076db6c5bd6a91a2c64014825394a",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_qm_press",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 62,
+      "source": {
+        "agency": "CFPB",
+        "title": "CFPB Issues Two Final Rules to Promote Access to Responsible, Affordable Mortgage Credit",
+        "url": "https://www.consumerfinance.gov/about-us/newsroom/consumer-financial-protection-bureau-issues-two-final-rules-promote-access-responsible-affordable-mortgage-credit/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8a07c11d60e2164d5ee928062fdef7b2678dda602afae7be518261ffa3454e34",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_dti",
+      "prompt_id": "finance_housingshare",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 104,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a debt-to-income ratio?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-why-is-the-43-debt-to-income-ratio-important-en-1791/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "524c48432b8153be23135c7ae95a87686546500a114ae379a3a0f0a0ecf0df9e",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.)"
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__hud_dti_archive",
+      "prompt_id": "finance_housingshare",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 66,
+      "source": {
+        "agency": "HUD (FHA)",
+        "title": "HOC Reference Guide: Debt-to-Income Ratio",
+        "url": "https://archives.hud.gov/offices/hsg/sfh/ref/sfhp2-12.cfm",
+        "rights": "US federal work (HUD), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c6bccb433ae0f5c4caf2d7042b955003a783af37669355c6522da1698480311a",
+        "retrieved_utc": "2026-09-15T05:02:50+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "When either or both of the permissible ratios of 31%/43% is/are exceeded, the lender is required to provide justification, in the \"Remarks\" section of the Loan Transmittal (HUD 92900.LT), as to why they believe the mortgage presents an acceptable risk. The lender must include any compensating factors used for loan approval. For EEM or EEH loans, ratios of 33%/45% are considered permissible (Handbook 4155.1, Section 6.D)."
+      }
+    }
+  ],
+  "corpus_sha256": "0567386742496c65ddf68e47377319b5ac1bf675003dbdcdba85bb223c9001f4"
+}

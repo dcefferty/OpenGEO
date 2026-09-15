@@ -28,7 +28,7 @@ usable target; averaging would call it a good one.
 The screen is a gate on the design, not a look at any result: it runs on the baseline
 text only, before any tactic variant exists.
 
-    python3 screen.py --corpus corpus/corpus_rankable_screen.json --runs results/screen_rankable.jsonl
+    python3 screen.py --corpus corpus/corpus_rankable_screen_b1.json --runs results/screen_rankable_b1.jsonl
     python3 screen.py ... --json      # machine-readable, consumed by the corpus builder
 """
 import argparse

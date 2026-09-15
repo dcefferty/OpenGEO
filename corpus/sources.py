@@ -108,9 +108,10 @@ class RightsError(ValueError):
     pass
 
 
-def save_text(url, text, method, http_status=None):
+def save_text(url, text, method, http_status=None, extra=None):
     """Store a snapshot. `method` records how the text was obtained, so a reader can
-    tell a curl fetch from a browser extraction."""
+    tell a curl fetch from a browser extraction. `extra` carries method-specific
+    provenance, such as the URL a browser actually landed on after redirects."""
     for marker, why in NOT_FEDERAL.items():
         if marker in text:
             raise RightsError(f"not snapshotting {url}: {why}")
@@ -122,6 +123,7 @@ def save_text(url, text, method, http_status=None):
         "http_status": http_status,
         "text_sha256": hashlib.sha256(text.encode()).hexdigest(),
         "chars": len(text),
+        **(extra or {}),
         "text": text,
     }
     path = SOURCES / f"{key_for(url)}.json"
