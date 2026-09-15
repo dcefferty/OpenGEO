@@ -16,10 +16,12 @@ and, per question:
   - marks a document PINNED if any engine cites it in <= 4% or >= 96% of runs
   - scores every unpinned document by its worst-case headroom: the smallest distance
     to 0 or 1 across all engines, min over engines of min(rate, 1 - rate)
-  - requires worst-case headroom of at least 3/24 -- three citations and three
-    non-citations from each boundary on every engine
-  - recommends the highest-scoring document as the target, or DISCARD if none
-    qualifies
+  - calls a document movable on an engine if it is at least 3/24 -- three citations
+    and three non-citations -- from each boundary there
+  - accepts a target movable on every engine, or on all but one; the excluded engine's
+    result on that question is reported as uninformative
+  - prefers a target movable on every engine, then the highest worst-case headroom
+    across the engines it is movable on, or DISCARD if nothing qualifies
 
 Worst-case headroom is the rule because a target is only as movable as its most
 constrained engine. A document at 0.5 on four engines and 0.97 on the fifth is not a
@@ -35,6 +37,8 @@ import argparse
 import json
 from collections import defaultdict
 
+import engine_weights
+
 PINNED_LO, PINNED_HI = 0.04, 0.96
 # A document can clear the pinning cutoffs and still be unusable: at 24 runs, 1/24 = 0.042
 # and 23/24 = 0.958 both pass them, yet a tactic cannot move a rate measurably below one
@@ -47,6 +51,20 @@ PINNED_LO, PINNED_HI = 0.04, 0.96
 # is applied retroactively to the feasibility probes, where it also lowers the
 # usable-target counts (results/probes/2026-09-12-realtext-feasibility.md).
 MIN_HEADROOM = 3 / 24
+
+# At most one engine may be left out of a question. The rankable regime -- several
+# documents answering -- exposes how differently the engines cite: on the housing question
+# grok cited 80% of candidates and claude 41%, so a document rarely sits mid-range on all
+# five at once. Requiring every engine discarded both questions screened on verbatim
+# text; in each, removing one engine's requirement produced a target.
+#
+# Chosen 2026-09-14 at the repo owner's direction over two alternatives: dropping grok
+# from the panel (a panel change made because an engine did not fit, which the next
+# question could demand again of gemini or deepseek) and keeping the all-engine rule
+# (0 of 2 questions passed it). The excluded engine's result on that question is
+# reported as uninformative, as the no-cite rule already does for a whole model. A
+# target movable on every engine is always preferred; the exclusion is a fallback.
+MAX_EXCLUDED = 1
 
 
 def wilson(k, n, z=1.96):
@@ -85,14 +103,36 @@ def screen_question(prompt, docs, rows):
         k = sum(1 for r in rows if i in (r.get("cited_doc_ids") or []))
         pinned = [m for m, v in per.items() if v <= PINNED_LO or v >= PINNED_HI]
         headroom = min(min(v, 1 - v) for v in per.values())
+        movable = [m for m, v in per.items() if min(v, 1 - v) >= MIN_HEADROOM]
         out_docs.append({
             "doc_id": i, "answers": d.get("answers"), "per_engine": per,
             "pooled": k / len(rows), "pooled_ci": wilson(k, len(rows)),
             "pinned_on": pinned, "headroom": headroom,
+            "movable_on": movable,
+            "headroom_movable": min((min(per[m], 1 - per[m]) for m in movable), default=0.0),
         })
 
-    usable = [d for d in out_docs if not d["pinned_on"] and d["headroom"] >= MIN_HEADROOM]
-    target = max(usable, key=lambda d: d["headroom"]) if usable else None
+    usable = [d for d in out_docs if len(models) - len(d["movable_on"]) <= MAX_EXCLUDED]
+    # Movable on every engine beats movable on all but one, whatever the headroom; among
+    # equals, worst-case headroom on the included engines decides. Headroom is discrete at
+    # 24 runs (steps of 1/24), so exact ties are common, and document order would break them
+    # arbitrarily. Ties go to the target whose excluded engine carries the least market
+    # weight, since the published headline is share-weighted and losing gpt (56%) on a
+    # question costs twenty times what losing grok (2.6%) does.
+    #
+    # Known consequence: on a tie this always spares the heavier engine, so exclusions
+    # concentrate on low-weight engines -- pushing toward removing grok from the panel,
+    # which the owner declined. The per-engine question counts printed below are how that
+    # stays visible; the analysis plan must set a floor on them before the round.
+    w = engine_weights.weights(models)
+    for d in out_docs:
+        d["excluded_weight"] = sum(w.get(m, 0.0) for m in models if m not in d["movable_on"])
+    ranked = sorted(usable, key=lambda d: (len(d["movable_on"]), d["headroom_movable"],
+                                           -d["excluded_weight"]), reverse=True)
+    target = ranked[0] if ranked else None
+    ties = [d["doc_id"] for d in ranked[1:]
+            if (len(d["movable_on"]), d["headroom_movable"])
+            == (len(target["movable_on"]), target["headroom_movable"])] if target else []
     cites = sum(len(r.get("cited_doc_ids") or []) for r in rows) / len(rows)
     return {
         "prompt_id": prompt["prompt_id"], "question": prompt["question"],
@@ -102,6 +142,9 @@ def screen_question(prompt, docs, rows):
         "documents": out_docs,
         "usable": [d["doc_id"] for d in usable],
         "target": target["doc_id"] if target else None,
+        "excluded_engines": ([m for m in models if m not in target["movable_on"]]
+                             if target else []),
+        "tied_with": ties,
         "verdict": "KEEP" if target else "DISCARD",
     }
 
@@ -144,15 +187,19 @@ def main():
         print("=" * 96)
         short = [m.split("/")[1][:10] for m in q["models"]]
         print(f"{'document':<26}" + "".join(f"{s:>11}" for s in short)
-              + f"{'pooled':>8}{'headroom':>10}  status")
-        for d in sorted(q["documents"], key=lambda d: -d["headroom"]):
+              + f"{'pooled':>8}{'movable':>9}  status")
+        n_eng = len(q["models"])
+        for d in sorted(q["documents"],
+                        key=lambda d: (-len(d["movable_on"]), -d["headroom_movable"])):
+            stuck = [m.split("/")[1][:10] for m in q["models"] if m not in d["movable_on"]]
             tag = ("TARGET" if d["doc_id"] == q["target"]
                    else "usable" if d["doc_id"] in q["usable"]
-                   else f"pinned on {len(d['pinned_on'])}" if d["pinned_on"]
-                   else f"too close to a boundary (headroom < {MIN_HEADROOM:.3f})")
+                   else f"not movable on {len(stuck)}")
+            if stuck and d["doc_id"] in q["usable"]:
+                tag += f" (excludes {', '.join(stuck)})"
             print(f"  {d['doc_id'].split('__')[-1]:<24}"
                   + "".join(f"{d['per_engine'][m]:>11.2f}" for m in q["models"])
-                  + f"{d['pooled']:>8.2f}{d['headroom']:>10.2f}  {tag}")
+                  + f"{d['pooled']:>8.2f}{len(d['movable_on']):>6}/{n_eng}  {tag}")
 
     kept = [q for q in results if q["verdict"] == "KEEP"]
     run = [q for q in results if q["verdict"] != "NOT RUN"]
@@ -160,10 +207,20 @@ def main():
     print(f"SCREEN: {len(kept)} of {len(run)} questions have a usable target")
     for q in run:
         t = q["target"].split("__")[-1] if q["target"] else "-"
-        h = max((d["headroom"] for d in q["documents"] if d["doc_id"] == q["target"]),
+        h = max((d["headroom_movable"] for d in q["documents"] if d["doc_id"] == q["target"]),
                 default=0.0)
-        print(f"  {q['verdict']:<8}{q['prompt_id']:<34}target {t:<24}"
-              f"worst-engine headroom {h:.2f}   usable {len(q['usable'])}/{q['n_docs']}")
+        ex = ", ".join(m.split("/")[1] for m in q["excluded_engines"]) or "none"
+        print(f"  {q['verdict']:<8}{q['prompt_id']:<30}target {t:<20}"
+              f"headroom {h:.2f}   excludes {ex}")
+        if q.get("tied_with"):
+            print(f"  {'':<38}tie broken by market weight, over "
+                  + ", ".join(i.split("__")[-1] for i in q["tied_with"]))
+    if kept:
+        models = kept[0]["models"]
+        print("\nquestions each engine contributes to (its ranking rests on these):")
+        for m in models:
+            n = sum(1 for q in kept if m not in q["excluded_engines"])
+            print(f"  {m:<34}{n} of {len(kept)}")
 
 
 if __name__ == "__main__":

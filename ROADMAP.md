@@ -114,14 +114,27 @@ so no CC-BY-SA conflict) can reach the regime. Full numbers:
 - **Sourcing enough answering documents is the real cost.** A heavily-covered topic
   yielded 9; another yielded 5. Several agency sites block automated fetching.
 
+- **A target may be pinned on at most one engine (decided 2026-09-14).** Screened on
+  verbatim federal text, requiring every engine discarded both questions. The engines
+  differ too much in how much they cite: on the housing question grok cited 80% of
+  candidates and claude 41%, and a document must sit mid-range on all five at once. In
+  each question, removing one engine's requirement produced a target. That is a property
+  of the engines, not of real text, so a synthetic corpus would face it too. The repo
+  owner chose to keep all five engines and let a question leave one out, reporting that
+  engine's result there as uninformative, over dropping grok from the panel. A target
+  movable on every engine is always preferred; ties go to the smallest market weight
+  excluded. **Watch:** both questions kept so far exclude grok, and the tie-break leans
+  that way. Per-engine question counts are printed by `screen.py`, and the pre-registration
+  must set a floor on them.
 *An earlier round of this note said "use ten candidates"; probe 2 falsified that and probe
 3 replaced it with the answering-count mechanism. Recorded because acting on the first
 probe alone would have sent the corpus work down the wrong path.*
 
 *Acceptance:* a question whose authoritative sources differ in framing, an answering-document
-count tuned so the target sits mid-range, and a target that no engine pins at 0.00 or 1.00
-— confirmed by a pre-committed screening run, followed by a pre-registered round producing
-a ranked table with intervals.
+count tuned so the target sits mid-range, and a target movable on all but at most one
+engine — confirmed by a pre-committed screening run — followed by a pre-registered round
+producing a ranked table with intervals, each engine's ranking stating how many questions
+it rests on.
 
 ---
 
