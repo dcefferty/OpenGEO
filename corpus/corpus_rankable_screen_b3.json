@@ -1,0 +1,292 @@
+{
+  "corpus_version": "rankable-screen-v0-b3",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 2,
+  "n_docs": 11,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "home_diy",
+    "taxes"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "taxes_recordkeeping",
+      "domain": "taxes",
+      "question": "How long should I keep my tax records?",
+      "target_doc_id": "taxes_recordkeeping__irs_howlong",
+      "target_format": "reference",
+      "doc_ids": [
+        "taxes_recordkeeping__irs_howlong",
+        "taxes_recordkeeping__irs_tc305",
+        "taxes_recordkeeping__irs_employment",
+        "taxes_recordkeeping__irs_smallbiz",
+        "taxes_recordkeeping__irs_recordkeeping",
+        "taxes_recordkeeping__irs_statutes",
+        "taxes_recordkeeping__irs_news"
+      ]
+    },
+    {
+      "prompt_id": "home_energysaving",
+      "domain": "home_diy",
+      "question": "How much can I save by air sealing and insulating my home?",
+      "target_doc_id": "home_energysaving__es_method",
+      "target_format": "reference",
+      "doc_ids": [
+        "home_energysaving__es_method",
+        "home_energysaving__es_why",
+        "home_energysaving__es_attic",
+        "home_energysaving__es_duct"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "taxes_recordkeeping__irs_howlong",
+      "prompt_id": "taxes_recordkeeping",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 99,
+      "source": {
+        "agency": "IRS",
+        "title": "How long should I keep records?",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c8249b068cf63a19840b40fc5b206b264e5b25c86f34f4623563449e8f2382bb",
+        "retrieved_utc": "2026-09-16T04:57:43+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Keep records for 3 years from the date you filed your original return or 2 years from the date you paid the tax, whichever is later, if you file a claim for credit or refund after you file your return. Keep records for 7 years if you file a claim for a loss from worthless securities or bad debt deduction. Keep records for 6 years if you do not report income that you should report, and it is more than 25% of the gross income shown on your return. Keep records indefinitely if you do not file a return."
+      }
+    },
+    {
+      "doc_id": "taxes_recordkeeping__irs_tc305",
+      "prompt_id": "taxes_recordkeeping",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 53,
+      "source": {
+        "agency": "IRS",
+        "title": "Topic no. 305, Recordkeeping",
+        "url": "https://www.irs.gov/taxtopics/tc305",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "63a2d2db8edd35413fb6befc3b57b740f83b795c0357c52d6ce6f382b9412a22",
+        "retrieved_utc": "2026-09-16T04:57:43+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "6 years - If you don't report income that you should have reported, and it's more than 25% of the gross income shown on the return, or it's attributable to foreign financial assets and is more than $5,000, the time to assess tax is 6 years from the date you filed the return."
+      }
+    },
+    {
+      "doc_id": "taxes_recordkeeping__irs_employment",
+      "prompt_id": "taxes_recordkeeping",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 26,
+      "source": {
+        "agency": "IRS",
+        "title": "Employment tax recordkeeping",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/employment-tax-recordkeeping",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3212c63f4c1b2ec566b4734d904384b43f4bca930c3ca78c4a78837e77447ea5",
+        "retrieved_utc": "2026-09-16T04:57:44+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Keep all records of employment taxes for at least four years after filing the 4th quarter for the year. These should be available for IRS review."
+      }
+    },
+    {
+      "doc_id": "taxes_recordkeeping__irs_smallbiz",
+      "prompt_id": "taxes_recordkeeping",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 17,
+      "source": {
+        "agency": "IRS",
+        "title": "Common questions about recordkeeping for small businesses",
+        "url": "https://www.irs.gov/newsroom/common-questions-about-recordkeeping-for-small-businesses",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "bde640e4faf801a2755497989a561bce30fa269e5a98004749026ced868aa049",
+        "retrieved_utc": "2026-09-16T04:57:44+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The general rule is three years depending on the action, expense and event recorded in the document."
+      }
+    },
+    {
+      "doc_id": "taxes_recordkeeping__irs_recordkeeping",
+      "prompt_id": "taxes_recordkeeping",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 11,
+      "source": {
+        "agency": "IRS",
+        "title": "Recordkeeping",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1bef89e2cd4daa5fa063c5c22ca5271d7774189e7387a7698535c5bf51d1d141",
+        "retrieved_utc": "2026-09-16T04:57:44+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Keep all records of employment taxes for at least four years."
+      }
+    },
+    {
+      "doc_id": "taxes_recordkeeping__irs_statutes",
+      "prompt_id": "taxes_recordkeeping",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "partial",
+      "words": 43,
+      "source": {
+        "agency": "IRS",
+        "title": "Statutes of limitations for assessing, collecting and refunding tax",
+        "url": "https://www.irs.gov/filing/statutes-of-limitations-for-assessing-collecting-and-refunding-tax",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "797ee06ce34b5fe96a1f5b5e4e6437f33d6818cec0bc568b4823a67b93e74a41",
+        "retrieved_utc": "2026-09-16T04:57:44+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "A statute of limitation is the time period established by law during when IRS can review, analyze, and resolve your tax-related issues. When the statutory period expires, we can no longer assess or collect additional tax, or allow you to claim a refund."
+      }
+    },
+    {
+      "doc_id": "taxes_recordkeeping__irs_news",
+      "prompt_id": "taxes_recordkeeping",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "partial",
+      "words": 72,
+      "source": {
+        "agency": "IRS",
+        "title": "Good recordkeeping year-round helps taxpayers avoid tax time frustration",
+        "url": "https://www.irs.gov/newsroom/good-recordkeeping-year-round-helps-taxpayers-avoid-tax-time-frustration",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4989c427368b9e941e62c1fc1847b410614b6c8de234b7797cb2ce855139dc48",
+        "retrieved_utc": "2026-09-16T04:57:43+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Tax-related records. This includes wage and earning statements from all employers or payers including payment apps or cards, such as Form W-2, 1099-K, 1099-Misc, 1099-NEC. Other records include interest and dividend statements from banks, certain government payments like unemployment compensation, other income documents and records of virtual currency transactions. Taxpayers should also keep receipts, canceled checks, and other documents that support income, a deduction, or a credit reported on their tax return."
+      }
+    },
+    {
+      "doc_id": "home_energysaving__es_method",
+      "prompt_id": "home_energysaving",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 43,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Methodology for Estimated Energy Savings",
+        "url": "https://www.energystar.gov/saveathome/seal_insulate/methodology",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1385a929a99f95181bd2572cb148b4b152d127063ca8369c200aa580d161cbfd",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "EPA estimates that homeowners can save an average of 15% on heating and cooling costs (or an average of 11% on total energy costs) by air sealing their homes and adding insulation in attics, floors over crawl spaces, and accessible basement rim joists."
+      }
+    },
+    {
+      "doc_id": "home_energysaving__es_why",
+      "prompt_id": "home_energysaving",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 86,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Why Seal and Insulate?",
+        "url": "https://www.energystar.gov/saveathome/seal_insulate/why-seal-and-insulate",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "bcd03e56e6059dd2992ca5f9a45240014e854d3a0c7edcd044d1953a8f622525",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Air that leaks through your home's envelope - the outer walls, windows, doors, and other openings - wastes a lot of energy and increases your utility costs. A well-sealed envelope, coupled with the right amount of insulation, can make a real difference on your utility bills. EPA estimates that homeowners can save an average of 15% on heating and cooling costs (or an average of 11% on total energy costs) by air sealing their homes and adding insulation in attics, floors over crawl spaces and basements."
+      }
+    },
+    {
+      "doc_id": "home_energysaving__es_attic",
+      "prompt_id": "home_energysaving",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 87,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Rule Your Attic! For Comfort and Savings",
+        "url": "https://www.energystar.gov/saveathome/seal_insulate/rule_your_attic",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1c48dd95cbda8b712052e7cc6f05b5c6cf3c8ba7e950f97e46da28627a73635c",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "A well-sealed and insulated attic can make a real difference in your energy bills and how comfortable your home is. Considering how high energy bills are these days, now is a great time to improve your home with a cost-effective project like sealing and insulating your attic. EPA estimates that homeowners can save an average of 15% on heating and cooling costs (or an average of 11% on total energy costs) by air sealing their homes and adding insulation in attics, floors over crawl spaces and basements."
+      }
+    },
+    {
+      "doc_id": "home_energysaving__es_duct",
+      "prompt_id": "home_energysaving",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 34,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Benefits of Duct Sealing",
+        "url": "https://www.energystar.gov/saveathome/heating-cooling/duct-sealing/benefits",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "af19757022b16882949edca5f5d0ba63a7c925666ef8e8c67e1e73b11d795f6f",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Leaky ducts can reduce heating and cooling system efficiency by as much as 20 percent. Sealing and insulating ducts increases efficiency, lowers your energy bills, and can often pay for itself in energy savings."
+      }
+    }
+  ],
+  "corpus_sha256": "b2da9584f9de96628073438a56099e6d094804a9ee34f220ec416c8ea65f9c3d"
+}
