@@ -130,6 +130,23 @@ so no CC-BY-SA conflict) can reach the regime. Full numbers:
 3 replaced it with the answering-count mechanism. Recorded because acting on the first
 probe alone would have sent the corpus work down the wrong path.*
 
+**Sized 2026-09-15 against the screened baselines, not an inherited number.** The five
+kept targets sit at 0.354-0.642 (mean 0.498) with no cell at a ceiling, which is what
+screening is for -- the v0.2 pilot's baseline was 0.87 with 67% of cells pinned. Power to
+detect a tactic against baseline, at 24 runs per arm (`size_round1.py` on those baselines):
+
+| smallest effect | 25 questions | 50 questions | 50 questions, 40 runs |
+|---|---|---|---|
+| OR 1.30 (~+6.5 pts) | 0.95 | 1.00 | 1.00 |
+| OR 1.20 (~+4.5 pts) | 0.71 | 0.95 | 0.99 |
+| OR 1.15 (~+3.5 pts) | 0.51 | 0.81 | 0.94 |
+
+So the question count follows from the smallest tactic worth ranking. H6's keyword-stuffing
+effect was +0.038, about OR 1.15, where 25 questions is a coin flip. **Plan on ~50 questions
+if tactics are expected to differ by a few points; 25 only suffices if they differ by 6 or
+more.** Separating tactics from each other is harder still than separating one from
+baseline, which this table does not cover.
+
 *Acceptance:* a question whose authoritative sources differ in framing, an answering-document
 count tuned so the target sits mid-range, and a target movable on all but at most one
 engine — confirmed by a pre-committed screening run — followed by a pre-registered round

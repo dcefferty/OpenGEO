@@ -118,9 +118,20 @@ def main():
     print(f"cells at a literal 100% ceiling (24/24): {100*ceiling:.0f}%")
     print(f"vs. METHODOLOGY.md's original assumption, Beta(1.2,3): "
           f"mean={beta_rates.mean():.3f}  sd={beta_rates.std():.3f}")
+    # Describe the data actually supplied, not the pilot it was written against. Run on
+    # the v0.2 pilot this prints the ceiling problem it was built to expose; run on the
+    # rankable screening baselines it prints a mid-range baseline instead, which is the
+    # point of screening. Hardcoding the pilot's numbers here contradicted the computed
+    # line above whenever the script was pointed at anything else.
     print("\nThe gap between these two rows is the whole point of this script: the original")
-    print("power table was sized for a ~29% baseline. Real baseline is ~87% and frequently")
-    print("at a literal ceiling, which compresses the room a treatment effect has to move.")
+    print(f"power table was sized for a ~{beta_rates.mean():.0%} baseline. The supplied data "
+          f"has a {raw_rates.mean():.0%} baseline")
+    if ceiling >= 0.10:
+        print(f"with {ceiling:.0%} of cells at a literal ceiling, which compresses the room a")
+        print("treatment effect has to move.")
+    else:
+        print(f"with {ceiling:.0%} of cells at a ceiling, so an effect has room to move in "
+              "either direction.")
 
     for label, rates in (("REAL PILOT DATA (empirical bootstrap)", cell_rates),
                           ("OLD ASSUMPTION (Beta(1.2,3) prior)", beta_rates)):

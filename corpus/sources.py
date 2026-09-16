@@ -29,11 +29,13 @@ and consumerfinance.gov serve curl; cdc.gov and nhtsa.gov return 403 to any
 non-browser client; studentaid.gov serves a JavaScript shell with no content.
 
 `fetch` uses curl, which reaches more of these than urllib does (CFPB rejects
-urllib's TLS fingerprint but not curl's). For pages curl cannot reach, extract the
-rendered text in a real browser (`document.body.innerText`) and store it with
-`save_text`, recording how it was obtained. Do not use a summarising fetch tool: its
-output passes through a model, and paraphrase is exactly what this module exists to
-catch.
+urllib's TLS fingerprint but not curl's), and falls back to the Internet Archive for
+the rest. Measured 2026-09-15, captures exist and serve curl for cdc.gov, ssa.gov,
+fsis.usda.gov, ods.od.nih.gov and nhtsa.gov; energy.gov 403s at the Archive too. An
+archived capture also gives a permanently citable, timestamped URL, which is better
+provenance than a local snapshot alone -- but it may predate the live page, so the
+capture date is recorded per document. Do not use a summarising fetch tool: its output
+passes through a model, and paraphrase is exactly what this module exists to catch.
 
     python3 corpus/sources.py fetch URL [URL ...]
     python3 corpus/sources.py find URL KEYWORD [KEYWORD ...]
@@ -47,6 +49,8 @@ import pathlib
 import re
 import subprocess
 import sys
+import time
+import urllib.parse
 from datetime import datetime, timezone
 
 SOURCES = pathlib.Path(__file__).parent / "sources"
@@ -131,29 +135,103 @@ def save_text(url, text, method, http_status=None, extra=None):
     return path
 
 
-def fetch(url, min_chars=400):
-    """Fetch with curl and snapshot the visible text. Returns (path, None) on success or
-    (None, reason) -- a 403, a timeout, or a page too thin to be real content (the
-    JavaScript-shell case), which would otherwise pass as an empty but valid fetch."""
+def _curl(url, timeout=25):
+    """(status, body). status is None if curl itself failed."""
     try:
         r = subprocess.run(
-            ["curl", "-s", "-L", "--compressed", "--max-time", "25", "-A", UA,
+            ["curl", "-s", "-L", "--compressed", "--max-time", str(timeout), "-A", UA,
              "-H", "Accept: text/html,application/xhtml+xml",
              "-H", "Accept-Language: en-US,en;q=0.9",
              "-w", "\n__HTTP_STATUS__%{http_code}", url],
-            capture_output=True, timeout=40)
+            capture_output=True, timeout=timeout + 15)
     except subprocess.TimeoutExpired:
-        return None, "timeout"
+        return None, ""
     body = r.stdout.decode("utf-8", errors="replace")
     body, _, status = body.rpartition("\n__HTTP_STATUS__")
-    status = int(status) if status.isdigit() else None
-    if status != 200:
-        return None, f"HTTP {status}"
-    text = visible_text(body)
-    if len(text) < min_chars:
-        return None, f"only {len(text)} visible chars -- likely a JavaScript shell"
+    return (int(status) if status.isdigit() else None), body
+
+
+# The Internet Archive is the fallback for federal sites that refuse non-browser clients:
+# cdc.gov, ssa.gov, fsis.usda.gov, ods.od.nih.gov and nhtsa.gov all serve captures even
+# though they 403 a direct fetch, and between them they carry health, retirement, food
+# safety and automotive -- domains the corpus otherwise cannot reach at all.
+#
+# Two details matter. The capture must be requested with the "id_" modifier, which
+# returns the originally archived bytes; without it the Archive injects its own toolbar
+# into the HTML, and that banner would land inside the snapshot and could be quoted into
+# an excerpt. And the CDX index, not the availability API, is used to find a capture --
+# the availability API rate-limits almost immediately and reports "no snapshot" when it
+# does, which reads as a missing page rather than a throttled request.
+WAYBACK_CDX = "https://web.archive.org/cdx/search/cdx"
+ARCHIVE_PAUSE = 3.0
+_last_archive_call = [0.0]
+
+
+def _archive_wait():
+    delta = time.monotonic() - _last_archive_call[0]
+    if delta < ARCHIVE_PAUSE:
+        time.sleep(ARCHIVE_PAUSE - delta)
+    _last_archive_call[0] = time.monotonic()
+
+
+def wayback_capture(url):
+    """Most recent archived capture that returned 200, as (timestamp, fetch URL), or None."""
+    _archive_wait()
+    q = urllib.parse.urlencode({"url": url, "output": "json", "filter": "statuscode:200",
+                                "collapse": "digest", "limit": "-1"})
+    status, body = _curl(f"{WAYBACK_CDX}?{q}", timeout=30)
+    if status != 200 or not body.strip():
+        return None
     try:
-        return save_text(url, text, "curl", status), None
+        rows = json.loads(body)
+    except ValueError:
+        return None
+    if len(rows) < 2:                      # row 0 is the header
+        return None
+    ts = rows[-1][1]
+    return ts, f"https://web.archive.org/web/{ts}id_/{url}"
+
+
+def fetch(url, min_chars=400, allow_archive=True):
+    """Snapshot a page's visible text, preferring a direct fetch and falling back to the
+    Internet Archive. Returns (path, None) on success or (None, reason).
+
+    Rejected: a non-200, a timeout, or a page too thin to be real content -- the
+    JavaScript-shell case, which would otherwise be saved as an empty but valid snapshot.
+
+    The snapshot is always keyed by the ORIGINAL url, so a document refers to the agency's
+    page whether the text came from the live site or an archived capture; where it came
+    from is recorded in the snapshot's method and archive fields."""
+    status, body = _curl(url)
+    direct_problem = (f"HTTP {status}" if status is not None else "timeout")
+    if status == 200:
+        text = visible_text(body)
+        if len(text) >= min_chars:
+            try:
+                return save_text(url, text, "curl", status), None
+            except RightsError as e:
+                return None, str(e)
+        direct_problem = f"only {len(text)} visible chars -- likely a JavaScript shell"
+
+    if not allow_archive:
+        return None, direct_problem
+
+    cap = wayback_capture(url)
+    if cap is None:
+        return None, f"{direct_problem}; no archived capture"
+    ts, archive_url = cap
+    _archive_wait()
+    a_status, a_body = _curl(archive_url, timeout=45)
+    if a_status != 200:
+        return None, f"{direct_problem}; archive returned HTTP {a_status}"
+    text = visible_text(a_body)
+    if len(text) < min_chars:
+        return None, f"{direct_problem}; archived capture only {len(text)} visible chars"
+    try:
+        path = save_text(url, text, "wayback id_",
+                         extra={"archive_url": archive_url, "archive_timestamp": ts,
+                                "direct_fetch_failed": direct_problem})
+        return path, None
     except RightsError as e:
         return None, str(e)
 
