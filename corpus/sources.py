@@ -192,9 +192,17 @@ def wayback_capture(url):
     return ts, f"https://web.archive.org/web/{ts}id_/{url}"
 
 
-def fetch(url, min_chars=400, allow_archive=True):
+def fetch(url, min_chars=400, allow_archive=True, refresh=False):
     """Snapshot a page's visible text, preferring a direct fetch and falling back to the
     Internet Archive. Returns (path, None) on success or (None, reason).
+
+    An existing snapshot is kept and returned unchanged unless `refresh=True`. A snapshot
+    is a dated record that a corpus has been built and run against: re-fetching rewrites
+    its retrieval timestamp, which changes the corpus hash even when the text is
+    byte-identical. That happened once -- an incidental re-fetch of one FDA page while
+    testing the fetcher moved batch 0's corpus hash after its screening run was already
+    committed -- so refusing by default is the safe direction, and a caller that genuinely
+    wants a newer capture asks for it.
 
     Rejected: a non-200, a timeout, or a page too thin to be real content -- the
     JavaScript-shell case, which would otherwise be saved as an empty but valid snapshot.
@@ -202,6 +210,10 @@ def fetch(url, min_chars=400, allow_archive=True):
     The snapshot is always keyed by the ORIGINAL url, so a document refers to the agency's
     page whether the text came from the live site or an archived capture; where it came
     from is recorded in the snapshot's method and archive fields."""
+    existing = SOURCES / f"{key_for(url)}.json"
+    if existing.exists() and not refresh:
+        return existing, None
+
     status, body = _curl(url)
     direct_problem = (f"HTTP {status}" if status is not None else "timeout")
     if status == 200:

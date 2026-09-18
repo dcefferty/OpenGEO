@@ -37,6 +37,12 @@ Questions are chosen where authoritative sources state the answer in different f
 which the probes found is what gives citation a movable middle. A question with one
 canonical answer every source repeats screened empty.
 
+They also need **at least 8 on-topic candidates**. Engines cite a sticky number of
+documents regardless of how many are offered, so a four- or five-document set has nearly
+all of it cited and every document pinned. Across the first ten screened questions,
+candidate count separated kept from discarded perfectly (7-9 against 4-6) while the count
+of directly answering documents did not (2-5 in both).
+
     python3 corpus/build_corpus_rankable.py      # one corpus file per screening batch
 """
 import hashlib
@@ -75,6 +81,7 @@ SEC = "US federal work (SEC), 17 U.S.C. 105"
 FED = "US federal work (Federal Reserve Board), 17 U.S.C. 105"
 IRS = "US federal work (IRS), 17 U.S.C. 105"
 EPA = "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105"
+SSA = "US federal work (Social Security Administration), 17 U.S.C. 105"
 
 
 def doc(key, agency, title, url, fmt, answers, rights, start, end, multi_block=False,
@@ -418,6 +425,107 @@ QUESTIONS = [
                 "docs", "direct", EPA,
                 "Leaky ducts can reduce heating and cooling system efficiency",
                 "pay for itself in energy savings."),
+        ],
+    },
+    {
+        "id": "cooking_temperature",
+        "batch": 4,
+        "domain": "cooking",
+        "question": "What internal temperature should I cook meat to?",
+        "docs": [
+            doc("fsis_doneness", "USDA FSIS", "Doneness Versus Safety",
+                "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/doneness-versus-safety",
+                "docs", "direct", USDA,
+                "FSIS recommends cooking whole poultry to a safe minimum internal temperature of 165",
+                "choose to cook poultry to higher temperatures."),
+            doc("usda_blog", "USDA", "Cooking Meat: Is It Done Yet?",
+                "https://www.usda.gov/about-usda/news/blog/cooking-meat-it-done-yet",
+                "blog", "direct", USDA,
+                "Cook raw beef, pork, lamb and veal steaks, chops, and roasts",
+                "160 F as measured with a food thermometer.", multi_block=True),
+            doc("fsis_chart", "USDA FSIS", "Safe Minimum Internal Temperature Chart",
+                "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+                "reference", "partial", USDA,
+                "Cook all food to these minimum internal temperatures",
+                "choose to cook food to higher temperatures."),
+            doc("fs_minternal", "HHS FoodSafety.gov", "Cook to a Safe Minimum Internal Temperature",
+                "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+                "reference", "partial", HHS,
+                "Follow the guidelines below for how to cook raw meat",
+                "germs that cause food poisoning."),
+        ],
+    },
+    {
+        "id": "retirement_claimage",
+        "batch": 4,
+        "domain": "retirement",
+        "question": "At what age should I start taking Social Security retirement benefits?",
+        "docs": [
+            doc("ssa_agered", "Social Security Administration",
+                "Retirement Age and Benefit Reduction",
+                "https://www.ssa.gov/benefits/retirement/planner/agereduction.html",
+                "reference", "direct", SSA,
+                "You can start receiving your Social Security retirement benefits as early as age 62.",
+                "your benefit amount will increase."),
+            doc("ssa_earlylate", "Social Security Administration", "Early or Late Retirement",
+                "https://www.ssa.gov/oact/quickcalc/early_late.html",
+                "reference", "direct", SSA,
+                "A worker can choose to retire as early as age 62, but",
+                "by retiring at age 70.", multi_block=True),
+            doc("ssa_1960delay", "Social Security Administration", "Delayed Retirement, Born in 1960",
+                "https://www.ssa.gov/benefits/retirement/planner/1960-delay.html",
+                "reference", "direct", SSA,
+                "The chart below explains how delayed retirement affects your benefit.",
+                "124 percent of the monthly benefit"),
+            doc("ssa_1960", "Social Security Administration", "Born in 1960 or later",
+                "https://www.ssa.gov/benefits/retirement/planner/1960.html",
+                "reference", "direct", SSA,
+                "You can start receiving your Social Security retirement benefits as early as age 62,",
+                "less than your full retirement benefit amount."),
+            doc("ssa_delay", "Social Security Administration", "Delayed Retirement Credits",
+                "https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+                "reference", "partial", SSA,
+                "For example, if you reach your full retirement age (67) in June",
+                "the year before your 69th birthday."),
+        ],
+    },
+    {
+        "id": "health_vitamind",
+        "batch": 4,
+        "domain": "health",
+        "question": "How much vitamin D does an adult need per day?",
+        "docs": [
+            doc("ods_hp", "NIH Office of Dietary Supplements",
+                "Vitamin D - Health Professional Fact Sheet",
+                "https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/",
+                "reference", "direct", NIH,
+                "These values range from 15 to 20 mcg (600-800 IU) for adults",
+                "depending on age."),
+            doc("nia_vit", "NIH National Institute on Aging",
+                "Vitamins and Minerals for Older Adults",
+                "https://www.nia.nih.gov/health/vitamins-and-supplements/vitamins-and-minerals-older-adults",
+                "docs", "direct", NIH,
+                # "If you are age 51-70..." appears twice on this page, under Men and
+                # under Women, with identical wording; span() refused it. Anchored on the
+                # unique vitamin D food-sources line so the passage is unambiguous.
+                "You can get vitamin D from fatty fish",
+                "If you are over age 70, you need at least 20 mcg (800 IU), but not more "
+                "than 100 mcg (4,000 IU).", multi_block=True),
+            doc("ods_con", "NIH Office of Dietary Supplements", "Vitamin D - Consumer Fact Sheet",
+                "https://ods.od.nih.gov/factsheets/VitaminD-Consumer/",
+                "reference", "partial", NIH,
+                "The amount of vitamin D you need each day depends on your age.",
+                "micrograms (mcg) and International Units (IU)."),
+            doc("niams", "NIH NIAMS", "Calcium and Vitamin D: Important for Bone Health",
+                "https://www.niams.nih.gov/health-topics/calcium-and-vitamin-d-important-bone-health",
+                "docs", "partial", NIH,
+                "Table 2 lists how much vitamin D people need every day",
+                "to keep their bones healthy."),
+            doc("fda_dv", "FDA", "Daily Value on the Nutrition and Supplement Facts Labels",
+                "https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels",
+                "docs", "none", FDA,
+                "DVs are the recommended amounts of nutrients to consume or not to exceed each day.",
+                "contributes to your daily diet."),
         ],
     },
 ]

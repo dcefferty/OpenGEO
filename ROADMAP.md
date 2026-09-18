@@ -130,6 +130,28 @@ so no CC-BY-SA conflict) can reach the regime. Full numbers:
 3 replaced it with the answering-count mechanism. Recorded because acting on the first
 probe alone would have sent the corpus work down the wrong path.*
 
+**Source at least 8 on-topic candidates per question (2026-09-17).** Across ten screened
+questions, candidate count separates the outcome perfectly and the number of directly
+answering documents does not:
+
+| | candidates | directly answering |
+|---|---|---|
+| kept (5) | 7-9 | 2-5 |
+| discarded (5) | 4-6 | 2-5 |
+
+Engines cite a fairly sticky number of documents -- 3.2 to 5.7 per answer here -- so with
+four or five candidates that is 64-91% of the entire set and every document pins near a
+ceiling. With seven to nine it is 42-80%, which leaves some documents mid-range. This
+refines the probes' finding that non-answering candidates are inert: probe 3's filler was
+*off-topic* and was never cited, but on-topic partial answerers are cited at 0.24-0.85 and
+do compete for citation slots. Caveat: richer topics got more sourcing effort, so candidate
+count is confounded with topic richness at n=10; the share-of-set figures are the part that
+does not depend on that.
+
+Practically, a thin candidate set fails however well its sources disagree, and the three
+questions discarded in batch 4 (cooking temperature, Social Security claiming age, vitamin
+D) are under-sourced rather than unusable -- each had 4-5 candidates and can be retried at 8+.
+
 **Sized 2026-09-15 against the screened baselines, not an inherited number.** The five
 kept targets sit at 0.354-0.642 (mean 0.498) with no cell at a ceiling, which is what
 screening is for -- the v0.2 pilot's baseline was 0.87 with 67% of cells pinned. Power to

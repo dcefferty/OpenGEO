@@ -1,0 +1,370 @@
+{
+  "corpus_version": "rankable-screen-v0-b4",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 3,
+  "n_docs": 14,
+  "formats": [
+    "blog",
+    "docs",
+    "reference"
+  ],
+  "domains": [
+    "cooking",
+    "health",
+    "retirement"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "cooking_temperature",
+      "domain": "cooking",
+      "question": "What internal temperature should I cook meat to?",
+      "target_doc_id": "cooking_temperature__fsis_doneness",
+      "target_format": "docs",
+      "doc_ids": [
+        "cooking_temperature__fsis_doneness",
+        "cooking_temperature__usda_blog",
+        "cooking_temperature__fsis_chart",
+        "cooking_temperature__fs_minternal"
+      ]
+    },
+    {
+      "prompt_id": "retirement_claimage",
+      "domain": "retirement",
+      "question": "At what age should I start taking Social Security retirement benefits?",
+      "target_doc_id": "retirement_claimage__ssa_agered",
+      "target_format": "reference",
+      "doc_ids": [
+        "retirement_claimage__ssa_agered",
+        "retirement_claimage__ssa_earlylate",
+        "retirement_claimage__ssa_1960delay",
+        "retirement_claimage__ssa_1960",
+        "retirement_claimage__ssa_delay"
+      ]
+    },
+    {
+      "prompt_id": "health_vitamind",
+      "domain": "health",
+      "question": "How much vitamin D does an adult need per day?",
+      "target_doc_id": "health_vitamind__ods_hp",
+      "target_format": "reference",
+      "doc_ids": [
+        "health_vitamind__ods_hp",
+        "health_vitamind__nia_vit",
+        "health_vitamind__ods_con",
+        "health_vitamind__niams",
+        "health_vitamind__fda_dv"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "cooking_temperature__fsis_doneness",
+      "prompt_id": "cooking_temperature",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "answers": "direct",
+      "words": 54,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Doneness Versus Safety",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/doneness-versus-safety",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8544b9de4bd268c9183e54b49a188ed68cda6d2444dfa838cb58d4cd4e9a22f1",
+        "retrieved_utc": "2026-09-18T04:41:39+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "FSIS recommends cooking whole poultry to a safe minimum internal temperature of 165 °F as measured using a food thermometer. Check the internal temperature in the innermost part of the thigh and wing and the thickest part of the breast. For reasons of personal preference, consumers may choose to cook poultry to higher temperatures."
+      }
+    },
+    {
+      "doc_id": "cooking_temperature__usda_blog",
+      "prompt_id": "cooking_temperature",
+      "format": "blog",
+      "domain": "cooking",
+      "is_target": false,
+      "answers": "direct",
+      "words": 72,
+      "source": {
+        "agency": "USDA",
+        "title": "Cooking Meat: Is It Done Yet?",
+        "url": "https://www.usda.gov/about-usda/news/blog/cooking-meat-it-done-yet",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "02555eb0d1d3f3e21ac0550f66bea26c0748ac8f35f4bc1492245e58fd042152",
+        "retrieved_utc": "2026-09-18T04:42:26+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "Cook raw beef, pork, lamb and veal steaks, chops, and roasts to a minimum internal temperature of 145 F as measured with a food thermometer before removing meat from the heat source. For safety and quality, allow meat to rest for at least three minutes before cutting or consuming. Ground meats: Cook raw ground beef, pork, lamb, and veal to an internal temperature of 160 F as measured with a food thermometer."
+      }
+    },
+    {
+      "doc_id": "cooking_temperature__fsis_chart",
+      "prompt_id": "cooking_temperature",
+      "format": "reference",
+      "domain": "cooking",
+      "is_target": false,
+      "answers": "partial",
+      "words": 35,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Safe Minimum Internal Temperature Chart",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d665ca9182a6df216f6da3c93a2abef1ce43d71f9711a3304540e4f60c0808f5",
+        "retrieved_utc": "2026-09-16T05:50:29+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "Cook all food to these minimum internal temperatures, as measured with a food thermometer, before removing food from the heat source. For reasons of personal preference, consumers may choose to cook food to higher temperatures."
+      }
+    },
+    {
+      "doc_id": "cooking_temperature__fs_minternal",
+      "prompt_id": "cooking_temperature",
+      "format": "reference",
+      "domain": "cooking",
+      "is_target": false,
+      "answers": "partial",
+      "words": 49,
+      "source": {
+        "agency": "HHS FoodSafety.gov",
+        "title": "Cook to a Safe Minimum Internal Temperature",
+        "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+        "rights": "US federal work (HHS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "35aa50e554aedb80a85445c59caee964cef1ae8e8d3e4e3bd5ec2119f01fd140",
+        "retrieved_utc": "2026-09-18T04:41:14+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "Follow the guidelines below for how to cook raw meat, poultry, seafood, and other foods to a safe minimum internal temperature. Always use a food thermometer to check whether meat has reached a safe minimum internal temperature that is hot enough to kill harmful germs that cause food poisoning."
+      }
+    },
+    {
+      "doc_id": "retirement_claimage__ssa_agered",
+      "prompt_id": "retirement_claimage",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "answers": "direct",
+      "words": 49,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Retirement Age and Benefit Reduction",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/agereduction.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "16a6e8c055d25aac5bf09a64614d1e7a3ddc8d1d38e7806378c8eae5c95cc47f",
+        "retrieved_utc": "2026-09-18T04:42:56+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "You can start receiving your Social Security retirement benefits as early as age 62. However, you are entitled to full benefits only when you reach your full retirement age. If you delay taking your benefits from your full retirement age up to age 70, your benefit amount will increase."
+      }
+    },
+    {
+      "doc_id": "retirement_claimage__ssa_earlylate",
+      "prompt_id": "retirement_claimage",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "answers": "direct",
+      "words": 56,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Early or Late Retirement",
+        "url": "https://www.ssa.gov/oact/quickcalc/early_late.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f5f338146fbd34e3e42c09648ec39c3d7a1566cc59fdcdd746b5c713cda602ca",
+        "retrieved_utc": "2026-09-18T04:43:39+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "A worker can choose to retire as early as age 62, but doing so may result in a reduction of as much as 30 percent. Starting to receive benefits after normal retirement age may result in larger benefits. With delayed retirement credits, a person can receive his or her largest benefit by retiring at age 70."
+      }
+    },
+    {
+      "doc_id": "retirement_claimage__ssa_1960delay",
+      "prompt_id": "retirement_claimage",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "answers": "direct",
+      "words": 49,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Delayed Retirement, Born in 1960",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/1960-delay.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2ac51baa3ef53f498b6fd7fb7682d89b1100dc35d883d246db7116998dc9002a",
+        "retrieved_utc": "2026-09-18T04:49:02+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "The chart below explains how delayed retirement affects your benefit. The increase is based on your date of birth and the number of months you delay the start of your retirement benefits. If you start receiving retirement benefits at age 70, you'll get 124 percent of the monthly benefit"
+      }
+    },
+    {
+      "doc_id": "retirement_claimage__ssa_1960",
+      "prompt_id": "retirement_claimage",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "answers": "direct",
+      "words": 29,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Born in 1960 or later",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/1960.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7dbdfb7003f64100b03aa46a922c76e523bfd0092b0bfd4467de03a273d3188f",
+        "retrieved_utc": "2026-09-18T04:43:21+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "You can start receiving your Social Security retirement benefits as early as age 62, but the benefit amount you receive will be less than your full retirement benefit amount."
+      }
+    },
+    {
+      "doc_id": "retirement_claimage__ssa_delay",
+      "prompt_id": "retirement_claimage",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "answers": "partial",
+      "words": 48,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Delayed Retirement Credits",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "672366e967d0db63e78dde4793c79e2aff4d169c0d5f106d79ebac7f304c7077",
+        "retrieved_utc": "2026-09-18T04:44:01+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "For example, if you reach your full retirement age (67) in June, you may plan to wait until your 69th birthday to start your retirement benefits. Your initial benefit amount will reflect delayed retirement credits earned from your full retirement age through the year before your 69th birthday."
+      }
+    },
+    {
+      "doc_id": "health_vitamind__ods_hp",
+      "prompt_id": "health_vitamind",
+      "format": "reference",
+      "domain": "health",
+      "is_target": false,
+      "answers": "direct",
+      "words": 28,
+      "source": {
+        "agency": "NIH Office of Dietary Supplements",
+        "title": "Vitamin D - Health Professional Fact Sheet",
+        "url": "https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "99c15d2df41d6682e3df929e29f267140bb44cb163d4efdf0285b4c52951b7aa",
+        "retrieved_utc": "2026-09-18T04:45:16+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "These values range from 15 to 20 mcg (600-800 IU) for adults and from 10 to 15 mcg (400-600 IU) for infants, children, and adolescents, depending on age."
+      }
+    },
+    {
+      "doc_id": "health_vitamind__nia_vit",
+      "prompt_id": "health_vitamind",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "direct",
+      "words": 67,
+      "source": {
+        "agency": "NIH National Institute on Aging",
+        "title": "Vitamins and Minerals for Older Adults",
+        "url": "https://www.nia.nih.gov/health/vitamins-and-supplements/vitamins-and-minerals-older-adults",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8a1e3d7a318f81a00f99d9a7b0bb9d2dd4bfe87cfd00e5496a1cb88741cb6a27",
+        "retrieved_utc": "2026-09-18T04:45:16+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "You can get vitamin D from fatty fish, fish liver oils, fortified milk and milk products, and fortified cereals. Men Age 51+: If you are age 51-70, you need at least 15 mcg (600 IU) each day, but not more than 100 mcg (4,000 IU). If you are over age 70, you need at least 20 mcg (800 IU), but not more than 100 mcg (4,000 IU)."
+      }
+    },
+    {
+      "doc_id": "health_vitamind__ods_con",
+      "prompt_id": "health_vitamind",
+      "format": "reference",
+      "domain": "health",
+      "is_target": false,
+      "answers": "partial",
+      "words": 27,
+      "source": {
+        "agency": "NIH Office of Dietary Supplements",
+        "title": "Vitamin D - Consumer Fact Sheet",
+        "url": "https://ods.od.nih.gov/factsheets/VitaminD-Consumer/",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d0bc4736488a3aea4db75031056263feeb5bc25d11ccd861e9816bfb249b2e79",
+        "retrieved_utc": "2026-09-16T05:50:44+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "The amount of vitamin D you need each day depends on your age. Average daily recommended amounts are listed below in micrograms (mcg) and International Units (IU)."
+      }
+    },
+    {
+      "doc_id": "health_vitamind__niams",
+      "prompt_id": "health_vitamind",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "partial",
+      "words": 16,
+      "source": {
+        "agency": "NIH NIAMS",
+        "title": "Calcium and Vitamin D: Important for Bone Health",
+        "url": "https://www.niams.nih.gov/health-topics/calcium-and-vitamin-d-important-bone-health",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "15194aa07e98f8819a5ddbe07838b791fd46ee804e30a19993913d6404118bc7",
+        "retrieved_utc": "2026-09-18T04:49:27+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Table 2 lists how much vitamin D people need every day to keep their bones healthy."
+      }
+    },
+    {
+      "doc_id": "health_vitamind__fda_dv",
+      "prompt_id": "health_vitamind",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "none",
+      "words": 39,
+      "source": {
+        "agency": "FDA",
+        "title": "Daily Value on the Nutrition and Supplement Facts Labels",
+        "url": "https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f21e3a43c7b5385294fdb147078987d6bc45afa59fea6a63508ff25e850f9835",
+        "retrieved_utc": "2026-09-18T04:45:16+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "DVs are the recommended amounts of nutrients to consume or not to exceed each day. The %DV is how much a nutrient in a single serving of an individual packaged food or dietary supplement contributes to your daily diet."
+      }
+    }
+  ],
+  "corpus_sha256": "2ce7c5e235ce8afccf4fe999f2890a17d71d3ae39303139081eb61a46c0f37b2"
+}
