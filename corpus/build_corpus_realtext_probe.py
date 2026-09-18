@@ -23,8 +23,16 @@ a real question have the "all answer" property for free -- that is why they woul
 
 Sources are US federal works, which are public domain (17 U.S.C. Sec 105). That matters
 because this repo licenses its data CC-BY-4.0, and Wikipedia/Stack Overflow are CC-BY-SA
-whose share-alike would force a relicense. Excerpts are short and quoted verbatim with
-the source URL recorded per document.
+whose share-alike would force a relicense. Excerpts are short, with the source URL
+recorded per document.
+
+**Correction 2026-09-13:** these excerpts are NOT verbatim. An audit against saved
+snapshots of the source pages found 2 of 25 checkable documents verbatim; the rest were
+extended with authored sentences or edited (contractions expanded, parentheticals
+dropped, and in one case 'On average,' removed, turning an average into a universal
+claim). The text is left exactly as run, because the committed results were produced
+from it. Do not reuse it as source text; see the correction in
+results/probes/2026-09-12-realtext-feasibility.md and use corpus/sources.py instead.
 
 ## The inversion
 
@@ -45,8 +53,9 @@ OUTDIR = pathlib.Path(__file__).parent
 # Derived from the documents, not chosen in advance. All six excerpts address it.
 QUESTION = "How much added sugar should an adult eat in a day?"
 
-# Each excerpt is verbatim US federal text, retrieved 2026-09-12. `agency` and `url`
-# are recorded so any claim in the corpus can be traced to its source.
+# Excerpts were drawn from US federal pages retrieved 2026-09-12, but are NOT verbatim --
+# see the correction in the module docstring. `agency` and `url` record the source each
+# was drawn from, not a guarantee that the wording is the agency's.
 DOCS = [
     {
         "key": "fda_label",

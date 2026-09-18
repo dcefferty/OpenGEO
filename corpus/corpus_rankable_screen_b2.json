@@ -1,0 +1,554 @@
+{
+  "corpus_version": "rankable-screen-v0-b2",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 3,
+  "n_docs": 22,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "finance",
+    "nutrition"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "finance_downpayment",
+      "domain": "finance",
+      "question": "How much should I put down when buying a home?",
+      "target_doc_id": "finance_downpayment__cfpb_dp_blog",
+      "target_format": "blog",
+      "doc_ids": [
+        "finance_downpayment__cfpb_dp_blog",
+        "finance_downpayment__cfpb_dp_kind",
+        "finance_downpayment__cfpb_pmi",
+        "finance_downpayment__cfpb_mi_how",
+        "finance_downpayment__va_purchase",
+        "finance_downpayment__cfpb_fha",
+        "finance_downpayment__va_fee"
+      ]
+    },
+    {
+      "prompt_id": "finance_emergencyfund",
+      "domain": "finance",
+      "question": "How much money should I keep in an emergency fund?",
+      "target_doc_id": "finance_emergencyfund__fdic_2024",
+      "target_format": "docs",
+      "doc_ids": [
+        "finance_emergencyfund__fdic_2024",
+        "finance_emergencyfund__cfpb_guide",
+        "finance_emergencyfund__sec_rainyday",
+        "finance_emergencyfund__fdic_2009",
+        "finance_emergencyfund__cfpb_prep",
+        "finance_emergencyfund__fed_shed26",
+        "finance_emergencyfund__fdic_editorial",
+        "finance_emergencyfund__sec_buildwealth",
+        "finance_emergencyfund__fdic_2025"
+      ]
+    },
+    {
+      "prompt_id": "nutrition_sodium",
+      "domain": "nutrition",
+      "question": "How much sodium should an adult have per day?",
+      "target_doc_id": "nutrition_sodium__odphp_tips",
+      "target_format": "docs",
+      "doc_ids": [
+        "nutrition_sodium__odphp_tips",
+        "nutrition_sodium__fda_diet",
+        "nutrition_sodium__fda_cutback",
+        "nutrition_sodium__fda_goals",
+        "nutrition_sodium__nhlbi_dash",
+        "nutrition_sodium__nhlbi_halt"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "finance_downpayment__cfpb_dp_blog",
+      "prompt_id": "finance_downpayment",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 64,
+      "source": {
+        "agency": "CFPB",
+        "title": "How to decide how much to spend on your down payment",
+        "url": "https://www.consumerfinance.gov/archive/blog/how-decide-how-much-spend-your-down-payment/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d67260399f1d27d855236ff0be9e1e38f0a9bd937669adc5e42d8a1c8073b01b",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "One of the toughest parts of buying a home for the first time is coming up with a down payment. You may have heard that in order to buy, you should have 20 percent of the total cost of the home saved up for the down payment. Actually, you can choose how much to put down based on what works best for your situation."
+      }
+    },
+    {
+      "doc_id": "finance_downpayment__cfpb_dp_kind",
+      "prompt_id": "finance_downpayment",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 56,
+      "source": {
+        "agency": "CFPB",
+        "title": "What kind of down payment do I need?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-kind-of-down-payment-do-i-need-how-does-the-amount-of-down-payment-i-make-affect-the-terms-of-my-mortgage-loan-en-120/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5ad99bc5bc2e4258200ccc6d021eb57db59cee54474be7a19062b8d5dde8ab01",
+        "retrieved_utc": "2026-09-15T05:19:35+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Generally, the larger the down payment you are able to make, the lower the interest rate you will receive and the more likely you are to be approved. If you cannot make a down payment of 20 percent, lenders usually will require you to purchase private mortgage insurance or obtain an FHA, VA, or USDA loan."
+      }
+    },
+    {
+      "doc_id": "finance_downpayment__cfpb_pmi",
+      "prompt_id": "finance_downpayment",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 48,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is private mortgage insurance?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ed3c6d7fa1e57d6e7ead34edb4c571803b2a54435dd22199a15b875281b6fffa",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Private mortgage insurance (PMI) is a type of mortgage insurance you might be required to buy if you take out a conventional loan with a down payment of less than 20 percent of the purchase price. PMI protects the lender-not you-if you stop making payments on your loan."
+      }
+    },
+    {
+      "doc_id": "finance_downpayment__cfpb_mi_how",
+      "prompt_id": "finance_downpayment",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 42,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is mortgage insurance and how does it work?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-mortgage-insurance-and-how-does-it-work-en-1953/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6bbbfb76355e4b25e159d81225c22f6850d67fe04898fe4d325e56747c883f0c",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Typically, borrowers making a down payment of less than 20 percent of the purchase price of the home need to pay for mortgage insurance. Mortgage insurance also is typically required on Federal Housing Administration (FHA) and U.S. Department of Agriculture (USDA) loans."
+      }
+    },
+    {
+      "doc_id": "finance_downpayment__va_purchase",
+      "prompt_id": "finance_downpayment",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 74,
+      "source": {
+        "agency": "Department of Veterans Affairs",
+        "title": "Purchase loan",
+        "url": "https://www.va.gov/housing-assistance/home-loans/loan-types/purchase-loan/",
+        "rights": "US federal work (Department of Veterans Affairs), 17 U.S.C. 105",
+        "rights_evidence": "va.gov benefits page, not VA News (which carries guest posts)",
+        "snapshot_sha256": "aae3d1da5b7919adb633cfb317181a16ec86d630d1b1b871f0fc75169c0b06f6",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "No need for private mortgage insurance (PMI) or mortgage insurance premiums (MIP). PMI is a type of insurance that protects the lender if you end up not being able to pay your mortgage. It's usually required on conventional loans if you make a down payment of less than 20% of the total mortgage amount. MIP is what the Federal Housing Administration (FHA) requires you to pay to self-insure an FHA loan against future loss."
+      }
+    },
+    {
+      "doc_id": "finance_downpayment__cfpb_fha",
+      "prompt_id": "finance_downpayment",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 41,
+      "source": {
+        "agency": "CFPB",
+        "title": "FHA loans",
+        "url": "https://www.consumerfinance.gov/owning-a-home/fha-loans/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b683c94987567d1a65235cfe2a4579f4b30163b573b183a37af93ac21212af7c",
+        "retrieved_utc": "2026-09-15T05:19:35+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "For borrowers with good credit and a medium (10-15 percent) down payment, FHA loans tend to be more expensive than conventional loans. For borrowers with lower credit scores or a smaller down payment, FHA loans can often be the cheapest option."
+      }
+    },
+    {
+      "doc_id": "finance_downpayment__va_fee",
+      "prompt_id": "finance_downpayment",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 62,
+      "source": {
+        "agency": "Department of Veterans Affairs",
+        "title": "VA funding fee and loan closing costs",
+        "url": "https://www.va.gov/housing-assistance/home-loans/funding-fee-and-closing-costs/",
+        "rights": "US federal work (Department of Veterans Affairs), 17 U.S.C. 105",
+        "rights_evidence": "va.gov benefits page, not VA News (which carries guest posts)",
+        "snapshot_sha256": "1d63bd44780661b88be2a43e4f21c4c8794de8c81924e65d6ffefd8f446e1ca6",
+        "retrieved_utc": "2026-09-15T05:19:37+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "For example: Let's say you're using a VA-backed loan for the first time, and you're buying a $200,000 home and paying a down payment of $10,000 (5% of the $200,000 loan). You'll pay a VA funding fee of $2,850, or 1.5% of the $190,000 loan amount. The funding fee applies only to the loan amount, not the purchase price of the home."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__fdic_2024",
+      "prompt_id": "finance_emergencyfund",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 44,
+      "source": {
+        "agency": "FDIC",
+        "title": "Starting Small Can Lead to Big Savings",
+        "url": "https://www.fdic.gov/consumer-resource-center/2024-01/starting-small-can-lead-big-savings",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d9828ecbd7ddcec08f78ae4cf5f4392e7bca97f020fa31a654e1e9a66632a9bc",
+        "retrieved_utc": "2026-09-15T05:19:39+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Also, consider setting a goal to build up an \"emergency\" fund that would cover at least six months of living expenses to help get through a difficult time, such as a job loss, major car repairs, or unexpected medical expenses not covered by insurance."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__cfpb_guide",
+      "prompt_id": "finance_emergencyfund",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 50,
+      "source": {
+        "agency": "CFPB",
+        "title": "An essential guide to building an emergency fund",
+        "url": "https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ee094c9149db1d0fce4094c2c385401e895e3c48a594f1aef8b9c5b0813b49c3",
+        "retrieved_utc": "2026-09-15T05:19:37+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The amount you need to have in an emergency savings fund depends on your situation. Think about the most common kind of unexpected expenses you've had in the past and how much they cost. This may help you set a goal for how much you want to have set aside."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__sec_rainyday",
+      "prompt_id": "finance_emergencyfund",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 44,
+      "source": {
+        "agency": "SEC Office of Investor Education and Advocacy",
+        "title": "Save for a Rainy Day",
+        "url": "https://www.investor.gov/introduction-investing/investing-basics/save-and-invest/save-rainy-day",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0bc49579ed5193e3408242fd26804eeb87c2b5f8458c9261e2f3a50130e605dc",
+        "retrieved_utc": "2026-09-15T05:21:40+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Most smart investors put enough money in savings to cover an emergency, like sudden unemployment. Some make sure they have up to six months of their income in savings so that they know it will absolutely be there for them when they need it."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__fdic_2009",
+      "prompt_id": "finance_emergencyfund",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 93,
+      "source": {
+        "agency": "FDIC",
+        "title": "Ways to Spend Less, Save More in Good Times and Bad",
+        "url": "https://www.fdic.gov/consumer-resource-center/2009-ways-spend-less-save-more-good-times-and-bad",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "320c1b46e62a64630f43c9f50f5554235b5f89eb93e9027976c94f71765fe90a",
+        "retrieved_utc": "2026-09-15T05:21:42+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Have an emergency savings account. This is an account you can tap if you lose your job or have major, unforeseen expenses. Emergency savings will help ensure that you don't have to borrow from your retirement nest egg or take out additional loans that would push you into debt. A general rule of thumb is to have enough money in this \"rainy day\" fund equal to at least two months of living expenses. If your employment outlook is especially uncertain, consider setting aside enough to cover six or more months of anticipated expenses."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__cfpb_prep",
+      "prompt_id": "finance_emergencyfund",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 59,
+      "source": {
+        "agency": "CFPB",
+        "title": "Preparedness means rebuilding toward a brighter future with emergency savings",
+        "url": "https://www.consumerfinance.gov/archive/blog/preparedness-means-rebuilding-toward-brighter-future-emergency-savings/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3ae9b04669492cb4b2462654bead55609a40843bf59095cec43034b03c6603c9",
+        "retrieved_utc": "2026-09-15T05:19:38+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "It might seem impossible to save enough to get you and your family through something like a furlough, job loss, or reduced hours. But any amount can make a difference and it's never too late to start. The more you can save, the better you can weather the worst, and the faster you can recover when it is over."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__fed_shed26",
+      "prompt_id": "finance_emergencyfund",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 61,
+      "source": {
+        "agency": "Federal Reserve Board",
+        "title": "Economic Well-Being of U.S. Households in 2025: Savings and Investments",
+        "url": "https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-savings-investments.htm",
+        "rights": "US federal work (Federal Reserve Board), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "262c4e3961b74d88773455d22d4102d9975f1d73e57678b1c2bbe0ae43196d50",
+        "retrieved_utc": "2026-09-15T05:19:39+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Having a buffer of savings for emergencies can help families cope with income fluctuations and with unexpected expenses. The share of adults who would pay for an unexpected $400 expense with cash or the equivalent was unchanged from 2024, and the share who said they had rainy day funds to cover three months of expenses was unchanged from 2024 as well."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__fdic_editorial",
+      "prompt_id": "finance_emergencyfund",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 37,
+      "source": {
+        "agency": "FDIC",
+        "title": "Your Savings: Good for You, Your Family, and Your Peace of Mind",
+        "url": "https://www.fdic.gov/news/editorials/your_savings.html",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": "Byline: FDIC Chairman Sheila Bair, writing in official capacity",
+        "snapshot_sha256": "cfabca9a39e6d2afe49542882bf5b58cb9546103863069f39dea4d6a89a80ad7",
+        "retrieved_utc": "2026-09-15T05:21:41+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Putting even small amounts of money into a rainy-day fund to cover emergency expenses or save for future purchases adds up quickly. And the best part is that you can earn a little interest on the money."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__sec_buildwealth",
+      "prompt_id": "finance_emergencyfund",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "none",
+      "words": 44,
+      "source": {
+        "agency": "SEC Office of Investor Education and Advocacy",
+        "title": "Build Wealth Over Time Through Saving and Investing",
+        "url": "https://www.investor.gov/build-wealth-over-time-through-saving-and-investing",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a64a7dc95ebcc36a6564c27996bc01ee2289071d938c5f81086f53eb1cdd9c61",
+        "retrieved_utc": "2026-09-15T05:21:42+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Start an emergency fund in a savings account at your bank or credit union and automatically deposit a certain amount of money directly into that account each pay period. That money can help you avoid going into debt if you have an unexpected expense."
+      }
+    },
+    {
+      "doc_id": "finance_emergencyfund__fdic_2025",
+      "prompt_id": "finance_emergencyfund",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "none",
+      "words": 48,
+      "source": {
+        "agency": "FDIC",
+        "title": "Saving for the Unexpected and Your Future",
+        "url": "https://www.fdic.gov/consumer-resource-center/2025-01/saving-unexpected-and-your-future",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0982a073f405468ba4cd06641c553ace40427f7523cc59379d0ee1e799c64854",
+        "retrieved_utc": "2026-09-15T05:19:38+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Saving for emergencies, retirement, or other expenses can seem difficult, but there are some strategies that can make it easier. Saving can start with identifying your savings goals, finding unnecessary expenses to cut, and deciding where to put your savings. Start by asking yourself some of these questions."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium__odphp_tips",
+      "prompt_id": "nutrition_sodium",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 72,
+      "source": {
+        "agency": "HHS ODPHP (MyHealthfinder)",
+        "title": "Eat Less Sodium: Quick Tips",
+        "url": "https://odphp.health.gov/myhealthfinder/health-conditions/heart-health/eat-less-sodium-quick-tips",
+        "rights": "US federal work (HHS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "69b3fea5200ab567d17f6c17b6715a3fccafccc4048faa747ad5a4c6710d9f57",
+        "retrieved_utc": "2026-09-14T03:35:14+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Ask your doctor how much sodium is okay for you. The general guidance for sodium limits is: Adults and teens age 14 years and older: no more than 2,300 mg (milligrams) a day Children ages 9 to 13 years: no more than 1,800 mg a day Children ages 4 to 8 years: no more than 1,500 mg a day Children ages 1 to 3 years: no more than 1,200 mg a day"
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium__fda_diet",
+      "prompt_id": "nutrition_sodium",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 33,
+      "source": {
+        "agency": "FDA",
+        "title": "Sodium in Your Diet",
+        "url": "https://www.fda.gov/food/nutrition-education-resources-materials/sodium-your-diet",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c6a7157adadf20f088391ca2d2fa72cfc1c019e633436a975b9d226fb332b8f8",
+        "retrieved_utc": "2026-09-14T03:35:12+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Know the Daily Value. The Daily Values are reference amounts of nutrients to consume or not to exceed each day. The Daily Value for sodium is less than 2,300 milligrams (mg) per day."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium__fda_cutback",
+      "prompt_id": "nutrition_sodium",
+      "format": "blog",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 62,
+      "source": {
+        "agency": "FDA",
+        "title": "Eating Too Much Salt? Ways to Cut Back...Gradually",
+        "url": "https://www.fda.gov/consumers/consumer-updates/eating-too-much-salt-ways-cut-backgradually",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "64a2662944b7df3ae82f08c0020e5ab570714ad3c013a85d27c0503670b4fedd",
+        "retrieved_utc": "2026-09-15T05:19:41+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "You and your family can also take steps to ease into reducing the amount of salt - and therefore, sodium - you eat. The recommended limit for sodium is 2,300 milligrams (mg) per day for people 14 years and older. But people in the U.S. consume about 3,400 mg per day on average. That's more than 50% more than the recommended limit."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium__fda_goals",
+      "prompt_id": "nutrition_sodium",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 62,
+      "source": {
+        "agency": "FDA",
+        "title": "Guidance for Industry: Voluntary Sodium Reduction Goals",
+        "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-voluntary-sodium-reduction-goals",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2d8d20f1d2620cb26b1d65e8729e7bd1d470b3be654fcc83a2cb0ae62067823b",
+        "retrieved_utc": "2026-09-15T05:19:42+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Average sodium intake in the U.S. is approximately 3,400 milligrams/day (mg/day). The Dietary Guidelines for Americans, 2020-2025 advises individuals 14 years and older to limit their consumption to 2,300 mg/day; this aligns with recommendations from the National Academies of Sciences, Engineering and Medicine, which set the Chronic Disease Risk Reduction Intake for sodium at 2,300 mg/day for those 14 years and older."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium__nhlbi_dash",
+      "prompt_id": "nutrition_sodium",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "direct",
+      "words": 14,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "DASH Eating Plan",
+        "url": "https://www.nhlbi.nih.gov/education/dash-eating-plan",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9f8e9833ecb15737dc8baa7a2eee1aedd945fabc88bf2bd46a3070a392c3d855",
+        "retrieved_utc": "2026-09-14T03:25:51+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "*1,500 milligrams (mg) sodium lowers blood pressure even further than 2,300 mg sodium daily."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium__nhlbi_halt",
+      "prompt_id": "nutrition_sodium",
+      "format": "news",
+      "domain": "nutrition",
+      "is_target": false,
+      "answers": "partial",
+      "words": 50,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Halt the Salt: 5 Ways to Cut Down on Sodium",
+        "url": "https://www.nhlbi.nih.gov/news/2023/halt-salt-5-ways-cut-down-sodium-and-improve-your-heart-health",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d36eb97e846fe0a78210f4909129821779f30f34ec3c326a075b56e251933ec5",
+        "retrieved_utc": "2026-09-15T05:19:42+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "It's a fact: Americans love salty foods - from hot dogs and pizza to popcorn and chips. Studies show people in the U.S. are among the world's largest consumers of salt: About 90% of children and adults eat too much of it, and their appetite for it is only growing."
+      }
+    }
+  ],
+  "corpus_sha256": "ee7c6d1f5af47299cc39b2216a3b305c90f21c0c8d403621d6c04514f3597167"
+}

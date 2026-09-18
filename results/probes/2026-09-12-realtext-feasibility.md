@@ -1,5 +1,57 @@
 # Probe: real public-domain text as the route to a rankable corpus (item 11)
 
+> **Correction, 2026-09-13 — the probe documents are not verbatim federal text.**
+>
+> This note and its builders described every excerpt as verbatim US federal text. It is
+> not. Building item 11's sourcing tools, each probe document was checked against a saved
+> snapshot of its source page (`corpus/sources.py`; six CDC pages that block non-browser
+> clients were checked inside a real browser against the rendered page instead):
+>
+> | | documents |
+> |---|---|
+> | verbatim | **2** — `cfpb_score`, `ftc_free` |
+> | not verbatim | **23** |
+> | not mechanically checked | 1 — `odphp_cutdown`, a PDF, and edited on inspection |
+>
+> The failures were introduced while assembling the corpus, not by the source pages:
+>
+> - **Sentences written to reach a target length** and attributed to the agency — in most
+>   documents. `nhanes_1516` closes with editorializing that appears nowhere in its source.
+> - **Edits to real sentences** — contractions expanded, parentheticals such as "(mg)" and
+>   "(DGA)" dropped, "40° F" spelled out, list items joined with commas.
+> - **One edit that changes meaning.** USDA ERS writes "*On average,* all adults aged 20 and
+>   over consume more added sugars than recommended." The excerpt dropped "On average,",
+>   turning a claim about a mean into a claim about every adult.
+> - **Sentences built from tables or summaries** — `fda_howto` turns a Daily Value table
+>   row into prose; `nhlbi_dash` was composed almost entirely.
+>
+> **What this does and does not change.** The facts in the documents are real and on the
+> source pages; the wording is not the agencies'. The mechanism findings below rest on
+> whether a document answers the question and on how many do, which the edits did not
+> change, so they are likely to hold — but they were measured on government-derived
+> text with authored additions, not on the federal text this note claimed. Item 11's
+> screening runs on text that passes the verbatim check, and serves as the replication.
+>
+> **The usable-target counts below were also overstated.** The screen treated a document
+> as usable if no engine sat at or beyond 0.04/0.96 — but at 24 runs, 1 citation (0.042)
+> and 23 (0.958) both pass that, and neither leaves room for a tactic to move. Under the
+> rule `screen.py` now enforces — at least 3 citations and 3 non-citations from each
+> boundary on every engine — the counts become:
+>
+> | | reported | under the 3/24 rule |
+> |---|---|---|
+> | probe 1, N=10 | 3 of 10 | **2 of 10** |
+> | probe 2, N=10 | 0 of 10 | 0 of 10 |
+> | probe 3, arm B | 2 of 10 | **1 of 10** |
+>
+> `nhanes_1516` is the target in both surviving cases, so the conclusion that a
+> disagree-in-form question can yield a target holds; the counts in sections 2 and 3b
+> should be read as these.
+>
+> The document text is left exactly as run: the committed results were produced from it,
+> and all six corpus hashes are unchanged by this correction. **Do not reuse these
+> excerpts as source text.**
+
 **2026-09-12. Not a round.** No hypothesis was pre-registered and nothing here is a
 finding about GEO. These are design probes: they ask whether a corpus built from real
 federal text can produce the citation regime ROADMAP item 11 needs, before anyone spends
@@ -169,7 +221,8 @@ position mattering more in bigger sets. Probe 2 went the other way — 0.125 at 
   documents answer, citation stops being a coin flip. This is the premise item 11 rests
   on and it holds in both domains.
 - **Sourcing and licensing.** US federal works are public domain (17 U.S.C. §105), so
-  excerpts ship under this repo's CC-BY-4.0 without conflict. Wikipedia and Stack
+  *verbatim* excerpts ship under this repo's CC-BY-4.0 without conflict. (Authored
+  additions are not federal works — one more reason the correction above matters.) Wikipedia and Stack
   Overflow are CC-BY-SA, whose share-alike would force a relicense of the dataset.
 - **The inversion.** Prior builders pick a question and write documents to answer it.
   With real text that is impossible — you cannot find real pages answering a question you

@@ -25,7 +25,15 @@ composition does not drive per-document CPR.
 The five shared answerers were chosen to span the range observed in probe 1 (1.00, 0.69,
 0.56, 0.52, 0.29) rather than clustered, so a dilution effect is visible wherever it acts.
 
-Sources are US federal works, public domain under 17 U.S.C. Sec 105, quoted verbatim.
+Sources are US federal pages, with source URLs recorded per document.
+
+**Correction 2026-09-13:** these excerpts are NOT verbatim. An audit against saved
+snapshots of the source pages found 2 of 25 checkable documents verbatim; the rest were
+extended with authored sentences or edited (contractions expanded, parentheticals
+dropped, and in one case 'On average,' removed, turning an average into a universal
+claim). The text is left exactly as run, because the committed results were produced
+from it. Do not reuse it as source text; see the correction in
+results/probes/2026-09-12-realtext-feasibility.md and use corpus/sources.py instead.
 Answering documents are reused unchanged from probe 1 where possible, imported rather
 than copied so there is one source of truth for the text.
 

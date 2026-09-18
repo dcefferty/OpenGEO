@@ -97,23 +97,61 @@ so no CC-BY-SA conflict) can reach the regime. Full numbers:
   0 of 10 usable as a target. Probe 1's disagree on form (% of calories vs grams per meal
   vs teaspoons per 1,000 calories), which creates the graded middle.
 - **Screening is mandatory, and more answering documents does not widen the window.**
-  Usable targets went 0 of 10 at five answering documents, 3 of 10 at eight, 2 of 10 at
-  nine. Inclusive engines (grok 7.6 of 10, deepseek 7.1, gemini 6.9) pin documents near
+  Usable targets went 0 of 10 at five answering documents, 2 of 10 at eight, 1 of 10 at
+  nine, under a rule requiring three citations and three non-citations from each
+  boundary on every engine (first reported as 0/3/2 under a looser cutoff). Inclusive engines (grok 7.6 of 10, deepseek 7.1, gemini 6.9) pin documents near
   1.00; selective ones (gpt 4.1, claude 3.6) pin them near 0.00, and dilution slides a
   document from one pin to the other. A round needs only one target per question, so two
   or three usable of ten is enough — but questions that screen empty must be discarded.
   Budget ~1.5 screened questions per usable one, ~$0.15 each.
+- **Every excerpt must pass a mechanical verbatim check.** The probes' excerpts were
+  described as verbatim federal text; an audit found 2 of 25 were — the rest had
+  authored sentences or edits, one of which changed a claim's meaning. The mechanism
+  findings are likely unaffected, but a published corpus cannot attribute words to an
+  agency that did not write them. `corpus/sources.py` snapshots each source page and
+  rejects any excerpt that is not a contiguous run of it; the corpus build fails on a
+  miss rather than warning.
 - **Sourcing enough answering documents is the real cost.** A heavily-covered topic
   yielded 9; another yielded 5. Several agency sites block automated fetching.
 
+- **A target may be pinned on at most one engine (decided 2026-09-14).** Screened on
+  verbatim federal text, requiring every engine discarded both questions. The engines
+  differ too much in how much they cite: on the housing question grok cited 80% of
+  candidates and claude 41%, and a document must sit mid-range on all five at once. In
+  each question, removing one engine's requirement produced a target. That is a property
+  of the engines, not of real text, so a synthetic corpus would face it too. The repo
+  owner chose to keep all five engines and let a question leave one out, reporting that
+  engine's result there as uninformative, over dropping grok from the panel. A target
+  movable on every engine is always preferred; ties go to the smallest market weight
+  excluded. **Watch:** both questions kept so far exclude grok, and the tie-break leans
+  that way. Per-engine question counts are printed by `screen.py`, and the pre-registration
+  must set a floor on them.
 *An earlier round of this note said "use ten candidates"; probe 2 falsified that and probe
 3 replaced it with the answering-count mechanism. Recorded because acting on the first
 probe alone would have sent the corpus work down the wrong path.*
 
+**Sized 2026-09-15 against the screened baselines, not an inherited number.** The five
+kept targets sit at 0.354-0.642 (mean 0.498) with no cell at a ceiling, which is what
+screening is for -- the v0.2 pilot's baseline was 0.87 with 67% of cells pinned. Power to
+detect a tactic against baseline, at 24 runs per arm (`size_round1.py` on those baselines):
+
+| smallest effect | 25 questions | 50 questions | 50 questions, 40 runs |
+|---|---|---|---|
+| OR 1.30 (~+6.5 pts) | 0.95 | 1.00 | 1.00 |
+| OR 1.20 (~+4.5 pts) | 0.71 | 0.95 | 0.99 |
+| OR 1.15 (~+3.5 pts) | 0.51 | 0.81 | 0.94 |
+
+So the question count follows from the smallest tactic worth ranking. H6's keyword-stuffing
+effect was +0.038, about OR 1.15, where 25 questions is a coin flip. **Plan on ~50 questions
+if tactics are expected to differ by a few points; 25 only suffices if they differ by 6 or
+more.** Separating tactics from each other is harder still than separating one from
+baseline, which this table does not cover.
+
 *Acceptance:* a question whose authoritative sources differ in framing, an answering-document
-count tuned so the target sits mid-range, and a target that no engine pins at 0.00 or 1.00
-— confirmed by a pre-committed screening run, followed by a pre-registered round producing
-a ranked table with intervals.
+count tuned so the target sits mid-range, and a target movable on all but at most one
+engine — confirmed by a pre-committed screening run — followed by a pre-registered round
+producing a ranked table with intervals, each engine's ranking stating how many questions
+it rests on.
 
 ---
 

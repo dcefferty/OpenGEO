@@ -21,8 +21,16 @@ The primary reading in both probes is **not** the mean over all documents, which
 partly by arithmetic when weak documents join the pool. It is whether the *same six*
 documents lose citations when four more candidates appear alongside them.
 
-Sources are US federal works, public domain under 17 U.S.C. Sec 105, quoted verbatim
-with source URLs recorded per document. Retrieved 2026-09-12.
+Sources are US federal pages, retrieved 2026-09-12, with source URLs recorded per
+document.
+
+**Correction 2026-09-13:** these excerpts are NOT verbatim. An audit against saved
+snapshots of the source pages found 2 of 25 checkable documents verbatim; the rest were
+extended with authored sentences or edited (contractions expanded, parentheticals
+dropped, and in one case 'On average,' removed, turning an average into a universal
+claim). The text is left exactly as run, because the committed results were produced
+from it. Do not reuse it as source text; see the correction in
+results/probes/2026-09-12-realtext-feasibility.md and use corpus/sources.py instead.
 
     python3 corpus/build_corpus_realtext_probe2.py
 """
