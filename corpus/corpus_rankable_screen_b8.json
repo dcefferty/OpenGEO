@@ -1,0 +1,383 @@
+{
+  "corpus_version": "rankable-screen-v0-b8",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 2,
+  "n_docs": 15,
+  "formats": [
+    "blog",
+    "docs",
+    "reference"
+  ],
+  "domains": [
+    "health",
+    "home_diy"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "health_bloodpressure",
+      "domain": "health",
+      "question": "What blood pressure reading counts as high?",
+      "target_doc_id": "health_bloodpressure__fda_bp",
+      "target_format": "docs",
+      "doc_ids": [
+        "health_bloodpressure__fda_bp",
+        "health_bloodpressure__nhlbi_hbp",
+        "health_bloodpressure__nhlbi_diag",
+        "health_bloodpressure__nia_bp",
+        "health_bloodpressure__niddk_bp",
+        "health_bloodpressure__nhlbi_sym",
+        "health_bloodpressure__nhlbi_causes",
+        "health_bloodpressure__nhlbi_stress"
+      ]
+    },
+    {
+      "prompt_id": "home_radon",
+      "domain": "home_diy",
+      "question": "At what radon level should I fix my home?",
+      "target_doc_id": "home_radon__epa_action",
+      "target_format": "reference",
+      "doc_ids": [
+        "home_radon__epa_action",
+        "home_radon__epa_wl",
+        "home_radon__epa_map",
+        "home_radon__epa_radtown",
+        "home_radon__epa_ks",
+        "home_radon__epa_risk",
+        "home_radon__epa_snap"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "health_bloodpressure__fda_bp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "direct",
+      "words": 33,
+      "source": {
+        "agency": "FDA",
+        "title": "High Blood Pressure - Understanding the Silent Killer",
+        "url": "https://www.fda.gov/drugs/information-consumers-and-patients-drugs/high-blood-pressure-understanding-silent-killer",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5669037d2c33f61f52d757e47eee4eca6656ebc214164d01b82fb0e8ab765b2d",
+        "retrieved_utc": "2026-09-19T19:21:58+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Normal pressure is 120/80 or lower. Your blood pressure is considered high (stage 1) if it reads 130 to 139 mmHg/80 to 89 mmHg. Stage 2 high blood pressure is 140/90 or higher."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_hbp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "direct",
+      "words": 32,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - What Is High Blood Pressure?",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "94cf706032da8e423b4fdcd09087641934aaef9a13c4fbd84b07fd2a903329f4",
+        "retrieved_utc": "2026-09-19T19:21:57+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Your blood pressure changes throughout the day based on your activities. A healthy systolic blood pressure is less than 120 mm Hg. A healthy diastolic pressure is less than 80 mm Hg."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_diag",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "direct",
+      "words": 16,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - Diagnosis",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/diagnosis",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2a00d7a6fe701c97e52468af3ad6b407e056e9bd445671e099a29427c85b5a7c",
+        "retrieved_utc": "2026-09-19T19:21:58+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Talk to your provider if your blood pressure readings are consistently higher than 120/80 mm Hg."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nia_bp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "direct",
+      "words": 24,
+      "source": {
+        "agency": "NIH National Institute on Aging",
+        "title": "High Blood Pressure and Older Adults",
+        "url": "https://www.nia.nih.gov/health/high-blood-pressure/high-blood-pressure-and-older-adults",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a4a0c070cbe7057a9074e6416c2fcb946b33c9751f016a6175c956378d74e6f2",
+        "retrieved_utc": "2026-09-19T19:21:59+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Normal blood pressure for most adults is defined as a systolic pressure of less than 120 and a diastolic pressure of less than 80."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__niddk_bp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "direct",
+      "words": 29,
+      "source": {
+        "agency": "NIH NIDDK",
+        "title": "High Blood Pressure and Kidney Disease",
+        "url": "https://www.niddk.nih.gov/health-information/kidney-disease/high-blood-pressure",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7260c2378e869406e8911f0bb7798a292639266a808f9d8e1633437defa2f2b9",
+        "retrieved_utc": "2026-09-19T19:22:01+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Your health care professional will diagnose you with high blood pressure if your blood pressure readings are consistently higher than 130/80 when tested repeatedly in a health care office."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_sym",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "partial",
+      "words": 20,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - Symptoms",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/symptoms",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9056196b87df6f9eb74ee29b12419f6e5836cd9a01e63c0efa53ab94d0bf7030",
+        "retrieved_utc": "2026-09-19T19:22:42+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "If your blood pressure is 180/120 but you don't have symptoms, wait 5 minutes and check your blood pressure again."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_causes",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "none",
+      "words": 32,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - Causes and Risk Factors",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/causes",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6f66672be843e11aa0682287b3a68d6df5200f95389cddcd88c7d4194ac641be",
+        "retrieved_utc": "2026-09-19T19:22:02+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Many factors raise your risk of high blood pressure. You can change some risk factors, such as unhealthy lifestyle habits. A healthy lifestyle can lower your risk for developing high blood pressure."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_stress",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "answers": "none",
+      "words": 25,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Heart-Healthy Living: Manage Stress",
+        "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living/manage-stress",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cb14dc7d4ae52a532855106279866911de637dab938a147f89e0b6fb8bfd946f",
+        "retrieved_utc": "2026-09-19T19:22:03+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Research suggests that an emotionally upsetting event, particularly one involving anger, can serve as a trigger for a heart attack or angina in some people."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_action",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 59,
+      "source": {
+        "agency": "EPA",
+        "title": "What is EPA's Action Level for Radon and What Does it Mean?",
+        "url": "https://www.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a87214c2de2b9f6df95841c4dd1a0954428ba8757cdb48e5a7309fb74ca2a15a",
+        "retrieved_utc": "2026-09-19T19:22:04+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more. Because there is no known safe level of exposure to radon, the EPA also recommends that Americans consider fixing their home for radon levels between 2 pCi/L and 4 pCi/L (75 - 150 Bq/m3) ."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_wl",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 71,
+      "source": {
+        "agency": "EPA",
+        "title": "Explain Working Levels (WL) and Picocuries Per Liter of Air",
+        "url": "https://www.epa.gov/radon/explain-working-levels-wl-and-picocuries-liter-air-pcil",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1e2bf8df8d589f63dc610136720b6e01186fa5245ab74002f73a7d80b4e7c287",
+        "retrieved_utc": "2026-09-19T19:22:04+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Radon test results may be reported in three different measures - picocuries per liter (pCi/L), Working Levels (WL) and becquerels per meter cubed (Bq/m3). If your test result is in pCi/L, the EPA recommends you fix your home if the radon level is 4 pCi/L (150 Bq/m3)or higher. If the test result is in WL, the EPA recommends you fix your home if the working level is 0.016 WL or higher."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_map",
+      "prompt_id": "home_radon",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 67,
+      "source": {
+        "agency": "EPA",
+        "title": "EPA Map of Radon Zones and Supplemental Information",
+        "url": "https://www.epa.gov/radon/epa-map-radon-zones-and-supplemental-information",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "efd543c8d96b662864cd8e2c2f3832cea31a6c007f6920ffbdf43a49f36b9eff",
+        "retrieved_utc": "2026-09-19T19:22:05+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "This map should not be used to determine if individual homes need to be tested. No matter where you live, test your home for radon-it's easy and inexpensive. Fix your home if your radon level is 4 picocuries per liter (pCi/L) (150 becquerels per cubic meter (Bq/m3))or higher. Consider fixing if your level is between 2 and 4 pCi/L (75 - 150 becquerels per cubic meter (Bq/m3))."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_radtown",
+      "prompt_id": "home_radon",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 60,
+      "source": {
+        "agency": "EPA",
+        "title": "Radon in Homes, Schools and Buildings",
+        "url": "https://www.epa.gov/radtown/radon-homes-schools-and-buildings",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ae709c44ddc2eb5cb4829808b02f92bccf487a712470aae14b76bb3fc0a8c2ba",
+        "retrieved_utc": "2026-09-19T19:22:04+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Take action to lower your exposure to radon when at home testing shows elevated radon levels at or above 4 pCi/L. Find a certified contractor, get cost estimates and fix spaces with an elevated radon level. If elevated radon levels are found in your school or business talk to your school administrator or building manager about getting the problem fixed."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_ks",
+      "prompt_id": "home_radon",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 64,
+      "source": {
+        "agency": "EPA Region 7",
+        "title": "Take Time to Protect Your Home from This Invisible Cancer Risk",
+        "url": "https://www.epa.gov/ks/january-take-time-protect-your-home-invisible-cancer-risk",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "38c803499ee5d4721119a9a60095e3420c43576157733f02a8b103687e39f1c4",
+        "retrieved_utc": "2026-09-19T19:22:06+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Any home, anywhere, can have a radon problem. But it's especially important to test your home here in the Heartland region where many of us live in areas designated as EPA Radon Zone One or Two, indicating high or moderate potential for elevated indoor radon levels. The EPA recommends homes be fixed if the radon level is four picocuries per liter (pCi/L) or more."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_risk",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 37,
+      "source": {
+        "agency": "EPA",
+        "title": "Health Risk of Radon",
+        "url": "https://www.epa.gov/radon/health-risk-radon",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4e6a7a2050f3dad508740a336d98231565a723d09a1ab696cc7ec941c8f69040",
+        "retrieved_utc": "2026-09-19T19:22:07+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Dr. Carmona also stressed the need to remedy the problem as soon as possible when the radon level is 4 pCi/L (150 Bq/m3)or more, noting that more than 20,000 Americans die of radon-related lung cancer each year."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_snap",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 51,
+      "source": {
+        "agency": "EPA (January 2021 snapshot)",
+        "title": "What is EPA's Action Level for Radon? (archived version)",
+        "url": "https://19january2021snapshot.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean_.html",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": "Distinct EPA-hosted snapshot URL; excerpt taken from the average-concentration passage, not the action-level passage used from the live page, so the two are not near-duplicates",
+        "snapshot_sha256": "76b73ca6b1a9d70c9ff2e3d95d6c142c5032ad7f6b39a4511fc425465655cce0",
+        "retrieved_utc": "2026-09-19T19:22:07+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The average indoor radon concentration for America's homes is about 1.3 pCi/L. It is upon this national average indoor level that EPA based its estimate of 21,000 radon-related lung cancers a year. The average concentration of radon in outdoor air is .4 pCi/L or 1/10th of EPA's 4 pCi/L action level."
+      }
+    }
+  ],
+  "corpus_sha256": "f61028df434a5682247a6bd050bdcd9ee1a6877a67958d43098a194a6adeeff5"
+}
