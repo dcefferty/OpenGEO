@@ -1,0 +1,578 @@
+{
+  "corpus_version": "rankable-screen-v0-b6",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 3,
+  "n_docs": 23,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "cybersecurity_consumer",
+    "home_diy",
+    "legal"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "security_passwordlength",
+      "domain": "cybersecurity_consumer",
+      "question": "How long should my password be?",
+      "target_doc_id": "security_passwordlength__nist_63b_pw",
+      "target_format": "reference",
+      "doc_ids": [
+        "security_passwordlength__nist_63b_pw",
+        "security_passwordlength__cisa_choose",
+        "security_passwordlength__ftc_pw",
+        "security_passwordlength__cisa_smb",
+        "security_passwordlength__nist_howto",
+        "security_passwordlength__nist_blog",
+        "security_passwordlength__nist_faq",
+        "security_passwordlength__cisa_train"
+      ]
+    },
+    {
+      "prompt_id": "home_smokealarm",
+      "domain": "home_diy",
+      "question": "How often should I test and replace my smoke alarm?",
+      "target_doc_id": "home_smokealarm__usfa_alarms",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_smokealarm__usfa_alarms",
+        "home_smokealarm__cpsc_2023b",
+        "home_smokealarm__cpsc_2015",
+        "home_smokealarm__ready_fires",
+        "home_smokealarm__cpsc_2023a",
+        "home_smokealarm__cpsc_2004",
+        "home_smokealarm__cpsc_blog",
+        "home_smokealarm__usfa_prepare"
+      ]
+    },
+    {
+      "prompt_id": "legal_coolingoff",
+      "domain": "legal",
+      "question": "How long do I have to cancel a purchase made at my home?",
+      "target_doc_id": "legal_coolingoff__ftc_remorse",
+      "target_format": "blog",
+      "doc_ids": [
+        "legal_coolingoff__ftc_remorse",
+        "legal_coolingoff__ftc_rule",
+        "legal_coolingoff__ftc_2012",
+        "legal_coolingoff__ftc_1995",
+        "legal_coolingoff__ftc_2009jul",
+        "legal_coolingoff__ftc_1996",
+        "legal_coolingoff__ftc_2009apr"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "security_passwordlength__nist_63b_pw",
+      "prompt_id": "security_passwordlength",
+      "format": "reference",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "direct",
+      "words": 24,
+      "source": {
+        "agency": "NIST",
+        "title": "SP 800-63B: Strength of Passwords",
+        "url": "https://pages.nist.gov/800-63-4/sp800-63b/passwords/",
+        "rights": "US federal work (NIST), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "98126073470e17557959af18dee5a46e1b77ce171f968ba82902ef88ca278621",
+        "retrieved_utc": "2026-09-19T17:06:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Passwords that are too short yield to brute-force attacks and dictionary attacks. The minimum password length required depends on the threat model being addressed."
+      }
+    },
+    {
+      "doc_id": "security_passwordlength__cisa_choose",
+      "prompt_id": "security_passwordlength",
+      "format": "news",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "direct",
+      "words": 34,
+      "source": {
+        "agency": "CISA",
+        "title": "Choosing and Protecting Passwords",
+        "url": "https://www.cisa.gov/news-events/news/choosing-and-protecting-passwords",
+        "rights": "US federal work (CISA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "63fe8c3094667ad5a70958670c32680d13d30579edcf7e4cdecf71672e3b7243",
+        "retrieved_utc": "2026-09-19T17:06:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The National Institute of Standards and Technology (NIST) has developed specific guidelines for strong passwords. According to NIST guidance, you should consider using the longest password or passphrase permissible (8-64 characters) when you can."
+      }
+    },
+    {
+      "doc_id": "security_passwordlength__ftc_pw",
+      "prompt_id": "security_passwordlength",
+      "format": "blog",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "direct",
+      "words": 42,
+      "source": {
+        "agency": "FTC",
+        "title": "Creating Strong Passwords and Other Ways to Protect Your Accounts",
+        "url": "https://consumer.ftc.gov/articles/creating-strong-passwords-and-other-ways-protect-your-accounts",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d3935a688279d76ce02681410dd62a1458954907d85ecb83d664e0c10581104d",
+        "retrieved_utc": "2026-09-19T17:06:51+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "When you set up an online account, you're usually asked to create a password. To protect your account from cyberattacks, create a strong password that's hard to guess. How? Start by making your password long - aim for at least 12 characters."
+      }
+    },
+    {
+      "doc_id": "security_passwordlength__cisa_smb",
+      "prompt_id": "security_passwordlength",
+      "format": "docs",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "direct",
+      "words": 16,
+      "source": {
+        "agency": "CISA",
+        "title": "Require Strong Passwords",
+        "url": "https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-strong-passwords",
+        "rights": "US federal work (CISA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a2c90600763d3f890220be485fffe88c39dbbeb6f1fc331bc03e52f244e18758",
+        "retrieved_utc": "2026-09-19T17:06:47+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Random: A mix of upper/lowercase letters, numbers and symbols or a passphrase of 5-7 unrelated words"
+      }
+    },
+    {
+      "doc_id": "security_passwordlength__nist_howto",
+      "prompt_id": "security_passwordlength",
+      "format": "blog",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "direct",
+      "words": 41,
+      "source": {
+        "agency": "NIST",
+        "title": "How Do I Create a Good Password?",
+        "url": "https://www.nist.gov/cybersecurity-and-privacy/how-do-i-create-good-password",
+        "rights": "US federal work (NIST), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ef714a3ee24f45910e06809f70b0b0eb7f8ae3d978ac2a7bdba7fc7ddb1126f6",
+        "retrieved_utc": "2026-09-19T17:06:46+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The most important part of a good password is its length. Every additional character dramatically increases the number of guesses an attacker would need to try. For example, a one-character password made from lowercase letters would take at most 26 guesses."
+      }
+    },
+    {
+      "doc_id": "security_passwordlength__nist_blog",
+      "prompt_id": "security_passwordlength",
+      "format": "blog",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "partial",
+      "words": 39,
+      "source": {
+        "agency": "NIST",
+        "title": "Easy Ways to Build a Better Password",
+        "url": "https://www.nist.gov/blogs/taking-measure/easy-ways-build-better-p5w0rd",
+        "rights": "US federal work (NIST), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1ac40404862a1109f7c21b07bef7b88af40141960662921d0355426666996009",
+        "retrieved_utc": "2026-09-19T17:06:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "So, we've established that, at least for password purposes, memorizing an entire word is no harder than memorizing a single letter. But we don't want to just replace 12-character passwords with 12-word passphrases-that would be a nightmare to type."
+      }
+    },
+    {
+      "doc_id": "security_passwordlength__nist_faq",
+      "prompt_id": "security_passwordlength",
+      "format": "reference",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "none",
+      "words": 31,
+      "source": {
+        "agency": "NIST",
+        "title": "SP 800-63 Digital Identity Guidelines FAQ",
+        "url": "https://pages.nist.gov/800-63-FAQ/",
+        "rights": "US federal work (NIST), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8dc6a4bd497a5312ec74b2a7204955041234991d59e31d3ce3eadd6ceb2c1c83",
+        "retrieved_utc": "2026-09-19T17:06:50+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The following list of FAQs for Special Publication (SP) 800-63, Digital Identity Guidelines addresses recurring inquiries to provide additional clarification to stakeholders. As new questions arise, we will update these FAQs."
+      }
+    },
+    {
+      "doc_id": "security_passwordlength__cisa_train",
+      "prompt_id": "security_passwordlength",
+      "format": "docs",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "answers": "none",
+      "words": 13,
+      "source": {
+        "agency": "CISA",
+        "title": "Formulate Strong Passwords and PIN Codes",
+        "url": "https://www.cisa.gov/resources-tools/training/formulate-strong-passwords-and-pin-codes",
+        "rights": "US federal work (CISA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e798bfd9a1e67f9f38dec934cf54b07ba60ea071969bd84f49c5692eb7a3f110",
+        "retrieved_utc": "2026-09-19T17:06:50+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Random. Use a random code as opposed to a simple pattern like 123456."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__usfa_alarms",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 19,
+      "source": {
+        "agency": "FEMA US Fire Administration",
+        "title": "Smoke Alarms",
+        "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "130e297adfdc18b014a1012c11ce683faf6371d14c2d74d471a5e754d7b62faf",
+        "retrieved_utc": "2026-09-19T17:06:51+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2023b",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 18,
+      "source": {
+        "agency": "CPSC",
+        "title": "Save Daylight, Save Lives: Replace Batteries in Alarms",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Save-Daylight-Save-Lives-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c1a087422f122f1f4a71b3299fd9d16bae5fc8dd33cb30b6d2f2118e9f960024",
+        "retrieved_utc": "2026-09-19T17:07:29+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2015",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 38,
+      "source": {
+        "agency": "CPSC",
+        "title": "When Turning Clocks Back, Replace Batteries in Alarms",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2015/When-Turning-Clocks-Back-After-Daylight-Saving-Time-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4ea0566cc1e76f956bdc877f0a72e096b84ce151e540c04e14584bebce033eea",
+        "retrieved_utc": "2026-09-19T17:08:10+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__ready_fires",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 12,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Home Fires",
+        "url": "https://www.ready.gov/home-fires",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3c366cbdea481a0252bdcc73f08f07d5e8e8f66d28afa737720c093a3ebbdf09",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Replace batteries twice a year, unless you are using 10-year lithium batteries."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2023a",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 47,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time to Change Smoke and CO Alarm Batteries",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Its-Time-to-Change-Smoke-and-Carbon-Monoxide-Alarm-Batteries-as-Daylight-Saving-Time-Ends",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d59087acb20eedfc6fa04135db811a2561db3ec31e4c740dd70a6a1391fcbe08",
+        "retrieved_utc": "2026-09-19T17:07:18+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2004",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 37,
+      "source": {
+        "agency": "CPSC",
+        "title": "CPSC Warns: Millions Have Smoke Alarms That Don't Work",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2004/CPSC-Warns-Millions-of-Americans-Have-Smoke-Alarms-that-Dont-Work",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cbe7e53c1a6de6549869904417d4ad27eee4fca7bf29dc33c62c942e74ae8022",
+        "retrieved_utc": "2026-09-19T17:07:53+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_blog",
+      "prompt_id": "home_smokealarm",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 55,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time. Check and Change Your Alarm Batteries",
+        "url": "https://onsafety.cpsc.gov/blog/2019/10/29/its-time-check-and-change-your-smoke-and-carbon-monoxide-alarm-batteries/",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d626873cb4107fc2dd8da141aebc9cbe3bb12c0a132289fda743fe1c0c82d069",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "control": "Consumers will turn their clocks back one hour when Daylight Saving Time ends on Sunday, November 3, 2019, at 2:00 a.m. As you set the new time, the U.S. Consumer Product Safety Commission (CPSC) reminds you that now is the perfect time to check and change the batteries in smoke and carbon monoxide (CO) alarms."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__usfa_prepare",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "none",
+      "words": 29,
+      "source": {
+        "agency": "FEMA US Fire Administration",
+        "title": "Prepare for Fire",
+        "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cb2ed57a1fdd4b440490f902694d41fdba19416003e7d53a3c8bdc41712baaa0",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The U.S. Fire Administration provides safety awareness materials in a variety of formats to help fire departments spread the word in their communities about preparing for a home fire."
+      }
+    },
+    {
+      "doc_id": "legal_coolingoff__ftc_remorse",
+      "prompt_id": "legal_coolingoff",
+      "format": "blog",
+      "domain": "legal",
+      "is_target": false,
+      "answers": "direct",
+      "words": 51,
+      "source": {
+        "agency": "FTC",
+        "title": "Buyer's Remorse: The FTC's Cooling-Off Rule May Help",
+        "url": "https://consumer.ftc.gov/articles/buyers-remorse-ftcs-cooling-rule-may-help",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c94a24e8965ce3ef2b82a3dc0e73313081cc258838cc49970b665c66781e011c",
+        "retrieved_utc": "2026-09-19T17:08:25+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The Cooling-Off Rule gives you three days to cancel certain sales made at your home, workplace, or dormitory, or at a seller's temporary location, like a hotel or motel room, convention center, fairground, or restaurant. The Rule also applies when you invite a salesperson to make a presentation in your home."
+      }
+    },
+    {
+      "doc_id": "legal_coolingoff__ftc_rule",
+      "prompt_id": "legal_coolingoff",
+      "format": "reference",
+      "domain": "legal",
+      "is_target": false,
+      "answers": "direct",
+      "words": 44,
+      "source": {
+        "agency": "FTC",
+        "title": "Cooling-off Period for Sales Made at Home or Other Locations",
+        "url": "https://www.ftc.gov/legal-library/browse/rules/cooling-period-sales-made-home-or-other-locations",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "98546bd6ae733429e7567d69834ddd5caed496b4792edf7f85ca2ead97d3691b",
+        "retrieved_utc": "2026-09-19T17:08:26+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The Cooling Off Rule provides that it is unfair and deceptive for sellers engaged in \"door-to-door\" sales valued at more than $25 to fail to provide consumers with disclosures regarding their right to cancel the sales contract within three business days of the transaction."
+      }
+    },
+    {
+      "doc_id": "legal_coolingoff__ftc_2012",
+      "prompt_id": "legal_coolingoff",
+      "format": "news",
+      "domain": "legal",
+      "is_target": false,
+      "answers": "direct",
+      "words": 58,
+      "source": {
+        "agency": "FTC",
+        "title": "FTC Concludes Regulatory Review of Cooling Off Rule",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2012/12/ftc-concludes-regulatory-review-cooling-rule-proposes-increase-threshold-amount-coverage-rule-25-130",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ea505e9ac909c33e2f39f7630d04e9343d41d8de8a51868f2f23c0caf0588e84",
+        "retrieved_utc": "2026-09-19T17:08:29+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Currently, the Cooling Off Rule provides that it is unfair and deceptive for sellers engaged in \"door-to-door\" sales valued at more than $25 to fail to provide consumers with disclosures regarding their right to cancel the sales contract within three business days of the transaction. The FTC is proposing to increase the $25 exempted dollar amount to $130."
+      }
+    },
+    {
+      "doc_id": "legal_coolingoff__ftc_1995",
+      "prompt_id": "legal_coolingoff",
+      "format": "news",
+      "domain": "legal",
+      "is_target": false,
+      "answers": "direct",
+      "words": 54,
+      "source": {
+        "agency": "FTC",
+        "title": "FTC Has Decided To Retain with Minor Changes its Cooling-Off Rule",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/1995/10/fyi-ftc-has-decided-retain-minor-changes-its-cooling-rule",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1be273afc0ba671e20e7c4e28674516628630c8cb90ef34a9e80110da9ab2e1a",
+        "retrieved_utc": "2026-09-19T17:08:31+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The Federal Trade Commission has decided to retain with minor changes its Cooling-Off Rule, which gives consumers three days in which to cancel -- and receive a full refund on -- purchases of $25.00 or more when made in the consumer's home or at certain locations away from the seller's normal place of business."
+      }
+    },
+    {
+      "doc_id": "legal_coolingoff__ftc_2009jul",
+      "prompt_id": "legal_coolingoff",
+      "format": "news",
+      "domain": "legal",
+      "is_target": false,
+      "answers": "direct",
+      "words": 50,
+      "source": {
+        "agency": "FTC",
+        "title": "Commission Reopens Public Comment Period On the Cooling Off Rule",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2009/07/commission-reopens-public-comment-period-cooling-rule",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ad01fb61def4cc67abfbde08bbb77a8bd7494e79f1048fc28b71df190549856d",
+        "retrieved_utc": "2026-09-19T17:08:34+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "On April 21, 2009, the FTC issued a Federal Register notice seeking public comments on the effectiveness of the Cooling Off Rule, which requires \"door-to-door\" salespeople of consumer goods or services with a purchase price of $25 or more to disclose the buyer's right to cancel within three business days."
+      }
+    },
+    {
+      "doc_id": "legal_coolingoff__ftc_1996",
+      "prompt_id": "legal_coolingoff",
+      "format": "news",
+      "domain": "legal",
+      "is_target": false,
+      "answers": "direct",
+      "words": 47,
+      "source": {
+        "agency": "FTC",
+        "title": "FTC Denies Cooling-Off Rule Exemption Request",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/1996/03/ftc-today-announced-it-has-denied-request-exemption-ftcs-cooling-rule-filed-seven-life-insurance",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "52dde9cfa9c951f2142e13210a1e1ffecb446d9b2e5a90c83eec364bfac51186",
+        "retrieved_utc": "2026-09-19T17:08:37+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The Cooling-Off Rule, promulgated in 1972, requires a seller of goods or services costing $25 or more, at a place other than the seller's regular place of business, to inform buyers of their right to cancel the sale within three business days and receive a full refund."
+      }
+    },
+    {
+      "doc_id": "legal_coolingoff__ftc_2009apr",
+      "prompt_id": "legal_coolingoff",
+      "format": "news",
+      "domain": "legal",
+      "is_target": false,
+      "answers": "partial",
+      "words": 39,
+      "source": {
+        "agency": "FTC",
+        "title": "Commission Approves Notice Seeking Comments on Cooling-Off Rule",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2009/04/commission-approves-federal-register-notice-seeking-comments-cooling-rule-commission-approves-final",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ce704a4d07893cb27b8f8cff1cd43182770b5eb702242a34e4c828b224574c9e",
+        "retrieved_utc": "2026-09-19T17:08:40+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The Rule also requires such sellers, within 10 businesses days of receiving a valid cancellation notice, to honor the buyer's request by refunding all payments, returning any traded-in property, cancelling and returning any security interests created by the sale,"
+      }
+    }
+  ],
+  "corpus_sha256": "747e4d03839fdb2acb47a36caf6b70ceecd19228495d08d4379838786f7d37e3"
+}
