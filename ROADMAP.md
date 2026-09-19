@@ -148,9 +148,13 @@ do compete for citation slots. Caveat: richer topics got more sourcing effort, s
 count is confounded with topic richness at n=10; the share-of-set figures are the part that
 does not depend on that.
 
-Practically, a thin candidate set fails however well its sources disagree, and the three
-questions discarded in batch 4 (cooking temperature, Social Security claiming age, vitamin
-D) are under-sourced rather than unusable -- each had 4-5 candidates and can be retried at 8+.
+**Confirmed prospectively 2026-09-17.** The three questions batch 4 discarded at 4-5
+candidates were re-sourced to 8, 10 and 8 and all three then passed -- the rule was stated
+before the retry, not fitted after it. Across ten distinct questions the separation is now
+7-10 candidates kept, 4-6 discarded, with no overlap, and the share of the candidate set
+cited is what moves: cooking went from 91% of its set cited to 69%, retirement from 85% to
+67%. Adding candidates raises citations only slightly (cooking 3.6 to 5.6 per answer), so
+the extra documents dilute per-document rates and unpin some of them.
 
 **Sized 2026-09-15 against the screened baselines, not an inherited number.** The five
 kept targets sit at 0.354-0.642 (mean 0.498) with no cell at a ceiling, which is what
