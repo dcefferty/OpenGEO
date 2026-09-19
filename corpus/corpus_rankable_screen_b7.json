@@ -1,0 +1,212 @@
+{
+  "corpus_version": "rankable-screen-v0-b7",
+  "intervention": "none -- baseline screening corpus for ROADMAP item 11",
+  "n_prompts": 1,
+  "n_docs": 8,
+  "formats": [
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "taxes"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "taxes_filingdeadline",
+      "domain": "taxes",
+      "question": "When is the deadline to file my federal tax return?",
+      "target_doc_id": "taxes_filingdeadline__irs_getext",
+      "target_format": "docs",
+      "doc_ids": [
+        "taxes_filingdeadline__irs_getext",
+        "taxes_filingdeadline__irs_dontwait",
+        "taxes_filingdeadline__irs_needmore",
+        "taxes_filingdeadline__irs_notpay",
+        "taxes_filingdeadline__irs_tc653",
+        "taxes_filingdeadline__irs_missed",
+        "taxes_filingdeadline__irs_ext_news",
+        "taxes_filingdeadline__irs_ftf"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "taxes_filingdeadline__irs_getext",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 42,
+      "source": {
+        "agency": "IRS",
+        "title": "Get an extension to file your tax return",
+        "url": "https://www.irs.gov/filing/get-an-extension-to-file-your-tax-return",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "477428b8f4382e3136aafb714f462956b1327cd0e7178bac55de15a637e4e923",
+        "retrieved_utc": "2026-09-19T19:06:05+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "If you need more time to file your taxes, request an extension by the April tax filing due date. This gives you until October 15 to file without penalties. Make sure you pay any tax you owe by the April filing date."
+      }
+    },
+    {
+      "doc_id": "taxes_filingdeadline__irs_dontwait",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 41,
+      "source": {
+        "agency": "IRS",
+        "title": "Need more time to file? Don't wait, request an extension",
+        "url": "https://www.irs.gov/newsroom/need-more-time-to-file-dont-wait-request-an-extension",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a46c577b14eaccb50668f5354e86bca2e74137af8cc77ada185aa6fd70c06e4d",
+        "retrieved_utc": "2026-09-19T19:06:05+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The April 15 deadline to file federal income tax returns is coming up fast. Taxpayers who need more time to file, should request an extension by the filing due date. An extension gives people until October 15 to file without penalties."
+      }
+    },
+    {
+      "doc_id": "taxes_filingdeadline__irs_needmore",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 46,
+      "source": {
+        "agency": "IRS",
+        "title": "If you need more time to file, request an extension",
+        "url": "https://www.irs.gov/newsroom/if-you-need-more-time-to-file-request-an-extension",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a7d12738522b68725eba0864cae1b5b4b1e2ab1be661468e04d37fe867ef4aad",
+        "retrieved_utc": "2026-09-19T19:06:06+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "WASHINGTON - As the end of filing season approaches, the Internal Revenue Service reminds taxpayers they can get an extension to file their federal income tax return until Oct. 15, 2026, but they must request the extension by April 15, 2026, in order to avoid penalties."
+      }
+    },
+    {
+      "doc_id": "taxes_filingdeadline__irs_notpay",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 69,
+      "source": {
+        "agency": "IRS",
+        "title": "An extension to file is not an extension to pay taxes",
+        "url": "https://www.irs.gov/newsroom/irs-reminds-taxpayers-an-extension-to-file-is-not-an-extension-to-pay-taxes",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cca0f6d33bd37ec8dfe813d314e1c70c5c2a39e3c83f7057bbd7020efd0e4496",
+        "retrieved_utc": "2026-09-19T19:06:07+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "For most individual taxpayers the tax filing and payment deadline is Monday, April 18, 2022. Those who need more time to file can request an extension to file. Taxpayers must request an extension to file by April 18, or they may face a failure to file penalty. This extension gives them until October 17 to file their tax return. An extension to file is not an extension to pay."
+      }
+    },
+    {
+      "doc_id": "taxes_filingdeadline__irs_tc653",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 50,
+      "source": {
+        "agency": "IRS",
+        "title": "Topic no. 653, IRS notices and bills, penalties and interest",
+        "url": "https://www.irs.gov/taxtopics/tc653",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "843958418bfc0e68d6e77191bcfac4ed283d9a02db37481909813077e9088c30",
+        "retrieved_utc": "2026-09-19T19:06:06+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Generally, April 15 is the deadline for most people to file their individual income tax returns and pay any tax owed. During its processing, the IRS checks your tax return for mathematical accuracy. When processing is complete, if you owe any tax, penalty, or interest, you will receive a bill."
+      }
+    },
+    {
+      "doc_id": "taxes_filingdeadline__irs_missed",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 39,
+      "source": {
+        "agency": "IRS",
+        "title": "Actions taxpayers should take if they missed the deadline",
+        "url": "https://www.irs.gov/newsroom/actions-taxpayers-should-take-if-they-missed-april-filing-and-payment-deadline",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "644c56261876bd9716180111f3790f46b6819cd5fc74bedea0250d53b70428db",
+        "retrieved_utc": "2026-09-19T19:06:07+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Taxpayers who missed the April 15 filing deadline should submit their federal tax return as soon as possible. Those who missed the deadline to file and owe taxes should file as soon as possible to avoid penalties and interest."
+      }
+    },
+    {
+      "doc_id": "taxes_filingdeadline__irs_ext_news",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "direct",
+      "words": 16,
+      "source": {
+        "agency": "IRS",
+        "title": "Taxpayers who need more time should request an extension",
+        "url": "https://www.irs.gov/newsroom/taxpayers-who-need-more-time-to-file-a-federal-tax-return-should-request-an-extension",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4edec8500adcb75293efa8060aefe3028cc9a9aa3736fda29ae4ca4b41360e5b",
+        "retrieved_utc": "2026-09-19T19:06:05+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "Taxpayers who need more time to file should request an extension by the April 15 deadline."
+      }
+    },
+    {
+      "doc_id": "taxes_filingdeadline__irs_ftf",
+      "prompt_id": "taxes_filingdeadline",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "answers": "partial",
+      "words": 32,
+      "source": {
+        "agency": "IRS",
+        "title": "Failure to file penalty",
+        "url": "https://www.irs.gov/payments/failure-to-file-penalty",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ade5f3effec3a4bd2fc234cdbfba5f9775d14948da5c2b6ab5a0fc36cc342fbc",
+        "retrieved_utc": "2026-09-19T19:06:06+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "control": "The penalty applies to individuals and businesses that fail to file forms including, but not limited to Form 1040, U.S. Individual Income Tax Return and Form 1120, U.S. Corporation Income Tax Return."
+      }
+    }
+  ],
+  "corpus_sha256": "28e44e55a376834f92459e971d061db4834a7fd1604e93efba841a2276f7e894"
+}

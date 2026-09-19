@@ -175,21 +175,32 @@ def _archive_wait():
 
 
 def wayback_capture(url):
-    """Most recent archived capture that returned 200, as (timestamp, fetch URL), or None."""
+    """Most recent archived capture that returned 200, as ((timestamp, fetch URL), None),
+    or (None, reason).
+
+    "No capture exists" and "the Archive did not answer" are reported separately and must
+    stay that way. The Archive returns an HTML holding page when it is offline and a 429
+    body when throttled; parsing either as "no capture" reads as a permanent fact about the
+    page and would send a sourcing session off to abandon perfectly archivable domains. Seen
+    2026-09-19, when the Archive was down and every dol.gov page looked unarchived."""
     _archive_wait()
     q = urllib.parse.urlencode({"url": url, "output": "json", "filter": "statuscode:200",
                                 "collapse": "digest", "limit": "-1"})
     status, body = _curl(f"{WAYBACK_CDX}?{q}", timeout=30)
-    if status != 200 or not body.strip():
-        return None
+    if status != 200:
+        return None, f"archive index returned HTTP {status}"
+    if "Temporarily Offline" in body or "Too Many Requests" in body:
+        return None, "archive is offline or throttling -- retry later, do not conclude the page is unarchived"
+    if not body.strip():
+        return None, "no capture on record"
     try:
         rows = json.loads(body)
     except ValueError:
-        return None
+        return None, "archive index returned a non-JSON body -- likely offline or throttling"
     if len(rows) < 2:                      # row 0 is the header
-        return None
+        return None, "no capture on record"
     ts = rows[-1][1]
-    return ts, f"https://web.archive.org/web/{ts}id_/{url}"
+    return (ts, f"https://web.archive.org/web/{ts}id_/{url}"), None
 
 
 def fetch(url, min_chars=400, allow_archive=True, refresh=False):
@@ -228,9 +239,9 @@ def fetch(url, min_chars=400, allow_archive=True, refresh=False):
     if not allow_archive:
         return None, direct_problem
 
-    cap = wayback_capture(url)
+    cap, why = wayback_capture(url)
     if cap is None:
-        return None, f"{direct_problem}; no archived capture"
+        return None, f"{direct_problem}; {why}"
     ts, archive_url = cap
     _archive_wait()
     a_status, a_body = _curl(archive_url, timeout=45)
