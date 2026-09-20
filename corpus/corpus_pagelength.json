@@ -1,0 +1,589 @@
+{
+  "corpus_version": "pagelength-screen-v1",
+  "intervention": "none -- screening run: does a page-length field saturate?",
+  "conditions": [
+    "control"
+  ],
+  "held_out_of_round": [
+    "finance_housingshare",
+    "health_bloodpressure",
+    "home_smokealarm"
+  ],
+  "n_prompts": 3,
+  "n_docs": 23,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "finance",
+    "health",
+    "home_diy"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "finance_housingshare",
+      "domain": "finance",
+      "question": "What share of my income should go to housing costs?",
+      "doc_ids": [
+        "finance_housingshare__huduser_chas",
+        "finance_housingshare__census_2024",
+        "finance_housingshare__census_19m",
+        "finance_housingshare__census_lowinc",
+        "finance_housingshare__census_story22",
+        "finance_housingshare__cfpb_qm_blog",
+        "finance_housingshare__cfpb_qm_press",
+        "finance_housingshare__cfpb_dti"
+      ],
+      "target_doc_id": "finance_housingshare__huduser_chas",
+      "target_format": "reference",
+      "source_corpus": "rankable-screen-v0-b1"
+    },
+    {
+      "prompt_id": "home_smokealarm",
+      "domain": "home_diy",
+      "question": "How often should I test and replace my smoke alarm?",
+      "doc_ids": [
+        "home_smokealarm__usfa_alarms",
+        "home_smokealarm__cpsc_2023b",
+        "home_smokealarm__cpsc_2015",
+        "home_smokealarm__ready_fires",
+        "home_smokealarm__cpsc_2023a",
+        "home_smokealarm__cpsc_2004",
+        "home_smokealarm__cpsc_blog"
+      ],
+      "target_doc_id": "home_smokealarm__usfa_alarms",
+      "target_format": "blog",
+      "source_corpus": "rankable-screen-v0-b6"
+    },
+    {
+      "prompt_id": "health_bloodpressure",
+      "domain": "health",
+      "question": "What blood pressure reading counts as high?",
+      "doc_ids": [
+        "health_bloodpressure__fda_bp",
+        "health_bloodpressure__nhlbi_hbp",
+        "health_bloodpressure__nhlbi_diag",
+        "health_bloodpressure__nia_bp",
+        "health_bloodpressure__niddk_bp",
+        "health_bloodpressure__nhlbi_sym",
+        "health_bloodpressure__nhlbi_causes",
+        "health_bloodpressure__cdc_hbp"
+      ],
+      "target_doc_id": "health_bloodpressure__fda_bp",
+      "target_format": "docs",
+      "source_corpus": "rankable-screen-v0-b8"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "finance_housingshare__huduser_chas",
+      "prompt_id": "finance_housingshare",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "HUD Office of Policy Development and Research",
+        "title": "CHAS: Background",
+        "url": "https://www.huduser.gov/portal/datasets/cp/CHAS/bg_chas.html",
+        "rights": "US federal work (HUD), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e1465004e74e482b504da7453c063fcfecdc4daa709ccfa6e5bb4508b7c7d544",
+        "retrieved_utc": "2026-09-15T05:02:51+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 337,
+      "variants": {
+        "control": "The primary purpose of the CHAS data is to demonstrate the number of households in need of housing assistance. This is estimated by the number of households that have certain housing problems and have income low enough to qualify for HUD's programs (primarily 30, 50, and 80 percent of median income). It is also important to consider the prevalence of housing problems among different types of households, such as the elderly, disabled, minorities, and different household types. The CHAS data provide counts of the numbers of households that fit these HUD-specified characteristics in HUD-specified geographic areas. In addition to estimating low-income housing needs, the CHAS data contribute to a more comprehensive market analysis by documenting issues like lead paint risks, \"affordability mismatch,\" and the interaction of affordability with variables like age of homes, number of bedrooms, and type of building. Data Format HUD has identified a large set of characteristics of interest to housing planners and policy-makers, and as a result the CHAS data can be quite unwieldy. To streamline the data and make it easier to use, HUD has created a series of \"tables,\" which are grouped by theme. Each of these tables contains certain \"dimensions\" (also referred to as variables). These dimensions can be combined in a number of ways, and the data files for each table present every possible combination of those dimensions. As an example, consider Table 11. Table 11 contains 3 dimensions: tenure, housing problems, and household income. Tenure has 2 options: owner-occupied or renter-occupied. Housing problems has 3 options: household has at least one housing problem, household has no housing problems, or household has no income (so cost burden could not be computed) but no other housing problems. Household income, in this particular table, has 13 options. Thus Table 11 essentially has 78 buckets (2*3*13=78), and every household belongs in one (and only one) of those buckets. In the CHAS data, we have counted the number of households in each of those buckets, for thousands of states, counties, cities, and neighborhoods."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_2024",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Nearly Half of Renter Households Are Cost-Burdened, Proportions Differ by Race",
+        "url": "https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "89b05284912e963a23d43bf83383fb2b2473b71e94722eae180cbcd755eede8f",
+        "retrieved_utc": "2026-09-15T05:02:53+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 333,
+      "variants": {
+        "control": "SEPT. 12, 2024 - Over 21 million renter households spent more than 30% of their income on housing costs in 2023, representing nearly half (49.7%) of the 42.5 million renter households in the United States for whom rent burden is calculated. Although the median ratio of income-to-housing costs for renters remained unchanged from 2022 at 31%, there are differences in the income-to-housing cost ratio when comparing across householder's race. That's according to newly available data tables released today from the 2023 American Community Survey (ACS), 1-year estimates. \"Housing costs rose between 2022 and 2023 for both homeowners and renters. The median cost of housing for renters rose from $1,354 to $1,406 (after adjusting for inflation),\" said Molly Ross, a survey statistician with the U.S. Census Bureau. \"And new data from the 2023 ACS, 1-year estimates show that the share of a rented household's income that goes towards these housing costs differs by householder race.\" Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened. Within Black or African American alone renter households, or households where the householder identified as being only Black or African American, 4.6 million (56.2%) paid more than 30% of their income on housing costs in 2023. Another 2.0 million (54.7%) Some Other Race alone renter households were cost-burdened. Among the other race groups: 1 million (43.4%) Asian alone renter households were cost-burdened. 10.4 million (46.7%) White alone renter households were cost-burdened. 229,000 (48.8%) American Indian or Alaska Native alone renter households were cost-burdened. 53,000 (51.7%) Native Hawaiian or Pacific Islander alone renter households were cost-burdened. The share of Native Hawaiian or Pacific Islander alone renters that were cost-burdened is not significantly different from American Indian or Alaska Native renter households, Some Other Race alone, Two or More Races, or Hispanic renter households."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_19m",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "More Than 19 Million Renters Burdened by Housing Costs",
+        "url": "https://www.census.gov/newsroom/press-releases/2022/renters-burdened-by-housing-costs.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d5c02a2a85bbc2e04aac8cd947cbc036de92674eee48ed7abc8d68b70b7384c9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 345,
+      "variants": {
+        "control": "DEC. 8, 2022 - Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing. At the county level, 239 or 7.6% of the nation's 3,143 counties had a median housing cost ratio for renters above 30%. More than half of households with income and paying rent faced housing cost burdens in these counties. Nearly a third of all renters in the nation lived in these counties. In 18 counties, homeowners with a mortgage had a median housing cost ratio above that of renters. That means the median household with a mortgage had higher financial burden than the median household that paid rent in these counties. The hardship caused by the rise in housing costs persisted despite increases in median household income. \"We've heard for a while now that incomes were not keeping up with the increased cost of housing,\" said Molly Cromwell, a demographer in the Census Bureau's Housing Statistics Branch. \"With the most recent data, we can see just how many households were burdened by the cost of their housing.\" The U.S. median household income for the 2017-2021 ACS 5-year period was $69,021. Median household income, adjusted for inflation to 2021 dollars, in the United States increased 10.5% from $62,460 in 2012-2016, the most recent nonoverlapping 5-year period. The rise in median income was not proportionate across all counties, however. Between 2012-2016 and 2017-2021, nearly half (1,374) of all counties experienced an increase in median household income, while more than half (1,699) of all counties did not have a statistically significant change. Most (74.1%) counties had a median household income lower than the national median, while 13.2% of counties had a median household income higher than the national median."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_lowinc",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Share of Income Needed to Pay Rent Increased the Most for Low-Income Households",
+        "url": "https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0188131a895b488d9e37fc08ed66f15b09dd2aa0d78a41124cd81efa180ac352",
+        "retrieved_utc": "2026-09-15T05:02:55+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 259,
+      "variants": {
+        "control": "The pandemic began in the United States following a period of rising home prices and declining interest and vacancy rates. These pressures increased during the pandemic, contributing to higher home prices and rents. The percentage of household income renter households spent on gross rent (rent plus utilities) - the housing cost ratio - increased nationwide from 2019 to 2021, according to recently released data from the U.S. Census Bureau's 2021 American Community Survey (ACS). But renter households with the lowest annual incomes, a population that traditionally has less income available for other essential goods, experienced the largest percentage point increases. Renters Spent More on Rent Since 2019 The U.S. Census Bureau calculates housing cost ratios for all renter-occupied units that pay cash rent and have positive household income. In 2021, 20.1 million renter-occupied households met the over 30% income threshold and were cost burdened, an increase of about 1 million households since 2019. When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%. Cost-burdened households have less money to spend on other critical needs such as food, transportation and child care. The median cost ratio for all renter-occupied households increased from 29.3% in 2019 to 30.6% in 2021 (Table 1). This increase shifted the number of households considered cost burdened from 46.3% to 49.0% of all renter-occupied units. That means just under half of all renter-occupied households in the United States were cost burdened in 2021."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_story22",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Renters More Likely Than Homeowners to Spend More Than 30% of Income on Housing",
+        "url": "https://www.census.gov/library/stories/2022/12/housing-costs-burden.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cdd03fe793097e6b0a834a1ac7b523496afc07cf734c8436487987938fd810e9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 271,
+      "variants": {
+        "control": "Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today. Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs. The burden was especially high in some of the nation's largest counties where housing is more expensive or in areas where incomes are low. The ACS collects a variety of housing cost information for renters (monthly rent and utility bills) and for homeowners (mortgage principal and interest, real estate taxes, homeowner's insurance, utilities, mobile home costs, second mortgage payments and condominium fees if applicable). Nearly half of the counties where renters had the highest median housing cost ratios were in the South. Out of the 44 million renter households, the vast majority (41 million) paid rent and had household income. Households with zero or negative income, or those in rented units not paying cash rent, were excluded from calculations. In 239 or 7.6% of the nation's 3,143 counties, more than half of renter households that paid rent and had a household income faced housing cost burdens. Among them are some of the most populous U.S. counties like Harris County, Texas, and Los Angeles County, California. Over 15.8 million renters, roughly one-third of all renter households in the nation, lived in these 239 counties. In contrast to the prevalence of burden faced by renters, the median housing cost ratio for homeowners rarely topped 30%, and homeowners with and without a mortgage frequently had lower overall housing costs than renters."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_qm_blog",
+      "prompt_id": "finance_housingshare",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Qualified Mortgages: what are they and what do they mean for you?",
+        "url": "https://www.consumerfinance.gov/about-us/blog/qualified-mortgages-what-are-they-and-what-do-they-mean-for-you/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ec2cd37d9a9f4660355c027960d9485e989076db6c5bd6a91a2c64014825394a",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "answers": "partial",
+      "words": 268,
+      "variants": {
+        "control": "If you're looking to buy a home in 2014, you've probably read or heard about something called a Qualified Mortgage. Here's what you need to know about Qualified Mortgages, which are sometimes called just QMs. Qualified Mortgages are based on some common-sense ideas: The borrower should be able to repay the loan. The terms of the loan should be safer for borrowers. The loan should also be easier to understand. That means you won't see QMs with complicated and risky features such as negative amortization or interest-only periods. To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income. Your lender has to evaluate your ability to repay the loan, but just because the lender is willing to loan you a certain amount, doesn't mean it is right for you. You still have to decide if the proposed loan payment fits comfortably in your budget and allows you to achieve your other goals. Another protection of a Qualified Mortgage is a limit on up-front fees. In the years before the housing crisis, some lenders charged borrowers very high loan origination fees. A QM limits the points and fees a lender can charge to no more than 3 percent of a loan over $100,000. The limits are somewhat higher for loan amounts under $100,000."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_qm_press",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "CFPB Issues Two Final Rules to Promote Access to Responsible, Affordable Mortgage Credit",
+        "url": "https://www.consumerfinance.gov/about-us/newsroom/consumer-financial-protection-bureau-issues-two-final-rules-promote-access-responsible-affordable-mortgage-credit/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8a07c11d60e2164d5ee928062fdef7b2678dda602afae7be518261ffa3454e34",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "answers": "partial",
+      "words": 291,
+      "variants": {
+        "control": "WASHINGTON, D.C. - Today, the Consumer Financial Protection Bureau (Bureau) issued final rules related to qualified mortgage (QM) loans. Lenders are required under the law to determine that consumers have the ability to repay mortgage loans before lenders make those loans. Loans that meet legal standards for QM loans are presumed to be loans for which consumers have such an ability to repay. The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs. Another current category of mortgage loans that has been accorded QM status under the law are loans that meet the standards of the Government Sponsored Enterprises (GSEs). Most mortgage loans are QMs pursuant to this provision, also known as \"the Patch.\" However, the Patch will expire on the mandatory compliance date of the General QM Final Rule (July 1, 2021), or the date the GSEs exit conservatorship, whichever comes first. The Bureau's issuance of its two new rules today will support a smooth and orderly transition away from the Patch and maintain access to responsible, affordable mortgage credit upon its expiration. In adopting a price-based approach to replace the specific DTI limit for General QM loans, the Bureau determined that a loan's price is a strong indicator of a consumer's ability to repay and is a more holistic and flexible measure of a consumer's ability to repay than DTI alone. Additionally, conditioning QM status on a specific DTI limit could impair access to responsible, affordable credit."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_dti",
+      "prompt_id": "finance_housingshare",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a debt-to-income ratio?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-why-is-the-43-debt-to-income-ratio-important-en-1791/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "524c48432b8153be23135c7ae95a87686546500a114ae379a3a0f0a0ecf0df9e",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "answers": "partial",
+      "words": 259,
+      "variants": {
+        "control": "Your debt-to-income ratio (DTI) is all your monthly debt payments divided by your gross monthly income. This number is one way lenders measure your ability to manage the monthly payments to repay the money you plan to borrow. Different loan products and lenders will have different DTI limits. How do I calculate my debt-to-income ratio? To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.) Close Share this 00:00 Don't see what you're looking for? Browse related questions How do I find the best loan available when I'm shopping for a home mortgage loan? What is a loan-to-value ratio and how does it relate to my costs? Learn more about mortgages Search for your question Search Searches are limited to 75 characters. Page last modified Aug. 30, 2023 @ 04:11 PM EDT About us The Consumer Financial Protection Bureau is a 21st century agency that implements and enforces Federal consumer financial law and ensures that markets for consumer financial products are transparent, fair, and competitive."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__usfa_alarms",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA US Fire Administration",
+        "title": "Smoke Alarms",
+        "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "130e297adfdc18b014a1012c11ce683faf6371d14c2d74d471a5e754d7b62faf",
+        "retrieved_utc": "2026-09-19T17:06:51+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 314,
+      "variants": {
+        "control": "Installing smoke alarms in every bedroom, outside each separate sleeping area, and on every level of a home - including the basement - is a fire safety precaution that all homeowners and landlords in your community need to take to protect residents from fire. Did you know: Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date. Help increase awareness in your community about the life-saving benefits of smoke alarms. Share these free materials to teach your community about the importance of fire safety and working home smoke alarms. Answers to common questions about smoke alarms What types of smoke alarms can I buy? There are many brands of smoke alarms on the market, but they fall under 2 basic types: ionization and photoelectric. Ionization and photoelectric smoke alarms detect different types of fires. Since no one can predict what type of fire might start in their home, the U.S. Fire Administration recommends that every home and place where people sleep have: Both ionization AND photoelectric smoke alarms, OR Dual-sensor smoke alarms, which contain both ionization and photoelectric smoke sensors. Choose interconnected smoke alarms so that when one sounds, they all sound. There are also alarms for people with hearing loss. These alarms may have strobe lights that flash and/or vibrate to alert those who are unable to hear standard smoke alarms when they sound. Are smoke alarms expensive? Smoke alarms are not expensive and are worth the lives they can help save. Alarm type and cost Ionization and photoelectric: $6 and up Dual-sensor: $24 and up Smoke alarms with a microprocessor (faster to alert, fewer false alarms): $30 and up Radio frequency/wireless (communicate from one to the next without wires): $40 and up Some fire departments offer reduced-price, or even free, smoke alarms. Contact your local fire department's nonemergency phone number for more information."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2023b",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "Save Daylight, Save Lives: Replace Batteries in Alarms",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Save-Daylight-Save-Lives-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c1a087422f122f1f4a71b3299fd9d16bae5fc8dd33cb30b6d2f2118e9f960024",
+        "retrieved_utc": "2026-09-19T17:07:29+00:00",
+        "method": "wayback id_"
+      },
+      "answers": "direct",
+      "words": 256,
+      "variants": {
+        "control": "WASHINGTON, D.C. - As the season changes, consumers should replace their batteries in smoke and carbon monoxide alarms. The U.S. Consumer Product Safety Commission (CPSC) urges consumers to ensure they have working alarms throughout their home and to take steps to prevent fires such as cleaning clothes dryer vents. Make these annual habits to help save lives. \"When moving your clocks forward, remember to check every level of your home for working smoke and CO alarms,\" said CPSC Chair Alexander Hoehn-Saric. \"Use this additional daylight to prevent home fires by cleaning clothes dryer vents.\" Annually, there are 360,300 residential fires according to CPSC estimates. The fires result in about 2,390 deaths, 10,860 injuries and $7.34 billion in property damage. Proper installation, operation and maintenance of smoke and CO alarms reduces the risk of property damage, injuries and death. Smoke and CO alarms tips: CPSC recommends installing smoke alarms on every level of the home, inside each bedroom and outside sleeping areas. CO alarms should be installed on each level of the home and outside sleeping areas. Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries. Follow manufacturer's instructions for replacing smoke and CO alarms. Clothes dryers can be a hidden hazard. CPSC estimates a yearly average of 6,400 clothes dryer fires that injure about 180 people and cause nearly $105 million in property damage. Clothes dryer tips: Do not use the dryer without a lint filter and make sure it is clean before or after each use."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2015",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "When Turning Clocks Back, Replace Batteries in Alarms",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2015/When-Turning-Clocks-Back-After-Daylight-Saving-Time-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4ea0566cc1e76f956bdc877f0a72e096b84ce151e540c04e14584bebce033eea",
+        "retrieved_utc": "2026-09-19T17:08:10+00:00",
+        "method": "wayback id_"
+      },
+      "answers": "direct",
+      "words": 260,
+      "variants": {
+        "control": "WASHINGTON, D.C. - Fall is a good time of year to think about fire and carbon monoxide safety in your home. The U.S. Consumer Product Safety Commission (CPSC) urges consumers to change the batteries in their smoke and carbon monoxide (CO) alarms this weekend. Daylight Saving Time ends on Sunday, November 2, and that's when consumers will turn their clocks back one hour. \"Smoke and CO alarms can save lives, but only if you have working alarms,\" said CPSC Chairman Elliot F. Kaye. \"Make it a tradition, that when you change your clocks for Daylight Saving Time, that you also change your smoke and CO alarm batteries. Working alarms-on every level of your home-can buy your family valuable time to escape from a fire or dangerous level of carbon monoxide.\" According to the National Fire Protection Association (NFPA), approximately three out of five fire deaths occur in homes with no smoke alarms or homes without working smoke alarms. Home fires often result in lost lives, lasting injuries and property damage. CPSC estimates that between 2009 and 2011, an average of 362,300 unintentional residential fires attended by the fire service, resulted in 2,260 deaths, 12,820 injuries and nearly $7 billion in property damage each year. Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly. Smoke alarms should be placed on every level of the home, inside each bedroom, and outside sleeping areas."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__ready_fires",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Home Fires",
+        "url": "https://www.ready.gov/home-fires",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3c366cbdea481a0252bdcc73f08f07d5e8e8f66d28afa737720c093a3ebbdf09",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 268,
+      "variants": {
+        "control": "A fire can become life-threatening in just two minutes. A residence can be engulfed in flames in five minutes. Learn About Fires Fire is FAST! In less than 30 seconds a small flame can turn into a major fire. It only takes minutes for thick black smoke to fill a house or for it to be engulfed in flames. Fire is HOT! Heat is more threatening than flames. Room temperatures in a fire can be 100 degrees at floor level and rise to 600 degrees at eye level. Inhaling this super-hot air will scorch your lungs and melt clothes to your skin. Fire is DARK! Fire starts bright, but quickly produces black smoke and complete darkness. Fire is DEADLY! Smoke and toxic gases kill more people than flames do. Fire produces poisonous gases that make you disoriented and drowsy. Smoke Alarms A working smoke alarm significantly increases your chances of surviving a deadly home fire. Replace batteries twice a year, unless you are using 10-year lithium batteries. Install smoke alarms on every level of your home, including the basement. Replace the entire smoke alarm unit every 10 years or according to manufacturer's instructions. Never disable a smoke alarm while cooking - it can be a deadly mistake. Audible alarms are available for visually impaired people and smoke alarms with a vibrating pad or flashing light are available for the hearing impaired. Before a Fire Make digital copies of valuable documents and records like birth certificates. If you are insured, contact your insurance company for detailed instructions on protecting your property, conducting inventory and contacting fire damage restoration companies."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2023a",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time to Change Smoke and CO Alarm Batteries",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Its-Time-to-Change-Smoke-and-Carbon-Monoxide-Alarm-Batteries-as-Daylight-Saving-Time-Ends",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d59087acb20eedfc6fa04135db811a2561db3ec31e4c740dd70a6a1391fcbe08",
+        "retrieved_utc": "2026-09-19T17:07:18+00:00",
+        "method": "wayback id_"
+      },
+      "answers": "partial",
+      "words": 262,
+      "variants": {
+        "control": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour. Many electronic devices and appliances will adjust automatically to the time change. However, many smoke and CO alarms need a few moments of your time to ensure they are working properly. As we move into the holiday season and people spend more time at home, furnaces, fireplaces and other fuel-burning appliances are used more, making working smoke and CO alarms all the more important. A new CPSC report estimates there were about 346,800 residential fires in 2019. The fires resulted in about 2,490 deaths, 11,760 injuries and $7.38 billion in property damage. Over the past 50 years, since the enactment of the Consumer Product Safety Act in 1972, CPSC has helped keep the public safe. From 1980 to 2019, CPSC reports a 67 percent decline in residential fires per household, a 66 percent decline in fire deaths per household and a 60 percent decline in fire injuries per household. Carbon monoxide is called the invisible killer because you cannot see or smell it. Carbon monoxide poisoning can come from portable generators, home heating systems and other CO-producing appliances. The majority of CO deaths occur in the colder months of the year, between November and February. More than 400 people die every year from CO poisoning, according to the Centers for Disease Control and Prevention (CDC)."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2004",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "CPSC Warns: Millions Have Smoke Alarms That Don't Work",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2004/CPSC-Warns-Millions-of-Americans-Have-Smoke-Alarms-that-Dont-Work",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cbe7e53c1a6de6549869904417d4ad27eee4fca7bf29dc33c62c942e74ae8022",
+        "retrieved_utc": "2026-09-19T17:07:53+00:00",
+        "method": "wayback id_"
+      },
+      "answers": "partial",
+      "words": 276,
+      "variants": {
+        "control": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing. Since most of the U.S. will gain an hour when Daylight Savings Time ends on Sunday, October 26, the CPSC recommends that consumers make good use of the extra hour by changing their smoke alarm batteries and testing the alarms to ensure they work properly. \"Parents and children should make safety a family activity by changing the batteries in their smoke alarms annually,\" said CPSC Chairman Hal Stratton. \"And be sure to test the smoke alarms every month to make sure they are working.\" Fire is the second leading cause of unintentional death in the home. Each year, nearly 2,700 people die in residential fires, and there are more than 330,000 residential fires reported to fire departments. Although 10 percent of homes have no smoke alarm, millions more do not have any working alarms. CPSC recommends consumers test each smoke alarm every month to make sure it is working properly. Long-life smoke alarms with 10-year batteries have been available to consumers since 1995. These long-life alarms also should be tested monthly. CPSC recommends consumers place a smoke alarm that meets the requirements of a professional testing laboratory, such as Underwriters Laboratories (UL), on each level of multi-story homes outside sleeping areas, and inside bedrooms. CPSC has worked to strengthen smoke alarm performance and installation requirements and is now studying audibility to see if there are ways to make the alarms more effective in waking children and alerting older people."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_blog",
+      "prompt_id": "home_smokealarm",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time. Check and Change Your Alarm Batteries",
+        "url": "https://onsafety.cpsc.gov/blog/2019/10/29/its-time-check-and-change-your-smoke-and-carbon-monoxide-alarm-batteries/",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d626873cb4107fc2dd8da141aebc9cbe3bb12c0a132289fda743fe1c0c82d069",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "wayback id_"
+      },
+      "answers": "partial",
+      "words": 294,
+      "variants": {
+        "control": "Consumers will turn their clocks back one hour when Daylight Saving Time ends on Sunday, November 3, 2019, at 2:00 a.m. As you set the new time, the U.S. Consumer Product Safety Commission (CPSC) reminds you that now is the perfect time to check and change the batteries in smoke and carbon monoxide (CO) alarms. \"Early warning is crucial to getting out of a house fire alive and for surviving CO poisoning,\" said CPSC Acting Chairman Robert Adler. \"I encourage everyone to check and change the batteries in their smoke and carbon monoxide alarms. Doing this can save you and your family in a fire or CO emergency.\" Why is this important? CPSC estimates that in 2016, there were nearly 352,000 residential structure fires, resulting in about 2,410 deaths, 10,370 injuries, and $6.36 billion in property damage. According to the National Fire Protection Association (NFPA,) in 2018, a home fire occurs at the rate of one every 87 seconds. From 2012-2016, the NFPA estimated that almost three of every five home fire deaths resulted from fires in homes with no working smoke alarms. In addition, the Centers for Disease Control and Prevention (CDC) estimate more than 400 people die in the United States every year from CO poisoning. What should you do to protect your family? Check ...change ...practice. It's that simple. Check your alarms monthly. Change the batteries yearly. Practice a fire escape plan. A smoke alarm should be on every level of your home, inside each bedroom, and outside sleeping areas. CO alarms should also be placed on every level of your home, and outside sleeping areas. Batteries should be replaced in alarms, unless the alarms have sealed 10-year batteries. Replace your smoke alarms if they are more than 10 years old."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__fda_bp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "High Blood Pressure - Understanding the Silent Killer",
+        "url": "https://www.fda.gov/drugs/information-consumers-and-patients-drugs/high-blood-pressure-understanding-silent-killer",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5669037d2c33f61f52d757e47eee4eca6656ebc214164d01b82fb0e8ab765b2d",
+        "retrieved_utc": "2026-09-19T19:21:58+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 279,
+      "variants": {
+        "control": "Nearly half, more than 119 million, American adults have high blood pressure. But only about 1 in 4 of those people have their condition under control. Many people develop high blood pressure when they are in their late 30's or early 40's, and it occurs more frequently as people age. However, because of the obesity epidemic, more and more children are also developing high blood pressure. What is high blood pressure? Blood pressure is defined as the force of blood pushing against the walls of the arteries as the heart pumps blood. High blood pressure - also known as hypertension - is a disease in which blood flows through blood vessels (arteries) at a higher-than-normal pressure. Blood pressure is measured with two numbers. The first, or top number, is the pressure in your blood vessels when your heart beats, called the systolic pressure. Systolic pressure is the higher of the two numbers. The second, or bottom number, measures the force of blood in your arteries while your heart is relaxed between beats. The bottom number is the lower of the two and is called the diastolic pressure. Normal pressure is 120/80 or lower. Your blood pressure is considered high (stage 1) if it reads 130 to 139 mmHg/80 to 89 mmHg. Stage 2 high blood pressure is 140/90 or higher. If you get a blood pressure reading of 180/120 or higher more than once, seek medical treatment right away. A reading this high is considered \"hypertensive crisis.\" Readings between 120/80 and 129/89 are considered pre-hypertension. People with pre-hypertension do not have blood pressure as low as it should be but are not yet considered to have high blood pressure."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_hbp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - What Is High Blood Pressure?",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "94cf706032da8e423b4fdcd09087641934aaef9a13c4fbd84b07fd2a903329f4",
+        "retrieved_utc": "2026-09-19T19:21:57+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 274,
+      "variants": {
+        "control": "High blood pressure, or hypertension, is a common condition that occurs when your blood pressure-the force of the blood on the walls of your arteries-is often too high. Medical Animation Copyright \u00a9 Nucleus Medical Media, All rights reserved. Half of all American adults have high blood pressure, also known as hypertension. Many don't even know it. High blood pressure develops when blood flows through your arteries artery (ARR-tuh-ree): A blood vessel that carries blood from the heart to the organs. Most arteries carry oxygenated blood. The pulmonary arteries carry deoxygenated blood away from the heart to the lungs. at higher-than-normal pressures. Blood pressures are written as two numbers separated by a slash like this: 120/80 mm Hg. You can say this as \"120 over 80 millimeters of mercury\" or just as \"120 over 80.\" The first number is your systolic systolic (sis-TOL-ik): The phase of circulation when the heart pumps and the pressure of blood against the vessels is highest. pressure - that's the force of the blood flow when blood is pumped out of the heart. The second number is your diastolic diastolic (DY-uh-stol-ik): The phase of circulation when the heart fills and the pressure of blood against the vessels is lowest. pressure, which is measured between heartbeats when the heart is filling with blood. Your blood pressure changes throughout the day based on your activities. A healthy systolic blood pressure is less than 120 mm Hg. A healthy diastolic pressure is less than 80 mm Hg. Your blood pressure is high when you have consistent systolic readings of 130 mm Hg or higher, or diastolic readings of 80 mm Hg or higher."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_diag",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - Diagnosis",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/diagnosis",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2a00d7a6fe701c97e52468af3ad6b407e056e9bd445671e099a29427c85b5a7c",
+        "retrieved_utc": "2026-09-19T19:21:58+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 287,
+      "variants": {
+        "control": "Everyone who's age 3 or older should have their blood pressure checked by a healthcare provider at least once a year. Your provider measures your blood pressure to see if it's in a healthy range. Regular checks can also show how well treatment for high blood pressure is working. Getting ready for a blood pressure measurement Video about the importance of getting your blood pressure checked regularly and understanding what your numbers mean so you can better manage your heart disease risk. Your provider will measure your blood pressure to see if you have higher-than-normal blood pressure. A blood pressure measurement is easy and painless and can be done in the provider's office or clinic or at home. The provider uses a gauge, stethoscope, or electronic sensor and a blood pressure cuff to measure your blood pressure. Prepare for the test by following a few simple steps: Do not exercise, drink coffee, or smoke cigarettes for 30 minutes before the test. Go to the bathroom before the test. For at least 5 minutes before the test, sit in a chair and relax. Make sure your feet are flat on the floor. Do not talk while you are relaxing or during the test. Uncover your arm for the cuff. Rest your arm on a table so it is supported and at the level of your heart. Even if you do prepare, your blood pressure reading may not be accurate if: You are excited or nervous. \"White coat hypertension\" refers to blood pressure readings that are higher in a provider's office than readings at home or in a pharmacy. To detect this type of high blood pressure, your provider may review readings from the office and from other places."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nia_bp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH National Institute on Aging",
+        "title": "High Blood Pressure and Older Adults",
+        "url": "https://www.nia.nih.gov/health/high-blood-pressure/high-blood-pressure-and-older-adults",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a4a0c070cbe7057a9074e6416c2fcb946b33c9751f016a6175c956378d74e6f2",
+        "retrieved_utc": "2026-09-19T19:21:59+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 255,
+      "variants": {
+        "control": "High blood pressure, or hypertension, is a major health problem that is common in older adults. Your body's network of blood vessels, known as the vascular system, changes with age. Arteries get stiffer, causing blood pressure to go up. This can be true even for people who have heart-healthy habits and feel just fine. High blood pressure, sometimes called \"the silent killer,\" often doesn't cause signs of illness that you can see or feel. Though high blood pressure affects nearly half of all adults, many may not even be aware they have it. If high blood pressure isn't controlled with lifestyle changes and medication, it can lead to serious health problems, including cardiovascular disease (such as heart disease and stroke), vascular dementia, eye problems, and kidney disease. The good news is that blood pressure can be controlled in most people. AgePage: High Blood Pressure Learn how lifestyle changes, like getting more exercise and having less salt, may help control high blood pressure. Download the PDF What is blood pressure? Blood pressure is the force of blood pushing against the walls of arteries as the heart pumps blood. When a health care professional measures your blood pressure, they use a blood pressure cuff around your arm that tightens and then gradually loosens. The results are given in two numbers. The first number, called systolic blood pressure, is the pressure caused by your heart contracting and pushing out blood. The second number, called diastolic blood pressure, is the pressure when your heart relaxes and fills with blood."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__niddk_bp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDDK",
+        "title": "High Blood Pressure and Kidney Disease",
+        "url": "https://www.niddk.nih.gov/health-information/kidney-disease/high-blood-pressure",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7260c2378e869406e8911f0bb7798a292639266a808f9d8e1633437defa2f2b9",
+        "retrieved_utc": "2026-09-19T19:22:01+00:00",
+        "method": "curl"
+      },
+      "answers": "direct",
+      "words": 264,
+      "variants": {
+        "control": "Blood pressure is the force of blood pushing against blood vessel walls as your heart pumps out blood. High blood pressure, also called hypertension, is an increase in the amount of force that blood places on blood vessels as it moves through the body. What are the kidneys and what do they do? Healthy kidneys filter about a half cup of blood every minute, removing wastes and extra water to make urine. The urine flows from each kidney to the bladder through a pair of thin tubes called ureters, one on each side of your bladder. Your bladder stores urine. Your kidneys, ureters, and bladder are part of your urinary tract system. How does high blood pressure affect the kidneys High blood pressure can constrict and narrow the blood vessels, which eventually damages and weakens them throughout the body, including in the kidneys. The narrowing reduces blood flow. If your kidneys' blood vessels are damaged, they may no longer work properly. When this happens, the kidneys are not able to remove all wastes and extra fluid from your body. Extra fluid in the blood vessels can raise your blood pressure even more, creating a dangerous cycle, and cause more damage leading to kidney failure. How common are high blood pressure and kidney disease? Almost 1 in 2 U.S. adults-or about 108 million people-have high blood pressure.1 More than 1 in 7 U.S. adults-or about 37 million people-may have chronic kidney disease (CKD).2 High blood pressure is the second leading cause of kidney failure in the United States after diabetes, as illustrated in Figure 1.2"
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_sym",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - Symptoms",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/symptoms",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9056196b87df6f9eb74ee29b12419f6e5836cd9a01e63c0efa53ab94d0bf7030",
+        "retrieved_utc": "2026-09-19T19:22:42+00:00",
+        "method": "curl"
+      },
+      "answers": "partial",
+      "words": 329,
+      "variants": {
+        "control": "It is important to check your blood pressure readings regularly and to know your numbers. That's because high blood pressure usually does not cause symptoms symptom (SIMP-tum): A problem that a patient experiences that may indicate disease but cannot be seen and does not show up on medical tests or procedures; some examples include headache, fatigue, nausea, or pain. until it has also caused serious problems. Blood pressure above 180/120 mm HG mm HG (Mm aich-Gee): millimeters of mercury (mm Hg), the unit of measurement for blood pressure is too high and requires medical attention, especially if you have symptoms. Blood pressure this high can damage your organs. If your blood pressure is 180/120 but you don't have symptoms, wait 5 minutes and check your blood pressure again. If it is still high, call your healthcare provider who may recommend starting a medicine or changing your dose. If the second measurement is also high and if you have any of these symptoms, call 9-1-1: A sudden, severe headache Difficulty breathing Sudden, severe pain in your abdomen, chest, or back Numbness or weakness A sudden change in vision Problems talking Do not wait to see if your pressure comes down on its own. This video shows how high blood pressure damages your artery walls over time and can lead to life-threatening health problems. Medical Animation Copyright \u00a9 Nucleus Medical Media, All rights reserved. Undiagnosed or uncontrolled high blood pressure can lead to serious health problems such as: Aneurysm Stroke Chronic kidney disease Eye damage Heart attack Heart failure Atherosclerosis ( plaque plaque (Plak): A substance made up of fat, cholesterol, calcium, and other substances found in the blood. In some cardiovascular diseases, plaque builds up and hardens in arteries. Plaque buildup reduces blood flow and makes it more likely that blood clots will form in the arteries. These blood clots can partially or completely block blood flow and oxygen delivery to the heart, brain, kidneys, or legs, arms, or pelvis."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__nhlbi_causes",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - Causes and Risk Factors",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/causes",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6f66672be843e11aa0682287b3a68d6df5200f95389cddcd88c7d4194ac641be",
+        "retrieved_utc": "2026-09-19T19:22:02+00:00",
+        "method": "curl"
+      },
+      "answers": "none",
+      "words": 252,
+      "variants": {
+        "control": "Many factors raise your risk of high blood pressure. You can change some risk factors, such as unhealthy lifestyle habits. A healthy lifestyle can lower your risk for developing high blood pressure. Other risk factors, such as age, family history and genetics genetic (jeh-NEH-tik): Having to do with genes. Most genes are sequences of DNA that contain information for making specific proteins or molecules of RNA that perform important functions in a cell. The information in genes is passed from parents to children. , race and ethnicity, and sex, cannot be changed. But, you can still take steps to reduce your risk of high blood pressure and its complications. Age Blood pressure tends to rise with age. Blood vessels naturally thicken and stiffen over time. These changes increase the risk for high blood pressure. However, the risk of high blood pressure is rising for children and teens, possibly because more children and teens have overweight or obesity. Family history and genetics High blood pressure often runs in families. Much of what we know about high blood pressure has come from genetic studies. Many genes gene (jeen): The unit that passes heredity from parents to children. Genes are pieces of DNA and contain information for making a specific protein. are linked to small increases in high blood pressure risk. Research Research (REE-serch): The scientific study of nature that sometimes includes processes of health and disease in people. Biomedical research can be defined as basic and pre-clinical, clinical and population science, implementation, and translational."
+      }
+    },
+    {
+      "doc_id": "health_bloodpressure__cdc_hbp",
+      "prompt_id": "health_bloodpressure",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "CDC",
+        "title": "About High Blood Pressure",
+        "url": "https://www.cdc.gov/high-blood-pressure/about/index.html",
+        "rights": "US federal work (CDC), 17 U.S.C. 105",
+        "rights_evidence": "cdc.gov, HHS operating division; page carries no third-party credit and does not trip the A.D.A.M. licensing guard",
+        "snapshot_sha256": "0610541bfe90e8bb7a1b02f4305fd4773188cf3c68a3f38e5f1dcc19a44f9e31",
+        "retrieved_utc": "2026-09-20T23:15:10+00:00",
+        "method": "wayback id_"
+      },
+      "answers": "direct",
+      "words": 256,
+      "variants": {
+        "control": "High blood pressure typically has no signs or symptoms but can cause problems for your heart, brain, kidneys, and eyes. No matter your age, you can take steps each day to keep your blood pressure in a healthy range. Some people may be able to control their blood pressure by making lifestyle changes or taking blood pressure medicines. Definition of high blood pressure Blood pressure is the pressure that occurs when blood pushes against the walls of your arteries. Arteries carry blood from your heart to other parts of your body. Normal blood pressure is less than 120/80 mm Hg.1 High blood pressure, also called hypertension, is blood pressure that is higher than normal. High blood pressure is consistently at or above 130/80 mm Hg.1 Your blood pressure changes throughout the day based on your activities. Having blood pressure consistently above normal may result in a diagnosis of high blood pressure. The higher your blood pressure levels, the more risk you have for other health problems, such as heart disease, heart attack, and stroke. Learn more Learn about how you can prevent and treat high blood pressure during pregnancy, which can put you and your baby at risk for health problems. When the heart pumps blood through the arteries, the blood puts pressure on the artery walls. This is called blood pressure. Diagnosis Your health care team can diagnose high blood pressure. They can also make treatment decisions by reviewing your systolic (first number) and diastolic (second number) blood pressure levels and comparing them to guidelines."
+      }
+    }
+  ],
+  "corpus_sha256": "064dd9e715a265b8077c2a8c3a3b984bcac7a5de997e7e58ee9c846c36c86b36"
+}
