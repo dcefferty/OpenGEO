@@ -156,6 +156,54 @@ cited is what moves: cooking went from 91% of its set cited to 69%, retirement f
 67%. Adding candidates raises citations only slightly (cooking 3.6 to 5.6 per answer), so
 the extra documents dilute per-document rates and unpin some of them.
 
+**Half the screened targets are too short to carry a structural tactic (2026-09-19).**
+Of the fourteen kept targets, **only seven have three or more sentences**; five are a
+single sentence of 16-44 words. Answer-first structure and FAQ blocks are undefined on a
+one-sentence document, so the corpus as built cannot express two of the five tactics this
+item names. The cause is how the excerpts were sliced: the source pages run 900-3,900
+words but are stored as short blocks, and in six of seven cases the excerpt is already the
+*entire* host block. Longer targets are available through multi-block spans, still
+verbatim, but re-anchoring changes baseline placement and so requires a re-screen
+(~$0.15 a question).
+
+Deliberately **not** fixed by lengthening every candidate. Longer excerpts answer more
+completely, and a field where every document fully answers is the probe-2 failure mode
+that yielded 0 of 10 usable targets. The short-excerpt regime may be *why* screening works
+at all. Only the target needs the length, and since every tactic arm is compared against
+the control arm of that same target, the target being longer than its competitors does not
+confound the tactic contrast -- it only moves the baseline, which the re-screen re-measures.
+
+**Four fact-preserving tactics moved nothing, at three questions (2026-09-19).** The
+first test of the *intervention* rather than the corpus: 1,800 calls, 0 errors, four
+tactics against a screened control on three questions
+(`results/probes/2026-09-19-tactic-pilot.md`, design committed before collection).
+`answer_first` -0.019, `faq` -0.005, `attributed` +0.017, `citation` +0.010; every
+Holm-corrected p is 1.000 and the largest odds ratio is 1.05, CI [0.77, 1.43]. The
+committed reading for that outcome is **inconclusive -- widen the pilot before sizing the
+round**, and that stands.
+
+Post-hoc diagnostics say the null is not an artefact. Per-cell movement is at resampling
+noise (mean |delta| over the noise expectation: 0.81 to 1.36, with `attributed` *below*
+noise), so unlike H7 there is no directional split cancelling out. Restricting to the nine
+cells with real headroom at run time collapses every arm to about 0.00. The variants were
+verified distinct as sent, and the metric agrees with the harness on 1,800 of 1,800 runs.
+
+**Screening certifies headroom from one noisy estimate (2026-09-19).** A 24-run rate of
+0.21 carries a Wilson interval of about [0.09, 0.41], and by run time **6 of 15 cells
+certified as movable sat at or past a boundary** -- claude 0.21 -> 0.04 on two questions.
+The gate is weaker than its design assumes. Same error class as raw cross-model Kendall's
+W: a quantity measured at finite runs treated as exact. Certify at more runs, or require a
+wider margin, before the round.
+
+Together with the sentence-count finding above, the binding constraint on this item is not
+statistical power but that the corpus can barely express the tactics: `answer_first` is a
+real manipulation on roughly 3 of 14 targets, and those 3 are the pilot. Sequence is
+re-anchor to longer spans, re-screen at a wider margin, re-probe -- then source at scale.
+If that proves too expensive, the negative result is itself publishable and is the
+opposite of what the GEO advice market sells: at the lengths real federal sources come in,
+fact-preserving presentation changes do not move citation, and only adding facts does
+(H4, +0.48).
+
 **Sized 2026-09-15 against the screened baselines, not an inherited number.** The five
 kept targets sit at 0.354-0.642 (mean 0.498) with no cell at a ceiling, which is what
 screening is for -- the v0.2 pilot's baseline was 0.87 with 67% of cells pinned. Power to
