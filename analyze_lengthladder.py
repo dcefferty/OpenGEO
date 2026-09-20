@@ -174,6 +174,28 @@ def main(argv=None):
     print(f"interaction {di:+.3f}   95% CI [{cii[0]:+.3f}, {cii[1]:+.3f}]   "
           f"p={perm_p(np.array(vi)) if len(vi) > 1 else float('nan'):.4f}   n={len(vi)} cells")
     print(f"cells: {', '.join(cells)}")
+    # At six cells with one carrying 56% of the panel weight, a percentile bootstrap CI
+    # and a sign-flip permutation test can disagree sharply: the bootstrap usually keeps
+    # the dominant cell, the permutation can flip its sign and reverse the mean on its
+    # own. Report the disagreement and the leave-one-out range rather than quoting
+    # whichever interval reads better.
+    vi_a, wi_a = np.asarray(vi, float), np.asarray(wi, float)
+    pp = perm_p(vi_a) if len(vi_a) > 1 else float("nan")
+    jk = [float((np.delete(vi_a, i) * np.delete(wi_a, i)).sum()
+                / np.delete(wi_a, i).sum()) for i in range(len(vi_a))]
+    print(f"\nROBUSTNESS")
+    print(f"  cells positive        {int((vi_a > 0).sum())} of {len(vi_a)}"
+          f"   unweighted mean {vi_a.mean():+.3f}   median {np.median(vi_a):+.3f}")
+    print(f"  leave-one-out range   {min(jk):+.3f} to {max(jk):+.3f}")
+    print(f"  bootstrap CI          [{cii[0]:+.3f}, {cii[1]:+.3f}]  (excludes 0: "
+          f"{'yes' if cii[0] > 0 or cii[1] < 0 else 'no'})")
+    print(f"  permutation p         {pp:.4f}  (significant at .05: "
+          f"{'yes' if pp < 0.05 else 'NO'})")
+    if (cii[0] > 0 or cii[1] < 0) and pp >= 0.05:
+        print("  ** THE TWO DISAGREE. With this many cells the percentile CI is")
+        print("     anti-conservative; the sign-flip test is the more trustworthy of")
+        print("     the two here, and it does not clear .05. Treat the interaction as")
+        print("     suggestive, not established, whatever the committed rule prints.")
     print(f"\nThe probe projected +/-0.10 on this contrast. Requiring BOTH rungs unpinned")
     print(f"in the same cell leaves {len(vi)} of 15, so its actual half-width is about")
     print(f"{(cii[1] - cii[0]) / 2:.3f}. The per-rung figures above carry the weight instead;")

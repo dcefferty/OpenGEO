@@ -149,3 +149,90 @@ restriction is visible rather than assumed.
 length, 0.52 → 0.40 → 0.34, while the other two are flat. At one question this is not a
 finding, but it points the same way as H7 — a longer document is not a more cited one, and
 may be a less cited one.
+
+---
+
+# Results — collected 2026-09-19/20
+
+2,160 runs after a resume. Phase 2's first pass hit `HTTP 402 Payment Required` on 129
+calls when the OpenRouter balance ran out; those runs were refilled on 2026-09-20 with 0
+errors, and all 90 cells reached 24 runs. Payment failures are unrelated to the outcome,
+so nothing is selected on. Panel covers 98.9% of measured traffic, 0 `model_returned`
+mismatches.
+
+## The committed rule fires — and should not be read as the answer
+
+| | value | 95% CI | n |
+|---|---|---|---|
+| interaction (primary) | **+0.150** | [+0.029, +0.258] | 6 cells |
+| long rung | +0.052 | [−0.027, +0.139] | 9 cells |
+| mid rung | +0.043 | [−0.073, +0.176] | 10 cells |
+| short rung | +0.025 | [−0.116, +0.242] | 7 cells |
+
+Interaction ≥ +0.10, its CI excludes zero, and the long rung exceeds the short rung, so
+the rule committed on 2026-09-19 prints **B SUPPORTED**. Recorded as such. But the rule
+has a defect that only showed up on contact with the data, and the evidence beneath it is
+weaker than the verdict implies.
+
+**The rule named one interval estimator and did not say what to do when the two disagree.**
+They disagree here:
+
+- bootstrap CI [+0.029, +0.258] — excludes zero
+- sign-flip permutation **p = 0.158** — nowhere near .05
+
+At six cells, with one carrying 56% of the panel weight (`gpt`), a percentile bootstrap
+usually keeps the dominant cell and is anti-conservative, while the permutation can flip
+that cell's sign and reverse the mean on its own. The permutation is the more trustworthy
+of the two here, and it does not clear .05. Leave-one-out confirms the fragility: dropping
+a single cell moves the estimate between **+0.076 and +0.186**, and the cell that halves
+it is `home_radon/gpt` (+0.292 at weight 0.559).
+
+Against that, 5 of 6 cells are positive and the unweighted mean (+0.139) tracks the
+weighted one (+0.150), so the direction is not one cell's artefact even if the magnitude
+is.
+
+**The mechanism contrast points the wrong way.** If burial depth were doing the work, the
+two deepening questions should show a gradient and the fixed-position question should be
+flat:
+
+| group | short | mid | long |
+|---|---|---|---|
+| deepening (smokealarm, radon) | −0.109 | +0.131 | +0.044 |
+| fixed position (housingshare) | **+0.192** | −0.084 | +0.078 |
+
+Neither is monotone, and the single largest value in the table is the **short** rung of the
+**fixed** question — which hypothesis B cannot explain at all. This was the contrast built
+in specifically to separate burial depth from document length, and it separates nothing.
+
+**The most credible signal is the per-rung trend**, which is monotone in the predicted
+direction on both cell sets: +0.025 → +0.043 → +0.052 unpinned, +0.015 → +0.037 → +0.069
+across all cells. Every one of those intervals contains zero.
+
+## Verdict: suggestive, not established
+
+The honest reading is narrower than the rule's. The tactic pilot's clean null has become
+"possibly something at length, on thin and internally inconsistent evidence." That is not
+enough to justify re-anchoring fourteen targets and re-screening the corpus, and it is no
+longer a clean null either.
+
+The probe failed to reach its own stated sensitivity, and the reason was visible at the
+gate: the primary contrast needs both rungs unpinned **in the same cell**, which left 6 of
+15. That should have been computed when the ladder was designed, not after phase 1.
+
+## What actually binds
+
+Not statistical power in the usual sense — usable **cells**, which are lost to saturation,
+and more runs per cell cannot buy them back. The phase-1 deviation already named the
+cause: clean nesting requires the answer at every rung, a document containing the answer is
+a strong answer, and inclusive engines cite strong answers almost always.
+
+The structural fix is to stop making the target conspicuous. Every candidate here is a
+12–104 word snippet while the target runs to 235; real answer engines synthesise from full
+pages, not snippets. A corpus where **all** documents are page-length would remove the
+asymmetry that pins the inclusive engines, and would be a more faithful model of the thing
+being measured. It is also a corpus rebuild, and it carries the probe-2 risk in reverse:
+longer candidates answer more completely, which is what produced 0 of 10 usable targets
+before.
+
+That is the decision this probe hands over, and it is a design question, not a sampling
+one.
