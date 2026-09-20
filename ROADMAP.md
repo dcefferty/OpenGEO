@@ -204,6 +204,41 @@ opposite of what the GEO advice market sells: at the lengths real federal source
 fact-preserving presentation changes do not move citation, and only adding facts does
 (H4, +0.48).
 
+**The gradeable middle is an artefact of truncation (2026-09-20).** The decisive probe.
+Every document in three already-held-out questions was rebuilt as a 252-345 word page
+section instead of a 12-104 word snippet -- closer to what an answer engine actually
+synthesises from -- and screened
+(`results/probes/2026-09-20-pagelength-screen.md`, design committed before collection).
+**1 of 3 questions kept a usable target, against 3 of 3 as snippets**, which is the
+committed SATURATES branch. Unpinned cells went 34% to 31%.
+
+The hypothesised mechanism did not fire: page length was meant to work by making engines
+cite fewer documents per answer, and cites per answer held at 4.68 to 4.84. What happened
+instead is that the distributions polarised. On blood pressure, four documents sit above
+0.78 and four below 0.08 with nothing between; smoke alarm collapsed to 0.93-0.99 across
+the board.
+
+A short snippet is a *partial* answer and earns an intermediate rate. A full page either
+contains the answer or does not. So the rankable regime -- several documents answering,
+citation measuring preference rather than presence -- is a property of how severely the
+documents were cut, not of the content. That is worse for this item than a null: measuring
+tactics in that regime measures something that does not correspond to how an engine sees a
+real page.
+
+Not uniform -- `finance_housingshare` improved (40% to 48% unpinned, 1 to 2 usable
+targets) -- and three questions is a probe, so a corpus from richer sources is not
+excluded. But the page-length rebuild is not the cheap fix the ladder's deviation implied.
+
+**Where item 11 stands.** Three probes now point the same way: four fact-preserving
+tactics at resampling noise, a length ladder whose own mechanism contrast contradicted it,
+and a page-length field that saturates. The ranked table is not obtainable in Tier 1 by
+either route tested. The result to publish is the scope boundary: at the synthesis stage
+with retrieval held constant, what moves citation is whether a document answers the
+question (H4, +0.48) -- not how the answer is presented. Presentation tactics belong to
+Tier 2 (item 9), because their causal path runs through the retrieval stage this design
+holds constant by construction. That is a publishable finding and the opposite of what the
+GEO advice market sells.
+
 **Sized 2026-09-15 against the screened baselines, not an inherited number.** The five
 kept targets sit at 0.354-0.642 (mean 0.498) with no cell at a ceiling, which is what
 screening is for -- the v0.2 pilot's baseline was 0.87 with 67% of cells pinned. Power to
