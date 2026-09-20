@@ -98,3 +98,54 @@ Fixed before collection.
 
 Recorded because the second outcome ends the largest open item on the roadmap, and is the
 one most likely to get explained away.
+
+---
+
+## Deviation logged 2026-09-19, after phase 1, before phase 2
+
+Phase 1 collected cleanly: 1,080 calls, 0 errors. The gate result is mixed, and the
+pre-registration above says "only if the gate passes" without defining passing. That is a
+gap in the pre-registration, not something to resolve by picking a convenient threshold
+now, so the decision and its reasoning are recorded here before any phase 2 data exists.
+
+**Control-arm placement, 26 of 45 cells inside [0.125, 0.875]:**
+
+| question | rung | claude | deepseek | gemini | gpt | grok | pooled | usable |
+|---|---|---|---|---|---|---|---|---|
+| `finance_housingshare` | short | 0.29 | 0.62 | 0.42 | 0.33 | 0.92\* | 0.52 | 4/5 |
+| | mid | 0.04\* | 0.46 | 0.54 | 0.12 | 0.83 | 0.40 | 4/5 |
+| | long | 0.17 | 0.21 | 0.50 | 0.08\* | 0.75 | 0.34 | 4/5 |
+| `home_radon` | short | 0.25 | 0.96\* | 1.00\* | 0.50 | 0.96\* | 0.73 | 2/5 |
+| | mid | 0.50 | 0.79 | 0.92\* | 0.29 | 1.00\* | 0.70 | 3/5 |
+| | long | 0.54 | 0.92\* | 1.00\* | 0.17 | 1.00\* | 0.72 | 2/5 |
+| `home_smokealarm` | short | 0.04\* | 0.92\* | 1.00\* | 0.38 | 0.96\* | 0.66 | 1/5 |
+| | mid | 0.00\* | 0.83 | 1.00\* | 0.17 | 0.83 | 0.57 | 3/5 |
+| | long | 0.46 | 0.79 | 1.00\* | 0.33 | 0.92\* | 0.70 | 3/5 |
+
+**A design tension the probe exposed, which was not anticipated.** Clean nesting requires
+the answer to be present at every rung. A document that contains the answer is a strong
+answer, and the inclusive engines cite strong answers almost always — gemini is at 1.00 on
+every rung of both `home_radon` and `home_smokealarm`. The pilot's targets avoided this
+by being *partial* answers, which is exactly what made them screenable. So the nesting
+requirement and the screening requirement pull against each other, and the two questions
+carrying the burial-depth contrast are the two that saturate.
+
+**Decision: run phase 2, with the primary contrast restricted to cells unpinned in the
+control arm.** Reasons, in order:
+
+1. Saturation is concentrated in gemini and grok (3 of 9 cells usable each). The engines
+   that stay usable are gpt (7 of 9) and claude (6 of 9) — together 65% of the weighted
+   panel — plus deepseek (6 of 9). The probe can still speak to most weighted traffic.
+2. The restriction selects on the **control arm only**, which phase 2 does not touch. It
+   is the same logic the screen already applies, and it cannot be influenced by the
+   outcome being measured.
+3. A pinned cell was always going to be uninformative; including it would dilute the
+   estimate toward zero and make a null unreadable.
+
+The pooled-over-all-cells figures will still be reported alongside, so the effect of this
+restriction is visible rather than assumed.
+
+**Also recorded:** `finance_housingshare` control declines monotonically with target
+length, 0.52 → 0.40 → 0.34, while the other two are flat. At one question this is not a
+finding, but it points the same way as H7 — a longer document is not a more cited one, and
+may be a less cited one.
