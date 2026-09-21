@@ -47,11 +47,11 @@
   },
   "page": {
     "title": "OpenGEO Findings",
-    "description": "What gets a page cited by AI answer engines, by how much, and how sure we are — from an open, reproducible benchmark.",
+    "description": "What gets a page cited by AI answer engines, by how much, and how sure we are \u2014 from an open, reproducible benchmark.",
     "eyebrow": [
       "OpenGEO",
       "open benchmark for AI answer engines",
-      "<b>Draft</b> · September 2026"
+      "<b>Draft</b> \u00b7 September 2026"
     ],
     "headline": "Specific facts are what get a page cited by AI answer engines.",
     "standfirst": "OpenGEO changes one thing about a document and measures whether the models behind {engine_names} cite it more. Adding specific figures took a page from being cited {facts_pooled_control_pct0} of the time to {facts_pooled_treatment_pct1}, on every model tested. Repeating keywords moved it by {stuffing_pooled_delta_abs} points. Every number carries its interval, and the tests that found nothing are reported alongside the ones that did.",
@@ -60,7 +60,7 @@
       "facts",
       "stuffing"
     ],
-    "hero_note": "Both changes were measured against the same kind of starting page — one that doesn't answer the question, cited {baseline_range} of the time. The specific-facts effect is probably understated: pages with facts were cited {facts_pooled_treatment_pct1} of the time, so it ran into the ceiling.",
+    "hero_note": "Both changes were measured against the same kind of starting page \u2014 one that doesn't answer the question, cited {baseline_range} of the time. The specific-facts effect is probably understated: pages with facts were cited {facts_pooled_treatment_pct1} of the time, so it ran into the ceiling.",
     "limits_heading": "What this can't tell you yet",
     "limits": [
       "<b>Whether your page gets found in the first place.</b> We hand each engine six documents and measure what it does with them. Search ranking and retrieval are held constant on purpose, and are a separate experiment.",
@@ -84,7 +84,7 @@
       },
       {
         "k": "Reproducible",
-        "text": "Split-half reliability <span class=\"num\">{reliability_low}–{reliability_high}</span> per engine. Documents, code and every raw response are public."
+        "text": "Split-half reliability <span class=\"num\">{reliability_low}\u2013{reliability_high}</span> per engine. Documents, code and every raw response are public."
       }
     ],
     "links": [
@@ -118,7 +118,7 @@
     "literal_numbers": [
       "95%",
       "per 100",
-      "4–8",
+      "4\u20138",
       "CC-BY 4.0"
     ]
   },
@@ -264,12 +264,12 @@
       },
       "text": {
         "body": [
-          "We took pages that talk around a question and replaced their generic phrasing with the specific figure the question asks for — a price, an interval, a dose — keeping the length within three words. <b>Citation rose on every model we tested, by {delta_min_abs} to {delta_max_abs} points.</b> The same result appeared at {replication_prompts} questions and again at {prompts}."
+          "We took pages that talk around a question and replaced their generic phrasing with the specific figure the question asks for \u2014 a price, an interval, a dose \u2014 keeping the length within three words. <b>Citation rose on every model we tested, by {delta_min_abs} to {delta_max_abs} points.</b> The same result appeared at {replication_prompts} questions and again at {prompts}."
         ],
         "caption": "Share of runs in which each engine cited the page. Engines ordered by share of AI-assistant web traffic ({share_source}). {others_effect_sentence}; the pooled {pooled_delta_pts} points {pooled_ci_pts} covers all {n_models} models.",
-        "for_you": "Where a page says “fast,” “affordable” or “most teams,” say how fast, how much, and how many.",
+        "for_you": "Where a page says \u201cfast,\u201d \u201caffordable\u201d or \u201cmost teams,\u201d say how fast, how much, and how many.",
         "prov": [
-          "{prompts} questions · {domains} domains",
+          "{prompts} questions \u00b7 {domains} domains",
           "{calls} engine calls",
           "{p_text}"
         ]
@@ -307,7 +307,7 @@
         }
       ],
       "title": "Repeating your keyword helps a little, and doesn't get you misquoted",
-      "lever": "Repeat the topic keyword 4–8 times",
+      "lever": "Repeat the topic keyword 4\u20138 times",
       "data": {
         "metric": "citation presence rate",
         "pooled": {
@@ -406,7 +406,7 @@
         },
         "compare_to": "facts",
         "fidelity": {
-          "metric": "share of cited sentences the page does not support (stuffed − orthogonal, per-prompt paired)",
+          "metric": "share of cited sentences the page does not support (stuffed \u2212 orthogonal, per-prompt paired)",
           "primary": {
             "judge": "qwen/qwen3.8-max",
             "delta": -0.009,
@@ -430,18 +430,18 @@
       "chart": {
         "type": "forest",
         "pooled_label": "All models",
-        "pooled_sublabel": "pooled · {n_models} models",
+        "pooled_sublabel": "pooled \u00b7 {n_models} models",
         "aria": "Change in citation rate from keyword repetition per engine, with 95% intervals"
       },
       "text": {
         "body": [
-          "We expected keyword stuffing to do nothing, or to hurt. It helped: repeating a page's topic phrase four to eight times, with no new facts and no extra length, raised citation by <b>{pooled_delta_pts} points {pooled_ci_pts}</b> — roughly {ratio_vs_compare}× smaller than the effect of adding specific figures. No engine went significantly the other way{panel_spans_zero_clause}."
+          "We expected keyword stuffing to do nothing, or to hurt. It helped: repeating a page's topic phrase four to eight times, with no new facts and no extra length, raised citation by <b>{pooled_delta_pts} points {pooled_ci_pts}</b> \u2014 roughly {ratio_vs_compare}\u00d7 smaller than the effect of adding specific figures. No engine went significantly the other way{panel_spans_zero_clause}."
         ],
-        "caption": "Change in citation rate from repetition, with 95% intervals. Dots in green have intervals clear of zero. The pooled figure covers {n_models} models, as the pre-registration specified — {others_pool_sentence}. {excluded_sentence}",
+        "caption": "Change in citation rate from repetition, with 95% intervals. Dots in green have intervals clear of zero. The pooled figure covers {n_models} models, as the pre-registration specified \u2014 {others_pool_sentence}. {excluded_sentence}",
         "after": [
           "We also checked whether stuffed pages get <em>misrepresented</em> more once cited. They don't: the share of attributed claims the page didn't support moved by <b>{fidelity_delta_pts} points {fidelity_ci_pts}</b>, and a second, independent judge model agreed."
         ],
-        "for_you": "Naming your topic plainly helps a little. It is the weaker lever by an order of magnitude — facts first.",
+        "for_you": "Naming your topic plainly helps a little. It is the weaker lever by an order of magnitude \u2014 facts first.",
         "prov": [
           "hypothesis committed before collection",
           "{calls} engine calls",
@@ -554,17 +554,17 @@
       "chart": {
         "type": "forest",
         "pooled_label": "All engines",
-        "pooled_sublabel": "share-weighted · {n_models} engines",
+        "pooled_sublabel": "share-weighted \u00b7 {n_models} engines",
         "aria": "Change in citation rate from doubling a page's length with filler, per engine, with 95% intervals"
       },
       "text": {
         "body": [
-          "Doubling a page's length with filler that states no fact, names no entity and repeats none of the question's words moved its citation rate by <b>{pooled_delta_pts} points {pooled_ci_pts}</b> — an interval comfortably around zero. Length is invisible in this round's variance decomposition too, behind which question was asked, which domain it came from, and the page's format.",
+          "Doubling a page's length with filler that states no fact, names no entity and repeats none of the question's words moved its citation rate by <b>{pooled_delta_pts} points {pooled_ci_pts}</b> \u2014 an interval comfortably around zero. Length is invisible in this round's variance decomposition too, behind which question was asked, which domain it came from, and the page's format.",
           "But the engines disagree about the sign. On {n_negative} of the five a padded page is cited <em>less</em> often, each with an interval clear of zero, and two of those hold up after correcting across the panel. The engines that shrug padding off are the two carrying most of the traffic, which is why the pooled figure lands flat. Nothing here rewards padding on any engine; on some it costs you."
         ],
         "caption": "Change in citation rate from doubling length with filler, with 95% intervals. Dots in red have intervals entirely below zero. Pooled across {n_models} engines, weighted by market share. {excluded_sentence}",
         "after": [
-          "A page's share of the answer's <em>sentences</em> — a fairer test of the word-count metrics used elsewhere in this field — did not move either, on any dose."
+          "A page's share of the answer's <em>sentences</em> \u2014 a fairer test of the word-count metrics used elsewhere in this field \u2014 did not move either, on any dose."
         ],
         "for_you": "Words are not the lever. Adding length without adding facts is at best neutral, and on several engines it actively costs you citations.",
         "prov": [
@@ -592,15 +592,138 @@
       ]
     },
     {
+      "alias": "presentation",
+      "public": true,
+      "order": 4,
+      "status": "null",
+      "kind": "paired_effect",
+      "evidence": [
+        {
+          "label": "Probe, not a round",
+          "style": "early"
+        },
+        {
+          "label": "Design committed before collection"
+        }
+      ],
+      "title": "How the answer is presented does not change whether it is cited",
+      "lever": "Answer-first order, FAQ headings, attribution, source citations",
+      "data": {
+        "metric": "citation presence rate",
+        "pooled": {
+          "control": 0.365,
+          "treatment": 0.367,
+          "delta": 0.001,
+          "ci": [
+            -0.036,
+            0.034
+          ],
+          "p": "0.844",
+          "n_models": 5
+        },
+        "per_model": {
+          "anthropic/claude-haiku-4.5": {
+            "control": 0.111,
+            "treatment": 0.174,
+            "delta": 0.062,
+            "ci": [
+              -0.035,
+              0.163
+            ],
+            "p": "0.299"
+          },
+          "deepseek/deepseek-chat": {
+            "control": 0.625,
+            "treatment": 0.618,
+            "delta": -0.007,
+            "ci": [
+              -0.08,
+              0.059
+            ],
+            "p": "0.823"
+          },
+          "google/gemini-3-flash-preview": {
+            "control": 0.681,
+            "treatment": 0.59,
+            "delta": -0.09,
+            "ci": [
+              -0.163,
+              -0.021
+            ],
+            "p": "0.046"
+          },
+          "openai/gpt-5.4-mini": {
+            "control": 0.208,
+            "treatment": 0.247,
+            "delta": 0.038,
+            "ci": [
+              0.007,
+              0.073
+            ],
+            "p": "0.030"
+          },
+          "x-ai/grok-4.3": {
+            "control": 0.861,
+            "treatment": 0.844,
+            "delta": -0.017,
+            "ci": [
+              -0.056,
+              0.017
+            ],
+            "p": "0.364"
+          }
+        },
+        "compare_to": "facts"
+      },
+      "chart": {
+        "type": "forest",
+        "pooled_label": "All engines",
+        "pooled_sublabel": "share-weighted \u00b7 {n_models} engines",
+        "aria": "Change in citation rate from four presentation tactics, per engine, with 95% intervals"
+      },
+      "text": {
+        "body": [
+          "These are the things the optimisation advice actually sells: put the answer first, format it as an FAQ, attribute it to its source, cite where it came from. We applied all four to documents already competing against real alternatives, holding the facts identical \u2014 no tactic was allowed to add a figure the original did not have, because a page that says more is already known to win. Pooled across the panel they moved citation by <b>{pooled_delta_pts} points {pooled_ci_pts}</b>.",
+          "The engines are not unanimous, and the disagreement is worth more than the pooled figure. On one engine these tactics cost a page citations and on another they earn a few, each with an interval clear of zero \u2014 but neither survives correction across the panel, and they point opposite ways. Per-cell movement sat at the level you get from running the same unchanged document twice."
+        ],
+        "caption": "Change in citation rate from four fact-preserving presentation tactics, with 95% intervals. Pooled across {n_models} engines, weighted by market share. {prompts} questions \u2014 an estimate with an interval, not a published effect size.",
+        "after": [
+          "Two further probes asked whether the documents were simply too short for order to matter. Lengthening them did not rescue the effect. Rebuilding every document as a full page section did something more awkward: the citation rates split to the extremes, most documents either always cited or never, and the gradeable middle this measurement depends on disappeared.",
+          "That middle turns out to be an artefact of cutting the documents short. A short excerpt is a partial answer and earns a partial rate; a full page either contains the answer or it does not. So this null cannot be fixed by running a bigger version of it \u2014 the regime it needs is a property of the truncation, not of the content."
+        ],
+        "for_you": "Presentation is not the lever at this stage. What the engine does with a page it already has depends on whether the page answers the question, not on where the answer sits or how it is framed. If these tactics help, they help earlier \u2014 by getting the page retrieved at all \u2014 and that is not what this measures.",
+        "prov": [
+          "design and reading committed before collection",
+          "{calls} engine calls across three probes",
+          "fact-preserving by construction: no tactic adds a figure"
+        ]
+      },
+      "provenance": {
+        "round": "tactic pilot, length ladder, page-length screen",
+        "corpus_sha": "831ad7108b1bdc31",
+        "prompts": 3,
+        "calls": 4320,
+        "report": "results/published/2026-09-20-tier1-scope/REPORT.md",
+        "data": [
+          "results/tacticpilot.jsonl",
+          "results/lengthladder.jsonl",
+          "results/pagelength_screen.jsonl"
+        ]
+      },
+      "asserts": [
+        "pooled_ci_spans_zero"
+      ]
+    },
+    {
       "alias": "agreement",
       "hypothesis": "H3",
       "public": true,
-      "order": 4,
+      "order": 5,
       "status": "null",
       "kind": "agreement",
       "evidence": [
         {
-          "label": "Replicated ×2",
+          "label": "Replicated \u00d72",
           "style": "strong"
         }
       ],
@@ -640,7 +763,7 @@
       },
       "text": {
         "body": [
-          "GEO tools are often sold on the idea that every engine is its own optimisation problem. We measured how closely engines agree on which documents they cite, and compared it with how closely one engine agrees with <em>itself</em> when asked the same thing again. <b>Engines agree with each other about as closely as one engine agrees with its own re-run</b> — the disagreement between them is no bigger than ordinary run-to-run noise."
+          "GEO tools are often sold on the idea that every engine is its own optimisation problem. We measured how closely engines agree on which documents they cite, and compared it with how closely one engine agrees with <em>itself</em> when asked the same thing again. <b>Engines agree with each other about as closely as one engine agrees with its own re-run</b> \u2014 the disagreement between them is no bigger than ordinary run-to-run noise."
         ],
         "caption": "Kendall's W: the higher it is, the more alike two rankings of which documents get cited. The within-engine figure is the noise floor any real disagreement would have to clear. {latest_label} shown; the {earlier_label} gave {earlier_cross} against {earlier_within}.",
         "for_you": "A page that earns citations from one engine tends to earn them from the others. The data doesn't support a separate strategy per engine.",
@@ -672,7 +795,7 @@
       "alias": "misattribution",
       "hypothesis": "C2 baseline",
       "public": true,
-      "order": 5,
+      "order": 6,
       "status": "measured",
       "kind": "misattribution",
       "evidence": [
@@ -684,7 +807,7 @@
       "title": "Engines sometimes credit your page with things it doesn't say",
       "data": {
         "metric": "share of cited sentences a judge finds the page does not support (NOT_SUPPORTED)",
-        "method": "fidelity_baseline.py — clean judgments only, last row per item, bootstrap over prompts, 10,000 resamples, seed 20260830",
+        "method": "fidelity_baseline.py \u2014 clean judgments only, last row per item, bootstrap over prompts, 10,000 resamples, seed 20260830",
         "judges": [
           {
             "judge": "glm-5.3",
@@ -717,7 +840,7 @@
       },
       "text": {
         "body": [
-          "Being cited isn't the same as being represented accurately. For every sentence that cited a page, we asked a separate model whether the page actually supports it. <b>Between {low_pct} and {high_pct} of cited sentences made a claim the page doesn't support</b>, depending on which model did the checking. These test pages don't directly answer the question asked — the situation where misattribution is most likely — so pages that do may fare better."
+          "Being cited isn't the same as being represented accurately. For every sentence that cited a page, we asked a separate model whether the page actually supports it. <b>Between {low_pct} and {high_pct} of cited sentences made a claim the page doesn't support</b>, depending on which model did the checking. These test pages don't directly answer the question asked \u2014 the situation where misattribution is most likely \u2014 so pages that do may fare better."
         ],
         "for_you": "Check what engines actually say when they cite you, not just whether they do.",
         "prov": [
@@ -749,18 +872,18 @@
       "alias": "calibration",
       "hypothesis": "CAL-1",
       "public": true,
-      "order": 6,
+      "order": 7,
       "status": "measured",
       "kind": "calibration",
       "evidence": [
         {
-          "label": "Early · {n_questions} questions, one engine",
+          "label": "Early \u00b7 {n_questions} questions, one engine",
           "style": "early"
         }
       ],
       "title": "Tracking tools that query the API may undercount your citations",
       "data": {
-        "metric": "1 − mean Jaccard similarity of cited-domain sets, API vs logged-out UI",
+        "metric": "1 \u2212 mean Jaccard similarity of cited-domain sets, API vs logged-out UI",
         "engine": "openai",
         "api_model": "openai/gpt-5.4-mini",
         "api_runs": 3,
@@ -959,7 +1082,7 @@
       "public": false,
       "order": 92,
       "status": "null",
-      "title": "Format × model interaction dominates the main effects",
+      "title": "Format \u00d7 model interaction dominates the main effects",
       "data": {
         "eta2": {
           "kwstuff-v3": {

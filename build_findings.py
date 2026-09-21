@@ -714,8 +714,13 @@ def write_round_index(L, root):
     for report in sorted(by_report, reverse=True):
         folder = report.rsplit("/", 2)[-2]
         date, name = folder[:10], folder[11:]
+        # Not every published result tests a numbered hypothesis. Probe-level work --
+        # below the prompt floor, design committed but no H-number -- is indexed by its
+        # status instead. Inventing an H-number for it would imply a pre-registered
+        # hypothesis test it never was.
+        entries = sorted(by_report[report], key=lambda x: x["order"])
         ids = ", ".join(dict.fromkeys(
-            f["hypothesis"] for f in sorted(by_report[report], key=lambda x: x["order"])))
+            f.get("hypothesis") or f["status"] for f in entries))
         lines.append(f"- **{date} — {name}** · [report]({folder}/REPORT.md) · {ids}")
 
     body = "\n".join(lines)

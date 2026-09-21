@@ -60,7 +60,25 @@ donor sites. This is a partnerships problem before it is a code problem.
 
 ### 10. Held-out private split
 Contamination defence. Publish only aggregate results from the private half; rotate a
-fraction of public prompts each round.
+fraction of public prompts each round. Protocol in `METHODOLOGY.md` §10.1.
+
+**Structure in place 2026-09-20**, split still empty. `private/` is gitignored,
+`private/MANIFEST.json` records the split, and `check_private.py` fails the build if any
+private prompt_id appears in a tracked file **or in any commit message** — a question leaks
+by being mentioned at least as easily as by being committed.
+
+**Correction to an earlier plan.** This item was previously treated as a gate that had to
+clear before the repository could go public. That was wrong in one direction and right in
+another, and the distinction matters:
+
+- It is **not** a publication blocker. The split's value comes from its questions never
+  having been published, which freshly sourced material satisfies whenever it is created.
+  Building it after launch costs nothing.
+- What **is** irreversible is already done: all 16 item-11 screened questions sit in git
+  history across 8 commits. They cannot join the split, because removing them would mean
+  rewriting the history that proves when each round was pre-registered — and that evidence
+  is the thing this project is actually selling. So the split must be sourced fresh, and
+  that cost is now fixed regardless of when it is paid.
 
 *Acceptance:* a private split exists, is excluded from the public corpus, and one round
 reports public and private results side by side.
@@ -156,6 +174,89 @@ cited is what moves: cooking went from 91% of its set cited to 69%, retirement f
 67%. Adding candidates raises citations only slightly (cooking 3.6 to 5.6 per answer), so
 the extra documents dilute per-document rates and unpin some of them.
 
+**Half the screened targets are too short to carry a structural tactic (2026-09-19).**
+Of the fourteen kept targets, **only seven have three or more sentences**; five are a
+single sentence of 16-44 words. Answer-first structure and FAQ blocks are undefined on a
+one-sentence document, so the corpus as built cannot express two of the five tactics this
+item names. The cause is how the excerpts were sliced: the source pages run 900-3,900
+words but are stored as short blocks, and in six of seven cases the excerpt is already the
+*entire* host block. Longer targets are available through multi-block spans, still
+verbatim, but re-anchoring changes baseline placement and so requires a re-screen
+(~$0.15 a question).
+
+Deliberately **not** fixed by lengthening every candidate. Longer excerpts answer more
+completely, and a field where every document fully answers is the probe-2 failure mode
+that yielded 0 of 10 usable targets. The short-excerpt regime may be *why* screening works
+at all. Only the target needs the length, and since every tactic arm is compared against
+the control arm of that same target, the target being longer than its competitors does not
+confound the tactic contrast -- it only moves the baseline, which the re-screen re-measures.
+
+**Four fact-preserving tactics moved nothing, at three questions (2026-09-19).** The
+first test of the *intervention* rather than the corpus: 1,800 calls, 0 errors, four
+tactics against a screened control on three questions
+(`results/probes/2026-09-19-tactic-pilot.md`, design committed before collection).
+`answer_first` -0.019, `faq` -0.005, `attributed` +0.017, `citation` +0.010; every
+Holm-corrected p is 1.000 and the largest odds ratio is 1.05, CI [0.77, 1.43]. The
+committed reading for that outcome is **inconclusive -- widen the pilot before sizing the
+round**, and that stands.
+
+Post-hoc diagnostics say the null is not an artefact. Per-cell movement is at resampling
+noise (mean |delta| over the noise expectation: 0.81 to 1.36, with `attributed` *below*
+noise), so unlike H7 there is no directional split cancelling out. Restricting to the nine
+cells with real headroom at run time collapses every arm to about 0.00. The variants were
+verified distinct as sent, and the metric agrees with the harness on 1,800 of 1,800 runs.
+
+**Screening certifies headroom from one noisy estimate (2026-09-19).** A 24-run rate of
+0.21 carries a Wilson interval of about [0.09, 0.41], and by run time **6 of 15 cells
+certified as movable sat at or past a boundary** -- claude 0.21 -> 0.04 on two questions.
+The gate is weaker than its design assumes. Same error class as raw cross-model Kendall's
+W: a quantity measured at finite runs treated as exact. Certify at more runs, or require a
+wider margin, before the round.
+
+Together with the sentence-count finding above, the binding constraint on this item is not
+statistical power but that the corpus can barely express the tactics: `answer_first` is a
+real manipulation on roughly 3 of 14 targets, and those 3 are the pilot. Sequence is
+re-anchor to longer spans, re-screen at a wider margin, re-probe -- then source at scale.
+If that proves too expensive, the negative result is itself publishable and is the
+opposite of what the GEO advice market sells: at the lengths real federal sources come in,
+fact-preserving presentation changes do not move citation, and only adding facts does
+(H4, +0.48).
+
+**The gradeable middle is an artefact of truncation (2026-09-20).** The decisive probe.
+Every document in three already-held-out questions was rebuilt as a 252-345 word page
+section instead of a 12-104 word snippet -- closer to what an answer engine actually
+synthesises from -- and screened
+(`results/probes/2026-09-20-pagelength-screen.md`, design committed before collection).
+**1 of 3 questions kept a usable target, against 3 of 3 as snippets**, which is the
+committed SATURATES branch. Unpinned cells went 34% to 31%.
+
+The hypothesised mechanism did not fire: page length was meant to work by making engines
+cite fewer documents per answer, and cites per answer held at 4.68 to 4.84. What happened
+instead is that the distributions polarised. On blood pressure, four documents sit above
+0.78 and four below 0.08 with nothing between; smoke alarm collapsed to 0.93-0.99 across
+the board.
+
+A short snippet is a *partial* answer and earns an intermediate rate. A full page either
+contains the answer or does not. So the rankable regime -- several documents answering,
+citation measuring preference rather than presence -- is a property of how severely the
+documents were cut, not of the content. That is worse for this item than a null: measuring
+tactics in that regime measures something that does not correspond to how an engine sees a
+real page.
+
+Not uniform -- `finance_housingshare` improved (40% to 48% unpinned, 1 to 2 usable
+targets) -- and three questions is a probe, so a corpus from richer sources is not
+excluded. But the page-length rebuild is not the cheap fix the ladder's deviation implied.
+
+**Where item 11 stands.** Three probes now point the same way: four fact-preserving
+tactics at resampling noise, a length ladder whose own mechanism contrast contradicted it,
+and a page-length field that saturates. The ranked table is not obtainable in Tier 1 by
+either route tested. The result to publish is the scope boundary: at the synthesis stage
+with retrieval held constant, what moves citation is whether a document answers the
+question (H4, +0.48) -- not how the answer is presented. Presentation tactics belong to
+Tier 2 (item 9), because their causal path runs through the retrieval stage this design
+holds constant by construction. That is a publishable finding and the opposite of what the
+GEO advice market sells.
+
 **Sized 2026-09-15 against the screened baselines, not an inherited number.** The five
 kept targets sit at 0.354-0.642 (mean 0.498) with no cell at a ceiling, which is what
 screening is for -- the v0.2 pilot's baseline was 0.87 with 67% of cells pinned. Power to
@@ -222,6 +323,49 @@ standard rather than in anyone's memory:
 - **A pooled figure can hide a directional split** (item 12). H7's share-weighted pool is a
   clean null while three of five engines point negative; an unweighted pool of the same data
   falsifies it. Per-engine results stay primary, and any pooled headline states its weighting.
+
+---
+
+## Publication checklist
+
+The repository is private and **stays private until the owner explicitly says otherwise**.
+Everything below is prepared; nothing here should be taken as a decision to launch.
+
+Done:
+
+- [x] Licence split so GitHub parses it — `LICENSE` (MIT), `LICENSE-DATA` (CC BY 4.0).
+      A single file with both made GitHub report "Other" and show no licence badge, on a
+      project whose entire pitch is openness.
+- [x] `CITATION.cff` — the audience that matters here (journalists, academics, buyers
+      doing vendor diligence) needs something to cite.
+- [x] `CONTRIBUTING.md` — reproduction steps, the non-negotiable design rules, and what
+      adding a round requires.
+- [x] Repository description and topics.
+- [x] `.gitignore` pins `private/` and `.claude/settings.local.json`; the latter
+      accumulates literal shell commands from approved tool calls and has held an API key
+      inline, protected until now only by a machine-local global ignore.
+
+To do **at launch, in one go** — these are coupled and a half-done launch looks worse than
+none:
+
+- [ ] `python3 check_private.py` — must pass. Once public, a leaked private prompt_id
+      cannot be un-leaked.
+- [ ] `python3 build_findings.py --check` then `build_findings.py`; confirm
+      `docs/index.html` is current.
+- [ ] Make the repository public.
+- [ ] Enable GitHub Pages on `main` / `docs`. Deliberately not enabled earlier: on a
+      private repository this is either unavailable or is itself a publication step.
+- [ ] Set the homepage URL to the Pages site **after** Pages is live, not before — a
+      repository whose homepage 404s is a bad first impression.
+- [ ] Decide whether the Tier 1 scope report
+      (`results/published/2026-09-20-tier1-scope/REPORT.md`) gets a `findings.json` entry
+      and a place on the page. It is the most contrarian result the project has; it is
+      also probe-level, so its ledger entry must not present an effect size.
+
+Not blocking, and deliberately so:
+
+- **Item 10, the private split.** It is not a publication gate — see item 10 for why the
+  earlier framing was wrong. The split is sourced fresh whenever it is built.
 
 ---
 

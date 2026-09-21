@@ -1,0 +1,780 @@
+{
+  "corpus_version": "length-ladder-v1",
+  "intervention": "answer_first at three nested target lengths",
+  "conditions": [
+    "short_control",
+    "short_first",
+    "mid_control",
+    "mid_first",
+    "long_control",
+    "long_first"
+  ],
+  "rungs": [
+    "short",
+    "mid",
+    "long"
+  ],
+  "held_out_of_round": [
+    "finance_housingshare",
+    "home_radon",
+    "home_smokealarm"
+  ],
+  "n_prompts": 3,
+  "n_docs": 24,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "finance",
+    "home_diy"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "home_smokealarm",
+      "domain": "home_diy",
+      "question": "How often should I test and replace my smoke alarm?",
+      "target_doc_id": "home_smokealarm__cpsc_blog",
+      "target_format": "blog",
+      "doc_ids": [
+        "home_smokealarm__usfa_alarms",
+        "home_smokealarm__cpsc_2023b",
+        "home_smokealarm__cpsc_2015",
+        "home_smokealarm__ready_fires",
+        "home_smokealarm__cpsc_2023a",
+        "home_smokealarm__cpsc_2004",
+        "home_smokealarm__cpsc_blog",
+        "home_smokealarm__usfa_prepare"
+      ],
+      "source_corpus": "rankable-screen-v0-b6"
+    },
+    {
+      "prompt_id": "home_radon",
+      "domain": "home_diy",
+      "question": "At what radon level should I fix my home?",
+      "target_doc_id": "home_radon__epa_radtown",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_radon__epa_action",
+        "home_radon__epa_wl",
+        "home_radon__epa_map",
+        "home_radon__epa_radtown",
+        "home_radon__epa_ks",
+        "home_radon__epa_risk",
+        "home_radon__epa_snap"
+      ],
+      "source_corpus": "rankable-screen-v0-b8"
+    },
+    {
+      "prompt_id": "finance_housingshare",
+      "domain": "finance",
+      "question": "What share of my income should go to housing costs?",
+      "target_doc_id": "finance_housingshare__census_story22",
+      "target_format": "news",
+      "doc_ids": [
+        "finance_housingshare__huduser_chas",
+        "finance_housingshare__census_2024",
+        "finance_housingshare__census_19m",
+        "finance_housingshare__census_lowinc",
+        "finance_housingshare__census_story22",
+        "finance_housingshare__cfpb_qm_blog",
+        "finance_housingshare__cfpb_qm_press",
+        "finance_housingshare__cfpb_dti",
+        "finance_housingshare__hud_dti_archive"
+      ],
+      "source_corpus": "rankable-screen-v0-b1"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "home_smokealarm__usfa_alarms",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 19,
+      "source": {
+        "agency": "FEMA US Fire Administration",
+        "title": "Smoke Alarms",
+        "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "130e297adfdc18b014a1012c11ce683faf6371d14c2d74d471a5e754d7b62faf",
+        "retrieved_utc": "2026-09-19T17:06:51+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date.",
+        "short_first": "Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date.",
+        "mid_control": "Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date.",
+        "mid_first": "Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date.",
+        "long_control": "Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date.",
+        "long_first": "Age matters when it comes to smoke alarms. They need to be replaced 10 years from the manufacture date."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2023b",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 18,
+      "source": {
+        "agency": "CPSC",
+        "title": "Save Daylight, Save Lives: Replace Batteries in Alarms",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Save-Daylight-Save-Lives-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c1a087422f122f1f4a71b3299fd9d16bae5fc8dd33cb30b6d2f2118e9f960024",
+        "retrieved_utc": "2026-09-19T17:07:29+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "short_control": "Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries.",
+        "short_first": "Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries.",
+        "mid_control": "Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries.",
+        "mid_first": "Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries.",
+        "long_control": "Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries.",
+        "long_first": "Test the alarms monthly and replace the batteries at least yearly, unless the alarms have sealed 10-year batteries."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2015",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 38,
+      "source": {
+        "agency": "CPSC",
+        "title": "When Turning Clocks Back, Replace Batteries in Alarms",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2015/When-Turning-Clocks-Back-After-Daylight-Saving-Time-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4ea0566cc1e76f956bdc877f0a72e096b84ce151e540c04e14584bebce033eea",
+        "retrieved_utc": "2026-09-19T17:08:10+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "short_control": "Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly.",
+        "short_first": "Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly.",
+        "mid_control": "Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly.",
+        "mid_first": "Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly.",
+        "long_control": "Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly.",
+        "long_first": "Batteries should be replaced in smoke alarms at least once a year, unless the alarms have sealed, 10-year batteries. CPSC recommends that consumers test their smoke alarms every month to make sure that the alarms are working properly."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__ready_fires",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 12,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Home Fires",
+        "url": "https://www.ready.gov/home-fires",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3c366cbdea481a0252bdcc73f08f07d5e8e8f66d28afa737720c093a3ebbdf09",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Replace batteries twice a year, unless you are using 10-year lithium batteries.",
+        "short_first": "Replace batteries twice a year, unless you are using 10-year lithium batteries.",
+        "mid_control": "Replace batteries twice a year, unless you are using 10-year lithium batteries.",
+        "mid_first": "Replace batteries twice a year, unless you are using 10-year lithium batteries.",
+        "long_control": "Replace batteries twice a year, unless you are using 10-year lithium batteries.",
+        "long_first": "Replace batteries twice a year, unless you are using 10-year lithium batteries."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2023a",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 47,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time to Change Smoke and CO Alarm Batteries",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Its-Time-to-Change-Smoke-and-Carbon-Monoxide-Alarm-Batteries-as-Daylight-Saving-Time-Ends",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d59087acb20eedfc6fa04135db811a2561db3ec31e4c740dd70a6a1391fcbe08",
+        "retrieved_utc": "2026-09-19T17:07:18+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "short_control": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour.",
+        "short_first": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour.",
+        "mid_control": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour.",
+        "mid_first": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour.",
+        "long_control": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour.",
+        "long_first": "WASHINGTON, D.C. - Daylight Saving Time ends on Sunday, November 6, 2022, and the U.S. Consumer Product Safety Commission (CPSC) wants consumers to \"fall\" into the habit of changing the batteries in their smoke and carbon monoxide (CO) alarms when you turn your clocks back one hour."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_2004",
+      "prompt_id": "home_smokealarm",
+      "format": "news",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 37,
+      "source": {
+        "agency": "CPSC",
+        "title": "CPSC Warns: Millions Have Smoke Alarms That Don't Work",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2004/CPSC-Warns-Millions-of-Americans-Have-Smoke-Alarms-that-Dont-Work",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cbe7e53c1a6de6549869904417d4ad27eee4fca7bf29dc33c62c942e74ae8022",
+        "retrieved_utc": "2026-09-19T17:07:53+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "short_control": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing.",
+        "short_first": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing.",
+        "mid_control": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing.",
+        "mid_first": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing.",
+        "long_control": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing.",
+        "long_first": "This is Fire Prevention Week (October 5-11), but the U.S. Consumer Product Safety Commission (CPSC) estimates that millions of homes in the U.S. have smoke alarms that do not work. Usually, the batteries are dead or missing."
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__cpsc_blog",
+      "prompt_id": "home_smokealarm",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": true,
+      "answers": "partial",
+      "words": 27,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time. Check and Change Your Alarm Batteries",
+        "url": "https://onsafety.cpsc.gov/blog/2019/10/29/its-time-check-and-change-your-smoke-and-carbon-monoxide-alarm-batteries/",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d626873cb4107fc2dd8da141aebc9cbe3bb12c0a132289fda743fe1c0c82d069",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "wayback id_"
+      },
+      "variants": {
+        "short_control": "What should you do to protect your family? Check ...change ...practice. It's that simple. Check your alarms monthly. Change the batteries yearly. Practice a fire escape plan.",
+        "short_first": "Check your alarms monthly. Change the batteries yearly. What should you do to protect your family? Check ...change ...practice. It's that simple. Practice a fire escape plan.",
+        "mid_control": "CPSC estimates that in 2016, there were nearly 352,000 residential structure fires, resulting in about 2,410 deaths, 10,370 injuries, and $6.36 billion in property damage. According to the National Fire Protection Association (NFPA,) in 2018, a home fire occurs at the rate of one every 87 seconds. From 2012-2016, the NFPA estimated that almost three of every five home fire deaths resulted from fires in homes with no working smoke alarms. In addition, the Centers for Disease Control and Prevention (CDC) estimate more than 400 people die in the United States every year from CO poisoning. What should you do to protect your family? Check ...change ...practice. It's that simple. Check your alarms monthly. Change the batteries yearly. Practice a fire escape plan.",
+        "mid_first": "Check your alarms monthly. Change the batteries yearly. CPSC estimates that in 2016, there were nearly 352,000 residential structure fires, resulting in about 2,410 deaths, 10,370 injuries, and $6.36 billion in property damage. According to the National Fire Protection Association (NFPA,) in 2018, a home fire occurs at the rate of one every 87 seconds. From 2012-2016, the NFPA estimated that almost three of every five home fire deaths resulted from fires in homes with no working smoke alarms. In addition, the Centers for Disease Control and Prevention (CDC) estimate more than 400 people die in the United States every year from CO poisoning. What should you do to protect your family? Check ...change ...practice. It's that simple. Practice a fire escape plan.",
+        "long_control": "Consumers will turn their clocks back one hour when Daylight Saving Time ends on Sunday, November 3, 2019, at 2:00 a.m. As you set the new time, the U.S. Consumer Product Safety Commission (CPSC) reminds you that now is the perfect time to check and change the batteries in smoke and carbon monoxide (CO) alarms. \"Early warning is crucial to getting out of a house fire alive and for surviving CO poisoning,\" said CPSC Acting Chairman Robert Adler. \"I encourage everyone to check and change the batteries in their smoke and carbon monoxide alarms. Doing this can save you and your family in a fire or CO emergency.\" Why is this important? CPSC estimates that in 2016, there were nearly 352,000 residential structure fires, resulting in about 2,410 deaths, 10,370 injuries, and $6.36 billion in property damage. According to the National Fire Protection Association (NFPA,) in 2018, a home fire occurs at the rate of one every 87 seconds. From 2012-2016, the NFPA estimated that almost three of every five home fire deaths resulted from fires in homes with no working smoke alarms. In addition, the Centers for Disease Control and Prevention (CDC) estimate more than 400 people die in the United States every year from CO poisoning. What should you do to protect your family? Check ...change ...practice. It's that simple. Check your alarms monthly. Change the batteries yearly. Practice a fire escape plan.",
+        "long_first": "Check your alarms monthly. Change the batteries yearly. Consumers will turn their clocks back one hour when Daylight Saving Time ends on Sunday, November 3, 2019, at 2:00 a.m. As you set the new time, the U.S. Consumer Product Safety Commission (CPSC) reminds you that now is the perfect time to check and change the batteries in smoke and carbon monoxide (CO) alarms. \"Early warning is crucial to getting out of a house fire alive and for surviving CO poisoning,\" said CPSC Acting Chairman Robert Adler. \"I encourage everyone to check and change the batteries in their smoke and carbon monoxide alarms. Doing this can save you and your family in a fire or CO emergency.\" Why is this important? CPSC estimates that in 2016, there were nearly 352,000 residential structure fires, resulting in about 2,410 deaths, 10,370 injuries, and $6.36 billion in property damage. According to the National Fire Protection Association (NFPA,) in 2018, a home fire occurs at the rate of one every 87 seconds. From 2012-2016, the NFPA estimated that almost three of every five home fire deaths resulted from fires in homes with no working smoke alarms. In addition, the Centers for Disease Control and Prevention (CDC) estimate more than 400 people die in the United States every year from CO poisoning. What should you do to protect your family? Check ...change ...practice. It's that simple. Practice a fire escape plan."
+      },
+      "variant_provenance": {
+        "short_control": "verbatim span of the snapshot (short rung)",
+        "mid_control": "verbatim span of the snapshot (mid rung)",
+        "long_control": "verbatim span of the snapshot (long rung)",
+        "short_first": "control's own sentences, answer moved to the front",
+        "mid_first": "control's own sentences, answer moved to the front",
+        "long_first": "control's own sentences, answer moved to the front"
+      },
+      "rung_words": {
+        "short": 27,
+        "mid": 123,
+        "long": 235
+      }
+    },
+    {
+      "doc_id": "home_smokealarm__usfa_prepare",
+      "prompt_id": "home_smokealarm",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "none",
+      "words": 29,
+      "source": {
+        "agency": "FEMA US Fire Administration",
+        "title": "Prepare for Fire",
+        "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cb2ed57a1fdd4b440490f902694d41fdba19416003e7d53a3c8bdc41712baaa0",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "The U.S. Fire Administration provides safety awareness materials in a variety of formats to help fire departments spread the word in their communities about preparing for a home fire.",
+        "short_first": "The U.S. Fire Administration provides safety awareness materials in a variety of formats to help fire departments spread the word in their communities about preparing for a home fire.",
+        "mid_control": "The U.S. Fire Administration provides safety awareness materials in a variety of formats to help fire departments spread the word in their communities about preparing for a home fire.",
+        "mid_first": "The U.S. Fire Administration provides safety awareness materials in a variety of formats to help fire departments spread the word in their communities about preparing for a home fire.",
+        "long_control": "The U.S. Fire Administration provides safety awareness materials in a variety of formats to help fire departments spread the word in their communities about preparing for a home fire.",
+        "long_first": "The U.S. Fire Administration provides safety awareness materials in a variety of formats to help fire departments spread the word in their communities about preparing for a home fire."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_action",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 59,
+      "source": {
+        "agency": "EPA",
+        "title": "What is EPA's Action Level for Radon and What Does it Mean?",
+        "url": "https://www.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a87214c2de2b9f6df95841c4dd1a0954428ba8757cdb48e5a7309fb74ca2a15a",
+        "retrieved_utc": "2026-09-19T19:22:04+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more. Because there is no known safe level of exposure to radon, the EPA also recommends that Americans consider fixing their home for radon levels between 2 pCi/L and 4 pCi/L (75 - 150 Bq/m3) .",
+        "short_first": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more. Because there is no known safe level of exposure to radon, the EPA also recommends that Americans consider fixing their home for radon levels between 2 pCi/L and 4 pCi/L (75 - 150 Bq/m3) .",
+        "mid_control": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more. Because there is no known safe level of exposure to radon, the EPA also recommends that Americans consider fixing their home for radon levels between 2 pCi/L and 4 pCi/L (75 - 150 Bq/m3) .",
+        "mid_first": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more. Because there is no known safe level of exposure to radon, the EPA also recommends that Americans consider fixing their home for radon levels between 2 pCi/L and 4 pCi/L (75 - 150 Bq/m3) .",
+        "long_control": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more. Because there is no known safe level of exposure to radon, the EPA also recommends that Americans consider fixing their home for radon levels between 2 pCi/L and 4 pCi/L (75 - 150 Bq/m3) .",
+        "long_first": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more. Because there is no known safe level of exposure to radon, the EPA also recommends that Americans consider fixing their home for radon levels between 2 pCi/L and 4 pCi/L (75 - 150 Bq/m3) ."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_wl",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 71,
+      "source": {
+        "agency": "EPA",
+        "title": "Explain Working Levels (WL) and Picocuries Per Liter of Air",
+        "url": "https://www.epa.gov/radon/explain-working-levels-wl-and-picocuries-liter-air-pcil",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1e2bf8df8d589f63dc610136720b6e01186fa5245ab74002f73a7d80b4e7c287",
+        "retrieved_utc": "2026-09-19T19:22:04+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Radon test results may be reported in three different measures - picocuries per liter (pCi/L), Working Levels (WL) and becquerels per meter cubed (Bq/m3). If your test result is in pCi/L, the EPA recommends you fix your home if the radon level is 4 pCi/L (150 Bq/m3)or higher. If the test result is in WL, the EPA recommends you fix your home if the working level is 0.016 WL or higher.",
+        "short_first": "Radon test results may be reported in three different measures - picocuries per liter (pCi/L), Working Levels (WL) and becquerels per meter cubed (Bq/m3). If your test result is in pCi/L, the EPA recommends you fix your home if the radon level is 4 pCi/L (150 Bq/m3)or higher. If the test result is in WL, the EPA recommends you fix your home if the working level is 0.016 WL or higher.",
+        "mid_control": "Radon test results may be reported in three different measures - picocuries per liter (pCi/L), Working Levels (WL) and becquerels per meter cubed (Bq/m3). If your test result is in pCi/L, the EPA recommends you fix your home if the radon level is 4 pCi/L (150 Bq/m3)or higher. If the test result is in WL, the EPA recommends you fix your home if the working level is 0.016 WL or higher.",
+        "mid_first": "Radon test results may be reported in three different measures - picocuries per liter (pCi/L), Working Levels (WL) and becquerels per meter cubed (Bq/m3). If your test result is in pCi/L, the EPA recommends you fix your home if the radon level is 4 pCi/L (150 Bq/m3)or higher. If the test result is in WL, the EPA recommends you fix your home if the working level is 0.016 WL or higher.",
+        "long_control": "Radon test results may be reported in three different measures - picocuries per liter (pCi/L), Working Levels (WL) and becquerels per meter cubed (Bq/m3). If your test result is in pCi/L, the EPA recommends you fix your home if the radon level is 4 pCi/L (150 Bq/m3)or higher. If the test result is in WL, the EPA recommends you fix your home if the working level is 0.016 WL or higher.",
+        "long_first": "Radon test results may be reported in three different measures - picocuries per liter (pCi/L), Working Levels (WL) and becquerels per meter cubed (Bq/m3). If your test result is in pCi/L, the EPA recommends you fix your home if the radon level is 4 pCi/L (150 Bq/m3)or higher. If the test result is in WL, the EPA recommends you fix your home if the working level is 0.016 WL or higher."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_map",
+      "prompt_id": "home_radon",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 67,
+      "source": {
+        "agency": "EPA",
+        "title": "EPA Map of Radon Zones and Supplemental Information",
+        "url": "https://www.epa.gov/radon/epa-map-radon-zones-and-supplemental-information",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "efd543c8d96b662864cd8e2c2f3832cea31a6c007f6920ffbdf43a49f36b9eff",
+        "retrieved_utc": "2026-09-19T19:22:05+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "This map should not be used to determine if individual homes need to be tested. No matter where you live, test your home for radon-it's easy and inexpensive. Fix your home if your radon level is 4 picocuries per liter (pCi/L) (150 becquerels per cubic meter (Bq/m3))or higher. Consider fixing if your level is between 2 and 4 pCi/L (75 - 150 becquerels per cubic meter (Bq/m3)).",
+        "short_first": "This map should not be used to determine if individual homes need to be tested. No matter where you live, test your home for radon-it's easy and inexpensive. Fix your home if your radon level is 4 picocuries per liter (pCi/L) (150 becquerels per cubic meter (Bq/m3))or higher. Consider fixing if your level is between 2 and 4 pCi/L (75 - 150 becquerels per cubic meter (Bq/m3)).",
+        "mid_control": "This map should not be used to determine if individual homes need to be tested. No matter where you live, test your home for radon-it's easy and inexpensive. Fix your home if your radon level is 4 picocuries per liter (pCi/L) (150 becquerels per cubic meter (Bq/m3))or higher. Consider fixing if your level is between 2 and 4 pCi/L (75 - 150 becquerels per cubic meter (Bq/m3)).",
+        "mid_first": "This map should not be used to determine if individual homes need to be tested. No matter where you live, test your home for radon-it's easy and inexpensive. Fix your home if your radon level is 4 picocuries per liter (pCi/L) (150 becquerels per cubic meter (Bq/m3))or higher. Consider fixing if your level is between 2 and 4 pCi/L (75 - 150 becquerels per cubic meter (Bq/m3)).",
+        "long_control": "This map should not be used to determine if individual homes need to be tested. No matter where you live, test your home for radon-it's easy and inexpensive. Fix your home if your radon level is 4 picocuries per liter (pCi/L) (150 becquerels per cubic meter (Bq/m3))or higher. Consider fixing if your level is between 2 and 4 pCi/L (75 - 150 becquerels per cubic meter (Bq/m3)).",
+        "long_first": "This map should not be used to determine if individual homes need to be tested. No matter where you live, test your home for radon-it's easy and inexpensive. Fix your home if your radon level is 4 picocuries per liter (pCi/L) (150 becquerels per cubic meter (Bq/m3))or higher. Consider fixing if your level is between 2 and 4 pCi/L (75 - 150 becquerels per cubic meter (Bq/m3))."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_radtown",
+      "prompt_id": "home_radon",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": true,
+      "answers": "direct",
+      "words": 60,
+      "source": {
+        "agency": "EPA",
+        "title": "Radon in Homes, Schools and Buildings",
+        "url": "https://www.epa.gov/radtown/radon-homes-schools-and-buildings",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ae709c44ddc2eb5cb4829808b02f92bccf487a712470aae14b76bb3fc0a8c2ba",
+        "retrieved_utc": "2026-09-19T19:22:04+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Take action to lower your exposure to radon when at home testing shows elevated radon levels at or above 4 pCi/L. Find a certified contractor, get cost estimates and fix spaces with an elevated radon level. If elevated radon levels are found in your school or business talk to your school administrator or building manager about getting the problem fixed.",
+        "short_first": "Take action to lower your exposure to radon when at home testing shows elevated radon levels at or above 4 pCi/L. Find a certified contractor, get cost estimates and fix spaces with an elevated radon level. If elevated radon levels are found in your school or business talk to your school administrator or building manager about getting the problem fixed.",
+        "mid_control": "There are steps you can take to find radon and reduce your exposure. Test your home, school and business. Testing for radon is simple and inexpensive. Radon levels are often highest in the lowest part of a home or building, so testing in the basement or ground floor is a good place to start. Take action to lower your exposure to radon when at home testing shows elevated radon levels at or above 4 pCi/L. Find a certified contractor, get cost estimates and fix spaces with an elevated radon level. If elevated radon levels are found in your school or business talk to your school administrator or building manager about getting the problem fixed.",
+        "mid_first": "Take action to lower your exposure to radon when at home testing shows elevated radon levels at or above 4 pCi/L. There are steps you can take to find radon and reduce your exposure. Test your home, school and business. Testing for radon is simple and inexpensive. Radon levels are often highest in the lowest part of a home or building, so testing in the basement or ground floor is a good place to start. Find a certified contractor, get cost estimates and fix spaces with an elevated radon level. If elevated radon levels are found in your school or business talk to your school administrator or building manager about getting the problem fixed.",
+        "long_control": "Nearly one in 15 homes in the United States has a radon level that should be reduced. Radon is the second leading cause of lung cancer. Smoking is the first. Radon has been found at high levels in every state. Known for its potential to cause lung cancer upon prolonged exposure, it is important to understand the risks to keep you and your family safe. Radon is a natural, radioactive gas that you can't see or smell. It comes from the ground, like in soil, rock and groundwater,. Radon can enter the places we consider safe, like our homes, and schools, There are steps you can take to find radon and reduce your exposure. Test your home, school and business. Testing for radon is simple and inexpensive. Radon levels are often highest in the lowest part of a home or building, so testing in the basement or ground floor is a good place to start. Take action to lower your exposure to radon when at home testing shows elevated radon levels at or above 4 pCi/L. Find a certified contractor, get cost estimates and fix spaces with an elevated radon level. If elevated radon levels are found in your school or business talk to your school administrator or building manager about getting the problem fixed.",
+        "long_first": "Take action to lower your exposure to radon when at home testing shows elevated radon levels at or above 4 pCi/L. Nearly one in 15 homes in the United States has a radon level that should be reduced. Radon is the second leading cause of lung cancer. Smoking is the first. Radon has been found at high levels in every state. Known for its potential to cause lung cancer upon prolonged exposure, it is important to understand the risks to keep you and your family safe. Radon is a natural, radioactive gas that you can't see or smell. It comes from the ground, like in soil, rock and groundwater,. Radon can enter the places we consider safe, like our homes, and schools, There are steps you can take to find radon and reduce your exposure. Test your home, school and business. Testing for radon is simple and inexpensive. Radon levels are often highest in the lowest part of a home or building, so testing in the basement or ground floor is a good place to start. Find a certified contractor, get cost estimates and fix spaces with an elevated radon level. If elevated radon levels are found in your school or business talk to your school administrator or building manager about getting the problem fixed."
+      },
+      "variant_provenance": {
+        "short_control": "verbatim span of the snapshot (short rung)",
+        "mid_control": "verbatim span of the snapshot (mid rung)",
+        "long_control": "verbatim span of the snapshot (long rung)",
+        "short_first": "control's own sentences, answer moved to the front",
+        "mid_first": "control's own sentences, answer moved to the front",
+        "long_first": "control's own sentences, answer moved to the front"
+      },
+      "rung_words": {
+        "short": 60,
+        "mid": 114,
+        "long": 215
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_ks",
+      "prompt_id": "home_radon",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "direct",
+      "words": 64,
+      "source": {
+        "agency": "EPA Region 7",
+        "title": "Take Time to Protect Your Home from This Invisible Cancer Risk",
+        "url": "https://www.epa.gov/ks/january-take-time-protect-your-home-invisible-cancer-risk",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "38c803499ee5d4721119a9a60095e3420c43576157733f02a8b103687e39f1c4",
+        "retrieved_utc": "2026-09-19T19:22:06+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Any home, anywhere, can have a radon problem. But it's especially important to test your home here in the Heartland region where many of us live in areas designated as EPA Radon Zone One or Two, indicating high or moderate potential for elevated indoor radon levels. The EPA recommends homes be fixed if the radon level is four picocuries per liter (pCi/L) or more.",
+        "short_first": "Any home, anywhere, can have a radon problem. But it's especially important to test your home here in the Heartland region where many of us live in areas designated as EPA Radon Zone One or Two, indicating high or moderate potential for elevated indoor radon levels. The EPA recommends homes be fixed if the radon level is four picocuries per liter (pCi/L) or more.",
+        "mid_control": "Any home, anywhere, can have a radon problem. But it's especially important to test your home here in the Heartland region where many of us live in areas designated as EPA Radon Zone One or Two, indicating high or moderate potential for elevated indoor radon levels. The EPA recommends homes be fixed if the radon level is four picocuries per liter (pCi/L) or more.",
+        "mid_first": "Any home, anywhere, can have a radon problem. But it's especially important to test your home here in the Heartland region where many of us live in areas designated as EPA Radon Zone One or Two, indicating high or moderate potential for elevated indoor radon levels. The EPA recommends homes be fixed if the radon level is four picocuries per liter (pCi/L) or more.",
+        "long_control": "Any home, anywhere, can have a radon problem. But it's especially important to test your home here in the Heartland region where many of us live in areas designated as EPA Radon Zone One or Two, indicating high or moderate potential for elevated indoor radon levels. The EPA recommends homes be fixed if the radon level is four picocuries per liter (pCi/L) or more.",
+        "long_first": "Any home, anywhere, can have a radon problem. But it's especially important to test your home here in the Heartland region where many of us live in areas designated as EPA Radon Zone One or Two, indicating high or moderate potential for elevated indoor radon levels. The EPA recommends homes be fixed if the radon level is four picocuries per liter (pCi/L) or more."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_risk",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 37,
+      "source": {
+        "agency": "EPA",
+        "title": "Health Risk of Radon",
+        "url": "https://www.epa.gov/radon/health-risk-radon",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4e6a7a2050f3dad508740a336d98231565a723d09a1ab696cc7ec941c8f69040",
+        "retrieved_utc": "2026-09-19T19:22:07+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Dr. Carmona also stressed the need to remedy the problem as soon as possible when the radon level is 4 pCi/L (150 Bq/m3)or more, noting that more than 20,000 Americans die of radon-related lung cancer each year.",
+        "short_first": "Dr. Carmona also stressed the need to remedy the problem as soon as possible when the radon level is 4 pCi/L (150 Bq/m3)or more, noting that more than 20,000 Americans die of radon-related lung cancer each year.",
+        "mid_control": "Dr. Carmona also stressed the need to remedy the problem as soon as possible when the radon level is 4 pCi/L (150 Bq/m3)or more, noting that more than 20,000 Americans die of radon-related lung cancer each year.",
+        "mid_first": "Dr. Carmona also stressed the need to remedy the problem as soon as possible when the radon level is 4 pCi/L (150 Bq/m3)or more, noting that more than 20,000 Americans die of radon-related lung cancer each year.",
+        "long_control": "Dr. Carmona also stressed the need to remedy the problem as soon as possible when the radon level is 4 pCi/L (150 Bq/m3)or more, noting that more than 20,000 Americans die of radon-related lung cancer each year.",
+        "long_first": "Dr. Carmona also stressed the need to remedy the problem as soon as possible when the radon level is 4 pCi/L (150 Bq/m3)or more, noting that more than 20,000 Americans die of radon-related lung cancer each year."
+      }
+    },
+    {
+      "doc_id": "home_radon__epa_snap",
+      "prompt_id": "home_radon",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "answers": "partial",
+      "words": 51,
+      "source": {
+        "agency": "EPA (January 2021 snapshot)",
+        "title": "What is EPA's Action Level for Radon? (archived version)",
+        "url": "https://19january2021snapshot.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean_.html",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": "Distinct EPA-hosted snapshot URL; excerpt taken from the average-concentration passage, not the action-level passage used from the live page, so the two are not near-duplicates",
+        "snapshot_sha256": "76b73ca6b1a9d70c9ff2e3d95d6c142c5032ad7f6b39a4511fc425465655cce0",
+        "retrieved_utc": "2026-09-19T19:22:07+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "The average indoor radon concentration for America's homes is about 1.3 pCi/L. It is upon this national average indoor level that EPA based its estimate of 21,000 radon-related lung cancers a year. The average concentration of radon in outdoor air is .4 pCi/L or 1/10th of EPA's 4 pCi/L action level.",
+        "short_first": "The average indoor radon concentration for America's homes is about 1.3 pCi/L. It is upon this national average indoor level that EPA based its estimate of 21,000 radon-related lung cancers a year. The average concentration of radon in outdoor air is .4 pCi/L or 1/10th of EPA's 4 pCi/L action level.",
+        "mid_control": "The average indoor radon concentration for America's homes is about 1.3 pCi/L. It is upon this national average indoor level that EPA based its estimate of 21,000 radon-related lung cancers a year. The average concentration of radon in outdoor air is .4 pCi/L or 1/10th of EPA's 4 pCi/L action level.",
+        "mid_first": "The average indoor radon concentration for America's homes is about 1.3 pCi/L. It is upon this national average indoor level that EPA based its estimate of 21,000 radon-related lung cancers a year. The average concentration of radon in outdoor air is .4 pCi/L or 1/10th of EPA's 4 pCi/L action level.",
+        "long_control": "The average indoor radon concentration for America's homes is about 1.3 pCi/L. It is upon this national average indoor level that EPA based its estimate of 21,000 radon-related lung cancers a year. The average concentration of radon in outdoor air is .4 pCi/L or 1/10th of EPA's 4 pCi/L action level.",
+        "long_first": "The average indoor radon concentration for America's homes is about 1.3 pCi/L. It is upon this national average indoor level that EPA based its estimate of 21,000 radon-related lung cancers a year. The average concentration of radon in outdoor air is .4 pCi/L or 1/10th of EPA's 4 pCi/L action level."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__huduser_chas",
+      "prompt_id": "finance_housingshare",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 27,
+      "source": {
+        "agency": "HUD Office of Policy Development and Research",
+        "title": "CHAS: Background",
+        "url": "https://www.huduser.gov/portal/datasets/cp/CHAS/bg_chas.html",
+        "rights": "US federal work (HUD), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e1465004e74e482b504da7453c063fcfecdc4daa709ccfa6e5bb4508b7c7d544",
+        "retrieved_utc": "2026-09-15T05:02:51+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Cost burden - Monthly housing costs (including utilities) exceeding 30% of monthly income. Severe cost burden - Monthly housing costs (including utilities) exceeding 50% of monthly income.",
+        "short_first": "Cost burden - Monthly housing costs (including utilities) exceeding 30% of monthly income. Severe cost burden - Monthly housing costs (including utilities) exceeding 50% of monthly income.",
+        "mid_control": "Cost burden - Monthly housing costs (including utilities) exceeding 30% of monthly income. Severe cost burden - Monthly housing costs (including utilities) exceeding 50% of monthly income.",
+        "mid_first": "Cost burden - Monthly housing costs (including utilities) exceeding 30% of monthly income. Severe cost burden - Monthly housing costs (including utilities) exceeding 50% of monthly income.",
+        "long_control": "Cost burden - Monthly housing costs (including utilities) exceeding 30% of monthly income. Severe cost burden - Monthly housing costs (including utilities) exceeding 50% of monthly income.",
+        "long_first": "Cost burden - Monthly housing costs (including utilities) exceeding 30% of monthly income. Severe cost burden - Monthly housing costs (including utilities) exceeding 50% of monthly income."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_2024",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 47,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Nearly Half of Renter Households Are Cost-Burdened, Proportions Differ by Race",
+        "url": "https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "89b05284912e963a23d43bf83383fb2b2473b71e94722eae180cbcd755eede8f",
+        "retrieved_utc": "2026-09-15T05:02:53+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened.",
+        "short_first": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened.",
+        "mid_control": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened.",
+        "mid_first": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened.",
+        "long_control": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened.",
+        "long_first": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD). Households spending more than 50% of their income on housing costs are considered severely cost-burdened."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_19m",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 75,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "More Than 19 Million Renters Burdened by Housing Costs",
+        "url": "https://www.census.gov/newsroom/press-releases/2022/renters-burdened-by-housing-costs.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d5c02a2a85bbc2e04aac8cd947cbc036de92674eee48ed7abc8d68b70b7384c9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing.",
+        "short_first": "Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing.",
+        "mid_control": "Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing.",
+        "mid_first": "Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing.",
+        "long_control": "Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing.",
+        "long_first": "Over 40% (19 million) of renter households in the country spent more than 30% of their income on housing costs during the 2017-2021 period, according to new American Community Survey (ACS) 5-year estimates released today by the U.S. Census Bureau. Households spending more than 30% on housing costs, including rent or mortgage payments, utilities, and other fees, are considered housing cost burdens according to the Department of Housing and Urban Development's definition of affordable housing."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_lowinc",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "direct",
+      "words": 33,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Share of Income Needed to Pay Rent Increased the Most for Low-Income Households",
+        "url": "https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0188131a895b488d9e37fc08ed66f15b09dd2aa0d78a41124cd81efa180ac352",
+        "retrieved_utc": "2026-09-15T05:02:55+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%.",
+        "short_first": "When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%.",
+        "mid_control": "When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%.",
+        "mid_first": "When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%.",
+        "long_control": "When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%.",
+        "long_first": "When a household has a cost ratio of over 30%, it is considered cost-burdened, according to the Department of Housing and Urban Development (HUD). Severely cost-burdened households have cost ratios of over 50%."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__census_story22",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": true,
+      "answers": "direct",
+      "words": 53,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Renters More Likely Than Homeowners to Spend More Than 30% of Income on Housing",
+        "url": "https://www.census.gov/library/stories/2022/12/housing-costs-burden.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cdd03fe793097e6b0a834a1ac7b523496afc07cf734c8436487987938fd810e9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today. Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs.",
+        "short_first": "Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs. Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today.",
+        "mid_control": "Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today. Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs. The burden was especially high in some of the nation's largest counties where housing is more expensive or in areas where incomes are low. The ACS collects a variety of housing cost information for renters (monthly rent and utility bills) and for homeowners (mortgage principal and interest, real estate taxes, homeowner's insurance, utilities, mobile home costs, second mortgage payments and condominium fees if applicable). Nearly half of the counties where renters had the highest median housing cost ratios were in the South. Out of the 44 million renter households, the vast majority (41 million) paid rent and had household income. Households with zero or negative income, or those in rented units not paying cash rent, were excluded from calculations.",
+        "mid_first": "Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs. Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today. The burden was especially high in some of the nation's largest counties where housing is more expensive or in areas where incomes are low. The ACS collects a variety of housing cost information for renters (monthly rent and utility bills) and for homeowners (mortgage principal and interest, real estate taxes, homeowner's insurance, utilities, mobile home costs, second mortgage payments and condominium fees if applicable). Nearly half of the counties where renters had the highest median housing cost ratios were in the South. Out of the 44 million renter households, the vast majority (41 million) paid rent and had household income. Households with zero or negative income, or those in rented units not paying cash rent, were excluded from calculations.",
+        "long_control": "Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today. Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs. The burden was especially high in some of the nation's largest counties where housing is more expensive or in areas where incomes are low. The ACS collects a variety of housing cost information for renters (monthly rent and utility bills) and for homeowners (mortgage principal and interest, real estate taxes, homeowner's insurance, utilities, mobile home costs, second mortgage payments and condominium fees if applicable). Nearly half of the counties where renters had the highest median housing cost ratios were in the South. Out of the 44 million renter households, the vast majority (41 million) paid rent and had household income. Households with zero or negative income, or those in rented units not paying cash rent, were excluded from calculations. In 239 or 7.6% of the nation's 3,143 counties, more than half of renter households that paid rent and had a household income faced housing cost burdens. Among them are some of the most populous U.S. counties like Harris County, Texas, and Los Angeles County, California. Over 15.8 million renters, roughly one-third of all renter households in the nation, lived in these 239 counties.",
+        "long_first": "Households are considered cost burdened when they spend more than 30% of their income on rent, mortgage and other housing needs. Over 19 million U.S. renter households spent more than 30% of their income on housing costs in 2021, according to data from the 2017-2021 American Community Survey (ACS) 5-year estimates released today. The burden was especially high in some of the nation's largest counties where housing is more expensive or in areas where incomes are low. The ACS collects a variety of housing cost information for renters (monthly rent and utility bills) and for homeowners (mortgage principal and interest, real estate taxes, homeowner's insurance, utilities, mobile home costs, second mortgage payments and condominium fees if applicable). Nearly half of the counties where renters had the highest median housing cost ratios were in the South. Out of the 44 million renter households, the vast majority (41 million) paid rent and had household income. Households with zero or negative income, or those in rented units not paying cash rent, were excluded from calculations. In 239 or 7.6% of the nation's 3,143 counties, more than half of renter households that paid rent and had a household income faced housing cost burdens. Among them are some of the most populous U.S. counties like Harris County, Texas, and Los Angeles County, California. Over 15.8 million renters, roughly one-third of all renter households in the nation, lived in these 239 counties."
+      },
+      "variant_provenance": {
+        "short_control": "verbatim span of the snapshot (short rung)",
+        "mid_control": "verbatim span of the snapshot (mid rung)",
+        "long_control": "verbatim span of the snapshot (long rung)",
+        "short_first": "control's own sentences, answer moved to the front",
+        "mid_first": "control's own sentences, answer moved to the front",
+        "long_first": "control's own sentences, answer moved to the front"
+      },
+      "rung_words": {
+        "short": 53,
+        "mid": 172,
+        "long": 236
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_qm_blog",
+      "prompt_id": "finance_housingshare",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 66,
+      "source": {
+        "agency": "CFPB",
+        "title": "Qualified Mortgages: what are they and what do they mean for you?",
+        "url": "https://www.consumerfinance.gov/about-us/blog/qualified-mortgages-what-are-they-and-what-do-they-mean-for-you/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ec2cd37d9a9f4660355c027960d9485e989076db6c5bd6a91a2c64014825394a",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income.",
+        "short_first": "To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income.",
+        "mid_control": "To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income.",
+        "mid_first": "To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income.",
+        "long_control": "To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income.",
+        "long_first": "To get a standard Qualified Mortgage, your monthly debt-to-income ratio generally must be at or below 43 percent. This means that no more than 43 percent of your gross monthly income is needed to pay your fixed debts including your mortgage and other debts such as car loans. Generally, financial planners recommend that borrowers keep their debt payments much lower than 43 percent of their income."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_qm_press",
+      "prompt_id": "finance_housingshare",
+      "format": "news",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 62,
+      "source": {
+        "agency": "CFPB",
+        "title": "CFPB Issues Two Final Rules to Promote Access to Responsible, Affordable Mortgage Credit",
+        "url": "https://www.consumerfinance.gov/about-us/newsroom/consumer-financial-protection-bureau-issues-two-final-rules-promote-access-responsible-affordable-mortgage-credit/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8a07c11d60e2164d5ee928062fdef7b2678dda602afae7be518261ffa3454e34",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs.",
+        "short_first": "The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs.",
+        "mid_control": "The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs.",
+        "mid_first": "The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs.",
+        "long_control": "The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs.",
+        "long_first": "The Bureau has issued two rules related to QM loans. The first final rule, the General QM Final Rule, replaces the current requirement for General QM loans that the consumer's debt-to-income ratio (DTI) not exceed 43 percent with a limit based on the loan's pricing. In the second final rule issued today, the Bureau creates a new category for QMs, Seasoned QMs."
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__cfpb_dti",
+      "prompt_id": "finance_housingshare",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 104,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a debt-to-income ratio?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-to-income-ratio-why-is-the-43-debt-to-income-ratio-important-en-1791/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "524c48432b8153be23135c7ae95a87686546500a114ae379a3a0f0a0ecf0df9e",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.)",
+        "short_first": "To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.)",
+        "mid_control": "To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.)",
+        "mid_first": "To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.)",
+        "long_control": "To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.)",
+        "long_first": "To calculate your DTI, you add up all your monthly debt payments and divide them by your gross monthly income. Your gross monthly income is generally the amount of money you have earned before your taxes and other deductions are taken out. For example, if you pay $1500 a month for your mortgage and another $100 a month for an auto loan and $400 a month for the rest of your debts, your monthly debt payments are $2,000. ($1500 + $100 + $400 = $2,000.) If your gross monthly income is $6,000, then your debt-to-income ratio is 33 percent. ($2,000 is 33% of $6,000.)"
+      }
+    },
+    {
+      "doc_id": "finance_housingshare__hud_dti_archive",
+      "prompt_id": "finance_housingshare",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "answers": "partial",
+      "words": 66,
+      "source": {
+        "agency": "HUD (FHA)",
+        "title": "HOC Reference Guide: Debt-to-Income Ratio",
+        "url": "https://archives.hud.gov/offices/hsg/sfh/ref/sfhp2-12.cfm",
+        "rights": "US federal work (HUD), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c6bccb433ae0f5c4caf2d7042b955003a783af37669355c6522da1698480311a",
+        "retrieved_utc": "2026-09-15T05:02:50+00:00",
+        "method": "curl"
+      },
+      "variants": {
+        "short_control": "When either or both of the permissible ratios of 31%/43% is/are exceeded, the lender is required to provide justification, in the \"Remarks\" section of the Loan Transmittal (HUD 92900.LT), as to why they believe the mortgage presents an acceptable risk. The lender must include any compensating factors used for loan approval. For EEM or EEH loans, ratios of 33%/45% are considered permissible (Handbook 4155.1, Section 6.D).",
+        "short_first": "When either or both of the permissible ratios of 31%/43% is/are exceeded, the lender is required to provide justification, in the \"Remarks\" section of the Loan Transmittal (HUD 92900.LT), as to why they believe the mortgage presents an acceptable risk. The lender must include any compensating factors used for loan approval. For EEM or EEH loans, ratios of 33%/45% are considered permissible (Handbook 4155.1, Section 6.D).",
+        "mid_control": "When either or both of the permissible ratios of 31%/43% is/are exceeded, the lender is required to provide justification, in the \"Remarks\" section of the Loan Transmittal (HUD 92900.LT), as to why they believe the mortgage presents an acceptable risk. The lender must include any compensating factors used for loan approval. For EEM or EEH loans, ratios of 33%/45% are considered permissible (Handbook 4155.1, Section 6.D).",
+        "mid_first": "When either or both of the permissible ratios of 31%/43% is/are exceeded, the lender is required to provide justification, in the \"Remarks\" section of the Loan Transmittal (HUD 92900.LT), as to why they believe the mortgage presents an acceptable risk. The lender must include any compensating factors used for loan approval. For EEM or EEH loans, ratios of 33%/45% are considered permissible (Handbook 4155.1, Section 6.D).",
+        "long_control": "When either or both of the permissible ratios of 31%/43% is/are exceeded, the lender is required to provide justification, in the \"Remarks\" section of the Loan Transmittal (HUD 92900.LT), as to why they believe the mortgage presents an acceptable risk. The lender must include any compensating factors used for loan approval. For EEM or EEH loans, ratios of 33%/45% are considered permissible (Handbook 4155.1, Section 6.D).",
+        "long_first": "When either or both of the permissible ratios of 31%/43% is/are exceeded, the lender is required to provide justification, in the \"Remarks\" section of the Loan Transmittal (HUD 92900.LT), as to why they believe the mortgage presents an acceptable risk. The lender must include any compensating factors used for loan approval. For EEM or EEH loans, ratios of 33%/45% are considered permissible (Handbook 4155.1, Section 6.D)."
+      }
+    }
+  ],
+  "corpus_sha256": "a24dba316cb35ae108f7e71ad0240908ef8f31efdaa7ffd55200e6874cf0feef"
+}

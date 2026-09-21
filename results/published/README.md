@@ -12,6 +12,7 @@ it by hand.
 
 <!-- rounds:start -->
 
+- **2026-09-20 — tier1-scope** · [report](2026-09-20-tier1-scope/REPORT.md) · null
 - **2026-09-11 — lengthonly** · [report](2026-09-11-lengthonly/REPORT.md) · H7
 - **2026-08-30 — calibration-v1** · [report](2026-08-30-calibration-v1/REPORT.md) · CAL-1
 - **2026-08-29 — kwstuff-v3** · [report](2026-08-29-kwstuff-v3/REPORT.md) · H6, H3, C2 baseline

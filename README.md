@@ -67,6 +67,8 @@ Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
 | `calibration_api.py`, `calibration_prompts.py` | Calibration study, API plane |
 | `build_findings.py` | Builds the findings page from the ledger |
 | `size_round1.py`, `make_mock.py`, `check_variants.py`, `engine_weights.py` | Power sizing, synthetic validation, corpus checks, engine panel |
+| `CONTRIBUTING.md` | How to reproduce a round, the rules that are not negotiable, and what adding a round requires |
+| `check_private.py` | Leak check for the held-out private split — must pass before any publication (`METHODOLOGY.md` §10.1) |
 
 ## How a round works
 
@@ -106,7 +108,14 @@ previous locations:
 
 `METHODOLOGY.md` §1–§8 keep their numbering, so every other section citation still resolves.
 
-## Licence
+## Licence and citation
 
-Code MIT. Data and results CC-BY-4.0 — cite the numbers, quote them, build on them, with
-attribution. See `LICENSE`.
+Code MIT (`LICENSE`). Data and results CC BY 4.0 (`LICENSE-DATA`) — cite the numbers,
+quote them, build on them, with attribution.
+
+Corpus documents are excerpts of US federal works, which carry no US copyright
+(17 U.S.C. § 105); each records its agency, source URL and rights basis.
+
+`CITATION.cff` has the preferred citation. When you are quoting a specific number, cite
+the round's dated report under `results/published/`, not just the repository — the
+repository changes, a published round does not.
