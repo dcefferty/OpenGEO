@@ -60,7 +60,25 @@ donor sites. This is a partnerships problem before it is a code problem.
 
 ### 10. Held-out private split
 Contamination defence. Publish only aggregate results from the private half; rotate a
-fraction of public prompts each round.
+fraction of public prompts each round. Protocol in `METHODOLOGY.md` §10.1.
+
+**Structure in place 2026-09-20**, split still empty. `private/` is gitignored,
+`private/MANIFEST.json` records the split, and `check_private.py` fails the build if any
+private prompt_id appears in a tracked file **or in any commit message** — a question leaks
+by being mentioned at least as easily as by being committed.
+
+**Correction to an earlier plan.** This item was previously treated as a gate that had to
+clear before the repository could go public. That was wrong in one direction and right in
+another, and the distinction matters:
+
+- It is **not** a publication blocker. The split's value comes from its questions never
+  having been published, which freshly sourced material satisfies whenever it is created.
+  Building it after launch costs nothing.
+- What **is** irreversible is already done: all 16 item-11 screened questions sit in git
+  history across 8 commits. They cannot join the split, because removing them would mean
+  rewriting the history that proves when each round was pre-registered — and that evidence
+  is the thing this project is actually selling. So the split must be sourced fresh, and
+  that cost is now fixed regardless of when it is paid.
 
 *Acceptance:* a private split exists, is excluded from the public corpus, and one round
 reports public and private results side by side.

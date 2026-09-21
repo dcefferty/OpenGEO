@@ -438,6 +438,45 @@ report it comes from, and prose claims carry assertions the build checks against
 **Licence:** code MIT; data and results CC-BY-4.0, so vendors can cite the numbers with
 attribution.
 
+### 10.1 The held-out private split
+
+A benchmark that is fully public is eventually trained on. The defence is a **private
+split**: questions the public corpus does not contain, run alongside the public ones, with
+**only aggregate results published**. A result that holds on both is not an artefact of the
+public set having been seen; a result that holds only on the public half is evidence of
+contamination or of the corpus having been fitted.
+
+The split is a *check on* the public numbers, not a source of headline ones. Nothing is
+ever claimed from the private half alone, because nobody can verify it.
+
+**It lives outside the repository, under a gitignored `private/`.** This is not a
+preference. Git history is permanent, and in this project the history *is* the
+pre-registration evidence — the timestamp on a committed pre-registration is what proves it
+preceded its data. A private question committed once cannot be made private again without
+rewriting that history, and that evidence is not tradeable. So the rule is absolute:
+material that has ever been committed to the public repository can never become part of
+the split, no matter that the repository was private at the time.
+
+Two consequences follow, and both are easy to get wrong:
+
+- **A question leaks by being mentioned, not just by being committed.** A prompt_id in a
+  roadmap note, a pre-registration, a probe write-up or a commit message burns that
+  question as thoroughly as committing its corpus would. `check_private.py` checks tracked
+  files *and* every commit message, and must pass before any publication and before the
+  repository is made public.
+- **The split must be sourced fresh.** It cannot be assembled by holding back part of an
+  existing corpus after the fact.
+
+**Size and rotation.** The split should be large enough that a divergence between halves is
+detectable rather than noise — at the reliability established in §5.2, that means treating
+it as a corpus in its own right, not a handful of spare questions. A fraction of public
+questions rotates into retirement each round, so the public set ages out rather than
+accumulating exposure indefinitely.
+
+**What a round reports.** Public results in full, with raw responses. Private results as
+aggregates only: the pooled effect, its interval, and whether it agrees with the public
+half. If the two disagree, that disagreement is the finding and is published as such.
+
 ---
 
 ## Sources
