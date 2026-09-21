@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: >-
+  If you use OpenGEO, cite the repository. Individual rounds carry their own
+  dated reports under results/published/ — cite the round, not just the repo,
+  when you are quoting a specific number.
+title: "OpenGEO: an open, reproducible, causal benchmark for Generative Engine Optimization"
+abstract: >-
+  OpenGEO measures whether changing a piece of content changes whether an AI
+  answer engine cites it. Documents are supplied to the model in context, so
+  retrieval is held constant and the synthesis stage is measured in isolation.
+  Every round uses a paired design in which only the document under test differs
+  between arms, is pre-registered before collection, and ships its corpus,
+  harness and raw model responses so the result can be re-run and checked.
+type: software
+authors:
+  - given-names: Lu
+    family-names: Yang
+repository-code: "https://github.com/dcefferty/GEO-Bench"
+url: "https://dcefferty.github.io/GEO-Bench/"
+license: MIT
+date-released: "2026-08-11"
+keywords:
+  - generative engine optimization
+  - GEO
+  - large language models
+  - citation
+  - benchmark
+  - reproducibility
+  - causal inference

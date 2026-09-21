@@ -1,0 +1,32 @@
+# Data and results licence
+
+The **code** in this repository is MIT licensed — see `LICENSE`.
+
+The **data and results** are licensed under Creative Commons Attribution 4.0
+International (CC BY 4.0). This covers:
+
+- `corpus/` — benchmark corpora and the builders that generate them
+- `results/` — raw model responses, the findings ledger, and published reports
+- `docs/` — the generated findings page
+- `preregistrations/` — the pre-registration record
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, link to the licence, and
+indicate if changes were made.
+
+Full licence text: https://creativecommons.org/licenses/by/4.0/legalcode
+Summary: https://creativecommons.org/licenses/by/4.0/
+
+Attribution is the point. Vendors, journalists and researchers are encouraged
+to cite these numbers — see `CITATION.cff` for the preferred form.
+
+## Third-party source material
+
+Documents in the benchmark corpora are excerpts of US federal government works,
+which are not subject to copyright in the United States (17 U.S.C. § 105). Each
+document records its agency, source URL and the rights basis under which it is
+included, and `corpus/sources.py` refuses to snapshot known non-federal content
+served from federal domains. The CC BY 4.0 grant above applies to this
+repository's own contributions — the selection, arrangement, annotation and
+measurement — not to the underlying federal text, which is already free of
+copyright.

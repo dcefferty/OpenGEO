@@ -326,6 +326,49 @@ standard rather than in anyone's memory:
 
 ---
 
+## Publication checklist
+
+The repository is private and **stays private until the owner explicitly says otherwise**.
+Everything below is prepared; nothing here should be taken as a decision to launch.
+
+Done:
+
+- [x] Licence split so GitHub parses it — `LICENSE` (MIT), `LICENSE-DATA` (CC BY 4.0).
+      A single file with both made GitHub report "Other" and show no licence badge, on a
+      project whose entire pitch is openness.
+- [x] `CITATION.cff` — the audience that matters here (journalists, academics, buyers
+      doing vendor diligence) needs something to cite.
+- [x] `CONTRIBUTING.md` — reproduction steps, the non-negotiable design rules, and what
+      adding a round requires.
+- [x] Repository description and topics.
+- [x] `.gitignore` pins `private/` and `.claude/settings.local.json`; the latter
+      accumulates literal shell commands from approved tool calls and has held an API key
+      inline, protected until now only by a machine-local global ignore.
+
+To do **at launch, in one go** — these are coupled and a half-done launch looks worse than
+none:
+
+- [ ] `python3 check_private.py` — must pass. Once public, a leaked private prompt_id
+      cannot be un-leaked.
+- [ ] `python3 build_findings.py --check` then `build_findings.py`; confirm
+      `docs/index.html` is current.
+- [ ] Make the repository public.
+- [ ] Enable GitHub Pages on `main` / `docs`. Deliberately not enabled earlier: on a
+      private repository this is either unavailable or is itself a publication step.
+- [ ] Set the homepage URL to the Pages site **after** Pages is live, not before — a
+      repository whose homepage 404s is a bad first impression.
+- [ ] Decide whether the Tier 1 scope report
+      (`results/published/2026-09-20-tier1-scope/REPORT.md`) gets a `findings.json` entry
+      and a place on the page. It is the most contrarian result the project has; it is
+      also probe-level, so its ledger entry must not present an effect size.
+
+Not blocking, and deliberately so:
+
+- **Item 10, the private split.** It is not a publication gate — see item 10 for why the
+  earlier framing was wrong. The split is sourced fresh whenever it is built.
+
+---
+
 ## Explicitly not doing
 
 - A brand-tracking dashboard or per-customer monitoring.
