@@ -320,6 +320,14 @@ standard rather than in anyone's memory:
   prompts; it failed on arithmetic, not on the corpus.
 - **Baseline placement over sample size** (§5.2, §9). Ceiling avoidance is free; more calls
   are not.
+- **An analyser must not average an incomplete cell beside a complete one** (2026-09-20).
+  The length-ladder probe lost 129 calls to `HTTP 402 Payment Required` when the account
+  balance ran out mid-collection, leaving twelve cells between 5 and 22 runs of 24. The
+  analyser averaged them in silently and produced a confident-looking table in which one
+  cell carried five times another's weight. Every analyser in the repo had that gap,
+  because every round until then had finished with zero errors. `analyze.incomplete_cells`
+  is now shared by all four: it reports every short cell and drops those below 80% of a
+  full complement, and it is a no-op on every round published so far.
 - **A pooled figure can hide a directional split** (item 12). H7's share-weighted pool is a
   clean null while three of five engines point negative; an unweighted pool of the same data
   falsifies it. Per-engine results stay primary, and any pooled headline states its weighting.

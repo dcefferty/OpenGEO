@@ -25,7 +25,7 @@ from collections import defaultdict
 
 import numpy as np
 
-from analyze import wilson
+from analyze import cell_key, report_incomplete, wilson
 from analyze_lengthonly import load, perm_p
 from engine_weights import coverage, weights
 
@@ -97,22 +97,12 @@ def main(argv=None):
 
     # A cell short of its runs is not a smaller sample of the same thing when the cause
     # is a mid-run failure: it is a cell whose interval is wider than the table implies.
-    # Report them rather than averaging them in silently. MIN_RUNS is the floor below
-    # which a cell is dropped from the primary figures entirely.
-    MIN_RUNS = 20
-    incomplete = sorted(((p_, m_, c_), n) for (p_, m_, c_), (k, n) in cell.items()
-                        if n < 24)
-    if incomplete:
-        print(f"\nINCOMPLETE CELLS: {len(incomplete)} of {len(cell)} did not reach 24 runs")
-        for (p_, m_, c_), n in incomplete[:15]:
-            flag = "  DROPPED" if n < MIN_RUNS else ""
-            print(f"  {p_:<22}{m_.split('/')[1][:10]:<12}{c_:<14}{n:>3}/24{flag}")
-        print(f"  cells below {MIN_RUNS} runs are dropped from the primary figures.")
-        print("  Complete the run (run_pilot.py --resume) before treating this as final.")
+    # Shared with every other analyser -- see analyze.incomplete_cells for why it exists.
+    dropped = report_incomplete(rows)
 
     def rate(p, m, cond):
         k, n = cell[(p, m, cond)]
-        return (k / n) if n >= MIN_RUNS else None
+        return (k / n) if n and (p, m, cond) not in dropped else None
 
     def unpinned(p, m, rung):
         v = rate(p, m, f"{rung}_control")
