@@ -161,4 +161,47 @@ corpus's numbers need restating with a contamination caveat.
 
 ## Deviations
 
-None yet. Every deviation is logged here, dated, before or as it happens.
+**2026-09-22 — H9 is mis-framed for the conditions this round runs under. Logged while
+collection was still in progress and before any result was seen.**
+
+H9 is stated above as a contamination test: "contamination inflates the *public* side. A
+public effect significantly larger than the private one is the signature this round is
+built to detect."
+
+**That signature cannot appear, because the repository has never been public.** Corpus
+v0.4 has never been published anywhere. Both halves of this round are equally unseen, so
+there is no exposure asymmetry for H9 to detect, and a finding of "no divergence" would be
+uninformative about contamination rather than evidence against it. The error is in this
+pre-registration, not in the corpora or the collection.
+
+**What the round does establish, and what it is now reported as:**
+
+1. **A pre-publication baseline.** A contamination test is longitudinal by nature. Measured
+   now, before the corpus is public, the public half's effect is the "before" against which
+   a post-publication re-run is compared. Without it, a later measurement means nothing.
+   This is the round's main value and it is time-critical in a way nothing else here is:
+   once the repository is public, this measurement can never be taken.
+2. **An equivalence check between the halves.** Whether the two corpora yield the same
+   effect under conditions where no exposure asymmetry exists is a *precondition* for the
+   contamination test, not the test itself. If they diverge now, the split needs fixing
+   before it can serve as a comparator at all.
+3. **Item 10's third acceptance clause**, which asks only that one round report public and
+   private results side by side.
+
+**H9 is therefore re-scoped, not abandoned.** Its statistic, contrast, scale and
+multiplicity handling are unchanged — the odds-ratio primary, risk differences alongside,
+Holm across five engines. Only its interpretation changes: it now reads as
+**corpus equivalence**, and a CI on the difference that excludes zero means the halves are
+not interchangeable, not that contamination has been found.
+
+**The contamination test proper is a re-run of this exact design after the repository has
+been public long enough for a training cycle**, comparing the public half's effect then
+against the public half's effect now. That round inherits this pre-registration's design
+and will cite this file as its baseline.
+
+**H8 is unaffected.** Whether H4 replicates on twelve never-published questions is a real
+question under any conditions, and it is the first time the private split's treatment arm
+has been run.
+
+Nothing about the collection is changed by this entry: same corpora, same hashes, same
+panel, same analysis plan. Only the claim the round is entitled to make is narrowed.
