@@ -30,7 +30,7 @@ from collections import defaultdict
 
 import numpy as np
 
-from analyze import wilson
+from analyze import cell_key, report_incomplete, wilson
 from engine_weights import coverage, weights
 
 CONDITIONS = ["control", "pad125", "pad150", "pad200"]
@@ -174,6 +174,11 @@ def main(argv=None):
 
     hdr("DATA HEALTH")
     print(f"usable runs {len(rows):,}   errored {errs}")
+    drop = report_incomplete(rows)
+    if drop:
+        rows = [r for r in rows if cell_key(r) not in drop]
+        all_models = sorted({r["model"] for r in rows})
+        print(f"  analysing {len(rows):,} runs from complete-enough cells")
     mismatch = sum(1 for r in rows
                    if r.get("model_returned") and r["model_returned"] != r["model"])
     print(f"model_returned mismatches: {mismatch}")

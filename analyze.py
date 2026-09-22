@@ -8,6 +8,7 @@ Requires numpy only. All inference is permutation- or bootstrap-based so there
 are no distributional assumptions to argue about and anyone can re-run it.
 """
 import argparse, json, pathlib, sys
+import math
 from collections import defaultdict, Counter
 import numpy as np
 
@@ -110,6 +111,65 @@ def kendall_w(rank_matrix):
     return 12 * S / (m ** 2 * (n ** 3 - n))
 
 
+def cell_key(r):
+    return (r["prompt_id"], r["model"], r["condition"])
+
+
+def incomplete_cells(rows, key=cell_key, floor_frac=0.8):
+    """Find cells that did not reach a full complement of runs.
+
+    Returns (expected, short, drop): the run count a complete cell has, every cell below
+    it as {cell: n}, and the subset to exclude from the primary figures.
+
+    This exists because a round can stop part-way. The length-ladder probe lost 129 calls
+    to `HTTP 402 Payment Required` when an account balance ran out mid-collection, leaving
+    twelve cells between 5 and 22 runs of 24 -- and the analyser averaged them beside
+    complete ones without a word, producing a confident-looking table in which one cell
+    carried five times another's weight. Every analyser in this repo had that gap, because
+    every round until then had finished with zero errors.
+
+    A short cell is not a smaller sample of the same thing. Its rate has a much wider
+    interval than the table implies, and whether it is short is usually unrelated to what
+    is being measured -- so it quietly inflates noise while looking identical to a good
+    cell. Report them, and drop the worst.
+
+    `expected` is the modal cell size rather than a hardcoded 24, so this works whatever
+    `--runs` a round used. Rows are deduplicated by run_key first: a file written by two
+    runs without `--resume` would otherwise make every honest cell look short.
+    """
+    if not rows:
+        return 0, {}, set()
+    if "run_key" in rows[0]:
+        rows = list({r["run_key"]: r for r in rows}.values())
+    n = Counter(key(r) for r in rows)
+    expected = Counter(n.values()).most_common(1)[0][0]
+    floor = math.ceil(floor_frac * expected)
+    return (expected,
+            {c: k for c, k in n.items() if k < expected},
+            {c for c, k in n.items() if k < floor})
+
+
+def report_incomplete(rows, key=cell_key, floor_frac=0.8, limit=12):
+    """Print the incomplete-cell report and return the set of cells to drop.
+
+    Prints nothing and returns an empty set when every cell is complete, which is the
+    case for every round published so far -- this is a guard, not a routine step.
+    """
+    expected, short, drop = incomplete_cells(rows, key, floor_frac)
+    if not short:
+        return set()
+    print(f"\nINCOMPLETE CELLS: {len(short)} did not reach {expected} runs")
+    for c, k in sorted(short.items(), key=lambda kv: kv[1])[:limit]:
+        label = " / ".join(str(x).split("/")[-1][:22] for x in c)
+        print(f"  {label:<58}{k:>3}/{expected}{'  DROPPED' if c in drop else ''}")
+    if len(short) > limit:
+        print(f"  ... and {len(short) - limit} more")
+    print(f"  Cells below {math.ceil(floor_frac * expected)} runs are dropped from the "
+          "primary figures.")
+    print("  Complete the run (run_pilot.py --resume) before treating this as final.")
+    return drop
+
+
 def hdr(t):
     print("\n" + "=" * 74)
     print(t)
@@ -159,6 +219,13 @@ def main():
         nc = sum(1 for r in sub if not r["cited_doc_ids"])
         print(f"  {m:<38} n={len(sub):<5} no-cite={100*nc/len(sub):5.1f}%  "
               f"cites/answer={np.mean([len(r['cited_doc_ids']) for r in sub]):.2f}")
+
+    drop = report_incomplete(recs)
+    if drop:
+        recs = [r for r in recs if cell_key(r) not in drop]
+        models = sorted({r["model"] for r in recs})
+        prompts = sorted({r["prompt_id"] for r in recs})
+        print(f"  analysing {len(recs):,} runs from complete-enough cells")
 
     # ---------------- A1: CPR ----------------
     hdr("A1. CITATION PRESENCE RATE (target document), by model")
