@@ -205,3 +205,81 @@ has been run.
 
 Nothing about the collection is changed by this entry: same corpora, same hashes, same
 panel, same analysis plan. Only the claim the round is entitled to make is narrowed.
+
+---
+
+**2026-09-22 — collection complete; 4 calls lost to HTTP 429 and refilled.** 14,400 calls,
+4 errors, all `429 Too Many Requests` on deepseek, 0.03% of the round. Per the analysis
+plan the round was resumed to completion rather than analysed short; the refill ran clean
+and every cell reached 24 runs before analysis.
+
+---
+
+**2026-09-22 — the pre-registered primary scale for H9 is compromised by a saturated
+treatment arm. Recorded before drawing any conclusion from it.**
+
+The odds ratio was chosen as H9's primary scale because a risk difference is bounded by its
+baseline and the halves' baselines differ. The odds ratio has its own failure mode, which
+this data hits and which was not anticipated: **the treatment arm saturates.**
+
+| engine | public treatment | private treatment |
+|---|---|---|
+| deepseek | 1152/1152 = 1.0000 | 288/288 = 1.0000 |
+| gemini | 1152/1152 = 1.0000 | 288/288 = 1.0000 |
+| gpt | 1150/1152 = 0.9983 | 288/288 = 1.0000 |
+| grok | 1148/1152 = 0.9965 | 287/288 = 0.9965 |
+
+At exactly 100% the odds are undefined, and the Haldane-Anscombe correction this analysis
+applies makes them scale with the cell's size: `(n+0.5)/0.5`. Public cells hold 1,152 runs
+and private cells 288, so **an identical 100% in both halves yields odds ratios differing
+by 3.99×, from sample size alone, with no effect whatever.** In log terms that is +1.38
+before any real difference is considered.
+
+Both engines that flag significant on the per-engine H9 contrast decompose entirely into
+that artefact and the control-rate differences this pre-registration tabulated in advance:
+
+- deepseek, lnOR difference +0.932 = ln(3.99 × 0.634). The sample-size artefact supplies
+  all of it; the control-rate difference pushes the other way and partly cancels it.
+- gemini, lnOR difference +1.965 = ln(3.99 × 1.788). Artefact plus a control-rate gap that
+  happens to point the same way.
+
+**Neither is evidence about the corpora.** The per-engine H9 contrasts are reported with
+this decomposition attached and are not interpreted as corpus differences. The pooled H9
+contrast and the variance decomposition are unaffected by the unequal-n artefact in the way
+the per-engine contrasts are, and both point the same way: pooled lnOR difference +0.535,
+CI [−0.316, +1.972], includes zero; and η² for the public/private term is **0.0001**
+against 0.2795 for condition.
+
+The general lesson, which belongs in the standard rather than only here: **when an arm
+saturates, neither scale works.** A risk difference is compressed by the ceiling and an
+odds ratio is inflated by the correction, in proportion to the cell size. The fix is to
+avoid saturating arms, which is what `METHODOLOGY.md` §9's ceiling discipline exists for —
+and which the *treatment* arm has never been held to, only the control arm.
+
+---
+
+**2026-09-22 — `claude-haiku-4.5` excluded by the standing rule, and the rule is
+mis-firing.** Applied as written: 19.3% no-cite on the private half exceeds the 10% limit,
+so claude is excluded from pooled figures. Panel coverage drops from 98.9% to 89.6%.
+
+The diagnosis does not match what the rule is for. The standing rule treats a high no-cite
+rate as instruction-following failure — "not a visibility signal". Here it is a visibility
+signal, and a clean one:
+
+| half | condition | no-cite |
+|---|---|---|
+| public | control | 1.7% |
+| public | treatment | 0.4% |
+| private | control | **38.5%** |
+| private | treatment | **0.0%** |
+
+Claude declines to cite anything in 38.5% of private *control* runs and never once in
+private *treatment* runs. That is not a parser failing; it is a model abstaining when no
+document answers the question, then citing normally as soon as one does. It is spread
+across the corpus rather than caused by one bad question — four questions under 10%, four
+between 10 and 30%, four between 30 and 60%, none above 60%.
+
+The exclusion stands for this round because the rule was pre-registered and applying it
+selectively after seeing which way it cuts is exactly what pre-registration prevents. But
+the rule conflates two different things, and on this evidence it discards the engine
+behaving most correctly. Revising it is filed as follow-up work, not done here.
