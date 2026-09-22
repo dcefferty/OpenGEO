@@ -450,6 +450,17 @@ on-topic. That cannot bias a paired contrast — the non-targets are identical a
 but it holds the target's baseline higher than it needs to be, so include one or two
 clearly tangential documents per question.
 
+**Both rules confirmed prospectively (2026-09-21).** They were derived by rewriting the
+controls of a corpus that had already failed, so the next corpus was built with them
+applied from the start rather than discovered again. It placed **five of six** targets
+inside [0.25, 0.75] on the first spot check, against **none of six** for the corpus the
+rules came from. Adding two tangential documents per question moved `cites/answer` from
+3.51 to 2.72 against a reference corpus's 2.66 — the two tuning passes on the earlier
+corpus had not shifted it at all (3.55 → 3.51), which is what identified it as the
+variable. The one failure landed where the gradient predicts: its control was a different
+*subject* rather than a different attribute of the same one, and it came in at 0.11
+against the earlier two-dimensions-away case at 0.17.
+
 ---
 
 ## 10. Publication
