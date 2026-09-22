@@ -80,8 +80,24 @@ another, and the distinction matters:
   is the thing this project is actually selling. So the split must be sourced fresh, and
   that cost is now fixed regardless of when it is paid.
 
+**Split v1 built 2026-09-21: twelve questions, screened, format-balanced.** Baseline
+placement matches the public corpus closely -- pooled control CPR 0.515, CI
+[0.489, 0.541], against v0.4's 0.503, with every question inside [0.25, 0.75]. That
+matching is the point: a divergence between halves should be attributable to
+contamination rather than to one half being harder. Two prompts per target format across
+the six, twelve distinct domains all drawn from v0.4's own twenty-four.
+
+Built in three batches under `METHODOLOGY.md` §9, control arm only. The treatment arm has
+never been run against it, because the §5.3 gate is about baseline placement and running
+the treatment arm would measure the effect a round exists to report.
+
+The build was also where §9's two new construction rules came from and where the second of
+them was confirmed prospectively -- first-pass yield went 0 of 6, to 5 of 6, to 3 of 3 as
+they were learned and applied.
+
 *Acceptance:* a private split exists, is excluded from the public corpus, and one round
-reports public and private results side by side.
+reports public and private results side by side. **First two clauses met; the third waits
+on a round.**
 
 ### 11. Make tactics rankable
 **The largest open research item.** The current corpus proves *specific facts beat no
