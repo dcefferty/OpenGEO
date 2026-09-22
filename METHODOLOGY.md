@@ -420,6 +420,36 @@ The consequence: a genuinely mid-range baseline is one that is topically adjacen
 answers none of the question's facts. Build the control that way, then confirm it with the
 §5.3 spot check before committing to a full round.
 
+**"Topically adjacent" is a distance, and it is steeper than it looks (2026-09-21).**
+Withholding the facts is not sufficient. A control that answers none of a question's
+facts, reuses none of its distinctive nouns and reaches no matching directional conclusion
+will *still* saturate if it sits on the same **dimension** of the subject the question asks
+about. Measured on a fresh six-question corpus whose controls were rewritten between two
+spot checks:
+
+| the control's relation to the question | observed control CPR |
+|---|---|
+| same dimension, facts withheld | 0.86 – 0.97 |
+| one dimension away | 0.41 – 0.75 |
+| two dimensions away — an unrelated aspect of the subject | 0.17 |
+
+One dimension away is the target. Concretely: for a question about *when to replace* a
+part, a control about *how to make it last* is the same dimension and pins near the
+ceiling; a control about *how to choose between brands* is one away; a control about the
+manufacturing history of the part is two away and pins near the floor.
+
+Two practical consequences. Aim one dimension away from the start rather than withholding
+facts and hoping. And **do not re-tune a control against the same spot check more than
+once** — a second pass is already fitting that sample's noise, which is a different error
+from the ceiling the gate exists to catch. A question that fails twice goes back to the
+pool and is rebuilt from scratch, not nudged again.
+
+Watch `cites/answer` alongside the target's rate. If the whole field is cited more
+generously than a comparable corpus, the non-target documents are collectively too
+on-topic. That cannot bias a paired contrast — the non-targets are identical across arms —
+but it holds the target's baseline higher than it needs to be, so include one or two
+clearly tangential documents per question.
+
 ---
 
 ## 10. Publication
