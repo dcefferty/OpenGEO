@@ -1124,7 +1124,8 @@
         "caption": "Change in citation rate from adding specific figures, measured only on questions that have never been published, with 95% intervals. Pooled across {n_models} engines, weighted by market share. {prompts} held-out questions.",
         "after": [
           "This is not yet a test for contamination, and the pre-registration says so: at the time of measurement the repository had never been public, so neither set had been exposed and there was no asymmetry to find. What it establishes is the <em>before</em> \u2014 a reading that can only be taken once, and that a later re-run is compared against.",
-          "One caveat travels with the number. The treatment arm saturates: on most engines every single run cites the page once it carries the figures. So {pooled_delta_pts} is a floor on the effect rather than a measurement of it, and the true size is not identified at this baseline."
+          "One caveat travels with the number. The treatment arm saturates: on most engines every single run cites the page once it carries the figures. So {pooled_delta_pts} is a floor on the effect rather than a measurement of it, and the true size is not identified at this baseline.",
+          "One engine is missing from the figure above, excluded by a data-health rule this round showed to be wrong: it counted a model's refusals to cite <em>anything</em> without checking whether that only happened when nothing on the page answered. Corrected, that engine turns out to show the largest effect of any, and the pooled figure rises rather than falls. The published number is the one committed to in advance; the correction is reported beside it in the full report."
         ],
         "for_you": "The advice does not depend on the test set. Adding the specific figure works on questions nobody has optimised against.",
         "prov": [

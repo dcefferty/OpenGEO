@@ -120,6 +120,40 @@ Two constraints discovered by running this:
 - **A model can regress between rounds.** Check per-model no-cite rate and control-arm CPR
   against the previous round on identical text before trusting a comparison.
 
+**Model exclusion: the no-cite rule.** A model whose answers cite nothing parseable is not
+producing a low visibility signal; it is failing to follow the instruction, and averaging
+it in understates every effect. Such a model is excluded from pooled figures and reported
+separately.
+
+**The rate is measured on the arm where a document clearly answers the question, not
+pooled across arms (2026-09-22).** Pooling conflates two different behaviours:
+
+| behaviour | control arm | answering arm | what it is |
+|---|---|---|---|
+| instruction failure | high | **high** | cannot follow the instruction — exclude |
+| abstention | high | **near zero** | declines when nothing qualifies — keep |
+
+A control document answers none of its question's facts by construction, so a model that
+abstains rather than citing loosely will show a high no-cite rate there and almost none as
+soon as a document answers. That is the most defensible behaviour on a panel, and the
+pooled rule discards it.
+
+The threshold is **10% on the answering arm**. This was found when a round excluded an
+engine at 19.3% pooled whose split was 38.5% on control and **0.0%** on treatment, spread
+across the corpus rather than caused by one question
+(`results/published/2026-09-22-public-private/REPORT.md`).
+
+**The revision changes no published exclusion.** Checked across every round with a
+fact-bearing arm: `kimi-k2` exceeds 10% on the answering arm in all three rounds it
+appears in (10.4%, 10.4%, 11.5%) and stays excluded; `mistral-medium-3` was dropped when
+the panel narrowed, before the length-only round was collected, so it is in no published
+figure. The rule is stated here because it was load-bearing in four rounds while living
+only in the analysers as a constant.
+
+Where a round has no arm in which a document plainly answers — a dose ladder of factless
+padding, for instance — the diagnostic cannot separate the two behaviours, and the
+exclusion is reported as unresolved rather than asserted either way.
+
 ---
 
 ## 4. Metrics
@@ -415,6 +449,24 @@ testing against real models — never by inspection or keyword scripts:
    enough to saturate citation. Models discriminate on presence versus absence of any
    specific on-topic content, not on how completely the answer is given. A "half-specific"
    baseline does not land mid-range; it lands at the ceiling.
+
+**The ceiling discipline applies to the treatment arm too, for a different reason
+(2026-09-22).** Everything above concerns the *control* arm, where a ceiling destroys the
+effect. A saturated **treatment** arm does not destroy the effect — it destroys the ability
+to express it on any scale:
+
+- A **risk difference** is bounded by the baseline. A cell starting at 0.767 cannot gain
+  more than 0.233 however good the intervention is, so the measured delta reports headroom
+  rather than efficacy.
+- An **odds ratio** is undefined at exactly 100%, and the Haldane-Anscombe correction that
+  makes it computable sets the odds to `(n+0.5)/0.5` — which scales with cell size. Two
+  arms both at a true 100%, measured at 1,152 and 288 runs, return odds ratios differing by
+  **3.99×** from sample size alone.
+
+A round whose treatment arm saturates therefore reports a **floor** on its effect, never an
+estimate, and must say so. Neither scale rescues it; the fix is corpus design, not
+analysis. Observed in the public/private round, where two engines cited the treated
+document in every single run.
 
 The consequence: a genuinely mid-range baseline is one that is topically adjacent but
 answers none of the question's facts. Build the control that way, then confirm it with the

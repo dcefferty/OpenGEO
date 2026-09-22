@@ -283,3 +283,19 @@ The exclusion stands for this round because the rule was pre-registered and appl
 selectively after seeing which way it cuts is exactly what pre-registration prevents. But
 the rule conflates two different things, and on this evidence it discards the engine
 behaving most correctly. Revising it is filed as follow-up work, not done here.
+
+---
+
+**2026-09-22 — the rule has now been corrected, and the round is reported both ways.**
+`METHODOLOGY.md` §3 now decides exclusions on the **answering arm** rather than pooled,
+which separates instruction failure from abstention. Checked across every round with an
+answering arm, the correction changes no other exclusion: `kimi-k2` exceeds 10% there in
+all three rounds it appears in and stays excluded, and `mistral-medium-3` was dropped when
+the panel narrowed, before the length-only round was collected.
+
+**The pre-registered four-engine figure remains this round's primary result**, because the
+alternative — re-deciding an exclusion after seeing which way it cuts — is the failure
+pre-registration exists to prevent. The five-engine re-analysis is reported beside it as a
+sensitivity, in the published report: pooled +0.473, CI [+0.375, +0.571], coverage 98.9%,
+with `claude-haiku-4.5` at +0.788 — the largest effect on the panel, from the engine the
+pooled rule discarded.

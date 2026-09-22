@@ -111,6 +111,67 @@ def kendall_w(rank_matrix):
     return 12 * S / (m ** 2 * (n ** 3 - n))
 
 
+NO_CITE_LIMIT = 0.10
+
+
+def no_cite_report(rows, control="control", limit=NO_CITE_LIMIT):
+    """Per-model no-cite rates, split by arm, and which models to exclude.
+
+    Returns {model: {"pooled", "control", "answering", "exclude", "unresolved"}}.
+
+    The rate that decides an exclusion is measured on the **answering arm** -- the
+    condition where a document plainly answers the question -- not pooled across arms.
+    Pooling conflates two behaviours that look identical in a single number:
+
+        instruction failure   high on control, high on the answering arm  -> exclude
+        abstention            high on control, near zero when answered    -> keep
+
+    A control document answers none of its question's facts by construction, so a model
+    that declines to cite rather than citing loosely shows a high rate there and almost
+    none as soon as something answers. That is the most defensible behaviour on a panel,
+    and the pooled rule discards it. Found when a round excluded an engine at 19.3% pooled
+    whose split was 38.5% control and 0.0% treatment -- see METHODOLOGY.md 3, "the no-cite
+    rule", and results/published/2026-09-22-public-private/REPORT.md.
+
+    Where a round has no answering arm -- a dose ladder of factless padding, say -- the
+    two behaviours cannot be separated. Those models are marked `unresolved` rather than
+    excluded or cleared, and the caller reports that rather than asserting either way.
+    """
+    by = defaultdict(lambda: defaultdict(lambda: [0, 0]))
+    for r in rows:
+        a = by[r["model"]][r["condition"]]
+        a[0] += not (r.get("cited_doc_ids") or [])
+        a[1] += 1
+    out = {}
+    for m, conds in by.items():
+        answering = [c for c in conds if c != control]
+        tot = [sum(conds[c][0] for c in conds), sum(conds[c][1] for c in conds)]
+        ctl = conds[control][0] / conds[control][1] if conds.get(control, [0, 0])[1] else None
+        best = min((conds[c][0] / conds[c][1] for c in answering if conds[c][1]),
+                   default=None)
+        out[m] = {"pooled": tot[0] / tot[1] if tot[1] else None,
+                  "control": ctl, "answering": best,
+                  "exclude": best is not None and best > limit,
+                  "unresolved": best is None}
+    return out
+
+
+def print_no_cite(rows, control="control", limit=NO_CITE_LIMIT):
+    """Print the table and return the set of models to exclude."""
+    rep = no_cite_report(rows, control, limit)
+    print(f"\n{'model':<34}{'control':>9}{'answering':>11}{'pooled':>9}   status")
+    for m in sorted(rep):
+        d = rep[m]
+        f = lambda v: "   --  " if v is None else f"{v:>6.1%} "
+        status = ("UNRESOLVED (no answering arm)" if d["unresolved"]
+                  else "EXCLUDED" if d["exclude"] else "ok")
+        print(f"{m:<34}{f(d['control']):>9}{f(d['answering']):>11}{f(d['pooled']):>9}   {status}")
+    if any(d["unresolved"] for d in rep.values()):
+        print("  UNRESOLVED: this round has no arm in which a document plainly answers, so")
+        print("  abstention cannot be told from instruction failure (METHODOLOGY.md 3).")
+    return {m for m, d in rep.items() if d["exclude"]}
+
+
 def cell_key(r):
     return (r["prompt_id"], r["model"], r["condition"])
 

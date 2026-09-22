@@ -138,14 +138,38 @@ conflates *cannot follow the instruction* with *declines because nothing qualifi
 this evidence it discarded the most defensible behaviour on the panel. Revising it is
 follow-up work, not done retroactively here.
 
+## Sensitivity: the round re-analysed under the corrected rule
+
+The exclusion above was applied as pre-registered, and the pre-registered figure stands as
+this round's primary result. But the rule has since been corrected in `METHODOLOGY.md` §3
+— exclusions are now decided on the **answering arm**, which separates instruction failure
+from abstention — and the round is reported both ways rather than only the way that was
+committed before the flaw was known.
+
+`claude-haiku-4.5` on the held-out half: **0.212 → 1.000, delta +0.788, CI [+0.726,
++0.851]** — the largest effect on the panel, from the engine the pooled rule discarded.
+
+| panel | pooled H8 | 95% CI | coverage |
+|---|---|---|---|
+| 4 engines, as pre-registered | +0.441 | [+0.331, +0.545] | 89.6% |
+| 5 engines, corrected rule | **+0.473** | [+0.375, +0.571] | **98.9%** |
+
+The correction does not rescue a weak result; it tightens a strong one. +0.473 sits closer
+to H4's +0.482 on v0.4 and +0.493 on v0.3 than the pre-registered figure does.
+
+Checked across every round with an answering arm, the corrected rule changes **no other
+exclusion**: `kimi-k2` exceeds 10% on the answering arm in all three rounds it appears in
+and stays excluded.
+
 ## Limits
 
 - **Not a contamination test.** Logged before results were seen. It is the baseline for
   one.
 - **Twelve private questions.** The interval on the half-to-half comparison is wide, and
   "no divergence detected" is not "no divergence exists."
-- **Four engines in the pooled figures**, 89.6% of measured assistant traffic, after the
-  claude exclusion above.
+- **The headline uses four engines**, 89.6% of measured assistant traffic, because the
+  pre-registered exclusion rule is applied as committed. The sensitivity section above
+  reports all five under the corrected rule.
 - **The treatment arm saturates**, so +0.441 is a floor on the effect, not an estimate of
   it. The true magnitude is not identified by this design at this baseline.
 - **Synthetic documents.** Both corpora are authored text, not real-world pages. The
