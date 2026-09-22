@@ -99,6 +99,40 @@ check — but it does not identify the effect's true magnitude. The write-up sta
 rather than defending the delta, and reports the control baseline as the quantity of
 interest alongside it.
 
+## Amendments after the first sourcing pass (2026-09-23)
+
+**1. The six-format structure cannot be replicated on public-domain sources, and the round
+drops it.** v0.4 gives every question one document in each of blog, news, docs, product,
+forum and reference. Across all 175 real documents item 11 ever built, only four registers
+appear — reference 50, docs 48, news 24, blog 15 — and **never `product` or `forum`**.
+Federal agencies do not publish product listings or forum posts, and a real one is not a
+federal work, so it cannot be used under 17 U.S.C. 105 alongside this corpus's licence.
+
+The round therefore uses six real documents per question **without format balance**, drawn
+from the registers that exist. This costs nothing on H4, whose contrast is facts versus no
+facts, but it means **this round cannot speak to H5 (content format)** and must say so.
+That is itself a result worth reporting: the format dimension of the benchmark is not
+testable on public-domain text at all, which bounds what any rights-clean corpus can
+measure.
+
+**2. Sourcing is currently throttled by two simultaneous outages.** A first pass over
+twenty candidate URLs returned nine failures. `cdc.gov`, `nhtsa.gov`, `cpsc.gov`, `fda.gov`
+and `energy.gov` refused automated requests (403/404), **and the Internet Archive CDX index
+is returning HTTP 503/0**, so the fallback that normally covers exactly those refusals is
+down too. Per-question yield was 3, 2, 2, 1, 1, 2 against the six needed.
+
+Questions are therefore re-anchored on domains that fetch directly. Of 183 snapshots, 146
+came via curl, and the domains that reliably answer are `consumerfinance.gov` (18),
+`irs.gov` (16), `ssa.gov` (11), `nhlbi.nih.gov` (11), `fda.gov` (11), `odphp.health.gov`
+(9), `tsa.gov` (7), `ftc.gov` (11 with `consumer.ftc.gov`), `epa.gov` (6),
+`fsis.usda.gov` (5), `energystar.gov` (5), `fdic.gov` (5). `cdc.gov` is archive-only and is
+unavailable while the outage lasts.
+
+This is a scheduling constraint rather than a design flaw, and it is recorded because it
+has now interrupted sourcing three times across two items. A corpus that depends on one
+archive being up is fragile, and the fragility belongs in the limitations rather than in
+anyone's memory.
+
 ## Sequence
 
 1. Source and build batch 1, six questions, one per target format
