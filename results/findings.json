@@ -1049,6 +1049,10 @@
         },
         {
           "label": "Questions never published"
+        },
+        {
+          "label": "Exclusion rule corrected after",
+          "style": "early"
         }
       ],
       "title": "The effect holds on questions we have never released",
@@ -1056,17 +1060,27 @@
       "data": {
         "metric": "citation presence rate",
         "pooled": {
-          "control": 0.559,
+          "control": 0.526,
           "treatment": 1.0,
-          "delta": 0.441,
+          "delta": 0.473,
           "ci": [
-            0.331,
-            0.545
+            0.375,
+            0.571
           ],
           "p": "0.0000",
-          "n_models": 4
+          "n_models": 5
         },
         "per_model": {
+          "anthropic/claude-haiku-4.5": {
+            "control": 0.212,
+            "treatment": 1.0,
+            "delta": 0.788,
+            "ci": [
+              0.726,
+              0.851
+            ],
+            "p": "0.0006"
+          },
           "deepseek/deepseek-chat": {
             "control": 0.417,
             "treatment": 1.0,
@@ -1125,7 +1139,7 @@
         "after": [
           "This is not yet a test for contamination, and the pre-registration says so: at the time of measurement the repository had never been public, so neither set had been exposed and there was no asymmetry to find. What it establishes is the <em>before</em> \u2014 a reading that can only be taken once, and that a later re-run is compared against.",
           "One caveat travels with the number. The treatment arm saturates: on most engines every single run cites the page once it carries the figures. So {pooled_delta_pts} is a floor on the effect rather than a measurement of it, and the true size is not identified at this baseline.",
-          "One engine is missing from the figure above, excluded by a data-health rule this round showed to be wrong: it counted a model's refusals to cite <em>anything</em> without checking whether that only happened when nothing on the page answered. Corrected, that engine turns out to show the largest effect of any, and the pooled figure rises rather than falls. The published number is the one committed to in advance; the correction is reported beside it in the full report."
+          "<b>The figure above uses a rule corrected after this round was pre-registered.</b> The committed version of the rule dropped any engine that often cited nothing at all, without checking whether that happened only when no page answered the question. One engine was dropped on exactly that basis, and it turned out to show the largest effect here. The pre-registered figure, computed without it, was lower; both numbers and the reason they differ are set out in the report, and the correction now applies to every round."
         ],
         "for_you": "The advice does not depend on the test set. Adding the specific figure works on questions nobody has optimised against.",
         "prov": [
