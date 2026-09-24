@@ -80,8 +80,24 @@ another, and the distinction matters:
   is the thing this project is actually selling. So the split must be sourced fresh, and
   that cost is now fixed regardless of when it is paid.
 
+**Split v1 built 2026-09-21: twelve questions, screened, format-balanced.** Baseline
+placement matches the public corpus closely -- pooled control CPR 0.515, CI
+[0.489, 0.541], against v0.4's 0.503, with every question inside [0.25, 0.75]. That
+matching is the point: a divergence between halves should be attributable to
+contamination rather than to one half being harder. Two prompts per target format across
+the six, twelve distinct domains all drawn from v0.4's own twenty-four.
+
+Built in three batches under `METHODOLOGY.md` §9, control arm only. The treatment arm has
+never been run against it, because the §5.3 gate is about baseline placement and running
+the treatment arm would measure the effect a round exists to report.
+
+The build was also where §9's two new construction rules came from and where the second of
+them was confirmed prospectively -- first-pass yield went 0 of 6, to 5 of 6, to 3 of 3 as
+they were learned and applied.
+
 *Acceptance:* a private split exists, is excluded from the public corpus, and one round
-reports public and private results side by side.
+reports public and private results side by side. **All three met 2026-09-22** — see the
+Completed table.
 
 ### 11. Make tactics rankable
 **The largest open research item.** The current corpus proves *specific facts beat no
@@ -296,6 +312,7 @@ it rests on.
 | 7 | Publish the v0.4 round | Full H1–H5 results including the H3 null, variance decomposition, limitations, reproduction steps | same report |
 | 7b | Keyword stuffing (H6) — the citable Round 1 | Pre-registered before collection; took three corpus designs. **H6 falsified: +0.038, CI [+0.004, +0.075], p=0.045.** Stuffing slightly *increases* citation, and Group C shows it does so without lower fidelity | `preregistrations/2026-08-kwstuff-v3.md`, `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
 | 8 (v1) | Calibration study v1 | **Divergence 0.368, CI [0.139, 0.625].** On 3 of 12 questions the API cited nothing where the logged-out UI cited real sources | `results/published/2026-08-30-calibration-v1/REPORT.md` |
+| 10 | Held-out private split | Twelve questions, screened, format-balanced, never published. Pooled control CPR 0.515 vs the public corpus's 0.503. **H4 replicates on the held-out half: +0.441, CI [+0.324, +0.560]**, and η² for the public/private term is 0.0001 against 0.2795 for the intervention. Banks the pre-publication baseline a contamination test needs | `preregistrations/2026-09-contamination.md`, `results/published/2026-09-22-public-private/REPORT.md` |
 | 12 | Length-only round (H7) | **H7 not falsified: pooled +0.004, CI [−0.024, +0.030], p=0.73** (share-weighted, 5 engines). But three engines cite padded pages *less*, two significantly after correction, and an **unweighted** pool would have falsified H7 at −0.023, CI [−0.042, −0.005] — the headline turns on a documented weighting parameter | `results/published/2026-09-11-lengthonly/REPORT.md` |
 
 Two notes for anyone following a citation into this file:

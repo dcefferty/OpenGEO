@@ -120,6 +120,40 @@ Two constraints discovered by running this:
 - **A model can regress between rounds.** Check per-model no-cite rate and control-arm CPR
   against the previous round on identical text before trusting a comparison.
 
+**Model exclusion: the no-cite rule.** A model whose answers cite nothing parseable is not
+producing a low visibility signal; it is failing to follow the instruction, and averaging
+it in understates every effect. Such a model is excluded from pooled figures and reported
+separately.
+
+**The rate is measured on the arm where a document clearly answers the question, not
+pooled across arms (2026-09-22).** Pooling conflates two different behaviours:
+
+| behaviour | control arm | answering arm | what it is |
+|---|---|---|---|
+| instruction failure | high | **high** | cannot follow the instruction — exclude |
+| abstention | high | **near zero** | declines when nothing qualifies — keep |
+
+A control document answers none of its question's facts by construction, so a model that
+abstains rather than citing loosely will show a high no-cite rate there and almost none as
+soon as a document answers. That is the most defensible behaviour on a panel, and the
+pooled rule discards it.
+
+The threshold is **10% on the answering arm**. This was found when a round excluded an
+engine at 19.3% pooled whose split was 38.5% on control and **0.0%** on treatment, spread
+across the corpus rather than caused by one question
+(`results/published/2026-09-22-public-private/REPORT.md`).
+
+**The revision changes no published exclusion.** Checked across every round with a
+fact-bearing arm: `kimi-k2` exceeds 10% on the answering arm in all three rounds it
+appears in (10.4%, 10.4%, 11.5%) and stays excluded; `mistral-medium-3` was dropped when
+the panel narrowed, before the length-only round was collected, so it is in no published
+figure. The rule is stated here because it was load-bearing in four rounds while living
+only in the analysers as a constant.
+
+Where a round has no arm in which a document plainly answers — a dose ladder of factless
+padding, for instance — the diagnostic cannot separate the two behaviours, and the
+exclusion is reported as unresolved rather than asserted either way.
+
 ---
 
 ## 4. Metrics
@@ -416,9 +450,68 @@ testing against real models — never by inspection or keyword scripts:
    specific on-topic content, not on how completely the answer is given. A "half-specific"
    baseline does not land mid-range; it lands at the ceiling.
 
+**The ceiling discipline applies to the treatment arm too, for a different reason
+(2026-09-22).** Everything above concerns the *control* arm, where a ceiling destroys the
+effect. A saturated **treatment** arm does not destroy the effect — it destroys the ability
+to express it on any scale:
+
+- A **risk difference** is bounded by the baseline. A cell starting at 0.767 cannot gain
+  more than 0.233 however good the intervention is, so the measured delta reports headroom
+  rather than efficacy.
+- An **odds ratio** is undefined at exactly 100%, and the Haldane-Anscombe correction that
+  makes it computable sets the odds to `(n+0.5)/0.5` — which scales with cell size. Two
+  arms both at a true 100%, measured at 1,152 and 288 runs, return odds ratios differing by
+  **3.99×** from sample size alone.
+
+A round whose treatment arm saturates therefore reports a **floor** on its effect, never an
+estimate, and must say so. Neither scale rescues it; the fix is corpus design, not
+analysis. Observed in the public/private round, where two engines cited the treated
+document in every single run.
+
 The consequence: a genuinely mid-range baseline is one that is topically adjacent but
 answers none of the question's facts. Build the control that way, then confirm it with the
 §5.3 spot check before committing to a full round.
+
+**"Topically adjacent" is a distance, and it is steeper than it looks (2026-09-21).**
+Withholding the facts is not sufficient. A control that answers none of a question's
+facts, reuses none of its distinctive nouns and reaches no matching directional conclusion
+will *still* saturate if it sits on the same **dimension** of the subject the question asks
+about. Measured on a fresh six-question corpus whose controls were rewritten between two
+spot checks:
+
+| the control's relation to the question | observed control CPR |
+|---|---|
+| same dimension, facts withheld | 0.86 – 0.97 |
+| one dimension away | 0.41 – 0.75 |
+| two dimensions away — an unrelated aspect of the subject | 0.17 |
+
+One dimension away is the target. Concretely: for a question about *when to replace* a
+part, a control about *how to make it last* is the same dimension and pins near the
+ceiling; a control about *how to choose between brands* is one away; a control about the
+manufacturing history of the part is two away and pins near the floor.
+
+Two practical consequences. Aim one dimension away from the start rather than withholding
+facts and hoping. And **do not re-tune a control against the same spot check more than
+once** — a second pass is already fitting that sample's noise, which is a different error
+from the ceiling the gate exists to catch. A question that fails twice goes back to the
+pool and is rebuilt from scratch, not nudged again.
+
+Watch `cites/answer` alongside the target's rate. If the whole field is cited more
+generously than a comparable corpus, the non-target documents are collectively too
+on-topic. That cannot bias a paired contrast — the non-targets are identical across arms —
+but it holds the target's baseline higher than it needs to be, so include one or two
+clearly tangential documents per question.
+
+**Both rules confirmed prospectively (2026-09-21).** They were derived by rewriting the
+controls of a corpus that had already failed, so the next corpus was built with them
+applied from the start rather than discovered again. It placed **five of six** targets
+inside [0.25, 0.75] on the first spot check, against **none of six** for the corpus the
+rules came from. Adding two tangential documents per question moved `cites/answer` from
+3.51 to 2.72 against a reference corpus's 2.66 — the two tuning passes on the earlier
+corpus had not shifted it at all (3.55 → 3.51), which is what identified it as the
+variable. The one failure landed where the gradient predicts: its control was a different
+*subject* rather than a different attribute of the same one, and it came in at 0.11
+against the earlier two-dimensions-away case at 0.17.
 
 ---
 

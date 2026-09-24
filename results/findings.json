@@ -1036,6 +1036,135 @@
       ]
     },
     {
+      "alias": "heldout",
+      "hypothesis": "H8",
+      "public": true,
+      "order": 8,
+      "status": "supported",
+      "kind": "paired_effect",
+      "evidence": [
+        {
+          "label": "Pre-registered",
+          "style": "strong"
+        },
+        {
+          "label": "Questions never published"
+        },
+        {
+          "label": "Exclusion rule corrected after",
+          "style": "early"
+        }
+      ],
+      "title": "The effect holds on questions we have never released",
+      "lever": "Replace vague claims with specific figures \u2014 on unseen questions",
+      "data": {
+        "metric": "citation presence rate",
+        "pooled": {
+          "control": 0.526,
+          "treatment": 1.0,
+          "delta": 0.473,
+          "ci": [
+            0.375,
+            0.571
+          ],
+          "p": "0.0000",
+          "n_models": 5
+        },
+        "per_model": {
+          "anthropic/claude-haiku-4.5": {
+            "control": 0.212,
+            "treatment": 1.0,
+            "delta": 0.788,
+            "ci": [
+              0.726,
+              0.851
+            ],
+            "p": "0.0006"
+          },
+          "deepseek/deepseek-chat": {
+            "control": 0.417,
+            "treatment": 1.0,
+            "delta": 0.583,
+            "ci": [
+              0.451,
+              0.701
+            ],
+            "p": "0.0006"
+          },
+          "google/gemini-3-flash-preview": {
+            "control": 0.767,
+            "treatment": 1.0,
+            "delta": 0.233,
+            "ci": [
+              0.125,
+              0.361
+            ],
+            "p": "0.0011"
+          },
+          "openai/gpt-5.4-mini": {
+            "control": 0.458,
+            "treatment": 1.0,
+            "delta": 0.542,
+            "ci": [
+              0.406,
+              0.674
+            ],
+            "p": "0.0006"
+          },
+          "x-ai/grok-4.3": {
+            "control": 0.656,
+            "treatment": 0.997,
+            "delta": 0.34,
+            "ci": [
+              0.229,
+              0.462
+            ],
+            "p": "0.0006"
+          }
+        },
+        "compare_to": "facts"
+      },
+      "chart": {
+        "type": "forest",
+        "pooled_label": "All engines",
+        "pooled_sublabel": "share-weighted \u00b7 {n_models} engines",
+        "aria": "Change in citation rate from adding specific figures, on held-out questions, per engine, with 95% intervals"
+      },
+      "text": {
+        "body": [
+          "A benchmark that publishes its own corpus is eventually trained on it, and an effect that survives only on questions a model has already seen is not an effect. So a second set of questions was built and deliberately never released \u2014 not in this repository, not in any report, not now and not later. Only totals from it are ever published.",
+          "Running both sets together, the strongest finding on this page holds on the unreleased half: <b>{pooled_delta_pts} points {pooled_ci_pts}</b>, with an interval clear of zero on every engine. Which half a question came from explains one hundredth of one percent of the variance in whether its page gets cited; the change to the page itself explains a quarter."
+        ],
+        "caption": "Change in citation rate from adding specific figures, measured only on questions that have never been published, with 95% intervals. Pooled across {n_models} engines, weighted by market share. {prompts} held-out questions.",
+        "after": [
+          "This is not yet a test for contamination, and the pre-registration says so: at the time of measurement the repository had never been public, so neither set had been exposed and there was no asymmetry to find. What it establishes is the <em>before</em> \u2014 a reading that can only be taken once, and that a later re-run is compared against.",
+          "One caveat travels with the number. The treatment arm saturates: on most engines every single run cites the page once it carries the figures. So {pooled_delta_pts} is a floor on the effect rather than a measurement of it, and the true size is not identified at this baseline.",
+          "<b>The figure above uses a rule corrected after this round was pre-registered.</b> The committed version of the rule dropped any engine that often cited nothing at all, without checking whether that happened only when no page answered the question. One engine was dropped on exactly that basis, and it turned out to show the largest effect here. The pre-registered figure, computed without it, was lower; both numbers and the reason they differ are set out in the report, and the correction now applies to every round."
+        ],
+        "for_you": "The advice does not depend on the test set. Adding the specific figure works on questions nobody has optimised against.",
+        "prov": [
+          "pre-registered before collection",
+          "{calls} engine calls",
+          "held-out half reported as totals only, permanently"
+        ]
+      },
+      "provenance": {
+        "round": "public/private",
+        "corpus_sha": "529939b6163befeb",
+        "prompts": 12,
+        "calls": 14400,
+        "report": "results/published/2026-09-22-public-private/REPORT.md",
+        "preregistration": "preregistrations/2026-09-contamination.md",
+        "data": [
+          "results/runs_contamination_public.jsonl"
+        ]
+      },
+      "asserts": [
+        "pooled_ci_excludes_zero",
+        "all_models_ci_above_zero"
+      ]
+    },
+    {
       "alias": "reliability",
       "hypothesis": "H1",
       "public": false,
