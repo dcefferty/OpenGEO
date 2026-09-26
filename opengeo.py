@@ -895,12 +895,30 @@ def cmd_test(args):
     return 0
 
 
+def cmd_fetch(args):
+    """Write a page's text exactly as `test` will read it. An edit has to be made against
+    this text, not against a copy taken some other way: a different extractor produces
+    different whitespace and line breaks, and the comparison would then see changes all
+    through the page instead of only the one that was made."""
+    text, prov = read_source(args.source)
+    out = pathlib.Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text + "\n")
+    print(f"Wrote {prov['words']} words to {out}")
+    print("Make your change in a copy of this file, then pass this file as --page and the "
+          "copy as --edit.")
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(
         prog="opengeo.py",
         description="Test whether a change to your page makes AI engines more likely to cite "
                     "it. A measurement, not advice: design/opengeo-test.md.")
     sub = ap.add_subparsers(dest="cmd", required=True)
+    f = sub.add_parser("fetch", help="save a page's text exactly as `test` reads it, to edit")
+    f.add_argument("source", help="URL or file")
+    f.add_argument("--out", required=True, help="where to write the text")
     t = sub.add_parser("test", help="run a paired test of your edit against your competitors")
     t.add_argument("--question", action="append", required=True,
                    help="a question your customers ask; repeat for 3-5 of them")
@@ -917,7 +935,7 @@ def main(argv=None):
     t.add_argument("--out", default="opengeo-results", help="where results are written")
     args = ap.parse_args(argv)
     try:
-        return cmd_test(args)
+        return cmd_fetch(args) if args.cmd == "fetch" else cmd_test(args)
     except ToolError as e:
         # stdout is block-buffered when piped -- into a log, or into the Claude skill -- and
         # stderr is not, so without this flush the error prints above the checks it refers to

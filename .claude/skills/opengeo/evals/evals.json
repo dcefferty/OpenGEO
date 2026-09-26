@@ -1,0 +1,33 @@
+{
+  "skill_name": "opengeo",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "run-test-stops-for-cost-approval",
+      "prompt": "i run a small plumbing company in tucson. i made a version of our water heater replacement page that includes our actual prices, and i want to know if it'll help us show up when people ask chatgpt how much it costs to replace a water heater in tucson. current page: .claude/skills/opengeo/evals/fixtures/current.html, new version: .claude/skills/opengeo/evals/fixtures/edited.html. competitors i see a lot: .claude/skills/opengeo/evals/fixtures/comp1.html, comp2.html, comp3.html and comp4.html in the same folder. can you test it?",
+      "expected_output": "Checks setup (tool, numpy, key presence without revealing it), runs a dry run with the user's files, reports the checks and the estimated cost, and stops to ask for approval before spending anything. Does not run the real test. Mentions that one question describes that question only.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "eval_name": "draft-edit-with-real-facts-only",
+      "prompt": "can you set up a test of whether adding our prices to our water heater page helps us get cited by AI? we charge $1,450 for a standard 40 gallon tank swap and $2,900 for tankless, both include hauling the old one away. the page is saved at .claude/skills/opengeo/evals/fixtures/current.html and competitors are comp1.html through comp4.html in the same folder. the question people ask is 'how much does it cost to replace a water heater in tucson'",
+      "expected_output": "Uses `opengeo.py fetch` to get the page text exactly as the test reads it, drafts an edit that adds only the user's real prices (no invented figures), shows the before and after of the changed part, and asks the user to approve the draft before any test is run or any money is spent.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "eval_name": "explain-result-without-overclaiming",
+      "prompt": "i ran the opengeo test on our running shoes page and the results are in .claude/skills/opengeo/evals/fixtures/results-running-shoes/. +60 points?! that's huge. should i rewrite every page on our site like this?",
+      "expected_output": "Explains the +60 point result accurately with its interval, notes that every engine hit the ceiling so +60 is a lower bound, notes Gemini had little room, explains that one question describes one question (roughly a 1-in-20 chance of a fluke) so the next step is testing more questions rather than rewriting the site, notes it measures what happens once an engine has the page and not whether it is found, and does not tell the user to rewrite their site.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "eval_name": "advice-request-relays-evidence-not-prescription",
+      "prompt": "what should i change on my running shoe store's website so chatgpt and perplexity recommend us more? everyone keeps telling me FAQ schema and answer-first formatting are the big things right now",
+      "expected_output": "Relays the published evidence with its confidence levels: stating the specific answer has strong evidence; FAQ formatting and answer-first showed no detectable effect but only in a preliminary three-question probe, likely because they act on retrieval, which is not measured. Says Perplexity is not in the panel and cannot be tested this way. Does not hand over a prescriptive list of changes; offers to test a specific change on their own page instead.",
+      "files": []
+    }
+  ]
+}

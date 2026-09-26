@@ -1,0 +1,135 @@
+{
+  "corpus_version": "opengeo-test-36c39450d56b",
+  "corpus_sha256": "36c39450d56b",
+  "tool_version": "0.1.0",
+  "edit_region": {
+    "words_changed_before": 58,
+    "words_changed_after": 60,
+    "shared_context_words": 13,
+    "position_in_page": 0.18
+  },
+  "n_prompts": 1,
+  "n_docs": 6,
+  "prompts": [
+    {
+      "prompt_id": "q1",
+      "question": "At what mileage should I replace my running shoes, and how much does rotating two pairs extend their life?",
+      "domain": "user",
+      "target_doc_id": "q1__yours",
+      "target_format": "user",
+      "doc_ids": [
+        "q1__yours",
+        "q1__competitor1",
+        "q1__competitor2",
+        "q1__competitor3",
+        "q1__competitor4",
+        "q1__competitor5"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "q1__yours",
+      "prompt_id": "q1",
+      "is_target": true,
+      "source": {
+        "yours": {
+          "ref": "page.txt",
+          "kind": "file",
+          "sha256": "f0a98e21bc81e6ac",
+          "words": 71
+        },
+        "edit": {
+          "ref": "edit.txt",
+          "kind": "file",
+          "sha256": "42888c0ac91f126d",
+          "words": 73
+        }
+      },
+      "variants": {
+        "control": "r/running - Ran three marathons now. Honest advice: don't overthink the shoe, overthink your training load. Nearly everyone I know who got injured added too much weekly volume too fast. Fit matters more than people think too - a shoe that's slightly too narrow will wreck a long run even if it's brand new. Try things on in the afternoon when your feet are largest, not first thing in the morning.",
+        "treatment": "r/running - Ran three marathons now. Honest advice: don't overthink the shoe, overthink the mileage. Nearly everyone I know who got injured added more than 10% weekly volume. Midsole foam compresses meaningfully by around 300-500 miles, so replace around then rather than waiting for visible wear. Rotating two pairs extended my shoe life by roughly 20%. Racing shoes feel amazing but I got about 150 miles out of mine before they went flat."
+      }
+    },
+    {
+      "doc_id": "q1__competitor1",
+      "prompt_id": "q1",
+      "is_target": false,
+      "source": {
+        "ref": "competitor1.txt",
+        "kind": "file",
+        "sha256": "3a9a05439307830a",
+        "words": 60,
+        "question_term_overlap": 5
+      },
+      "variants": {
+        "control": "Marathon training shoes need to survive a lot more mileage than most people plan for. The temptation is to buy the lightest racing shoe you can find, but you'll spend most of your training in easy miles, and that's where cushioning and durability matter. Many runners end up rotating two pairs - one for long runs, one for speed work.",
+        "treatment": "Marathon training shoes need to survive a lot more mileage than most people plan for. The temptation is to buy the lightest racing shoe you can find, but you'll spend most of your training in easy miles, and that's where cushioning and durability matter. Many runners end up rotating two pairs - one for long runs, one for speed work."
+      }
+    },
+    {
+      "doc_id": "q1__competitor2",
+      "prompt_id": "q1",
+      "is_target": false,
+      "source": {
+        "ref": "competitor2.txt",
+        "kind": "file",
+        "sha256": "c570ba8dfcf9453b",
+        "words": 46,
+        "question_term_overlap": 0
+      },
+      "variants": {
+        "control": "World Athletics confirmed it will maintain existing stack height limits for road racing through the next season, ending speculation about further restrictions. Shoe manufacturers had lobbied for clarity ahead of product cycles. The ruling affects competitive racing only and does not apply to recreational training footwear.",
+        "treatment": "World Athletics confirmed it will maintain existing stack height limits for road racing through the next season, ending speculation about further restrictions. Shoe manufacturers had lobbied for clarity ahead of product cycles. The ruling affects competitive racing only and does not apply to recreational training footwear."
+      }
+    },
+    {
+      "doc_id": "q1__competitor3",
+      "prompt_id": "q1",
+      "is_target": false,
+      "source": {
+        "ref": "competitor3.txt",
+        "kind": "file",
+        "sha256": "44c0e49f3d5cbb09",
+        "words": 58,
+        "question_term_overlap": 0
+      },
+      "variants": {
+        "control": "Fit guide. Measure both feet in the afternoon, when they are largest. Allow a thumb's width between the longest toe and the end of the shoe. The heel should hold without slipping when laced. Width is measured at the widest part of the forefoot. If you are between sizes, size up rather than down for distances above 10km.",
+        "treatment": "Fit guide. Measure both feet in the afternoon, when they are largest. Allow a thumb's width between the longest toe and the end of the shoe. The heel should hold without slipping when laced. Width is measured at the widest part of the forefoot. If you are between sizes, size up rather than down for distances above 10km."
+      }
+    },
+    {
+      "doc_id": "q1__competitor4",
+      "prompt_id": "q1",
+      "is_target": false,
+      "source": {
+        "ref": "competitor4.txt",
+        "kind": "file",
+        "sha256": "c39d9ef533503aef",
+        "words": 34,
+        "question_term_overlap": 1
+      },
+      "variants": {
+        "control": "Meridian Long Run - daily trainer built for high-mileage weeks. Dual-density foam midsole with a breathable engineered mesh upper. Suitable for neutral gait. Available in standard and wide fittings. Free returns within 30 days.",
+        "treatment": "Meridian Long Run - daily trainer built for high-mileage weeks. Dual-density foam midsole with a breathable engineered mesh upper. Suitable for neutral gait. Available in standard and wide fittings. Free returns within 30 days."
+      }
+    },
+    {
+      "doc_id": "q1__competitor5",
+      "prompt_id": "q1",
+      "is_target": false,
+      "source": {
+        "ref": "competitor5.txt",
+        "kind": "file",
+        "sha256": "0fd7c56d539f7118",
+        "words": 46,
+        "question_term_overlap": 2
+      },
+      "variants": {
+        "control": "Running shoes are commonly categorised by gait support (neutral, stability, motion control), by stack height and heel-to-toe drop, and by intended use (daily trainer, tempo, racing). Midsole materials include EVA, TPU and PEBA-based foams, which differ in weight, energy return and rate of compression over distance.",
+        "treatment": "Running shoes are commonly categorised by gait support (neutral, stability, motion control), by stack height and heel-to-toe drop, and by intended use (daily trainer, tempo, racing). Midsole materials include EVA, TPU and PEBA-based foams, which differ in weight, energy return and rate of compression over distance."
+      }
+    }
+  ]
+}
