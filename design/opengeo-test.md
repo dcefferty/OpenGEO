@@ -169,3 +169,52 @@ stack rule in `CLAUDE.md`; `numpy` only in analysis.
 Validated before release the way this project validates everything: against a synthetic run
 with a planted effect that the tool must recover, and against one of the published rounds,
 which it must reproduce.
+
+## Changes made while building it (2026-09-26)
+
+Recorded here, as the header of this file requires, rather than left in the code.
+
+**The ceiling rule is a gate between two phases, not a pre-flight check.** Whether your
+current page is already cited almost every time can only be known by running it, so the
+command runs your current page first and uses that as the gate. A question whose current
+page is cited in at least 21 of 24 runs is reported as *not tested* and its edited version
+is never sent. That is the §5.3 spot check applied automatically, and it means a test that
+cannot be informative costs half what it otherwise would.
+
+**The results folder is named for the test, not the date.** `<question>-<hash>`, where the
+hash is of the exact text tested. Re-running an identical command therefore lands in the
+same folder and resumes where it stopped, making no calls for anything already done. A
+changed page produces a different hash and a new folder, which is correct: it is a
+different test. The date lives in `manifest.json` and `report.md`.
+
+**One chart per question.** `chart.svg` for a single question, `chart-q1.svg`,
+`chart-q2.svg` and so on for several.
+
+**Where each interval comes from.** For one question the interval is a bootstrap over runs
+— valid for that question, and silent about any other, which is the statistical form of
+"one question is one question". Across questions, the interval is a bootstrap over
+*questions*, which is what captures question-to-question variation, and it is only
+reported from five questions up; below 25 it is labelled a rough estimate.
+
+**Output is written for pipes as well as terminals.** A live counter that overwrites itself
+works in a terminal and becomes one unreadable line in a log or inside the Claude skill, so
+the command detects which it is writing to. Errors are also flushed after the output they
+refer to, not before it.
+
+**`.gitignore` covers `opengeo-results/`**, because it holds the pages a user tested —
+their competitors' included — and must never reach this repository by accident.
+
+### Validated before release
+
+- **Calibration**, 300 simulations per case: true nulls called significant 5.3% and 6.3%
+  of the time against a 5% target; intervals covering the true effect 94.7% and 93.7%;
+  estimates unbiased (mean −0.008 and −0.006 on true zeros, +0.394 on a true +0.40).
+- **Reproduction of a published result.** Corpus v0.4's `cons_shoes`, run through the
+  command with its own documents: **+0.60** share-weighted against the published **+0.609**
+  on the same five-engine panel. ChatGPT matched to within a point (+0.79 against +0.79).
+  Grok's current-page rate came in at 0.17 against a published 0.46, about 2.3 standard
+  errors — on the edge of chance for one engine in five, with the runs four days apart —
+  and moves the pooled figure very little, since Grok carries 2.6% of the weight. Every
+  engine was flagged as a lower bound, as the published round predicts, and Gemini as
+  having no room.
+- **No key in any output.** The results folder was searched for the key after a live run.

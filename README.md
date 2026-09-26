@@ -17,6 +17,34 @@ in context, so retrieval is held constant by construction. A result here says wh
 does with content it already has — not whether a page gets found in the first place. That
 caveat travels with every number the project publishes.
 
+## Test your own page
+
+Did your change to your page make AI engines more likely to cite it — against your actual
+competitors? `opengeo test` runs the same paired, controlled experiment as every published
+round, on your content:
+
+```bash
+export OPENROUTER_API_KEY=sk-or-...
+python3 opengeo.py test \
+    --question "How much does a home energy audit cost?" \
+    --page     https://mysite.com/energy-audit \
+    --edit     ./energy-audit-v2.md \
+    --against  https://competitor-a.com/audits https://competitor-b.com/pricing
+```
+
+You get the change in citation rate with a 95% interval, per engine, a chart, and every raw
+model response. About $0.05–$0.15 per question. Add `--dry-run` to see the checks and cost
+without sending anything.
+
+The rigour is in the defaults, so you don't have to know it to benefit from it: 24 runs per
+version, temperature 1.0, randomised document order, a check that your page has room to
+improve before paying to test the edit, and a flag when the result is only a lower bound.
+Each default and the evidence behind it is in `design/opengeo-test.md`.
+
+It is a measurement, not advice. It tells you what your change did; it never tells you what
+to change. And it measures what happens once an engine *has* your page — not whether an
+engine finds it.
+
 ## Findings
 
 The current results live in one place, generated from a ledger so they can't drift:
@@ -67,6 +95,7 @@ Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
 | `calibration_api.py`, `calibration_prompts.py` | Calibration study, API plane |
 | `build_findings.py` | Builds the findings page from the ledger |
 | `size_round1.py`, `make_mock.py`, `check_variants.py`, `engine_weights.py` | Power sizing, synthetic validation, corpus checks, engine panel |
+| `opengeo.py` | `opengeo test`: run a paired experiment on your own page against your competitors (`design/opengeo-test.md`) |
 | `CONTRIBUTING.md` | How to reproduce a round, the rules that are not negotiable, and what adding a round requires |
 | `check_private.py` | Leak check for the held-out private split — must pass before any publication (`METHODOLOGY.md` §10.1) |
 
