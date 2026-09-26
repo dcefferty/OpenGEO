@@ -15,8 +15,8 @@ type: software
 authors:
   - given-names: Lu
     family-names: Yang
-repository-code: "https://github.com/dcefferty/GEO-Bench"
-url: "https://dcefferty.github.io/GEO-Bench/"
+repository-code: "https://github.com/dcefferty/OpenGEO"
+url: "https://dcefferty.github.io/OpenGEO/"
 license: MIT
 date-released: "2026-08-11"
 keywords:

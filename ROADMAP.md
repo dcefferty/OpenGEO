@@ -313,7 +313,7 @@ it rests on.
 | 7b | Keyword stuffing (H6) — the citable Round 1 | Pre-registered before collection; took three corpus designs. **H6 falsified: +0.038, CI [+0.004, +0.075], p=0.045.** Stuffing slightly *increases* citation, and Group C shows it does so without lower fidelity | `preregistrations/2026-08-kwstuff-v3.md`, `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
 | 8 (v1) | Calibration study v1 | **Divergence 0.368, CI [0.139, 0.625].** On 3 of 12 questions the API cited nothing where the logged-out UI cited real sources | `results/published/2026-08-30-calibration-v1/REPORT.md` |
 | 10 | Held-out private split | Twelve questions, screened, format-balanced, never published. Pooled control CPR 0.515 vs the public corpus's 0.503. **H4 replicates on the held-out half: +0.441, CI [+0.324, +0.560]**, and η² for the public/private term is 0.0001 against 0.2795 for the intervention. Banks the pre-publication baseline a contamination test needs | `preregistrations/2026-09-contamination.md`, `results/published/2026-09-22-public-private/REPORT.md` |
-| 12 | Length-only round (H7) | **H7 not falsified: pooled +0.004, CI [−0.024, +0.030], p=0.73** (share-weighted, 5 engines). But three engines cite padded pages *less*, two significantly after correction, and an **unweighted** pool would have falsified H7 at −0.023, CI [−0.042, −0.005] — the headline turns on a documented weighting parameter | `results/published/2026-09-11-lengthonly/REPORT.md` |
+| 12 | Length-only round (H7) | **H7 not falsified: pooled +0.004, CI [−0.023, +0.031], p=0.73** (share-weighted, 5 engines). But three engines cite padded pages *less*, two significantly after correction, and an **unweighted** pool would have falsified H7 at −0.023, CI [−0.042, −0.005] — the headline turns on a documented weighting parameter | `results/published/2026-09-11-lengthonly/REPORT.md` |
 
 Two notes for anyone following a citation into this file:
 
@@ -401,6 +401,29 @@ Not blocking, and deliberately so:
   credibility of the measurement.
 - A composite "visibility score."
 - Browser automation as the primary query plane.
+
+### The line between the tool and the fix (clarified 2026-09-26)
+
+`opengeo test` (`design/opengeo-test.md`) lets anyone run a controlled experiment on
+their own page. That sits on the permitted side of the line above, and the reason is
+worth stating precisely, because the two are easy to confuse.
+
+| | Permitted | Ruled out |
+|---|---|---|
+| **What it does** | Measures whether *your* change moved citation | Tells you what to change |
+| **What it returns** | An effect with an interval, per engine | A score, a grade, or a to-do list |
+| **Who decides** | You choose the change; the tool reports what happened | The tool chooses the change |
+| **Rigour** | The benchmark's own guardrails, not optional | Whatever produces a clean answer |
+
+The test is whether the output is *a measurement of something the user decided* or *a
+recommendation the tool generated*. A measurement is this project's mission applied to
+someone else's content. A recommendation turns the benchmark into a product that profits
+from its own conclusions, and that is where credibility goes.
+
+Concretely, the tool may say *"your edit raised citation from 38% to 71%, CI +21 to +45,
+on this one question"*. It may not say *"add pricing to your page"*. The published
+findings can say what the evidence supports and how strongly, because they are the
+measurement. The tool just lets people take the same measurement themselves.
 
 ---
 
