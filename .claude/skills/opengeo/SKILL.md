@@ -40,10 +40,11 @@ user's time if it's discovered later.
 
 1. **Find the tool.** `opengeo.py` lives at the root of the OpenGEO repository. If the
    current directory isn't that repo, ask the user where their copy is.
-2. **Python with numpy.** The dry run needs only the standard library, but the real run
-   analyses with numpy. Check with `python3 -c "import numpy"`. If that fails, try other
+2. **Python with numpy.** The analysis needs numpy, and the tool refuses to run, dry run
+   included, without it. Check with `python3 -c "import numpy"`. If that fails, try other
    interpreters on the machine (`python3.13`, `python3.12`), or suggest
-   `pip install numpy`. Use whichever works for every command after this.
+   `pip install numpy`. Use whichever works for every command after this, including any
+   command you hand the user to run themselves.
 3. **The API key**, which must be in the environment as `OPENROUTER_API_KEY`. Check it
    without revealing it: `python3 -c "import os; print('set' if os.environ.get('OPENROUTER_API_KEY') else 'not set')"`.
    If it's missing, ask the user to add `export OPENROUTER_API_KEY=sk-or-...` to their
@@ -65,15 +66,26 @@ question. If they only have a vague goal ("get cited more"), that's the moment t
 
 - **The question, or three to five of them.** Real questions their customers ask, in the
   customer's words. One question is fine to start, but the result then describes that
-  question only — say so now rather than after they've paid.
+  question only — say so now rather than after they've paid. Two kinds of question are
+  worth adding on purpose:
+  - **One the old wording answered**, if the edit removes or rewrites anything. An edit can
+    win the question it was written for and lose another; without such a question, a loss
+    can't show up.
+  - **Local questions, made explicit.** Engines queried through an API don't know where the
+    asker is, so "near me" has to become a named place ("emergency plumber in Tucson"). If
+    a question names a neighbourhood, a page that lists it has a built-in keyword advantage:
+    a real effect, but one that applies to people who type that neighbourhood.
 - **Their page as it is now:** a URL or a saved file.
 - **Their edited page.** If they already have one, use it. If they want help making it, see
   step 3.
 - **Two to five competitor pages** that someone asking this question might also be shown.
-  Four or five is better: every published round had five other documents. If they don't
-  know who competes, suggest they try the question in an AI assistant or search engine and
-  note who comes up — the tool deliberately doesn't discover competitors itself, because
-  that would make the same test give a different answer next week.
+  Five is best: every published round had five other documents, and engines cite several
+  pages per answer, so in a smaller field the user's current page is often cited almost
+  every time already. The test then stops halfway, at half the cost, saying there's no room
+  to show a change; tell them that up front. If they don't know who competes, suggest they
+  try the question in an AI assistant or search engine and note who comes up. The tool
+  deliberately doesn't discover competitors itself, because that would make the same test
+  give a different answer next week.
 
 A page that refuses automated requests (a 403, or almost no text because it's built with
 JavaScript) can be saved from their browser with File > Save As and passed as a file.
@@ -89,13 +101,23 @@ python3 opengeo.py fetch <their-page-url-or-file> --out opengeo-results/drafts/c
 
 Copy that to `opengeo-results/drafts/edited.txt`, make the user's change in the copy, and
 show them the before and after of the part you changed. Get their approval before testing.
-(`opengeo-results/` is gitignored, so drafts can't be committed by accident.)
+(`opengeo-results/` is gitignored, so drafts can't be committed by accident.) The file's
+first line is the page's title, which the engines see with the excerpt; leave it alone
+unless the change is to the title.
 
-Make only the change they asked for. Keep it within about three words of the original
-length by *replacing* vague wording rather than adding to it, if that reads naturally — the
-tool enforces this by default so a length change can't masquerade as an effect. If the
-natural edit genuinely adds content, don't contort it: the test can run with
-`--allow-length-change` (step 4 explains when that's fine).
+Make only the change they asked for, so the test measures that change and nothing else:
+
+- **Keep it within about three words of the original length** by *replacing* vague wording
+  rather than adding to it, if that reads naturally. The tool enforces this by default so a
+  length change can't masquerade as an effect. If the natural edit genuinely adds content,
+  don't contort it: the test can run with `--allow-length-change` (step 4 explains when).
+- **Don't slip the question's own words into the edit** unless that is the change. Repeating
+  the question's keywords is itself a measured effect (+4 points), and it would blur which
+  part of the edit did the work.
+- **Read the edit in context before showing it.** Whatever the edited page now implies is a
+  claim too. A price placed next to "every installation includes an expansion tank and the
+  permit" reads as covering them, so ask rather than let the page say something the user
+  hasn't confirmed — they may publish it.
 
 ### 4. Dry run, then ask
 
@@ -106,10 +128,13 @@ python3 opengeo.py test --question "..." --page <current> --edit <edited> \
     --against <competitor1> <competitor2> ... --dry-run
 ```
 
-Show the user the checks and the estimated cost, and **wait for a clear yes before running
-for real.** It's their OpenRouter account. The cost is small — roughly $0.05–$0.15 per
-question — but spending it is their call, and the dry run is also where problems surface
-before any money moves.
+Show the user the checks, what the engines will see, and the estimated cost, and **wait for
+a clear yes before running for real.** It's their OpenRouter account. The cost is small —
+about $0.30 per question at current prices; quote the dry run's own estimate — but spending
+it is their call, and the dry run is also where problems surface before any money moves.
+
+"What the engines will see" is the page's title and a section of about 80–110 words around
+the edit, never the whole page. Tell the user, so they know what is being compared.
 
 If a check is marked ✗, the run is blocked. Explain it plainly and let them choose:
 
@@ -120,6 +145,10 @@ If a check is marked ✗, the run is blocked. Explain it plainly and let them ch
   Let the user pick; don't add the flag on their behalf without saying so.
 - **Fewer than two competitors.** With nothing to compete against, a page gets cited by
   default and the test says nothing.
+- **numpy is missing** for the Python that ran the tool. Switch to one that has it (see
+  Setup); nothing has been spent.
+- **Only one version has a page title.** The edit was made in a file taken some other way
+  than `fetch`. Redo it in a copy of `fetch`'s output.
 
 ### 5. Run it
 
@@ -143,8 +172,9 @@ of the output means and the specific ways results get over-read.
 
 Three things belong in almost every explanation:
 
-- **One question is one question.** About 1 in 20 tests shows a change by pure chance, so a
-  single result — however clean — is a reason to test more questions, not to rewrite a site.
+- **One question is one question.** A clear result may well be real (the output says how
+  likely chance is), but it describes this question against these competitors. It's a
+  reason to test more questions, not to rewrite a site.
 - **It measures what happens once an engine has the page**, not whether an engine will find
   the page in the first place. Retrieval is held constant; that's what makes the result
   causal, and it's also its limit.

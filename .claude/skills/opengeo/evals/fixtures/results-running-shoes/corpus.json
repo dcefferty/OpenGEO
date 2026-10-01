@@ -1,19 +1,21 @@
 {
-  "corpus_version": "opengeo-test-36c39450d56b",
-  "corpus_sha256": "36c39450d56b",
-  "tool_version": "0.1.0",
+  "corpus_version": "opengeo-test-19520db4ec12",
+  "corpus_sha256": "19520db4ec12",
+  "tool_version": "0.2.0",
   "edit_region": {
-    "words_changed_before": 58,
-    "words_changed_after": 60,
-    "shared_context_words": 13,
-    "position_in_page": 0.18
+    "words_changed_before": 16,
+    "words_changed_after": 17,
+    "shared_context_words": 63,
+    "position_in_page": 0.66,
+    "title_before": "Running Shoe Fitting | Kestrel Running Co.",
+    "title_after": "Running Shoe Fitting | Kestrel Running Co."
   },
   "n_prompts": 1,
   "n_docs": 6,
   "prompts": [
     {
       "prompt_id": "q1",
-      "question": "At what mileage should I replace my running shoes, and how much does rotating two pairs extend their life?",
+      "question": "How often should I replace my running shoes?",
       "domain": "user",
       "target_doc_id": "q1__yours",
       "target_format": "user",
@@ -34,21 +36,23 @@
       "is_target": true,
       "source": {
         "yours": {
-          "ref": "page.txt",
+          "ref": "current.html",
           "kind": "file",
-          "sha256": "f0a98e21bc81e6ac",
-          "words": 71
+          "title": "Running Shoe Fitting | Kestrel Running Co.",
+          "sha256": "03336de3ffd8402d",
+          "words": 120
         },
         "edit": {
-          "ref": "edit.txt",
+          "ref": "edited.html",
           "kind": "file",
-          "sha256": "42888c0ac91f126d",
-          "words": 73
+          "title": "Running Shoe Fitting | Kestrel Running Co.",
+          "sha256": "4f66493ef2597b7c",
+          "words": 121
         }
       },
       "variants": {
-        "control": "r/running - Ran three marathons now. Honest advice: don't overthink the shoe, overthink your training load. Nearly everyone I know who got injured added too much weekly volume too fast. Fit matters more than people think too - a shoe that's slightly too narrow will wreck a long run even if it's brand new. Try things on in the afternoon when your feet are largest, not first thing in the morning.",
-        "treatment": "r/running - Ran three marathons now. Honest advice: don't overthink the shoe, overthink the mileage. Nearly everyone I know who got injured added more than 10% weekly volume. Midsole foam compresses meaningfully by around 300-500 miles, so replace around then rather than waiting for visible wear. Rotating two pairs extended my shoe life by roughly 20%. Racing shoes feel amazing but I got about 150 miles out of mine before they went flat."
+        "control": "Running Shoe Fitting | Kestrel Running Co.\nFrom there we bring out three or four pairs that suit your gait and the running you do, from easy road miles to mountain trails. Take your time and jog the block in each pair before you decide. We carry Brooks, Hoka, Saucony, New Balance and On, in widths from narrow to extra wide. Not sure the new pair is right? Run in it for 30 days, and if it doesn't work out, bring it back for an exchange.",
+        "treatment": "Running Shoe Fitting | Kestrel Running Co.\nFrom there we bring out three or four pairs that suit your gait and the running you do, from easy road miles to mountain trails. Take your time and jog the block in each pair before you decide. Most pairs last 300 to 500 miles, roughly four to six months at 20 miles a week. Not sure the new pair is right? Run in it for 30 days, and if it doesn't work out, bring it back for an exchange."
       }
     },
     {
@@ -56,15 +60,16 @@
       "prompt_id": "q1",
       "is_target": false,
       "source": {
-        "ref": "competitor1.txt",
+        "ref": "comp1.html",
         "kind": "file",
-        "sha256": "3a9a05439307830a",
-        "words": 60,
-        "question_term_overlap": 5
+        "title": "Free Gait Analysis | Summit Run Shop",
+        "sha256": "70d4e37a33517351",
+        "words": 83,
+        "question_term_overlap": 1
       },
       "variants": {
-        "control": "Marathon training shoes need to survive a lot more mileage than most people plan for. The temptation is to buy the lightest racing shoe you can find, but you'll spend most of your training in easy miles, and that's where cushioning and durability matter. Many runners end up rotating two pairs - one for long runs, one for speed work.",
-        "treatment": "Marathon training shoes need to survive a lot more mileage than most people plan for. The temptation is to buy the lightest racing shoe you can find, but you'll spend most of your training in easy miles, and that's where cushioning and durability matter. Many runners end up rotating two pairs - one for long runs, one for speed work."
+        "control": "Free Gait Analysis | Summit Run Shop\nFree Gait Analysis At Summit Run Shop, every visit includes a free gait analysis. We watch you walk and run, check your arch height and ankle mobility, and look at how far your foot rolls inward as it lands. Runners who overpronate often do well in a stability shoe with a firmer medial post, while neutral runners usually prefer more flexible cushioning. Bring the socks you run in and, if you use them, your orthotics, so the fit matches how you actually run.",
+        "treatment": "Free Gait Analysis | Summit Run Shop\nFree Gait Analysis At Summit Run Shop, every visit includes a free gait analysis. We watch you walk and run, check your arch height and ankle mobility, and look at how far your foot rolls inward as it lands. Runners who overpronate often do well in a stability shoe with a firmer medial post, while neutral runners usually prefer more flexible cushioning. Bring the socks you run in and, if you use them, your orthotics, so the fit matches how you actually run."
       }
     },
     {
@@ -72,15 +77,16 @@
       "prompt_id": "q1",
       "is_target": false,
       "source": {
-        "ref": "competitor2.txt",
+        "ref": "comp2.html",
         "kind": "file",
-        "sha256": "c570ba8dfcf9453b",
-        "words": 46,
+        "title": "Cloudline 4 Daily Trainer | Aerofoot",
+        "sha256": "bc21255bc5debf07",
+        "words": 73,
         "question_term_overlap": 0
       },
       "variants": {
-        "control": "World Athletics confirmed it will maintain existing stack height limits for road racing through the next season, ending speculation about further restrictions. Shoe manufacturers had lobbied for clarity ahead of product cycles. The ruling affects competitive racing only and does not apply to recreational training footwear.",
-        "treatment": "World Athletics confirmed it will maintain existing stack height limits for road racing through the next season, ending speculation about further restrictions. Shoe manufacturers had lobbied for clarity ahead of product cycles. The ruling affects competitive racing only and does not apply to recreational training footwear."
+        "control": "Cloudline 4 Daily Trainer | Aerofoot\nCloudline 4 The Cloudline 4 is our softest daily trainer yet. A full-length supercritical foam midsole returns more energy with every stride, and a rocker profile keeps you rolling forward on long runs. The engineered mesh upper stretches where your foot flexes and stays locked down at the heel. It weighs 9.1 ounces in a men's size 9, with an 8 mm drop and a wide, stable base for easy and recovery days.",
+        "treatment": "Cloudline 4 Daily Trainer | Aerofoot\nCloudline 4 The Cloudline 4 is our softest daily trainer yet. A full-length supercritical foam midsole returns more energy with every stride, and a rocker profile keeps you rolling forward on long runs. The engineered mesh upper stretches where your foot flexes and stays locked down at the heel. It weighs 9.1 ounces in a men's size 9, with an 8 mm drop and a wide, stable base for easy and recovery days."
       }
     },
     {
@@ -88,15 +94,16 @@
       "prompt_id": "q1",
       "is_target": false,
       "source": {
-        "ref": "competitor3.txt",
+        "ref": "comp3.html",
         "kind": "file",
-        "sha256": "44c0e49f3d5cbb09",
-        "words": 58,
-        "question_term_overlap": 0
+        "title": "How to Choose Your First Marathon Shoe | The Long Run",
+        "sha256": "470db54de226d34d",
+        "words": 86,
+        "question_term_overlap": 1
       },
       "variants": {
-        "control": "Fit guide. Measure both feet in the afternoon, when they are largest. Allow a thumb's width between the longest toe and the end of the shoe. The heel should hold without slipping when laced. Width is measured at the widest part of the forefoot. If you are between sizes, size up rather than down for distances above 10km.",
-        "treatment": "Fit guide. Measure both feet in the afternoon, when they are largest. Allow a thumb's width between the longest toe and the end of the shoe. The heel should hold without slipping when laced. Width is measured at the widest part of the forefoot. If you are between sizes, size up rather than down for distances above 10km."
+        "control": "How to Choose Your First Marathon Shoe | The Long Run\nHow to Choose Your First Marathon Shoe Your first marathon block will put more miles on your legs than anything you have done before, so the shoe matters. Prioritise comfort over speed: the lightest racing shoe is tempting, but most of your training happens at an easy pace, where cushioning and a secure fit do more for you than a carbon plate. Try shoes on late in the day, when your feet are at their largest, and leave a thumb's width of space at the toe.",
+        "treatment": "How to Choose Your First Marathon Shoe | The Long Run\nHow to Choose Your First Marathon Shoe Your first marathon block will put more miles on your legs than anything you have done before, so the shoe matters. Prioritise comfort over speed: the lightest racing shoe is tempting, but most of your training happens at an easy pace, where cushioning and a secure fit do more for you than a carbon plate. Try shoes on late in the day, when your feet are at their largest, and leave a thumb's width of space at the toe."
       }
     },
     {
@@ -104,15 +111,16 @@
       "prompt_id": "q1",
       "is_target": false,
       "source": {
-        "ref": "competitor4.txt",
+        "ref": "comp4.html",
         "kind": "file",
-        "sha256": "c39d9ef533503aef",
-        "words": 34,
+        "title": "Common Running Injuries and How to Prevent Them | Front Range Physio",
+        "sha256": "47ce9c173dddd0a6",
+        "words": 79,
         "question_term_overlap": 1
       },
       "variants": {
-        "control": "Meridian Long Run - daily trainer built for high-mileage weeks. Dual-density foam midsole with a breathable engineered mesh upper. Suitable for neutral gait. Available in standard and wide fittings. Free returns within 30 days.",
-        "treatment": "Meridian Long Run - daily trainer built for high-mileage weeks. Dual-density foam midsole with a breathable engineered mesh upper. Suitable for neutral gait. Available in standard and wide fittings. Free returns within 30 days."
+        "control": "Common Running Injuries and How to Prevent Them | Front Range Physio\nCommon Running Injuries Shin splints, runner's knee, plantar fasciitis and Achilles tendinopathy account for most of the running injuries we treat. The most common cause is doing too much too soon: increasing weekly mileage faster than tendons and bones can adapt. Build volume gradually, keep at least one easy day between hard sessions, and add two short strength sessions a week for your calves, hips and core. If pain changes the way you run, stop and get it assessed.",
+        "treatment": "Common Running Injuries and How to Prevent Them | Front Range Physio\nCommon Running Injuries Shin splints, runner's knee, plantar fasciitis and Achilles tendinopathy account for most of the running injuries we treat. The most common cause is doing too much too soon: increasing weekly mileage faster than tendons and bones can adapt. Build volume gradually, keep at least one easy day between hard sessions, and add two short strength sessions a week for your calves, hips and core. If pain changes the way you run, stop and get it assessed."
       }
     },
     {
@@ -120,15 +128,16 @@
       "prompt_id": "q1",
       "is_target": false,
       "source": {
-        "ref": "competitor5.txt",
+        "ref": "comp5.html",
         "kind": "file",
-        "sha256": "0fd7c56d539f7118",
-        "words": 46,
+        "title": "Aerofoot Expands Shoe Recycling Program to 200 Stores | Gear Wire",
+        "sha256": "7c7950e2c6404efe",
+        "words": 69,
         "question_term_overlap": 2
       },
       "variants": {
-        "control": "Running shoes are commonly categorised by gait support (neutral, stability, motion control), by stack height and heel-to-toe drop, and by intended use (daily trainer, tempo, racing). Midsole materials include EVA, TPU and PEBA-based foams, which differ in weight, energy return and rate of compression over distance.",
-        "treatment": "Running shoes are commonly categorised by gait support (neutral, stability, motion control), by stack height and heel-to-toe drop, and by intended use (daily trainer, tempo, racing). Midsole materials include EVA, TPU and PEBA-based foams, which differ in weight, energy return and rate of compression over distance."
+        "control": "Aerofoot Expands Shoe Recycling Program to 200 Stores | Gear Wire\nAerofoot Expands Shoe Recycling Program Runners can now drop off worn-out athletic shoes of any brand at 200 Aerofoot stores, the company said on Tuesday. Collected shoes are ground into rubber granules for playground surfaces and running tracks. The program, which began as a pilot in three cities last year, has collected more than 400,000 pairs. Aerofoot said it plans to add drop-off bins at partner retailers next spring.",
+        "treatment": "Aerofoot Expands Shoe Recycling Program to 200 Stores | Gear Wire\nAerofoot Expands Shoe Recycling Program Runners can now drop off worn-out athletic shoes of any brand at 200 Aerofoot stores, the company said on Tuesday. Collected shoes are ground into rubber granules for playground surfaces and running tracks. The program, which began as a pilot in three cities last year, has collected more than 400,000 pairs. Aerofoot said it plans to add drop-off bins at partner retailers next spring."
       }
     }
   ]

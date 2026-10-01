@@ -41,8 +41,15 @@ answers, the page was cited.
 | **Repeated the keyword** from the question | **+4 points**, 95% CI +0.4 to +7.5 | Pre-registered. Real but small, and with no measurable cost to accuracy |
 | **Padded the page with filler** to twice its length | **0 points**, 95% CI −2 to +3 | Pre-registered. Length alone does nothing; on a few engines padding cost citations |
 
-The first row carries an honest caveat worth passing on: the edited pages were cited in
-almost every run, so +48 is a floor on the effect, not a measurement of its full size.
+The first row carries a caveat worth passing on: its direction is solid, but its size is
+not a prediction. In those tests the vague version was written to answer none of the
+question, and the edited page was usually the only document that did, so it was cited
+almost every time. The +48 mostly reflects how rarely the vague version was cited. Against
+competitors that also state the answer, expect less. Never present it as "at least +48".
+
+A related pattern, seen while building the tests rather than measured as a formal result:
+engines reward a page for answering at all, not for answering more completely. A page that
+already gives some specific answer gained little from a fuller one.
 
 ### Preliminary evidence
 
@@ -52,7 +59,7 @@ anything general. Treat these as "no effect detected so far", not as "proven not
 | What was changed | Effect | Confidence |
 |---|---|---|
 | Moved the answer to the top of the page | no detectable effect | Preliminary |
-| Formatted it as an FAQ, with the question as a heading | no detectable effect | Preliminary |
+| Formatted it as a visible FAQ, with the question as a heading | no detectable effect | Preliminary |
 | Attributed claims to their source by name | no detectable effect | Preliminary |
 | Added a line citing the source | no detectable effect | Preliminary |
 
@@ -61,9 +68,14 @@ nothing is that they act on *whether a page is found* — retrieval — which th
 holds constant by design. So "no effect" here means no effect once an engine already has
 the page, not that the tactic is useless everywhere.
 
-This is the most useful thing to tell someone who's been sold on FAQ schema or answer-first
+This is the most useful thing to tell someone who's been sold on answer-first or FAQ
 formatting: the evidence doesn't show it helps at the stage we can measure, and whether it
 helps a page get *found* is an open question nobody has tested causally.
+
+**FAQ schema is a different thing, and was never tested.** Schema is structured-data markup
+in the page's code. The engines here receive a page's visible text, and markup doesn't
+survive into it, so neither the benchmark nor `opengeo test` can measure schema at all. Say
+so plainly rather than letting the formatting result stand in for it.
 
 ### Context worth knowing
 
@@ -86,6 +98,9 @@ Say these whenever they bear on what the user is trying to decide:
   searches ("best plumber near me") were not tested. `opengeo test` lets the user test their
   own commercial questions, which is one of the best reasons to run it.
 - **It used each engine's API**, which is not identical to what a person sees in the app.
+  Each engine is one model standing in for its app: "ChatGPT" is OpenAI's gpt-5.4-mini,
+  "Claude" is Claude Haiku 4.5, and so on (`engine_weights.py` at the repository root has
+  the full panel). When someone cares about one engine specifically, name its model.
 - **Five engines: ChatGPT, Gemini, Claude, DeepSeek and Grok**, together about 99% of
   measured AI-assistant traffic. **Perplexity is not among them and cannot be.** It runs its
   own live web search and ignores documents handed to it, so it can't be tested this way at

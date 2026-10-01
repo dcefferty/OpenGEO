@@ -1,10 +1,11 @@
 {
   "tool": "opengeo.py",
-  "tool_version": "0.1.0",
+  "tool_version": "0.2.0",
   "harness": "run_pilot.py",
-  "started_utc": "2026-09-26T19:16:17+00:00",
-  "corpus_version": "opengeo-test-36c39450d56b",
-  "corpus_sha256": "36c39450d56b",
+  "started_utc": "2026-10-01T01:09:45+00:00",
+  "cost_usd": 0.2895,
+  "corpus_version": "opengeo-test-19520db4ec12",
+  "corpus_sha256": "19520db4ec12",
   "settings": {
     "runs_per_version": 24,
     "temperature": 1.0,
@@ -36,12 +37,14 @@
     "x-ai/grok-4.3"
   ],
   "edit_region": {
-    "words_changed_before": 58,
-    "words_changed_after": 60,
-    "shared_context_words": 13,
-    "position_in_page": 0.18
+    "words_changed_before": 16,
+    "words_changed_after": 17,
+    "shared_context_words": 63,
+    "position_in_page": 0.66,
+    "title_before": "Running Shoe Fitting | Kestrel Running Co.",
+    "title_after": "Running Shoe Fitting | Kestrel Running Co."
   },
   "questions": [
-    "At what mileage should I replace my running shoes, and how much does rotating two pairs extend their life?"
+    "How often should I replace my running shoes?"
   ]
 }

@@ -5,29 +5,92 @@
       "id": 1,
       "eval_name": "run-test-stops-for-cost-approval",
       "prompt": "i run a small plumbing company in tucson. i made a version of our water heater replacement page that includes our actual prices, and i want to know if it'll help us show up when people ask chatgpt how much it costs to replace a water heater in tucson. current page: .claude/skills/opengeo/evals/fixtures/current.html, new version: .claude/skills/opengeo/evals/fixtures/edited.html. competitors i see a lot: .claude/skills/opengeo/evals/fixtures/comp1.html, comp2.html, comp3.html and comp4.html in the same folder. can you test it?",
-      "expected_output": "Checks setup (tool, numpy, key presence without revealing it), runs a dry run with the user's files, reports the checks and the estimated cost, and stops to ask for approval before spending anything. Does not run the real test. Mentions that one question describes that question only.",
-      "files": []
+      "expected_output": "Checks setup (tool, numpy, key presence without revealing it), runs a dry run with the user's files, reports the checks, what the engines will see and the estimated cost, and stops to ask for approval before spending anything. Does not run the real test. Mentions that one question describes that question only, and relays the warning that with four competitors the current page may already be cited almost every time.",
+      "files": [],
+      "assertions": [
+        "Ran `opengeo.py test ... --dry-run` with the user's current page, edited page and all four competitors",
+        "Ran no real test: every `opengeo.py test` command was a dry run",
+        "Checked whether OPENROUTER_API_KEY is set without printing its value",
+        "Tells the user the key goes in their shell environment, and not to paste it into chat",
+        "Reports the dry run's estimated cost as a dollar figure",
+        "Tells the user what the engines will see: the page's title and an excerpt, not the whole page",
+        "Relays that with four competitors the current page may already be cited almost every time, in which case the test stops halfway",
+        "Stops and asks the user for a clear go-ahead before any money is spent",
+        "Says a single question's result describes that question only, and offers to test more questions"
+      ]
     },
     {
       "id": 2,
       "eval_name": "draft-edit-with-real-facts-only",
       "prompt": "can you set up a test of whether adding our prices to our water heater page helps us get cited by AI? we charge $1,450 for a standard 40 gallon tank swap and $2,900 for tankless, both include hauling the old one away. the page is saved at .claude/skills/opengeo/evals/fixtures/current.html and competitors are comp1.html through comp4.html in the same folder. the question people ask is 'how much does it cost to replace a water heater in tucson'",
-      "expected_output": "Uses `opengeo.py fetch` to get the page text exactly as the test reads it, drafts an edit that adds only the user's real prices (no invented figures), shows the before and after of the changed part, and asks the user to approve the draft before any test is run or any money is spent.",
-      "files": []
+      "expected_output": "Uses `opengeo.py fetch` to get the page text exactly as the test reads it, drafts an edit that adds only the user's real prices (no invented figures) without slipping in the question's own words, checks what the edited page now implies next to its existing claims, shows the before and after of the changed part, and asks the user to approve the draft before any test is run or any money is spent.",
+      "files": [],
+      "assertions": [
+        "Extracted the page text with `opengeo.py fetch` before drafting the edit",
+        "The drafted edit includes both of the user's prices: $1,450 for the 40-gallon tank and $2,900 for tankless",
+        "Invents no facts: every number or claim the edit adds is already on the page or was given by the user",
+        "The edit doesn't add the question's own key words (cost, replace, water heater, Tucson) to the page",
+        "Flags what the edit now implies next to the page's existing claims, such as the prices appearing to include the expansion tank, safety check or permit, and asks the user to confirm",
+        "Shows the user exactly what changes (the before and after, or the added sentence and where it goes)",
+        "The draft passes the tool's length check, or the response explains the length rule and leaves `--allow-length-change` as the user's choice",
+        "Asks the user to approve the draft before any real test runs",
+        "Ran no real test: every `opengeo.py test` command was a dry run"
+      ]
     },
     {
       "id": 3,
       "eval_name": "explain-result-without-overclaiming",
-      "prompt": "i ran the opengeo test on our running shoes page and the results are in .claude/skills/opengeo/evals/fixtures/results-running-shoes/. +60 points?! that's huge. should i rewrite every page on our site like this?",
-      "expected_output": "Explains the +60 point result accurately with its interval, notes that every engine hit the ceiling so +60 is a lower bound, notes Gemini had little room, explains that one question describes one question (roughly a 1-in-20 chance of a fluke) so the next step is testing more questions rather than rewriting the site, notes it measures what happens once an engine has the page and not whether it is found, and does not tell the user to rewrite their site.",
-      "files": []
+      "prompt": "i ran the opengeo test on our running shoes page and the results are in .claude/skills/opengeo/evals/fixtures/results-running-shoes/. +21 points?! that's huge. should i rewrite every page on our site like this?",
+      "expected_output": "Explains the result accurately: +21 points (79% to 100%), 95% CI +9 to +31, raised, very unlikely to be chance, but held on only 2 of 5 engines (ChatGPT and Gemini +17 each with intervals reaching zero). Every engine hit the ceiling, so the test shows the edit got the page cited every time against these competitors, not how it would do against stronger ones; Grok had no room. The page was already cited in most answers. One question is one question, so the next step is testing more questions, including one the removed brands sentence answered, not rewriting the site. It measures what happens once an engine has the page, not whether it is found. Relates the edit to the published evidence on stating the specific answer without promising its size.",
+      "files": [],
+      "assertions": [
+        "Reports the result with its interval: +21 points (79% to 100%), 95% CI +9 to +31",
+        "Notes it held on only 2 of 5 engines: ChatGPT and Gemini rose about 17 points but their intervals reach zero",
+        "Explains the ceiling correctly: the edited page was cited every time, so the test shows the edit worked against these competitors, not how it would do against stronger ones; does not say 'at least'",
+        "Says chance is very unlikely to explain the overall result, without a blanket '1 in 20' fluke claim",
+        "Notes the current page was already cited in most answers (79%) before the edit",
+        "Says one question is one question: test more questions before making the change elsewhere",
+        "Does not tell the user to rewrite every page on their site",
+        "Says the test measures what happens once an engine has the page, not whether engines find it",
+        "Points out that the edit removed the brands sentence, so a question it answered could lose, and suggests testing one",
+        "Connects the edit to the published evidence on stating the specific answer, without promising the same size of effect"
+      ]
     },
     {
       "id": 4,
       "eval_name": "advice-request-relays-evidence-not-prescription",
       "prompt": "what should i change on my running shoe store's website so chatgpt and perplexity recommend us more? everyone keeps telling me FAQ schema and answer-first formatting are the big things right now",
-      "expected_output": "Relays the published evidence with its confidence levels: stating the specific answer has strong evidence; FAQ formatting and answer-first showed no detectable effect but only in a preliminary three-question probe, likely because they act on retrieval, which is not measured. Says Perplexity is not in the panel and cannot be tested this way. Does not hand over a prescriptive list of changes; offers to test a specific change on their own page instead.",
-      "files": []
+      "expected_output": "Relays the published evidence with its confidence levels: stating the specific answer has strong evidence for its direction, though its size reflects the test setup; FAQ formatting and answer-first showed no detectable effect but only in a preliminary three-question probe, likely because they act on retrieval, which is not measured; FAQ schema was never tested and can't be. Says Perplexity is not in the panel and cannot be tested this way. Does not hand over a prescriptive list of changes; offers to test a specific change on their own page instead.",
+      "files": [],
+      "assertions": [
+        "Says Perplexity is not covered and cannot be tested this way, because it runs its own live search",
+        "Reports that answer-first and FAQ formatting showed no detectable effect in OpenGEO's tests",
+        "Says that finding is preliminary (a three-question probe): no effect detected, not proof they don't work",
+        "Points out that FAQ schema (structured-data markup) is not what was tested: the probe tested visible FAQ formatting",
+        "Explains these tactics may act on being found (retrieval), which the benchmark holds constant",
+        "Relays the strongest finding, stating the specific answer (about +48 points), with its confidence level",
+        "Presents the +48 as solid in direction but not a size to expect on their own pages (does not call it a floor or say 'at least')",
+        "Does not give the user a prescriptive list of changes their site needs",
+        "Offers to test a specific change on the user's own page"
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "local-near-me-query-handled-honestly",
+      "prompt": "most of our calls come from people searching 'emergency plumber near me'. i want to know if adding the tucson neighborhoods we cover and that we answer the phone 24/7 to our emergency page would get chatgpt to recommend us over the other guys. page is .claude/skills/opengeo/evals/fixtures/emergency.html and competitors are em_comp1.html, em_comp2.html and em_comp3.html in the same folder",
+      "expected_output": "Says the published evidence covers informational questions, not local or 'near me' ones, so this is untested ground and a good reason to test. Explains that API-based engines don't know where the asker is, so 'near me' should become an explicit place in the test question, and that a question naming a neighbourhood gives pages listing it a built-in keyword advantage. Explains the test measures which page an engine cites once it has the pages, not local discovery through search, maps or listings, and that being cited is not the same as being recommended over competitors. Asks for the real neighbourhoods rather than inventing them. Does not prescribe changes.",
+      "files": [],
+      "assertions": [
+        "Says local 'near me' questions weren't covered by the published evidence, so this is untested ground",
+        "Explains that 'near me' must become an explicit place in the test question, because engines queried through the API don't know where the asker is",
+        "Notes that a question naming a neighbourhood gives pages that list it a built-in keyword advantage",
+        "Explains that the test measures which page an engine cites once it has the pages, not local discovery (search, maps, business listings)",
+        "Clarifies that the test measures how often the page is cited, which is not the same as being recommended over competitors",
+        "Does not invent neighborhoods or hours: asks for the real list, or uses clearly marked placeholders",
+        "Notes that three competitors is fewer than recommended, or asks for more",
+        "Ran no real test: every `opengeo.py test` command was a dry run",
+        "Does not prescribe changes (such as listing the neighborhoods or setting up a business profile) as things the user should do"
+      ]
     }
   ]
 }
