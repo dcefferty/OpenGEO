@@ -375,8 +375,13 @@ none:
 
 - [ ] `python3 check_private.py` — must pass. Once public, a leaked private prompt_id
       cannot be un-leaked.
+- [ ] Drop "Draft" from both pages: `page.eyebrow`, `page.footer`, `story.eyebrow` and
+      `story.footer` in `results/findings.json`.
+- [ ] Check that no business name in the skill's eval fixtures
+      (`.claude/skills/opengeo/evals/fixtures/`) belongs to a real business; they are
+      written as fictional and some make claims about the business.
 - [ ] `python3 build_findings.py --check` then `build_findings.py`; confirm
-      `docs/index.html` is current.
+      `docs/index.html` (the overview) and `docs/findings.html` are current.
 - [ ] Make the repository public.
 - [ ] Enable GitHub Pages on `main` / `docs`. Deliberately not enabled earlier: on a
       private repository this is either unavailable or is itself a publication step.

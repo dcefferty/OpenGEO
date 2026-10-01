@@ -1,21 +1,36 @@
 # OpenGEO
 
-**An open, reproducible, causal benchmark for Generative Engine Optimization.** It changes
-one thing about a document and measures whether AI answer engines cite it more.
+**Most advice on getting cited by AI has never been tested. OpenGEO tests it.** It is an
+open, reproducible experiment: change one thing about a page, ask AI answer engines the same
+question many times, and measure whether they cite the page more.
 
-Two things make it different from the GEO numbers already in circulation. Everything here
-is **reproducible** — the corpus, the harness, and every raw model response ship with the
-result, so anyone can re-run a round and check it. And every result is **causal**: a paired
-design where only the document under test changes between arms, rather than an
-observational comparison of pages that already rank.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/effects-dark.svg">
+  <img alt="What each tested change did to how often AI answers cited a page: stating the specific answer moved it far more than repeating the keyword, padding the page, or presentation tactics, which moved it little or not at all." src="docs/assets/effects-light.svg">
+</picture>
 
-It is deliberately **not** a brand-visibility tracker, and it will never ship a composite
-"visibility score."
+**What it found, in plain words.** Every figure, with its interval, is on the
+[overview page](docs/index.html), and in full on the [findings page](docs/findings.html).
 
-**What it measures, precisely:** the synthesis stage. Documents are supplied to the model
-in context, so retrieval is held constant by construction. A result here says what a model
-does with content it already has — not whether a page gets found in the first place. That
-caveat travels with every number the project publishes.
+- **Stating the specific answer** got pages cited far more often than talking around it.
+  It is the strongest result here, and it held on questions that have never been published.
+  How big the gain is depends on your competition.
+- **Repeating your keyword** helped a little. Pre-registered.
+- **Padding a page** with filler did nothing, and on some engines it cost citations.
+  Pre-registered.
+- **Answer-first order, FAQ headings, attribution and source citations** moved nothing we
+  could detect. That is early evidence, from a small probe.
+
+**Where it stops.** It measures the synthesis stage: what an engine does once it has your
+page, not whether it finds your page in the first place. Documents are handed to each
+engine, so retrieval is held constant by construction. That is what makes a result causal,
+and it is also its limit; the caveat travels with every number the project publishes.
+
+**Why it is different.** Everything is **reproducible**: the corpus, the harness and every
+raw model response ship with each result, so anyone can re-run a round and check it. Every
+result is **causal**: a paired design where only the page under test changes, not an
+observational comparison of pages that already rank. And it is deliberately **not** a
+brand-visibility tracker; it will never ship a composite "visibility score."
 
 ## Test your own page
 
@@ -45,14 +60,19 @@ It is a measurement, not advice. It tells you what your change did; it never tel
 to change. And it measures what happens once an engine *has* your page — not whether an
 engine finds it.
 
+Prefer to ask in plain English? The Claude skill in `.claude/skills/opengeo/` gathers your
+page, your question and your competitors, shows you the cost, runs the test and explains the
+result: *"Test whether adding our prices to our water heater page helps us get cited."*
+
 ## Findings
 
 The current results live in one place, generated from a ledger so they can't drift:
 
-- **`docs/index.html`** — the findings page: what moves citation, by how much, with
-  intervals. Served by GitHub Pages once this repo is public.
+- **`docs/index.html`** — the overview: what was tested, what moved citation, how sure we
+  are and where it stops, in plain language. Served by GitHub Pages once this repo is public.
+- **`docs/findings.html`** — every finding in full, with per-engine charts and intervals.
 - **`results/published/`** — the full report for each round, including the nulls.
-- **`results/findings.json`** — the machine-readable ledger the page is built from.
+- **`results/findings.json`** — the machine-readable ledger both pages are built from.
 
 No figures are written into this README on purpose: every number in the project has exactly
 one source, and duplicating them here is how documentation starts lying.
@@ -88,12 +108,12 @@ Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
 | `corpus/` | Document text lives in the builders; the JSON corpora are generated and hashed |
 | `preregistrations/` | One file per round, committed **before** collection. The git timestamp is the evidence |
 | `results/` | Raw responses, the findings ledger, and published reports |
-| `docs/` | The generated public findings page |
+| `docs/` | The generated public pages: the overview (`index.html`) and the findings (`findings.html`) |
 | `run_pilot.py` | Tier 1 runner: resumable, logs full provenance per call |
 | `analyze.py` | Metrics and hypothesis tests — permutation and bootstrap only |
 | `judge_fidelity.py`, `fidelity_baseline.py` | Group C fidelity judging and its baseline |
 | `calibration_api.py`, `calibration_prompts.py` | Calibration study, API plane |
-| `build_findings.py` | Builds the findings page from the ledger |
+| `build_findings.py`, `build_story.py` | Build both public pages, and the chart above, from the ledger (`design/story-page.md`) |
 | `size_round1.py`, `make_mock.py`, `check_variants.py`, `engine_weights.py` | Power sizing, synthetic validation, corpus checks, engine panel |
 | `opengeo.py` | `opengeo test`: run a paired experiment on your own page against your competitors (`design/opengeo-test.md`) |
 | `CONTRIBUTING.md` | How to reproduce a round, the rules that are not negotiable, and what adding a round requires |
@@ -112,7 +132,7 @@ Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
 
 ```bash
 python3 build_findings.py --check                # validate the ledger
-python3 build_findings.py                        # regenerate docs/index.html
+python3 build_findings.py                        # regenerate both pages and the README chart
 ```
 
 The build refuses to publish a claim the data no longer supports, a round that carries
