@@ -33,12 +33,12 @@ python3 opengeo.py test \
 ```
 
 You get the change in citation rate with a 95% interval, per engine, a chart, and every raw
-model response. About $0.05–$0.15 per question. Add `--dry-run` to see the checks and cost
-without sending anything.
+model response. About $0.30 per question at current prices. Add `--dry-run` to see the
+checks and the estimated cost without sending anything.
 
 The rigour is in the defaults, so you don't have to know it to benefit from it: 24 runs per
 version, temperature 1.0, randomised document order, a check that your page has room to
-improve before paying to test the edit, and a flag when the result is only a lower bound.
+improve before paying to test the edit, and a flag when your edited page hits the ceiling.
 Each default and the evidence behind it is in `design/opengeo-test.md`.
 
 It is a measurement, not advice. It tells you what your change did; it never tells you what

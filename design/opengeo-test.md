@@ -32,7 +32,7 @@ python3 opengeo.py test \
     --question "How much does a home energy audit cost?" \
     --page     https://mysite.com/energy-audit      # URL or local file: the page as it is now
     --edit     ./energy-audit-v2.md                  # local file: the page with your change
-    --against  https://competitor-a.com/audits \     # 2+ competitor pages, 4-5 recommended
+    --against  https://competitor-a.com/audits \     # 2+ competitor pages, 5 recommended
                https://competitor-b.com/pricing
 ```
 
@@ -61,7 +61,8 @@ choices can be checked.
 | Engines | **The five-engine market panel**, fixed | Chosen and weighted by measured market share, 98.9% of assistant traffic (`engine_weights.py`) |
 | Length of your edit | **Within ±3 words**, blocks by default | §9. Relaxable with `--allow-length-change` — see below |
 | Your current page | **Must not already be cited almost always** | §9's ceiling rule, which records three distinct ways a baseline ends up at the ceiling, each found only by testing against real models |
-| Your edited page | **Flagged if cited every time** | Public/private round: a saturated arm makes the effect a lower bound on every scale (§9) |
+| Your edited page | **Flagged at the ceiling if cited every time** | Public/private round: a saturated arm caps what any scale can express (§9). The output says the edit got the page cited every time against these competitors, and that it can't show how the edit would do against stronger ones (changed in 0.2.0) |
+| Competitors | **2 required, 5 recommended** | Every published round used a field of 5. ROADMAP item 11: engines cite 3.2–5.7 documents per answer, so in a small field nearly everything is cited and the current page leaves no room (5 since 0.2.0) |
 | Engines that cite nothing | **Excluded only if they fail on answering documents too** | Public/private round: the pooled rule dropped an engine that was abstaining correctly (§3) |
 | Interrupted runs | **Resumed, never analysed short** | Length-ladder round: a mid-run credit failure left cells at 5 of 24 runs (`analyze.incomplete_cells`) |
 | Document length | **The 50–110 word section most relevant to the question** | The regime every published effect was measured in; full pages behave differently (page-length screen) |
@@ -71,7 +72,7 @@ choices can be checked.
 **Fixed** — no flag exists. Runs per version, temperature, random order, the engine panel.
 There is no evidence that relaxing any of them leaves the result unbiased, and a cheaper,
 noisier answer that looks identical to a correct one is worse than no answer. At roughly
-$0.05 per question, cost is not a reason to cut any of them.
+$0.30 per question, cost is not a reason to cut any of them.
 
 **Blocking, relaxable with evidence** — one case: edit length. The ±3-word rule exists so an
 effect cannot be word count in disguise. But H7 measured padding a page to double its length
@@ -82,11 +83,15 @@ cites H7 as the reason it is not a confound. The flag is named for what it does 
 is recorded in the output — a documented deviation, like the ones this project logs in its
 own pre-registrations, not a silent setting.
 
-**Warning** — the run proceeds and the report says what it means. A saturated edited page
-(the effect is a lower bound), fewer than four competitors (less competition than every
-published round had), a single question.
+**Warning** — the run proceeds and the report says what it means. An edited page cited
+every time (a ceiling), fewer than five competitors (less competition than every published
+round had), an edit that also changes the page's title, a single question.
 
-## Two design decisions
+Two further blocks are input errors rather than guardrails, so no flag relaxes them: a
+Python without numpy, which the analysis needs after every call has been paid for, and a
+page title on only one of the two versions (0.2.0).
+
+## Three design decisions
 
 **Competitors come from the user.** A paired test needs other documents for the page to
 compete against. The user supplies them because it is the more useful question — not "does
@@ -102,6 +107,15 @@ propose, and nothing else on your page is part of the test. For each competitor 
 section most relevant to the question, which is what a retrieval step would plausibly hand
 an engine. If that makes the competitors decisively better answers than your page, the
 ceiling check reports it — which is itself useful to know.
+
+**Every page is shown with its title** (0.2.0). A search result or a retrieved passage
+travels with its page's title, and the title is usually where a page says who it is and
+where — the business name, the city. An excerpt chosen around an edit can easily miss the
+heading, and before 0.2.0 an engine asked about water heaters in Tucson could not see that
+the user's page was a Tucson plumber's. Each document is now its page's `<title>` (or first
+`<h1>` when there is none) on one line, then its excerpt. It applies to every page alike, so
+it is identical between the two versions unless the edit itself changes the title. The
+published rounds' documents had no titles, so a corpus built from them is unchanged.
 
 ## Output
 
@@ -126,11 +140,12 @@ is how a user checks whether a result still holds after the engines change.
 Two statements appear on every result, in plain language, because they are the two ways
 this tool's output is most likely to be over-read:
 
-1. **One question is one question.** *"This tells you about this question, against these
-   competitors. Test 3–5 questions your customers actually ask before changing your whole
-   site."* A pooled result across several questions is reported when they are given; below
-   25 questions it is described as an estimate, never as a general rule, matching the floor
-   this project holds itself to.
+1. **One question is one question.** *"This is one question, against these competitors.
+   Test 3–5 questions your customers actually ask before making the same kind of change
+   elsewhere."* A pooled result across several questions is reported when they are given;
+   below 25 questions it is described as an estimate, never as a general rule, matching the
+   floor this project holds itself to. Whether a result could be chance is a separate
+   statement, made from the result's own permutation test (0.2.0).
 2. **It measures what happens once an engine has your page.** *"This does not tell you
    whether an AI will find your page in the first place."* The documents are supplied
    directly, so retrieval is held constant. That is what makes the result causal, and it is
@@ -211,10 +226,87 @@ their competitors' included — and must never reach this repository by accident
   estimates unbiased (mean −0.008 and −0.006 on true zeros, +0.394 on a true +0.40).
 - **Reproduction of a published result.** Corpus v0.4's `cons_shoes`, run through the
   command with its own documents: **+0.60** share-weighted against the published **+0.609**
-  on the same five-engine panel. ChatGPT matched to within a point (+0.79 against +0.79).
-  Grok's current-page rate came in at 0.17 against a published 0.46, about 2.3 standard
-  errors — on the edge of chance for one engine in five, with the runs four days apart —
-  and moves the pooled figure very little, since Grok carries 2.6% of the weight. Every
-  engine was flagged as a lower bound, as the published round predicts, and Gemini as
-  having no room.
+  on the same five-engine panel. Every engine's current-page rate landed within one
+  citation in 24 of the published one (ChatGPT 5 against 4, Gemini 21 against 22, Claude 1
+  against 1, DeepSeek 18 against 19, Grok 4 against 4), and the edited page was cited in
+  all 24 runs on every engine, as published. Every engine was flagged at the ceiling
+  (labelled "lower bound" in 0.1.0), as the published round predicts, and Gemini as having
+  no room.
+
+  *Corrected 2026-09-26.* An earlier version of this paragraph compared against per-engine
+  figures that were computed wrongly during validation. It reported ChatGPT as +0.79
+  against +0.79 and a Grok discrepancy (0.17 against 0.46) that does not exist. The
+  published counts above come from `target_cited` in `results/runs_v0.4.jsonl`, the field
+  `analyze.py` uses, deduplicated by run key.
 - **No key in any output.** The results folder was searched for the key after a live run.
+
+## Changes in 0.2.0 (2026-09-30)
+
+Found by testing the Claude skill: agents with and without it were given realistic requests
+and their answers graded, and the answers turned up problems in the tool itself.
+
+**The corpus version is a hash of the experiment, not of where the files were.** In 0.1.0 it
+covered each page's file path, so the identical test run from another folder got a
+different version — and therefore different document orders and a different results
+folder — and the path put the user's home directory into `corpus.json`. It now covers the
+questions and the exact text of every document, and provenance records file names only.
+
+**A missing numpy blocks the run before anything is spent.** It is needed only by the
+analysis, which runs after every call has been paid for, so in 0.1.0 a missing numpy
+surfaced as a crash after the spend.
+
+**"Lower bound" became "ceiling".** METHODOLOGY §9 calls a saturated treatment arm's effect
+a floor, which is right for researchers and misread by everyone else as "at least this
+much, on my other pages too". In a user's own test the change shown is all the room there
+was, so the output now says the edit got the page cited every time against these
+competitors, and not how it would do against pages that also answer the question.
+
+**Chance is stated from the result itself.** 0.1.0 printed "about 1 in 20 tests shows a
+change by chance alone" under every result. That is the false-positive rate of the 95% bar,
+not the chance that a given result is noise, and it cast doubt on clear results. The pooled
+figure now has its own permutation test, stratified by engine, and the output says how
+often an edit that did nothing would show a difference this large. Calibrated on 300 true
+nulls: 3.0% significant against a 5% target.
+
+**A borderline verdict.** The pooled interval and the permutation test agree except near
+the line. Where they disagree, the result is called borderline rather than raised or
+lowered.
+
+**Intervals no longer collapse at the ceiling.** When the edited page is cited in all 24
+runs — what an edit that adds a missing answer usually produces — that arm has no variance,
+and a plain percentile bootstrap treats 24 of 24 as certain. A real run showed it: ChatGPT
+at 83% → 100% got an interval of +4 to +33 while its own permutation test gave p = 0.108.
+By simulation at n = 24, coverage was 91% at 83% → 100% and 61% at 96% → 100%. Each arm is
+now resampled with one success and one failure added (Agresti and Caffo, 2000), which
+brings those to 93% and 100%; away from the ceiling it errs wide (97–99%). Pooled over
+engines, 2.7% of 300 true nulls were called raised or lowered, and power on a true +10
+points went from 28% to 24% — the price of intervals that don't overstate. An engine now
+counts toward "held on N of 5" only when its interval and its permutation test agree.
+
+**Every page is shown with its title**, as set out under "Three design decisions" above.
+`fetch` writes the title as the first line of its file, so a test built from fetched text
+and one built from the HTML are identical; an edit to the title alone is tested under the
+same excerpt; a title on only one version is blocked.
+
+**Competitor sections skip navigation.** Page extraction turns a menu or link list into one
+run-on "sentence", whose many topic words won the relevance score: on live pages, 0.1.0
+picked 234–377 words of navigation instead of an 80-word section. A section now never
+includes a "sentence" over 75 words — 95% of sentences on 183 real pages run under 64, and
+the top 2% run 145 or more — and a page with no prose section long enough falls back to its
+best 80-word window. Clean inputs are unaffected: the published reproduction's corpus is
+byte-identical.
+
+**5 competitors recommended, up from 4**, as the defaults table records.
+
+**The cost estimate uses each engine's own price.** 0.1.0 assumed one flat price bracket
+and a 220-token answer for every engine. The panel's prices are higher than that bracket,
+and Grok's answers run to about 600 tokens because its reasoning is billed, so a real run
+cost $0.29 against an estimated $0.06–$0.18. The estimate now uses each engine's current
+price from OpenRouter's public model list (a dated table when it can't be reached) and
+each engine's mean answer length over 27,360 published answers. On two real runs, each
+billed total fell inside the new range. Every run now also reports what it actually cost,
+as billed, in the terminal, `report.md` and `manifest.json`.
+
+**Shown before anything is spent:** the excerpt and title the engines will see, and that a
+question whose current page leaves no room stops halfway at about half the cost. The
+report quotes the excerpt in full under "What the engines saw".

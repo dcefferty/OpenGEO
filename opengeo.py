@@ -22,6 +22,8 @@ Standard library for everything except the analysis, which uses numpy.
 import argparse
 import difflib
 import hashlib
+import html
+import importlib.util
 import json
 import os
 import pathlib
@@ -30,6 +32,7 @@ import re
 import sys
 import threading
 import time
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -41,7 +44,7 @@ import engine_weights  # noqa: E402
 import run_pilot as rp  # noqa: E402
 import sources as src  # noqa: E402
 
-TOOL_VERSION = "0.1.0"
+TOOL_VERSION = "0.2.0"
 
 # ---------------------------------------------------------------------- defaults ----
 # Every value here is argued for in design/opengeo-test.md. The first group has no flag,
@@ -52,9 +55,10 @@ PANEL = [m for _, (_, m) in engine_weights.ENGINES.items() if m]   # 98.9% of tr
 
 LENGTH_TOLERANCE = 3            # METHODOLOGY 9; relaxable only with --allow-length-change (H7)
 WINDOW_MIN, WINDOW_TARGET, WINDOW_MAX = 50, 80, 110   # the regime every published effect used
+PROSE_SENTENCE_MAX = 75         # a longer "sentence" in extracted text is a menu or a list
 CEILING = 21 / 24               # current page cited this often: no room left to improve
-SATURATED = 23 / 24             # edited page cited this often: the effect is a lower bound
-MIN_COMPETITORS, RECOMMENDED_COMPETITORS = 2, 4
+SATURATED = 23 / 24             # edited page cited this often: the test hit its ceiling
+MIN_COMPETITORS, RECOMMENDED_COMPETITORS = 2, 5   # 5: the field every published round used
 CONCURRENCY = 6
 
 
@@ -63,8 +67,38 @@ class ToolError(Exception):
 
 
 # ------------------------------------------------------------------- reading pages ----
+_TITLE = re.compile(r"<title[^>]*>(.*?)</title\s*>", re.I | re.S)
+_H1 = re.compile(r"<h1[^>]*>(.*?)</h1\s*>", re.I | re.S)
+
+
+def _from_html(raw):
+    """(title, visible text). The title is the page's <title>, or its first <h1> when it
+    has none -- the line a search result or a retrieved passage carries, and usually where
+    a page says who it is and where. A <title> is taken out of the text, because a browser
+    shows it in the tab rather than on the page; it travels separately (see with_title)."""
+    title = ""
+    for pat in (_TITLE, _H1):
+        m = pat.search(raw)
+        if m:
+            title = src.norm(html.unescape(re.sub(r"<[^>]+>", " ", m.group(1))))
+            if title:
+                break
+    return title, src.visible_text(_TITLE.sub(" ", raw, count=1))
+
+
+def _from_text(raw):
+    """(title, text) for a text file. A short first line followed by a blank line is the
+    title: the layout `fetch` writes, and the way a Markdown heading reads."""
+    lines = raw.lstrip("﻿").split("\n")
+    if (len(lines) > 2 and lines[0].strip() and not lines[1].strip()
+            and len(lines[0].split()) <= 20):
+        return src.norm(lines[0].strip().lstrip("#")), "\n".join(lines[2:])
+    return "", raw
+
+
 def read_source(ref):
-    """Text of a page given a URL or a local file. Returns (text, provenance).
+    """A page's title and text, given a URL or a local file. Returns (title, text,
+    provenance); the title is "" when the page has none.
 
     Pages are read into memory and written only to this test's own results folder --
     never into corpus/sources/, which is the benchmark's committed snapshot store and has
@@ -78,7 +112,7 @@ def read_source(ref):
                 f"Could not fetch {ref} -- it {why}.\n"
                 "  Some sites refuse automated requests. Save the page in your browser "
                 "(File > Save As) and pass the saved file instead.")
-        text = src.visible_text(body)
+        title, text = _from_html(body)
         prov = {"ref": ref, "kind": "url", "http_status": status}
     else:
         p = pathlib.Path(ref).expanduser()
@@ -86,17 +120,35 @@ def read_source(ref):
             raise ToolError(f"No such file: {ref}")
         raw = p.read_text(encoding="utf-8", errors="replace")
         looks_html = bool(re.search(r"<(html|body|p|div|h[1-6])[\s>]", raw, re.I))
-        text = src.visible_text(raw) if looks_html else raw
-        prov = {"ref": str(p), "kind": "file"}
+        title, text = _from_html(raw) if looks_html else _from_text(raw)
+        # The file's name only. Results folders get shared, and a full path carries the
+        # user's home directory; the content hash below identifies the text exactly.
+        prov = {"ref": p.name, "kind": "file"}
     text = src.norm(text)
     if len(text.split()) < 20:
         raise ToolError(
             f"{ref} has almost no readable text ({len(text.split())} words).\n"
             "  If it is a JavaScript-rendered page, save it from your browser and pass the "
             "saved file instead.")
+    prov["title"] = title
     prov["sha256"] = hashlib.sha256(text.encode()).hexdigest()[:16]
     prov["words"] = len(text.split())
-    return text, prov
+    return title, text, prov
+
+
+def with_title(title, excerpt):
+    """A page's title on its own line above its excerpt, the way a search result or a
+    retrieved passage carries it, unless the excerpt already opens with it. Applied to every
+    page alike, so it differs between your two versions only if your edit changes it."""
+    if not title or excerpt.startswith(title):
+        return excerpt
+    return f"{title}\n{excerpt}"
+
+
+def _split_title(text):
+    """(title, excerpt) of a document as tested; the title is "" when it has none."""
+    head, sep, rest = text.partition("\n")
+    return (head, rest) if sep else ("", text)
 
 
 # --------------------------------------------------------------------- edit region ----
@@ -171,13 +223,18 @@ def _terms(text):
 def best_section(text, question, lo=WINDOW_MIN, target=WINDOW_TARGET):
     """The run of consecutive sentences, about `target` words long, sharing the most terms
     with the question. This stands in for what a retrieval step would plausibly hand an
-    engine from that page. Ties go to the earliest section on the page."""
+    engine from that page. Ties go to the earliest section on the page.
+
+    Menus, footers and link lists have no sentence breaks, so page extraction turns each
+    into one enormous "sentence", and its many topic words would win the overlap score. A
+    section never includes one: across 183 real pages, 95% of sentences run under 64 words
+    and the top 2% run 145 or more, which is navigation, not prose."""
     sents = src.sentences(text)
     q = _terms(question)
     best = None
     for i in range(len(sents)):
         words, j = 0, i
-        while j < len(sents) and words < target:
+        while j < len(sents) and words < target and len(sents[j].split()) <= PROSE_SENTENCE_MAX:
             words += len(sents[j].split())
             j += 1
         if words < lo:
@@ -186,8 +243,16 @@ def best_section(text, question, lo=WINDOW_MIN, target=WINDOW_TARGET):
         score = len(q & _terms(chunk))
         if best is None or score > best[0]:
             best = (score, chunk)
-    if best is None:                                 # the whole page is shorter than `lo`
-        return text, len(q & _terms(text))
+    if best is None:
+        words = text.split()
+        if len(words) <= WINDOW_MAX:                 # a short page goes in whole
+            return text, len(q & _terms(text))
+        # a long page with no run of prose long enough: the best fixed window of words
+        for i in range(0, len(words) - target + 1, target // 2):
+            chunk = " ".join(words[i:i + target])
+            score = len(q & _terms(chunk))
+            if best is None or score > best[0]:
+                best = (score, chunk)
     return best[1], best[0]
 
 
@@ -198,15 +263,26 @@ def slugify(s, n=40):
 
 def build_corpus(questions, page, edit, competitors):
     """One paired test per question: your excerpt, as it is and as edited, among the most
-    relevant section of each competitor page. Only your excerpt differs between arms."""
-    original, page_prov = read_source(page)
-    edited, edit_prov = read_source(edit)
-    control, treatment, region = edit_region(original, edited)
+    relevant section of each competitor page, each under its page's title. Only your
+    excerpt -- and your title, if your edit changes it -- differs between arms."""
+    page_title, original, page_prov = read_source(page)
+    edit_title, edited, edit_prov = read_source(edit)
+    if original == edited and page_title != edit_title:
+        # The edit changes only the title: test it above the same section of the page.
+        section = best_section(original, questions[0])[0]
+        control = treatment = section
+        region = {"words_changed_before": len(page_title.split()),
+                  "words_changed_after": len(edit_title.split()),
+                  "shared_context_words": len(section.split()), "position_in_page": 0.0}
+    else:
+        control, treatment, region = edit_region(original, edited)
+    control, treatment = with_title(page_title, control), with_title(edit_title, treatment)
+    region.update({"title_before": page_title, "title_after": edit_title})
 
     comp_texts = []
     for ref in competitors:
-        text, prov = read_source(ref)
-        comp_texts.append((ref, text, prov))
+        title, text, prov = read_source(ref)
+        comp_texts.append((ref, title, text, prov))
 
     documents, prompts = [], []
     for k, question in enumerate(questions, 1):
@@ -216,8 +292,9 @@ def build_corpus(questions, page, edit, competitors):
         documents.append({"doc_id": target, "prompt_id": pid, "is_target": True,
                           "source": {"yours": page_prov, "edit": edit_prov},
                           "variants": {"control": control, "treatment": treatment}})
-        for c, (ref, text, prov) in enumerate(comp_texts, 1):
+        for c, (ref, title, text, prov) in enumerate(comp_texts, 1):
             section, overlap = best_section(text, question)
+            section = with_title(title, section)
             did = f"{pid}__competitor{c}"
             ids.append(did)
             documents.append({"doc_id": did, "prompt_id": pid, "is_target": False,
@@ -227,7 +304,13 @@ def build_corpus(questions, page, edit, competitors):
                         "target_doc_id": target, "target_format": "user", "doc_ids": ids})
 
     body = {"prompts": prompts, "documents": documents}
-    digest = hashlib.sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()[:12]
+    # The version names the experiment -- the questions and the exact text of every
+    # document -- and not where the files happened to be. Provenance stays out of the hash,
+    # so the identical test gets the identical version, document orders and results folder
+    # on any machine.
+    content = {"prompts": prompts,
+               "documents": [{k: v for k, v in d.items() if k != "source"} for d in documents]}
+    digest = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()[:12]
     return {"corpus_version": f"opengeo-test-{digest}", "corpus_sha256": digest,
             "tool_version": TOOL_VERSION, "edit_region": region,
             "n_prompts": len(prompts), "n_docs": len(documents), **body}
@@ -262,16 +345,48 @@ def preflight(corpus, n_competitors, allow_length_change):
             "its length at +0.004,\n"
             "        so length alone does not move citation; the report will say you used it.")
 
+    # The title is shown with the excerpt, so a title that differs between the two versions
+    # is part of the edit. Usually that is a mistake -- the edit was made in a file taken some
+    # other way than `fetch` -- so say so rather than test it silently.
+    r = corpus["edit_region"]
+    before, after = r.get("title_before", ""), r.get("title_after", "")
+    if before != after and not (before and after):
+        blocks.append(
+            f'Only one of your two versions has a page title ("{before or after}").\n'
+            "    The engines see a page's title with its excerpt, so this would count as part "
+            "of your edit.\n"
+            "    Make your edit in a copy of the file `opengeo.py fetch` writes, which keeps "
+            "the title on its first line.")
+    elif before != after:
+        warns.append(f'Your edit also changes the page title: "{before}" -> "{after}". If '
+                     "that isn't part of your change, make the edit in a copy of the file "
+                     "`opengeo.py fetch` writes.")
+
     if n_competitors < MIN_COMPETITORS:
         blocks.append(f"At least {MIN_COMPETITORS} competitor pages are needed (--against). With "
                       "fewer, your page has almost nothing to compete with and gets cited by "
                       "default.")
     elif n_competitors < RECOMMENDED_COMPETITORS:
-        warns.append(f"{n_competitors} competitors given. Every published OpenGEO round used 5 "
-                     f"other documents; {RECOMMENDED_COMPETITORS}-5 makes the test closer to "
-                     "real conditions.")
+        # ROADMAP item 11: engines cite 3.2-5.7 documents per answer, so in a small field
+        # nearly every document is cited and the current page may leave no room at all.
+        warns.append(f"{n_competitors} competitors given. Engines cite several pages per "
+                     "answer, so in a small field your current page may already be cited "
+                     "almost every time, and the test would stop halfway with no room to "
+                     "show a change. Every published OpenGEO round used "
+                     f"{RECOMMENDED_COMPETITORS} other documents, and "
+                     f"{RECOMMENDED_COMPETITORS} competitors makes the test closer to real "
+                     "conditions.")
     else:
         oks.append(f"{n_competitors} competitor pages")
+
+    # numpy is needed only for the analysis, which runs after every call has been paid for,
+    # so a missing numpy would otherwise surface as a crash after the spend.
+    if importlib.util.find_spec("numpy") is None:
+        blocks.append(f"numpy is not installed for this Python ({sys.executable}).\n"
+                      "    The analysis needs it, and the analysis only runs after every call "
+                      "has been paid for.\n"
+                      f"    Install it with `{sys.executable} -m pip install numpy`, or run "
+                      "with a Python that has it.")
 
     if corpus["n_prompts"] == 1:
         warns.append("One question. The result will be true for this question; test 3-5 "
@@ -283,20 +398,52 @@ def preflight(corpus, n_competitors, allow_length_change):
     return blocks, warns, oks
 
 
-def estimate_cost(corpus):
-    """(calls, low, high) in US dollars. Tokens are estimated from the text actually sent;
-    prices bracket the panel's current rates rather than pretending to one exact figure."""
-    per_q_chars = {}
+# Typical answer length per engine, in tokens: means over 27,360 answers in five published
+# rounds. Grok's include its reasoning, which is billed, so it costs the most per answer.
+ANSWER_TOKENS = {"openai/gpt-5.4-mini": 80, "google/gemini-3-flash-preview": 125,
+                 "anthropic/claude-haiku-4.5": 115, "deepseek/deepseek-chat": 100,
+                 "x-ai/grok-4.3": 600}
+# OpenRouter's listed prices on 2026-09-30, US dollars per million tokens (input, output).
+# Used only when its live price list can't be reached.
+PRICES = {"openai/gpt-5.4-mini": (0.75, 4.50), "google/gemini-3-flash-preview": (0.50, 3.00),
+          "anthropic/claude-haiku-4.5": (1.00, 5.00), "deepseek/deepseek-chat": (0.26, 1.03),
+          "x-ai/grok-4.3": (1.25, 2.50)}
+PRICES_DATE = "2026-09-30"
+
+
+def current_prices():
+    """Each engine's price from OpenRouter's public model list, which needs no key, or the
+    dated table above if it can't be reached. Returns (prices, live)."""
+    try:
+        with urllib.request.urlopen("https://openrouter.ai/api/v1/models", timeout=10) as r:
+            listed = {m["id"]: m["pricing"] for m in json.load(r)["data"]}
+        return {m: (float(listed[m]["prompt"]) * 1e6, float(listed[m]["completion"]) * 1e6)
+                for m in PANEL}, True
+    except Exception:          # offline, blocked, or the list changed shape: use the table
+        return {m: PRICES[m] for m in PANEL}, False
+
+
+def estimate_cost(corpus, prices):
+    """(calls, low, high) in US dollars: each engine's price for the text actually sent and
+    its typical answer length. 0.1.0 assumed one flat rate and answer length for every
+    engine and came in at half the true cost. Checked on two real runs, this puts each
+    billed total inside the range, 2% and 11% below its middle. The range allows for
+    answers running shorter or longer than usual."""
+    calls = corpus["n_prompts"] * 2 * len(PANEL) * RUNS
+    mid = 0.0
     for p in corpus["prompts"]:
         docs = [d for d in corpus["documents"] if d["prompt_id"] == p["prompt_id"]]
-        per_q_chars[p["prompt_id"]] = (len(rp.SYSTEM) + len(p["question"])
-                                       + sum(len(d["variants"]["control"]) for d in docs) + 200)
-    calls = corpus["n_prompts"] * 2 * len(PANEL) * RUNS
-    tok_in = sum(per_q_chars.values()) / 4 * 2 * len(PANEL) * RUNS
-    tok_out = 220 * calls
-    low = tok_in / 1e6 * 0.15 + tok_out / 1e6 * 0.60
-    high = tok_in / 1e6 * 0.50 + tok_out / 1e6 * 1.50
-    return calls, low, high
+        tok_in = (len(rp.SYSTEM) + len(p["question"])
+                  + sum(len(d["variants"]["control"]) for d in docs) + 200) / 4
+        for m in PANEL:
+            p_in, p_out = prices[m]
+            mid += 2 * RUNS * (tok_in * p_in + ANSWER_TOKENS[m] * p_out) / 1e6
+    return calls, mid * 0.8, mid * 1.25
+
+
+def actual_cost(rows):
+    """What the calls in this results folder cost, as OpenRouter billed them."""
+    return sum((r.get("usage") or {}).get("cost") or 0 for r in rows)
 
 
 # ---------------------------------------------------------------------- running ----
@@ -428,24 +575,36 @@ def _two_arm(c, t, rng, B=10000, P=20000):
     """Effect of the edit on one engine for one question: difference in citation rate,
     a percentile bootstrap interval, and a permutation p-value. The two arms are
     independent samples -- each repeat uses a fresh random document order -- so they are
-    resampled independently. Bootstrap and permutation only, per CLAUDE.md."""
+    resampled independently. Bootstrap and permutation only, per CLAUDE.md.
+
+    Each arm is resampled with one success and one failure added (Agresti and Caffo, 2000).
+    Without that, an arm cited in all 24 runs -- what an edit that adds a missing answer
+    usually produces -- has no variance at all, and the interval narrows as if 24 of 24 were
+    certain: by simulation at n=24, coverage fell to 91% at 83%->100% and to 61% at
+    96%->100%. With it, those are 93% and 100%, at the cost of erring wide (97-99%) away
+    from the ceiling. The point estimate is the plain difference."""
     import numpy as np
     d = t.mean() - c.mean()
-    bc = c[rng.integers(0, len(c), (B, len(c)))].mean(1)
-    bt = t[rng.integers(0, len(t), (B, len(t)))].mean(1)
+    ca, ta = np.append(c, [0.0, 1.0]), np.append(t, [0.0, 1.0])
+    bc = ca[rng.integers(0, len(ca), (B, len(ca)))].mean(1)
+    bt = ta[rng.integers(0, len(ta), (B, len(ta)))].mean(1)
     ci = np.percentile(bt - bc, [2.5, 97.5])
     pool = np.concatenate([c, t])
     perm = pool[np.argsort(rng.random((P, len(pool))), axis=1)]
     dp = perm[:, len(c):].mean(1) - perm[:, :len(c)].mean(1)
     p = float((np.abs(dp) >= abs(d) - 1e-12).mean())
-    return float(d), (float(ci[0]), float(ci[1])), p, bt - bc
+    return float(d), (float(ci[0]), float(ci[1])), p, bt - bc, dp
 
 
-def _verdict(ci):
-    if ci[0] > 0:
-        return "raised"
-    if ci[1] < 0:
-        return "lowered"
+def _verdict(ci, p):
+    """From the pooled interval and the pooled permutation test: two views of the same
+    data, which agree except near the line. Where they disagree the result is called
+    borderline rather than given the benefit of the doubt."""
+    clear = ci[0] > 0 or ci[1] < 0
+    if clear and p < 0.05:
+        return "raised" if ci[0] > 0 else "lowered"
+    if clear or p < 0.05:
+        return "borderline"
     return "no detectable change"
 
 
@@ -471,7 +630,7 @@ def analyse(corpus, rows, gated_out):
             questions.append({"prompt_id": pid, "question": p["question"], "skipped": True,
                               "control_rate": gated_out[pid]})
             continue
-        per, draws = {}, {}
+        per, draws, nulls = {}, {}, {}
         for m in engines:
             sel = lambda cond: np.array([r["target_cited"] for r in rows
                                          if r["prompt_id"] == pid and r["model"] == m
@@ -479,8 +638,8 @@ def analyse(corpus, rows, gated_out):
             c, t = sel("control"), sel("treatment")
             if not len(c) or not len(t):
                 continue
-            d, ci, pv, bs = _two_arm(c, t, rng)
-            draws[m] = bs
+            d, ci, pv, bs, dp = _two_arm(c, t, rng)
+            draws[m], nulls[m] = bs, dp
             per[m] = {"control": float(c.mean()), "treatment": float(t.mean()),
                       "delta": d, "ci": ci, "p": pv, "n": (len(c), len(t)),
                       "no_room": c.mean() >= CEILING,
@@ -489,12 +648,21 @@ def analyse(corpus, rows, gated_out):
         pooled = sum(w[m] * per[m]["delta"] for m in per) / tw
         pbs = sum(w[m] * draws[m] for m in per) / tw
         pci = tuple(float(x) for x in np.percentile(pbs, [2.5, 97.5]))
-        verdict = _verdict(pci)
+        # A stratified permutation test of the pooled figure: arms are shuffled within each
+        # engine, independently, so the weighted sum of the per-engine null draws is a draw
+        # from the pooled null. It answers "how often would an edit that did nothing show a
+        # difference this large?" -- which is what "could this be chance?" actually asks.
+        pnull = sum(w[m] * nulls[m] for m in per) / tw
+        pp = float((np.abs(pnull) >= abs(pooled) - 1e-12).mean())
+        verdict = _verdict(pci, pp)
         sign = 1 if pooled >= 0 else -1
-        held = sum(1 for m in per if (per[m]["ci"][0] > 0 if sign > 0 else per[m]["ci"][1] < 0))
+        # An engine holds when its interval clears zero in the same direction and its own
+        # permutation test agrees -- the same two-view rule as the verdict.
+        held = sum(1 for m in per if per[m]["p"] < 0.05
+                   and (per[m]["ci"][0] > 0 if sign > 0 else per[m]["ci"][1] < 0))
         questions.append({
             "prompt_id": pid, "question": p["question"], "skipped": False,
-            "per_engine": per, "delta": pooled, "ci": pci, "verdict": verdict,
+            "per_engine": per, "delta": pooled, "ci": pci, "p": pp, "verdict": verdict,
             "control": sum(w[m] * per[m]["control"] for m in per) / tw,
             "treatment": sum(w[m] * per[m]["treatment"] for m in per) / tw,
             "engines_held": held, "engines_total": len(per),
@@ -507,7 +675,8 @@ def analyse(corpus, rows, gated_out):
         deltas = np.array([q["delta"] for q in ran])
         across = {"n": len(ran), "mean": float(deltas.mean()),
                   "raised": sum(q["verdict"] == "raised" for q in ran),
-                  "lowered": sum(q["verdict"] == "lowered" for q in ran)}
+                  "lowered": sum(q["verdict"] == "lowered" for q in ran),
+                  "borderline": sum(q["verdict"] == "borderline" for q in ran)}
         if len(ran) >= 5:
             # Resampling questions is what captures question-to-question variation -- the
             # thing a single question cannot tell you. Below 25 it is a rough estimate,
@@ -607,8 +776,8 @@ def write_chart(q, path):
         mark = ""
         if s.get("saturated"):
             mark = " ^"
-            notes.add("^ cited in almost every run after the edit, so the true change may be "
-                      "larger: read it as a lower bound")
+            notes.add("^ ceiling: cited in almost every run after the edit, as high as this "
+                      "test can measure")
         if s.get("no_room"):
             mark += " *"
             notes.add("* already cited almost every time before the edit: little room to rise")
@@ -664,11 +833,25 @@ def _headline(q):
     if q["verdict"] == "lowered":
         return (f"Your edit LOWERED citation from {_pct(q['control'])} to "
                 f"{_pct(q['treatment'])}")
+    if q["verdict"] == "borderline":
+        return f"Borderline: {_pct(q['control'])} before, {_pct(q['treatment'])} after"
     return (f"No detectable change: {_pct(q['control'])} before, {_pct(q['treatment'])} after")
 
 
 def _engines(k):
     return f"{k} engine" if k == 1 else f"{k} engines"
+
+
+def _chance(p):
+    """How often an edit that did nothing would show a difference this large, in words.
+    Stated from the result's own permutation p-value: a flat "1 in 20" would describe the
+    95% bar, not this result, and overstates the doubt about a clear one."""
+    if p < 0.001:
+        return ("If your edit did nothing, a difference this large would turn up less than "
+                "1 time in 1,000, so chance is very unlikely to explain it.")
+    return (f"If your edit did nothing, a difference this large would still turn up about "
+            f"1 time in {max(round(1 / p), 1):,}. Worth confirming on more questions before "
+            "acting on it.")
 
 
 def _meaning(res, q, flags, n_questions):
@@ -681,16 +864,23 @@ def _meaning(res, q, flags, n_questions):
     elif q["verdict"] == "lowered":
         out.append("For this question, against these competitors, your edit made AI answers "
                    "LESS likely to cite your page.")
+    elif q["verdict"] == "borderline":
+        out.append("Borderline: the interval and the permutation test disagree about whether "
+                   "this is a real change, which only happens close to the line. Treat it as "
+                   "unproven; testing more questions is how to settle it.")
     else:
         out.append("The interval includes zero: this test could not tell your edit apart "
                    "from no change. That is a real result, not a failed test.")
+    if q["verdict"] != "no detectable change":
+        out.append(_chance(q["p"]))
     if n_questions == 1:
-        out.append("One question is one question. About 1 in 20 tests shows a change by "
-                   "chance alone, so test 3-5 questions your customers actually ask before "
-                   "rewriting your site.")
+        out.append("This is one question, against these competitors. Test 3-5 questions your "
+                   "customers actually ask before making the same kind of change elsewhere.")
     if q["saturated_engines"]:
         out.append(f"{_engines(len(q['saturated_engines']))} cited your edited page in almost "
-                   "every run, so the true change there may be larger than shown.")
+                   "every run, as high as this test can measure. That shows your edit got your "
+                   "page cited every time against these competitors, not how it would do "
+                   "against pages that also answer the question.")
     if q["no_room_engines"]:
         out.append(f"{_engines(len(q['no_room_engines']))} already cited your current page "
                    "almost every time, leaving little room to show an improvement.")
@@ -725,7 +915,7 @@ def print_result(res, flags):
             if m not in q["per_engine"]:
                 continue
             s = q["per_engine"][m]
-            tag = ("  ^ lower bound" if s["saturated"] else "") + ("  * no room" if s["no_room"] else "")
+            tag = ("  ^ ceiling" if s["saturated"] else "") + ("  * no room" if s["no_room"] else "")
             print(f"  {NAME.get(m, m):<9}{_pct(s['control']):>5} {_bar(s['control'], s['treatment'])} "
                   f"{_pct(s['treatment']):<5}{_pts(s['delta']):>5} pts  "
                   f"({_pts(s['ci'][0])} to {_pts(s['ci'][1])}){tag}")
@@ -743,7 +933,8 @@ def print_result(res, flags):
     if a:
         print(f"{'=' * 78}\nACROSS {a['n']} QUESTIONS\n{'=' * 78}")
         print(f"  Your edit raised citation on {a['raised']} of {a['n']} questions"
-              + (f" and lowered it on {a['lowered']}" if a["lowered"] else "") + ".")
+              + (f" and lowered it on {a['lowered']}" if a["lowered"] else "")
+              + (f"; {a['borderline']} borderline" if a["borderline"] else "") + ".")
         print(f"  Average change: {_pts(a['mean'])} points"
               + (f", 95% CI {_pts(a['ci'][0])} to {_pts(a['ci'][1])}" if "ci" in a else ""))
         if a.get("rough"):
@@ -752,11 +943,12 @@ def print_result(res, flags):
                   "general.")
 
 
-def write_report(res, corpus, folder, flags, started):
+def write_report(res, corpus, folder, flags, started, spent=None):
     L = [f"# OpenGEO test — {res['questions'][0]['question']}", "",
          f"Run {started} with `opengeo.py` {TOOL_VERSION}. "
          f"Corpus `{corpus['corpus_version']}`. {RUNS} runs per version per engine, "
-         f"temperature {TEMPERATURE}, document order randomised per run.", "",
+         f"temperature {TEMPERATURE}, document order randomised per run."
+         + (f" Cost ${spent:.2f}, as billed." if spent is not None else ""), "",
          f"Engines: {', '.join(NAME.get(m, m) for m in res['engines'])} — "
          f"{res['coverage']:.1%} of measured AI-assistant traffic.", ""]
     for q in res["questions"]:
@@ -774,30 +966,43 @@ def write_report(res, corpus, folder, flags, started):
             if m not in q["per_engine"]:
                 continue
             s = q["per_engine"][m]
-            note = "; ".join(n for n, on in (("lower bound", s["saturated"]),
+            note = "; ".join(n for n, on in (("ceiling", s["saturated"]),
                                              ("no room", s["no_room"])) if on)
             L.append(f"| {NAME.get(m, m)} | {_pct(s['control'])} | {_pct(s['treatment'])} | "
                      f"{_pts(s['delta'])} | {_pts(s['ci'][0])} to {_pts(s['ci'][1])} | "
                      f"{s['p']:.3f} | {note} |")
         L += [f"| **All engines** (share-weighted) | {_pct(q['control'])} | "
               f"{_pct(q['treatment'])} | **{_pts(q['delta'])}** | {_pts(q['ci'][0])} to "
-              f"{_pts(q['ci'][1])} | | |", "",
+              f"{_pts(q['ci'][1])} | {q['p']:.3f} | |", "",
               "What this means:", ""] + [f"- {m}" for m in _meaning(res, q, flags,
                                                                    len(res["questions"]))] + [""]
     if res["across"]:
         a = res["across"]
         L += ["## Across questions", "",
-              f"Raised on {a['raised']} of {a['n']}, lowered on {a['lowered']}. Mean change "
+              f"Raised on {a['raised']} of {a['n']}, lowered on {a['lowered']}, borderline on "
+              f"{a['borderline']}. Mean change "
               f"{_pts(a['mean'])} points"
               + (f", 95% CI {_pts(a['ci'][0])} to {_pts(a['ci'][1])}" if "ci" in a else "")
               + ("" if not a.get("rough") else ". With fewer than 25 questions this is a rough "
                  "estimate, not a general rule."), ""]
+    def quote(text):
+        title, excerpt = _split_title(text)
+        return ([f"> **{title}**", ">"] if title else []) + [f"> {excerpt}"]
+
+    t = next(d for d in corpus["documents"] if d["is_target"])
+    L += ["## What the engines saw", "",
+          "Your page's title, if it has one, and the part of the page around your edit -- not "
+          "the whole page. Each competitor page was shown the same way: its title and its most "
+          "relevant section (all in `corpus.json`). Anything else on the page was not part of "
+          "the test.", "",
+          "**Before:**", ""] + quote(t["variants"]["control"]) + [
+          "", "**After your edit:**", ""] + quote(t["variants"]["treatment"]) + [""]
     L += ["## Method", "",
           "A paired, controlled experiment. Your page appears twice — as it is and as edited — "
           "each time among the same excerpts of your competitors' pages. Only your excerpt "
           "differs between the two versions, so a difference in citation is caused by your "
           "edit. Intervals are percentile bootstraps over runs; p-values are permutation "
-          "tests. No distributional assumptions.", "",
+          "tests, stratified by engine for the pooled row. No distributional assumptions.", "",
           "Every default is argued for, with its evidence, in `design/opengeo-test.md`.", "",
           "## Files", "",
           "- `runs.jsonl` — every raw model response",
@@ -807,13 +1012,14 @@ def write_report(res, corpus, folder, flags, started):
     (folder / "report.md").write_text("\n".join(L))
 
 
-def write_manifest(res, corpus, folder, flags, started, rows):
+def write_manifest(res, corpus, folder, flags, started, rows, spent=None):
     """Enough to re-run the identical test. Built from explicit fields only, never from the
     environment, so the API key cannot end up in it."""
     returned = sorted({r.get("model_returned") for r in _latest(rows) if r.get("model_returned")})
     (folder / "manifest.json").write_text(json.dumps({
         "tool": "opengeo.py", "tool_version": TOOL_VERSION, "harness": "run_pilot.py",
-        "started_utc": started, "corpus_version": corpus["corpus_version"],
+        "started_utc": started, "cost_usd": None if spent is None else round(spent, 4),
+        "corpus_version": corpus["corpus_version"],
         "corpus_sha256": corpus["corpus_sha256"],
         "settings": {"runs_per_version": RUNS, "temperature": TEMPERATURE,
                      "length_tolerance_words": LENGTH_TOLERANCE, "ceiling": CEILING,
@@ -848,11 +1054,31 @@ def cmd_test(args):
     if blocks:
         raise ToolError("Stopped before spending anything: fix the check marked ✗ above.")
 
-    calls, low, high = estimate_cost(corpus)
+    # What the engines will actually see: the page's title and an excerpt chosen around the
+    # edit, not the whole page.
+    target = next(d for d in corpus["documents"] if d["is_target"])
+    title, excerpt = _split_title(target["variants"]["treatment"])
+    words = excerpt.split()
+    shown = " ".join(words) if len(words) <= 20 else f"{' '.join(words[:8])} ... {' '.join(words[-8:])}"
+    print("\nThe engines will see " + ("your page's title and this part of it"
+                                       if title else "this part of your page")
+          + ", not the whole page:")
+    if title:
+        print(f"  {title}")
+    total = len(target["variants"]["treatment"].split())
+    print(f'  "{shown}" ({total} words' + (", title included)" if title else ")"))
+
+    prices, live = current_prices()
+    calls, low, high = estimate_cost(corpus, prices)
     nq = corpus["n_prompts"]
     print(f"\nThis test makes {calls:,} calls ({nq} question{'' if nq == 1 else 's'} x 2 versions x "
           f"{len(PANEL)} engines x {RUNS} runs).")
-    print(f"Estimated cost: ${low:.2f} to ${high:.2f} on your OpenRouter account.")
+    print(f"Estimated cost: ${low:.2f} to ${high:.2f} on your OpenRouter account, at "
+          + ("OpenRouter's current prices." if live else
+             f"prices as of {PRICES_DATE} (OpenRouter's price list couldn't be reached)."))
+    print("If your current page is already cited almost every time on a question, that "
+          "question stops\nafter the first half -- there is no room to show a change -- and "
+          "costs about half.")
     if args.dry_run:
         print("\nDry run: nothing was sent.")
         return 0
@@ -888,9 +1114,11 @@ def cmd_test(args):
         if not q["skipped"]:
             name = "chart.svg" if len(res["questions"]) == 1 else f"chart-{q['prompt_id']}.svg"
             write_chart(q, folder / name)
-    write_report(res, corpus, folder, flags, started)
-    write_manifest(res, corpus, folder, flags, started, rows)
-    print(f"\nFull results: {folder}/")
+    spent = actual_cost(rows)
+    write_report(res, corpus, folder, flags, started, spent)
+    write_manifest(res, corpus, folder, flags, started, rows, spent)
+    print(f"\nThis test cost ${spent:.2f} on your OpenRouter account, as billed.")
+    print(f"Full results: {folder}/")
     print("  report.md, chart.svg, runs.jsonl (every raw response), corpus.json, manifest.json")
     return 0
 
@@ -900,13 +1128,17 @@ def cmd_fetch(args):
     this text, not against a copy taken some other way: a different extractor produces
     different whitespace and line breaks, and the comparison would then see changes all
     through the page instead of only the one that was made."""
-    text, prov = read_source(args.source)
+    title, text, prov = read_source(args.source)
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(text + "\n")
-    print(f"Wrote {prov['words']} words to {out}")
+    out.write_text((f"{title}\n\n" if title else "") + text + "\n")
+    print(f"Wrote {prov['words']} words to {out}"
+          + (", with the page's title on the first line" if title else ""))
     print("Make your change in a copy of this file, then pass this file as --page and the "
           "copy as --edit.")
+    if title:
+        print("Leave the first line alone unless your change is to the title: the engines see "
+              "it with your excerpt.")
     return 0
 
 
@@ -926,7 +1158,7 @@ def main(argv=None):
     t.add_argument("--edit", required=True, help="your page with the change (file)")
     t.add_argument("--against", nargs="+", required=True, metavar="PAGE",
                    help=f"competitor pages (URL or file), {MIN_COMPETITORS}+ needed, "
-                        f"{RECOMMENDED_COMPETITORS}-5 recommended")
+                        f"{RECOMMENDED_COMPETITORS} recommended")
     t.add_argument("--allow-length-change", action="store_true",
                    help="permit an edit that changes the length by more than "
                         f"{LENGTH_TOLERANCE} words; recorded in the report")
