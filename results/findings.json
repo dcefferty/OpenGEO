@@ -1,7 +1,7 @@
 {
   "schema": "opengeo-findings/1",
   "updated": "2026-09-11",
-  "repo": "https://github.com/dcefferty/GEO-Bench",
+  "repo": "https://github.com/dcefferty/OpenGEO",
   "traffic_share": {
     "label": "Similarweb, August 2026",
     "source": "Similarweb Gen AI worldwide all-device website traffic share",

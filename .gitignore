@@ -16,3 +16,9 @@ private/
 # which have included API keys inline. Protected by a global ignore on this machine only,
 # which does not travel with the repo -- so it is pinned here too.
 .claude/settings.local.json
+
+# Output of `opengeo test`. Holds the pages a user tested -- including their competitors'
+# -- plus every raw model response. It belongs to whoever ran the test, never to this
+# repository, and running the tool from inside the repo must not leave it one `git add -A`
+# away from being committed.
+opengeo-results/
