@@ -60,11 +60,11 @@
       "facts",
       "stuffing"
     ],
-    "hero_note": "Both changes were measured against the same kind of starting page \u2014 one that doesn't answer the question, cited {baseline_range} of the time. The specific-facts effect is probably understated: pages with facts were cited {facts_pooled_treatment_pct1} of the time, so it ran into the ceiling.",
+    "hero_note": "Both changes were measured against the same kind of starting page \u2014 one that doesn't answer the question, cited {baseline_range} of the time. Pages with facts were cited {facts_pooled_treatment_pct1} of the time, so the specific-facts effect ran into the ceiling: its direction is clear, but its size reflects where the vague page started and is not identified.",
     "limits_heading": "What this can't tell you yet",
     "limits": [
       "<b>Whether your page gets found in the first place.</b> We hand each engine six documents and measure what it does with them. Search ranking and retrieval are held constant on purpose, and are a separate experiment.",
-      "<b>Which tactic is best.</b> Statistics, quotations, source citations and FAQ blocks can't be ranked against each other yet: pages with any specific fact are cited {facts_pooled_treatment_pct1} of the time, which leaves no room to separate them. A redesign is under way.",
+      "<b>Which presentation tactic is best.</b> At the stage measured here, answer-first order, FAQ headings, attribution and source citations did not move citation, and ranking them would need documents cut in a way that turned out to be an artefact. If they help, they help a page get found, which is a different experiment.",
       "<b>How real, published pages behave.</b> Test documents are written for the benchmark so that exactly one thing changes between versions.",
       "<b>How the engines' own websites behave</b>, beyond the single early check above."
     ],
@@ -113,7 +113,8 @@
     ],
     "footer": "Draft for review. Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from, and the page is regenerated when a round closes. Code MIT, data and results CC-BY 4.0. Engines are tested through the API models named on each chart.",
     "design": {
-      "runs_per_cell": 24
+      "runs_per_cell": 24,
+      "cost_per_question": "about $0.30"
     },
     "literal_numbers": [
       "95%",
@@ -152,7 +153,8 @@
             0.563
           ],
           "p": "<0.0001",
-          "n_models": 8
+          "n_models": 8,
+          "weighting": "equal"
         },
         "per_model": {
           "openai/gpt-5.4-mini": {
@@ -1067,7 +1069,7 @@
             0.375,
             0.571
           ],
-          "p": "0.0000",
+          "p": "<0.0001",
           "n_models": 5
         },
         "per_model": {
@@ -1234,5 +1236,239 @@
         "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"
       }
     }
-  ]
+  ],
+  "story": {
+    "title": "What gets a page cited by AI \u2014 OpenGEO",
+    "description": "An open experiment on what makes AI answer engines cite a page: what was tested, what moved citation, how sure we are, and how to run the same test on your own page.",
+    "eyebrow": [
+      "OpenGEO",
+      "an open experiment on AI answer engines",
+      "<b>Draft</b> \u00b7 October 2026"
+    ],
+    "headline": "Most advice on getting cited by AI has never been tested. We tested it.",
+    "standfirst": "We put {facts_prompts} everyday questions to {facts_n_models} AI models, {facts_calls} times in all, changing one thing at a time on the pages they could cite. One change stood out: stating the specific answer. Formatting tricks and padding made no difference we could detect. Below is what we found, how sure we are, where the evidence stops, and how to run the same test on your own page.",
+    "hero": {
+      "before": "A page that talks around the question",
+      "after": "The same page, stating the specific answer",
+      "unit": "of answers cited it",
+      "note": "Averaged over {facts_prompts} questions and {facts_n_models} models. It measures what an engine does once it has the page, not whether it finds it; more on that below."
+    },
+    "example": {
+      "kicker": "What we changed",
+      "heading": "One question, two versions of a page",
+      "lead": "Here are two of the {facts_prompts} questions. Each page came in two versions, and everything else the engine saw was identical: five other pages, in a shuffled order. Each engine answered {runs_per_cell} times per version.",
+      "labels": {
+        "before": "Before: talks around it",
+        "after": "After: states the answer",
+        "said": "What ChatGPT said",
+        "engines": "How many of its {runs_per_cell} answers cited the page"
+      },
+      "after": "Real answers, quoted as written. In both examples the before answer says the sources don't give the figure, and the after answer quotes the page and cites it. Both questions sit close to the average across all {facts_prompts}; on others the change mattered more, or less.",
+      "corpus": "corpus/corpus_v0.4.json",
+      "runs": "results/runs_v0.4.jsonl",
+      "cases": [
+        {
+          "key": "hvac",
+          "tab": "A local service business",
+          "prompt_id": "local_hvac",
+          "answer_before": "openai/gpt-5.4-mini|local_hvac|control|20",
+          "answer_after": "openai/gpt-5.4-mini|local_hvac|treatment|12",
+          "cited": {
+            "openai/gpt-5.4-mini": [
+              6,
+              24,
+              24
+            ],
+            "google/gemini-3-flash-preview": [
+              23,
+              24,
+              24
+            ],
+            "anthropic/claude-haiku-4.5": [
+              15,
+              24,
+              24
+            ],
+            "deepseek/deepseek-chat": [
+              18,
+              24,
+              24
+            ],
+            "x-ai/grok-4.3": [
+              19,
+              24,
+              24
+            ]
+          }
+        },
+        {
+          "key": "saas",
+          "tab": "A software company",
+          "prompt_id": "saas_uptime",
+          "answer_before": "openai/gpt-5.4-mini|saas_uptime|control|20",
+          "answer_after": "openai/gpt-5.4-mini|saas_uptime|treatment|6",
+          "cited": {
+            "openai/gpt-5.4-mini": [
+              7,
+              24,
+              24
+            ],
+            "google/gemini-3-flash-preview": [
+              24,
+              24,
+              24
+            ],
+            "anthropic/claude-haiku-4.5": [
+              7,
+              24,
+              24
+            ],
+            "deepseek/deepseek-chat": [
+              24,
+              24,
+              24
+            ],
+            "x-ai/grok-4.3": [
+              9,
+              24,
+              24
+            ]
+          }
+        }
+      ]
+    },
+    "all": {
+      "kicker": "Across all {facts_prompts} questions",
+      "heading": "It held on every model we tested",
+      "body": [
+        "Averaged over every question, stating the specific answer raised the share of answers citing the page by <b>{s_facts_pts} points</b> (95% interval {s_facts_ci}). It went up on all {facts_n_models} models we tested, including the five below.",
+        "We then repeated it, pre-registered this time, on {heldout_prompts} questions that have never been published anywhere, so no model could have seen them in training: <b>{s_heldout_pts} points</b> ({s_heldout_ci}), up on every engine."
+      ],
+      "caveat": "<b>How big it is depends on your competition.</b> In these tests the before page didn't answer the question at all, and the after page was usually the only one that did, so it ended up cited almost every time. Against competitors that already state the answer, expect a smaller gain. The direction is solid; the size is specific to the setup.",
+      "caption": "Share of answers citing the page, per engine, before and after. Engines ordered by share of AI-assistant traffic ({share_source}).",
+      "asserts": [
+        "facts:pooled_ci_excludes_zero",
+        "facts:all_models_ci_above_zero",
+        "heldout:pooled_ci_excludes_zero",
+        "heldout:all_models_ci_above_zero"
+      ]
+    },
+    "rest": {
+      "kicker": "What else we tested",
+      "heading": "The usual advice barely moved it",
+      "body": [
+        "We tested the other things AI-visibility advice sells, on the same kind of pages and the same scale."
+      ],
+      "rows": [
+        {
+          "alias": "facts",
+          "label": "State the specific answer",
+          "tag": "Found twice \u00b7 held on unpublished questions",
+          "emphasis": true
+        },
+        {
+          "alias": "stuffing",
+          "label": "Repeat the keyword",
+          "tag": "Pre-registered"
+        },
+        {
+          "alias": "length",
+          "label": "Double the length with filler",
+          "tag": "Pre-registered"
+        },
+        {
+          "alias": "presentation",
+          "label": "Answer first, FAQ headings, attribution, citations",
+          "tag": "Early probe \u00b7 {presentation_prompts} questions"
+        }
+      ],
+      "caption": "Change in the share of answers citing the page, in percentage points, with 95% intervals.",
+      "after": [
+        "<b>Repeating your keyword</b> helped a little: {s_stuffing_pts} points ({s_stuffing_ci}), pre-registered. It's real, but about {stuffing_ratio_vs_compare} times smaller than stating the answer.",
+        "<b>Padding a page</b> to twice its length with filler did nothing on average ({s_length_pts} points, {s_length_ci}), and on some engines it cost citations.",
+        "<b>Presentation</b>, meaning answer-first order, FAQ-style headings, attributing claims and citing sources, moved citation by {s_presentation_pts} points ({s_presentation_ci}). That comes from an early probe of {presentation_prompts} questions, so read it as nothing found yet, not proof that it never helps.",
+        "<b>FAQ schema</b>, the markup, was never tested, and this experiment can't test it: the engines here read a page's visible text, and markup doesn't carry into it."
+      ],
+      "asserts": [
+        "stuffing:pooled_ci_excludes_zero",
+        "stuffing:at_least_10x_smaller_than_compare",
+        "length:pooled_ci_spans_zero",
+        "length:some_model_ci_below_zero",
+        "presentation:pooled_ci_spans_zero"
+      ]
+    },
+    "more": {
+      "kicker": "Worth knowing",
+      "heading": "Being cited isn't the whole story",
+      "cards": [
+        {
+          "alias": "misattribution",
+          "title": "Engines sometimes credit you with things you didn't say",
+          "text": "When an answer cited a page, we checked each cited claim against the page. Between {misattribution_low_pct} and {misattribution_high_pct} of cited sentences said something the page doesn't support, depending on which model did the checking."
+        },
+        {
+          "alias": "calibration",
+          "title": "Tools that check the API may undercount you",
+          "text": "On {calibration_n_web_only} of {calibration_n_questions} everyday questions, OpenAI's API cited nothing while chatgpt.com cited real sources. Most citation trackers query the API."
+        },
+        {
+          "alias": "agreement",
+          "title": "The engines largely agree",
+          "text": "Engines agree with each other about which pages deserve a citation about as closely as one engine agrees with itself on a re-run. A page that earns citations from one tends to earn them from the others."
+        }
+      ]
+    },
+    "limits": {
+      "kicker": "Where it stops",
+      "heading": "What this can't tell you",
+      "steps": [
+        "Someone asks a question",
+        "The engine searches and picks pages",
+        "It reads them and writes an answer",
+        "The answer cites its sources"
+      ],
+      "measured": 2,
+      "measured_label": "What this measures",
+      "unmeasured_label": "Not measured here",
+      "items": [
+        "<b>Whether an engine finds your page.</b> We hand each engine the pages and measure what it does with them. For many small businesses getting found is the bigger problem, and it's a different experiment.",
+        "<b>Local and \"near me\" searches.</b> The questions were informational (how much, how long, how often), not \"best plumber near me\".",
+        "<b>Exactly what people see in the apps.</b> Each engine is tested through its API, as one model: ChatGPT is OpenAI's {chatgpt_model}, for instance. The apps can behave differently.",
+        "<b>Perplexity.</b> It runs its own live search and ignores pages handed to it, so it can't be tested this way.",
+        "<b>Real, published pages.</b> The test pages were written for the experiment, so that exactly one thing changes between versions."
+      ]
+    },
+    "test": {
+      "kicker": "Your turn",
+      "heading": "Run the same test on your own page",
+      "body": [
+        "<code>opengeo test</code> puts your page, as it is and with your change, among your competitors' pages. It asks {engine_names} your question {runs_per_cell} times each, and tells you whether the change moved how often you're cited, per engine, with an interval. It measures what your change did; it never tells you what to change.",
+        "It costs {cost_per_question} per question on your own OpenRouter account, and runs every check for free before anything is spent."
+      ],
+      "demo_caption": "A real test, on fictional pages for a running-shoe store: the edit swapped one sentence for specific advice on when to replace shoes.",
+      "demo": ".claude/skills/opengeo/evals/fixtures/results-running-shoes",
+      "command": "python3 opengeo.py test \\\n    --question \"How often should I replace my running shoes?\" \\\n    --page  current.html \\\n    --edit  edited.html \\\n    --against comp1.html comp2.html comp3.html comp4.html comp5.html",
+      "skill": "Or ask Claude. The OpenGEO skill gathers your page, your question and your competitors, shows you the cost, runs the test and explains the result: <i>\u201cTest whether adding our prices to our water heater page helps us get cited.\u201d</i>",
+      "links": [
+        {
+          "label": "How to run it",
+          "path": "README.md#test-your-own-page"
+        },
+        {
+          "label": "The Claude skill",
+          "path": ".claude/skills/opengeo",
+          "tree": true
+        },
+        {
+          "label": "Every default, and why",
+          "path": "design/opengeo-test.md"
+        }
+      ]
+    },
+    "method": {
+      "kicker": "The method",
+      "heading": "How we know"
+    },
+    "footer": "Draft for review. Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from; the worked examples are quoted from the raw results and checked against them at every build. Code MIT, data and results CC-BY 4.0."
+  }
 }

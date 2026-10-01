@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-OpenGEO -- build the public findings page from the findings ledger.
+OpenGEO -- build the public pages from the findings ledger.
 
     python3 build_findings.py                  # results/findings.json -> docs/index.html
+                                               #   (the story) and docs/findings.html
     python3 build_findings.py --check          # validate the ledger, write nothing
-    python3 build_findings.py --fragment -o x  # body-only HTML, for embedding or preview
+    python3 build_findings.py --fragment -o x  # findings page body only, for embedding
 
-The page is a pure function of results/findings.json. Figures are never typed into this
+docs/index.html is the plain-language story (build_story.py, design/story-page.md);
+docs/findings.html is the full technical findings page, built here. Both follow the
+rules below.
+
+The pages are a pure function of results/findings.json -- plus, for the story's worked
+examples, the committed raw results those examples quote. Figures are never typed into this
 file or into page copy: prose in the ledger carries {placeholders} filled from the
 entry's own data at build time, and every public entry cites the committed report its
 numbers come from. When a round closes, its entry is added and the page is rebuilt;
@@ -296,8 +302,11 @@ def validate(L, root):
             errors.append(f"{f['alias']}: public result with no report to cite")
         if f["status"] == "in_progress" and f.get("data"):
             errors.append(f"{f['alias']}: in-progress entries may not carry result data")
+    import build_story
+    story_errors, _ = build_story.check(L)
+    errors += story_errors
     allow = L["page"].get("literal_numbers", [])
-    for where, s in prose(L):
+    for where, s in list(prose(L)) + list(build_story.prose(L)):
         t = TAG.sub("", PLACEHOLDER.sub("", s))
         for a in allow:
             t = t.replace(a, "")
@@ -522,7 +531,8 @@ def prov_line(f, L, c):
 
 def article(f, L, c):
     t = f["text"]
-    parts = [f'<article class="finding"><div class="fhead">{"".join(chip(e, c) for e in f["evidence"])}</div>',
+    parts = [f'<article class="finding" id="{esc(f["alias"])}"><div class="fhead">'
+             f'{"".join(chip(e, c) for e in f["evidence"])}</div>',
              f'<h2>{esc(f["title"])}</h2>']
     parts += [f"<p>{fmt(s, c)}</p>" for s in t.get("body", [])]
     parts.append(CHARTS[f["chart"]["type"]](f, L, c))
@@ -541,7 +551,10 @@ def build(L, fragment=False):
     pending = [f for f in L["findings"] if f.get("public") and f["status"] == "in_progress"]
     levers = [A[a] for a in pg["hero_levers"]]
 
-    head = ('<header><div class="eyebrow">' + "<span>·</span>".join(f"<span>{e}</span>" for e in pg["eyebrow"])
+    nav = ('<nav class="top"><a class="brand" href="index.html">OpenGEO</a><span>'
+           '<a href="index.html">Overview</a><a href="findings.html" aria-current="page">Findings</a>'
+           f'<a href="{esc(L["repo"])}">Repository</a></span></nav>')
+    head = (nav + '<header><div class="eyebrow">' + "<span>·</span>".join(f"<span>{e}</span>" for e in pg["eyebrow"])
             + f'</div><h1>{esc(pg["headline"])}</h1><p class="standfirst">{fmt(pg["standfirst"], P)}</p></header>')
     hero = (f'<div class="hero"><p class="cap">{esc(pg["hero_caption"])}</p>{svg_hero(levers, fctx)}'
             f'<p class="note">{fmt(pg["hero_note"], P)}</p></div>')
@@ -591,6 +604,12 @@ body{margin:0;background:var(--paper);color:var(--ink);
   font:15.5px/1.62 "Public Sans",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   -webkit-font-smoothing:antialiased}
 .wrap{max-width:900px;margin:0 auto;padding:44px 24px 90px}
+nav.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;margin:0 0 36px}
+nav.top a{color:var(--muted);text-decoration:none;margin-left:16px}
+nav.top a:first-child{margin-left:0}
+nav.top a[aria-current],nav.top a:hover{color:var(--ink)}
+nav.top .brand{color:var(--ink);font-weight:600;letter-spacing:.04em}
 a{color:var(--ochre);text-underline-offset:2px}
 a:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
@@ -732,9 +751,10 @@ def write_round_index(L, root):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--ledger", default=str(HERE / "results" / "findings.json"))
-    ap.add_argument("-o", "--out", default=str(HERE / "docs" / "index.html"))
+    ap.add_argument("-o", "--out", default=str(HERE / "docs" / "findings.html"),
+                    help="where the findings page goes; the story always goes to docs/index.html")
     ap.add_argument("--check", action="store_true", help="validate only; write nothing")
-    ap.add_argument("--fragment", action="store_true", help="omit <html>/<head>/<body>")
+    ap.add_argument("--fragment", action="store_true", help="findings page only, without <html>/<head>/<body>")
     args = ap.parse_args()
 
     L = json.loads(pathlib.Path(args.ledger).read_text())
@@ -757,6 +777,17 @@ def main():
     shown = sum(1 for f in L["findings"] if f.get("public") and f["status"] != "in_progress")
     print(f"wrote {out}  ({shown} findings public, "
           f"{sum(1 for f in L['findings'] if not f.get('public'))} kept off the page)")
+    if not args.fragment and L.get("story"):
+        import build_story
+        _, cases = build_story.check(L)
+        story = HERE / "docs" / "index.html"
+        story.write_text(build_story.build(L, cases))
+        print(f"wrote {story}  (the story; {len(cases)} worked examples checked against the raw runs)")
+        assets = HERE / "docs" / "assets"
+        assets.mkdir(exist_ok=True)
+        for mode in ("light", "dark"):
+            (assets / f"effects-{mode}.svg").write_text(build_story.effects_svg(L, mode))
+        print(f"wrote {assets}/effects-{{light,dark}}.svg  (the README's chart)")
     if n_rounds:
         print(f"wrote results/published/README.md  ({n_rounds} published rounds indexed)")
 
