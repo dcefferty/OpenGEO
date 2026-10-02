@@ -58,7 +58,7 @@ donor sites. This is a partnerships problem before it is a code problem.
 
 *Acceptance:* one completed paired round on donated inventory, published with intervals.
 
-### 10. Held-out private split
+### 10. Held-out private split — done 2026-09-22
 Contamination defence. Publish only aggregate results from the private half; rotate a
 fraction of public prompts each round. Protocol in `METHODOLOGY.md` §10.1.
 
@@ -99,7 +99,12 @@ they were learned and applied.
 reports public and private results side by side. **All three met 2026-09-22** — see the
 Completed table.
 
-### 11. Make tactics rankable
+### 11. Make tactics rankable — closed in Tier 1, 2026-09-20
+*Closed negative in this design and published as the Tier 1 scope report
+(`results/published/2026-09-20-tier1-scope/REPORT.md`), which is the "presentation" entry
+on the findings page. The acceptance below was not met; ranking presentation tactics moves
+to Tier 2 (item 9), where retrieval is not held constant. The history follows.*
+
 **The largest open research item.** The current corpus proves *specific facts beat no
 facts*, decisively, on every engine — but its treatment arm sits at CPR 0.9981. Statistics,
 attributed quotations, source citations, answer-first structure and FAQ blocks would all
@@ -313,6 +318,7 @@ it rests on.
 | 7b | Keyword stuffing (H6) — the citable Round 1 | Pre-registered before collection; took three corpus designs. **H6 falsified: +0.038, CI [+0.004, +0.075], p=0.045.** Stuffing slightly *increases* citation, and Group C shows it does so without lower fidelity | `preregistrations/2026-08-kwstuff-v3.md`, `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
 | 8 (v1) | Calibration study v1 | **Divergence 0.368, CI [0.139, 0.625].** On 3 of 12 questions the API cited nothing where the logged-out UI cited real sources | `results/published/2026-08-30-calibration-v1/REPORT.md` |
 | 10 | Held-out private split | Twelve questions, screened, format-balanced, never published. Pooled control CPR 0.515 vs the public corpus's 0.503. **H4 replicates on the held-out half: +0.441, CI [+0.324, +0.560]**, and η² for the public/private term is 0.0001 against 0.2795 for the intervention. Banks the pre-publication baseline a contamination test needs | `preregistrations/2026-09-contamination.md`, `results/published/2026-09-22-public-private/REPORT.md` |
+| 11 | Make tactics rankable (Tier 1) | **Closed negative.** Four fact-preserving presentation tactics pooled +0.001, CI [−0.036, +0.034], at 3 questions — an estimate, not an effect size. The gradeable middle a ranking needs is an artefact of truncated documents, so presentation tactics belong to Tier 2 | `results/published/2026-09-20-tier1-scope/REPORT.md` |
 | 12 | Length-only round (H7) | **H7 not falsified: pooled +0.004, CI [−0.023, +0.031], p=0.73** (share-weighted, 5 engines). But three engines cite padded pages *less*, two significantly after correction, and an **unweighted** pool would have falsified H7 at −0.023, CI [−0.042, −0.005] — the headline turns on a documented weighting parameter | `results/published/2026-09-11-lengthonly/REPORT.md` |
 
 Two notes for anyone following a citation into this file:
@@ -373,24 +379,29 @@ Done:
 To do **at launch, in one go** — these are coupled and a half-done launch looks worse than
 none:
 
-- [ ] `python3 check_private.py` — must pass. Once public, a leaked private prompt_id
+- [x] `python3 check_private.py` — must pass. Once public, a leaked private prompt_id
       cannot be un-leaked.
-- [ ] Drop "Draft" from both pages: `page.eyebrow`, `page.footer`, `story.eyebrow` and
+- [x] Drop "Draft" from both pages: `page.eyebrow`, `page.footer`, `story.eyebrow` and
       `story.footer` in `results/findings.json`.
-- [ ] Check that no business name in the skill's eval fixtures
+- [x] Check that no business name in the skill's eval fixtures
       (`.claude/skills/opengeo/evals/fixtures/`) belongs to a real business; they are
-      written as fictional and some make claims about the business.
-- [ ] `python3 build_findings.py --check` then `build_findings.py`; confirm
+      written as fictional and some make claims about the business. Done 2026-10-01: two
+      were renamed for being too close to real plumbing businesses (`em_comp3.html` is now
+      Mesquite Hollow Plumbing, `comp4.html` Copperlane Home Notes); the rest returned no
+      match.
+- [x] `python3 build_findings.py --check` then `build_findings.py`; confirm
       `docs/index.html` (the overview) and `docs/findings.html` are current.
 - [ ] Make the repository public.
 - [ ] Enable GitHub Pages on `main` / `docs`. Deliberately not enabled earlier: on a
       private repository this is either unavailable or is itself a publication step.
 - [ ] Set the homepage URL to the Pages site **after** Pages is live, not before — a
       repository whose homepage 404s is a bad first impression.
-- [ ] Decide whether the Tier 1 scope report
+- [x] Decide whether the Tier 1 scope report
       (`results/published/2026-09-20-tier1-scope/REPORT.md`) gets a `findings.json` entry
       and a place on the page. It is the most contrarian result the project has; it is
-      also probe-level, so its ledger entry must not present an effect size.
+      also probe-level, so its ledger entry must not present an effect size. Done: it is
+      the "presentation" entry, reported as an interval and labelled as not a published
+      effect size.
 
 Not blocking, and deliberately so:
 
