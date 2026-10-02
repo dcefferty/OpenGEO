@@ -1,6 +1,6 @@
 {
   "schema": "opengeo-findings/1",
-  "updated": "2026-09-11",
+  "updated": "2026-10-01",
   "repo": "https://github.com/dcefferty/OpenGEO",
   "traffic_share": {
     "label": "Similarweb, August 2026",
@@ -51,7 +51,7 @@
     "eyebrow": [
       "OpenGEO",
       "open benchmark for AI answer engines",
-      "<b>Draft</b> \u00b7 September 2026"
+      "October 2026"
     ],
     "headline": "Specific facts are what get a page cited by AI answer engines.",
     "standfirst": "OpenGEO changes one thing about a document and measures whether the models behind {engine_names} cite it more. Adding specific figures took a page from being cited {facts_pooled_control_pct0} of the time to {facts_pooled_treatment_pct1}, on every model tested. Repeating keywords moved it by {stuffing_pooled_delta_abs} points. Every number carries its interval, and the tests that found nothing are reported alongside the ones that did.",
@@ -111,7 +111,7 @@
         "path": "results/findings.json"
       }
     ],
-    "footer": "Draft for review. Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from, and the page is regenerated when a round closes. Code MIT, data and results CC-BY 4.0. Engines are tested through the API models named on each chart.",
+    "footer": "Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from, and the page is regenerated when a round closes. Code MIT, data and results CC-BY 4.0. Engines are tested through the API models named on each chart.",
     "design": {
       "runs_per_cell": 24,
       "cost_per_question": "about $0.30"
@@ -1243,7 +1243,7 @@
     "eyebrow": [
       "OpenGEO",
       "an open experiment on AI answer engines",
-      "<b>Draft</b> \u00b7 October 2026"
+      "October 2026"
     ],
     "headline": "Most advice on getting cited by AI has never been tested. We tested it.",
     "standfirst": "We put {facts_prompts} everyday questions to {facts_n_models} AI models, {facts_calls} times in all, changing one thing at a time on the pages they could cite. One change stood out: stating the specific answer. Formatting tricks and padding made no difference we could detect. Below is what we found, how sure we are, where the evidence stops, and how to run the same test on your own page.",
@@ -1469,6 +1469,6 @@
       "kicker": "The method",
       "heading": "How we know"
     },
-    "footer": "Draft for review. Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from; the worked examples are quoted from the raw results and checked against them at every build. Code MIT, data and results CC-BY 4.0."
+    "footer": "Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from; the worked examples are quoted from the raw results and checked against them at every build. Code MIT, data and results CC-BY 4.0."
   }
 }
