@@ -130,7 +130,7 @@ python3 opengeo.py test --question "..." --page <current> --edit <edited> \
 
 Show the user the checks, what the engines will see, and the estimated cost, and **wait for
 a clear yes before running for real.** It's their OpenRouter account. The cost is small —
-about $0.30 per question at current prices; quote the dry run's own estimate — but spending
+about 30 cents per question at current prices; quote the dry run's own estimate — but spending
 it is their call, and the dry run is also where problems surface before any money moves.
 
 "What the engines will see" is the page's title and a section of about 80–110 words around
