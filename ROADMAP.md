@@ -360,8 +360,8 @@ standard rather than in anyone's memory:
 
 ## Publication checklist
 
-The repository is private and **stays private until the owner explicitly says otherwise**.
-Everything below is prepared; nothing here should be taken as a decision to launch.
+The repository went public on 2026-10-04, on the owner's instruction, once everything
+below was done. The site is at https://dcefferty.github.io/OpenGEO/.
 
 Done:
 
@@ -380,6 +380,10 @@ Done:
       corpora, pre-registrations and results moved into `experiments/` with their layout
       inside unchanged, so commands in earlier reports still work from there (README,
       "Where things moved").
+- [x] Commit emails. Done 2026-10-03: the history keeps the addresses its commits were
+      made with, because rewriting it would change every commit ID, and the commit dates
+      are the evidence of when each round was pre-registered. New commits use the GitHub
+      noreply address, signed with a key registered on GitHub, so they show as Verified.
 
 To do **at launch, in one go** — these are coupled and a half-done launch looks worse than
 none:
@@ -396,11 +400,14 @@ none:
       match.
 - [x] `python3 build_findings.py --check` then `build_findings.py`; confirm
       `docs/index.html` (the overview) and `docs/findings.html` are current.
-- [ ] Make the repository public.
-- [ ] Enable GitHub Pages on `main` / `docs`. Deliberately not enabled earlier: on a
+- [x] Make the repository public. Done 2026-10-04, after a last check: tree clean,
+      `check_private.py` passing, pages current with the ledger, and no key or token
+      pattern anywhere in the history.
+- [x] Enable GitHub Pages on `main` / `docs`. Deliberately not enabled earlier: on a
       private repository this is either unavailable or is itself a publication step.
-- [ ] Set the homepage URL to the Pages site **after** Pages is live, not before — a
-      repository whose homepage 404s is a bad first impression.
+      Done 2026-10-04: https://dcefferty.github.io/OpenGEO/
+- [x] Set the homepage URL to the Pages site **after** Pages is live, not before — a
+      repository whose homepage 404s is a bad first impression. Done 2026-10-04.
 - [x] Decide whether the Tier 1 scope report
       (`experiments/results/published/2026-09-20-tier1-scope/REPORT.md`) gets a
       `findings.json` entry and a place on the page. It is the most contrarian result the
