@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: >-
   If you use OpenGEO, cite the repository. Individual rounds carry their own
-  dated reports under results/published/ — cite the round, not just the repo,
-  when you are quoting a specific number.
+  dated reports under experiments/results/published/ — cite the round, not
+  just the repo, when you are quoting a specific number.
 title: "OpenGEO: an open, reproducible, causal benchmark for Generative Engine Optimization"
 abstract: >-
   OpenGEO measures whether changing a piece of content changes whether an AI

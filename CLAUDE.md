@@ -48,7 +48,8 @@ Changing any of these breaks the experiment. If a change seems to require it, st
   Any change to `analyze.py` must still recover them. This has already caught two real bugs.
 - **Publish nulls.** A benchmark that only reports wins is a marketing site.
 - **Pre-register each round** — hypotheses, corpus hash, interventions, primary metric, and
-  analysis plan committed *before* collection. It is a timestamped file in `preregistrations/`.
+  analysis plan committed *before* collection. It is a timestamped file in
+  `experiments/preregistrations/`.
 - **Spot-check before every full round.** A few hundred real calls confirming the baseline is
   not at a ceiling or floor, after pre-registration and before collection. It is a gate on the
   design, not a look at the result. Two rounds were wasted learning this (`METHODOLOGY.md` §5.3).
@@ -61,15 +62,22 @@ Changing any of these breaks the experiment. If a change seems to require it, st
 - **Pre-registrations and published reports are immutable too.** Log deviations inside the
   pre-registration, dated; never quietly edit what a round said it would do.
 - **The public page is generated, never edited.** A round is published by adding its entry
-  to `results/findings.json` — every figure citing the round's committed report — and
-  running `build_findings.py`. Prose claims like "every model" carry named assertions in
-  the ledger; if new data breaks one, the build refuses. Fix the sentence, not the
-  assertion. In-progress rounds may not carry result data, by the same no-interim-analysis
-  rule every pre-registration states.
+  to `experiments/results/findings.json` — every figure citing the round's committed
+  report — and running `build_findings.py`. Prose claims like "every model" carry named
+  assertions in the ledger; if new data breaks one, the build refuses. Fix the sentence,
+  not the assertion. In-progress rounds may not carry result data, by the same
+  no-interim-analysis rule every pre-registration states.
+- **The root holds the tool and the project docs; the benchmark lives in `experiments/`.**
+  New round code and data go there. Paths in its scripts, pre-registrations and reports are
+  relative to that folder; the findings ledger's paths are relative to the repository root,
+  because it also links outside it.
 
 ## Commands
 
+The benchmark runs from `experiments/`:
+
 ```bash
+cd experiments
 python3 corpus/build_corpus.py                      # regenerate + print balance checks
 python3 run_pilot.py --dry-run                      # cost estimate, no API calls
 python3 run_pilot.py                                # 4,608 calls at defaults
@@ -80,7 +88,7 @@ python3 make_mock.py                                # synthetic data, known effe
 python3 analyze.py --runs results/mock.jsonl        # must recover them
 
 python3 build_findings.py --check                   # validate results/findings.json
-python3 build_findings.py                           # regenerate docs/index.html (overview) and docs/findings.html
+python3 build_findings.py                           # regenerate ../docs/index.html (overview) and ../docs/findings.html
 ```
 
 Needs `OPENROUTER_API_KEY`. Python 3.9+; numpy for analysis, stdlib only for the runner.
@@ -102,5 +110,5 @@ variance; it does not publish an effect size. Report it as an interval, and say 
 
 ## Where things stand
 
-Not here — it goes stale. Current results are in `results/findings.json` and on the
-generated page; open work and completed rounds are in `ROADMAP.md`.
+Not here — it goes stale. Current results are in `experiments/results/findings.json` and
+on the generated page; open work and completed rounds are in `ROADMAP.md`.

@@ -10,7 +10,7 @@ project's history is its pre-registration evidence.** A private question committ
 cannot be made private again without rewriting the history that proves when each round was
 pre-registered, and that evidence is not tradeable.
 
-So the split lives outside the repo, under `private/`, which is gitignored. This script is
+So the split lives outside the repo, under `experiments/private/`, which is gitignored. This script is
 the thing that notices when that has gone wrong. It runs three checks:
 
   ignored     `private/` is actually matched by .gitignore
@@ -32,13 +32,15 @@ import pathlib
 import subprocess
 import sys
 
-HERE = pathlib.Path(__file__).parent
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parent              # a leak anywhere in the repository counts, not only in here
 PRIVATE = HERE / "private"
+PRIVATE_REL = PRIVATE.relative_to(ROOT).as_posix()
 MANIFEST = PRIVATE / "MANIFEST.json"
 
 
 def git(*args):
-    return subprocess.run(["git", "-C", str(HERE), *args],
+    return subprocess.run(["git", "-C", str(ROOT), *args],
                           capture_output=True, text=True).stdout.splitlines()
 
 
@@ -46,20 +48,21 @@ def main():
     problems, notes = [], []
 
     if not PRIVATE.exists():
-        print("no private/ directory -- no split exists yet.")
+        print(f"no {PRIVATE_REL}/ directory -- no split exists yet.")
         print("ROADMAP item 10 is open; this check passes vacuously.")
         return 0
 
     # 1. gitignore actually covers it
-    ignored = subprocess.run(["git", "-C", str(HERE), "check-ignore", "-q", "private/x"])
+    ignored = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "-q",
+                              f"{PRIVATE_REL}/x"])
     if ignored.returncode != 0:
-        problems.append("private/ is NOT matched by .gitignore -- add it before anything "
-                        "else, then re-run")
+        problems.append(f"{PRIVATE_REL}/ is NOT matched by .gitignore -- add it before "
+                        "anything else, then re-run")
 
     # 2. nothing under private/ is tracked
-    tracked = [p for p in git("ls-files", "private") if p.strip()]
+    tracked = [p for p in git("ls-files", PRIVATE_REL) if p.strip()]
     if tracked:
-        problems.append(f"{len(tracked)} file(s) under private/ are TRACKED BY GIT: "
+        problems.append(f"{len(tracked)} file(s) under {PRIVATE_REL}/ are TRACKED BY GIT: "
                         + ", ".join(tracked[:5]))
 
     # 3. no private prompt_id appears in a tracked file
@@ -75,7 +78,7 @@ def main():
         for pid in ids:
             hits = []
             for path in all_tracked:
-                f = HERE / path
+                f = ROOT / path
                 try:
                     if pid in f.read_text(errors="ignore"):
                         hits.append(path)

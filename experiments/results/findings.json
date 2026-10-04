@@ -6,7 +6,7 @@
     "label": "Similarweb, August 2026",
     "source": "Similarweb Gen AI worldwide all-device website traffic share",
     "as_of": "2026-08",
-    "file": "engine_weights.py"
+    "file": "experiments/engine_weights.py"
   },
   "engines": [
     {
@@ -98,20 +98,20 @@
       },
       {
         "label": "Pre-registrations",
-        "path": "preregistrations",
+        "path": "experiments/preregistrations",
         "tree": true
       },
       {
         "label": "Raw data",
-        "path": "results",
+        "path": "experiments/results",
         "tree": true
       },
       {
         "label": "Findings ledger",
-        "path": "results/findings.json"
+        "path": "experiments/results/findings.json"
       }
     ],
-    "footer": "Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from, and the page is regenerated when a round closes. Code MIT, data and results CC-BY 4.0. Engines are tested through the API models named on each chart.",
+    "footer": "Every figure on this page is read from <code>experiments/results/findings.json</code>, which cites the committed report each one comes from, and the page is regenerated when a round closes. Code MIT, data and results CC-BY 4.0. Engines are tested through the API models named on each chart.",
     "design": {
       "runs_per_cell": 24,
       "cost_per_question": "about $0.30"
@@ -248,7 +248,7 @@
               0.641
             ],
             "p": "0.0005",
-            "data": "results/runs_v0.3.jsonl"
+            "data": "experiments/results/runs_v0.3.jsonl"
           }
         ]
       },
@@ -282,11 +282,11 @@
         "prompts": 48,
         "domains": 24,
         "calls": 18432,
-        "report": "results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md",
+        "report": "experiments/results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md",
         "preregistration": null,
         "data": [
-          "results/runs_v0.4.jsonl",
-          "results/runs_v0.3.jsonl"
+          "experiments/results/runs_v0.4.jsonl",
+          "experiments/results/runs_v0.3.jsonl"
         ]
       },
       "asserts": [
@@ -456,12 +456,12 @@
         "prompts": 48,
         "domains": 24,
         "calls": 18432,
-        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md",
-        "preregistration": "preregistrations/2026-08-kwstuff-v3.md",
+        "report": "experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md",
+        "preregistration": "experiments/preregistrations/2026-08-kwstuff-v3.md",
         "data": [
-          "results/runs_kwstuff_v3.jsonl",
-          "results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl",
-          "results/fidelity_kwstuff-v3_glm-5.3_full.jsonl"
+          "experiments/results/runs_kwstuff_v3.jsonl",
+          "experiments/results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl",
+          "experiments/results/fidelity_kwstuff-v3_glm-5.3_full.jsonl"
         ]
       },
       "asserts": [
@@ -581,10 +581,10 @@
         "prompts": 48,
         "domains": 24,
         "calls": 23040,
-        "report": "results/published/2026-09-11-lengthonly/REPORT.md",
-        "preregistration": "preregistrations/2026-09-lengthonly.md",
+        "report": "experiments/results/published/2026-09-11-lengthonly/REPORT.md",
+        "preregistration": "experiments/preregistrations/2026-09-lengthonly.md",
         "data": [
-          "results/runs_lengthonly.jsonl"
+          "experiments/results/runs_lengthonly.jsonl"
         ]
       },
       "asserts": [
@@ -705,11 +705,11 @@
         "corpus_sha": "831ad7108b1bdc31",
         "prompts": 3,
         "calls": 4320,
-        "report": "results/published/2026-09-20-tier1-scope/REPORT.md",
+        "report": "experiments/results/published/2026-09-20-tier1-scope/REPORT.md",
         "data": [
-          "results/tacticpilot.jsonl",
-          "results/lengthladder.jsonl",
-          "results/pagelength_screen.jsonl"
+          "experiments/results/tacticpilot.jsonl",
+          "experiments/results/lengthladder.jsonl",
+          "experiments/results/pagelength_screen.jsonl"
         ]
       },
       "asserts": [
@@ -777,16 +777,16 @@
       "provenance": {
         "round": "kwstuff-v3, corpus v0.4",
         "calls": 36864,
-        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md",
+        "report": "experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md",
         "links": [
           {
             "label": "earlier round",
-            "path": "results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md"
+            "path": "experiments/results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md"
           }
         ],
         "data": [
-          "results/runs_kwstuff_v3.jsonl",
-          "results/runs_v0.4.jsonl"
+          "experiments/results/runs_kwstuff_v3.jsonl",
+          "experiments/results/runs_v0.4.jsonl"
         ]
       },
       "asserts": [
@@ -852,19 +852,19 @@
       },
       "provenance": {
         "round": "Group C follow-up to kwstuff-v3",
-        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md",
+        "report": "experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md",
         "data": [
-          "results/fidelity_kwstuff-v3_glm-5.3_full.jsonl",
-          "results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl"
+          "experiments/results/fidelity_kwstuff-v3_glm-5.3_full.jsonl",
+          "experiments/results/fidelity_kwstuff-v3_qwen3.8-max_full.jsonl"
         ],
         "links": [
           {
             "label": "judging method",
-            "path": "judge_fidelity.py"
+            "path": "experiments/judge_fidelity.py"
           },
           {
             "label": "computation",
-            "path": "fidelity_baseline.py"
+            "path": "experiments/fidelity_baseline.py"
           }
         ]
       },
@@ -1027,10 +1027,10 @@
       "provenance": {
         "round": "calibration v1",
         "calls": 72,
-        "report": "results/published/2026-08-30-calibration-v1/REPORT.md",
+        "report": "experiments/results/published/2026-08-30-calibration-v1/REPORT.md",
         "data": [
-          "results/calibration_api.jsonl",
-          "results/calibration_ui_logged_out.jsonl"
+          "experiments/results/calibration_api.jsonl",
+          "experiments/results/calibration_ui_logged_out.jsonl"
         ]
       },
       "asserts": [
@@ -1155,10 +1155,10 @@
         "corpus_sha": "529939b6163befeb",
         "prompts": 12,
         "calls": 14400,
-        "report": "results/published/2026-09-22-public-private/REPORT.md",
-        "preregistration": "preregistrations/2026-09-contamination.md",
+        "report": "experiments/results/published/2026-09-22-public-private/REPORT.md",
+        "preregistration": "experiments/preregistrations/2026-09-contamination.md",
         "data": [
-          "results/runs_contamination_public.jsonl"
+          "experiments/results/runs_contamination_public.jsonl"
         ]
       },
       "asserts": [
@@ -1180,7 +1180,7 @@
         "basis": "Spearman-Brown corrected split-half, per model, kwstuff-v3; corpus v0.4 was at least 0.957 for every model"
       },
       "provenance": {
-        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"
+        "report": "experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md"
       }
     },
     {
@@ -1204,7 +1204,7 @@
         "note": "Supported on the pre-registered magnitude test, but slot position is a minor factor next to content. Kept off the public page: in Tier 1, position means slot in a supplied context, which readers would easily mistake for search rank."
       },
       "provenance": {
-        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"
+        "report": "experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md"
       }
     },
     {
@@ -1233,7 +1233,7 @@
         ]
       },
       "provenance": {
-        "report": "results/published/2026-08-29-kwstuff-v3/REPORT.md"
+        "report": "experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md"
       }
     }
   ],
@@ -1264,8 +1264,8 @@
         "engines": "How many of its {runs_per_cell} answers cited the page"
       },
       "after": "Real answers, quoted as written. In both examples the before answer says the sources don't give the figure, and the after answer quotes the page and cites it. Both questions sit close to the average across all {facts_prompts}; on others the change mattered more, or less.",
-      "corpus": "corpus/corpus_v0.4.json",
-      "runs": "results/runs_v0.4.jsonl",
+      "corpus": "experiments/corpus/corpus_v0.4.json",
+      "runs": "experiments/results/runs_v0.4.jsonl",
       "cases": [
         {
           "key": "hvac",
@@ -1469,6 +1469,6 @@
       "kicker": "The method",
       "heading": "How we know"
     },
-    "footer": "Every figure on this page is read from <code>results/findings.json</code>, which cites the committed report each one comes from; the worked examples are quoted from the raw results and checked against them at every build. Code MIT, data and results CC-BY 4.0."
+    "footer": "Every figure on this page is read from <code>experiments/results/findings.json</code>, which cites the committed report each one comes from; the worked examples are quoted from the raw results and checked against them at every build. Code MIT, data and results CC-BY 4.0."
   }
 }
