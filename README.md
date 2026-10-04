@@ -10,7 +10,7 @@ question many times, and measure whether they cite the page more.
 </picture>
 
 **What it found, in plain words.** Every figure, with its interval, is on the
-[overview page](docs/index.html), and in full on the [findings page](docs/findings.html).
+[overview page](https://dcefferty.github.io/OpenGEO/), and in full on the [findings page](https://dcefferty.github.io/OpenGEO/findings.html).
 
 - **Stating the specific answer** got pages cited far more often than talking around it.
   It is the strongest result here, and it held on questions that have never been published.
@@ -68,9 +68,10 @@ result: *"Test whether adding our prices to our water heater page helps us get c
 
 The current results live in one place, generated from a ledger so they can't drift:
 
-- **`docs/index.html`** — the overview: what was tested, what moved citation, how sure we
-  are and where it stops, in plain language. Served by GitHub Pages once this repo is public.
-- **`docs/findings.html`** — every finding in full, with per-engine charts and intervals.
+- **[The overview](https://dcefferty.github.io/OpenGEO/)** (`docs/index.html`) — what was
+  tested, what moved citation, how sure we are and where it stops, in plain language.
+- **[The findings page](https://dcefferty.github.io/OpenGEO/findings.html)** (`docs/findings.html`) —
+  every finding in full, with per-engine charts and intervals.
 - **`experiments/results/published/`** — the full report for each round, including the
   nulls.
 - **`experiments/results/findings.json`** — the machine-readable ledger both pages are
