@@ -2,8 +2,8 @@
 """
 OpenGEO -- build the public pages from the findings ledger.
 
-    python3 build_findings.py                  # results/findings.json -> docs/index.html
-                                               #   (the story) and docs/findings.html
+    python3 build_findings.py                  # results/findings.json -> ../docs/index.html
+                                               #   (the story) and ../docs/findings.html
     python3 build_findings.py --check          # validate the ledger, write nothing
     python3 build_findings.py --fragment -o x  # findings page body only, for embedding
 
@@ -33,7 +33,8 @@ Standard library only.
 """
 import argparse, html, json, math, pathlib, re, sys
 
-HERE = pathlib.Path(__file__).parent
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parent      # the ledger's paths are relative to the repository root, as is docs/
 MINUS = "−"
 MONO = 'font-family="IBM Plex Mono, monospace"'
 
@@ -751,14 +752,14 @@ def write_round_index(L, root):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--ledger", default=str(HERE / "results" / "findings.json"))
-    ap.add_argument("-o", "--out", default=str(HERE / "docs" / "findings.html"),
+    ap.add_argument("-o", "--out", default=str(ROOT / "docs" / "findings.html"),
                     help="where the findings page goes; the story always goes to docs/index.html")
     ap.add_argument("--check", action="store_true", help="validate only; write nothing")
     ap.add_argument("--fragment", action="store_true", help="findings page only, without <html>/<head>/<body>")
     args = ap.parse_args()
 
     L = json.loads(pathlib.Path(args.ledger).read_text())
-    errors, warnings = validate(L, HERE)
+    errors, warnings = validate(L, ROOT)
     for w in warnings:
         print(f"  note  {w}")
     if errors:
@@ -780,16 +781,16 @@ def main():
     if not args.fragment and L.get("story"):
         import build_story
         _, cases = build_story.check(L)
-        story = HERE / "docs" / "index.html"
+        story = ROOT / "docs" / "index.html"
         story.write_text(build_story.build(L, cases))
         print(f"wrote {story}  (the story; {len(cases)} worked examples checked against the raw runs)")
-        assets = HERE / "docs" / "assets"
+        assets = ROOT / "docs" / "assets"
         assets.mkdir(exist_ok=True)
         for mode in ("light", "dark"):
             (assets / f"effects-{mode}.svg").write_text(build_story.effects_svg(L, mode))
         print(f"wrote {assets}/effects-{{light,dark}}.svg  (the README's chart)")
     if n_rounds:
-        print(f"wrote results/published/README.md  ({n_rounds} published rounds indexed)")
+        print(f"wrote experiments/results/published/README.md  ({n_rounds} published rounds indexed)")
 
 
 if __name__ == "__main__":

@@ -37,8 +37,9 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
-sys.path.insert(0, str(HERE / "corpus"))
+# The tool runs on the benchmark's own harness, so a test is made the way every round is.
+sys.path.insert(0, str(HERE / "experiments"))
+sys.path.insert(0, str(HERE / "experiments" / "corpus"))
 
 import engine_weights  # noqa: E402
 import run_pilot as rp  # noqa: E402
@@ -101,8 +102,8 @@ def read_source(ref):
     provenance); the title is "" when the page has none.
 
     Pages are read into memory and written only to this test's own results folder --
-    never into corpus/sources/, which is the benchmark's committed snapshot store and has
-    no business holding anyone's competitor pages.
+    never into experiments/corpus/sources/, which is the benchmark's committed snapshot
+    store and has no business holding anyone's competitor pages.
     """
     if re.match(r"https?://", ref):
         status, body = src._curl(ref)

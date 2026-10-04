@@ -7,7 +7,10 @@ issue with your `runs.jsonl` and the corpus hash you ran against.
 
 ## Reproducing a round
 
+Everything a round needs lives in `experiments/`, and runs from there:
+
 ```bash
+cd experiments
 python3 corpus/build_corpus.py                   # regenerate the corpus + balance checks
 python3 run_pilot.py --dry-run                   # cost estimate, no API calls
 
@@ -60,8 +63,9 @@ not an improvement — `METHODOLOGY.md` explains each, and `CLAUDE.md` lists the
 
 - **All document text lives in the builders**, never hand-edited into a `corpus_*.json`.
   Edit the builder and regenerate.
-- **Excerpts are sliced from committed snapshots**, never retyped — `corpus/sources.py`
-  fails the build rather than warning if a source has drifted.
+- **Excerpts are sliced from committed snapshots**, never retyped —
+  `experiments/corpus/sources.py` fails the build rather than warning if a source has
+  drifted.
 - **Rights are established per document**, with evidence. A `.gov` domain is not by itself
   a federal work.
 - **Corpus versions are immutable once a round has run against them.** Changes get a new
@@ -70,10 +74,11 @@ not an improvement — `METHODOLOGY.md` explains each, and `CLAUDE.md` lists the
 ## Before opening a PR
 
 ```bash
+cd experiments
 python3 build_findings.py --check                # validate the findings ledger
 python3 check_private.py                         # private-split leak check
 ```
 
 The findings page is generated, never hand-edited. A round is published by adding its
-entry to `results/findings.json` and running `build_findings.py`; the build refuses a claim
-the data no longer supports.
+entry to `experiments/results/findings.json` and running `build_findings.py`; the build
+refuses a claim the data no longer supports.

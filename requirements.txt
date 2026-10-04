@@ -1,4 +1,4 @@
-# run_pilot.py and make_mock.py need nothing beyond the standard library (plus numpy
+# experiments/run_pilot.py and make_mock.py need nothing beyond the standard library (plus numpy
 # for the mock generator). analyze.py needs numpy.
 #
 # Deliberately minimal: contributors must be able to reproduce a round without a

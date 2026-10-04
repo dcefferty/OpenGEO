@@ -19,7 +19,7 @@ import re
 
 import build_findings as bf
 
-HERE = bf.HERE
+ROOT = bf.ROOT
 esc, fmt = bf.esc, bf.fmt
 
 
@@ -78,10 +78,10 @@ def load_example(L):
     """The worked examples as tested: texts from the corpus, answers and counts from the
     raw runs, deduplicated by run key the way analyze.py reads them."""
     ex = L["story"]["example"]
-    corpus = json.loads((HERE / ex["corpus"]).read_text())
+    corpus = json.loads((ROOT / ex["corpus"]).read_text())
     want = {c["prompt_id"] for c in ex["cases"]}
     rows = {}
-    with open(HERE / ex["runs"]) as fh:
+    with open(ROOT / ex["runs"]) as fh:
         for line in fh:
             if not any(f'"{pid}"' in line for pid in want):
                 continue
@@ -231,7 +231,7 @@ def pipeline(S, c):
 
 def demo(S, c):
     t = S["test"]
-    folder = HERE / t["demo"]
+    folder = ROOT / t["demo"]
     report = (folder / "report.md").read_text()
     m = re.search(r"^\*\*(.+?)\*\* — (.+?)\.$", report, re.M)
     verdict = f"{m.group(1)} — {m.group(2)}" if m else ""

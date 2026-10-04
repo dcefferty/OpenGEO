@@ -25,8 +25,8 @@ and it says nothing certain about theirs. That gap is exactly what `opengeo test
 
 ## The findings
 
-As of 2026-09-26. The authority is `results/findings.json` and the reports in
-`results/published/` at the repository root; if they differ from this summary, they win.
+As of 2026-09-26. The authority is `experiments/results/findings.json` and the reports in
+`experiments/results/published/`; if they differ from this summary, they win.
 
 "Points" are percentage points of citation rate: how much more often, out of every 100
 answers, the page was cited.
@@ -99,8 +99,8 @@ Say these whenever they bear on what the user is trying to decide:
   own commercial questions, which is one of the best reasons to run it.
 - **It used each engine's API**, which is not identical to what a person sees in the app.
   Each engine is one model standing in for its app: "ChatGPT" is OpenAI's gpt-5.4-mini,
-  "Claude" is Claude Haiku 4.5, and so on (`engine_weights.py` at the repository root has
-  the full panel). When someone cares about one engine specifically, name its model.
+  "Claude" is Claude Haiku 4.5, and so on (`experiments/engine_weights.py` has the full
+  panel). When someone cares about one engine specifically, name its model.
 - **Five engines: ChatGPT, Gemini, Claude, DeepSeek and Grok**, together about 99% of
   measured AI-assistant traffic. **Perplexity is not among them and cannot be.** It runs its
   own live web search and ignores documents handed to it, so it can't be tested this way at

@@ -2,7 +2,7 @@
 
 Where this project is going, and where it has been. The technical spec is
 `METHODOLOGY.md`; the findings themselves are on the published page and in
-`results/findings.json`.
+`experiments/results/findings.json`.
 
 Open items state an acceptance criterion so they can be picked up cold. Completed items
 are kept at their original numbers, because published reports and pre-registrations cite
@@ -39,7 +39,7 @@ results can be checked. A funded vendor cannot credibly occupy that position.
 
 ### 8. Calibration study — v1 done, three gaps open
 v1 measured API vs logged-out UI for one engine: divergence 0.368, 95% CI [0.139, 0.625]
-(`results/published/2026-08-30-calibration-v1/REPORT.md`). Still open:
+(`experiments/results/published/2026-08-30-calibration-v1/REPORT.md`). Still open:
 
 - **Logged-in UI plane.** Needs real personal accounts; deliberately deferred.
 - **More engines.** v1 covered OpenAI only. Perplexity's logged-out UI blocks search behind
@@ -62,10 +62,10 @@ donor sites. This is a partnerships problem before it is a code problem.
 Contamination defence. Publish only aggregate results from the private half; rotate a
 fraction of public prompts each round. Protocol in `METHODOLOGY.md` §10.1.
 
-**Structure in place 2026-09-20**, split still empty. `private/` is gitignored,
-`private/MANIFEST.json` records the split, and `check_private.py` fails the build if any
-private prompt_id appears in a tracked file **or in any commit message** — a question leaks
-by being mentioned at least as easily as by being committed.
+**Structure in place 2026-09-20**, split still empty. `experiments/private/` is gitignored,
+`experiments/private/MANIFEST.json` records the split, and `check_private.py` fails the
+build if any private prompt_id appears in a tracked file **or in any commit message** — a
+question leaks by being mentioned at least as easily as by being committed.
 
 **Correction to an earlier plan.** This item was previously treated as a gate that had to
 clear before the repository could go public. That was wrong in one direction and right in
@@ -101,9 +101,10 @@ Completed table.
 
 ### 11. Make tactics rankable — closed in Tier 1, 2026-09-20
 *Closed negative in this design and published as the Tier 1 scope report
-(`results/published/2026-09-20-tier1-scope/REPORT.md`), which is the "presentation" entry
-on the findings page. The acceptance below was not met; ranking presentation tactics moves
-to Tier 2 (item 9), where retrieval is not held constant. The history follows.*
+(`experiments/results/published/2026-09-20-tier1-scope/REPORT.md`), which is the
+"presentation" entry on the findings page. The acceptance below was not met; ranking
+presentation tactics moves to Tier 2 (item 9), where retrieval is not held constant. The
+history follows.*
 
 **The largest open research item.** The current corpus proves *specific facts beat no
 facts*, decisively, on every engine — but its treatment arm sits at CPR 0.9981. Statistics,
@@ -122,7 +123,7 @@ that has gone wrong so far.
 
 **Feasibility probed 2026-09-12/13, three times.** Real US federal text (public domain,
 so no CC-BY-SA conflict) can reach the regime. Full numbers:
-`results/probes/2026-09-12-realtext-feasibility.md`.
+`experiments/results/probes/2026-09-12-realtext-feasibility.md`.
 
 - **The lever is how many documents ANSWER, not how many candidates there are.** Probe 3
   held candidates at ten and varied only the answering count (5 → 9): the five answering
@@ -147,9 +148,9 @@ so no CC-BY-SA conflict) can reach the regime. Full numbers:
   described as verbatim federal text; an audit found 2 of 25 were — the rest had
   authored sentences or edits, one of which changed a claim's meaning. The mechanism
   findings are likely unaffected, but a published corpus cannot attribute words to an
-  agency that did not write them. `corpus/sources.py` snapshots each source page and
-  rejects any excerpt that is not a contiguous run of it; the corpus build fails on a
-  miss rather than warning.
+  agency that did not write them. `experiments/corpus/sources.py` snapshots each source
+  page and rejects any excerpt that is not a contiguous run of it; the corpus build fails
+  on a miss rather than warning.
 - **Sourcing enough answering documents is the real cost.** A heavily-covered topic
   yielded 9; another yielded 5. Several agency sites block automated fetching.
 
@@ -215,9 +216,9 @@ confound the tactic contrast -- it only moves the baseline, which the re-screen 
 **Four fact-preserving tactics moved nothing, at three questions (2026-09-19).** The
 first test of the *intervention* rather than the corpus: 1,800 calls, 0 errors, four
 tactics against a screened control on three questions
-(`results/probes/2026-09-19-tactic-pilot.md`, design committed before collection).
-`answer_first` -0.019, `faq` -0.005, `attributed` +0.017, `citation` +0.010; every
-Holm-corrected p is 1.000 and the largest odds ratio is 1.05, CI [0.77, 1.43]. The
+(`experiments/results/probes/2026-09-19-tactic-pilot.md`, design committed before
+collection). `answer_first` -0.019, `faq` -0.005, `attributed` +0.017, `citation` +0.010;
+every Holm-corrected p is 1.000 and the largest odds ratio is 1.05, CI [0.77, 1.43]. The
 committed reading for that outcome is **inconclusive -- widen the pilot before sizing the
 round**, and that stands.
 
@@ -247,9 +248,9 @@ fact-preserving presentation changes do not move citation, and only adding facts
 Every document in three already-held-out questions was rebuilt as a 252-345 word page
 section instead of a 12-104 word snippet -- closer to what an answer engine actually
 synthesises from -- and screened
-(`results/probes/2026-09-20-pagelength-screen.md`, design committed before collection).
-**1 of 3 questions kept a usable target, against 3 of 3 as snippets**, which is the
-committed SATURATES branch. Unpinned cells went 34% to 31%.
+(`experiments/results/probes/2026-09-20-pagelength-screen.md`, design committed before
+collection). **1 of 3 questions kept a usable target, against 3 of 3 as snippets**, which
+is the committed SATURATES branch. Unpinned cells went 34% to 31%.
 
 The hypothesised mechanism did not fire: page length was meant to work by making engines
 cite fewer documents per answer, and cites per answer held at 4.68 to 4.84. What happened
@@ -307,19 +308,19 @@ it rests on.
 
 | # | Item | Outcome | Records |
 |---|---|---|---|
-| 1 | Length-matched corpus v0.2 | 12 target pairs within ±3 words; sha `491dad19cb3cd9b0` | `corpus/build_corpus.py` |
-| 2 | Pre-register the pilot | H1–H5, corpus hash, 8 models, 24 runs/cell, analysis plan, stopping rule | `preregistrations/2026-08-pilot.md` |
+| 1 | Length-matched corpus v0.2 | 12 target pairs within ±3 words; sha `491dad19cb3cd9b0` | `experiments/corpus/build_corpus.py` |
+| 2 | Pre-register the pilot | H1–H5, corpus hash, 8 models, 24 runs/cell, analysis plan, stopping rule | `experiments/preregistrations/2026-08-pilot.md` |
 | 3 | First real run | 4,608 calls, 0 errors. **H4 null** (+0.001, CI includes zero) — diagnosed as a control-arm ceiling, not a true null. `kimi-k2` excluded for a 34.4% no-cite rate | same pre-registration's deviations |
-| 4 | Fidelity metrics (Group C) | `judge_fidelity.py`. A 500-item pilot suggested a large effect; it did **not** replicate at 11,657 items under paired analysis. Confirmed null by two different-vendor judges | `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
+| 4 | Fidelity metrics (Group C) | `judge_fidelity.py`. A 500-item pilot suggested a large effect; it did **not** replicate at 11,657 items under paired analysis. Confirmed null by two different-vendor judges | `experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md` |
 | 5 | Power analysis | `size_round1.py`. Found the spec's own Beta(1.2,3) prior was wrong by ~2.5× in power terms, and that **baseline placement dominates sample size** | `METHODOLOGY.md` §5.2 |
-| 5b | Ceiling-fix corpus (v0.3) | Rewrote 12 prompts so controls share no topical surface with the answer. **H4 +0.493, CI [+0.352, +0.641], p=0.0005** | `results/runs_v0.3.jsonl` |
-| 6 | Scale-up (corpus v0.4) | 48 prompts, 18,432 calls. **H4 +0.482, CI [+0.404, +0.563], p<0.0001**, significant for all 8 models. Not pre-registered, so published as exploratory rather than claimed as Round 1 | `results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md` |
+| 5b | Ceiling-fix corpus (v0.3) | Rewrote 12 prompts so controls share no topical surface with the answer. **H4 +0.493, CI [+0.352, +0.641], p=0.0005** | `experiments/results/runs_v0.3.jsonl` |
+| 6 | Scale-up (corpus v0.4) | 48 prompts, 18,432 calls. **H4 +0.482, CI [+0.404, +0.563], p<0.0001**, significant for all 8 models. Not pre-registered, so published as exploratory rather than claimed as Round 1 | `experiments/results/published/2026-08-25-corpus-v0.4-exploratory/REPORT.md` |
 | 7 | Publish the v0.4 round | Full H1–H5 results including the H3 null, variance decomposition, limitations, reproduction steps | same report |
-| 7b | Keyword stuffing (H6) — the citable Round 1 | Pre-registered before collection; took three corpus designs. **H6 falsified: +0.038, CI [+0.004, +0.075], p=0.045.** Stuffing slightly *increases* citation, and Group C shows it does so without lower fidelity | `preregistrations/2026-08-kwstuff-v3.md`, `results/published/2026-08-29-kwstuff-v3/REPORT.md` |
-| 8 (v1) | Calibration study v1 | **Divergence 0.368, CI [0.139, 0.625].** On 3 of 12 questions the API cited nothing where the logged-out UI cited real sources | `results/published/2026-08-30-calibration-v1/REPORT.md` |
-| 10 | Held-out private split | Twelve questions, screened, format-balanced, never published. Pooled control CPR 0.515 vs the public corpus's 0.503. **H4 replicates on the held-out half: +0.441, CI [+0.324, +0.560]**, and η² for the public/private term is 0.0001 against 0.2795 for the intervention. Banks the pre-publication baseline a contamination test needs | `preregistrations/2026-09-contamination.md`, `results/published/2026-09-22-public-private/REPORT.md` |
-| 11 | Make tactics rankable (Tier 1) | **Closed negative.** Four fact-preserving presentation tactics pooled +0.001, CI [−0.036, +0.034], at 3 questions — an estimate, not an effect size. The gradeable middle a ranking needs is an artefact of truncated documents, so presentation tactics belong to Tier 2 | `results/published/2026-09-20-tier1-scope/REPORT.md` |
-| 12 | Length-only round (H7) | **H7 not falsified: pooled +0.004, CI [−0.023, +0.031], p=0.73** (share-weighted, 5 engines). But three engines cite padded pages *less*, two significantly after correction, and an **unweighted** pool would have falsified H7 at −0.023, CI [−0.042, −0.005] — the headline turns on a documented weighting parameter | `results/published/2026-09-11-lengthonly/REPORT.md` |
+| 7b | Keyword stuffing (H6) — the citable Round 1 | Pre-registered before collection; took three corpus designs. **H6 falsified: +0.038, CI [+0.004, +0.075], p=0.045.** Stuffing slightly *increases* citation, and Group C shows it does so without lower fidelity | `experiments/preregistrations/2026-08-kwstuff-v3.md`, `experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md` |
+| 8 (v1) | Calibration study v1 | **Divergence 0.368, CI [0.139, 0.625].** On 3 of 12 questions the API cited nothing where the logged-out UI cited real sources | `experiments/results/published/2026-08-30-calibration-v1/REPORT.md` |
+| 10 | Held-out private split | Twelve questions, screened, format-balanced, never published. Pooled control CPR 0.515 vs the public corpus's 0.503. **H4 replicates on the held-out half: +0.441, CI [+0.324, +0.560]**, and η² for the public/private term is 0.0001 against 0.2795 for the intervention. Banks the pre-publication baseline a contamination test needs | `experiments/preregistrations/2026-09-contamination.md`, `experiments/results/published/2026-09-22-public-private/REPORT.md` |
+| 11 | Make tactics rankable (Tier 1) | **Closed negative.** Four fact-preserving presentation tactics pooled +0.001, CI [−0.036, +0.034], at 3 questions — an estimate, not an effect size. The gradeable middle a ranking needs is an artefact of truncated documents, so presentation tactics belong to Tier 2 | `experiments/results/published/2026-09-20-tier1-scope/REPORT.md` |
+| 12 | Length-only round (H7) | **H7 not falsified: pooled +0.004, CI [−0.023, +0.031], p=0.73** (share-weighted, 5 engines). But three engines cite padded pages *less*, two significantly after correction, and an **unweighted** pool would have falsified H7 at −0.023, CI [−0.042, −0.005] — the headline turns on a documented weighting parameter | `experiments/results/published/2026-09-11-lengthonly/REPORT.md` |
 
 Two notes for anyone following a citation into this file:
 
@@ -372,9 +373,13 @@ Done:
 - [x] `CONTRIBUTING.md` — reproduction steps, the non-negotiable design rules, and what
       adding a round requires.
 - [x] Repository description and topics.
-- [x] `.gitignore` pins `private/` and `.claude/settings.local.json`; the latter
+- [x] `.gitignore` pins `experiments/private/` and `.claude/settings.local.json`; the latter
       accumulates literal shell commands from approved tool calls and has held an API key
       inline, protected until now only by a machine-local global ignore.
+- [x] Tidy the root for a first-time visitor. Done 2026-10-04: the benchmark's scripts,
+      corpora, pre-registrations and results moved into `experiments/` with their layout
+      inside unchanged, so commands in earlier reports still work from there (README,
+      "Where things moved").
 
 To do **at launch, in one go** — these are coupled and a half-done launch looks worse than
 none:
@@ -382,7 +387,7 @@ none:
 - [x] `python3 check_private.py` — must pass. Once public, a leaked private prompt_id
       cannot be un-leaked.
 - [x] Drop "Draft" from both pages: `page.eyebrow`, `page.footer`, `story.eyebrow` and
-      `story.footer` in `results/findings.json`.
+      `story.footer` in `experiments/results/findings.json`.
 - [x] Check that no business name in the skill's eval fixtures
       (`.claude/skills/opengeo/evals/fixtures/`) belongs to a real business; they are
       written as fictional and some make claims about the business. Done 2026-10-01: two
@@ -397,11 +402,11 @@ none:
 - [ ] Set the homepage URL to the Pages site **after** Pages is live, not before — a
       repository whose homepage 404s is a bad first impression.
 - [x] Decide whether the Tier 1 scope report
-      (`results/published/2026-09-20-tier1-scope/REPORT.md`) gets a `findings.json` entry
-      and a place on the page. It is the most contrarian result the project has; it is
-      also probe-level, so its ledger entry must not present an effect size. Done: it is
-      the "presentation" entry, reported as an interval and labelled as not a published
-      effect size.
+      (`experiments/results/published/2026-09-20-tier1-scope/REPORT.md`) gets a
+      `findings.json` entry and a place on the page. It is the most contrarian result the
+      project has; it is also probe-level, so its ledger entry must not present an effect
+      size. Done: it is the "presentation" entry, reported as an interval and labelled as
+      not a published effect size.
 
 Not blocking, and deliberately so:
 

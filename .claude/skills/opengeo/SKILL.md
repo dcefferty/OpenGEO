@@ -191,5 +191,6 @@ At the root of the OpenGEO repository:
 
 - `opengeo.py` — the tool; `python3 opengeo.py test --help` lists every option
 - `design/opengeo-test.md` — every default and the evidence behind it
-- `results/findings.json` and `results/published/` — the published evidence, and the
-  authority whenever it differs from the summary in `references/evidence.md`
+- `experiments/results/findings.json` and `experiments/results/published/` — the published
+  evidence, and the authority whenever it differs from the summary in
+  `references/evidence.md`

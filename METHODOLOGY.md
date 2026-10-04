@@ -107,8 +107,9 @@ collection is acceptable because n is small and the study runs periodically.
 
 **Engine panel.** Engines are selected and ordered by measured market share rather than
 convenience, so the panel matches the engines readers actually use; the shares, their
-source and their caveats live in `engine_weights.py`. Pooled figures for a round with an
-uneven panel are reported share-weighted, with per-engine results remaining primary.
+source and their caveats live in `experiments/engine_weights.py`. Pooled figures for a
+round with an uneven panel are reported share-weighted, with per-engine results remaining
+primary.
 
 Two constraints discovered by running this:
 
@@ -141,7 +142,7 @@ pooled rule discards it.
 The threshold is **10% on the answering arm**. This was found when a round excluded an
 engine at 19.3% pooled whose split was 38.5% on control and **0.0%** on treatment, spread
 across the corpus rather than caused by one question
-(`results/published/2026-09-22-public-private/REPORT.md`).
+(`experiments/results/published/2026-09-22-public-private/REPORT.md`).
 
 **The revision changes no published exclusion.** Checked across every round with a
 fact-bearing arm: `kimi-k2` exceeds 10% on the answering arm in all three rounds it
@@ -327,7 +328,8 @@ wrong. The first pilot's real control CPR averaged 0.867, with 67% of (prompt, m
 cells at a literal 100% ceiling, which collapses achievable power — 0.34 rather than 0.87
 for OR=1.3 at identical size. **Baseline placement dominates sample size.** A corpus whose
 control arm sits in a sensitive 30–70% band is worth more than twice the calls. Size a
-round with `size_round1.py`, which resamples measured cells rather than assuming a prior.
+round with `experiments/size_round1.py`, which resamples measured cells rather than
+assuming a prior.
 
 **Pairing is most of the power.** At identical budget (50 prompts × 20 runs, OR 1.5):
 paired 0.95, unpaired 0.32. Any study comparing treated pages against a *different* set of
@@ -341,10 +343,10 @@ defensible; "adding statistics will get *your page* cited" is not.
 ### 5.3 Pre-registration
 
 Each round publishes hypotheses, corpus hash, interventions, primary metric, analysis plan
-and stopping rule **before collection**, as a timestamped file in `preregistrations/`. The
-git timestamp is the evidence. It is the strongest credibility signal available in a field
-where every published number comes from someone selling something, and it protects against
-the garden of forking paths.
+and stopping rule **before collection**, as a timestamped file in
+`experiments/preregistrations/`. The git timestamp is the evidence. It is the strongest
+credibility signal available in a field where every published number comes from someone
+selling something, and it protects against the garden of forking paths.
 
 Three rules that follow from rounds that went wrong:
 
@@ -525,8 +527,9 @@ pre-registration says so before the data exists.
 downloadable is the differentiator over every commercial competitor.
 
 **The public findings page is generated from a ledger**, never hand-edited — see
-`results/findings.json` and `build_findings.py`. Every figure on it cites the committed
-report it comes from, and prose claims carry assertions the build checks against the data.
+`experiments/results/findings.json` and `experiments/build_findings.py`. Every figure on
+it cites the committed report it comes from, and prose claims carry assertions the build
+checks against the data.
 
 **Licence:** code MIT; data and results CC-BY-4.0, so vendors can cite the numbers with
 attribution.
@@ -542,8 +545,8 @@ contamination or of the corpus having been fitted.
 The split is a *check on* the public numbers, not a source of headline ones. Nothing is
 ever claimed from the private half alone, because nobody can verify it.
 
-**It lives outside the repository, under a gitignored `private/`.** This is not a
-preference. Git history is permanent, and in this project the history *is* the
+**It lives outside the repository, under a gitignored `experiments/private/`.** This is not
+a preference. Git history is permanent, and in this project the history *is* the
 pre-registration evidence — the timestamp on a committed pre-registration is what proves it
 preceded its data. A private question committed once cannot be made private again without
 rewriting that history, and that evidence is not tradeable. So the rule is absolute:
@@ -554,9 +557,9 @@ Two consequences follow, and both are easy to get wrong:
 
 - **A question leaks by being mentioned, not just by being committed.** A prompt_id in a
   roadmap note, a pre-registration, a probe write-up or a commit message burns that
-  question as thoroughly as committing its corpus would. `check_private.py` checks tracked
-  files *and* every commit message, and must pass before any publication and before the
-  repository is made public.
+  question as thoroughly as committing its corpus would. `experiments/check_private.py`
+  checks tracked files *and* every commit message, and must pass before any publication
+  and before the repository is made public.
 - **The split must be sourced fresh.** It cannot be assembled by holding back part of an
   existing corpus after the fact.
 

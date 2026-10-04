@@ -71,15 +71,20 @@ The current results live in one place, generated from a ledger so they can't dri
 - **`docs/index.html`** — the overview: what was tested, what moved citation, how sure we
   are and where it stops, in plain language. Served by GitHub Pages once this repo is public.
 - **`docs/findings.html`** — every finding in full, with per-engine charts and intervals.
-- **`results/published/`** — the full report for each round, including the nulls.
-- **`results/findings.json`** — the machine-readable ledger both pages are built from.
+- **`experiments/results/published/`** — the full report for each round, including the
+  nulls.
+- **`experiments/results/findings.json`** — the machine-readable ledger both pages are
+  built from.
 
 No figures are written into this README on purpose: every number in the project has exactly
 one source, and duplicating them here is how documentation starts lying.
 
 ## Quick start
 
+The benchmark lives in `experiments/`, and its commands run from there:
+
 ```bash
+cd experiments
 python3 corpus/build_corpus.py                   # regenerate the corpus + balance checks
 python3 run_pilot.py --dry-run                   # cost estimate, no API calls
 
@@ -105,19 +110,12 @@ Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
 | `METHODOLOGY.md` | The standard: two-tier design, the metric set, sampling and statistics, corpus construction rules, provenance schema |
 | `ROADMAP.md` | Open work, completed rounds, positioning, kill criteria |
 | `CLAUDE.md` / `AGENTS.md` | Rules for coding agents working in the repo (`AGENTS.md` is a symlink) |
-| `corpus/` | Document text lives in the builders; the JSON corpora are generated and hashed |
-| `preregistrations/` | One file per round, committed **before** collection. The git timestamp is the evidence |
-| `results/` | Raw responses, the findings ledger, and published reports |
-| `docs/` | The generated public pages: the overview (`index.html`) and the findings (`findings.html`) |
-| `run_pilot.py` | Tier 1 runner: resumable, logs full provenance per call |
-| `analyze.py` | Metrics and hypothesis tests — permutation and bootstrap only |
-| `judge_fidelity.py`, `fidelity_baseline.py` | Group C fidelity judging and its baseline |
-| `calibration_api.py`, `calibration_prompts.py` | Calibration study, API plane |
-| `build_findings.py`, `build_story.py` | Build both public pages, and the chart above, from the ledger (`design/story-page.md`) |
-| `size_round1.py`, `make_mock.py`, `check_variants.py`, `engine_weights.py` | Power sizing, synthetic validation, corpus checks, engine panel |
-| `opengeo.py` | `opengeo test`: run a paired experiment on your own page against your competitors (`design/opengeo-test.md`) |
 | `CONTRIBUTING.md` | How to reproduce a round, the rules that are not negotiable, and what adding a round requires |
-| `check_private.py` | Leak check for the held-out private split — must pass before any publication (`METHODOLOGY.md` §10.1) |
+| `experiments/` | The benchmark: corpora, pre-registrations, raw results, published reports, and the scripts that run, analyse and publish each round. [Its README](experiments/README.md) maps every file |
+| `docs/` | The generated public pages: the overview (`index.html`) and the findings (`findings.html`) |
+| `opengeo.py` | `opengeo test`: run a paired experiment on your own page against your competitors (`design/opengeo-test.md`) |
+| `.claude/skills/opengeo/` | The Claude skill that runs `opengeo test` for you (`.agents/skills/opengeo` points to it, for Codex) |
+| `design/` | Design records for `opengeo test` and the overview page |
 
 ## How a round works
 
@@ -128,9 +126,10 @@ Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
    This is a go/no-go gate on the design, never a peek at the result.
 4. **Run it** to completion. No interim analysis.
 5. **Analyse and publish**, whichever direction it went, then add the round to
-   `results/findings.json` and rebuild the page:
+   `experiments/results/findings.json` and rebuild the page:
 
 ```bash
+cd experiments
 python3 build_findings.py --check                # validate the ledger
 python3 build_findings.py                        # regenerate both pages and the README chart
 ```
@@ -157,6 +156,13 @@ previous locations:
 
 `METHODOLOGY.md` §1–§8 keep their numbering, so every other section citation still resolves.
 
+In October 2026 the benchmark moved from the repository root into `experiments/`, with its
+layout inside unchanged: `corpus/`, `preregistrations/`, `results/` and the scripts sit at
+the same paths relative to one another. Commands in earlier pre-registrations and reports
+work as written when run from inside `experiments/`, and their links still resolve. To see
+when a pre-registration was committed, follow it across the move:
+`git log --follow experiments/preregistrations/<file>`.
+
 ## Licence and citation
 
 Code MIT (`LICENSE`). Data and results CC BY 4.0 (`LICENSE-DATA`) — cite the numbers,
@@ -166,5 +172,5 @@ Corpus documents are excerpts of US federal works, which carry no US copyright
 (17 U.S.C. § 105); each records its agency, source URL and rights basis.
 
 `CITATION.cff` has the preferred citation. When you are quoting a specific number, cite
-the round's dated report under `results/published/`, not just the repository — the
-repository changes, a published round does not.
+the round's dated report under `experiments/results/published/`, not just the
+repository — the repository changes, a published round does not.

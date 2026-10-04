@@ -54,11 +54,11 @@ choices can be checked.
 
 | Default | Value | Evidence |
 |---|---|---|
-| Runs per version | **24, fixed** | Detecting a *difference* is what this tool does, and the split-half reliability of a difference is 0.21 at 10 runs and 0.75 at 24 — measured by **simulation** on data with a planted effect, the basis of the 24-run rule in `CLAUDE.md`. On real runs the citation rate itself is reliable at 24, Spearman-Brown 0.92–0.96 on every model (`results/published/2026-08-29-kwstuff-v3/REPORT.md`) |
+| Runs per version | **24, fixed** | Detecting a *difference* is what this tool does, and the split-half reliability of a difference is 0.21 at 10 runs and 0.75 at 24 — measured by **simulation** on data with a planted effect, the basis of the 24-run rule in `CLAUDE.md`. On real runs the citation rate itself is reliable at 24, Spearman-Brown 0.92–0.96 on every model (`experiments/results/published/2026-08-29-kwstuff-v3/REPORT.md`) |
 | Temperature | **1.0, fixed** | Measures the answers a real user sees; lowering it measures a different, more stable system |
 | Document order | **Random per run, seeded** | Position affects citation enough that the position-sensitivity index is estimable; a fixed order would bias every result |
 | Design | **Paired**: only your page changes between versions | About 3× the statistical power of an unpaired comparison at identical cost (0.95 vs 0.32) |
-| Engines | **The five-engine market panel**, fixed | Chosen and weighted by measured market share, 98.9% of assistant traffic (`engine_weights.py`) |
+| Engines | **The five-engine market panel**, fixed | Chosen and weighted by measured market share, 98.9% of assistant traffic (`experiments/engine_weights.py`) |
 | Length of your edit | **Within ±3 words**, blocks by default | §9. Relaxable with `--allow-length-change` — see below |
 | Your current page | **Must not already be cited almost always** | §9's ceiling rule, which records three distinct ways a baseline ends up at the ceiling, each found only by testing against real models |
 | Your edited page | **Flagged at the ceiling if cited every time** | Public/private round: a saturated arm caps what any scale can express (§9). The output says the edit got the page cited every time against these competitors, and that it can't show how the edit would do against stronger ones (changed in 0.2.0) |
@@ -170,12 +170,12 @@ Almost all of it already exists and has been exercised on published rounds:
 
 | Needed | Reused from |
 |---|---|
-| Model calls, citation parsing, run keys, order seeding | `run_pilot.py` |
-| Fetching and slicing pages | `corpus/sources.py` |
-| Length and numeral checks | `check_variants.py` |
-| Intervals, permutation tests | `analyze.py` |
-| Incomplete-cell and abstention guardrails | `analyze.py` |
-| Engine panel and weights | `engine_weights.py` |
+| Model calls, citation parsing, run keys, order seeding | `experiments/run_pilot.py` |
+| Fetching and slicing pages | `experiments/corpus/sources.py` |
+| Length and numeral checks | `experiments/check_variants.py` |
+| Intervals, permutation tests | `experiments/analyze.py` |
+| Incomplete-cell and abstention guardrails | `experiments/analyze.py` |
+| Engine panel and weights | `experiments/engine_weights.py` |
 
 New code: argument handling, the edit-region detection, corpus assembly for one test, the
 terminal and file output, and the chart. The runner stays standard-library only, per the
@@ -236,8 +236,9 @@ their competitors' included — and must never reach this repository by accident
   *Corrected 2026-09-26.* An earlier version of this paragraph compared against per-engine
   figures that were computed wrongly during validation. It reported ChatGPT as +0.79
   against +0.79 and a Grok discrepancy (0.17 against 0.46) that does not exist. The
-  published counts above come from `target_cited` in `results/runs_v0.4.jsonl`, the field
-  `analyze.py` uses, deduplicated by run key.
+  published counts above come from `target_cited` in
+  `experiments/results/runs_v0.4.jsonl`, the field `analyze.py` uses, deduplicated by run
+  key.
 - **No key in any output.** The results folder was searched for the key after a live run.
 
 ## Changes in 0.2.0 (2026-09-30)
