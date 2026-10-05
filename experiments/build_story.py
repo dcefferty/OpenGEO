@@ -14,8 +14,10 @@ Charts are HTML rather than SVG so their labels stay legible at phone width: pos
 are percentages of the plot, text is real text. Standard library only.
 """
 import base64
+import hashlib
 import json
 import re
+import textwrap
 
 import build_findings as bf
 
@@ -70,7 +72,7 @@ def prose(L):
             for k, v in o.items():
                 if k not in ("asserts", "cases", "corpus", "runs", "demo", "command", "links", "alias"):
                     yield from walk(v, f"{where}.{k}")
-    for sec in ("hero", "example", "all", "rest", "more", "readme", "limits", "test", "method"):
+    for sec in ("hero", "example", "all", "rest", "more", "readme", "preview", "limits", "test", "method"):
         yield from walk(S.get(sec, {}), f"story.{sec}")
 
 
@@ -251,6 +253,15 @@ SVG_THEMES = {
 }
 
 
+def split_label(label, width=32):
+    """A label too long for its column splits at the comma nearest its middle."""
+    if len(label) <= width or "," not in label:
+        return [label]
+    cuts = [i for i, ch in enumerate(label) if ch == ","]
+    k = min(cuts, key=lambda i: abs(i - len(label) / 2))
+    return [label[:k + 1], label[k + 1:].strip()]
+
+
 def effects_svg(L, mode):
     """The story's one-scale chart as a standalone SVG for the README, one per colour mode
     (GitHub picks with <picture>). An image can't load the page's fonts or variables, so
@@ -259,14 +270,7 @@ def effects_svg(L, mode):
     T = SVG_THEMES[mode]
     rows = [{**r, "pooled": A[r["alias"]]["data"]["pooled"]} for r in L["story"]["rest"]["rows"]]
 
-    def lines(label, width=32):
-        """A label too long for the column splits at the comma nearest its middle."""
-        if len(label) <= width or "," not in label:
-            return [label]
-        cuts = [i for i, ch in enumerate(label) if ch == ","]
-        k = min(cuts, key=lambda i: abs(i - len(label) / 2))
-        return [label[:k + 1], label[k + 1:].strip()]
-
+    lines = split_label
     W, LB, top, rowH = 760, 300, 58, 54
     heights = [rowH + 16 * (len(lines(r["label"])) - 1) for r in rows]
     lo, hi, PL, PR = -10, 60, LB + 14, W - 64
@@ -305,6 +309,67 @@ def effects_svg(L, mode):
                  f'fill="{T["ink"]}">{spts(P["delta"], nd)}</text>')
     o.append("</svg>")
     return "\n".join(o) + "\n"
+
+
+# ------------------------------------------------------------------ the link preview
+PREVIEW_PNG = "docs/assets/preview.png"
+PREVIEW_SIZE = (1200, 630)
+PREVIEW_KEY = "opengeo-preview-sha256"
+
+
+def preview_svg(L):
+    """The image a shared link shows: the headline and the one-scale result, in type big
+    enough to read at the third of its size it is usually shown at. render_preview.py makes
+    the PNG from it; the PNG records this SVG's hash, so the build can tell when the ledger
+    has moved on without it."""
+    A, c = context(L)
+    S, T = L["story"], SVG_THEMES["light"]
+    W, H = PREVIEW_SIZE
+    serif = 'font-family="Instrument Serif, Georgia, serif"'
+    sans = 'font-family="Public Sans, Helvetica, Arial, sans-serif"'
+    mono = 'font-family="IBM Plex Mono, Menlo, monospace"'
+    rows = [{**r, "pooled": A[r["alias"]]["data"]["pooled"]} for r in S["rest"]["rows"]]
+    lo, hi, PL, PR = -10, 60, 580, 1060
+    x = lambda v: PL + (v * 100 - lo) / (hi - lo) * (PR - PL)
+
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
+         f'<rect width="{W}" height="{H}" fill="{T["bg"]}"/>']
+    y = 106
+    for ln in textwrap.wrap(S["headline"], 36):
+        o.append(f'<text x="64" y="{y}" {serif} font-size="54" fill="{T["ink"]}">{esc(ln)}</text>')
+        y += 60
+    o.append(f'<text x="64" y="{y - 14}" {sans} font-size="21" fill="{T["muted"]}">'
+             f'{esc(fmt(S["rest"]["caption"], c))}</text>')
+    top = y + 18
+    heights = [66 + 28 * (len(split_label(r["label"], 30)) - 1) for r in rows]
+    bottom = top + sum(heights)
+    if bottom > H - 78:
+        raise ValueError(f"link preview: the rows end at y={bottom}, past the footer")
+    o.append(f'<line x1="{x(0):.1f}" y1="{top - 4}" x2="{x(0):.1f}" y2="{bottom + 4}" '
+             f'stroke="{T["line2"]}" stroke-width="2"/>')
+    y0 = top
+    for r, h in zip(rows, heights):
+        P, y = r["pooled"], y0 + h / 2
+        y0 += h
+        col = T["accent"] if r.get("emphasis") else T["gray"]
+        nd = _nd(P["delta"])
+        ls = split_label(r["label"], 30)
+        ty = y + 9 - 16 * (len(ls) - 1)
+        label = "".join(f'<tspan x="64" dy="{0 if j == 0 else 32}">{esc(s)}</tspan>' for j, s in enumerate(ls))
+        o.append(f'<text x="64" y="{ty:.1f}" {sans} font-size="27" font-weight="600" fill="{T["ink"]}">{label}</text>'
+                 f'<line x1="{x(P["ci"][0]):.1f}" y1="{y:.1f}" x2="{x(P["ci"][1]):.1f}" y2="{y:.1f}" stroke="{col}" '
+                 f'stroke-width="5" stroke-linecap="round"/>'
+                 f'<circle cx="{x(P["delta"]):.1f}" cy="{y:.1f}" r="11" fill="{col}" stroke="{T["bg"]}" stroke-width="3"/>'
+                 f'<text x="{x(P["ci"][1]) + 18:.1f}" y="{y + 9:.1f}" {mono} font-size="26" font-weight="600" '
+                 f'fill="{T["ink"]}">{spts(P["delta"], nd)}</text>')
+    host = L["site"].split("://", 1)[-1].rstrip("/")
+    o.append(f'<text x="64" y="{H - 44}" {mono} font-size="22" fill="{T["muted"]}">OpenGEO · {esc(host)}</text>')
+    o.append("</svg>")
+    return "\n".join(o) + "\n"
+
+
+def preview_hash(L):
+    return hashlib.sha256(preview_svg(L).encode()).hexdigest()
 
 
 # ------------------------------------------------------------------ the README
@@ -484,6 +549,7 @@ def build(L, cases):
     return ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{esc(S["title"])}</title><meta name="description" content="{esc(S["description"])}">'
+            f'{bf.social_meta(L, S["title"], S["description"])}'
             f'{bf.FONTS}<style>{bf.CSS}{CSS}</style></head><body>{body}</body></html>\n')
 
 

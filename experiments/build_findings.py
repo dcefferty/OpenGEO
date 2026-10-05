@@ -107,6 +107,33 @@ def colour(delta, ci):
         return "var(--nil)"
     return "var(--pos)" if delta > 0 else "var(--neg)"
 
+def social_meta(L, title, description, path=""):
+    """What a shared link shows on LinkedIn, X, Slack and the rest: title, summary and the
+    preview image (build_story.preview_svg, rendered by render_preview.py)."""
+    import build_story
+    S, url = L["story"], L["site"] + path
+    tags = [("og:type", "website"), ("og:site_name", "OpenGEO"), ("og:title", title),
+            ("og:description", description), ("og:url", url),
+            ("og:image", L["site"] + build_story.PREVIEW_PNG.removeprefix("docs/")),
+            ("og:image:width", build_story.PREVIEW_SIZE[0]), ("og:image:height", build_story.PREVIEW_SIZE[1]),
+            ("og:image:alt", f'{S["headline"]} {S["preview"]["alt"]}')]
+    return ("".join(f'<meta property="{k}" content="{esc(v)}">' for k, v in tags)
+            + f'<meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="{esc(url)}">')
+
+
+def png_text(path, key):
+    """A tEXt value from a PNG, or None: the preview records the hash of the SVG it was made from."""
+    data, i = path.read_bytes(), 8
+    while i + 8 <= len(data):
+        n, kind = int.from_bytes(data[i:i + 4], "big"), data[i + 4:i + 8]
+        if kind == b"tEXt":
+            k, _, v = data[i + 8:i + 8 + n].partition(b"\0")
+            if k.decode("latin-1") == key:
+                return v.decode("latin-1")
+        i += 12 + n
+    return None
+
+
 def repo_url(L, path, tree=False):
     if not path:
         return L["repo"]
@@ -307,6 +334,10 @@ def validate(L, root):
     import build_story
     story_errors, _ = build_story.check(L)
     errors += story_errors
+    png = root / build_story.PREVIEW_PNG
+    if L.get("story") and (not png.exists() or png_text(png, build_story.PREVIEW_KEY) != build_story.preview_hash(L)):
+        warnings.append(f"{build_story.PREVIEW_PNG}, the image shared links show, does not match the "
+                        "ledger -- run python3 render_preview.py")
     allow = L["page"].get("literal_numbers", [])
     for where, s in list(prose(L)) + list(build_story.prose(L)):
         t = TAG.sub("", PLACEHOLDER.sub("", s))
@@ -580,6 +611,7 @@ def build(L, fragment=False):
     return ('<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{esc(pg["title"])}</title><meta name="description" content="{esc(pg["description"])}">'
+            f'{social_meta(L, pg["title"], pg["description"], "findings.html")}'
             f'{FONTS}<style>{CSS}</style></head><body>{content}</body></html>\n')
 
 

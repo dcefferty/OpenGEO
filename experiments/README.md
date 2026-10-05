@@ -36,6 +36,7 @@ including when each pre-registration was committed.
 | `judge_fidelity.py`, `fidelity_baseline.py` | Group C fidelity judging and its baseline |
 | `calibration_api.py`, `calibration_prompts.py` | Calibration study, API plane |
 | `build_findings.py`, `build_story.py` | Build the public pages in [`../docs/`](../docs/) and the README chart from `results/findings.json` |
+| `render_preview.py` | Draws the image a shared link shows, `../docs/assets/preview.png`, from the ledger. Needs Chrome; the build says when the image is out of date |
 | `check_private.py` | Leak check for the held-out private split — must pass before any publication (`METHODOLOGY.md` §10.1) |
 | `private/` | The held-out private split. Gitignored: it exists only on the machine that holds it |
 
