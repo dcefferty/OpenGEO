@@ -84,3 +84,10 @@ IBM Plex Mono figures; the paper and ochre tokens), with hero figures in the san
 The README rework: the GitHub landing page gets the story's first chart (light and dark
 SVGs via `<picture>`), the three findings in plain words with their confidence, "test your
 own page", and the limits, ahead of the existing repository map.
+
+2026-10-04: the README's findings now carry their numbers. Feedback on the README asked for
+the data there, as five to ten pieces of advice. The data supports seven findings, not
+advice, so the README shows those: a table of the four tested changes with effects,
+intervals and how strong the evidence is, the story's sentences on each, and its three
+findings on how engines behave. The build writes all of it from the ledger, reusing the
+story's text, so the README and the pages cannot disagree.
