@@ -1418,6 +1418,14 @@
         }
       ]
     },
+    "readme": {
+      "lead": "<b>Stating the specific answer</b> raised the share of answers citing the page by {s_facts_pts} points ({s_facts_ci}) across {facts_prompts} questions, and it went up on all {facts_n_models} models tested. Repeated, pre-registered, on {heldout_prompts} questions that have never been published anywhere, it was {s_heldout_pts} points ({s_heldout_ci}).",
+      "asserts": [
+        "facts:pooled_ci_excludes_zero",
+        "facts:all_models_ci_above_zero",
+        "heldout:pooled_ci_excludes_zero"
+      ]
+    },
     "limits": {
       "kicker": "Where it stops",
       "heading": "What this can't tell you",

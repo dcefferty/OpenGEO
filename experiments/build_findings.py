@@ -3,7 +3,8 @@
 OpenGEO -- build the public pages from the findings ledger.
 
     python3 build_findings.py                  # results/findings.json -> ../docs/index.html
-                                               #   (the story) and ../docs/findings.html
+                                               #   (the story) and ../docs/findings.html,
+                                               #   plus the findings in ../README.md
     python3 build_findings.py --check          # validate the ledger, write nothing
     python3 build_findings.py --fragment -o x  # findings page body only, for embedding
 
@@ -789,6 +790,8 @@ def main():
         for mode in ("light", "dark"):
             (assets / f"effects-{mode}.svg").write_text(build_story.effects_svg(L, mode))
         print(f"wrote {assets}/effects-{{light,dark}}.svg  (the README's chart)")
+        if build_story.write_readme(L, ROOT / "README.md"):
+            print("wrote README.md  (the findings section between its markers)")
     if n_rounds:
         print(f"wrote experiments/results/published/README.md  ({n_rounds} published rounds indexed)")
 

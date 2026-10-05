@@ -9,17 +9,36 @@ question many times, and measure whether they cite the page more.
   <img alt="What each tested change did to how often AI answers cited a page: stating the specific answer moved it far more than repeating the keyword, padding the page, or presentation tactics, which moved it little or not at all." src="docs/assets/effects-light.svg">
 </picture>
 
-**What it found, in plain words.** Every figure, with its interval, is on the
-[overview page](https://dcefferty.github.io/OpenGEO/), and in full on the [findings page](https://dcefferty.github.io/OpenGEO/findings.html).
+**What it found.** Each result comes from a published round. The
+[overview page](https://dcefferty.github.io/OpenGEO/) shows them per engine, and the
+[findings page](https://dcefferty.github.io/OpenGEO/findings.html) in full.
 
-- **Stating the specific answer** got pages cited far more often than talking around it.
-  It is the strongest result here, and it held on questions that have never been published.
-  How big the gain is depends on your competition.
-- **Repeating your keyword** helped a little. Pre-registered.
-- **Padding a page** with filler did nothing, and on some engines it cost citations.
-  Pre-registered.
-- **Answer-first order, FAQ headings, attribution and source citations** moved nothing we
-  could detect. That is early evidence, from a small probe.
+<!-- findings:start -->
+Change in the share of answers citing the page, in percentage points, with 95% intervals.
+
+| What changed | Effect | Evidence |
+|---|---|---|
+| **State the specific answer** | **+48 points** (+40 to +56) | Found twice · held on unpublished questions |
+| Repeat the keyword | +3.8 points (+0.4 to +7.5) | Pre-registered |
+| Double the length with filler | +0.4 points (−2.3 to +3.1) | Pre-registered |
+| Answer first, FAQ headings, attribution, citations | +0.1 points (−3.6 to +3.4) | Early probe · 3 questions |
+
+- **Stating the specific answer** raised the share of answers citing the page by +48 points (+40 to +56) across 48 questions, and it went up on all 8 models tested. Repeated, pre-registered, on 12 questions that have never been published anywhere, it was +47 points (+38 to +57).
+- **How big it is depends on your competition.** In these tests the before page didn't answer the question at all, and the after page was usually the only one that did, so it ended up cited almost every time. Against competitors that already state the answer, expect a smaller gain. The direction is solid; the size is specific to the setup.
+- **Repeating your keyword** helped a little: +3.8 points (+0.4 to +7.5), pre-registered. It's real, but about 13 times smaller than stating the answer.
+- **Padding a page** to twice its length with filler did nothing on average (+0.4 points, −2.3 to +3.1), and on some engines it cost citations.
+- **Presentation**, meaning answer-first order, FAQ-style headings, attributing claims and citing sources, moved citation by +0.1 points (−3.6 to +3.4). That comes from an early probe of 3 questions, so read it as nothing found yet, not proof that it never helps.
+- **FAQ schema**, the markup, was never tested, and this experiment can't test it: the engines here read a page's visible text, and markup doesn't carry into it.
+
+**Being cited isn't the whole story.**
+
+- **Engines sometimes credit you with things you didn't say.** When an answer cited a page, we checked each cited claim against the page. Between 13% and 20% of cited sentences said something the page doesn't support, depending on which model did the checking.
+- **Tools that check the API may undercount you.** On 3 of 12 everyday questions, OpenAI's API cited nothing while chatgpt.com cited real sources. Most citation trackers query the API.
+- **The engines largely agree.** Engines agree with each other about which pages deserve a citation about as closely as one engine agrees with itself on a re-run. A page that earns citations from one tends to earn them from the others.
+<!-- findings:end -->
+
+**Try one on your own page.** Any of these changes can be tested on your page, against your
+real competitors, with [`opengeo test`](#test-your-own-page).
 
 **Where it stops.** It measures the synthesis stage: what an engine does once it has your
 page, not whether it finds your page in the first place. Documents are handed to each
@@ -77,8 +96,9 @@ The current results live in one place, generated from a ledger so they can't dri
 - **`experiments/results/findings.json`** — the machine-readable ledger both pages are
   built from.
 
-No figures are written into this README on purpose: every number in the project has exactly
-one source, and duplicating them here is how documentation starts lying.
+Every number in the project has exactly one source, the ledger. The results at the top of
+this README are written into it by the same build that makes the pages, so they can't drift
+from them: to change one, change the ledger and rebuild.
 
 ## Quick start
 
@@ -132,7 +152,7 @@ Python 3.9+. The runner is standard library only; `numpy` is used for analysis.
 ```bash
 cd experiments
 python3 build_findings.py --check                # validate the ledger
-python3 build_findings.py                        # regenerate both pages and the README chart
+python3 build_findings.py                        # regenerate both pages and the README's chart and results
 ```
 
 The build refuses to publish a claim the data no longer supports, a round that carries

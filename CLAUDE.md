@@ -63,9 +63,10 @@ Changing any of these breaks the experiment. If a change seems to require it, st
   pre-registration, dated; never quietly edit what a round said it would do.
 - **The public page is generated, never edited.** A round is published by adding its entry
   to `experiments/results/findings.json` — every figure citing the round's committed
-  report — and running `build_findings.py`. Prose claims like "every model" carry named
-  assertions in the ledger; if new data breaks one, the build refuses. Fix the sentence,
-  not the assertion. In-progress rounds may not carry result data, by the same
+  report — and running `build_findings.py`, which also rewrites the README's results
+  between its `findings` markers; never edit inside them. Prose claims like "every model"
+  carry named assertions in the ledger; if new data breaks one, the build refuses. Fix the
+  sentence, not the assertion. In-progress rounds may not carry result data, by the same
   no-interim-analysis rule every pre-registration states.
 - **The root holds the tool and the project docs; the benchmark lives in `experiments/`.**
   New round code and data go there. Paths in its scripts, pre-registrations and reports are

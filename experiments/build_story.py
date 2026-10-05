@@ -70,7 +70,7 @@ def prose(L):
             for k, v in o.items():
                 if k not in ("asserts", "cases", "corpus", "runs", "demo", "command", "links", "alias"):
                     yield from walk(v, f"{where}.{k}")
-    for sec in ("hero", "example", "all", "rest", "more", "limits", "test", "method"):
+    for sec in ("hero", "example", "all", "rest", "more", "readme", "limits", "test", "method"):
         yield from walk(S.get(sec, {}), f"story.{sec}")
 
 
@@ -123,8 +123,8 @@ def check(L):
         return [], None
     errors = []
     A = {f["alias"]: f for f in L["findings"]}
-    for sec in ("all", "rest"):
-        for name in S[sec].get("asserts", []):
+    for sec in ("all", "rest", "readme"):
+        for name in S.get(sec, {}).get("asserts", []):
             alias, fn = name.split(":")
             if fn not in bf.ASSERTS:
                 errors.append(f"story.{sec}: unknown assertion '{fn}'")
@@ -305,6 +305,49 @@ def effects_svg(L, mode):
                  f'fill="{T["ink"]}">{spts(P["delta"], nd)}</text>')
     o.append("</svg>")
     return "\n".join(o) + "\n"
+
+
+# ------------------------------------------------------------------ the README
+README_MARKERS = ("<!-- findings:start -->", "<!-- findings:end -->")
+
+
+def md(s):
+    """The ledger's inline HTML, as markdown."""
+    return re.sub(r"</?code>", "`", re.sub(r"</?i>", "*", re.sub(r"</?b>", "**", s)))
+
+
+def readme_section(L):
+    """The README's findings, as markdown: the story's own rows and sentences, so the GitHub
+    page carries the numbers without a second copy of any of them to keep in step."""
+    S = L["story"]
+    A, c = context(L)
+    rest, more = S["rest"], S["more"]
+    out = [md(fmt(rest["caption"], c)), "",
+           "| What changed | Effect | Evidence |", "|---|---|---|"]
+    for r in rest["rows"]:
+        P = A[r["alias"]]["data"]["pooled"]
+        nd = _nd(P["delta"])
+        label, pts = r["label"], f"{spts(P['delta'], nd)} points"
+        if r.get("emphasis"):
+            label, pts = f"**{label}**", f"**{pts}**"
+        out.append(f"| {label} | {pts} ({sci(P['ci'], nd)}) | {fmt(r['tag'], c)} |")
+    out.append("")
+    out += [f"- {md(fmt(s, c))}" for s in [S["readme"]["lead"], S["all"]["caveat"], *rest["after"]]]
+    out += ["", f"**{more['heading']}.**", ""]
+    out += [f"- **{k['title']}.** {md(fmt(k['text'], c))}" for k in more["cards"]]
+    return "\n".join(out)
+
+
+def write_readme(L, path):
+    """Replace the README's findings section, between its markers, with the current one."""
+    text = path.read_text()
+    start, end = README_MARKERS
+    if start not in text or end not in text:
+        return False
+    body = readme_section(L)
+    path.write_text(re.sub(re.escape(start) + r".*?" + re.escape(end),
+                           lambda m: f"{start}\n{body}\n{end}", text, flags=re.S))
+    return True
 
 
 # ------------------------------------------------------------------ the page
