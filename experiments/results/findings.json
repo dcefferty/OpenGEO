@@ -2,6 +2,7 @@
   "schema": "opengeo-findings/1",
   "updated": "2026-10-01",
   "repo": "https://github.com/dcefferty/OpenGEO",
+  "site": "https://dcefferty.github.io/OpenGEO/",
   "traffic_share": {
     "label": "Similarweb, August 2026",
     "source": "Similarweb Gen AI worldwide all-device website traffic share",
@@ -1425,6 +1426,9 @@
         "facts:all_models_ci_above_zero",
         "heldout:pooled_ci_excludes_zero"
       ]
+    },
+    "preview": {
+      "alt": "A chart of what each tested change did to how often AI answers cited a page: stating the specific answer moved it far more than repeating the keyword, padding the page, or presentation tactics, which moved it little or not at all."
     },
     "limits": {
       "kicker": "Where it stops",

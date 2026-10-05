@@ -91,3 +91,10 @@ advice, so the README shows those: a table of the four tested changes with effec
 intervals and how strong the evidence is, the story's sentences on each, and its three
 findings on how engines behave. The build writes all of it from the ledger, reusing the
 story's text, so the README and the pages cannot disagree.
+
+2026-10-04: link previews. Both pages carry Open Graph and Twitter-card tags, so a shared
+link shows the title, the summary and a preview image: the headline and the one-scale
+result, drawn from the ledger in type large enough to read when shown small.
+`render_preview.py` turns that drawing into the PNG the sites require, using headless
+Chrome, which the build itself does not depend on. The PNG records the hash of the drawing
+it was made from, so the build notes when a new round has made it out of date.

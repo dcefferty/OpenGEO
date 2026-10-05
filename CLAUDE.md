@@ -90,6 +90,7 @@ python3 analyze.py --runs results/mock.jsonl        # must recover them
 
 python3 build_findings.py --check                   # validate results/findings.json
 python3 build_findings.py                           # regenerate ../docs/index.html (overview) and ../docs/findings.html
+python3 render_preview.py                           # redraw the link-preview image when results change (needs Chrome)
 ```
 
 Needs `OPENROUTER_API_KEY`. Python 3.9+; numpy for analysis, stdlib only for the runner.
