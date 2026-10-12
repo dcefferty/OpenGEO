@@ -94,6 +94,8 @@ def main():
     dest = bf.ROOT / bs.PREVIEW_PNG
     dest.write_bytes(with_text(png, bs.PREVIEW_KEY, bs.preview_hash(L)))
     print(f"wrote {bs.PREVIEW_PNG}  ({W}x{H}, {len(png) // 1024} KB)")
+    print("GitHub keeps its own copy for links to the repository: upload this file again under "
+          "Settings > General > Social preview (there is no API for it).")
 
 
 if __name__ == "__main__":
