@@ -1,5 +1,7 @@
 # OpenGEO
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23330416.svg)](https://doi.org/10.5281/zenodo.23330416)
+
 **Most advice on getting cited by AI has never been tested. OpenGEO tests it.** It is an
 open, reproducible experiment: change one thing about a page, ask AI answer engines the same
 question many times, and measure whether they cite the page more.
@@ -192,6 +194,8 @@ quote them, build on them, with attribution.
 Corpus documents are excerpts of US federal works, which carry no US copyright
 (17 U.S.C. § 105); each records its agency, source URL and rights basis.
 
-`CITATION.cff` has the preferred citation. When you are quoting a specific number, cite
-the round's dated report under `experiments/results/published/`, not just the
-repository — the repository changes, a published round does not.
+`CITATION.cff` has the preferred citation, and every release is archived on Zenodo
+([DOI 10.5281/zenodo.23330416](https://doi.org/10.5281/zenodo.23330416), which always
+resolves to the latest version). When you are quoting a specific number, cite the round's
+dated report under `experiments/results/published/`, not just the repository — the
+repository changes, a published round does not.
