@@ -15,6 +15,7 @@ type: software
 authors:
   - given-names: Lu
     family-names: Yang
+doi: 10.5281/zenodo.23330416
 repository-code: "https://github.com/dcefferty/OpenGEO"
 url: "https://dcefferty.github.io/OpenGEO/"
 license: MIT
