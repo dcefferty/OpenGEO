@@ -30,6 +30,7 @@ import pathlib
 import random
 import re
 import sys
+import textwrap
 import threading
 import time
 import urllib.request
@@ -45,7 +46,7 @@ import engine_weights  # noqa: E402
 import run_pilot as rp  # noqa: E402
 import sources as src  # noqa: E402
 
-TOOL_VERSION = "0.2.0"
+TOOL_VERSION = "0.3.0"
 
 # ---------------------------------------------------------------------- defaults ----
 # Every value here is argued for in design/opengeo-test.md. The first group has no flag,
@@ -65,6 +66,48 @@ CONCURRENCY = 6
 
 class ToolError(Exception):
     """A problem with the inputs, explained in plain language. Printed, never traced."""
+
+
+# --------------------------------------------------------------------------- words ----
+# Chinese and Japanese are written without spaces, so splitting on whitespace would count a
+# whole paragraph as one word. Each of their characters counts as a word instead -- the
+# convention word processors use -- so every rule keeps its proportions: about three words
+# of change in a window of about eighty. Their punctuation separates words as a space does.
+# Anything else between spaces is one word, as before, so English is read, cut and counted
+# exactly as in 0.2.0.
+_CJK = "\u3005-\u3007\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f"
+_CJK_PUNCT = "\u3000-\u3004\u3008-\u303f\uff01-\uff0f\uff1a-\uff20\uff3b-\uff40\uff5b-\uff65"
+_WORD = re.compile(f"[{_CJK}]|[^\\s{_CJK}{_CJK_PUNCT}]+")
+_CJK_RUN = re.compile(f"[{_CJK}]+")
+_BRACKETS = "\u300c\u300e\uff08(\u3008\u300a\u3010\u3014["        # only ever open
+_OPENERS = "\"'\u201c\u2018" + _BRACKETS
+
+
+def _spans(text):
+    """Where each word starts and ends."""
+    return [m.span() for m in _WORD.finditer(text)]
+
+
+def _count(text):
+    return len(_WORD.findall(text))
+
+
+def _has_cjk(text):
+    return bool(_CJK_RUN.search(text))
+
+
+def _cut(text, spans, i, j):
+    """Words i to j-1 as written: the text's own spacing, the punctuation closing the last
+    word (such as 。 or 」), and a bracket or quote opening the first."""
+    if i >= j:
+        return ""
+    s, e = spans[i][0], spans[j - 1][1]
+    while s > 0 and text[s - 1] in _OPENERS:
+        s -= 1
+    while (e < len(text) and not text[e].isspace() and not _WORD.match(text, e)
+           and text[e] not in _BRACKETS):
+        e += 1
+    return text[s:e]
 
 
 # ------------------------------------------------------------------- reading pages ----
@@ -92,7 +135,7 @@ def _from_text(raw):
     title: the layout `fetch` writes, and the way a Markdown heading reads."""
     lines = raw.lstrip("﻿").split("\n")
     if (len(lines) > 2 and lines[0].strip() and not lines[1].strip()
-            and len(lines[0].split()) <= 20):
+            and _count(lines[0]) <= (40 if _has_cjk(lines[0]) else 20)):
         return src.norm(lines[0].strip().lstrip("#")), "\n".join(lines[2:])
     return "", raw
 
@@ -126,14 +169,15 @@ def read_source(ref):
         # user's home directory; the content hash below identifies the text exactly.
         prov = {"ref": p.name, "kind": "file"}
     text = src.norm(text)
-    if len(text.split()) < 20:
+    words = _count(text)
+    if words < 20:
         raise ToolError(
-            f"{ref} has almost no readable text ({len(text.split())} words).\n"
+            f"{ref} has almost no readable text ({words} words).\n"
             "  If it is a JavaScript-rendered page, save it from your browser and pass the "
             "saved file instead.")
     prov["title"] = title
     prov["sha256"] = hashlib.sha256(text.encode()).hexdigest()[:16]
-    prov["words"] = len(text.split())
+    prov["words"] = words
     return title, text, prov
 
 
@@ -154,10 +198,14 @@ def _split_title(text):
 
 # --------------------------------------------------------------------- edit region ----
 _SENTENCE_END = re.compile(r"[.!?][\"')\]]*$")
+_CJK_STOP_MARK = re.compile("[\"'\u201d\u2019\u300d\u300f\uff09)\\]]*[\u3002\uff01\uff1f]")
 
 
-def _ends_sentence(word):
-    return bool(_SENTENCE_END.search(word))
+def _ends_sentence(text, span):
+    """Whether the word at `span` closes a sentence: it ends in . ! or ? itself, as an
+    English word does, or a Chinese or Japanese full stop follows it."""
+    s, e = span
+    return bool(_SENTENCE_END.search(text[s:e]) or _CJK_STOP_MARK.match(text, e))
 
 
 def edit_region(original, edited, target=WINDOW_TARGET):
@@ -170,7 +218,8 @@ def edit_region(original, edited, target=WINDOW_TARGET):
     two excerpts differ in exactly your change and nothing else: that is what makes the
     comparison paired.
     """
-    a, b = original.split(), edited.split()
+    sa, sb = _spans(original), _spans(edited)
+    a, b = [original[s:e] for s, e in sa], [edited[s:e] for s, e in sb]
     changes = [op for op in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes()
                if op[0] != "equal"]
     if not changes:
@@ -188,20 +237,22 @@ def edit_region(original, edited, target=WINDOW_TARGET):
     if after > suffix:
         before, after = min(prefix, before + after - suffix), suffix
 
-    # widen to sentence boundaries, but only through shared context and only so far
+    # widen to sentence boundaries, but only through shared context and only so far: thirty
+    # words, or sixty characters of Chinese or Japanese, whose sentences run longer in them
+    reach = 60 if _has_cjk(original) else 30
     start = i1 - before
     k = 0
-    while start > 0 and k < 30 and not _ends_sentence(a[start - 1]):
+    while start > 0 and k < reach and not _ends_sentence(original, sa[start - 1]):
         start, k = start - 1, k + 1
     end_a = i2 + after
     k = 0
-    while end_a < len(a) and k < 30 and not _ends_sentence(a[end_a - 1]):
+    while end_a < len(a) and k < reach and not _ends_sentence(original, sa[end_a - 1]):
         end_a, k = end_a + 1, k + 1
     tail = end_a - i2                      # shared words kept after the change
 
     shift = i1 - start                     # shared words kept before the change
-    control = " ".join(a[start:end_a])
-    treatment = " ".join(b[j1 - shift:j2 + tail])
+    control = _cut(original, sa, start, end_a)
+    treatment = _cut(edited, sb, j1 - shift, j2 + tail)
     return control, treatment, {
         "words_changed_before": i2 - i1,
         "words_changed_after": j2 - j1,
@@ -217,8 +268,32 @@ was what when where which who why will with would you your yours my me our we ge
 about much many more most""".split())
 
 
+# Chinese and Japanese share no spaced words with a question, so their terms are pairs of
+# adjacent characters: the standard way to match text written without spaces.
+_CJK_STOP = {"什么", "多少", "怎么", "如何", "哪些", "哪个", "为什", "可以", "我们", "你们",
+             "是否", "一个", "这个", "那个", "有没", "没有", "的是"}
+_CJK_SENTENCE = re.compile("[^\u3002\uff01\uff1f]+(?:[\u3002\uff01\uff1f]+[\"'\u201d\u2019\u300d\u300f\uff09)]*)?")
+
+
 def _terms(text):
-    return {w for w in re.findall(r"[a-z0-9]+", text.lower()) if w not in _STOP and len(w) > 2}
+    terms = {w for w in re.findall(r"[a-z0-9]+", text.lower()) if w not in _STOP and len(w) > 2}
+    for run in _CJK_RUN.findall(text):
+        terms.update(p for p in (run[i:i + 2] for i in range(len(run) - 1)) if p not in _CJK_STOP)
+    return terms
+
+
+def _sentences(text):
+    """(sentence, where it starts) for each sentence: src.sentences, also split after a
+    Chinese or Japanese full stop, which needs no space after it."""
+    out, pos = [], 0
+    for s in src.sentences(text):
+        for part in _CJK_SENTENCE.findall(s):
+            part = part.strip()
+            k = text.find(part, pos) if part else -1
+            if k >= 0:
+                out.append((part, k))
+                pos = k + len(part)
+    return out
 
 
 def best_section(text, question, lo=WINDOW_MIN, target=WINDOW_TARGET):
@@ -230,27 +305,27 @@ def best_section(text, question, lo=WINDOW_MIN, target=WINDOW_TARGET):
     into one enormous "sentence", and its many topic words would win the overlap score. A
     section never includes one: across 183 real pages, 95% of sentences run under 64 words
     and the top 2% run 145 or more, which is navigation, not prose."""
-    sents = src.sentences(text)
+    sents = _sentences(text)
     q = _terms(question)
     best = None
     for i in range(len(sents)):
         words, j = 0, i
-        while j < len(sents) and words < target and len(sents[j].split()) <= PROSE_SENTENCE_MAX:
-            words += len(sents[j].split())
+        while j < len(sents) and words < target and _count(sents[j][0]) <= PROSE_SENTENCE_MAX:
+            words += _count(sents[j][0])
             j += 1
         if words < lo:
             continue
-        chunk = " ".join(sents[i:j])
+        chunk = text[sents[i][1]:sents[j - 1][1] + len(sents[j - 1][0])]
         score = len(q & _terms(chunk))
         if best is None or score > best[0]:
             best = (score, chunk)
     if best is None:
-        words = text.split()
-        if len(words) <= WINDOW_MAX:                 # a short page goes in whole
+        spans = _spans(text)
+        if len(spans) <= WINDOW_MAX:                 # a short page goes in whole
             return text, len(q & _terms(text))
         # a long page with no run of prose long enough: the best fixed window of words
-        for i in range(0, len(words) - target + 1, target // 2):
-            chunk = " ".join(words[i:i + target])
+        for i in range(0, len(spans) - target + 1, target // 2):
+            chunk = _cut(text, spans, i, i + target)
             score = len(q & _terms(chunk))
             if best is None or score > best[0]:
                 best = (score, chunk)
@@ -272,9 +347,9 @@ def build_corpus(questions, page, edit, competitors):
         # The edit changes only the title: test it above the same section of the page.
         section = best_section(original, questions[0])[0]
         control = treatment = section
-        region = {"words_changed_before": len(page_title.split()),
-                  "words_changed_after": len(edit_title.split()),
-                  "shared_context_words": len(section.split()), "position_in_page": 0.0}
+        region = {"words_changed_before": _count(page_title),
+                  "words_changed_after": _count(edit_title),
+                  "shared_context_words": _count(section), "position_in_page": 0.0}
     else:
         control, treatment, region = edit_region(original, edited)
     control, treatment = with_title(page_title, control), with_title(edit_title, treatment)
@@ -318,33 +393,59 @@ def build_corpus(questions, page, edit, competitors):
 
 
 # ------------------------------------------------------------------- preflight ----
+def _published(alias):
+    """(points, interval) of a published result as the findings pages state it, or None
+    when the ledger can't be read."""
+    try:
+        import build_story as bs
+        L = json.loads((HERE / "experiments" / "results" / "findings.json").read_text())
+        p = next(f for f in L["findings"] if f["alias"] == alias)["data"]["pooled"]
+    except (ImportError, OSError, ValueError, KeyError, StopIteration):
+        return None
+    nd = bs._nd(p["delta"])
+    return bs.spts(p["delta"], nd), bs.sci(p["ci"], nd)
+
+
+def _length_evidence():
+    """What OpenGEO found about length (H7), in the words and numbers of its pages."""
+    got = _published("length")
+    nums = f" ({got[0]} points, 95% CI {got[1]})" if got else ""
+    return ("OpenGEO found that doubling a page's length with filler did nothing on "
+            f"average{nums}, though some engines cited padded pages less")
+
+
 def preflight(corpus, n_competitors, allow_length_change):
     """Checks that need no API calls. Returns (blocks, warnings, passes), each a list of
     plain-language strings. Any block stops the run before anything is spent."""
     blocks, warns, oks = [], [], []
     t = next(d for d in corpus["documents"] if d["is_target"])
-    cw = len(t["variants"]["control"].split())
-    tw = len(t["variants"]["treatment"].split())
+    cw = _count(t["variants"]["control"])
+    tw = _count(t["variants"]["treatment"])
     diff = tw - cw
+    cjk = " (each Chinese or Japanese character counts as a word)" if _has_cjk(
+        t["variants"]["treatment"]) else ""
 
     if abs(diff) <= LENGTH_TOLERANCE:
         oks.append(f"Your edit is within {LENGTH_TOLERANCE} words of the original length "
-                   f"({cw} -> {tw} words)")
+                   f"({cw} -> {tw} words){cjk}")
     elif allow_length_change:
         warns.append(
-            f"Your edit changes the length by {diff:+d} words ({cw} -> {tw}). Allowed by "
-            "--allow-length-change: OpenGEO's H7 round measured doubling a page's length at "
-            "+0.004 (CI -0.023 to +0.031), so length alone is not expected to explain an "
-            "effect. The report records that this flag was used.")
+            f"Your edit changes the length by {diff:+d} words ({cw} -> {tw}){cjk}. Allowed by "
+            f"--allow-length-change: {_length_evidence()}. The report records that this flag "
+            "was used.")
     else:
+        how = ("make the edit replace wording rather than add to it" if diff > 0 else
+               "make the edit replace wording rather than cut it, and check what it removed: "
+               "it may be a claim your page makes")
         blocks.append(
-            f"Your edit changes the length by {diff:+d} words ({cw} -> {tw}).\n"
+            f"Your edit changes the length by {diff:+d} words ({cw} -> {tw}){cjk}.\n"
             "    A length change can masquerade as an effect, so by default the edit must stay "
             f"within {LENGTH_TOLERANCE} words. Two ways forward:\n"
-            "      - make the edit replace wording rather than add it, or\n"
-            "      - re-run with --allow-length-change. OpenGEO measured padding a page to twice "
-            "its length at +0.004,\n"
-            "        so length alone does not move citation; the report will say you used it.")
+            + textwrap.fill(how + ", or", 96, initial_indent="      - ",
+                            subsequent_indent="        ") + "\n"
+            + textwrap.fill(f"re-run with --allow-length-change. {_length_evidence()}; the "
+                            "report will say you used it.", 96, initial_indent="      - ",
+                            subsequent_indent="        "))
 
     # The title is shown with the excerpt, so a title that differs between the two versions
     # is part of the edit. Usually that is a mistake -- the edit was made in a file taken some
@@ -434,12 +535,19 @@ def estimate_cost(corpus, prices):
     mid = 0.0
     for p in corpus["prompts"]:
         docs = [d for d in corpus["documents"] if d["prompt_id"] == p["prompt_id"]]
-        tok_in = (len(rp.SYSTEM) + len(p["question"])
-                  + sum(len(d["variants"]["control"]) for d in docs) + 200) / 4
+        tok_in = (_tokens_est(rp.SYSTEM) + _tokens_est(p["question"])
+                  + sum(_tokens_est(d["variants"]["control"]) for d in docs) + 50)
         for m in PANEL:
             p_in, p_out = prices[m]
             mid += 2 * RUNS * (tok_in * p_in + ANSWER_TOKENS[m] * p_out) / 1e6
     return calls, mid * 0.8, mid * 1.25
+
+
+def _tokens_est(text):
+    """Roughly how many tokens a text is: about four characters each in English, about one
+    per character in Chinese and Japanese, which pack far more into a character."""
+    cjk = sum(len(r) for r in _CJK_RUN.findall(text))
+    return cjk + (len(text) - cjk) / 4
 
 
 def actual_cost(rows):
@@ -891,9 +999,9 @@ def _meaning(res, q, flags, n_questions):
                    "answers even when your edited page was present, which is a failure to "
                    "follow the instructions, not a visibility signal.")
     if flags.get("allow_length_change"):
-        out.append("--allow-length-change was used: your edit changed the length. OpenGEO "
-                   "measured doubling a page's length at +0.004, so length alone is not "
-                   "expected to explain this.")
+        out.append("--allow-length-change was used: your edit changed the length. "
+                   f"{_length_evidence()}, so on those engines part of a change could come "
+                   "from length rather than content.")
     out.append("This measures what happens once an AI engine has your page. It does not tell "
                "you whether an engine will find your page in the first place.")
     return out
@@ -1059,15 +1167,18 @@ def cmd_test(args):
     # edit, not the whole page.
     target = next(d for d in corpus["documents"] if d["is_target"])
     title, excerpt = _split_title(target["variants"]["treatment"])
-    words = excerpt.split()
-    shown = " ".join(words) if len(words) <= 20 else f"{' '.join(words[:8])} ... {' '.join(words[-8:])}"
+    sp = _spans(excerpt)
+    shown = (excerpt if len(sp) <= 20 else
+             f"{_cut(excerpt, sp, 0, 8)} ... {_cut(excerpt, sp, len(sp) - 8, len(sp))}")
     print("\nThe engines will see " + ("your page's title and this part of it"
                                        if title else "this part of your page")
           + ", not the whole page:")
     if title:
         print(f"  {title}")
-    total = len(target["variants"]["treatment"].split())
-    print(f'  "{shown}" ({total} words' + (", title included)" if title else ")"))
+    total = _count(target["variants"]["treatment"])
+    print(f'  "{shown}" ({total} words' + (", title included" if title else "")
+          + ("; each Chinese or Japanese character counts as a word" if _has_cjk(excerpt) else "")
+          + ")")
 
     prices, live = current_prices()
     calls, low, high = estimate_cost(corpus, prices)

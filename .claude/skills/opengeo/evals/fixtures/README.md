@@ -9,6 +9,12 @@ coincidental.
   the tool's length check.
 - `emergency.html` and `em_comp1-3.html`: a local, "near me" case, the kind of query the
   benchmark never covered.
+- `zh-water-heater/`: the water-heater case in Chinese, for a fictional installer in Chengdu:
+  `current.html`, `edited.html` (one sentence replaced with prices, within three characters
+  of the original length) and five competitor pages. The tool counts each Chinese character
+  as a word, so this set exercises that path end to end. The business names were invented,
+  and a web search found no business by any of them; that search covered the US-indexed web,
+  not Chinese business registries.
 - `running-store/`: a running-shoe store's fitting page, the same page with one sentence
   swapped for specific replacement guidance, and five competitor pages.
 - `results-running-shoes/`: the real output of `opengeo test` 0.2.0 on `running-store/`,

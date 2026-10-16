@@ -97,6 +97,9 @@ Say these whenever they bear on what the user is trying to decide:
 - **The questions were informational** — how much, how often, how long. Local and commercial
   searches ("best plumber near me") were not tested. `opengeo test` lets the user test their
   own commercial questions, which is one of the best reasons to run it.
+- **Every page and question was in English.** Whether the effects carry over to Chinese,
+  Japanese or any other language is untested. `opengeo test` handles other languages, so a
+  user writing in one can test it directly.
 - **It used each engine's API**, which is not identical to what a person sees in the app.
   Each engine is one model standing in for its app: "ChatGPT" is OpenAI's gpt-5.4-mini,
   "Claude" is Claude Haiku 4.5, and so on (`experiments/engine_weights.py` has the full
