@@ -52,6 +52,9 @@ user's time if it's discovered later.
    never put it inside a command you run.** Commands can be saved: in this very project an
    approved command carrying a key inline ended up written into
    `.claude/settings.local.json`. The key belongs in their environment, nowhere else.
+   If they paste a key into the chat anyway, don't use it: keep it out of every command and
+   don't repeat it back. Ask them to set it in their environment as above, and to replace it
+   in their OpenRouter account, because it is now in this conversation.
 
 ## The workflow
 
@@ -89,6 +92,11 @@ question. If they only have a vague goal ("get cited more"), that's the moment t
 
 A page that refuses automated requests (a 403, or almost no text because it's built with
 JavaScript) can be saved from their browser with File > Save As and passed as a file.
+
+Pages in other languages work too. In Chinese and Japanese, which are written without
+spaces, each character counts as a word for the tool's length rules. OpenGEO's published
+evidence comes from English pages and questions only, so for any other language, say that
+how it carries over is untested, which is a reason to test.
 
 ### 3. Help draft the edit, if asked
 
@@ -138,11 +146,15 @@ the edit, never the whole page. Tell the user, so they know what is being compar
 
 If a check is marked ✗, the run is blocked. Explain it plainly and let them choose:
 
-- **Length changed by more than three words.** Two honest options: rework the edit to
-  replace wording instead of adding it, or add `--allow-length-change`. The flag is
-  justified by evidence — OpenGEO measured doubling a page's length at +0.004, CI −0.023 to
-  +0.031, so length alone doesn't move citation — and the report records that it was used.
-  Let the user pick; don't add the flag on their behalf without saying so.
+- **Length changed by more than three words.** Two honest options: rework the edit so it
+  replaces wording instead of adding or cutting it, or add `--allow-length-change`. If the
+  edit made the page *shorter*, look at what it cut first: a dropped sentence is often a
+  claim the page made, which the user may want to keep. The flag is backed by evidence:
+  OpenGEO found that doubling a page's length with filler did nothing on average (+0.4
+  percentage points, 95% CI −2.3 to +3.1), though some engines cited padded pages less.
+  Give it in points, as here; a bare +0.004 means nothing to most people. The report
+  records that the flag was used. Let the user pick; don't add the flag on their behalf
+  without saying so.
 - **Fewer than two competitors.** With nothing to compete against, a page gets cited by
   default and the test says nothing.
 - **numpy is missing** for the Python that ran the tool. Switch to one that has it (see

@@ -76,10 +76,11 @@ $0.30 per question, cost is not a reason to cut any of them.
 
 **Blocking, relaxable with evidence** — one case: edit length. The ±3-word rule exists so an
 effect cannot be word count in disguise. But H7 measured padding a page to double its length
-at **+0.004, CI [−0.023, +0.031]**: length alone does not move citation. Most real edits add
+at **+0.4 points, 95% CI [−2.3, +3.1]**: on average, length alone does not move citation,
+though some engines cited padded pages less (wording changed in 0.3.0). Most real edits add
 content rather than swapping it, so a strict rule would reject the edits people actually
 make. `--allow-length-change` permits it, and the report states the length difference and
-cites H7 as the reason it is not a confound. The flag is named for what it does and its use
+cites H7, caveat included. The flag is named for what it does and its use
 is recorded in the output — a documented deviation, like the ones this project logs in its
 own pre-registrations, not a silent setting.
 
@@ -311,3 +312,36 @@ as billed, in the terminal, `report.md` and `manifest.json`.
 **Shown before anything is spent:** the excerpt and title the engines will see, and that a
 question whose current page leaves no room stops halfway at about half the cost. The
 report quotes the excerpt in full under "What the engines saw".
+
+## Changes in 0.3.0 (2026-10-15)
+
+Found by writing a new test case for the Claude skill, and by asking whether the tool works
+for the readers the project's feedback now comes from.
+
+**Chinese and Japanese pages work.** 0.2.0 counted words by splitting on spaces, and these
+languages have none: a 49-character Chinese paragraph counted as one word, so a Chinese page
+was rejected as having "almost no readable text", and the length check, the excerpt window
+and the competitor sections could not have worked either. Each Chinese or Japanese
+character now counts as a word, the convention word processors use, which keeps every
+rule's proportions: about three words of change in a window of about eighty. Their
+punctuation separates words, and 。！？ end sentences, so excerpts are cut at sentence
+boundaries, from the page's own text rather than rebuilt with a space between every word.
+A competitor section's relevance is scored on pairs of adjacent characters, the standard
+way to match text written without spaces. A Chinese sentence runs to more characters than
+an English one has words, so the search for a sentence boundary reaches 60 characters
+instead of 30 words. The cost estimate counts each Chinese or Japanese character as about
+one token rather than a quarter of one; it has not been checked against a real Chinese run
+yet. A "sentence" over 75 characters is still treated as navigation, as in English, which
+may need revisiting once real Chinese pages have been tried.
+
+English is untouched. The four English fixture tests produce byte-identical corpora, edit
+regions, cost estimates and check messages, apart from the message below, and the saved
+running-store run reproduces its report and chart exactly.
+
+**The length message fits the edit and states the evidence in points.** When an edit made
+the page shorter, it now says to replace wording rather than cut it, and to check what was
+removed, which is often a claim the page made. It gives H7 as the findings pages do: doubling
+a page's length with filler did nothing on average, +0.4 points (95% CI −2.3 to +3.1), read
+from the ledger rather than typed in, instead of a bare +0.004. It also says what 0.2.0
+left out: some engines cited padded pages less. The same wording appears when the flag is
+used and in the report.
