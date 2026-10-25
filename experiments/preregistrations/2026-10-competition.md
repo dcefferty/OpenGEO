@@ -222,4 +222,65 @@ Every sentence carries the Tier 1 caveat: synthesis stage only, retrieval held c
 
 Logged here with a timestamp before analysis, not made silently.
 
-*(none yet)*
+**2026-10-24 — spot check run; all three gates PASS; full round cleared to run.**
+
+Ran the pre-committed spot check exactly as specified above: the 6 named prompts, the 5
+panel engines, `control` and `control_comp` only, 12 runs per cell = **720 calls, 0
+errors, 0 `model_returned` mismatches** (`results/spot_competition.jsonl`). Corpus
+rebuilt from `corpus/build_corpus_competition.py` at sha `ae1a8844d11cb97f` before the run.
+Logged spend $0.71. No treatment arm was run.
+
+| gate | rule | result | |
+|---|---|---|---|
+| 1. control replicates | pooled `control` CPR within ±0.10 of 0.565 | **0.572** [0.521, 0.622], n=360 (Δ +0.007) | PASS |
+| 2. competitor competes | competitor CPR in `control_comp` ≥ 0.50 | **1.000** [0.989, 1.000], n=360 | PASS |
+| 3. no ceiling | pooled `control_comp` target CPR ≤ 0.90 | **0.322** [0.276, 0.372], n=360 | PASS |
+
+Pooling for the gates is unweighted, because the 0.565 reference is the unweighted pool
+of `results/runs_v0.4.jsonl` on these six prompts and five engines (recomputed: 720 runs,
+0.565). Share-weighted for reference: control 0.463 (v0.4 on the same subset: 0.476),
+`control_comp` target 0.229, competitor 1.000.
+
+Per engine (72 runs per cell, 95% Wilson):
+
+| engine | no-cite | `control` target | `control_comp` target | competitor |
+|---|---|---|---|---|
+| openai/gpt-5.4-mini | 0.0% | 0.194 [0.12, 0.30] | 0.000 [0.00, 0.05] | 1.000 [0.95, 1.00] |
+| google/gemini-3-flash-preview | 0.0% | 0.958 [0.88, 0.99] | 0.667 [0.55, 0.76] | 1.000 [0.95, 1.00] |
+| anthropic/claude-haiku-4.5 | 0.0% | 0.444 [0.34, 0.56] | 0.139 [0.08, 0.24] | 1.000 [0.95, 1.00] |
+| deepseek/deepseek-chat | 3.5% | 0.708 [0.59, 0.80] | 0.556 [0.44, 0.66] | 1.000 [0.95, 1.00] |
+| x-ai/grok-4.3 | 0.7% | 0.556 [0.44, 0.66] | 0.250 [0.16, 0.36] | 1.000 [0.95, 1.00] |
+
+v0.4 `control` on the same subset, per engine: 0.271, 0.889, 0.299, 0.806, 0.563. No engine
+exceeds the 10% no-cite exclusion threshold.
+
+**Observations, recorded so they cannot be reinterpreted later. None changes the design.**
+
+- **The competitor is cited in every run on every engine.** It passes gate 2 at its ceiling.
+  H9b (displacement) can therefore only move downward, which is the direction it asks
+  about, but its `control_comp` baseline carries no variance to compare against.
+- **`gpt-5.4-mini` puts the untreated target at a floor (0/72) once the competitor is
+  present.** Per the gate's own text, a floor does not fail it. It does mean that engine's
+  H9 delta runs from a baseline of zero, and since it carries 55.9% of the share weight,
+  the share-weighted H9 figure will lean on it.
+
+The spot check does not test H9 and these numbers are not evidence about it.
+
+**Status:** the full 23,040-call round (~$25) may proceed as pre-registered, at the
+owner's go-ahead.
+
+**2026-10-25 — full round collected; one interruption, resumed; no design change.**
+
+The owner approved the full round on 2026-10-25. Collection started 02:39 UTC with the
+pre-registered command (5 engines, 48 prompts, 4 conditions, 24 runs). The job hit the
+cloud session's 2-hour process limit after 18,762 runs, with 0 errors. The first four
+engines were complete and Grok had 330 of 4,608. It was continued with `run_pilot.py
+--resume`, which skips completed run keys, and finished at 06:06 UTC. Final file: 23,040
+runs, 0 errors, 0 duplicate run keys, 0 `model_returned` mismatches. Logged spend $21.42.
+
+This is an interruption of collection, not a data-health failure, so the stopping rule's
+full rerun does not apply. Its one consequence is timing: about 93% of Grok's runs were
+collected in the last 87 minutes, after the other four engines had finished.
+Every contrast is paired within
+(prompt, model), so no comparison mixes the two segments. No analysis was run until the
+file was complete.
