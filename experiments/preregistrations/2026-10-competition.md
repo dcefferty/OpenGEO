@@ -268,3 +268,19 @@ The spot check does not test H9 and these numbers are not evidence about it.
 
 **Status:** the full 23,040-call round (~$25) may proceed as pre-registered, at the
 owner's go-ahead.
+
+**2026-10-25 — full round collected; one interruption, resumed; no design change.**
+
+The owner approved the full round on 2026-10-25. Collection started 02:39 UTC with the
+pre-registered command (5 engines, 48 prompts, 4 conditions, 24 runs). The job hit the
+cloud session's 2-hour process limit after 18,762 runs, with 0 errors. The first four
+engines were complete and Grok had 330 of 4,608. It was continued with `run_pilot.py
+--resume`, which skips completed run keys, and finished at 06:06 UTC. Final file: 23,040
+runs, 0 errors, 0 duplicate run keys, 0 `model_returned` mismatches. Logged spend $21.42.
+
+This is an interruption of collection, not a data-health failure, so the stopping rule's
+full rerun does not apply. Its one consequence is timing: about 93% of Grok's runs were
+collected in the last 87 minutes, after the other four engines had finished.
+Every contrast is paired within
+(prompt, model), so no comparison mixes the two segments. No analysis was run until the
+file was complete.
