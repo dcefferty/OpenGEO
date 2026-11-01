@@ -26,7 +26,7 @@ Change in the share of answers citing the page, in percentage points, with 95% i
 | Answer first, FAQ headings, attribution, citations | +0.1 points (−3.6 to +3.4) | Early probe · 3 questions |
 
 - **Stating the specific answer** raised the share of answers citing the page by +48 points (+40 to +56) across 48 questions, and it went up on all 8 models tested. Repeated, pre-registered, on 12 questions that have never been published anywhere, it was +47 points (+38 to +57).
-- **How big it is depends on your competition.** In these tests the before page didn't answer the question at all, and the after page was usually the only one that did, so it ended up cited almost every time. Against competitors that already state the answer, expect a smaller gain. The direction is solid; the size is specific to the setup.
+- **It held against competition too.** In these tests the before page didn't answer the question, and the after page was usually the only one that did. So we ran it again with a rival page that already stated the same figures. Without the figures, a page was cited in 16% of answers; with them, 92.6%: a gain of +76.4 points. The exact size depends on the setup; the direction does not.
 - **Repeating your keyword** helped a little: +3.8 points (+0.4 to +7.5), pre-registered. It's real, but about 13 times smaller than stating the answer.
 - **Padding a page** to twice its length with filler did nothing on average (+0.4 points, −2.3 to +3.1), and on some engines it cost citations.
 - **Presentation**, meaning answer-first order, FAQ-style headings, attributing claims and citing sources, moved citation by +0.1 points (−3.6 to +3.4). That comes from an early probe of 3 questions, so read it as nothing found yet, not proof that it never helps.
