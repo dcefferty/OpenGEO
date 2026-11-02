@@ -190,7 +190,7 @@ def main():
 
     if args.dry_run:
         p = prompts[0]
-        texts = [docs_by_id[d]["variants"]["control"] for d in p["doc_ids"]]
+        texts = [docs_by_id[d]["variants"][args.conditions[0]] for d in p["doc_ids"]]
         msgs = build_messages(p["question"], list(enumerate(texts, 1)))
         approx_in = len(msgs[0]["content"] + msgs[1]["content"]) / 4
         tot_in = approx_in * len(cells)
