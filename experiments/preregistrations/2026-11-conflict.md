@@ -247,4 +247,34 @@ Every sentence carries the Tier 1 caveat: synthesis stage only, retrieval held c
 
 Logged here with a timestamp before analysis, not made silently.
 
-*(none yet)*
+**2026-11-02 — spot check run; both gates PASS; full round cleared to run.**
+
+Ran the pre-committed spot check exactly as specified above: the 6 named prompts, the 5
+panel engines, `control_comp` and `agree` only, 12 runs per cell = **720 calls, 0 errors,
+0 `model_returned` mismatches** (`results/spot_conflict.jsonl`). Corpus rebuilt from
+`corpus/build_corpus_conflict.py` at sha `4d27315abb2f1a7a` before the run. Logged spend
+$0.69. The `conflict` arm was not run.
+
+| gate | rule | result | |
+|---|---|---|---|
+| 1. `control_comp` replicates | pooled CPR within ±0.10 of 0.214 | **0.239** [0.198, 0.286], n=360 (Δ +0.025) | PASS |
+| 2. `agree` replicates | pooled CPR within ±0.08 of 0.925 | **0.914** [0.880, 0.939], n=360 (Δ −0.011) | PASS |
+
+Per engine (72 runs per cell, 95% Wilson; competitor CPR pooled over both arms):
+
+| engine | no-cite | `control_comp` target | `agree` target | competitor |
+|---|---|---|---|---|
+| openai/gpt-5.4-mini | 0.0% | 0.056 [0.02, 0.13] | 0.833 [0.73, 0.90] | 0.938 |
+| google/gemini-3-flash-preview | 0.0% | 0.458 [0.35, 0.57] | 1.000 [0.95, 1.00] | 1.000 |
+| anthropic/claude-haiku-4.5 | 2.1% | 0.097 [0.05, 0.19] | 0.764 [0.65, 0.85] | 0.903 |
+| deepseek/deepseek-chat | 0.7% | 0.389 [0.28, 0.50] | 0.972 [0.90, 0.99] | 0.993 |
+| x-ai/grok-4.3 | 0.7% | 0.194 [0.12, 0.30] | 1.000 [0.95, 1.00] | 0.993 |
+
+No engine exceeds the 10% no-cite threshold. As expected from H9, `agree` sits at or near
+the ceiling on Gemini, DeepSeek and Grok, so the saturation rule will likely make their H13
+figures floors. ChatGPT and Claude have headroom.
+
+The spot check does not test H13 and these numbers are not evidence about it.
+
+**Status:** the full 17,280-call round (~$16) may proceed as pre-registered, at the
+owner's go-ahead.
