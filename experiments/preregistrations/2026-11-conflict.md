@@ -278,3 +278,27 @@ The spot check does not test H13 and these numbers are not evidence about it.
 
 **Status:** the full 17,280-call round (~$16) may proceed as pre-registered, at the
 owner's go-ahead.
+
+**2026-11-03 — full round collected; one interruption, resumed; 56 transient errors
+retried; no design change.**
+
+The owner approved the full round on 2026-11-03. Collection started 02:42 UTC with the
+pre-registered command (5 engines, 48 prompts, 3 conditions, 24 runs). The job hit the
+cloud session's 2-hour process limit after 14,439 rows. The first four engines had every
+run key attempted, and Grok had 615 of 3,456. 56 of those rows were errors from
+`deepseek/deepseek-chat`: 55 `HTTP 429 Too Many Requests` and one `HTTP 504`. Collection
+was continued with `run_pilot.py --resume`, which re-attempts errored and missing run keys.
+It finished at 05:57 UTC with 0 errors.
+
+Final file: 17,280 usable runs with 17,280 distinct run keys, plus the 56 error rows kept
+as written (the analyser counts and skips them). 0 `model_returned` mismatches. Logged
+spend $16.35.
+
+This was an interruption of collection, not a data-health failure, so the stopping rule's
+full rerun does not apply. Two consequences, both on paired cells only:
+- 56 DeepSeek runs were collected up to two hours after the rest of their cells.
+- About 82% of Grok's runs were collected in the last 75 minutes, after the other four
+  engines had finished.
+
+Every contrast is paired within (prompt, model), so no comparison mixes engines across the
+two segments. No analysis was run until the file was complete.
