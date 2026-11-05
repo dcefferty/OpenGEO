@@ -201,6 +201,18 @@ def ctx_paired(f, L, A):
     spans = [e["name"] for e in panel(L) if e["model"] in pm and spans_zero(pm[e["model"]]["ci"])]
     c["panel_spans_zero_clause"] = f", but on {join_and(spans)} the interval includes zero" if spans else ""
 
+    for e in panel(L):
+        if e["model"] in pm:
+            m, k = pm[e["model"]], e["name"].lower()
+            c.update({f"{k}_delta_pts": pts(m["delta"]), f"{k}_ci_pts": ci_pts(m["ci"]),
+                      f"{k}_control_pct0": pct(m["control"]), f"{k}_treatment_pct0": pct(m["treatment"])})
+    for k, s in d.get("secondary", {}).items():
+        if "delta" in s:
+            c.update({f"{k}_delta_pts": pts(s["delta"]), f"{k}_ci_pts": ci_pts(s["ci"]),
+                      f"{k}_delta_abs": f"{abs(s['delta']) * 100:.1f}"})
+        if "value" in s:
+            c[f"{k}_pct0"] = pct(s["value"])
+
     if d.get("compare_to"):
         c["ratio_vs_compare"] = str(r0(A[d["compare_to"]]["data"]["pooled"]["delta"] / P["delta"]))
     if d.get("fidelity"):
@@ -277,6 +289,8 @@ ASSERTS = {
     "no_model_ci_above_zero": lambda f, A: all(m["ci"][0] <= 0 for m in _pm(f)),
     "all_models_ci_above_zero": lambda f, A: all(m["ci"][0] > 0 for m in _pm(f)),
     "no_model_ci_below_zero": lambda f, A: all(m["ci"][1] >= 0 for m in _pm(f)),
+    "secondary_ci_exclude_zero": lambda f, A: all(
+        sig(s["ci"]) for s in f["data"]["secondary"].values() if "ci" in s),
     "replications_ci_exclude_zero": lambda f, A: all(sig(r["ci"]) for r in f["data"]["replications"]),
     "at_least_10x_smaller_than_compare": lambda f, A:
         A[f["data"]["compare_to"]]["data"]["pooled"]["delta"] >= 10 * f["data"]["pooled"]["delta"],
@@ -413,16 +427,17 @@ def svg_dumbbell(f, L, c):
     for i, e in enumerate(rows):
         m = pm[e["model"]]
         a, b = m["control"], m["treatment"]
+        sd = 1 if b >= a else -1   # the arm label sits on the side away from the other dot
         y = top + i * rowH + rowH / 2 - 6
         tip = (f'{e["name"]} · {e["short"]}\n{ch["arm_short"][0]} {pct(a, 1)}  →  '
                f'{ch["arm_short"][1]} {pct(b, 1)}\nΔ {pts(m["delta"])} pts  {ci_pts(m["ci"])}')
         out.append(
             hit(tip, y - rowH / 2 + 6, rowH) + engine_label(e["name"], e["short"], y) +
-            f'<line x1="{x(a) + 7:.1f}" y1="{y}" x2="{x(b) - 7:.1f}" y2="{y}" stroke="var(--ochre)" '
+            f'<line x1="{x(a) + 7 * sd:.1f}" y1="{y}" x2="{x(b) - 7 * sd:.1f}" y2="{y}" stroke="var(--ochre)" '
             f'stroke-width="2" opacity=".55"/>'
             f'<circle cx="{x(a):.1f}" cy="{y}" r="6" fill="var(--raised)" stroke="var(--ochre)" stroke-width="2.5"/>'
             f'<circle cx="{x(b):.1f}" cy="{y}" r="6.5" fill="var(--ochre)" stroke="var(--raised)" stroke-width="2"/>'
-            f'<text x="{x(a) - 12:.1f}" y="{y + 4:.1f}" text-anchor="end" fill="var(--ink-2)" {MONO} '
+            f'<text x="{x(a) - 12 * sd:.1f}" y="{y + 4:.1f}" text-anchor="{"end" if sd > 0 else "start"}" fill="var(--ink-2)" {MONO} '
             f'font-size="11">{r0(a * 100)}%</text></g>')
     legend = (f'<div class="legend"><span><i class="sw" style="border:2px solid var(--ochre)"></i>'
               f'{esc(ch["arms"][0])}</span><span><i class="sw" style="background:var(--ochre)"></i>'

@@ -1,6 +1,6 @@
 {
   "schema": "opengeo-findings/1",
-  "updated": "2026-11-01",
+  "updated": "2026-11-05",
   "repo": "https://github.com/dcefferty/OpenGEO",
   "site": "https://dcefferty.github.io/OpenGEO/",
   "traffic_share": {
@@ -438,10 +438,165 @@
       ]
     },
     {
+      "alias": "conflict",
+      "hypothesis": "H13",
+      "public": true,
+      "order": 3,
+      "status": "supported",
+      "kind": "paired_effect",
+      "evidence": [
+        {
+          "label": "Pre-registered",
+          "style": "strong"
+        }
+      ],
+      "title": "Disagreeing with that rival costs citations, mostly on ChatGPT",
+      "lever": "Different figures from a rival page that states the answer",
+      "data": {
+        "metric": "citation presence rate",
+        "contrast": "agree \u2212 conflict: control is the page whose figures contradict the rival, treatment the same page stating the rival's figures",
+        "pooled": {
+          "control": 0.73,
+          "treatment": 0.932,
+          "delta": 0.203,
+          "ci": [
+            0.164,
+            0.241
+          ],
+          "p": "<0.0001",
+          "n_models": 5
+        },
+        "per_model": {
+          "openai/gpt-5.4-mini": {
+            "control": 0.555,
+            "treatment": 0.905,
+            "delta": 0.351,
+            "ci": [
+              0.289,
+              0.414
+            ],
+            "p": "<0.0001"
+          },
+          "google/gemini-3-flash-preview": {
+            "control": 0.97,
+            "treatment": 1.0,
+            "delta": 0.03,
+            "ci": [
+              0.011,
+              0.057
+            ],
+            "p": "0.0004"
+          },
+          "anthropic/claude-haiku-4.5": {
+            "control": 0.922,
+            "treatment": 0.848,
+            "delta": -0.074,
+            "ci": [
+              -0.125,
+              -0.02
+            ],
+            "p": "0.021"
+          },
+          "deepseek/deepseek-chat": {
+            "control": 0.884,
+            "treatment": 0.997,
+            "delta": 0.113,
+            "ci": [
+              0.064,
+              0.166
+            ],
+            "p": "<0.0001"
+          },
+          "x-ai/grok-4.3": {
+            "control": 0.97,
+            "treatment": 0.99,
+            "delta": 0.02,
+            "ci": [
+              -0.005,
+              0.053
+            ],
+            "p": "0.221"
+          }
+        },
+        "secondary": {
+          "disputed": {
+            "label": "H13a, conflict \u2212 control_comp: a contradicted figure vs no figure",
+            "delta": 0.557,
+            "ci": [
+              0.499,
+              0.617
+            ],
+            "p": "<0.0001"
+          },
+          "adoption": {
+            "label": "H13c, share of single-figure answers stating the rival's figure (delta is over 0.5)",
+            "value": 0.656,
+            "delta": 0.156,
+            "ci": [
+              0.061,
+              0.246
+            ],
+            "p": "0.004"
+          },
+          "both": {
+            "label": "share of conflict answers stating both figures, 4,250 of 5,760",
+            "value": 0.738
+          }
+        }
+      },
+      "chart": {
+        "type": "dumbbell",
+        "arms": [
+          "Page whose figures contradict the rival",
+          "Same page with the rival's figures"
+        ],
+        "arm_short": [
+          "disagrees",
+          "agrees"
+        ],
+        "aria": "Citation rate per engine for a page whose figures contradict a rival page, and for the same page when its figures agree"
+      },
+      "text": {
+        "body": [
+          "In the test above, the rival page stated the same figures as the page under test. Real pages often disagree. So we kept everything else identical and changed only the page's figures, to different but plausible ones. <b>Pooled across the panel, the page that disagreed was cited {pooled_delta_abs} points less often than the one that agreed</b> (95% interval {pooled_ci_pts}, weighted by market share)."
+        ],
+        "caption": "Share of runs in which each engine cited the page, when its figures contradict the rival's and when they agree. Engines ordered by share of AI-assistant web traffic ({share_source}). Pooled across {n_models} engines, weighted by market share.",
+        "after": [
+          "Most of that gap is ChatGPT, which carries over half the traffic weight. It cited the disagreeing page in {chatgpt_control_pct0} of runs, against {chatgpt_treatment_pct0} when the figures agreed. Gemini, DeepSeek and Grok mostly kept citing it, and all three cited the agreeing page in essentially every run, so their gaps are floors. <b>Claude went the other way</b>: its gap was {claude_delta_pts} points {claude_ci_pts}, meaning it cited the disagreeing page more often.",
+          "Most answers didn't pick a side. In {both_pct0} of answers to the disagreeing version, the engine stated both figures, usually saying the sources differ and citing each page for its own figure. ChatGPT was the exception: it tended to pick one figure and cite one page. When an answer did pick, it took the rival's figure {adoption_pct0} of the time, {adoption_delta_abs} points more than a coin flip would (95% interval {adoption_ci_pts}). In this design the rival always held the original, realistic figure, so that preference may partly reflect which figure is right.",
+          "Disagreeing still beats saying nothing. The page with a disputed figure was cited {disputed_delta_abs} points more often than the vague page that stated none (95% interval {disputed_ci_pts})."
+        ],
+        "for_you": "If a rival states a different figure, state yours anyway: a disputed figure is cited far more than a vague page. On ChatGPT, expect to lose some citations to the rival; on most other engines, expect your figure to appear beside theirs rather than instead of it.",
+        "prov": [
+          "hypothesis committed before collection",
+          "{calls} engine calls",
+          "{p_text}"
+        ]
+      },
+      "provenance": {
+        "round": "conflict-v1",
+        "corpus_sha": "4d27315abb2f1a7a",
+        "prompts": 48,
+        "domains": 24,
+        "calls": 17280,
+        "report": "experiments/results/published/2026-11-03-conflict/REPORT.md",
+        "preregistration": "experiments/preregistrations/2026-11-conflict.md",
+        "data": [
+          "experiments/results/runs_conflict.jsonl",
+          "experiments/results/spot_conflict.jsonl"
+        ]
+      },
+      "asserts": [
+        "pooled_ci_excludes_zero",
+        "some_model_ci_below_zero",
+        "secondary_ci_exclude_zero"
+      ]
+    },
+    {
       "alias": "stuffing",
       "hypothesis": "H6",
       "public": true,
-      "order": 3,
+      "order": 4,
       "status": "falsified",
       "kind": "paired_effect",
       "evidence": [
@@ -617,7 +772,7 @@
       "alias": "length",
       "hypothesis": "H7",
       "public": true,
-      "order": 4,
+      "order": 5,
       "status": "null",
       "kind": "paired_effect",
       "evidence": [
@@ -738,7 +893,7 @@
     {
       "alias": "presentation",
       "public": true,
-      "order": 5,
+      "order": 6,
       "status": "null",
       "kind": "paired_effect",
       "evidence": [
@@ -862,7 +1017,7 @@
       "alias": "agreement",
       "hypothesis": "H3",
       "public": true,
-      "order": 6,
+      "order": 7,
       "status": "null",
       "kind": "agreement",
       "evidence": [
@@ -939,7 +1094,7 @@
       "alias": "misattribution",
       "hypothesis": "C2 baseline",
       "public": true,
-      "order": 7,
+      "order": 8,
       "status": "measured",
       "kind": "misattribution",
       "evidence": [
@@ -1016,7 +1171,7 @@
       "alias": "calibration",
       "hypothesis": "CAL-1",
       "public": true,
-      "order": 8,
+      "order": 9,
       "status": "measured",
       "kind": "calibration",
       "evidence": [
@@ -1183,7 +1338,7 @@
       "alias": "heldout",
       "hypothesis": "H8",
       "public": true,
-      "order": 9,
+      "order": 10,
       "status": "supported",
       "kind": "paired_effect",
       "evidence": [

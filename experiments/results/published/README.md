@@ -12,6 +12,7 @@ it by hand.
 
 <!-- rounds:start -->
 
+- **2026-11-03 — conflict** · [report](2026-11-03-conflict/REPORT.md) · H13
 - **2026-10-25 — competition** · [report](2026-10-25-competition/REPORT.md) · H9
 - **2026-09-22 — public-private** · [report](2026-09-22-public-private/REPORT.md) · H8
 - **2026-09-20 — tier1-scope** · [report](2026-09-20-tier1-scope/REPORT.md) · null
