@@ -98,3 +98,9 @@ result, drawn from the ledger in type large enough to read when shown small.
 `render_preview.py` turns that drawing into the PNG the sites require, using headless
 Chrome, which the build itself does not depend on. The PNG records the hash of the drawing
 it was made from, so the build notes when a new round has made it out of date.
+
+2026-11-06: H13 (conflicting figures) joins section 5 as a fourth card, full width so the
+grid doesn't leave it half a row. It reads "a rival with different figures costs you some
+citations", mostly on ChatGPT, and says a disputed figure still beats a vague page. Its two
+numbers are rounded the story's way (no decimals from ten up) from the `conflict` entry.
+The H9 competition result stays where it was, as the caveat under section 3.

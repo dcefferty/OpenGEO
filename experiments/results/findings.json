@@ -1714,6 +1714,12 @@
           "alias": "agreement",
           "title": "The engines largely agree",
           "text": "Engines agree with each other about which pages deserve a citation about as closely as one engine agrees with itself on a re-run. A page that earns citations from one tends to earn them from the others."
+        },
+        {
+          "alias": "conflict",
+          "title": "A rival with different figures costs you some citations",
+          "text": "When a rival page stated different figures, a page was cited {s_conflict_abs} points less often than when its figures agreed, mostly because of ChatGPT. Most answers stated both figures and cited each page for its own. A disputed figure was still cited {s_conflict_disputed_abs} points more often than a vague page that stated none.",
+          "wide": true
         }
       ]
     },
