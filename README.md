@@ -37,6 +37,7 @@ Change in the share of answers citing the page, in percentage points, with 95% i
 - **Engines sometimes credit you with things you didn't say.** When an answer cited a page, we checked each cited claim against the page. Between 13% and 20% of cited sentences said something the page doesn't support, depending on which model did the checking.
 - **Tools that check the API may undercount you.** On 3 of 12 everyday questions, OpenAI's API cited nothing while chatgpt.com cited real sources. Most citation trackers query the API.
 - **The engines largely agree.** Engines agree with each other about which pages deserve a citation about as closely as one engine agrees with itself on a re-run. A page that earns citations from one tends to earn them from the others.
+- **A rival with different figures costs you some citations.** When a rival page stated different figures, a page was cited 20 points less often than when its figures agreed, mostly because of ChatGPT. Most answers stated both figures and cited each page for its own. A disputed figure was still cited 56 points more often than a vague page that stated none.
 <!-- findings:end -->
 
 **Try one on your own page.** Any of these changes can be tested on your page, against your

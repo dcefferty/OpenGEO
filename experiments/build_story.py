@@ -49,6 +49,10 @@ def context(L):
         c[f"s_{a}_pts"], c[f"s_{a}_ci"] = spts(pool["delta"], nd), sci(pool["ci"], nd)
     f = A["facts"]["data"]["pooled"]
     c["s_facts_before"], c["s_facts_after"] = bf.pct(f["control"]), bf.pct(f["treatment"])
+    # H13, unsigned and rounded the plain-reader way: "cited 20 points less often".
+    cf = A["conflict"]["data"]
+    for k, v in (("conflict", cf["pooled"]["delta"]), ("conflict_disputed", cf["secondary"]["disputed"]["delta"])):
+        c[f"s_{k}_abs"] = f"{abs(v) * 100:.{_nd(v)}f}"
     c["chatgpt_model"] = next(e["short"] for e in L["engines"] if e["name"] == "ChatGPT")
     return A, c
 
@@ -515,7 +519,7 @@ def build(L, cases):
         f = A[k["alias"]]
         fc = {**c, **bf.CTX[f["kind"]](f, L, A)} if f.get("kind") in bf.CTX else c
         extra = bf.units(f, L, fc) if k["alias"] == "misattribution" else ""
-        wide = " wide" if extra else ""
+        wide = " wide" if extra or k.get("wide") else ""
         cards.append(f'<div class="kcard{wide}"><div class="kt"><h3>{esc(k["title"])}</h3><p>{fmt(k["text"], c)}</p>'
                      f'<a class="more" href="findings.html#{esc(k["alias"])}">The full finding</a></div>{extra}</div>')
     parts.append(f'<section class="s" id="more"><p class="kicker">{fmt(mo["kicker"], c)}</p><h2>{esc(mo["heading"])}</h2>'
