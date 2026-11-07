@@ -258,7 +258,34 @@ def ctx_reliability(f, L, A):
     d = f["data"]
     return {"low": f"{d['split_half_min']:.2f}", "high": f"{d['split_half_max']:.2f}"}
 
-CTX = {"paired_effect": ctx_paired, "agreement": ctx_agreement,
+def ctx_multi(f, L, A):
+    """Several paired contrasts from one round, each with its own pool and engines."""
+    c = ctx_common(f, L, A)
+    K = f["data"]["contrasts"]
+    first = next(iter(K.values()))["pooled"]
+    c["n_models"] = str(first["n_models"])
+    bound = max(abs(e) for k in K.values() for e in k["pooled"]["ci"])
+    c["bound_pts"] = str(r0(bound * 100))
+    for key, k in K.items():
+        P = k["pooled"]
+        c.update({f"{key}_delta_pts": pts(P["delta"]), f"{key}_ci_pts": ci_pts(P["ci"]),
+                  f"{key}_delta_abs": f"{abs(P['delta']) * 100:.1f}",
+                  f"{key}_control_pct0": pct(P["control"]), f"{key}_treatment_pct0": pct(P["treatment"]),
+                  f"{key}_p_text": p_text(P["p_holm"])})
+        for e in panel(L):
+            if e["model"] in k["per_model"]:
+                m, n = k["per_model"][e["model"]], e["name"].lower()
+                c.update({f"{key}_{n}_delta_pts": pts(m["delta"]), f"{key}_{n}_ci_pts": ci_pts(m["ci"]),
+                          f"{key}_{n}_p_holm_text": p_text(m["p_holm"])})
+    for k, s in f["data"].get("secondary", {}).items():
+        if "value" in s:
+            c[f"{k}_pct1"] = pct(s["value"], 1)
+        if "count" in s:
+            c[f"{k}_count"] = num(s["count"])
+            c[f"{k}_of"] = num(s["of"])
+    return c
+
+CTX = {"paired_effect": ctx_paired, "multi_effect": ctx_multi, "agreement": ctx_agreement,
        "misattribution": ctx_misattribution, "calibration": ctx_calibration,
        "reliability": ctx_reliability}
 
@@ -291,6 +318,13 @@ ASSERTS = {
     "no_model_ci_below_zero": lambda f, A: all(m["ci"][1] >= 0 for m in _pm(f)),
     "secondary_ci_exclude_zero": lambda f, A: all(
         sig(s["ci"]) for s in f["data"]["secondary"].values() if "ci" in s),
+    "all_contrasts_ci_span_zero": lambda f, A: all(
+        spans_zero(k["pooled"]["ci"]) for k in f["data"]["contrasts"].values()),
+    "all_contrasts_ci_within_bound": lambda f, A: all(
+        abs(e) * 100 <= f["data"]["bound_pts"] for k in f["data"]["contrasts"].values() for e in k["pooled"]["ci"]),
+    "one_model_contrast_survives_holm": lambda f, A: sum(
+        1 for k in f["data"]["contrasts"].values() for m in k["per_model"].values()
+        if not m["p_holm"].startswith("<") and float(m["p_holm"]) < 0.05 or m["p_holm"].startswith("<")) == 1,
     "replications_ci_exclude_zero": lambda f, A: all(sig(r["ci"]) for r in f["data"]["replications"]),
     "at_least_10x_smaller_than_compare": lambda f, A:
         A[f["data"]["compare_to"]]["data"]["pooled"]["delta"] >= 10 * f["data"]["pooled"]["delta"],
@@ -449,7 +483,16 @@ def svg_forest(f, L, c):
     pm, P = d["per_model"], d["pooled"]
     rows = [(e["name"], e["short"], pm[e["model"]], False) for e in panel(L) if e["model"] in pm]
     rows.append((ch["pooled_label"], fmt(ch["pooled_sublabel"], c), P, True))
-    W, LB, rowH, top = 760, 170, 44, 26
+    return figure(forest_svg(rows, ch), f, c)
+
+def svg_contrasts(f, L, c):
+    """One row per contrast of a multi_effect entry, each its share-weighted pool."""
+    ch = f["chart"]
+    rows = [(k["label"], fmt(k["sub"], c), k["pooled"], True) for k in f["data"]["contrasts"].values()]
+    return figure(forest_svg(rows, ch, LB=260), f, c)
+
+def forest_svg(rows, ch, LB=170):
+    W, rowH, top = 760, 44, 26
     PL, PR = LB, W - 70
     H = top + len(rows) * rowH + 38
     lo = min(0, min(r[2]["ci"][0] for r in rows)) * 100
@@ -474,7 +517,7 @@ def svg_forest(f, L, c):
         glyph = (f'<path d="M {X:.1f} {y - 8} L {X + 9:.1f} {y} L {X:.1f} {y + 8} L {X - 9:.1f} {y} Z" '
                  f'fill="{col}" stroke="var(--raised)" stroke-width="2"/>' if pooled else
                  f'<circle cx="{X:.1f}" cy="{y}" r="6" fill="{col}" stroke="var(--raised)" stroke-width="2"/>')
-        if pooled:
+        if pooled and i and not rows[i - 1][3]:
             out.append(f'<line x1="0" y1="{y - rowH / 2 + 4:.1f}" x2="{W}" y2="{y - rowH / 2 + 4:.1f}" '
                        f'stroke="var(--line-2)" stroke-width="1"/>')
         out.append(
@@ -485,7 +528,7 @@ def svg_forest(f, L, c):
              f'font-weight="600">{pts(dv)}</text>' if pooled else "") + "</g>")
     out.append(f'<text x="{W - 8}" y="{H - 10}" text-anchor="end" fill="var(--muted)" {MONO} '
                f'font-size="9.5">pts</text></svg>')
-    return figure("".join(out), f, c)
+    return "".join(out)
 
 def svg_pair(f, L, c):
     r, ch = f["data"]["rounds"][0], f["chart"]
@@ -560,7 +603,8 @@ def figure(inner, f, c):
     cap = f["text"].get("caption")
     return f"<figure>{inner}" + (f"<figcaption>{fmt(cap, c)}</figcaption>" if cap else "") + "</figure>"
 
-CHARTS = {"dumbbell": svg_dumbbell, "forest": svg_forest, "interval_pair": svg_pair,
+CHARTS = {"dumbbell": svg_dumbbell, "forest": svg_forest, "contrasts": svg_contrasts,
+          "interval_pair": svg_pair,
           "units": units, "calibration": calibration}
 
 
