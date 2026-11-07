@@ -1,6 +1,6 @@
 {
   "schema": "opengeo-findings/1",
-  "updated": "2026-11-05",
+  "updated": "2026-11-07",
   "repo": "https://github.com/dcefferty/OpenGEO",
   "site": "https://dcefferty.github.io/OpenGEO/",
   "traffic_share": {
@@ -1011,6 +1011,301 @@
       },
       "asserts": [
         "pooled_ci_spans_zero"
+      ]
+    },
+    {
+      "alias": "trust",
+      "hypothesis": "H10\u2013H12",
+      "public": true,
+      "order": 6.5,
+      "status": "falsified",
+      "kind": "multi_effect",
+      "evidence": [
+        {
+          "label": "Pre-registered",
+          "style": "strong"
+        }
+      ],
+      "title": "A date, a byline or marketing tone does not change whether a page is cited",
+      "lever": "An update date, an expert byline, or superlatives, with the page text unchanged",
+      "data": {
+        "metric": "citation presence rate",
+        "bound_pts": 3.5,
+        "contrasts": {
+          "dates": {
+            "label": "Recent date vs old date",
+            "sub": "fresh \u2212 stale \u00b7 {n_models} engines",
+            "hypothesis": "H10",
+            "pooled": {
+              "control": 0.514,
+              "treatment": 0.5,
+              "delta": -0.014,
+              "ci": [
+                -0.031,
+                0.004
+              ],
+              "p": "0.124",
+              "p_holm": "0.373",
+              "n_models": 5
+            },
+            "per_model": {
+              "anthropic/claude-haiku-4.5": {
+                "control": 0.378,
+                "treatment": 0.386,
+                "delta": 0.008,
+                "ci": [
+                  -0.02,
+                  0.036
+                ],
+                "p": "0.564",
+                "p_holm": "1.000"
+              },
+              "deepseek/deepseek-chat": {
+                "control": 0.481,
+                "treatment": 0.488,
+                "delta": 0.007,
+                "ci": [
+                  -0.027,
+                  0.043
+                ],
+                "p": "0.684",
+                "p_holm": "1.000"
+              },
+              "google/gemini-3-flash-preview": {
+                "control": 0.678,
+                "treatment": 0.678,
+                "delta": 0.0,
+                "ci": [
+                  -0.027,
+                  0.025
+                ],
+                "p": "1.000",
+                "p_holm": "1.000"
+              },
+              "openai/gpt-5.4-mini": {
+                "control": 0.45,
+                "treatment": 0.423,
+                "delta": -0.027,
+                "ci": [
+                  -0.054,
+                  -0.002
+                ],
+                "p": "0.039",
+                "p_holm": "0.197"
+              },
+              "x-ai/grok-4.3": {
+                "control": 0.626,
+                "treatment": 0.635,
+                "delta": 0.009,
+                "ci": [
+                  -0.026,
+                  0.045
+                ],
+                "p": "0.658",
+                "p_holm": "1.000"
+              }
+            }
+          },
+          "byline": {
+            "label": "Expert byline vs none",
+            "sub": "byline \u2212 control \u00b7 {n_models} engines",
+            "hypothesis": "H11",
+            "pooled": {
+              "control": 0.503,
+              "treatment": 0.511,
+              "delta": 0.008,
+              "ci": [
+                -0.011,
+                0.028
+              ],
+              "p": "0.424",
+              "p_holm": "0.849",
+              "n_models": 5
+            },
+            "per_model": {
+              "anthropic/claude-haiku-4.5": {
+                "control": 0.387,
+                "treatment": 0.372,
+                "delta": -0.016,
+                "ci": [
+                  -0.044,
+                  0.011
+                ],
+                "p": "0.276",
+                "p_holm": "1.000"
+              },
+              "deepseek/deepseek-chat": {
+                "control": 0.487,
+                "treatment": 0.487,
+                "delta": -0.0,
+                "ci": [
+                  -0.034,
+                  0.032
+                ],
+                "p": "0.966",
+                "p_holm": "1.000"
+              },
+              "google/gemini-3-flash-preview": {
+                "control": 0.641,
+                "treatment": 0.673,
+                "delta": 0.031,
+                "ci": [
+                  0.001,
+                  0.063
+                ],
+                "p": "0.051",
+                "p_holm": "0.255"
+              },
+              "openai/gpt-5.4-mini": {
+                "control": 0.447,
+                "treatment": 0.449,
+                "delta": 0.002,
+                "ci": [
+                  -0.03,
+                  0.033
+                ],
+                "p": "0.941",
+                "p_holm": "1.000"
+              },
+              "x-ai/grok-4.3": {
+                "control": 0.619,
+                "treatment": 0.608,
+                "delta": -0.011,
+                "ci": [
+                  -0.048,
+                  0.026
+                ],
+                "p": "0.562",
+                "p_holm": "1.000"
+              }
+            }
+          },
+          "promo": {
+            "label": "Superlatives vs none",
+            "sub": "promo \u2212 control \u00b7 {n_models} engines",
+            "hypothesis": "H12",
+            "pooled": {
+              "control": 0.503,
+              "treatment": 0.505,
+              "delta": 0.002,
+              "ci": [
+                -0.018,
+                0.022
+              ],
+              "p": "0.829",
+              "p_holm": "0.849",
+              "n_models": 5
+            },
+            "per_model": {
+              "anthropic/claude-haiku-4.5": {
+                "control": 0.387,
+                "treatment": 0.35,
+                "delta": -0.037,
+                "ci": [
+                  -0.067,
+                  -0.01
+                ],
+                "p": "0.015",
+                "p_holm": "0.058"
+              },
+              "deepseek/deepseek-chat": {
+                "control": 0.487,
+                "treatment": 0.508,
+                "delta": 0.021,
+                "ci": [
+                  -0.003,
+                  0.045
+                ],
+                "p": "0.113",
+                "p_holm": "0.339"
+              },
+              "google/gemini-3-flash-preview": {
+                "control": 0.641,
+                "treatment": 0.701,
+                "delta": 0.06,
+                "ci": [
+                  0.027,
+                  0.094
+                ],
+                "p": "<0.001",
+                "p_holm": "0.004"
+              },
+              "openai/gpt-5.4-mini": {
+                "control": 0.447,
+                "treatment": 0.426,
+                "delta": -0.021,
+                "ci": [
+                  -0.053,
+                  0.011
+                ],
+                "p": "0.230",
+                "p_holm": "0.412"
+              },
+              "x-ai/grok-4.3": {
+                "control": 0.619,
+                "treatment": 0.601,
+                "delta": -0.018,
+                "ci": [
+                  -0.047,
+                  0.008
+                ],
+                "p": "0.206",
+                "p_holm": "0.412"
+              }
+            }
+          }
+        },
+        "secondary": {
+          "echo_byline": {
+            "label": "answers in the byline arm that name the author",
+            "count": 1,
+            "of": 5760
+          },
+          "echo_dates": {
+            "label": "answers in the stale-date arm that repeat its year",
+            "count": 17,
+            "of": 5760
+          }
+        }
+      },
+      "chart": {
+        "type": "contrasts",
+        "aria": "Change in citation rate from adding a recent rather than old date, an expert byline, or a line of superlatives, pooled across engines, with 95% intervals"
+      },
+      "text": {
+        "body": [
+          "After \u201cadd statistics\u201d, the most repeated advice is about signals put on a page: show a recent date, show an expert author, drop the marketing language. We tested each one by adding a single line to the top of a page and changing nothing else. The page was one that doesn\u2019t answer the question, which is where a small effect is easiest to see: repeating a keyword moved this same page by {stuffing_pooled_delta_pts} points.",
+          "<b>None of the three moved citation.</b> A line giving a recent update date, against the same line dated seven years earlier, changed it by {dates_delta_pts} points {dates_ci_pts}. An expert byline changed it by {byline_delta_pts} points {byline_ci_pts}, and a line of superlatives by {promo_delta_pts} points {promo_ci_pts}. Each interval rules out a pooled effect of more than about {bound_pts} points either way."
+        ],
+        "caption": "Change in citation rate from each signal, with 95% intervals. Each row is pooled across {n_models} engines, weighted by market share.",
+        "after": [
+          "Engine by engine, the picture is the same with one exception. <b>Gemini cited the page with superlatives more often, not less</b>: {promo_gemini_delta_pts} points {promo_gemini_ci_pts}, {promo_gemini_p_holm_text} after correcting across engines. Claude leaned the other way ({promo_claude_delta_pts} points), and the two roughly cancel in the pool.",
+          "The answers almost never passed the signal on. Only {echo_byline_count} of the {echo_byline_of} answers to the byline version named the author, and {echo_dates_count} of the {echo_dates_of} answers to the old-date version repeated its year, usually while saying the sources didn\u2019t answer the question."
+        ],
+        "for_you": "Once an engine has your page, these signals don\u2019t change whether it cites you. What does is whether the page answers the question. Dates and authors may still matter earlier, when a search engine decides which pages to fetch, and this test doesn\u2019t cover that.",
+        "prov": [
+          "hypotheses committed before collection",
+          "{calls} engine calls",
+          "{dates_p_text} for the date contrast after correction"
+        ]
+      },
+      "provenance": {
+        "round": "trust-v1",
+        "corpus_sha": "97124c249d3f7a4f",
+        "prompts": 48,
+        "domains": 24,
+        "calls": 28800,
+        "report": "experiments/results/published/2026-11-07-trust/REPORT.md",
+        "preregistration": "experiments/preregistrations/2026-11-trust.md",
+        "data": [
+          "experiments/results/runs_trust.jsonl",
+          "experiments/results/spot_trust.jsonl"
+        ]
+      },
+      "asserts": [
+        "all_contrasts_ci_span_zero",
+        "all_contrasts_ci_within_bound",
+        "one_model_contrast_survives_holm"
       ]
     },
     {
