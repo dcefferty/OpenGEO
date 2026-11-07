@@ -1,0 +1,996 @@
+{
+  "corpus_version": "realtext-h4-screen-b1",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 1: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "cooking",
+    "cybersecurity_consumer",
+    "finance",
+    "home_diy",
+    "nutrition",
+    "taxes"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "taxes_employment_records",
+      "domain": "taxes",
+      "question": "How long does a small business with employees have to keep its employment tax records?",
+      "target_doc_id": "taxes_employment_records__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "taxes_employment_records__target",
+        "taxes_employment_records__doc1",
+        "taxes_employment_records__doc2",
+        "taxes_employment_records__doc3",
+        "taxes_employment_records__doc4",
+        "taxes_employment_records__doc5"
+      ],
+      "answer_pattern": "\\byears?\\b"
+    },
+    {
+      "prompt_id": "cyber_password_length",
+      "domain": "cybersecurity_consumer",
+      "question": "How many characters long should a password be, according to NIST's current guidance?",
+      "target_doc_id": "cyber_password_length__target",
+      "target_format": "news",
+      "doc_ids": [
+        "cyber_password_length__target",
+        "cyber_password_length__doc1",
+        "cyber_password_length__doc2",
+        "cyber_password_length__doc3",
+        "cyber_password_length__doc4",
+        "cyber_password_length__doc5"
+      ],
+      "answer_pattern": "\\d+\\s*(?:-|to)?\\s*\\d*\\s*characters?\\b|\\d+-character|characters long|\\b(?:eight|twelve|fifteen|sixty-four)\\b"
+    },
+    {
+      "prompt_id": "nutrition_caffeine_limit",
+      "domain": "nutrition",
+      "question": "How much caffeine a day is generally safe for healthy adults?",
+      "target_doc_id": "nutrition_caffeine_limit__target",
+      "target_format": "news",
+      "doc_ids": [
+        "nutrition_caffeine_limit__target",
+        "nutrition_caffeine_limit__doc1",
+        "nutrition_caffeine_limit__doc2",
+        "nutrition_caffeine_limit__doc3",
+        "nutrition_caffeine_limit__doc4",
+        "nutrition_caffeine_limit__doc5"
+      ],
+      "answer_pattern": "milligram|\\bmg\\b|cups? of (?:plain )?coffee|\\d+\\s*(?:to\\s*\\d+\\s*)?cups"
+    },
+    {
+      "prompt_id": "cooking_leftovers_room_temp",
+      "domain": "cooking",
+      "question": "How long can cooked food be left out at room temperature before it should be thrown away?",
+      "target_doc_id": "cooking_leftovers_room_temp__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "cooking_leftovers_room_temp__target",
+        "cooking_leftovers_room_temp__doc1",
+        "cooking_leftovers_room_temp__doc2",
+        "cooking_leftovers_room_temp__doc3",
+        "cooking_leftovers_room_temp__doc4",
+        "cooking_leftovers_room_temp__doc5"
+      ],
+      "answer_pattern": "\\bhours?\\b|90 ?°|90 degrees|danger zone"
+    },
+    {
+      "prompt_id": "home_radon_action_level",
+      "domain": "home_diy",
+      "question": "At what radon level does the EPA recommend fixing your home?",
+      "target_doc_id": "home_radon_action_level__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_radon_action_level__target",
+        "home_radon_action_level__doc1",
+        "home_radon_action_level__doc2",
+        "home_radon_action_level__doc3",
+        "home_radon_action_level__doc4",
+        "home_radon_action_level__doc5"
+      ],
+      "answer_pattern": "pCi|picocurie|Bq/m|becquerel|working levels?\\b"
+    },
+    {
+      "prompt_id": "finance_emergency_400",
+      "domain": "finance",
+      "question": "What share of U.S. adults could cover an unexpected $400 expense using cash or its equivalent?",
+      "target_doc_id": "finance_emergency_400__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "finance_emergency_400__target",
+        "finance_emergency_400__doc1",
+        "finance_emergency_400__doc2",
+        "finance_emergency_400__doc3",
+        "finance_emergency_400__doc4",
+        "finance_emergency_400__doc5"
+      ],
+      "answer_pattern": "percent|%|\\$400|\\b6\\d\\b|in (?:10|ten)\\b|\\bhalf\\b|\\bmajority\\b|\\bmost (?:adults|americans|people)\\b"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "taxes_employment_records__target",
+      "prompt_id": "taxes_employment_records",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": true,
+      "source": {
+        "agency": "IRS",
+        "title": "Recordkeeping",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/recordkeeping",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1bef89e2cd4daa5fa063c5c22ca5271d7774189e7387a7698535c5bf51d1d141",
+        "retrieved_utc": "2026-09-16T04:57:44+00:00",
+        "method": "curl"
+      },
+      "words": 101,
+      "variants": {
+        "control": "Good records will help you monitor the progress of your business, prepare your financial statements, identify sources of income, keep track of deductible expenses, keep track of your basis in property, prepare your tax returns, and support items reported on your tax returns. What kinds of records should I keep? You may choose any recordkeeping system suited to your business that clearly shows your income and expenses. Except in a few cases, the law does not require any special kind of records. However, the business you are in affects the type of records you need to keep for federal tax purposes.",
+        "treatment": "Good records will help you monitor the progress of your business, prepare your financial statements, identify sources of income, keep track of deductible expenses, keep track of your basis in property, prepare your tax returns, and support items reported on your tax returns. What kinds of records should I keep? You may choose any recordkeeping system suited to your business that clearly shows your income and expenses. Except in a few cases, the law does not require any special kind of records. Employers must keep all employment tax records for at least 4 years after the tax becomes due or is paid."
+      },
+      "edit": {
+        "replaced": "However, the business you are in affects the type of records you need to keep for federal tax purposes.",
+        "inserted": "Employers must keep all employment tax records for at least 4 years after the tax becomes due or is paid.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.irs.gov/taxtopics/tc305",
+            "agency": "IRS",
+            "passage": "If you have employees, you must keep all your employment tax records for at least 4 years after the tax becomes due or is paid, whichever is later.",
+            "snapshot_sha256": "63a2d2db8edd35413fb6befc3b57b740f83b795c0357c52d6ce6f382b9412a22"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "taxes_employment_records__doc1",
+      "prompt_id": "taxes_employment_records",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Employment tax recordkeeping",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/employment-tax-recordkeeping",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3212c63f4c1b2ec566b4734d904384b43f4bca930c3ca78c4a78837e77447ea5",
+        "retrieved_utc": "2026-09-16T04:57:44+00:00",
+        "method": "curl"
+      },
+      "words": 96,
+      "variants": {
+        "control": "Your employer identification number. Amounts and dates of all wage, annuity, and pension payments. Amounts of tips reported to you by your employees. Record of all allocated tips. The fair market value of in-kind wages paid. Names, addresses, social security numbers, and occupations of employees and recipients. Any employee copies of Form W-2 and W-2c returned to you as undeliverable. Dates of employment for each employee. Periods for which employees and recipients were paid while absent due to sickness or injury and the amount and weekly rate of payments you or third-party payers made to them.",
+        "treatment": "Your employer identification number. Amounts and dates of all wage, annuity, and pension payments. Amounts of tips reported to you by your employees. Record of all allocated tips. The fair market value of in-kind wages paid. Names, addresses, social security numbers, and occupations of employees and recipients. Any employee copies of Form W-2 and W-2c returned to you as undeliverable. Dates of employment for each employee. Periods for which employees and recipients were paid while absent due to sickness or injury and the amount and weekly rate of payments you or third-party payers made to them."
+      }
+    },
+    {
+      "doc_id": "taxes_employment_records__doc2",
+      "prompt_id": "taxes_employment_records",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Good recordkeeping year-round helps taxpayers avoid tax time frustration",
+        "url": "https://www.irs.gov/newsroom/good-recordkeeping-year-round-helps-taxpayers-avoid-tax-time-frustration",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4989c427368b9e941e62c1fc1847b410614b6c8de234b7797cb2ce855139dc48",
+        "retrieved_utc": "2026-09-16T04:57:43+00:00",
+        "method": "curl"
+      },
+      "words": 74,
+      "variants": {
+        "control": "Identify sources of income. Taxpayers may receive money or property from a variety of sources. The records can identify the sources of income and help separate business from non-business income and taxable from nontaxable income. Keep track of expenses. Taxpayers can use records to identify expenses for which they can claim a deduction. This will help determine whether to itemize deductions at filing. It may also help them discover potentially overlooked deductions or credits.",
+        "treatment": "Identify sources of income. Taxpayers may receive money or property from a variety of sources. The records can identify the sources of income and help separate business from non-business income and taxable from nontaxable income. Keep track of expenses. Taxpayers can use records to identify expenses for which they can claim a deduction. This will help determine whether to itemize deductions at filing. It may also help them discover potentially overlooked deductions or credits."
+      }
+    },
+    {
+      "doc_id": "taxes_employment_records__doc3",
+      "prompt_id": "taxes_employment_records",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "IRS audits",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/irs-audits",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ae205a7bb0331b58d594d53afed794163f003f3ea482747bf376163276440fe9",
+        "retrieved_utc": "2026-09-16T04:57:43+00:00",
+        "method": "curl"
+      },
+      "words": 78,
+      "variants": {
+        "control": "Selection for an audit does not always suggest there's a problem. The IRS uses several different selection methods: Random selection and computer screening - sometimes returns are selected based solely on a statistical formula. We compare your tax return against \"norms\" for similar returns. We develop these \"norms\" from audits of a statistically valid random sample of returns, as part of the National Research Program the IRS conducts. The IRS uses this program to update return selection information.",
+        "treatment": "Selection for an audit does not always suggest there's a problem. The IRS uses several different selection methods: Random selection and computer screening - sometimes returns are selected based solely on a statistical formula. We compare your tax return against \"norms\" for similar returns. We develop these \"norms\" from audits of a statistically valid random sample of returns, as part of the National Research Program the IRS conducts. The IRS uses this program to update return selection information."
+      }
+    },
+    {
+      "doc_id": "taxes_employment_records__doc4",
+      "prompt_id": "taxes_employment_records",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Get an extension to file your tax return",
+        "url": "https://www.irs.gov/filing/get-an-extension-to-file-your-tax-return",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "477428b8f4382e3136aafb714f462956b1327cd0e7178bac55de15a637e4e923",
+        "retrieved_utc": "2026-09-19T19:06:05+00:00",
+        "method": "curl"
+      },
+      "words": 67,
+      "variants": {
+        "control": "If you need more time to file your taxes, request an extension by the April tax filing due date. This gives you until October 15 to file without penalties. Make sure you pay any tax you owe by the April filing date. The extension is only for filing your return. Get an extension There are 3 ways to get until October 15 to file your tax return.",
+        "treatment": "If you need more time to file your taxes, request an extension by the April tax filing due date. This gives you until October 15 to file without penalties. Make sure you pay any tax you owe by the April filing date. The extension is only for filing your return. Get an extension There are 3 ways to get until October 15 to file your tax return."
+      }
+    },
+    {
+      "doc_id": "taxes_employment_records__doc5",
+      "prompt_id": "taxes_employment_records",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Failure to file penalty",
+        "url": "https://www.irs.gov/payments/failure-to-file-penalty",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ade5f3effec3a4bd2fc234cdbfba5f9775d14948da5c2b6ab5a0fc36cc342fbc",
+        "retrieved_utc": "2026-09-19T19:06:06+00:00",
+        "method": "curl"
+      },
+      "words": 80,
+      "variants": {
+        "control": "You can avoid a penalty by filing and paying your tax by the due date. If you can't do so, you can apply for an extension of time to file or a payment plan. Apply for an extension of time to file If you need more time to prepare your tax return, apply for an extension of time to file. This does not grant you an extension of time to pay. A payment plan can help you pay over time.",
+        "treatment": "You can avoid a penalty by filing and paying your tax by the due date. If you can't do so, you can apply for an extension of time to file or a payment plan. Apply for an extension of time to file If you need more time to prepare your tax return, apply for an extension of time to file. This does not grant you an extension of time to pay. A payment plan can help you pay over time."
+      }
+    },
+    {
+      "doc_id": "cyber_password_length__target",
+      "prompt_id": "cyber_password_length",
+      "format": "news",
+      "domain": "cybersecurity_consumer",
+      "is_target": true,
+      "source": {
+        "agency": "CISA",
+        "title": "Choosing and Protecting Passwords",
+        "url": "https://www.cisa.gov/news-events/news/choosing-and-protecting-passwords",
+        "rights": "US federal work (CISA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "63fe8c3094667ad5a70958670c32680d13d30579edcf7e4cdecf71672e3b7243",
+        "retrieved_utc": "2026-09-19T17:06:47+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "Once you've come up with a strong, memorable password it's tempting to reuse it-don't! Reusing a password, even a strong one, endangers your accounts just as much as using a weak password. If attackers guess your password, they would have access to your other accounts with the same password. Use the following techniques to develop unique passwords for each of your accounts: Use different passwords on different systems and accounts.",
+        "treatment": "Once you've come up with a strong, memorable password it's tempting to reuse it-don't! NIST guidance recommends that a password should be at least 15 characters long, and never reused. If attackers guess your password, they would have access to your other accounts with the same password. Use the following techniques to develop unique passwords for each of your accounts: Use different passwords on different systems and accounts."
+      },
+      "edit": {
+        "replaced": "Reusing a password, even a strong one, endangers your accounts just as much as using a weak password.",
+        "inserted": "NIST guidance recommends that a password should be at least 15 characters long, and never reused.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.nist.gov/cybersecurity-and-privacy/how-do-i-create-good-password",
+            "agency": "NIST",
+            "passage": "NIST guidance recommends that a password should be at least 15 characters long.",
+            "snapshot_sha256": "ef714a3ee24f45910e06809f70b0b0eb7f8ae3d978ac2a7bdba7fc7ddb1126f6"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "cyber_password_length__doc1",
+      "prompt_id": "cyber_password_length",
+      "format": "blog",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "source": {
+        "agency": "NIST",
+        "title": "Easy Ways to Build a Better Password",
+        "url": "https://www.nist.gov/blogs/taking-measure/easy-ways-build-better-p5w0rd",
+        "rights": "US federal work (NIST), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1ac40404862a1109f7c21b07bef7b88af40141960662921d0355426666996009",
+        "retrieved_utc": "2026-09-19T17:06:49+00:00",
+        "method": "curl"
+      },
+      "words": 86,
+      "variants": {
+        "control": "Instead, passphrases should be words that can go together in your head, but no one else would ever suspect. An example from my kitchen: \"blender vent sauté pendant red chair.\" These words all make sense, and they aren't even all things. Verbs work just as well. Even if someone knew I picked words based on my kitchen, they would need to see my kitchen and then determine which of the thousands of nouns and verbs I picked. So, from a hacker's perspective, it really is random.",
+        "treatment": "Instead, passphrases should be words that can go together in your head, but no one else would ever suspect. An example from my kitchen: \"blender vent sauté pendant red chair.\" These words all make sense, and they aren't even all things. Verbs work just as well. Even if someone knew I picked words based on my kitchen, they would need to see my kitchen and then determine which of the thousands of nouns and verbs I picked. So, from a hacker's perspective, it really is random."
+      }
+    },
+    {
+      "doc_id": "cyber_password_length__doc2",
+      "prompt_id": "cyber_password_length",
+      "format": "blog",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Creating Strong Passwords and Other Ways to Protect Your Accounts",
+        "url": "https://consumer.ftc.gov/articles/creating-strong-passwords-and-other-ways-protect-your-accounts",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d3935a688279d76ce02681410dd62a1458954907d85ecb83d664e0c10581104d",
+        "retrieved_utc": "2026-09-19T17:06:51+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "It's critical to protect your email account with a strong password. That's because password reset links often go to your email inbox. If a hacker takes over your email account, they can get password reset links for your other accounts. Then they can change the passwords and take over those accounts, too. If that happens, here's how to recover a hacked account.",
+        "treatment": "It's critical to protect your email account with a strong password. That's because password reset links often go to your email inbox. If a hacker takes over your email account, they can get password reset links for your other accounts. Then they can change the passwords and take over those accounts, too. If that happens, here's how to recover a hacked account."
+      }
+    },
+    {
+      "doc_id": "cyber_password_length__doc3",
+      "prompt_id": "cyber_password_length",
+      "format": "docs",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "source": {
+        "agency": "CISA",
+        "title": "Require Strong Passwords",
+        "url": "https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-strong-passwords",
+        "rights": "US federal work (CISA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a2c90600763d3f890220be485fffe88c39dbbeb6f1fc331bc03e52f244e18758",
+        "retrieved_utc": "2026-09-19T17:06:47+00:00",
+        "method": "curl"
+      },
+      "words": 52,
+      "variants": {
+        "control": "Employees only need to remember one strong master password for the password manager. This helps prevent password reuse, weak passwords and accidental breaches. As your business grows, consider moving to an identity and access manager (IAM) with single sign-on (SSO), which lets users securely access multiple systems with one set of credentials.",
+        "treatment": "Employees only need to remember one strong master password for the password manager. This helps prevent password reuse, weak passwords and accidental breaches. As your business grows, consider moving to an identity and access manager (IAM) with single sign-on (SSO), which lets users securely access multiple systems with one set of credentials."
+      }
+    },
+    {
+      "doc_id": "cyber_password_length__doc4",
+      "prompt_id": "cyber_password_length",
+      "format": "docs",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "source": {
+        "agency": "CISA",
+        "title": "Formulate Strong Passwords and PIN Codes",
+        "url": "https://www.cisa.gov/resources-tools/training/formulate-strong-passwords-and-pin-codes",
+        "rights": "US federal work (CISA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e798bfd9a1e67f9f38dec934cf54b07ba60ea071969bd84f49c5692eb7a3f110",
+        "retrieved_utc": "2026-09-19T17:06:50+00:00",
+        "method": "curl"
+      },
+      "words": 96,
+      "variants": {
+        "control": "Account authentication is one of the most important cybersecurity cornerstones for individuals and organizations. This is your method for controlling access to your data, regardless of whether it is stored on a personal device or in an account that you access from the internet. Threat actors seeking to steal your data have several methods to do so. If you use a weak password or reuse a single password for multiple accounts, you're more susceptible to brute force or dictionary attacks, both of which are methods for guessing your password to gain unauthorized access to your account.",
+        "treatment": "Account authentication is one of the most important cybersecurity cornerstones for individuals and organizations. This is your method for controlling access to your data, regardless of whether it is stored on a personal device or in an account that you access from the internet. Threat actors seeking to steal your data have several methods to do so. If you use a weak password or reuse a single password for multiple accounts, you're more susceptible to brute force or dictionary attacks, both of which are methods for guessing your password to gain unauthorized access to your account."
+      }
+    },
+    {
+      "doc_id": "cyber_password_length__doc5",
+      "prompt_id": "cyber_password_length",
+      "format": "reference",
+      "domain": "cybersecurity_consumer",
+      "is_target": false,
+      "source": {
+        "agency": "NIST",
+        "title": "SP 800-63 Digital Identity Guidelines FAQ",
+        "url": "https://pages.nist.gov/800-63-FAQ/",
+        "rights": "US federal work (NIST), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8dc6a4bd497a5312ec74b2a7204955041234991d59e31d3ce3eadd6ceb2c1c83",
+        "retrieved_utc": "2026-09-19T17:06:50+00:00",
+        "method": "curl"
+      },
+      "words": 77,
+      "variants": {
+        "control": "Knowledge-based authentication (KBA), sometimes referred to as \"security questions\", is no longer recognized as an acceptable authenticator by SP 800-63. This was formerly permitted and referred to as a \"pre-registered knowledge token\" in SP 800-63-2 and earlier editions. The ease with which an attacker can discover the answers to many KBA questions, and relatively small number of possible choices for many of them, cause KBA to have an unacceptably high risk of successful use by an attacker.",
+        "treatment": "Knowledge-based authentication (KBA), sometimes referred to as \"security questions\", is no longer recognized as an acceptable authenticator by SP 800-63. This was formerly permitted and referred to as a \"pre-registered knowledge token\" in SP 800-63-2 and earlier editions. The ease with which an attacker can discover the answers to many KBA questions, and relatively small number of possible choices for many of them, cause KBA to have an unacceptably high risk of successful use by an attacker."
+      }
+    },
+    {
+      "doc_id": "nutrition_caffeine_limit__target",
+      "prompt_id": "nutrition_caffeine_limit",
+      "format": "news",
+      "domain": "nutrition",
+      "is_target": true,
+      "source": {
+        "agency": "FDA",
+        "title": "Spilling the Beans: How Much Caffeine is Too Much?",
+        "url": "https://www.fda.gov/consumers/consumer-updates/spilling-beans-how-much-caffeine-too-much",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "be8714724548d3d0500f13d93f78e966434c536524d29867bdf4908f54004f47",
+        "retrieved_utc": "2026-09-14T03:36:35+00:00",
+        "method": "curl"
+      },
+      "words": 83,
+      "variants": {
+        "control": "All packaged foods are required to list caffeine in the \"list of ingredients\" when it is added to products as a stand-alone ingredient. When a packaged food contains an ingredient - such as chocolate chips - that inherently contains caffeine, then caffeine will not appear on the list of ingredients. However, the caffeine-containing ingredient (for example, chocolate) will be listed. Many packaged foods, including beverages and dietary supplements containing caffeine, voluntarily provide information on the label as to how much caffeine they contain.",
+        "treatment": "All packaged foods are required to list caffeine in the \"list of ingredients\" when it is added to products as a stand-alone ingredient. When a packaged food contains an ingredient - such as chocolate chips - that inherently contains caffeine, then caffeine will not appear on the list of ingredients. However, the caffeine-containing ingredient (for example, chocolate) will be listed. For most adults, the FDA cites 400 milligrams a day, about two to three cups of coffee, as not generally associated with negative effects."
+      },
+      "edit": {
+        "replaced": "Many packaged foods, including beverages and dietary supplements containing caffeine, voluntarily provide information on the label as to how much caffeine they contain.",
+        "inserted": "For most adults, the FDA cites 400 milligrams a day, about two to three cups of coffee, as not generally associated with negative effects.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.fda.gov/consumers/consumer-updates/spilling-beans-how-much-caffeine-too-much",
+            "agency": "FDA",
+            "passage": "For most adults, the FDA has cited 400 milligrams* a day - that's about two to three 12-fluid-ounce cups of coffee - as an amount not generally associated with negative effects.",
+            "snapshot_sha256": "be8714724548d3d0500f13d93f78e966434c536524d29867bdf4908f54004f47"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "nutrition_caffeine_limit__doc1",
+      "prompt_id": "nutrition_caffeine_limit",
+      "format": "blog",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "CDC",
+        "title": "About Water and Healthier Drinks",
+        "url": "https://www.cdc.gov/healthy-weight-growth/water-healthy-drinks/index.html",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "6a87c09995c6d7bd455379d1a21aaff52687acf6a2d60d6259ffbe7e683a6462",
+        "retrieved_utc": "2026-09-22T14:14:09+00:00",
+        "method": "wayback id_"
+      },
+      "words": 80,
+      "variants": {
+        "control": "Drinks with sugar alternatives: Drinks that are labeled \"sugar-free\" or \"diet\" likely contain high-intensity sweeteners, such as sucralose, aspartame, or saccharine. These sweeteners may reduce caloric intake in the short term. However, there are many questions about the sweeteners' effectiveness for long-term weight management. Energy drinks: In addition to added sugar, these products may also contain large amounts of caffeine and other legal stimulants. Concerns have been raised about the potential health risks of these products, especially for young people.",
+        "treatment": "Drinks with sugar alternatives: Drinks that are labeled \"sugar-free\" or \"diet\" likely contain high-intensity sweeteners, such as sucralose, aspartame, or saccharine. These sweeteners may reduce caloric intake in the short term. However, there are many questions about the sweeteners' effectiveness for long-term weight management. Energy drinks: In addition to added sugar, these products may also contain large amounts of caffeine and other legal stimulants. Concerns have been raised about the potential health risks of these products, especially for young people."
+      }
+    },
+    {
+      "doc_id": "nutrition_caffeine_limit__doc2",
+      "prompt_id": "nutrition_caffeine_limit",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "USDA ARS Food Surveys Research Group",
+        "title": "Added Sugars in Adults' Diet: What We Eat in America, NHANES 2015-2016",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK589210/",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": "Bookshelf publisher line: Beltsville (MD): United States Department of Agriculture (USDA)",
+        "snapshot_sha256": "a210c512993818bb7c4e9c3e3a7661c0dd1125fccdce26efd7f542b73811ac5b",
+        "retrieved_utc": "2026-09-14T03:25:48+00:00",
+        "method": "curl"
+      },
+      "words": 83,
+      "variants": {
+        "control": "Beverages such as sweetened beverages, tea, and coffee together supplied a high proportion of added sugars in adult's overall diet. On average, males obtained 37 percent and females, 28 percent of added sugars from sweetened beverages; and both males and females obtained about 17 percent of added sugars from tea and coffee, combined. Sweet bakery products such as cakes, pies, cookies, brownies, doughnuts, sweet rolls, and pastries provided 11 percent of added sugars in all males' and 15 percent in all females' diets.",
+        "treatment": "Beverages such as sweetened beverages, tea, and coffee together supplied a high proportion of added sugars in adult's overall diet. On average, males obtained 37 percent and females, 28 percent of added sugars from sweetened beverages; and both males and females obtained about 17 percent of added sugars from tea and coffee, combined. Sweet bakery products such as cakes, pies, cookies, brownies, doughnuts, sweet rolls, and pastries provided 11 percent of added sugars in all males' and 15 percent in all females' diets."
+      }
+    },
+    {
+      "doc_id": "nutrition_caffeine_limit__doc3",
+      "prompt_id": "nutrition_caffeine_limit",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Added Sugars on the Nutrition Facts Label",
+        "url": "https://www.fda.gov/food/nutrition-facts-label/added-sugars-nutrition-facts-label",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7f11e839a4b8668450bc4308ee7fb7265a98f47a7392bea7c2a61a9c127e51e5",
+        "retrieved_utc": "2026-09-14T03:25:47+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "The Dietary Guidelines for Americans states that a limited amount of added sugars can be included as part of an overall healthy eating pattern that includes healthy choices from each of the food groups (vegetables, fruits, grains, dairy, and protein foods). It is important to remember that added sugars is just one piece of information on the label. Looking at the ingredient list and reading all the information on the Nutrition Facts label can help you make the most informed choices.",
+        "treatment": "The Dietary Guidelines for Americans states that a limited amount of added sugars can be included as part of an overall healthy eating pattern that includes healthy choices from each of the food groups (vegetables, fruits, grains, dairy, and protein foods). It is important to remember that added sugars is just one piece of information on the label. Looking at the ingredient list and reading all the information on the Nutrition Facts label can help you make the most informed choices."
+      }
+    },
+    {
+      "doc_id": "nutrition_caffeine_limit__doc4",
+      "prompt_id": "nutrition_caffeine_limit",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Daily Value on the Nutrition and Supplement Facts Labels",
+        "url": "https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f21e3a43c7b5385294fdb147078987d6bc45afa59fea6a63508ff25e850f9835",
+        "retrieved_utc": "2026-09-18T04:45:16+00:00",
+        "method": "curl"
+      },
+      "words": 97,
+      "variants": {
+        "control": "The Nutrition Facts label must list total fat, saturated fat, trans fat, cholesterol, sodium, total carbohydrate, dietary fiber, total sugars, added sugars, protein, and certain vitamins and minerals. While the actual amount and %DV of vitamin D, calcium, iron, and potassium must be listed, other vitamins and minerals may be listed voluntarily by the manufacturer. However, they are required to list any vitamins and minerals that are added to the food or if a statement is made on the package labeling about their health effects or the amount contained in the food (for example, \"high\" or \"low\").",
+        "treatment": "The Nutrition Facts label must list total fat, saturated fat, trans fat, cholesterol, sodium, total carbohydrate, dietary fiber, total sugars, added sugars, protein, and certain vitamins and minerals. While the actual amount and %DV of vitamin D, calcium, iron, and potassium must be listed, other vitamins and minerals may be listed voluntarily by the manufacturer. However, they are required to list any vitamins and minerals that are added to the food or if a statement is made on the package labeling about their health effects or the amount contained in the food (for example, \"high\" or \"low\")."
+      }
+    },
+    {
+      "doc_id": "nutrition_caffeine_limit__doc5",
+      "prompt_id": "nutrition_caffeine_limit",
+      "format": "blog",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Eating Too Much Salt? Ways to Cut Back...Gradually",
+        "url": "https://www.fda.gov/consumers/consumer-updates/eating-too-much-salt-ways-cut-backgradually",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "64a2662944b7df3ae82f08c0020e5ab570714ad3c013a85d27c0503670b4fedd",
+        "retrieved_utc": "2026-09-15T05:19:41+00:00",
+        "method": "curl"
+      },
+      "words": 92,
+      "variants": {
+        "control": "Sodium is added to packaged and prepared foods for a variety of reasons such as food safety, improving flavor and texture, curing meat, and for baking. So, the FDA has carefully developed different sodium reduction targets for different types of foods. Will the reductions affect how foods taste? We know that people usually don't notice small reductions in sodium, and over time, people's taste buds get used to changes that are made gradually. And there are foods on the market already meeting the targets, so we know these are achievable and acceptable.",
+        "treatment": "Sodium is added to packaged and prepared foods for a variety of reasons such as food safety, improving flavor and texture, curing meat, and for baking. So, the FDA has carefully developed different sodium reduction targets for different types of foods. Will the reductions affect how foods taste? We know that people usually don't notice small reductions in sodium, and over time, people's taste buds get used to changes that are made gradually. And there are foods on the market already meeting the targets, so we know these are achievable and acceptable."
+      }
+    },
+    {
+      "doc_id": "cooking_leftovers_room_temp__target",
+      "prompt_id": "cooking_leftovers_room_temp",
+      "format": "reference",
+      "domain": "cooking",
+      "is_target": true,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "How Temperatures Affect Food",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/how-temperatures-affect-food",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7fdd239b2ab3b04163f690548417591fcf34111424d1427d486719b6c8abff7a",
+        "retrieved_utc": "2026-09-18T05:08:58+00:00",
+        "method": "wayback id_"
+      },
+      "words": 88,
+      "variants": {
+        "control": "A temperature of 40 °F should be maintained in the refrigerator. In contrast to freezer storage, perishable foods will gradually spoil in the refrigerator. Spoilage bacteria will make themselves known in a variety of ways. The food may develop an uncharacteristic odor, color and/or become sticky or slimy. Molds may also grow and become visible. Bacteria capable of causing foodborne illness either don't grow or grow very slowly at refrigerator temperatures. An appliance thermometer should always be used to verify that the temperature of the unit is correct.",
+        "treatment": "A temperature of 40 °F should be maintained in the refrigerator. In contrast to freezer storage, perishable foods will gradually spoil in the refrigerator. Spoilage bacteria will make themselves known in a variety of ways. The food may develop an uncharacteristic odor, color and/or become sticky or slimy. Molds may also grow and become visible. Cooked food left out more than 2 hours, or 1 hour above 90 °F, should be discarded. An appliance thermometer should always be used to verify that the temperature of the unit is correct."
+      },
+      "edit": {
+        "replaced": "Bacteria capable of causing foodborne illness either don't grow or grow very slowly at refrigerator temperatures.",
+        "inserted": "Cooked food left out more than 2 hours, or 1 hour above 90 °F, should be discarded.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/grilling-food-safely",
+            "agency": "USDA FSIS",
+            "passage": "Discard any food left out more than 2 hours (1 hour if temperature outside is above 90°F/ 32°C).",
+            "snapshot_sha256": "9f261f2448e0abc8e4a57780d20ee508b3b74a2d89ee17fe4cbd292986bc91d7"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "cooking_leftovers_room_temp__doc1",
+      "prompt_id": "cooking_leftovers_room_temp",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Doneness Versus Safety",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/doneness-versus-safety",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8544b9de4bd268c9183e54b49a188ed68cda6d2444dfa838cb58d4cd4e9a22f1",
+        "retrieved_utc": "2026-09-18T04:41:39+00:00",
+        "method": "wayback id_"
+      },
+      "words": 109,
+      "variants": {
+        "control": "Research indicates that the color of the meat and the color of the juices are not accurate indicators of doneness. Ground beef may turn brown before it has reached a temperature at which bacteria are destroyed. A consumer preparing hamburger patties and depending on visual signs to determine safety by using the brown color as an indicator is taking a chance that pathogenic microorganisms may survive. A hamburger cooked to 160 °F (165 °F for ground poultry), measured with a food thermometer throughout the patty, is safe - regardless of color. Cook ground poultry to a safe minimum internal temperature of 165 °F as measured with a food thermometer.",
+        "treatment": "Research indicates that the color of the meat and the color of the juices are not accurate indicators of doneness. Ground beef may turn brown before it has reached a temperature at which bacteria are destroyed. A consumer preparing hamburger patties and depending on visual signs to determine safety by using the brown color as an indicator is taking a chance that pathogenic microorganisms may survive. A hamburger cooked to 160 °F (165 °F for ground poultry), measured with a food thermometer throughout the patty, is safe - regardless of color. Cook ground poultry to a safe minimum internal temperature of 165 °F as measured with a food thermometer."
+      }
+    },
+    {
+      "doc_id": "cooking_leftovers_room_temp__doc2",
+      "prompt_id": "cooking_leftovers_room_temp",
+      "format": "blog",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA",
+        "title": "Cooking Meat: Is It Done Yet?",
+        "url": "https://www.usda.gov/about-usda/news/blog/cooking-meat-it-done-yet",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "02555eb0d1d3f3e21ac0550f66bea26c0748ac8f35f4bc1492245e58fd042152",
+        "retrieved_utc": "2026-09-18T04:42:26+00:00",
+        "method": "wayback id_"
+      },
+      "words": 98,
+      "variants": {
+        "control": "USDA recommends never relying on color, firmness or time as an indicator to know if your food is fully cooked. Always cook all meats to a minimum safe internal temperature as measured with a food thermometer to prevent foodborne illness. So how does one know \"is it done yet?\" Cook raw beef, pork, lamb and veal steaks, chops, and roasts to a minimum internal temperature of 145 F as measured with a food thermometer before removing meat from the heat source. For safety and quality, allow meat to rest for at least three minutes before cutting or consuming.",
+        "treatment": "USDA recommends never relying on color, firmness or time as an indicator to know if your food is fully cooked. Always cook all meats to a minimum safe internal temperature as measured with a food thermometer to prevent foodborne illness. So how does one know \"is it done yet?\" Cook raw beef, pork, lamb and veal steaks, chops, and roasts to a minimum internal temperature of 145 F as measured with a food thermometer before removing meat from the heat source. For safety and quality, allow meat to rest for at least three minutes before cutting or consuming."
+      }
+    },
+    {
+      "doc_id": "cooking_leftovers_room_temp__doc3",
+      "prompt_id": "cooking_leftovers_room_temp",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Safe Food Handling",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "4b09fb7de151a7cbec60a3fedaf497fbcd8a2ad5a4ad6b34614aff976ded9cf6",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "The food supply in the United States is among the safest in the world. However, when certain disease-causing bacteria or pathogens contaminate food, they can cause foodborne illness, often called \"food poisoning.\" The Federal government estimates that there are about 48 million cases of foodborne illness annually - the equivalent of sickening 1 in 6 Americans each year. And each year, these illnesses result in an estimated 128,000 hospitalizations and 3,000 deaths.",
+        "treatment": "The food supply in the United States is among the safest in the world. However, when certain disease-causing bacteria or pathogens contaminate food, they can cause foodborne illness, often called \"food poisoning.\" The Federal government estimates that there are about 48 million cases of foodborne illness annually - the equivalent of sickening 1 in 6 Americans each year. And each year, these illnesses result in an estimated 128,000 hospitalizations and 3,000 deaths."
+      }
+    },
+    {
+      "doc_id": "cooking_leftovers_room_temp__doc4",
+      "prompt_id": "cooking_leftovers_room_temp",
+      "format": "reference",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Kitchen Thermometers",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/kitchen-thermometers",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6b76cfd56db4ed736986daf37e56ab5b3e6d87899ba9bb851d89ae60b24d87de",
+        "retrieved_utc": "2026-09-18T05:09:57+00:00",
+        "method": "wayback id_"
+      },
+      "words": 88,
+      "variants": {
+        "control": "Thermistor-style food thermometers use a resistor (a ceramic semiconductor bonded in the tip with temperature-sensitive epoxy) to measure temperature. The thickness of the probe is approximately 1/8 of an inch and takes roughly 10 seconds to register the temperature on the digital display. Since the semiconductor is in the tip, thermistors can measure temperature in thin foods, as well as thick foods. Because the center of a food is usually cooler than the outer surface, place the tip in the center of the thickest part of the food.",
+        "treatment": "Thermistor-style food thermometers use a resistor (a ceramic semiconductor bonded in the tip with temperature-sensitive epoxy) to measure temperature. The thickness of the probe is approximately 1/8 of an inch and takes roughly 10 seconds to register the temperature on the digital display. Since the semiconductor is in the tip, thermistors can measure temperature in thin foods, as well as thick foods. Because the center of a food is usually cooler than the outer surface, place the tip in the center of the thickest part of the food."
+      }
+    },
+    {
+      "doc_id": "cooking_leftovers_room_temp__doc5",
+      "prompt_id": "cooking_leftovers_room_temp",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Grilling Food Safely",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/grilling-food-safely",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9f261f2448e0abc8e4a57780d20ee508b3b74a2d89ee17fe4cbd292986bc91d7",
+        "retrieved_utc": "2026-09-18T05:08:35+00:00",
+        "method": "wayback id_"
+      },
+      "words": 87,
+      "variants": {
+        "control": "Smoking is cooking food indirectly in the presence of a fire. It can be done in a covered grill with a pan of water placed beneath the meat or poultry. Meats can also be smoked in a smoker - an outdoor cooker especially designed for smoking foods. Smoking is done much more slowly than grilling, and as a result, the meat is tender and takes on a natural smoke flavoring. The temperature in the smoker should be maintained at 250 to 300°F (121 to 149°C) for safety.",
+        "treatment": "Smoking is cooking food indirectly in the presence of a fire. It can be done in a covered grill with a pan of water placed beneath the meat or poultry. Meats can also be smoked in a smoker - an outdoor cooker especially designed for smoking foods. Smoking is done much more slowly than grilling, and as a result, the meat is tender and takes on a natural smoke flavoring. The temperature in the smoker should be maintained at 250 to 300°F (121 to 149°C) for safety."
+      }
+    },
+    {
+      "doc_id": "home_radon_action_level__target",
+      "prompt_id": "home_radon_action_level",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": true,
+      "source": {
+        "agency": "EPA",
+        "title": "Radon in Homes, Schools and Buildings",
+        "url": "https://www.epa.gov/radtown/radon-homes-schools-and-buildings",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ae709c44ddc2eb5cb4829808b02f92bccf487a712470aae14b76bb3fc0a8c2ba",
+        "retrieved_utc": "2026-09-19T19:22:04+00:00",
+        "method": "curl"
+      },
+      "words": 109,
+      "variants": {
+        "control": "Radon comes from the natural decay of uranium and radium found in nearly all rocks and soils. Radon moves up from the ground and into buildings through the openings that exist in floors or walls. In some parts of the country where groundwater is the primary source for drinking water radon can enter with the home's water. Because radon comes from rocks and soils, radon typically collects in rooms that are in contact with the ground, like basements. The EPA and the Surgeon General recommend testing all homes and schools for radon. Test your home or school again if there are major remodeling or changes to the HVAC system.",
+        "treatment": "Radon comes from the natural decay of uranium and radium found in nearly all rocks and soils. Radon moves up from the ground and into buildings through the openings that exist in floors or walls. In some parts of the country where groundwater is the primary source for drinking water radon can enter with the home's water. Because radon comes from rocks and soils, radon typically collects in rooms that are in contact with the ground, like basements. The EPA recommends fixing a home if its radon level is 4 pCi/L or more. Test your home or school again if there are major remodeling or changes to the HVAC system."
+      },
+      "edit": {
+        "replaced": "The EPA and the Surgeon General recommend testing all homes and schools for radon.",
+        "inserted": "The EPA recommends fixing a home if its radon level is 4 pCi/L or more.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.epa.gov/radon/what-epas-action-level-radon-and-what-does-it-mean",
+            "agency": "EPA",
+            "passage": "The EPA recommends homes be fixed if the radon level is 4 pCi/L (picocuries per liter) (150 becquerels per meter cubed (Bq/m3)) or more.",
+            "snapshot_sha256": "a87214c2de2b9f6df95841c4dd1a0954428ba8757cdb48e5a7309fb74ca2a15a"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "home_radon_action_level__doc1",
+      "prompt_id": "home_radon_action_level",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA Region 7",
+        "title": "Take Time to Protect Your Home from This Invisible Cancer Risk",
+        "url": "https://www.epa.gov/ks/january-take-time-protect-your-home-invisible-cancer-risk",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "38c803499ee5d4721119a9a60095e3420c43576157733f02a8b103687e39f1c4",
+        "retrieved_utc": "2026-09-19T19:22:06+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "LENEXA, KAN. (JAN. 27, 2026) - January is National Radon Action Month, and that means it's time to test your house for radon, a radioactive gas. Radon - colorless, odorless and tasteless - is an invisible killer. In fact, radon is the leading cause of lung cancer in non-smokers. The good news is that there are actions you can take today to protect your family.",
+        "treatment": "LENEXA, KAN. (JAN. 27, 2026) - January is National Radon Action Month, and that means it's time to test your house for radon, a radioactive gas. Radon - colorless, odorless and tasteless - is an invisible killer. In fact, radon is the leading cause of lung cancer in non-smokers. The good news is that there are actions you can take today to protect your family."
+      }
+    },
+    {
+      "doc_id": "home_radon_action_level__doc2",
+      "prompt_id": "home_radon_action_level",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Health Risk of Radon",
+        "url": "https://www.epa.gov/radon/health-risk-radon",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4e6a7a2050f3dad508740a336d98231565a723d09a1ab696cc7ec941c8f69040",
+        "retrieved_utc": "2026-09-19T19:22:07+00:00",
+        "method": "curl"
+      },
+      "words": 67,
+      "variants": {
+        "control": "Radon is the number one cause of lung cancer among non-smokers, according to EPA estimates. Overall, radon is the second leading cause of lung cancer. Radon is responsible for about 21,000 lung cancer deaths every year. About 2,900 of these deaths occur among people who have never smoked. On January 13, 2005, Dr. Richard H. Carmona, the U.S. Surgeon General, issued a national health advisory on radon.",
+        "treatment": "Radon is the number one cause of lung cancer among non-smokers, according to EPA estimates. Overall, radon is the second leading cause of lung cancer. Radon is responsible for about 21,000 lung cancer deaths every year. About 2,900 of these deaths occur among people who have never smoked. On January 13, 2005, Dr. Richard H. Carmona, the U.S. Surgeon General, issued a national health advisory on radon."
+      }
+    },
+    {
+      "doc_id": "home_radon_action_level__doc3",
+      "prompt_id": "home_radon_action_level",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "EPA Map of Radon Zones and Supplemental Information",
+        "url": "https://www.epa.gov/radon/epa-map-radon-zones-and-supplemental-information",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "efd543c8d96b662864cd8e2c2f3832cea31a6c007f6920ffbdf43a49f36b9eff",
+        "retrieved_utc": "2026-09-19T19:22:05+00:00",
+        "method": "curl"
+      },
+      "words": 55,
+      "variants": {
+        "control": "EPA's Map of Radon Zones can be supplemented with available state-developed or other data to further understand the radon potential for a specific area. Additional radon testing data may be accessed through the CDC Environmental Health Tracking Network, an online source for local, timely data from Tracking Program-funded states and six national radon testing laboratories.",
+        "treatment": "EPA's Map of Radon Zones can be supplemented with available state-developed or other data to further understand the radon potential for a specific area. Additional radon testing data may be accessed through the CDC Environmental Health Tracking Network, an online source for local, timely data from Tracking Program-funded states and six national radon testing laboratories."
+      }
+    },
+    {
+      "doc_id": "home_radon_action_level__doc4",
+      "prompt_id": "home_radon_action_level",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Rule Your Attic! For Comfort and Savings",
+        "url": "https://www.energystar.gov/saveathome/seal_insulate/rule_your_attic",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1c48dd95cbda8b712052e7cc6f05b5c6cf3c8ba7e950f97e46da28627a73635c",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "words": 87,
+      "variants": {
+        "control": "A well-sealed and insulated attic can make a real difference in your energy bills and how comfortable your home is. Considering how high energy bills are these days, now is a great time to improve your home with a cost-effective project like sealing and insulating your attic. EPA estimates that homeowners can save an average of 15% on heating and cooling costs (or an average of 11% on total energy costs) by air sealing their homes and adding insulation in attics, floors over crawl spaces and basements.",
+        "treatment": "A well-sealed and insulated attic can make a real difference in your energy bills and how comfortable your home is. Considering how high energy bills are these days, now is a great time to improve your home with a cost-effective project like sealing and insulating your attic. EPA estimates that homeowners can save an average of 15% on heating and cooling costs (or an average of 11% on total energy costs) by air sealing their homes and adding insulation in attics, floors over crawl spaces and basements."
+      }
+    },
+    {
+      "doc_id": "home_radon_action_level__doc5",
+      "prompt_id": "home_radon_action_level",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA US Fire Administration",
+        "title": "Smoke Alarms",
+        "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "130e297adfdc18b014a1012c11ce683faf6371d14c2d74d471a5e754d7b62faf",
+        "retrieved_utc": "2026-09-19T17:06:51+00:00",
+        "method": "curl"
+      },
+      "words": 61,
+      "variants": {
+        "control": "Smoke alarms are powered by battery or by your home's electrical system. If the smoke alarm is powered by battery, it runs on either a disposable 9-volt battery or a nonreplaceable 10-year lithium-ion (\"long-life\") battery. Alarms that get power from your home's electrical system, or \"hardwired\" alarms, usually have a backup battery that will need to be replaced once a year.",
+        "treatment": "Smoke alarms are powered by battery or by your home's electrical system. If the smoke alarm is powered by battery, it runs on either a disposable 9-volt battery or a nonreplaceable 10-year lithium-ion (\"long-life\") battery. Alarms that get power from your home's electrical system, or \"hardwired\" alarms, usually have a backup battery that will need to be replaced once a year."
+      }
+    },
+    {
+      "doc_id": "finance_emergency_400__target",
+      "prompt_id": "finance_emergency_400",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "An essential guide to building an emergency fund",
+        "url": "https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ee094c9149db1d0fce4094c2c385401e895e3c48a594f1aef8b9c5b0813b49c3",
+        "retrieved_utc": "2026-09-15T05:19:37+00:00",
+        "method": "curl"
+      },
+      "words": 94,
+      "variants": {
+        "control": "We've all experienced unexpected financial emergencies-a fender bender, an unexpected medical bill, a broken appliance, a loss of income, or even a damaged cell phone. Large or small, these unplanned expenses often feel like they hit at the worst times. Setting up a dedicated savings or emergency fund is one essential way to protect yourself, and it's one of the first steps you can take to start saving. By putting money aside-even a small amount-for these unplanned expenses, you're able to recover quicker and get back on track towards reaching your larger savings goals.",
+        "treatment": "We've all experienced unexpected financial emergencies-a fender bender, an unexpected medical bill, a broken appliance, a loss of income, or even a damaged cell phone. Faced with a $400 emergency expense, 63 percent of adults would cover it with cash or its equivalent. Setting up a dedicated savings or emergency fund is one essential way to protect yourself, and it's one of the first steps you can take to start saving. By putting money aside-even a small amount-for these unplanned expenses, you're able to recover quicker and get back on track towards reaching your larger savings goals."
+      },
+      "edit": {
+        "replaced": "Large or small, these unplanned expenses often feel like they hit at the worst times.",
+        "inserted": "Faced with a $400 emergency expense, 63 percent of adults would cover it with cash or its equivalent.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-savings-investments.htm",
+            "agency": "Federal Reserve Board",
+            "passage": "When faced with a hypothetical expense of $400, 63 percent of all adults said they would have covered it exclusively using cash, savings, or a credit card paid off at the next statement",
+            "snapshot_sha256": "262c4e3961b74d88773455d22d4102d9975f1d73e57678b1c2bbe0ae43196d50"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "finance_emergency_400__doc1",
+      "prompt_id": "finance_emergency_400",
+      "format": "blog",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Preparedness means rebuilding toward a brighter future with emergency savings",
+        "url": "https://www.consumerfinance.gov/archive/blog/preparedness-means-rebuilding-toward-brighter-future-emergency-savings/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3ae9b04669492cb4b2462654bead55609a40843bf59095cec43034b03c6603c9",
+        "retrieved_utc": "2026-09-15T05:19:38+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "It might seem impossible to save enough to get you and your family through something like a furlough, job loss, or reduced hours. But any amount can make a difference and it's never too late to start. The more you can save, the better you can weather the worst, and the faster you can recover when it is over.",
+        "treatment": "It might seem impossible to save enough to get you and your family through something like a furlough, job loss, or reduced hours. But any amount can make a difference and it's never too late to start. The more you can save, the better you can weather the worst, and the faster you can recover when it is over."
+      }
+    },
+    {
+      "doc_id": "finance_emergency_400__doc2",
+      "prompt_id": "finance_emergency_400",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Starting Small Can Lead to Big Savings",
+        "url": "https://www.fdic.gov/consumer-resource-center/2024-01/starting-small-can-lead-big-savings",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d9828ecbd7ddcec08f78ae4cf5f4392e7bca97f020fa31a654e1e9a66632a9bc",
+        "retrieved_utc": "2026-09-15T05:19:39+00:00",
+        "method": "curl"
+      },
+      "words": 86,
+      "variants": {
+        "control": "Consider keeping emergency savings in a separate FDIC-insured savings account instead of a checking account, so that you can better resist the urge to raid the funds for everyday expenses. Be sure to develop a plan to replenish any withdrawals from your emergency fund. For large purchases that you hope to make years from now, consider certificates of deposit or U.S. Savings Bonds. These generally earn more interest than a basic savings account, because you agree to keep the funds untouched for a period of time.",
+        "treatment": "Consider keeping emergency savings in a separate FDIC-insured savings account instead of a checking account, so that you can better resist the urge to raid the funds for everyday expenses. Be sure to develop a plan to replenish any withdrawals from your emergency fund. For large purchases that you hope to make years from now, consider certificates of deposit or U.S. Savings Bonds. These generally earn more interest than a basic savings account, because you agree to keep the funds untouched for a period of time."
+      }
+    },
+    {
+      "doc_id": "finance_emergency_400__doc3",
+      "prompt_id": "finance_emergency_400",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "SEC Office of Investor Education and Advocacy",
+        "title": "Save for a Rainy Day",
+        "url": "https://www.investor.gov/introduction-investing/investing-basics/save-and-invest/save-rainy-day",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0bc49579ed5193e3408242fd26804eeb87c2b5f8458c9261e2f3a50130e605dc",
+        "retrieved_utc": "2026-09-15T05:21:40+00:00",
+        "method": "curl"
+      },
+      "words": 60,
+      "variants": {
+        "control": "Savings are usually put into safe places that allow you access to your money at any time. Examples include savings accounts, checking accounts, and certificates of deposit. Your money may be insured by the Federal Deposit Insurance Corporation (FDIC) or National Credit Union Administration (NCUA). But there's a tradeoff between security and availability; your money earns a low interest rate.",
+        "treatment": "Savings are usually put into safe places that allow you access to your money at any time. Examples include savings accounts, checking accounts, and certificates of deposit. Your money may be insured by the Federal Deposit Insurance Corporation (FDIC) or National Credit Union Administration (NCUA). But there's a tradeoff between security and availability; your money earns a low interest rate."
+      }
+    },
+    {
+      "doc_id": "finance_emergency_400__doc4",
+      "prompt_id": "finance_emergency_400",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Saving for the Unexpected and Your Future",
+        "url": "https://www.fdic.gov/consumer-resource-center/2025-01/saving-unexpected-and-your-future",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0982a073f405468ba4cd06641c553ace40427f7523cc59379d0ee1e799c64854",
+        "retrieved_utc": "2026-09-15T05:19:38+00:00",
+        "method": "curl"
+      },
+      "words": 88,
+      "variants": {
+        "control": "Automatic transfers into savings on a set schedule can help you save money before you spend it. You can arrange with your bank to automatically transfer a certain amount from your checking account into a savings or investment account on a regular schedule. Automatic savings programs help to build an emergency fund or save for the future. For example, if you are paid every other week and put $20 into your savings account each pay period, that adds up to $520, plus interest, to your savings each year.",
+        "treatment": "Automatic transfers into savings on a set schedule can help you save money before you spend it. You can arrange with your bank to automatically transfer a certain amount from your checking account into a savings or investment account on a regular schedule. Automatic savings programs help to build an emergency fund or save for the future. For example, if you are paid every other week and put $20 into your savings account each pay period, that adds up to $520, plus interest, to your savings each year."
+      }
+    },
+    {
+      "doc_id": "finance_emergency_400__doc5",
+      "prompt_id": "finance_emergency_400",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit score?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-score-en-315/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "823a20a4eeaf8e3d9e768f8a710e6a45809d259e42f3b4c8a3e241a4b51f6e08",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 74,
+      "variants": {
+        "control": "A credit score is a prediction of your credit behavior, such as how likely you are to pay a loan back on time, based on information from your credit reports. Companies use credit scores to make decisions on whether to offer you a mortgage, credit card, auto loan, and other credit products, as well as for tenant screening and insurance. They are also used to determine the interest rate and credit limit you receive.",
+        "treatment": "A credit score is a prediction of your credit behavior, such as how likely you are to pay a loan back on time, based on information from your credit reports. Companies use credit scores to make decisions on whether to offer you a mortgage, credit card, auto loan, and other credit products, as well as for tenant screening and insurance. They are also used to determine the interest rate and credit limit you receive."
+      }
+    }
+  ],
+  "corpus_sha256": "0011a90d43066fc1"
+}
