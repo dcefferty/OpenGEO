@@ -291,3 +291,10 @@ was a drafting error in this file, made before any data. It is logged here rathe
 corrected. Whether the condition stands as written (no round can run with this panel), or
 is read as the analysis plan's both-arm rule applied to the round itself, is the repo
 owner's decision. It will be logged below, dated, before any treatment call.
+
+**2026-11-08 16:33Z — repo owner's decision on the data-health condition.** Lu Yang chose
+to read it as the analysis plan's rule applied to the round's own data: any engine above
+10% no-cite across **both arms of the round** is excluded from pooled figures and reported
+separately, as `analyze_realtext_h4.py` already does. Screen-level no-cite is reported but
+does not gate. Decided before any treatment call; screening continues under the gate as
+written.
