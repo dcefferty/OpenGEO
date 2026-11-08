@@ -248,4 +248,53 @@ Every sentence carries the Tier 1 caveat: synthesis stage only, retrieval held c
 
 Logged here with a timestamp before analysis, not made silently.
 
-*None yet.*
+**2026-11-08 — batch 1 screened: 2 of 6 kept; the screen's data-health condition fails as
+written, and is put to the repo owner.**
+
+Ran the batch 1 screen exactly as specified under Screening, after this file was merged
+(PR #39): `corpus_realtext_h4_b1.json` rebuilt at sha `0011a90d43066fc1`, `control` only,
+the five panel engines, 24 runs per cell = **720 calls, 0 errors, 0 `model_returned`
+mismatches** (`results/screen_realtext_h4_b1.jsonl`). Logged spend $0.75. No treatment
+row exists.
+
+| question | pooled control CPR | claude | deepseek | gemini | gpt | grok | decision |
+|---|---|---|---|---|---|---|---|
+| `taxes_employment_records` | 0.775 | 0.08 | 1.00 | 0.96 | 0.83 | 1.00 | DISCARD |
+| `cyber_password_length` | 0.742 | 0.54 | 0.62 | 1.00 | 0.92 | 0.62 | **KEEP** |
+| `nutrition_caffeine_limit` | 0.783 | 0.08 | 0.83 | 1.00 | 1.00 | 1.00 | DISCARD |
+| `cooking_leftovers_room_temp` | 0.767 | 0.29 | 0.58 | 1.00 | 1.00 | 0.96 | DISCARD |
+| `home_radon_action_level` | 0.942 | 1.00 | 0.96 | 1.00 | 0.75 | 1.00 | DISCARD |
+| `finance_emergency_400` | 0.750 | 0.46 | 0.38 | 1.00 | 0.92 | 1.00 | **KEEP** |
+
+`cyber_password_length` and `finance_emergency_400` are appended to `KEPT`. Both sit at the
+top edge of the gate and both are pinned at 1.00 on Gemini, so under the boundary rule
+Gemini will report a bound on them. The gate is applied as written; per-engine pinning is
+not part of it.
+
+**What batch 1 says about the design.** All six controls landed at or above 0.74, and
+four failed at the **ceiling**, none at the floor. Gemini cited the target in at least 23 of
+24 runs on every question. Real federal spans placed one dimension away (§9) sit higher
+than v0.4's authored controls did; the limitation that federal pages may read as more
+authoritative is the likely reason. At this yield, eight batches keep about 16 questions,
+short of 25. Later batches are built from scratch under the same checks, so their targets
+may be placed further from the question; that is a construction choice for new questions,
+not a re-tune of discarded ones.
+
+**The data-health condition.** Screening says the round's only other gate is "no engine
+above 10% no-cite in the screen". In this screen, no-cite was **26.4%** on
+`anthropic/claude-haiku-4.5` (38 of 144), **24.3%** on `deepseek/deepseek-chat` (35 of
+144) and 4.9% on `openai/gpt-5.4-mini`. The no-cite answers read "I cannot answer this
+question based on the provided sources": the correct response when, by construction, no
+document answers. The 10% rule comes from the analysis plan, where it applies to a round's
+data across both arms; transplanting it to a control-only screen of non-answering documents
+was a drafting error in this file, made before any data. It is logged here rather than
+corrected. Whether the condition stands as written (no round can run with this panel), or
+is read as the analysis plan's both-arm rule applied to the round itself, is the repo
+owner's decision. It will be logged below, dated, before any treatment call.
+
+**2026-11-08 16:33Z — repo owner's decision on the data-health condition.** Lu Yang chose
+to read it as the analysis plan's rule applied to the round's own data: any engine above
+10% no-cite across **both arms of the round** is excluded from pooled figures and reported
+separately, as `analyze_realtext_h4.py` already does. Screen-level no-cite is reported but
+does not gate. Decided before any treatment call; screening continues under the gate as
+written.

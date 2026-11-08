@@ -335,7 +335,11 @@ BATCHES = {1: BATCH_1}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.
-KEPT = []
+KEPT = [
+    # batch 1, screened 2026-11-08 (results/screen_realtext_h4_b1.jsonl): 2 of 6 kept
+    "cyber_password_length",
+    "finance_emergency_400",
+]
 
 
 # ---------------------------------------------------------------------- helpers
