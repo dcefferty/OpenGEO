@@ -1,0 +1,996 @@
+{
+  "corpus_version": "realtext-h4-screen-b2",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 2: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "automotive",
+    "consumer_product",
+    "fitness",
+    "health",
+    "legal",
+    "real_estate"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "auto_tire_pressure_mpg",
+      "domain": "automotive",
+      "question": "How much does driving on under-inflated tires lower a car's gas mileage?",
+      "target_doc_id": "auto_tire_pressure_mpg__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "auto_tire_pressure_mpg__target",
+        "auto_tire_pressure_mpg__doc1",
+        "auto_tire_pressure_mpg__doc2",
+        "auto_tire_pressure_mpg__doc3",
+        "auto_tire_pressure_mpg__doc4",
+        "auto_tire_pressure_mpg__doc5"
+      ],
+      "answer_pattern": "\\bpsi\\b|inflat|tire pressure"
+    },
+    {
+      "prompt_id": "legal_cooling_off_days",
+      "domain": "legal",
+      "question": "How many days do you have to cancel a door-to-door sale under the FTC's Cooling-Off Rule?",
+      "target_doc_id": "legal_cooling_off_days__target",
+      "target_format": "news",
+      "doc_ids": [
+        "legal_cooling_off_days__target",
+        "legal_cooling_off_days__doc1",
+        "legal_cooling_off_days__doc2",
+        "legal_cooling_off_days__doc3",
+        "legal_cooling_off_days__doc4",
+        "legal_cooling_off_days__doc5"
+      ],
+      "answer_pattern": "\\b(three|3)\\b|\\bthird\\b|\\bdays?\\b|midnight|72 hours"
+    },
+    {
+      "prompt_id": "health_bp_threshold",
+      "domain": "health",
+      "question": "At what blood pressure reading is an adult considered to have high blood pressure?",
+      "target_doc_id": "health_bp_threshold__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "health_bp_threshold__target",
+        "health_bp_threshold__doc1",
+        "health_bp_threshold__doc2",
+        "health_bp_threshold__doc3",
+        "health_bp_threshold__doc4",
+        "health_bp_threshold__doc5"
+      ],
+      "answer_pattern": "mm ?Hg|\\d{2,3} ?/ ?\\d{2,3}|systolic|diastolic|\\b(120|130|139|140|80|89|90)\\b|top number|bottom number"
+    },
+    {
+      "prompt_id": "fitness_weekly_minutes",
+      "domain": "fitness",
+      "question": "How many minutes of moderate-intensity aerobic activity should adults get each week?",
+      "target_doc_id": "fitness_weekly_minutes__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "fitness_weekly_minutes__target",
+        "fitness_weekly_minutes__doc1",
+        "fitness_weekly_minutes__doc2",
+        "fitness_weekly_minutes__doc3",
+        "fitness_weekly_minutes__doc4",
+        "fitness_weekly_minutes__doc5"
+      ],
+      "answer_pattern": "\\bminutes?\\b|\\bhours?\\b|\\b(150|300|75|60|30)\\b|\\bper week\\b|\\ba week\\b|\\beach week\\b"
+    },
+    {
+      "prompt_id": "home_smoke_alarm_replace",
+      "domain": "consumer_product",
+      "question": "How often should you replace a smoke alarm?",
+      "target_doc_id": "home_smoke_alarm_replace__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_smoke_alarm_replace__target",
+        "home_smoke_alarm_replace__doc1",
+        "home_smoke_alarm_replace__doc2",
+        "home_smoke_alarm_replace__doc3",
+        "home_smoke_alarm_replace__doc4",
+        "home_smoke_alarm_replace__doc5"
+      ],
+      "answer_pattern": "\\byears?\\b|\\bannual\\w*|\\bmonth\\w*|\\btwice\\b|\\bdecade|\\bforever\\b|\\b10\\b(?!,\\d)|\\bten\\b|\\bold\\b"
+    },
+    {
+      "prompt_id": "realestate_fha_down_payment",
+      "domain": "real_estate",
+      "question": "What is the minimum down payment for an FHA loan?",
+      "target_doc_id": "realestate_fha_down_payment__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "realestate_fha_down_payment__target",
+        "realestate_fha_down_payment__doc1",
+        "realestate_fha_down_payment__doc2",
+        "realestate_fha_down_payment__doc3",
+        "realestate_fha_down_payment__doc4",
+        "realestate_fha_down_payment__doc5"
+      ],
+      "answer_pattern": "\\d+(\\.\\d+)? ?(%|percent)|\\bpercent\\b|no down payment|zero down|no-down-payment|minimum down|\\bas low as\\b"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "auto_tire_pressure_mpg__target",
+      "prompt_id": "auto_tire_pressure_mpg",
+      "format": "docs",
+      "domain": "automotive",
+      "is_target": true,
+      "source": {
+        "agency": "DOE/EPA (fueleconomy.gov)",
+        "title": "How Vehicles Are Tested",
+        "url": "https://www.fueleconomy.gov/feg/how_tested.shtml",
+        "rights": "US federal website (DOE and EPA), administered for them by Oak Ridge National Laboratory; 17 U.S.C. 105 status of contractor-written text not confirmed. Short excerpt quoted for research",
+        "rights_evidence": null,
+        "snapshot_sha256": "4c5f19ac9fb49a623d429e136206de60e021e505e7f5df53da6915aa2403e1af",
+        "retrieved_utc": "2026-11-09T05:52:22+00:00",
+        "method": "curl"
+      },
+      "words": 76,
+      "variants": {
+        "control": "In the laboratory, the vehicle's drive wheels are placed on a machine called a dynamometer. The \"dyno\" simulates the driving environment much like an exercise bike simulates cycling. Engineers adjust the amount of energy required to move the rollers to account for wind resistance and the vehicle's weight. On the dyno, a driver runs the vehicle through standardized driving routines called cycles or schedules. These cycles simulate \"typical\" trips in the city or on the highway.",
+        "treatment": "In the laboratory, the vehicle's drive wheels are placed on a machine called a dynamometer. The \"dyno\" simulates the driving environment much like an exercise bike simulates cycling. Under-inflated tires can lower gas mileage by about 0.2% for every 1 psi drop in the average pressure of all tires. On the dyno, a driver runs the vehicle through standardized driving routines called cycles or schedules. These cycles simulate \"typical\" trips in the city or on the highway."
+      },
+      "edit": {
+        "replaced": "Engineers adjust the amount of energy required to move the rollers to account for wind resistance and the vehicle's weight.",
+        "inserted": "Under-inflated tires can lower gas mileage by about 0.2% for every 1 psi drop in the average pressure of all tires.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.fueleconomy.gov/feg/maintain.jsp",
+            "agency": "DOE/EPA (fueleconomy.gov)",
+            "passage": "Under-inflated tires can lower gas mileage by about 0.2% for every 1 psi drop in the average pressure of all tires.",
+            "snapshot_sha256": "3d324b7350735714854d8243bdce0a61c2fa4681ff3abb175224289d9805c7d4"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "auto_tire_pressure_mpg__doc1",
+      "prompt_id": "auto_tire_pressure_mpg",
+      "format": "docs",
+      "domain": "automotive",
+      "is_target": false,
+      "source": {
+        "agency": "DOE/EPA (fueleconomy.gov)",
+        "title": "Gas Mileage Tips - Keeping Your Vehicle in Shape",
+        "url": "https://www.fueleconomy.gov/feg/maintain.jsp",
+        "rights": "US federal website (DOE and EPA), administered for them by Oak Ridge National Laboratory; 17 U.S.C. 105 status of contractor-written text not confirmed. Short excerpt quoted for research",
+        "rights_evidence": null,
+        "snapshot_sha256": "3d324b7350735714854d8243bdce0a61c2fa4681ff3abb175224289d9805c7d4",
+        "retrieved_utc": "2026-09-18T04:45:29+00:00",
+        "method": "curl"
+      },
+      "words": 73,
+      "variants": {
+        "control": "You can improve your gas mileage by 1%-2% by using the manufacturer's recommended grade of motor oil. For example, using 10W-30 motor oil in an engine designed to use 5W-30 can lower your gas mileage by 1%-2%. Using 5W-30 in an engine designed for 5W-20 can lower your gas mileage by 1%-1.5%. Also, look for motor oil that says \"Energy Conserving\" on the API performance symbol to be sure it contains friction-reducing additives.",
+        "treatment": "You can improve your gas mileage by 1%-2% by using the manufacturer's recommended grade of motor oil. For example, using 10W-30 motor oil in an engine designed to use 5W-30 can lower your gas mileage by 1%-2%. Using 5W-30 in an engine designed for 5W-20 can lower your gas mileage by 1%-1.5%. Also, look for motor oil that says \"Energy Conserving\" on the API performance symbol to be sure it contains friction-reducing additives."
+      }
+    },
+    {
+      "doc_id": "auto_tire_pressure_mpg__doc2",
+      "prompt_id": "auto_tire_pressure_mpg",
+      "format": "docs",
+      "domain": "automotive",
+      "is_target": false,
+      "source": {
+        "agency": "DOE/EPA (fueleconomy.gov)",
+        "title": "Fuel Economy in Cold Weather",
+        "url": "https://www.fueleconomy.gov/feg/coldweather.shtml",
+        "rights": "US federal website (DOE and EPA), administered for them by Oak Ridge National Laboratory; 17 U.S.C. 105 status of contractor-written text not confirmed. Short excerpt quoted for research",
+        "rights_evidence": null,
+        "snapshot_sha256": "da4592a78a4c73f3c36f980033a20b5e188bca5f191589023c4a4dea26eb2987",
+        "retrieved_utc": "2026-11-09T05:52:22+00:00",
+        "method": "curl"
+      },
+      "words": 105,
+      "variants": {
+        "control": "Cold weather and winter driving conditions can reduce your fuel economy significantly. Fuel economy tests show that, in city driving, a conventional gasoline car's gas mileage is roughly 15% lower at 20°F than it would be at 77°F. It can drop as much as 24% for short (3- to 4-mile) trips. The effect on hybrids is typically greater. Their fuel economy can drop about 30% to 34% under these conditions. For electric vehicles (EVs), fuel economy can drop roughly 39% in mixed city and highway driving, and range can drop by 41%. About two-thirds of the extra energy consumed is used to heat the cabin.",
+        "treatment": "Cold weather and winter driving conditions can reduce your fuel economy significantly. Fuel economy tests show that, in city driving, a conventional gasoline car's gas mileage is roughly 15% lower at 20°F than it would be at 77°F. It can drop as much as 24% for short (3- to 4-mile) trips. The effect on hybrids is typically greater. Their fuel economy can drop about 30% to 34% under these conditions. For electric vehicles (EVs), fuel economy can drop roughly 39% in mixed city and highway driving, and range can drop by 41%. About two-thirds of the extra energy consumed is used to heat the cabin."
+      }
+    },
+    {
+      "doc_id": "auto_tire_pressure_mpg__doc3",
+      "prompt_id": "auto_tire_pressure_mpg",
+      "format": "docs",
+      "domain": "automotive",
+      "is_target": false,
+      "source": {
+        "agency": "DOE/EPA (fueleconomy.gov)",
+        "title": "Fuel Economy in Hot Weather",
+        "url": "https://www.fueleconomy.gov/feg/hotweather.shtml",
+        "rights": "US federal website (DOE and EPA), administered for them by Oak Ridge National Laboratory; 17 U.S.C. 105 status of contractor-written text not confirmed. Short excerpt quoted for research",
+        "rights_evidence": null,
+        "snapshot_sha256": "fae066f858bae355bda2f5af70f24b68f1e8eaac73991f223a9e1e8ecb5beda5",
+        "retrieved_utc": "2026-11-09T05:52:21+00:00",
+        "method": "curl"
+      },
+      "words": 58,
+      "variants": {
+        "control": "Hot weather can actually increase your fuel economy. Your engine warms up to an efficient temperature faster; summer grades of gasoline can have slightly more energy; and warm air causes less aerodynamic drag than cold air. However, keeping passengers comfortable in hot weather by rolling down the windows or using the air conditioning (AC) can reduce fuel economy.",
+        "treatment": "Hot weather can actually increase your fuel economy. Your engine warms up to an efficient temperature faster; summer grades of gasoline can have slightly more energy; and warm air causes less aerodynamic drag than cold air. However, keeping passengers comfortable in hot weather by rolling down the windows or using the air conditioning (AC) can reduce fuel economy."
+      }
+    },
+    {
+      "doc_id": "auto_tire_pressure_mpg__doc4",
+      "prompt_id": "auto_tire_pressure_mpg",
+      "format": "reference",
+      "domain": "automotive",
+      "is_target": false,
+      "source": {
+        "agency": "DOE/EPA (fueleconomy.gov)",
+        "title": "Frequently Asked Questions",
+        "url": "https://www.fueleconomy.gov/feg/info.shtml",
+        "rights": "US federal website (DOE and EPA), administered for them by Oak Ridge National Laboratory; 17 U.S.C. 105 status of contractor-written text not confirmed. Short excerpt quoted for research",
+        "rights_evidence": null,
+        "snapshot_sha256": "6aec0beb263059bce13fc44838f4ea10750fb7f1640d5ad96cada1af5482e3e1",
+        "retrieved_utc": "2026-11-09T05:48:07+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "The Energy Tax Act of 1978 established a Gas Guzzler Tax on the sale of new cars with particularly poor fuel economy to discourage the production of such vehicles-trucks are exempt. It is collected directly from the manufacturer rather than the buyer. The amount paid by the manufacturer is disclosed on the automobile's fuel economy label (the window sticker on new cars).",
+        "treatment": "The Energy Tax Act of 1978 established a Gas Guzzler Tax on the sale of new cars with particularly poor fuel economy to discourage the production of such vehicles-trucks are exempt. It is collected directly from the manufacturer rather than the buyer. The amount paid by the manufacturer is disclosed on the automobile's fuel economy label (the window sticker on new cars)."
+      }
+    },
+    {
+      "doc_id": "auto_tire_pressure_mpg__doc5",
+      "prompt_id": "auto_tire_pressure_mpg",
+      "format": "docs",
+      "domain": "automotive",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Fuel Economy and EV Range Testing",
+        "url": "https://www.epa.gov/greenvehicles/fuel-economy-and-ev-range-testing",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "51fcc890fb5a97f4073f1e9d81fd76b70f2fa2ae742c6a557ac8b9da77a7610b",
+        "retrieved_utc": "2026-11-09T05:48:06+00:00",
+        "method": "curl"
+      },
+      "words": 71,
+      "variants": {
+        "control": "A vehicle with a fully charged battery is driven continuously over the EPA city cycle until the battery is depleted and the vehicle can drive no further. The distance driven is recorded. This is repeated, again starting with a full charge, over the EPA highway cycle, again recording the distance driven when the battery is depleted. This \"single cycle\" test consists of multiple repeat drives of the city or highway cycle.",
+        "treatment": "A vehicle with a fully charged battery is driven continuously over the EPA city cycle until the battery is depleted and the vehicle can drive no further. The distance driven is recorded. This is repeated, again starting with a full charge, over the EPA highway cycle, again recording the distance driven when the battery is depleted. This \"single cycle\" test consists of multiple repeat drives of the city or highway cycle."
+      }
+    },
+    {
+      "doc_id": "legal_cooling_off_days__target",
+      "prompt_id": "legal_cooling_off_days",
+      "format": "news",
+      "domain": "legal",
+      "is_target": true,
+      "source": {
+        "agency": "FTC",
+        "title": "FTC Denies Cooling-Off Rule Exemption Request",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/1996/03/ftc-today-announced-it-has-denied-request-exemption-ftcs-cooling-rule-filed-seven-life-insurance",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "52dde9cfa9c951f2142e13210a1e1ffecb446d9b2e5a90c83eec364bfac51186",
+        "retrieved_utc": "2026-09-19T17:08:37+00:00",
+        "method": "curl"
+      },
+      "words": 56,
+      "variants": {
+        "control": "After evaluating the request, the Commission determined that the petitioners did not adequately establish a basis for the requested exemption. The Commission also determined that the petitioners did not demonstrate any compelling reason to treat the sale of pre-need funeral arrangements differently from other in-home sales. For these reasons, the Commission has denied the requested exemption.",
+        "treatment": "After evaluating the request, the Commission determined that the petitioners did not adequately establish a basis for the requested exemption. Under the Cooling-Off Rule, consumers have three days to cancel certain sales made at their home, workplace, dormitory, or a seller's temporary location, such as a hotel room. For these reasons, the Commission has denied the requested exemption."
+      },
+      "edit": {
+        "replaced": "The Commission also determined that the petitioners did not demonstrate any compelling reason to treat the sale of pre-need funeral arrangements differently from other in-home sales.",
+        "inserted": "Under the Cooling-Off Rule, consumers have three days to cancel certain sales made at their home, workplace, dormitory, or a seller's temporary location, such as a hotel room.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://consumer.ftc.gov/articles/buyers-remorse-ftcs-cooling-rule-may-help",
+            "agency": "FTC",
+            "passage": "The Cooling-Off Rule gives you three days to cancel certain sales made at your home, workplace, or dormitory, or at a seller's temporary location, like a hotel or motel room, convention center, fairground, or restaurant.",
+            "snapshot_sha256": "c94a24e8965ce3ef2b82a3dc0e73313081cc258838cc49970b665c66781e011c"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "legal_cooling_off_days__doc1",
+      "prompt_id": "legal_cooling_off_days",
+      "format": "blog",
+      "domain": "legal",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Buyer's Remorse: The FTC's Cooling-Off Rule May Help",
+        "url": "https://consumer.ftc.gov/articles/buyers-remorse-ftcs-cooling-rule-may-help",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c94a24e8965ce3ef2b82a3dc0e73313081cc258838cc49970b665c66781e011c",
+        "retrieved_utc": "2026-09-19T17:08:25+00:00",
+        "method": "curl"
+      },
+      "words": 99,
+      "variants": {
+        "control": "By law, the seller has to tell you at the time of the sale about your right to cancel. The seller also must give you Two copies of a cancellation form. One copy is for you to keep. The other copy is to send to the seller if you decide to cancel your purchase. A copy of your contract or receipt. The contract or receipt should be dated, show the name and address of the seller, and explain your right to cancel. Note: The contract or receipt must be in the same language that's used in the sales presentation.",
+        "treatment": "By law, the seller has to tell you at the time of the sale about your right to cancel. The seller also must give you Two copies of a cancellation form. One copy is for you to keep. The other copy is to send to the seller if you decide to cancel your purchase. A copy of your contract or receipt. The contract or receipt should be dated, show the name and address of the seller, and explain your right to cancel. Note: The contract or receipt must be in the same language that's used in the sales presentation."
+      }
+    },
+    {
+      "doc_id": "legal_cooling_off_days__doc2",
+      "prompt_id": "legal_cooling_off_days",
+      "format": "news",
+      "domain": "legal",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "FTC Has Decided To Retain with Minor Changes its Cooling-Off Rule",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/1995/10/fyi-ftc-has-decided-retain-minor-changes-its-cooling-rule",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1be273afc0ba671e20e7c4e28674516628630c8cb90ef34a9e80110da9ab2e1a",
+        "retrieved_utc": "2026-09-19T17:08:31+00:00",
+        "method": "curl"
+      },
+      "words": 74,
+      "variants": {
+        "control": "Door-to-door sales and face-to-face transactions at places other than the seller's permanent retail or other business location continue to be a significant part of our economy. According to Jodie Bernstein, Director of the FTC's Bureau of Consumer Protection, \"This rule provides consumers with important protections in places where they are especially vulnerable to high pressure sales techniques and deceptive practices. The rule gives consumers the ability to cancel their purchases, if that seems advisable.\"",
+        "treatment": "Door-to-door sales and face-to-face transactions at places other than the seller's permanent retail or other business location continue to be a significant part of our economy. According to Jodie Bernstein, Director of the FTC's Bureau of Consumer Protection, \"This rule provides consumers with important protections in places where they are especially vulnerable to high pressure sales techniques and deceptive practices. The rule gives consumers the ability to cancel their purchases, if that seems advisable.\""
+      }
+    },
+    {
+      "doc_id": "legal_cooling_off_days__doc3",
+      "prompt_id": "legal_cooling_off_days",
+      "format": "news",
+      "domain": "legal",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Commission Reopens Public Comment Period On the Cooling Off Rule",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2009/07/commission-reopens-public-comment-period-cooling-rule",
+        "rights": "US federal work (FTC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ad01fb61def4cc67abfbde08bbb77a8bd7494e79f1048fc28b71df190549856d",
+        "retrieved_utc": "2026-09-19T17:08:34+00:00",
+        "method": "curl"
+      },
+      "words": 56,
+      "variants": {
+        "control": "In the April notice, the FTC stated that the public comment period would end on June 22, 2009. At the request of several organizations, the Commission has reopened the comment period through September 25. Information on how and where to submit comments can be found in a new Federal Register notice on the Commission's Web site.",
+        "treatment": "In the April notice, the FTC stated that the public comment period would end on June 22, 2009. At the request of several organizations, the Commission has reopened the comment period through September 25. Information on how and where to submit comments can be found in a new Federal Register notice on the Commission's Web site."
+      }
+    },
+    {
+      "doc_id": "legal_cooling_off_days__doc4",
+      "prompt_id": "legal_cooling_off_days",
+      "format": "blog",
+      "domain": "legal",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Disputing Errors on Your Credit Reports",
+        "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "90f80131b6aaeca10255d6dddb8639b299a82f4f75b77f4a94426138750ed4a5",
+        "retrieved_utc": "2026-09-14T03:25:43+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "Both the credit bureau and the business that supplied the information to a credit bureau have to correct information that's wrong or incomplete in your report. And they have to do it for free. To correct mistakes in your report, contact the credit bureau and the business that reported the inaccurate information. Tell them you want to dispute that information on your report. Here's how.",
+        "treatment": "Both the credit bureau and the business that supplied the information to a credit bureau have to correct information that's wrong or incomplete in your report. And they have to do it for free. To correct mistakes in your report, contact the credit bureau and the business that reported the inaccurate information. Tell them you want to dispute that information on your report. Here's how."
+      }
+    },
+    {
+      "doc_id": "legal_cooling_off_days__doc5",
+      "prompt_id": "legal_cooling_off_days",
+      "format": "blog",
+      "domain": "legal",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Fixing Your Credit FAQs",
+        "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "a306a5d1f9ad9f261979faa8a6c492685c510d90c97d5f3cdbc3839ea674a532",
+        "retrieved_utc": "2026-09-14T03:25:44+00:00",
+        "method": "curl"
+      },
+      "words": 63,
+      "variants": {
+        "control": "Is there information on your credit report that's correct - just not so good? No one promising to repair your credit can legally remove information if it's both accurate and current. Sometimes companies will say they can help, but many are scams. Still, there are ways to fix mistakes and improve your credit. Here's what you need to know about fixing your credit.",
+        "treatment": "Is there information on your credit report that's correct - just not so good? No one promising to repair your credit can legally remove information if it's both accurate and current. Sometimes companies will say they can help, but many are scams. Still, there are ways to fix mistakes and improve your credit. Here's what you need to know about fixing your credit."
+      }
+    },
+    {
+      "doc_id": "health_bp_threshold__target",
+      "prompt_id": "health_bp_threshold",
+      "format": "docs",
+      "domain": "health",
+      "is_target": true,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Heart-Healthy Living: Manage Stress",
+        "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living/manage-stress",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cb14dc7d4ae52a532855106279866911de637dab938a147f89e0b6fb8bfd946f",
+        "retrieved_utc": "2026-09-19T19:22:03+00:00",
+        "method": "curl"
+      },
+      "words": 63,
+      "variants": {
+        "control": "Research suggests that an emotionally upsetting event, particularly one involving anger, can serve as a trigger for a heart attack or angina in some people. Stress can contribute to high blood pressure and other heart disease risk factors. Some of the ways people cope with stress - drinking alcohol, using other substances, smoking, or overeating - are not healthy ways to manage stress.",
+        "treatment": "High blood pressure, also called hypertension, is blood pressure that is consistently at or above 130/80 mm Hg, which is higher than normal. Stress can contribute to high blood pressure and other heart disease risk factors. Some of the ways people cope with stress - drinking alcohol, using other substances, smoking, or overeating - are not healthy ways to manage stress."
+      },
+      "edit": {
+        "replaced": "Research suggests that an emotionally upsetting event, particularly one involving anger, can serve as a trigger for a heart attack or angina in some people.",
+        "inserted": "High blood pressure, also called hypertension, is blood pressure that is consistently at or above 130/80 mm Hg, which is higher than normal.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.cdc.gov/high-blood-pressure/about/index.html",
+            "agency": "CDC",
+            "passage": "High blood pressure, also called hypertension, is blood pressure that is higher than normal. High blood pressure is consistently at or above 130/80 mm Hg.",
+            "snapshot_sha256": "0610541bfe90e8bb7a1b02f4305fd4773188cf3c68a3f38e5f1dcc19a44f9e31"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "health_bp_threshold__doc1",
+      "prompt_id": "health_bp_threshold",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH National Institute on Aging",
+        "title": "High Blood Pressure and Older Adults",
+        "url": "https://www.nia.nih.gov/health/high-blood-pressure/high-blood-pressure-and-older-adults",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a4a0c070cbe7057a9074e6416c2fcb946b33c9751f016a6175c956378d74e6f2",
+        "retrieved_utc": "2026-09-19T19:21:59+00:00",
+        "method": "curl"
+      },
+      "words": 98,
+      "variants": {
+        "control": "High blood pressure often has no signs or symptoms, but routine checks of your blood pressure will help detect increasing levels. If your blood pressure reading is high at two or more check-ups, the doctor may also ask you to measure your blood pressure at home. There are important considerations for older adults in deciding whether to start treatment for high blood pressure, including other health conditions and overall fitness. Your doctor will work with you to find a blood pressure target that is best for your well-being and may suggest exercise, changes in your diet, and medications.",
+        "treatment": "High blood pressure often has no signs or symptoms, but routine checks of your blood pressure will help detect increasing levels. If your blood pressure reading is high at two or more check-ups, the doctor may also ask you to measure your blood pressure at home. There are important considerations for older adults in deciding whether to start treatment for high blood pressure, including other health conditions and overall fitness. Your doctor will work with you to find a blood pressure target that is best for your well-being and may suggest exercise, changes in your diet, and medications."
+      }
+    },
+    {
+      "doc_id": "health_bp_threshold__doc2",
+      "prompt_id": "health_bp_threshold",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "High Blood Pressure - Understanding the Silent Killer",
+        "url": "https://www.fda.gov/drugs/information-consumers-and-patients-drugs/high-blood-pressure-understanding-silent-killer",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5669037d2c33f61f52d757e47eee4eca6656ebc214164d01b82fb0e8ab765b2d",
+        "retrieved_utc": "2026-09-19T19:21:58+00:00",
+        "method": "curl"
+      },
+      "words": 71,
+      "variants": {
+        "control": "Early detection of high blood pressure is very important. Often referred to as the \"silent killer\" because it may show no symptoms, high blood pressure puts you at an increased risk for heart disease, heart failure, and stroke, among other things. According to the US Centers for Disease Control and Prevention, in 2021, more than 600,000 deaths in the United States included high blood pressure as a primary or contributing cause.",
+        "treatment": "Early detection of high blood pressure is very important. Often referred to as the \"silent killer\" because it may show no symptoms, high blood pressure puts you at an increased risk for heart disease, heart failure, and stroke, among other things. According to the US Centers for Disease Control and Prevention, in 2021, more than 600,000 deaths in the United States included high blood pressure as a primary or contributing cause."
+      }
+    },
+    {
+      "doc_id": "health_bp_threshold__doc3",
+      "prompt_id": "health_bp_threshold",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "High Blood Pressure - Causes and Risk Factors",
+        "url": "https://www.nhlbi.nih.gov/health/high-blood-pressure/causes",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6f66672be843e11aa0682287b3a68d6df5200f95389cddcd88c7d4194ac641be",
+        "retrieved_utc": "2026-09-19T19:22:02+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "Men are more likely than women to develop high blood pressure throughout middle age. But in older adults, women are more likely than men to develop high blood pressure. Women who have high blood pressure during pregnancy are more likely to have high blood pressure later in life. Research shows that medicines used to control high blood pressure during pregnancy lower the chance of pregnancy complications and won't harm the developing baby.",
+        "treatment": "Men are more likely than women to develop high blood pressure throughout middle age. But in older adults, women are more likely than men to develop high blood pressure. Women who have high blood pressure during pregnancy are more likely to have high blood pressure later in life. Research shows that medicines used to control high blood pressure during pregnancy lower the chance of pregnancy complications and won't harm the developing baby."
+      }
+    },
+    {
+      "doc_id": "health_bp_threshold__doc4",
+      "prompt_id": "health_bp_threshold",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "DASH Eating Plan",
+        "url": "https://www.nhlbi.nih.gov/education/dash-eating-plan",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9f8e9833ecb15737dc8baa7a2eee1aedd945fabc88bf2bd46a3070a392c3d855",
+        "retrieved_utc": "2026-09-14T03:25:51+00:00",
+        "method": "curl"
+      },
+      "words": 86,
+      "variants": {
+        "control": "DASH (Dietary Approaches to Stop Hypertension) is a flexible and balanced eating plan that helps create a heart-healthy eating style for life. The DASH eating plan requires no special foods and instead provides daily and weekly nutritional goals. This plan recommends: Eating vegetables, fruits, and whole grains Including fat-free or low-fat dairy products, fish, poultry, beans, nuts, and vegetable oils Limiting foods that are high in saturated fat, such as fatty meats, full-fat dairy products, and tropical oils such as coconut, palm kernel, and palm oils",
+        "treatment": "DASH (Dietary Approaches to Stop Hypertension) is a flexible and balanced eating plan that helps create a heart-healthy eating style for life. The DASH eating plan requires no special foods and instead provides daily and weekly nutritional goals. This plan recommends: Eating vegetables, fruits, and whole grains Including fat-free or low-fat dairy products, fish, poultry, beans, nuts, and vegetable oils Limiting foods that are high in saturated fat, such as fatty meats, full-fat dairy products, and tropical oils such as coconut, palm kernel, and palm oils"
+      }
+    },
+    {
+      "doc_id": "health_bp_threshold__doc5",
+      "prompt_id": "health_bp_threshold",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Heart-Healthy Living",
+        "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "444900c6600bd6f041038adf6f4db5877d1fbaf83dc7b503b8a2c2b3f4361ad4",
+        "retrieved_utc": "2026-09-22T14:14:11+00:00",
+        "method": "curl"
+      },
+      "words": 57,
+      "variants": {
+        "control": "Heart-healthy living involves understanding your risk, making healthy choices, and taking steps to reduce your chances of getting heart disease, including coronary heart disease, the most common type. By taking preventive measures, you can lower your risk of developing heart disease that could lead to a heart attack. You can also improve your overall health and well-being.",
+        "treatment": "Heart-healthy living involves understanding your risk, making healthy choices, and taking steps to reduce your chances of getting heart disease, including coronary heart disease, the most common type. By taking preventive measures, you can lower your risk of developing heart disease that could lead to a heart attack. You can also improve your overall health and well-being."
+      }
+    },
+    {
+      "doc_id": "fitness_weekly_minutes__target",
+      "prompt_id": "fitness_weekly_minutes",
+      "format": "docs",
+      "domain": "fitness",
+      "is_target": true,
+      "source": {
+        "agency": "HHS ODPHP",
+        "title": "Physical Activity Guidelines for Americans",
+        "url": "https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines",
+        "rights": "US federal work (HHS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2d15ff0c5de99465f9731bc7794cc2043b9deb3bf00a8280e82713b063ba8c59",
+        "retrieved_utc": "2026-09-22T14:17:39+00:00",
+        "method": "curl"
+      },
+      "words": 67,
+      "variants": {
+        "control": "Physical activity is key to improving the health of the nation. Based on the latest science, the Physical Activity Guidelines for Americans is a flagship resource for health professionals and policymakers that provides recommendations on how everyone can improve their health through regular physical activity. Learn ways to help people understand the benefits of physical activity and how to make it a part of their regular routine.",
+        "treatment": "Physical activity is key to improving the health of the nation. Based on the latest science, the Physical Activity Guidelines for Americans is a flagship resource for health professionals and policymakers that provides recommendations on how everyone can improve their health through regular physical activity. To attain the most health benefits, adults need at least 150 to 300 minutes of moderate-intensity aerobic activity each week."
+      },
+      "edit": {
+        "replaced": "Learn ways to help people understand the benefits of physical activity and how to make it a part of their regular routine.",
+        "inserted": "To attain the most health benefits, adults need at least 150 to 300 minutes of moderate-intensity aerobic activity each week.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know",
+            "agency": "HHS ODPHP",
+            "passage": "To attain the most health benefits from physical activity, adults need at least 150 to 300 minutes of moderate-intensity aerobic activity, like brisk walking or fast dancing, each week.",
+            "snapshot_sha256": "19616b9fffde55ce1e9c71bdcdec6162a6201553adc9ea37e8a64a5cf584e871"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "fitness_weekly_minutes__doc1",
+      "prompt_id": "fitness_weekly_minutes",
+      "format": "reference",
+      "domain": "fitness",
+      "is_target": false,
+      "source": {
+        "agency": "HHS ODPHP",
+        "title": "Top 10 Things to Know About the Second Edition of the Physical Activity Guidelines for Americans",
+        "url": "https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know",
+        "rights": "US federal work (HHS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "19616b9fffde55ce1e9c71bdcdec6162a6201553adc9ea37e8a64a5cf584e871",
+        "retrieved_utc": "2026-09-16T04:57:46+00:00",
+        "method": "curl"
+      },
+      "words": 52,
+      "variants": {
+        "control": "The first key guideline for adults is to move more and sit less. This recommendation is based on new evidence that shows a strong relationship between increased sedentary behavior and increased risk of heart disease, high blood pressure, and all-cause mortality. All physical activity, especially moderate-to-vigorous activity, can help offset these risks.",
+        "treatment": "The first key guideline for adults is to move more and sit less. This recommendation is based on new evidence that shows a strong relationship between increased sedentary behavior and increased risk of heart disease, high blood pressure, and all-cause mortality. All physical activity, especially moderate-to-vigorous activity, can help offset these risks."
+      }
+    },
+    {
+      "doc_id": "fitness_weekly_minutes__doc2",
+      "prompt_id": "fitness_weekly_minutes",
+      "format": "docs",
+      "domain": "fitness",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIA",
+        "title": "Three Types of Exercise Can Improve Your Health and Physical Ability",
+        "url": "https://www.nia.nih.gov/health/exercise-and-physical-activity/four-types-exercise-can-improve-your-health-and-physical",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2166a75cd895173dc8061345113d4bbc95fb1a9d8deab976834f8d78fa2e7007",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "Most people tend to focus on one type of exercise or activity and think they're doing enough. Research has shown that it's important to get all three types: aerobic, muscle-strengthening, and balance. Doing one type of exercise can help improve your ability to do the others, and variety helps reduce boredom and risk of injury. There are also activities that incorporate multiple types of exercise, such as yoga, dancing, or water aerobics.",
+        "treatment": "Most people tend to focus on one type of exercise or activity and think they're doing enough. Research has shown that it's important to get all three types: aerobic, muscle-strengthening, and balance. Doing one type of exercise can help improve your ability to do the others, and variety helps reduce boredom and risk of injury. There are also activities that incorporate multiple types of exercise, such as yoga, dancing, or water aerobics."
+      }
+    },
+    {
+      "doc_id": "fitness_weekly_minutes__doc3",
+      "prompt_id": "fitness_weekly_minutes",
+      "format": "blog",
+      "domain": "fitness",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Get Regular Physical Activity",
+        "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living/physical-activity",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "a0516f9d08beb67aa56900e8cf6da9d5f2653402477c082bb3de2c3a2247dc6f",
+        "retrieved_utc": "2026-09-14T03:25:51+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "Talk with your healthcare provider before you start a new exercise plan. Discuss how much and what types of physical activity are safe for you. Even modest amounts of physical activity are good for your health. Aerobic exercise benefits your heart and lungs the most. This is any exercise in which your heart beats faster and you use more oxygen than usual, such as brisk walking, running, biking, and swimming.",
+        "treatment": "Talk with your healthcare provider before you start a new exercise plan. Discuss how much and what types of physical activity are safe for you. Even modest amounts of physical activity are good for your health. Aerobic exercise benefits your heart and lungs the most. This is any exercise in which your heart beats faster and you use more oxygen than usual, such as brisk walking, running, biking, and swimming."
+      }
+    },
+    {
+      "doc_id": "fitness_weekly_minutes__doc4",
+      "prompt_id": "fitness_weekly_minutes",
+      "format": "reference",
+      "domain": "fitness",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDDK",
+        "title": "Health Tips for Adults",
+        "url": "https://www.niddk.nih.gov/health-information/weight-management/healthy-eating-physical-activity-for-life/health-tips-for-adults",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "2a6244c560fd39620e58476306114d2f33143c50d37004372833473022a44929",
+        "retrieved_utc": "2026-09-14T03:25:52+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "Have healthy snacks on hand. Whether you are at home, at work, or on the go, healthy snacks may help combat hunger and prevent overeating. Look for snacks that are low in added sugar and salt. Your best bets are whole foods-like baby carrots, fresh fruit, or low-fat or fat-free yogurt instead of chips, cakes, or cookies-rather than packaged or processed foods.",
+        "treatment": "Have healthy snacks on hand. Whether you are at home, at work, or on the go, healthy snacks may help combat hunger and prevent overeating. Look for snacks that are low in added sugar and salt. Your best bets are whole foods-like baby carrots, fresh fruit, or low-fat or fat-free yogurt instead of chips, cakes, or cookies-rather than packaged or processed foods."
+      }
+    },
+    {
+      "doc_id": "fitness_weekly_minutes__doc5",
+      "prompt_id": "fitness_weekly_minutes",
+      "format": "docs",
+      "domain": "fitness",
+      "is_target": false,
+      "source": {
+        "agency": "HHS ODPHP (MyHealthfinder)",
+        "title": "Aim for a Healthy Weight",
+        "url": "https://odphp.health.gov/myhealthfinder/health-conditions/diabetes/watch-your-weight",
+        "rights": "US federal work (HHS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6bdc8694cf67e0497f24c349b21da63c99e5084dba73c912c973a2cc4301287b",
+        "retrieved_utc": "2026-09-22T14:14:14+00:00",
+        "method": "curl"
+      },
+      "words": 54,
+      "variants": {
+        "control": "If you have overweight and have risk factors for heart disease (like high blood pressure or high cholesterol), or if you have obesity, losing weight may improve your health. You can lose weight by getting more physical activity and eating fewer calories. Calories are a measure of the energy in the foods you eat.",
+        "treatment": "If you have overweight and have risk factors for heart disease (like high blood pressure or high cholesterol), or if you have obesity, losing weight may improve your health. You can lose weight by getting more physical activity and eating fewer calories. Calories are a measure of the energy in the foods you eat."
+      }
+    },
+    {
+      "doc_id": "home_smoke_alarm_replace__target",
+      "prompt_id": "home_smoke_alarm_replace",
+      "format": "docs",
+      "domain": "consumer_product",
+      "is_target": true,
+      "source": {
+        "agency": "FEMA US Fire Administration",
+        "title": "Smoke Alarms",
+        "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "130e297adfdc18b014a1012c11ce683faf6371d14c2d74d471a5e754d7b62faf",
+        "retrieved_utc": "2026-09-19T17:06:51+00:00",
+        "method": "curl"
+      },
+      "words": 104,
+      "variants": {
+        "control": "Smoke alarms are not expensive and are worth the lives they can help save. Alarm type and cost Ionization and photoelectric: $6 and up Dual-sensor: $24 and up Smoke alarms with a microprocessor (faster to alert, fewer false alarms): $30 and up Radio frequency/wireless (communicate from one to the next without wires): $40 and up Some fire departments offer reduced-price, or even free, smoke alarms. Contact your local fire department's nonemergency phone number for more information. Your city, county or state may require a specific type of alarm. Please check with your local fire marshal for information on what type of alarm you need.",
+        "treatment": "Smoke alarms are not expensive and are worth the lives they can help save. Alarm type and cost Ionization and photoelectric: $6 and up Dual-sensor: $24 and up Smoke alarms with a microprocessor (faster to alert, fewer false alarms): $30 and up Radio frequency/wireless (communicate from one to the next without wires): $40 and up Some fire departments offer reduced-price, or even free, smoke alarms. Smoke alarms do not last forever; get new ones every 10 years. Your city, county or state may require a specific type of alarm. Please check with your local fire marshal for information on what type of alarm you need."
+      },
+      "edit": {
+        "replaced": "Contact your local fire department's nonemergency phone number for more information.",
+        "inserted": "Smoke alarms do not last forever; get new ones every 10 years.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+            "agency": "FEMA US Fire Administration",
+            "passage": "Smoke alarms do not last forever. Get new smoke alarms every 10 years.",
+            "snapshot_sha256": "130e297adfdc18b014a1012c11ce683faf6371d14c2d74d471a5e754d7b62faf"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "home_smoke_alarm_replace__doc1",
+      "prompt_id": "home_smoke_alarm_replace",
+      "format": "news",
+      "domain": "consumer_product",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "CPSC Warns: Millions Have Smoke Alarms That Don't Work",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2004/CPSC-Warns-Millions-of-Americans-Have-Smoke-Alarms-that-Dont-Work",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cbe7e53c1a6de6549869904417d4ad27eee4fca7bf29dc33c62c942e74ae8022",
+        "retrieved_utc": "2026-09-19T17:07:53+00:00",
+        "method": "wayback id_"
+      },
+      "words": 68,
+      "variants": {
+        "control": "CPSC recommends consumers place a smoke alarm that meets the requirements of a professional testing laboratory, such as Underwriters Laboratories (UL), on each level of multi-story homes outside sleeping areas, and inside bedrooms. CPSC has worked to strengthen smoke alarm performance and installation requirements and is now studying audibility to see if there are ways to make the alarms more effective in waking children and alerting older people.",
+        "treatment": "CPSC recommends consumers place a smoke alarm that meets the requirements of a professional testing laboratory, such as Underwriters Laboratories (UL), on each level of multi-story homes outside sleeping areas, and inside bedrooms. CPSC has worked to strengthen smoke alarm performance and installation requirements and is now studying audibility to see if there are ways to make the alarms more effective in waking children and alerting older people."
+      }
+    },
+    {
+      "doc_id": "home_smoke_alarm_replace__doc2",
+      "prompt_id": "home_smoke_alarm_replace",
+      "format": "news",
+      "domain": "consumer_product",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time to Change Smoke and CO Alarm Batteries",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Its-Time-to-Change-Smoke-and-Carbon-Monoxide-Alarm-Batteries-as-Daylight-Saving-Time-Ends",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d59087acb20eedfc6fa04135db811a2561db3ec31e4c740dd70a6a1391fcbe08",
+        "retrieved_utc": "2026-09-19T17:07:18+00:00",
+        "method": "wayback id_"
+      },
+      "words": 64,
+      "variants": {
+        "control": "Many electronic devices and appliances will adjust automatically to the time change. However, many smoke and CO alarms need a few moments of your time to ensure they are working properly. As we move into the holiday season and people spend more time at home, furnaces, fireplaces and other fuel-burning appliances are used more, making working smoke and CO alarms all the more important.",
+        "treatment": "Many electronic devices and appliances will adjust automatically to the time change. However, many smoke and CO alarms need a few moments of your time to ensure they are working properly. As we move into the holiday season and people spend more time at home, furnaces, fireplaces and other fuel-burning appliances are used more, making working smoke and CO alarms all the more important."
+      }
+    },
+    {
+      "doc_id": "home_smoke_alarm_replace__doc3",
+      "prompt_id": "home_smoke_alarm_replace",
+      "format": "blog",
+      "domain": "consumer_product",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "It's Time. Check and Change Your Alarm Batteries",
+        "url": "https://onsafety.cpsc.gov/blog/2019/10/29/its-time-check-and-change-your-smoke-and-carbon-monoxide-alarm-batteries/",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d626873cb4107fc2dd8da141aebc9cbe3bb12c0a132289fda743fe1c0c82d069",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "wayback id_"
+      },
+      "words": 71,
+      "variants": {
+        "control": "CPSC estimates that in 2016, there were nearly 352,000 residential structure fires, resulting in about 2,410 deaths, 10,370 injuries, and $6.36 billion in property damage. According to the National Fire Protection Association (NFPA,) in 2018, a home fire occurs at the rate of one every 87 seconds. From 2012-2016, the NFPA estimated that almost three of every five home fire deaths resulted from fires in homes with no working smoke alarms.",
+        "treatment": "CPSC estimates that in 2016, there were nearly 352,000 residential structure fires, resulting in about 2,410 deaths, 10,370 injuries, and $6.36 billion in property damage. According to the National Fire Protection Association (NFPA,) in 2018, a home fire occurs at the rate of one every 87 seconds. From 2012-2016, the NFPA estimated that almost three of every five home fire deaths resulted from fires in homes with no working smoke alarms."
+      }
+    },
+    {
+      "doc_id": "home_smoke_alarm_replace__doc4",
+      "prompt_id": "home_smoke_alarm_replace",
+      "format": "docs",
+      "domain": "consumer_product",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Home Fires",
+        "url": "https://www.ready.gov/home-fires",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3c366cbdea481a0252bdcc73f08f07d5e8e8f66d28afa737720c093a3ebbdf09",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "words": 104,
+      "variants": {
+        "control": "Drop down to the floor and crawl low, under any smoke to your exit. Heavy smoke and poisonous gases collect first along the ceiling. Before opening a door, feel the doorknob and door. If either is hot, or if there is smoke coming around the door, leave the door closed and use your second way out. If you open a door, open it slowly. Be ready to shut it quickly if heavy smoke or fire is present. If you can't get to someone needing assistance, leave the home and call 9-1-1 or the fire department. Tell the emergency operator where the person is located.",
+        "treatment": "Drop down to the floor and crawl low, under any smoke to your exit. Heavy smoke and poisonous gases collect first along the ceiling. Before opening a door, feel the doorknob and door. If either is hot, or if there is smoke coming around the door, leave the door closed and use your second way out. If you open a door, open it slowly. Be ready to shut it quickly if heavy smoke or fire is present. If you can't get to someone needing assistance, leave the home and call 9-1-1 or the fire department. Tell the emergency operator where the person is located."
+      }
+    },
+    {
+      "doc_id": "home_smoke_alarm_replace__doc5",
+      "prompt_id": "home_smoke_alarm_replace",
+      "format": "news",
+      "domain": "consumer_product",
+      "is_target": false,
+      "source": {
+        "agency": "CPSC",
+        "title": "Save Daylight, Save Lives: Replace Batteries in Alarms",
+        "url": "https://www.cpsc.gov/Newsroom/News-Releases/2023/Save-Daylight-Save-Lives-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+        "rights": "US federal work (CPSC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c1a087422f122f1f4a71b3299fd9d16bae5fc8dd33cb30b6d2f2118e9f960024",
+        "retrieved_utc": "2026-09-19T17:07:29+00:00",
+        "method": "wayback id_"
+      },
+      "words": 75,
+      "variants": {
+        "control": "Clothes dryers can be a hidden hazard. CPSC estimates a yearly average of 6,400 clothes dryer fires that injure about 180 people and cause nearly $105 million in property damage. Clothes dryer tips: Do not use the dryer without a lint filter and make sure it is clean before or after each use. Make sure the air exhaust vent pipe is not restricted and the outdoor vent flap will open when the dryer is operating.",
+        "treatment": "Clothes dryers can be a hidden hazard. CPSC estimates a yearly average of 6,400 clothes dryer fires that injure about 180 people and cause nearly $105 million in property damage. Clothes dryer tips: Do not use the dryer without a lint filter and make sure it is clean before or after each use. Make sure the air exhaust vent pipe is not restricted and the outdoor vent flap will open when the dryer is operating."
+      }
+    },
+    {
+      "doc_id": "realestate_fha_down_payment__target",
+      "prompt_id": "realestate_fha_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": true,
+      "source": {
+        "agency": "GSA (USAGov)",
+        "title": "Government-backed home loans and mortgage assistance",
+        "url": "https://www.usa.gov/government-home-loans",
+        "rights": "US federal work (GSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7ab1194b23c43b6dc6e91223d7ef2539dd689353010c5f35a4c5d3736c8be021",
+        "retrieved_utc": "2026-09-16T04:59:38+00:00",
+        "method": "curl"
+      },
+      "words": 97,
+      "variants": {
+        "control": "HUD's Good Neighbor Next Door Sales Program offers large discounts on the listing prices of homes in revitalization areas. To qualify, you must be a: Law enforcement officer Teacher Firefighter Emergency medical technician. You also need to commit to living in a property for 36 months as your principal residence. Energy-conscious homebuyers Energy-efficient mortgages (EEMs) can help you buy a home designed to reduce energy use and have a lower environmental impact. EEMs can be used to purchase or refinance an existing or new Energy Star-certified home. EEMs can also be used to finance energy-efficient home improvements.",
+        "treatment": "HUD's Good Neighbor Next Door Sales Program offers large discounts on the listing prices of homes in revitalization areas. To qualify, you must be a: Law enforcement officer Teacher Firefighter Emergency medical technician. You also need to commit to living in a property for 36 months as your principal residence. Energy-conscious homebuyers Energy-efficient mortgages (EEMs) can help you buy a home designed to reduce energy use and have a lower environmental impact. FHA loans are available with a down payment of 3.5 percent or higher. EEMs can also be used to finance energy-efficient home improvements."
+      },
+      "edit": {
+        "replaced": "EEMs can be used to purchase or refinance an existing or new Energy Star-certified home.",
+        "inserted": "FHA loans are available with a down payment of 3.5 percent or higher.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/archive/blog/how-decide-how-much-spend-your-down-payment/",
+            "agency": "CFPB",
+            "passage": "FHA loans are available with a down payment of 3.5 percent or higher.",
+            "snapshot_sha256": "d67260399f1d27d855236ff0be9e1e38f0a9bd937669adc5e42d8a1c8073b01b"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "realestate_fha_down_payment__doc1",
+      "prompt_id": "realestate_fha_down_payment",
+      "format": "blog",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How to decide how much to spend on your down payment",
+        "url": "https://www.consumerfinance.gov/archive/blog/how-decide-how-much-spend-your-down-payment/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d67260399f1d27d855236ff0be9e1e38f0a9bd937669adc5e42d8a1c8073b01b",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 64,
+      "variants": {
+        "control": "Gifts from family or friends. In most cases, you can use gift money from a family member or a friend for your down payment. However, some kinds of mortgage loans do not permit you to use gifts for your down payment. Ask loan officers whether gift funds are allowed and what documentation of the gift is required for the mortgage options you are considering.",
+        "treatment": "Gifts from family or friends. In most cases, you can use gift money from a family member or a friend for your down payment. However, some kinds of mortgage loans do not permit you to use gifts for your down payment. Ask loan officers whether gift funds are allowed and what documentation of the gift is required for the mortgage options you are considering."
+      }
+    },
+    {
+      "doc_id": "realestate_fha_down_payment__doc2",
+      "prompt_id": "realestate_fha_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What kind of down payment do I need?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-kind-of-down-payment-do-i-need-how-does-the-amount-of-down-payment-i-make-affect-the-terms-of-my-mortgage-loan-en-120/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5ad99bc5bc2e4258200ccc6d021eb57db59cee54474be7a19062b8d5dde8ab01",
+        "retrieved_utc": "2026-09-15T05:19:35+00:00",
+        "method": "curl"
+      },
+      "words": 102,
+      "variants": {
+        "control": "Don't forget to factor in all the upfront costs you will have in addition to the down payment. Think about all the costs that you'll likely have to deal with during the purchase process and immediately afterward. For example, you may want to pay points to lower your interest rate. You'll also have to pay closing costs, which sometimes can be substantial. And don't forget about the cost of moving and making any repairs that are needed right away. Tip: Ask about how your down payment affects your interest rate and what options you have when you shop around for different loans.",
+        "treatment": "Don't forget to factor in all the upfront costs you will have in addition to the down payment. Think about all the costs that you'll likely have to deal with during the purchase process and immediately afterward. For example, you may want to pay points to lower your interest rate. You'll also have to pay closing costs, which sometimes can be substantial. And don't forget about the cost of moving and making any repairs that are needed right away. Tip: Ask about how your down payment affects your interest rate and what options you have when you shop around for different loans."
+      }
+    },
+    {
+      "doc_id": "realestate_fha_down_payment__doc3",
+      "prompt_id": "realestate_fha_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is mortgage insurance and how does it work?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-mortgage-insurance-and-how-does-it-work-en-1953/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6bbbfb76355e4b25e159d81225c22f6850d67fe04898fe4d325e56747c883f0c",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 84,
+      "variants": {
+        "control": "Mortgage insurance, no matter what kind, protects the lender - not you - in the event that you fall behind on your payments. If you fall behind, your credit score could suffer and you can lose your home through foreclosure. Then, in the worst-case scenario, supposing your property is sold through foreclosure and the sale is not enough to cover your mortgage balance in full, mortgage insurance makes up the difference so that the company that holds your mortgage is repaid the full amount.",
+        "treatment": "Mortgage insurance, no matter what kind, protects the lender - not you - in the event that you fall behind on your payments. If you fall behind, your credit score could suffer and you can lose your home through foreclosure. Then, in the worst-case scenario, supposing your property is sold through foreclosure and the sale is not enough to cover your mortgage balance in full, mortgage insurance makes up the difference so that the company that holds your mortgage is repaid the full amount."
+      }
+    },
+    {
+      "doc_id": "realestate_fha_down_payment__doc4",
+      "prompt_id": "realestate_fha_down_payment",
+      "format": "blog",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Seven factors that determine your mortgage interest rate",
+        "url": "https://www.consumerfinance.gov/archive/blog/7-factors-determine-your-mortgage-interest-rate/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3bc292f89fc4c436264fd63e40ea248e8e29c07e8901e624e576f0d0a06dc8b9",
+        "retrieved_utc": "2026-09-16T04:59:38+00:00",
+        "method": "curl"
+      },
+      "words": 85,
+      "variants": {
+        "control": "Interest rates come in two basic types: fixed and adjustable. Fixed interest rates don't change over time. Adjustable rates may have an initial fixed period, after which they go up or down each period based on the market. Your initial interest rate may be lower with an adjustable-rate loan than with a fixed rate loan, but that rate might increase significantly later on. Learn more about interest rate types and then use our Explore Interest Rates tool to see how this choice affects interest rates.",
+        "treatment": "Interest rates come in two basic types: fixed and adjustable. Fixed interest rates don't change over time. Adjustable rates may have an initial fixed period, after which they go up or down each period based on the market. Your initial interest rate may be lower with an adjustable-rate loan than with a fixed rate loan, but that rate might increase significantly later on. Learn more about interest rate types and then use our Explore Interest Rates tool to see how this choice affects interest rates."
+      }
+    },
+    {
+      "doc_id": "realestate_fha_down_payment__doc5",
+      "prompt_id": "realestate_fha_down_payment",
+      "format": "blog",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Qualified Mortgages: what are they and what do they mean for you?",
+        "url": "https://www.consumerfinance.gov/about-us/blog/qualified-mortgages-what-are-they-and-what-do-they-mean-for-you/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ec2cd37d9a9f4660355c027960d9485e989076db6c5bd6a91a2c64014825394a",
+        "retrieved_utc": "2026-09-15T05:02:49+00:00",
+        "method": "curl"
+      },
+      "words": 60,
+      "variants": {
+        "control": "Not every loan has to be a standard QM. Borrowers should still have other loan options, such as jumbo and balloon loans or loans that allow a higher debt-to-income ratio. But even when a loan is not a Qualified Mortgage, lenders must still evaluate your income, debts, and other financial information to make sure you have the ability to repay.",
+        "treatment": "Not every loan has to be a standard QM. Borrowers should still have other loan options, such as jumbo and balloon loans or loans that allow a higher debt-to-income ratio. But even when a loan is not a Qualified Mortgage, lenders must still evaluate your income, debts, and other financial information to make sure you have the ability to repay."
+      }
+    }
+  ],
+  "corpus_sha256": "f1e9c57b43bc31ba"
+}
