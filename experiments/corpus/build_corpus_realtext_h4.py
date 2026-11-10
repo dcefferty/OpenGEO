@@ -124,6 +124,32 @@ NEW_SOURCES = {
     "https://odphp.health.gov/myhealthfinder/health-conditions/diabetes/watch-your-weight": {
         "agency": "HHS ODPHP (MyHealthfinder)", "title": "Aim for a Healthy Weight",
         "format": "docs", "rights": "US federal work (HHS), 17 U.S.C. 105"},
+    # batch 3 (2026-11-10)
+    "https://www.tsa.gov/travel/security-screening/whatcanibring/all": {
+        "agency": "TSA", "title": "What Can I Bring?", "format": "reference", "rights": "US federal work (TSA), 17 U.S.C. 105"},
+    "https://www.tsa.gov/travel/security-screening/liquids-aerosols-gels-rule": {
+        "agency": "TSA", "title": "Liquids, Aerosols, and Gels Rule", "format": "docs", "rights": "US federal work (TSA), 17 U.S.C. 105"},
+    "https://www.tsa.gov/travel/security-screening/whatcanibring/items/baby-formula": {
+        "agency": "TSA", "title": "Baby Formula", "format": "reference", "rights": "US federal work (TSA), 17 U.S.C. 105"},
+    "https://www.tsa.gov/travel/security-screening/whatcanibring/items/juice-babies": {
+        "agency": "TSA", "title": "Juice for Babies", "format": "reference", "rights": "US federal work (TSA), 17 U.S.C. 105"},
+    "https://www.tsa.gov/travel/frequently-asked-questions/breast-milk-formula-and-juice-exempt-3-1-1-liquids-rule": {
+        "agency": "TSA",
+        "title": "Is Breast Milk, Formula and Juice exempt from the 3-1-1 liquids rule?",
+        "format": "reference", "rights": "US federal work (TSA), 17 U.S.C. 105"},
+    "https://www.tsa.gov/travel/frequently-asked-questions": {
+        "agency": "TSA", "title": "Frequently Asked Questions", "format": "reference", "rights": "US federal work (TSA), 17 U.S.C. 105"},
+    "https://www.energy.gov/energysaver/thermostats": {
+        "agency": "DOE", "title": "Thermostats", "format": "docs",
+        "rights": "US federal work (DOE), 17 U.S.C. 105"},
+    "https://www.ssa.gov/benefits/retirement/": {
+        "agency": "SSA", "title": "Retirement Benefits", "format": "docs",
+        "rights": "US federal work (SSA), 17 U.S.C. 105"},
+    "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/small-entity-compliance-guide-health-claims-calcium-and-osteoporosis-and-calcium-vitamin-d-and": {
+        "agency": "FDA",
+        "title": "Small Entity Compliance Guide: Health Claims on Calcium and Osteoporosis; "
+                 "and Calcium, Vitamin D, and Osteoporosis",
+        "format": "docs", "rights": "US federal work (FDA), 17 U.S.C. 105"},
     "https://www.nhlbi.nih.gov/health/heart-healthy-living": {
         "agency": "NIH NHLBI", "title": "Heart-Healthy Living", "format": "docs",
         "rights": "US federal work (NIH), 17 U.S.C. 105"},
@@ -626,7 +652,237 @@ BATCH_2 = [
     },
 ]
 
-BATCHES = {1: BATCH_1, 2: BATCH_2}
+# --------------------------------------------------------------------------- batch 3
+#
+# Built 2026-11-10, after batch 2's screen (pre-registration, Deviations, 2026-11-10):
+# batch 1's targets, one dimension away, failed at the ceiling; batch 2's, two away,
+# kept 4 of 6 and failed only at the floor, on the two targets furthest from their
+# questions (stress for a blood-pressure question; a regulatory petition). Batch 3 keeps
+# batch 2's construction and narrows it to what was kept: the target is on the
+# question's own SUBJECT, on an unrelated aspect of it (where to mount the thermostat,
+# how credit scores vary, earning while on benefits), never a different subject. At
+# least two non-targets sit closer to the question; one or two are tangential.
+
+BATCH_3 = [
+    {
+        "prompt_id": "travel_tsa_liquids",
+        "domain": "travel",
+        "question": "What is the largest liquid container you can bring in a carry-on bag "
+                    "through TSA airport security?",
+        "answer": r"ounces?|\boz\b|\bml\b|millilit|3-1-1|3\.4|\b100\b|quart|travel.size"
+                  r"|liters?|gallons?",
+        "target": {   # same subject, other aspect: additional screening, asking TSA
+            "url": "https://www.tsa.gov/travel/security-screening/whatcanibring/all",
+            "start": "Even if an item is generally permitted, it may be subject to additional",
+            "end": "live assistance is available from 8 am - 6 pm (ET).",
+            "replace": "For items not listed here, our AskTSA team looks forward to "
+                       "answering your questions 365 days a year; live assistance is "
+                       "available from 8 am - 6 pm (ET).",
+            "with": "Liquids, aerosols, gels, creams and pastes in your carry-on bag are "
+                    "limited to travel-sized containers that are 3.4 ounces (100 "
+                    "milliliters) or less per item through the checkpoint.",
+            "figures": [("https://www.tsa.gov/travel/security-screening/liquids-aerosols-gels-rule",
+                         "These are limited to travel-sized containers that are 3.4 ounces "
+                         "(100 milliliters) or less per item.")],
+        },
+        "others": [
+            # closer: liquids that may exceed the rule, and how liquids are screened
+            ("https://www.tsa.gov/travel/security-screening/liquids-aerosols-gels-rule",
+             "The duty free liquids were purchased internationally",
+             "the purchase was made within 48 hours."),
+            ("https://www.tsa.gov/travel/security-screening/whatcanibring/items/baby-formula",
+             "Although not required, to expedite the screening process", None),
+            ("https://www.tsa.gov/travel/security-screening/whatcanibring/items/juice-babies",
+             "TSA X-ray machines do not adversely affect food or medicines.", None),
+            ("https://www.tsa.gov/travel/frequently-asked-questions/breast-milk-formula-and-juice-exempt-3-1-1-liquids-rule",
+             "Ice packs, freezer packs, frozen gel packs and other accessories", None),
+            # tangential: lost and found
+            ("https://www.tsa.gov/travel/frequently-asked-questions",
+             "TSA makes every effort to reunite passengers with items left behind", None),
+        ],
+    },
+    {
+        "prompt_id": "home_thermostat_setback",
+        "domain": "home_diy",
+        "question": "How much can you save on heating and cooling by turning your "
+                    "thermostat back 7 to 10 degrees for 8 hours a day?",
+        "answer": r"\d+ ?%|percent|\d+ ?°|degrees",
+        "target": {   # same subject, other aspect: where to mount the thermostat
+            "url": "https://www.energy.gov/energysaver/thermostats",
+            "start": "The location of your thermostat can affect its performance", "end": None,
+            "replace": "To operate properly, a thermostat must be on an interior wall away "
+                       "from direct sunlight, drafts, doorways, skylights, and windows.",
+            "with": "Turning your thermostat back 7°-10°F for 8 hours a day can save as much "
+                    "as 10% a year on heating and cooling.",
+            "figures": [("https://www.energy.gov/energysaver/thermostats",
+                         "You can save as much as 10% a year on heating and cooling by simply "
+                         "turning your thermostat back 7°-10°F for 8 hours a day from its "
+                         "normal setting.")],
+        },
+        "others": [
+            # closer: other ways to cut heating and cooling use
+            ("https://www.energystar.gov/saveathome/heating-cooling/duct-sealing/benefits",
+             "Sealing and insulating ducts can help with common comfort problems",
+             "reducing the risk of pollutants entering ducts and circulating through your home."),
+            ("https://www.energystar.gov/saveathome/seal_insulate/rule_your_attic",
+             "Making sure your attic is well-sealed and properly insulated", None),
+            ("https://www.energystar.gov/saveathome/seal_insulate/why-seal-and-insulate",
+             "Less pollen, dust and insects (or pests) entering your home",
+             "the equivalent of having a window open every day of the year!"),
+            # tangential: heating with a stove; how EPA modelled homes
+            ("https://www.ready.gov/home-fires",
+             "Never use a stove range or oven to heat your home.", None),
+            ("https://www.energystar.gov/saveathome/seal_insulate/methodology",
+             "Geographic climate factors, regional construction styles", None),
+        ],
+    },
+    {
+        "prompt_id": "retirement_full_age",
+        "domain": "retirement",
+        "question": "What is the full retirement age for Social Security if you were born "
+                    "in 1960 or later?",
+        "answer": r"\b(6[0-9]|70)s?\b|sixty|seventy",
+        "target": {   # same subject, other aspect: working while receiving benefits
+            "url": "https://www.ssa.gov/benefits/retirement/planner/applying2.html",
+            "start": "You may work after you start receiving benefits",
+            "end": "regardless of your yearly earnings.",
+            "replace": "We may withhold some of your benefits if you earn more than the "
+                       "yearly earnings limit.",
+            "with": "If you were born in 1960 or later, your full retirement age is 67.",
+            "figures": [("https://www.ssa.gov/benefits/retirement/planner/1960.html",
+                         "If you were born in 1960 or later, your full retirement age is 67")],
+        },
+        "others": [
+            # closer: claiming early or late, without the ages
+            ("https://www.ssa.gov/benefits/retirement/planner/agereduction.html",
+             "There are advantages and disadvantages to taking your benefit before",
+             "delayed retirement credits that would increase your monthly benefit."),
+            ("https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+             "Choosing when to begin your retirement benefits is an important", None),
+            ("https://www.ssa.gov/faqs/en/questions/KA-03391.html",
+             "On the other hand, if you delay claiming your benefit",
+             "by creating or signing in to your personal my Social Security."),
+            # tangential: Medicare and taxes; the program
+            ("https://www.ssa.gov/retirement/plan-for-retirement",
+             "If you're getting Medicare Part B (medical insurance)",
+             "request to have them withheld."),
+            ("https://www.ssa.gov/benefits/retirement/",
+             "Social Security is part of the retirement plan for almost every",
+             "makes it easy to apply for benefits."),
+        ],
+    },
+    {
+        "prompt_id": "credit_negative_info_years",
+        "domain": "credit",
+        "question": "How long can accurate negative information, like late payments, stay "
+                    "on your credit report?",
+        "answer": r"\byears?\b|\bseven\b|\b7\b|\b10\b|\bten\b|forever|time limits?",
+        "target": {   # same subject, other aspect: why credit scores differ
+            "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-score-en-315/",
+            "start": "You do not have just \"one\" credit score.",
+            "end": "Most credit scores range from 300-850.",
+            "replace": "Usually a higher score makes it easier to qualify for a loan and may "
+                       "result in a better interest rate or loan terms.",
+            "with": "Credit reporting companies can generally report negative information, "
+                    "such as late payments, about your account payment history for up to "
+                    "seven years.",
+            "figures": [("https://www.consumerfinance.gov/ask-cfpb/how-long-does-information-stay-on-my-credit-report-en-323/",
+                         "Credit reporting companies can generally report negative "
+                         "information about your credit account payment history for up to "
+                         "seven years, and may report positive information for longer.")],
+        },
+        "others": [
+            # closer: removing negative information, and correcting errors
+            ("https://www.consumerfinance.gov/ask-cfpb/is-it-possible-to-remove-accurate-negative-information-from-my-credit-report-en-1249/",
+             "You can also dispute negative information that arose from identity theft",
+             "It's probably a credit repair scam."),
+            ("https://www.consumerfinance.gov/ask-cfpb/how-long-does-information-stay-on-my-credit-report-en-323/",
+             "Many companies promise to \"repair\" or \"fix\" your credit", None),
+            ("https://www.fdic.gov/consumer-resource-center/credit-reports",
+             "If you identify information in your file that is incomplete or inaccurate",
+             "may continue to report information it has verified as accurate."),
+            # tangential: imposter sites; what bureaus collect
+            ("https://consumer.ftc.gov/articles/free-credit-reports",
+             "You might see companies and sites offering free credit reports", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-report-en-309/",
+             "Most people have more than one credit report.", None),
+        ],
+    },
+    {
+        "prompt_id": "nutrition_vitamin_d_adults",
+        "domain": "nutrition",
+        "question": "How much vitamin D do adults aged 19 to 70 need each day?",
+        "answer": r"\bIU\b|international units|\bmcg\b|micrograms?|\b(400|600|800|15|20)\b"
+                  r"|4,000|recommended (daily |dietary )?amounts?|\bRDA\b",
+        "target": {   # same subject, other aspect: vitamin D and blood sugar
+            "url": "https://ods.od.nih.gov/factsheets/VitaminD-Consumer/",
+            "start": "Vitamin D helps your body regulate blood sugar levels.", "end": None,
+            "replace": "Other studies show that vitamin D supplements don't stop most people "
+                       "with prediabetes from developing diabetes.",
+            "with": "Adults aged 19 to 70 years need 15 mcg (600 IU) of vitamin D each day.",
+            "figures": [("https://ods.od.nih.gov/factsheets/VitaminD-Consumer/",
+                         "Adults 19–70 years 15 mcg (600 IU)")],
+        },
+        "others": [
+            # closer: getting enough vitamin D from food
+            ("https://www.niams.nih.gov/health-topics/calcium-and-vitamin-d-important-bone-health",
+             "In the United States, most people do not consume enough vitamin D",
+             "but most other dairy products do not have added vitamin D."),
+            ("https://www.dietaryguidelines.gov/resources/2020-2025-dietary-guidelines-online-materials/food-sources-select-nutrients/food-sources-vitamin-d",
+             "Getting enough vitamin D is important for strong bones", None),
+            ("https://www.nia.nih.gov/health/vitamins-and-supplements/vitamins-and-minerals-older-adults",
+             "It is usually better to get the nutrients you need from food",
+             "may recommend a vitamin or dietary supplement."),
+            # tangential: label claims; calcium
+            ("https://www.fda.gov/regulatory-information/search-fda-guidance-documents/small-entity-compliance-guide-health-claims-calcium-and-osteoporosis-and-calcium-vitamin-d-and",
+             "2. What specific requirements must be met to make a claim",
+             "the only recognized risk factor for the development of osteoporosis."),
+            ("https://ods.od.nih.gov/factsheets/Calcium-Consumer/",
+             "Calcium is a mineral your body needs to build and maintain strong bones",
+             "Vitamin D helps your body absorb calcium."),
+        ],
+    },
+    {
+        "prompt_id": "housing_cost_burden",
+        "domain": "real_estate",
+        "question": "What share of its income does a household have to spend on housing to "
+                    "be considered cost-burdened?",
+        "answer": r"\d+(\.\d+)? ?%|percent|\bhalf\b|\bthird\b|one-third|\bmajority\b",
+        "target": {   # same subject, other aspect: how HUD's CHAS data are organised
+            "url": "https://www.huduser.gov/portal/datasets/cp/CHAS/bg_chas.html",
+            "start": "In addition to estimating low-income housing needs, the CHAS data",
+            "end": "which are grouped by theme.",
+            "replace": "To streamline the data and make it easier to use, HUD has created a "
+                       "series of \"tables,\" which are grouped by theme.",
+            "with": "Households are considered cost-burdened when they spend more than 30% of "
+                    "their income on rent, mortgage payments, and other housing costs.",
+            "figures": [("https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+                         "Households are considered cost-burdened when they spend more than "
+                         "30% of their income on rent, mortgage payments, and other housing "
+                         "costs, according to the U.S. Department of Housing and Urban "
+                         "Development (HUD).")],
+        },
+        "others": [
+            # closer: housing costs against income, without the threshold
+            ("https://www.census.gov/library/stories/2022/12/housing-costs-burden.html",
+             "High housing costs can impact the amount of money households are able",
+             "continue to be burdened by housing expenses."),
+            ("https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html",
+             "For example, while the median housing cost ratio was higher",
+             "compared to those in higher-income groups."),
+            ("https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+             "\"Housing costs rose between 2022 and 2023 for both homeowners and renters.", None),
+            # tangential: a data release schedule; buying a home
+            ("https://www.census.gov/newsroom/press-releases/2022/renters-burdened-by-housing-costs.html",
+             "The Census Bureau is set to release ACS 5-year Public Use Microdata", None),
+            ("https://www.consumerfinance.gov/archive/blog/how-decide-how-much-spend-your-down-payment/",
+             "Buying a home is exciting.",
+             "join the conversation on Facebook and Twitter using #ShopMortgage."),
+        ],
+    },
+]
+
+BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.
