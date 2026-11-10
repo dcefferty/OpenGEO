@@ -634,6 +634,11 @@ KEPT = [
     # batch 1, screened 2026-11-08 (results/screen_realtext_h4_b1.jsonl): 2 of 6 kept
     "cyber_password_length",
     "finance_emergency_400",
+    # batch 2, screened 2026-11-10 (results/screen_realtext_h4_b2.jsonl): 4 of 6 kept
+    "auto_tire_pressure_mpg",
+    "fitness_weekly_minutes",
+    "home_smoke_alarm_replace",
+    "realestate_fha_down_payment",
 ]
 
 

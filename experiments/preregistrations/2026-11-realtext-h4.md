@@ -332,3 +332,36 @@ measures where real text two dimensions away lands. The gate is unchanged.
 it for them under contract. Its text is therefore not plainly a federal employee's work under
 17 U.S.C. 105. The builder records that status rather than assuming it, and the corpus
 quotes short excerpts for research. Every other batch 2 page is an agency's own.
+
+**2026-11-10 — batch 2 screened: 4 of 6 kept.** Ran the batch 2 screen as specified under
+Screening, on `corpus/corpus_realtext_h4_b2.json` (sha `f1e9c57b43bc31ba`), after the batch 2
+entry above was merged and with the repo owner's go-ahead. That was 720 control-only calls with
+0 errors, costing $0.75. No treatment row exists. Output is in `results/screen_realtext_h4_b2.jsonl`.
+
+| question | pooled | claude | deepseek | gemini | gpt | grok | cites/ans | decision |
+|---|---|---|---|---|---|---|---|---|
+| `auto_tire_pressure_mpg` | 0.467 | 0.29 | 0.17 | 0.88 | 0.17 | 0.83 | 3.21 | KEEP |
+| `legal_cooling_off_days` | 0.142 | 0.00* | 0.08 | 0.25 | 0.00* | 0.38 | 2.17 | DISCARD |
+| `health_bp_threshold` | 0.158 | 0.00* | 0.12 | 0.38 | 0.04* | 0.25 | 2.48 | DISCARD |
+| `fitness_weekly_minutes` | 0.550 | 0.75 | 0.75 | 0.25 | 0.04* | 0.96* | 2.95 | KEEP |
+| `home_smoke_alarm_replace` | 0.675 | 0.83 | 0.50 | 1.00* | 0.08 | 0.96* | 3.30 | KEEP |
+| `realestate_fha_down_payment` | 0.325 | 0.00* | 0.29 | 0.71 | 0.00* | 0.62 | 2.59 | KEEP |
+
+\* pinned on that engine (at most 1, or at least 23, of 24 runs cite the target). Under the
+boundary rule, an engine pinned on a kept question will report a bound there.
+
+The four kept questions are appended to `KEPT` in the builder, which now holds **6 of the
+25** needed. Both discards failed at the **floor**, where all four batch 1 discards failed at
+the ceiling. Two dimensions away overshot on two questions, and those two targets are
+arguably the furthest of the six from their questions. One is about stress rather than
+blood pressure. The other is a regulatory petition with no consumer-facing content. That
+fits §9's gradient but does not test it. Pinning on kept questions is heavier than
+in batch 1 and now runs in both directions, with GPT near 0 on three of the four. The gate is
+applied as written: pooled and unweighted.
+
+Screen-level no-cite, reported but not gating under the 2026-11-08 decision:
+`anthropic/claude-haiku-4.5` 27.8% (40 of 144), `deepseek/deepseek-chat` 19.4% (28 of 144),
+`openai/gpt-5.4-mini` 4.9%, `x-ai/grok-4.3` 1.4%, `google/gemini-3-flash-preview` 0%.
+
+At a combined yield of 6 of 12, the remaining six batches would keep about 18 more questions.
+That would reach 25 in about four more batches, inside the 8-batch limit.
