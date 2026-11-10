@@ -74,6 +74,12 @@ import sources as S  # noqa: E402
 
 MIN_WORDS, MAX_WORDS, LENGTH_TOL = 50, 110, 3
 
+# fueleconomy.gov is run for DOE and EPA by a contractor lab, so unlike the other pages
+# its text is not plainly a federal employee's work. Recorded as such, not assumed.
+FUELECONOMY_RIGHTS = ("US federal website (DOE and EPA), administered for them by Oak Ridge "
+                      "National Laboratory; 17 U.S.C. 105 status of contractor-written text "
+                      "not confirmed. Short excerpt quoted for research")
+
 # Metadata for pages no earlier corpus used. Every other page's agency, title, rights and
 # format are reused from the corpus that first carried it (see `known_sources`).
 NEW_SOURCES = {
@@ -83,6 +89,51 @@ NEW_SOURCES = {
     "https://www.fda.gov/consumers/consumer-updates/spilling-beans-how-much-caffeine-too-much": {
         "agency": "FDA", "title": "Spilling the Beans: How Much Caffeine is Too Much?",
         "format": "news", "rights": "US federal work (FDA), 17 U.S.C. 105"},
+    # batch 2 (fetched 2026-11-09, after .gov hosts were allowlisted)
+    "https://www.fueleconomy.gov/feg/how_tested.shtml": {
+        "agency": "DOE/EPA (fueleconomy.gov)", "title": "How Vehicles Are Tested",
+        "format": "docs", "rights": FUELECONOMY_RIGHTS},
+    "https://www.fueleconomy.gov/feg/maintain.jsp": {
+        "agency": "DOE/EPA (fueleconomy.gov)",
+        "title": "Gas Mileage Tips - Keeping Your Vehicle in Shape",
+        "format": "docs", "rights": FUELECONOMY_RIGHTS},
+    "https://www.fueleconomy.gov/feg/coldweather.shtml": {
+        "agency": "DOE/EPA (fueleconomy.gov)", "title": "Fuel Economy in Cold Weather",
+        "format": "docs", "rights": FUELECONOMY_RIGHTS},
+    "https://www.fueleconomy.gov/feg/hotweather.shtml": {
+        "agency": "DOE/EPA (fueleconomy.gov)", "title": "Fuel Economy in Hot Weather",
+        "format": "docs", "rights": FUELECONOMY_RIGHTS},
+    "https://www.fueleconomy.gov/feg/info.shtml": {
+        "agency": "DOE/EPA (fueleconomy.gov)", "title": "Frequently Asked Questions",
+        "format": "reference", "rights": FUELECONOMY_RIGHTS},
+    "https://www.epa.gov/greenvehicles/fuel-economy-and-ev-range-testing": {
+        "agency": "EPA", "title": "Fuel Economy and EV Range Testing", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines": {
+        "agency": "HHS ODPHP", "title": "Physical Activity Guidelines for Americans",
+        "format": "docs", "rights": "US federal work (HHS), 17 U.S.C. 105"},
+    "https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know": {
+        "agency": "HHS ODPHP",
+        "title": "Top 10 Things to Know About the Second Edition of the Physical Activity "
+                 "Guidelines for Americans",
+        "format": "reference", "rights": "US federal work (HHS), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/exercise-and-physical-activity/four-types-exercise-can-improve-your-health-and-physical": {
+        "agency": "NIH NIA",
+        "title": "Three Types of Exercise Can Improve Your Health and Physical Ability",
+        "format": "docs", "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://odphp.health.gov/myhealthfinder/health-conditions/diabetes/watch-your-weight": {
+        "agency": "HHS ODPHP (MyHealthfinder)", "title": "Aim for a Healthy Weight",
+        "format": "docs", "rights": "US federal work (HHS), 17 U.S.C. 105"},
+    "https://www.nhlbi.nih.gov/health/heart-healthy-living": {
+        "agency": "NIH NHLBI", "title": "Heart-Healthy Living", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.usa.gov/government-home-loans": {
+        "agency": "GSA (USAGov)",
+        "title": "Government-backed home loans and mortgage assistance",
+        "format": "reference", "rights": "US federal work (GSA), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/archive/blog/7-factors-determine-your-mortgage-interest-rate/": {
+        "agency": "CFPB", "title": "Seven factors that determine your mortgage interest rate",
+        "format": "blog", "rights": "US federal work (CFPB), 17 U.S.C. 105"},
 }
 
 # --------------------------------------------------------------------------- batch 1
@@ -331,7 +382,251 @@ BATCH_1 = [
     },
 ]
 
-BATCHES = {1: BATCH_1}
+# --------------------------------------------------------------------------- batch 2
+#
+# Built 2026-11-09, after batch 1's screen (pre-registration, Deviations, 2026-11-08):
+# all six batch-1 controls landed at or above 0.74, and four failed at the ceiling. Batch 2
+# is built from scratch under the same checks, with two construction changes, both
+# allowed for new questions by that entry:
+#
+#   - the target sits TWO dimensions from the question (METHODOLOGY.md section 9): an
+#     unrelated aspect of the subject -- how mileage is measured, an exemption petition
+#     against the rule, what alarms cost -- not a neighbouring attribute of it
+#   - at least two non-targets sit CLOSER to the question than the target does: same
+#     subject, the question's own dimension, facts withheld. Each question keeps one or
+#     two clearly tangential documents as well.
+#
+# Section 9 measured two-dimensions-away authored controls at 0.11-0.17; batch 1's real
+# spans one dimension away ran 0.74-0.94 against v0.4's 0.41-0.75. Whether real text two
+# dimensions away lands inside the gate is what this batch's screen finds out.
+
+BATCH_2 = [
+    {
+        "prompt_id": "auto_tire_pressure_mpg",
+        "domain": "automotive",
+        "question": "How much does driving on under-inflated tires lower a car's gas mileage?",
+        "answer": r"\bpsi\b|inflat|tire pressure",
+        "target": {   # two away: how MPG is measured in the lab
+            "url": "https://www.fueleconomy.gov/feg/how_tested.shtml",
+            "start": "In the laboratory, the vehicle's drive wheels are placed on a machine",
+            "end": "These cycles simulate \"typical\" trips in the city or on the highway.",
+            "replace": "Engineers adjust the amount of energy required to move the rollers to "
+                       "account for wind resistance and the vehicle's weight.",
+            "with": "Under-inflated tires can lower gas mileage by about 0.2% for every 1 psi "
+                    "drop in the average pressure of all tires.",
+            "figures": [("https://www.fueleconomy.gov/feg/maintain.jsp",
+                         "Under-inflated tires can lower gas mileage by about 0.2% for every 1 "
+                         "psi drop in the average pressure of all tires.")],
+        },
+        "others": [
+            # closer: other maintenance that lowers mileage
+            ("https://www.fueleconomy.gov/feg/maintain.jsp",
+             "You can improve your gas mileage by 1%-2% by using the manufacturer's",
+             "to be sure it contains friction-reducing additives."),
+            # closer: conditions that lower mileage
+            ("https://www.fueleconomy.gov/feg/coldweather.shtml",
+             "Cold weather and winter driving conditions can reduce your fuel economy",
+             "About two-thirds of the extra energy consumed is used to heat the cabin."),
+            ("https://www.fueleconomy.gov/feg/hotweather.shtml",
+             "Hot weather can actually increase your fuel economy.",
+             "using the air conditioning (AC) can reduce fuel economy."),
+            # tangential: a tax on poor fuel economy
+            ("https://www.fueleconomy.gov/feg/info.shtml",
+             "The Energy Tax Act of 1978 established a Gas Guzzler Tax", None),
+            # tangential: EV range testing
+            ("https://www.epa.gov/greenvehicles/fuel-economy-and-ev-range-testing",
+             "A vehicle with a fully charged battery is driven continuously", None),
+        ],
+    },
+    {
+        "prompt_id": "legal_cooling_off_days",
+        "domain": "legal",
+        "question": "How many days do you have to cancel a door-to-door sale under the FTC's "
+                    "Cooling-Off Rule?",
+        "answer": r"\b(three|3)\b|\bthird\b|\bdays?\b|midnight|72 hours",
+        "target": {   # two away: a 1996 exemption petition against the rule
+            "url": "https://www.ftc.gov/news-events/news/press-releases/1996/03/ftc-today-announced-it-has-denied-request-exemption-ftcs-cooling-rule-filed-seven-life-insurance",
+            "start": "After evaluating the request, the Commission determined", "end": None,
+            "replace": "The Commission also determined that the petitioners did not "
+                       "demonstrate any compelling reason to treat the sale of pre-need "
+                       "funeral arrangements differently from other in-home sales.",
+            "with": "Under the Cooling-Off Rule, consumers have three days to cancel certain "
+                    "sales made at their home, workplace, dormitory, or a seller's temporary "
+                    "location, such as a hotel room.",
+            "figures": [("https://consumer.ftc.gov/articles/buyers-remorse-ftcs-cooling-rule-may-help",
+                         "The Cooling-Off Rule gives you three days to cancel certain sales "
+                         "made at your home, workplace, or dormitory, or at a seller's "
+                         "temporary location, like a hotel or motel room, convention center, "
+                         "fairground, or restaurant.")],
+        },
+        "others": [
+            # closer: what the seller must give you about cancelling
+            ("https://consumer.ftc.gov/articles/buyers-remorse-ftcs-cooling-rule-may-help",
+             "By law, the seller has to tell you at the time of the sale about your right",
+             "must be in the same language that's used in the sales presentation."),
+            # closer: why the rule lets consumers cancel
+            ("https://www.ftc.gov/news-events/news/press-releases/1995/10/fyi-ftc-has-decided-retain-minor-changes-its-cooling-rule",
+             "Door-to-door sales and face-to-face transactions at places other than", None),
+            # the rule's 2009 review: comment period
+            ("https://www.ftc.gov/news-events/news/press-releases/2009/07/commission-reopens-public-comment-period-cooling-rule",
+             "In the April notice, the FTC stated that the public comment period", None),
+            # tangential: disputing credit report errors
+            ("https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+             "Both the credit bureau and the business that supplied the information", None),
+            # tangential: credit repair
+            ("https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+             "Is there information on your credit report that's correct", None),
+        ],
+    },
+    {
+        "prompt_id": "health_bp_threshold",
+        "domain": "health",
+        "question": "At what blood pressure reading is an adult considered to have high "
+                    "blood pressure?",
+        "answer": r"mm ?Hg|\d{2,3} ?/ ?\d{2,3}|systolic|diastolic|\b(120|130|139|140|80|89|90)\b"
+                  r"|top number|bottom number",
+        "target": {   # two away: stress and heart health
+            "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living/manage-stress",
+            "start": "Research suggests that an emotionally upsetting event", "end": None,
+            "replace": "Research suggests that an emotionally upsetting event, particularly "
+                       "one involving anger, can serve as a trigger for a heart attack or "
+                       "angina in some people.",
+            "with": "High blood pressure, also called hypertension, is blood pressure that is "
+                    "consistently at or above 130/80 mm Hg, which is higher than normal.",
+            "figures": [("https://www.cdc.gov/high-blood-pressure/about/index.html",
+                         "High blood pressure, also called hypertension, is blood pressure "
+                         "that is higher than normal. High blood pressure is consistently at "
+                         "or above 130/80 mm Hg.")],
+        },
+        "others": [
+            # closer: how high blood pressure is detected
+            ("https://www.nia.nih.gov/health/high-blood-pressure/high-blood-pressure-and-older-adults",
+             "High blood pressure often has no signs or symptoms, but routine checks",
+             "may suggest exercise, changes in your diet, and medications."),
+            ("https://www.fda.gov/drugs/information-consumers-and-patients-drugs/high-blood-pressure-understanding-silent-killer",
+             "Early detection of high blood pressure is very important.", None),
+            # closer: who develops it
+            ("https://www.nhlbi.nih.gov/health/high-blood-pressure/causes",
+             "Men are more likely than women to develop high blood pressure",
+             "lower the chance of pregnancy complications and won't harm the developing baby."),
+            # tangential: an eating plan
+            ("https://www.nhlbi.nih.gov/education/dash-eating-plan",
+             "DASH (Dietary Approaches to Stop Hypertension) is a flexible",
+             "and tropical oils such as coconut, palm kernel, and palm oils"),
+            # tangential: heart-healthy living in general
+            ("https://www.nhlbi.nih.gov/health/heart-healthy-living",
+             "Heart-healthy living involves understanding your risk", None),
+        ],
+    },
+    {
+        "prompt_id": "fitness_weekly_minutes",
+        "domain": "fitness",
+        "question": "How many minutes of moderate-intensity aerobic activity should adults "
+                    "get each week?",
+        "answer": r"\bminutes?\b|\bhours?\b|\b(150|300|75|60|30)\b|\bper week\b|\ba week\b"
+                  r"|\beach week\b",
+        "target": {   # two away: the guidelines as a publication
+            "url": "https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines",
+            "start": "Physical activity is key to improving the health of the nation.",
+            "end": None,
+            "replace": "Learn ways to help people understand the benefits of physical activity "
+                       "and how to make it a part of their regular routine.",
+            "with": "To attain the most health benefits, adults need at least 150 to 300 "
+                    "minutes of moderate-intensity aerobic activity each week.",
+            "figures": [("https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know",
+                         "To attain the most health benefits from physical activity, adults "
+                         "need at least 150 to 300 minutes of moderate-intensity aerobic "
+                         "activity, like brisk walking or fast dancing, each week.")],
+        },
+        "others": [
+            # closer: what kind of activity, and how much is safe
+            ("https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know",
+             "The first key guideline for adults is to move more and sit less.", None),
+            ("https://www.nia.nih.gov/health/exercise-and-physical-activity/four-types-exercise-can-improve-your-health-and-physical",
+             "Most people tend to focus on one type of exercise or activity",
+             "such as yoga, dancing, or water aerobics."),
+            ("https://www.nhlbi.nih.gov/health/heart-healthy-living/physical-activity",
+             "Talk with your healthcare provider before you start a new exercise plan.",
+             "such as brisk walking, running, biking, and swimming."),
+            # tangential: snacks, and weight
+            ("https://www.niddk.nih.gov/health-information/weight-management/healthy-eating-physical-activity-for-life/health-tips-for-adults",
+             "Have healthy snacks on hand.", None),
+            ("https://odphp.health.gov/myhealthfinder/health-conditions/diabetes/watch-your-weight",
+             "If you have overweight and have risk factors for heart disease", None),
+        ],
+    },
+    {
+        "prompt_id": "home_smoke_alarm_replace",
+        "domain": "consumer_product",
+        "question": "How often should you replace a smoke alarm?",
+        "answer": r"\byears?\b|\bannual\w*|\bmonth\w*|\btwice\b|\bdecade|\bforever\b|\b10\b(?!,\d)"
+                  r"|\bten\b|\bold\b",
+        "target": {   # two away: what alarms cost
+            "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+            "start": "Smoke alarms are not expensive and are worth the lives they can help save.",
+            "end": "check with your local fire marshal for information on what type of alarm "
+                   "you need.",
+            "replace": "Contact your local fire department's nonemergency phone number for "
+                       "more information.",
+            "with": "Smoke alarms do not last forever; get new ones every 10 years.",
+            "figures": [("https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/",
+                         "Smoke alarms do not last forever. Get new smoke alarms every 10 years.")],
+        },
+        "others": [
+            # closer: where to put alarms, keeping them working
+            ("https://www.cpsc.gov/Newsroom/News-Releases/2004/CPSC-Warns-Millions-of-Americans-Have-Smoke-Alarms-that-Dont-Work",
+             "CPSC recommends consumers place a smoke alarm that meets the requirements", None),
+            ("https://www.cpsc.gov/Newsroom/News-Releases/2023/Its-Time-to-Change-Smoke-and-Carbon-Monoxide-Alarm-Batteries-as-Daylight-Saving-Time-Ends",
+             "Many electronic devices and appliances will adjust automatically",
+             "making working smoke and CO alarms all the more important."),
+            ("https://onsafety.cpsc.gov/blog/2019/10/29/its-time-check-and-change-your-smoke-and-carbon-monoxide-alarm-batteries/",
+             "CPSC estimates that in 2016, there were nearly 352,000 residential",
+             "resulted from fires in homes with no working smoke alarms."),
+            # tangential: escaping a fire, dryer fires
+            ("https://www.ready.gov/home-fires",
+             "Drop down to the floor and crawl low, under any smoke to your exit.",
+             "Tell the emergency operator where the person is located."),
+            ("https://www.cpsc.gov/Newsroom/News-Releases/2023/Save-Daylight-Save-Lives-Replace-Batteries-in-Smoke-and-Carbon-Monoxide-Alarms",
+             "Clothes dryers can be a hidden hazard.",
+             "the outdoor vent flap will open when the dryer is operating."),
+        ],
+    },
+    {
+        "prompt_id": "realestate_fha_down_payment",
+        "domain": "real_estate",
+        "question": "What is the minimum down payment for an FHA loan?",
+        "answer": r"\d+(\.\d+)? ?(%|percent)|\bpercent\b|no down payment|zero down"
+                  r"|no-down-payment|minimum down|\bas low as\b",
+        "target": {   # two away: other federal homebuying programs
+            "url": "https://www.usa.gov/government-home-loans",
+            "start": "HUD's Good Neighbor Next Door Sales Program offers large discounts",
+            "end": "EEMs can also be used to finance energy-efficient home improvements.",
+            "replace": "EEMs can be used to purchase or refinance an existing or new Energy "
+                       "Star-certified home.",
+            "with": "FHA loans are available with a down payment of 3.5 percent or higher.",
+            "figures": [("https://www.consumerfinance.gov/archive/blog/how-decide-how-much-spend-your-down-payment/",
+                         "FHA loans are available with a down payment of 3.5 percent or higher.")],
+        },
+        "others": [
+            # closer: paying for the down payment, and around it
+            ("https://www.consumerfinance.gov/archive/blog/how-decide-how-much-spend-your-down-payment/",
+             "Gifts from family or friends.", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-kind-of-down-payment-do-i-need-how-does-the-amount-of-down-payment-i-make-affect-the-terms-of-my-mortgage-loan-en-120/",
+             "Don't forget to factor in all the upfront costs you will have",
+             "what options you have when you shop around for different loans."),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-mortgage-insurance-and-how-does-it-work-en-1953/",
+             "Mortgage insurance, no matter what kind, protects the lender", None),
+            # tangential: rate types, loan standards
+            ("https://www.consumerfinance.gov/archive/blog/7-factors-determine-your-mortgage-interest-rate/",
+             "Interest rates come in two basic types: fixed and adjustable.",
+             "to see how this choice affects interest rates."),
+            ("https://www.consumerfinance.gov/about-us/blog/qualified-mortgages-what-are-they-and-what-do-they-mean-for-you/",
+             "Not every loan has to be a standard QM.", None),
+        ],
+    },
+]
+
+BATCHES = {1: BATCH_1, 2: BATCH_2}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.
@@ -391,7 +686,7 @@ def build_question(q, meta, fail):
             fail(f"{pid}/{role}: not verbatim -- {missing[:1]}")
         if url not in meta:
             fail(f"{pid}/{role}: no metadata for {url}; add it to NEW_SOURCES")
-        source, fmt = meta[url]
+        source, fmt = meta.get(url, ({"url": url}, None))
         source = dict(source, snapshot_sha256=snap["text_sha256"],
                       retrieved_utc=snap["retrieved_utc"], method=snap["method"])
         n = words(text)

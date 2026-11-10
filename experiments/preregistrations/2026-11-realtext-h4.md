@@ -298,3 +298,37 @@ to read it as the analysis plan's rule applied to the round's own data: any engi
 separately, as `analyze_realtext_h4.py` already does. Screen-level no-cite is reported but
 does not gate. Decided before any treatment call; screening continues under the gate as
 written.
+
+**2026-11-09 — batch 2 built, before any batch 2 data.** `corpus/corpus_realtext_h4_b2.json`,
+version `realtext-h4-screen-b2`, sha `f1e9c57b43bc31ba`, from the same builder under the
+same checks. Batch 1's corpus is unchanged (sha `0011a90d43066fc1`). The screen command is
+the one under Screening with `b1` replaced by `b2`.
+
+Federal sites became reachable from the build environment on 2026-11-08, so batch 2 adds
+five snapshots under `corpus/sources/` (four fueleconomy.gov pages and one EPA page) and
+otherwise reuses pages already held. Two construction changes follow the batch 1 entry
+above. Both apply to new questions only; no batch 1 question is touched.
+
+- **Targets sit two dimensions from the question** (`METHODOLOGY.md` §9), on an unrelated
+  aspect of the subject, not a neighbouring attribute of it.
+- **At least two non-targets per question sit closer to the question than the target.**
+  They cover the same subject on the question's own dimension, with the facts withheld.
+  One or two tangential documents per question are kept as before.
+
+§9 measured authored controls two dimensions away at 0.11 to 0.17. Batch 1's real spans one
+dimension away ran 0.74 to 0.94, against v0.4's authored 0.41 to 0.75. This batch's screen
+measures where real text two dimensions away lands. The gate is unchanged.
+
+| question | target (control is a verbatim span of) | inserted sentence | figures from |
+|---|---|---|---|
+| `auto_tire_pressure_mpg` How much does driving on under-inflated tires lower a car's gas mileage? | fueleconomy.gov, How Vehicles Are Tested (the dynamometer) | "Under-inflated tires can lower gas mileage by about 0.2% for every 1 psi drop in the average pressure of all tires." | fueleconomy.gov, Keeping Your Vehicle in Shape |
+| `legal_cooling_off_days` How many days do you have to cancel a door-to-door sale under the FTC's Cooling-Off Rule? | FTC, 1996 press release denying an exemption petition | "Under the Cooling-Off Rule, consumers have three days to cancel certain sales made at their home, workplace, dormitory, or a seller's temporary location, such as a hotel room." | FTC, Buyer's Remorse |
+| `health_bp_threshold` At what blood pressure reading is an adult considered to have high blood pressure? | NHLBI, Manage Stress | "High blood pressure, also called hypertension, is blood pressure that is consistently at or above 130/80 mm Hg, which is higher than normal." | CDC, About High Blood Pressure |
+| `fitness_weekly_minutes` How many minutes of moderate-intensity aerobic activity should adults get each week? | ODPHP, Physical Activity Guidelines for Americans (what the guidelines are) | "To attain the most health benefits, adults need at least 150 to 300 minutes of moderate-intensity aerobic activity each week." | ODPHP, Top 10 Things to Know |
+| `home_smoke_alarm_replace` How often should you replace a smoke alarm? | USFA, Smoke Alarms (what alarms cost) | "Smoke alarms do not last forever; get new ones every 10 years." | the same USFA page |
+| `realestate_fha_down_payment` What is the minimum down payment for an FHA loan? | USAGov, Government-backed home loans (Good Neighbor Next Door, energy-efficient mortgages) | "FHA loans are available with a down payment of 3.5 percent or higher." | CFPB, How to decide how much to spend on your down payment |
+
+**Rights.** fueleconomy.gov is a DOE and EPA site, but Oak Ridge National Laboratory runs
+it for them under contract. Its text is therefore not plainly a federal employee's work under
+17 U.S.C. 105. The builder records that status rather than assuming it, and the corpus
+quotes short excerpts for research. Every other batch 2 page is an agency's own.
