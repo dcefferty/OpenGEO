@@ -1,0 +1,996 @@
+{
+  "corpus_version": "realtext-h4-screen-b3",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 3: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "credit",
+    "home_diy",
+    "nutrition",
+    "real_estate",
+    "retirement",
+    "travel"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "travel_tsa_liquids",
+      "domain": "travel",
+      "question": "What is the largest liquid container you can bring in a carry-on bag through TSA airport security?",
+      "target_doc_id": "travel_tsa_liquids__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "travel_tsa_liquids__target",
+        "travel_tsa_liquids__doc1",
+        "travel_tsa_liquids__doc2",
+        "travel_tsa_liquids__doc3",
+        "travel_tsa_liquids__doc4",
+        "travel_tsa_liquids__doc5"
+      ],
+      "answer_pattern": "ounces?|\\boz\\b|\\bml\\b|millilit|3-1-1|3\\.4|\\b100\\b|quart|travel.size|liters?|gallons?"
+    },
+    {
+      "prompt_id": "home_thermostat_setback",
+      "domain": "home_diy",
+      "question": "How much can you save on heating and cooling by turning your thermostat back 7 to 10 degrees for 8 hours a day?",
+      "target_doc_id": "home_thermostat_setback__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_thermostat_setback__target",
+        "home_thermostat_setback__doc1",
+        "home_thermostat_setback__doc2",
+        "home_thermostat_setback__doc3",
+        "home_thermostat_setback__doc4",
+        "home_thermostat_setback__doc5"
+      ],
+      "answer_pattern": "\\d+ ?%|percent|\\d+ ?°|degrees"
+    },
+    {
+      "prompt_id": "retirement_full_age",
+      "domain": "retirement",
+      "question": "What is the full retirement age for Social Security if you were born in 1960 or later?",
+      "target_doc_id": "retirement_full_age__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "retirement_full_age__target",
+        "retirement_full_age__doc1",
+        "retirement_full_age__doc2",
+        "retirement_full_age__doc3",
+        "retirement_full_age__doc4",
+        "retirement_full_age__doc5"
+      ],
+      "answer_pattern": "\\b(6[0-9]|70)s?\\b|sixty|seventy"
+    },
+    {
+      "prompt_id": "credit_negative_info_years",
+      "domain": "credit",
+      "question": "How long can accurate negative information, like late payments, stay on your credit report?",
+      "target_doc_id": "credit_negative_info_years__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "credit_negative_info_years__target",
+        "credit_negative_info_years__doc1",
+        "credit_negative_info_years__doc2",
+        "credit_negative_info_years__doc3",
+        "credit_negative_info_years__doc4",
+        "credit_negative_info_years__doc5"
+      ],
+      "answer_pattern": "\\byears?\\b|\\bseven\\b|\\b7\\b|\\b10\\b|\\bten\\b|forever|time limits?"
+    },
+    {
+      "prompt_id": "nutrition_vitamin_d_adults",
+      "domain": "nutrition",
+      "question": "How much vitamin D do adults aged 19 to 70 need each day?",
+      "target_doc_id": "nutrition_vitamin_d_adults__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "nutrition_vitamin_d_adults__target",
+        "nutrition_vitamin_d_adults__doc1",
+        "nutrition_vitamin_d_adults__doc2",
+        "nutrition_vitamin_d_adults__doc3",
+        "nutrition_vitamin_d_adults__doc4",
+        "nutrition_vitamin_d_adults__doc5"
+      ],
+      "answer_pattern": "\\bIU\\b|international units|\\bmcg\\b|micrograms?|\\b(400|600|800|15|20)\\b|4,000|recommended (daily |dietary )?amounts?|\\bRDA\\b"
+    },
+    {
+      "prompt_id": "housing_cost_burden",
+      "domain": "real_estate",
+      "question": "What share of its income does a household have to spend on housing to be considered cost-burdened?",
+      "target_doc_id": "housing_cost_burden__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "housing_cost_burden__target",
+        "housing_cost_burden__doc1",
+        "housing_cost_burden__doc2",
+        "housing_cost_burden__doc3",
+        "housing_cost_burden__doc4",
+        "housing_cost_burden__doc5"
+      ],
+      "answer_pattern": "\\d+(\\.\\d+)? ?%|percent|\\bhalf\\b|\\bthird\\b|one-third|\\bmajority\\b"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "travel_tsa_liquids__target",
+      "prompt_id": "travel_tsa_liquids",
+      "format": "reference",
+      "domain": "travel",
+      "is_target": true,
+      "source": {
+        "agency": "TSA",
+        "title": "What Can I Bring?",
+        "url": "https://www.tsa.gov/travel/security-screening/whatcanibring/all",
+        "rights": "US federal work (TSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2a6a3889f7b4f770c2628575e44ee6e9f928a7713841faced5ad28c2ee1a5610",
+        "retrieved_utc": "2026-09-19T19:04:17+00:00",
+        "method": "curl"
+      },
+      "words": 84,
+      "variants": {
+        "control": "Even if an item is generally permitted, it may be subject to additional screening or not allowed through the checkpoint if it triggers an alarm during the screening process, appears to have been tampered with, or poses other security concerns. Read about civil penalties for prohibited items. Contact AskTSA if your item is not listed For items not listed here, our AskTSA team looks forward to answering your questions 365 days a year; live assistance is available from 8 am - 6 pm (ET).",
+        "treatment": "Even if an item is generally permitted, it may be subject to additional screening or not allowed through the checkpoint if it triggers an alarm during the screening process, appears to have been tampered with, or poses other security concerns. Read about civil penalties for prohibited items. Contact AskTSA if your item is not listed Liquids, aerosols, gels, creams and pastes in your carry-on bag are limited to travel-sized containers that are 3.4 ounces (100 milliliters) or less per item through the checkpoint."
+      },
+      "edit": {
+        "replaced": "For items not listed here, our AskTSA team looks forward to answering your questions 365 days a year; live assistance is available from 8 am - 6 pm (ET).",
+        "inserted": "Liquids, aerosols, gels, creams and pastes in your carry-on bag are limited to travel-sized containers that are 3.4 ounces (100 milliliters) or less per item through the checkpoint.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.tsa.gov/travel/security-screening/liquids-aerosols-gels-rule",
+            "agency": "TSA",
+            "passage": "These are limited to travel-sized containers that are 3.4 ounces (100 milliliters) or less per item.",
+            "snapshot_sha256": "e03b9f1e153f9c34fa5e91e6846483120be63b16406652fd71f8dd1a85837b6b"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "travel_tsa_liquids__doc1",
+      "prompt_id": "travel_tsa_liquids",
+      "format": "docs",
+      "domain": "travel",
+      "is_target": false,
+      "source": {
+        "agency": "TSA",
+        "title": "Liquids, Aerosols, and Gels Rule",
+        "url": "https://www.tsa.gov/travel/security-screening/liquids-aerosols-gels-rule",
+        "rights": "US federal work (TSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e03b9f1e153f9c34fa5e91e6846483120be63b16406652fd71f8dd1a85837b6b",
+        "retrieved_utc": "2026-09-19T19:04:09+00:00",
+        "method": "curl"
+      },
+      "words": 61,
+      "variants": {
+        "control": "The duty free liquids were purchased internationally and you are traveling to the United States with a connecting flight. The liquids are packed in a transparent, secure, tamper-evident bag by the retailer and do not show signs of tampering when presented to TSA for screening. The original receipt for the liquids is present and the purchase was made within 48 hours.",
+        "treatment": "The duty free liquids were purchased internationally and you are traveling to the United States with a connecting flight. The liquids are packed in a transparent, secure, tamper-evident bag by the retailer and do not show signs of tampering when presented to TSA for screening. The original receipt for the liquids is present and the purchase was made within 48 hours."
+      }
+    },
+    {
+      "doc_id": "travel_tsa_liquids__doc2",
+      "prompt_id": "travel_tsa_liquids",
+      "format": "reference",
+      "domain": "travel",
+      "is_target": false,
+      "source": {
+        "agency": "TSA",
+        "title": "Baby Formula",
+        "url": "https://www.tsa.gov/travel/security-screening/whatcanibring/items/baby-formula",
+        "rights": "US federal work (TSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3319249b6292ad0a6e9cf4e613b17c96f2e8e6b615fe1d0238318a0c8a99743e",
+        "retrieved_utc": "2026-09-19T19:04:10+00:00",
+        "method": "curl"
+      },
+      "words": 83,
+      "variants": {
+        "control": "Although not required, to expedite the screening process, it is recommended that formula and breast milk be transported in clear, translucent bottles and not plastic bags or pouches. Liquids in plastic bags or pouches may not be able to be screened by Bottle Liquid Scanners, and you may be asked to open them (if feasible) for alternate screening such as Explosive Trace Detection and Vapor Analysis for the presence of liquid explosives. Screening will never include placing anything into the medically necessary liquid.",
+        "treatment": "Although not required, to expedite the screening process, it is recommended that formula and breast milk be transported in clear, translucent bottles and not plastic bags or pouches. Liquids in plastic bags or pouches may not be able to be screened by Bottle Liquid Scanners, and you may be asked to open them (if feasible) for alternate screening such as Explosive Trace Detection and Vapor Analysis for the presence of liquid explosives. Screening will never include placing anything into the medically necessary liquid."
+      }
+    },
+    {
+      "doc_id": "travel_tsa_liquids__doc3",
+      "prompt_id": "travel_tsa_liquids",
+      "format": "reference",
+      "domain": "travel",
+      "is_target": false,
+      "source": {
+        "agency": "TSA",
+        "title": "Juice for Babies",
+        "url": "https://www.tsa.gov/travel/security-screening/whatcanibring/items/juice-babies",
+        "rights": "US federal work (TSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "745f75625a5d7d3cff40d2b386cb33cc15c939b62bda05883cc0eac6d9f3731b",
+        "retrieved_utc": "2026-09-19T19:04:10+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "TSA X-ray machines do not adversely affect food or medicines. However, if you do not want the formula, breast milk, toddler drinks, and baby/toddler food (to include puree pouches) to be X-rayed or opened, please inform the TSA officer. Additional steps will be taken to clear the liquid and you or the traveling guardian will undergo additional screening procedures, to include Advanced Imaging Technology screening and additional/enhanced screening of other carry-on property.",
+        "treatment": "TSA X-ray machines do not adversely affect food or medicines. However, if you do not want the formula, breast milk, toddler drinks, and baby/toddler food (to include puree pouches) to be X-rayed or opened, please inform the TSA officer. Additional steps will be taken to clear the liquid and you or the traveling guardian will undergo additional screening procedures, to include Advanced Imaging Technology screening and additional/enhanced screening of other carry-on property."
+      }
+    },
+    {
+      "doc_id": "travel_tsa_liquids__doc4",
+      "prompt_id": "travel_tsa_liquids",
+      "format": "reference",
+      "domain": "travel",
+      "is_target": false,
+      "source": {
+        "agency": "TSA",
+        "title": "Is Breast Milk, Formula and Juice exempt from the 3-1-1 liquids rule?",
+        "url": "https://www.tsa.gov/travel/frequently-asked-questions/breast-milk-formula-and-juice-exempt-3-1-1-liquids-rule",
+        "rights": "US federal work (TSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "38d76ae712e89597e9ecc3af93cb2cf327b3abb09e1b6680fd374c84cb9c0d62",
+        "retrieved_utc": "2026-09-19T19:04:10+00:00",
+        "method": "curl"
+      },
+      "words": 74,
+      "variants": {
+        "control": "Ice packs, freezer packs, frozen gel packs and other accessories required to cool formula, breast milk and juice - regardless of the presence of breast milk - are allowed in carry-on. If these accessories are partially frozen or slushy, they are subject to the same screening as described above. You may also bring gel or liquid-filled teethers, canned, jarred and processed baby food in carry-on baggage. These items may be subject to additional screening.",
+        "treatment": "Ice packs, freezer packs, frozen gel packs and other accessories required to cool formula, breast milk and juice - regardless of the presence of breast milk - are allowed in carry-on. If these accessories are partially frozen or slushy, they are subject to the same screening as described above. You may also bring gel or liquid-filled teethers, canned, jarred and processed baby food in carry-on baggage. These items may be subject to additional screening."
+      }
+    },
+    {
+      "doc_id": "travel_tsa_liquids__doc5",
+      "prompt_id": "travel_tsa_liquids",
+      "format": "reference",
+      "domain": "travel",
+      "is_target": false,
+      "source": {
+        "agency": "TSA",
+        "title": "Frequently Asked Questions",
+        "url": "https://www.tsa.gov/travel/frequently-asked-questions",
+        "rights": "US federal work (TSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4d0ffeb10bc6f23400bd7295f88467b1db07ed08886296f71b4a636dc4e9a737",
+        "retrieved_utc": "2026-09-19T19:04:17+00:00",
+        "method": "curl"
+      },
+      "words": 95,
+      "variants": {
+        "control": "TSA makes every effort to reunite passengers with items left behind at the airport checkpoint. Lost and found items retained by TSA for a minimum of thirty (30) days, and if not claimed, are either destroyed, turned over to a state agency for surplus property, or sold by TSA as excess property. The state may dispose of the items through sales, destruction, donations or charities. The state keeps any money from sales, not TSA. At a number of locations, lost and found items are turned over to the airport at the end of each day.",
+        "treatment": "TSA makes every effort to reunite passengers with items left behind at the airport checkpoint. Lost and found items retained by TSA for a minimum of thirty (30) days, and if not claimed, are either destroyed, turned over to a state agency for surplus property, or sold by TSA as excess property. The state may dispose of the items through sales, destruction, donations or charities. The state keeps any money from sales, not TSA. At a number of locations, lost and found items are turned over to the airport at the end of each day."
+      }
+    },
+    {
+      "doc_id": "home_thermostat_setback__target",
+      "prompt_id": "home_thermostat_setback",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": true,
+      "source": {
+        "agency": "DOE",
+        "title": "Thermostats",
+        "url": "https://www.energy.gov/energysaver/thermostats",
+        "rights": "US federal work (DOE), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "62b69b21bc57faaed374767ede9203aaa378abe351e6c117ea74ce31de4fcccb",
+        "retrieved_utc": "2026-09-16T05:51:12+00:00",
+        "method": "wayback id_"
+      },
+      "words": 89,
+      "variants": {
+        "control": "The location of your thermostat can affect its performance and efficiency. Read the manufacturer's installation instructions to prevent \"ghost readings\" or unnecessary furnace or air conditioner cycling. To operate properly, a thermostat must be on an interior wall away from direct sunlight, drafts, doorways, skylights, and windows. It should be located where natural room air currents-warm air rising, cool air sinking-occur. Furniture will block natural air movement, so do not place pieces in front of or below your thermostat. Also make sure your thermostat is conveniently located for programming.",
+        "treatment": "The location of your thermostat can affect its performance and efficiency. Read the manufacturer's installation instructions to prevent \"ghost readings\" or unnecessary furnace or air conditioner cycling. Turning your thermostat back 7°-10°F for 8 hours a day can save as much as 10% a year on heating and cooling. It should be located where natural room air currents-warm air rising, cool air sinking-occur. Furniture will block natural air movement, so do not place pieces in front of or below your thermostat. Also make sure your thermostat is conveniently located for programming."
+      },
+      "edit": {
+        "replaced": "To operate properly, a thermostat must be on an interior wall away from direct sunlight, drafts, doorways, skylights, and windows.",
+        "inserted": "Turning your thermostat back 7°-10°F for 8 hours a day can save as much as 10% a year on heating and cooling.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.energy.gov/energysaver/thermostats",
+            "agency": "DOE",
+            "passage": "You can save as much as 10% a year on heating and cooling by simply turning your thermostat back 7°-10°F for 8 hours a day from its normal setting.",
+            "snapshot_sha256": "62b69b21bc57faaed374767ede9203aaa378abe351e6c117ea74ce31de4fcccb"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "home_thermostat_setback__doc1",
+      "prompt_id": "home_thermostat_setback",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Benefits of Duct Sealing",
+        "url": "https://www.energystar.gov/saveathome/heating-cooling/duct-sealing/benefits",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "af19757022b16882949edca5f5d0ba63a7c925666ef8e8c67e1e73b11d795f6f",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "Sealing and insulating ducts can help with common comfort problems, such as rooms that are too hot in the summer or too cold in the winter. Indoor Air Quality Fumes from household and garden chemicals, insulation particles, and dust can enter your duct system, aggravating asthma and allergy problems. Sealing ducts can help improve indoor air quality by reducing the risk of pollutants entering ducts and circulating through your home.",
+        "treatment": "Sealing and insulating ducts can help with common comfort problems, such as rooms that are too hot in the summer or too cold in the winter. Indoor Air Quality Fumes from household and garden chemicals, insulation particles, and dust can enter your duct system, aggravating asthma and allergy problems. Sealing ducts can help improve indoor air quality by reducing the risk of pollutants entering ducts and circulating through your home."
+      }
+    },
+    {
+      "doc_id": "home_thermostat_setback__doc2",
+      "prompt_id": "home_thermostat_setback",
+      "format": "blog",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Rule Your Attic! For Comfort and Savings",
+        "url": "https://www.energystar.gov/saveathome/seal_insulate/rule_your_attic",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1c48dd95cbda8b712052e7cc6f05b5c6cf3c8ba7e950f97e46da28627a73635c",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "words": 58,
+      "variants": {
+        "control": "Making sure your attic is well-sealed and properly insulated is one of the most important things you can do as part of an ENERGY STAR Home Upgrade to help you make your energy choices count for a clean energy future with information on how to measure your levels, choose the right insulation type and hire an insulation contractor.",
+        "treatment": "Making sure your attic is well-sealed and properly insulated is one of the most important things you can do as part of an ENERGY STAR Home Upgrade to help you make your energy choices count for a clean energy future with information on how to measure your levels, choose the right insulation type and hire an insulation contractor."
+      }
+    },
+    {
+      "doc_id": "home_thermostat_setback__doc3",
+      "prompt_id": "home_thermostat_setback",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Why Seal and Insulate?",
+        "url": "https://www.energystar.gov/saveathome/seal_insulate/why-seal-and-insulate",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "bcd03e56e6059dd2992ca5f9a45240014e854d3a0c7edcd044d1953a8f622525",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "words": 56,
+      "variants": {
+        "control": "Less pollen, dust and insects (or pests) entering your home Better humidity control Lower chance for ice dams on the roof/eves in snowy climates In fact, if you added up all the leaks, holes and gaps in a typical home's envelope, it would be the equivalent of having a window open every day of the year!",
+        "treatment": "Less pollen, dust and insects (or pests) entering your home Better humidity control Lower chance for ice dams on the roof/eves in snowy climates In fact, if you added up all the leaks, holes and gaps in a typical home's envelope, it would be the equivalent of having a window open every day of the year!"
+      }
+    },
+    {
+      "doc_id": "home_thermostat_setback__doc4",
+      "prompt_id": "home_thermostat_setback",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Home Fires",
+        "url": "https://www.ready.gov/home-fires",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3c366cbdea481a0252bdcc73f08f07d5e8e8f66d28afa737720c093a3ebbdf09",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "words": 54,
+      "variants": {
+        "control": "Never use a stove range or oven to heat your home. It can increase the risk of fires, burns and could damage the appliance. Gas stoves are especially dangerous to use as heat sources because dangerous levels of carbon monoxide could build up, putting you and your family at risk for carbon monoxide poisoning.",
+        "treatment": "Never use a stove range or oven to heat your home. It can increase the risk of fires, burns and could damage the appliance. Gas stoves are especially dangerous to use as heat sources because dangerous levels of carbon monoxide could build up, putting you and your family at risk for carbon monoxide poisoning."
+      }
+    },
+    {
+      "doc_id": "home_thermostat_setback__doc5",
+      "prompt_id": "home_thermostat_setback",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA ENERGY STAR",
+        "title": "Methodology for Estimated Energy Savings",
+        "url": "https://www.energystar.gov/saveathome/seal_insulate/methodology",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1385a929a99f95181bd2572cb148b4b152d127063ca8369c200aa580d161cbfd",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "Geographic climate factors, regional construction styles (e.g., basement, crawl space or slab-on-grade), and fuel type characteristics (e.g., natural gas or electricity) were then proportionally weighted using the Residential Energy and Costs Analysis Methodology from the U.S. Department of Energy. Estimated energy use was then calculated for \"typical\" composite houses in all U.S. climate zones using Beacon Residential™, a proprietary energy model that uses the nationally recognized DOE-2 hourly simulation software.",
+        "treatment": "Geographic climate factors, regional construction styles (e.g., basement, crawl space or slab-on-grade), and fuel type characteristics (e.g., natural gas or electricity) were then proportionally weighted using the Residential Energy and Costs Analysis Methodology from the U.S. Department of Energy. Estimated energy use was then calculated for \"typical\" composite houses in all U.S. climate zones using Beacon Residential™, a proprietary energy model that uses the nationally recognized DOE-2 hourly simulation software."
+      }
+    },
+    {
+      "doc_id": "retirement_full_age__target",
+      "prompt_id": "retirement_full_age",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": true,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "You Can Receive Benefits Before Your Full Retirement Age",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/applying2.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f38f69186baf87781692e511b185cd6495888b59a633139a43b4bb23898aa8a4",
+        "retrieved_utc": "2026-09-18T05:11:03+00:00",
+        "method": "wayback id_"
+      },
+      "words": 89,
+      "variants": {
+        "control": "You may work after you start receiving benefits, which could mean a higher benefit for you in the future. We may withhold some of your benefits if you earn more than the yearly earnings limit. Sometimes people who retire in mid-year already have earned more than the annual earnings limit. However: We have a special rule that applies to earnings for one year, usually the first year you begin receiving benefits. This means we cannot withhold benefits for any month we consider you retired, regardless of your yearly earnings.",
+        "treatment": "You may work after you start receiving benefits, which could mean a higher benefit for you in the future. If you were born in 1960 or later, your full retirement age is 67. Sometimes people who retire in mid-year already have earned more than the annual earnings limit. However: We have a special rule that applies to earnings for one year, usually the first year you begin receiving benefits. This means we cannot withhold benefits for any month we consider you retired, regardless of your yearly earnings."
+      },
+      "edit": {
+        "replaced": "We may withhold some of your benefits if you earn more than the yearly earnings limit.",
+        "inserted": "If you were born in 1960 or later, your full retirement age is 67.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.ssa.gov/benefits/retirement/planner/1960.html",
+            "agency": "Social Security Administration",
+            "passage": "If you were born in 1960 or later, your full retirement age is 67",
+            "snapshot_sha256": "7dbdfb7003f64100b03aa46a922c76e523bfd0092b0bfd4467de03a273d3188f"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "retirement_full_age__doc1",
+      "prompt_id": "retirement_full_age",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Retirement Age and Benefit Reduction",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/agereduction.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "16a6e8c055d25aac5bf09a64614d1e7a3ddc8d1d38e7806378c8eae5c95cc47f",
+        "retrieved_utc": "2026-09-18T04:42:56+00:00",
+        "method": "wayback id_"
+      },
+      "words": 69,
+      "variants": {
+        "control": "There are advantages and disadvantages to taking your benefit before your full retirement age. The advantage is that you collect benefits for a longer period of time. The disadvantage is your benefit will be reduced. Each person's situation is different. It is important to remember: If you delay your benefits until after full retirement age, you will be eligible for delayed retirement credits that would increase your monthly benefit.",
+        "treatment": "There are advantages and disadvantages to taking your benefit before your full retirement age. The advantage is that you collect benefits for a longer period of time. The disadvantage is your benefit will be reduced. Each person's situation is different. It is important to remember: If you delay your benefits until after full retirement age, you will be eligible for delayed retirement credits that would increase your monthly benefit."
+      }
+    },
+    {
+      "doc_id": "retirement_full_age__doc2",
+      "prompt_id": "retirement_full_age",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Delayed Retirement Credits",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "672366e967d0db63e78dde4793c79e2aff4d169c0d5f106d79ebac7f304c7077",
+        "retrieved_utc": "2026-09-18T04:44:01+00:00",
+        "method": "wayback id_"
+      },
+      "words": 63,
+      "variants": {
+        "control": "Choosing when to begin your retirement benefits is an important and personal decision. No matter your age, be sure to explore our website to learn your choices and make the best decision. Sometimes, the month you choose to start benefits could mean higher benefit payments for you and your family. Here's some additional information that may help you decide what's right for you:",
+        "treatment": "Choosing when to begin your retirement benefits is an important and personal decision. No matter your age, be sure to explore our website to learn your choices and make the best decision. Sometimes, the month you choose to start benefits could mean higher benefit payments for you and your family. Here's some additional information that may help you decide what's right for you:"
+      }
+    },
+    {
+      "doc_id": "retirement_full_age__doc3",
+      "prompt_id": "retirement_full_age",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "At what age should I start receiving my retirement benefits?",
+        "url": "https://www.ssa.gov/faqs/en/questions/KA-03391.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "80559ad67a9117a9d7ed63a944d03034f3141f631adec2de6770d5bb9499c85c",
+        "retrieved_utc": "2026-09-18T05:10:29+00:00",
+        "method": "wayback id_"
+      },
+      "words": 76,
+      "variants": {
+        "control": "On the other hand, if you delay claiming your benefit, your monthly amount will be increased for each month of delay. These adjustments are permanent. For more details on the affect of choosing early or delayed retirement read our publication When to Start Receiving Retirement Benefits. You can also get estimates of your personal retirement benefits and see the effects of different retirement age scenarios by creating or signing in to your personal my Social Security.",
+        "treatment": "On the other hand, if you delay claiming your benefit, your monthly amount will be increased for each month of delay. These adjustments are permanent. For more details on the affect of choosing early or delayed retirement read our publication When to Start Receiving Retirement Benefits. You can also get estimates of your personal retirement benefits and see the effects of different retirement age scenarios by creating or signing in to your personal my Social Security."
+      }
+    },
+    {
+      "doc_id": "retirement_full_age__doc4",
+      "prompt_id": "retirement_full_age",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Plan for Retirement",
+        "url": "https://www.ssa.gov/retirement/plan-for-retirement",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "53577c355827c84099423febe99243927d4c7aa4828872fbf74755808a46c654",
+        "retrieved_utc": "2026-09-18T05:11:15+00:00",
+        "method": "wayback id_"
+      },
+      "words": 58,
+      "variants": {
+        "control": "If you're getting Medicare Part B (medical insurance), the cost will be taken out of your monthly benefit. Determine when to sign up for Medicare. Withholding taxes from benefit payments You may owe taxes on your benefits. You can pay the IRS directly or have taxes withheld. See if you owe taxes and request to have them withheld.",
+        "treatment": "If you're getting Medicare Part B (medical insurance), the cost will be taken out of your monthly benefit. Determine when to sign up for Medicare. Withholding taxes from benefit payments You may owe taxes on your benefits. You can pay the IRS directly or have taxes withheld. See if you owe taxes and request to have them withheld."
+      }
+    },
+    {
+      "doc_id": "retirement_full_age__doc5",
+      "prompt_id": "retirement_full_age",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "SSA",
+        "title": "Retirement Benefits",
+        "url": "https://www.ssa.gov/benefits/retirement/",
+        "rights": "US federal work (SSA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "dc5119479bdecf43c370e182d3897c1eb9cb40ae552944fc9c03c97e44ca1889",
+        "retrieved_utc": "2026-09-18T04:49:27+00:00",
+        "method": "wayback id_"
+      },
+      "words": 59,
+      "variants": {
+        "control": "Social Security is part of the retirement plan for almost every American worker. It provides replacement income for qualified retirees and their families. This section of our website helps you better understand the program, the application process, and the online tools and resources available to you. Ready To Retire? Our online application makes it easy to apply for benefits.",
+        "treatment": "Social Security is part of the retirement plan for almost every American worker. It provides replacement income for qualified retirees and their families. This section of our website helps you better understand the program, the application process, and the online tools and resources available to you. Ready To Retire? Our online application makes it easy to apply for benefits."
+      }
+    },
+    {
+      "doc_id": "credit_negative_info_years__target",
+      "prompt_id": "credit_negative_info_years",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit score?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-score-en-315/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "823a20a4eeaf8e3d9e768f8a710e6a45809d259e42f3b4c8a3e241a4b51f6e08",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 87,
+      "variants": {
+        "control": "You do not have just \"one\" credit score. Each credit score depends on the data used to calculate it, and it may differ depending on the scoring model (which itself may depend on the type of loan product the score will be used for), the source of the data used, and even the day when it was calculated. Usually a higher score makes it easier to qualify for a loan and may result in a better interest rate or loan terms. Most credit scores range from 300-850.",
+        "treatment": "You do not have just \"one\" credit score. Each credit score depends on the data used to calculate it, and it may differ depending on the scoring model (which itself may depend on the type of loan product the score will be used for), the source of the data used, and even the day when it was calculated. Credit reporting companies can generally report negative information, such as late payments, about your account payment history for up to seven years. Most credit scores range from 300-850."
+      },
+      "edit": {
+        "replaced": "Usually a higher score makes it easier to qualify for a loan and may result in a better interest rate or loan terms.",
+        "inserted": "Credit reporting companies can generally report negative information, such as late payments, about your account payment history for up to seven years.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-long-does-information-stay-on-my-credit-report-en-323/",
+            "agency": "CFPB",
+            "passage": "Credit reporting companies can generally report negative information about your credit account payment history for up to seven years, and may report positive information for longer.",
+            "snapshot_sha256": "6682dd5002f39b01299f9f70dac76bc1bb5da270031cbe8fe790b4b647fdae9f"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "credit_negative_info_years__doc1",
+      "prompt_id": "credit_negative_info_years",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Is it possible to remove accurate but negative information?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/is-it-possible-to-remove-accurate-negative-information-from-my-credit-report-en-1249/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "6ae236d66828889c40b7b296d7b85cf728083795090b07ab6903cae53bbb88ea",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 54,
+      "variants": {
+        "control": "You can also dispute negative information that arose from identity theft or is not information about you. The credit reporting companies should remove these items from your credit reports. Beware of anyone who claims that they can remove information from your credit report that's current, accurate, and negative. It's probably a credit repair scam.",
+        "treatment": "You can also dispute negative information that arose from identity theft or is not information about you. The credit reporting companies should remove these items from your credit reports. Beware of anyone who claims that they can remove information from your credit report that's current, accurate, and negative. It's probably a credit repair scam."
+      }
+    },
+    {
+      "doc_id": "credit_negative_info_years__doc2",
+      "prompt_id": "credit_negative_info_years",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How long does information stay on my credit report?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-long-does-information-stay-on-my-credit-report-en-323/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "6682dd5002f39b01299f9f70dac76bc1bb5da270031cbe8fe790b4b647fdae9f",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 58,
+      "variants": {
+        "control": "Many companies promise to \"repair\" or \"fix\" your credit for an upfront fee. However, no one has the right to remove negative information, such as late payments, from a credit report if it is accurate. You can only get your credit report fixed if it contains errors, and you can do that on your own at no cost.",
+        "treatment": "Many companies promise to \"repair\" or \"fix\" your credit for an upfront fee. However, no one has the right to remove negative information, such as late payments, from a credit report if it is accurate. You can only get your credit report fixed if it contains errors, and you can do that on your own at no cost."
+      }
+    },
+    {
+      "doc_id": "credit_negative_info_years__doc3",
+      "prompt_id": "credit_negative_info_years",
+      "format": "docs",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Credit Reports",
+        "url": "https://www.fdic.gov/consumer-resource-center/credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "4f7f52d87dd4c7f7a6dcd82b24123ba3cff7b86e620d950ecb2a4ae0bfda568f",
+        "retrieved_utc": "2026-09-14T03:25:47+00:00",
+        "method": "curl"
+      },
+      "words": 63,
+      "variants": {
+        "control": "If you identify information in your file that is incomplete or inaccurate and report it to a credit bureau, it must investigate unless your dispute is frivolous. See www.ftc.gov/credit for an explanation of dispute procedures. Inaccurate, incomplete or unverifiable information must be removed or corrected, usually within 30 days. However, a credit bureau may continue to report information it has verified as accurate.",
+        "treatment": "If you identify information in your file that is incomplete or inaccurate and report it to a credit bureau, it must investigate unless your dispute is frivolous. See www.ftc.gov/credit for an explanation of dispute procedures. Inaccurate, incomplete or unverifiable information must be removed or corrected, usually within 30 days. However, a credit bureau may continue to report information it has verified as accurate."
+      }
+    },
+    {
+      "doc_id": "credit_negative_info_years__doc4",
+      "prompt_id": "credit_negative_info_years",
+      "format": "blog",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Free Credit Reports",
+        "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "785788f18e1bcbc47094867e573f4824cdefd28447529905426632ba0435ebfb",
+        "retrieved_utc": "2026-09-14T03:25:44+00:00",
+        "method": "curl"
+      },
+      "words": 82,
+      "variants": {
+        "control": "You might see companies and sites offering free credit reports, but there's only one authorized place to get the free annual credit reports you're entitled to by law: AnnualCreditReport.com. Other sites pretend to be associated with AnnualCreditReport.com or claim to offer free credit reports, free credit scores, or free credit monitoring. They also use terms like \"free report\" in their names. They might even have URLs that purposely misspell AnnualCreditReport.com in the hope that you'll mistype the name of the official site.",
+        "treatment": "You might see companies and sites offering free credit reports, but there's only one authorized place to get the free annual credit reports you're entitled to by law: AnnualCreditReport.com. Other sites pretend to be associated with AnnualCreditReport.com or claim to offer free credit reports, free credit scores, or free credit monitoring. They also use terms like \"free report\" in their names. They might even have URLs that purposely misspell AnnualCreditReport.com in the hope that you'll mistype the name of the official site."
+      }
+    },
+    {
+      "doc_id": "credit_negative_info_years__doc5",
+      "prompt_id": "credit_negative_info_years",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit report?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-report-en-309/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "87f460daf7a37d5195c62b6e4ddba6f3959eeed966a01e20080490f72b65e428",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 55,
+      "variants": {
+        "control": "Most people have more than one credit report. Credit reporting companies, also known as credit bureaus or consumer reporting agencies, collect and store financial data about you that is submitted to them by creditors, such as lenders, credit card companies, and other financial companies. Creditors are not required to report to every credit reporting company.",
+        "treatment": "Most people have more than one credit report. Credit reporting companies, also known as credit bureaus or consumer reporting agencies, collect and store financial data about you that is submitted to them by creditors, such as lenders, credit card companies, and other financial companies. Creditors are not required to report to every credit reporting company."
+      }
+    },
+    {
+      "doc_id": "nutrition_vitamin_d_adults__target",
+      "prompt_id": "nutrition_vitamin_d_adults",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": true,
+      "source": {
+        "agency": "NIH Office of Dietary Supplements",
+        "title": "Vitamin D - Consumer Fact Sheet",
+        "url": "https://ods.od.nih.gov/factsheets/VitaminD-Consumer/",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d0bc4736488a3aea4db75031056263feeb5bc25d11ccd861e9816bfb249b2e79",
+        "retrieved_utc": "2026-09-16T05:50:44+00:00",
+        "method": "wayback id_"
+      },
+      "words": 62,
+      "variants": {
+        "control": "Vitamin D helps your body regulate blood sugar levels. However, clinical trials in people with and without diabetes show that supplemental vitamin D does not improve blood sugar levels, insulin resistance, or hemoglobin A1c levels (the average level of blood sugar over the past 3 months). Other studies show that vitamin D supplements don't stop most people with prediabetes from developing diabetes.",
+        "treatment": "Vitamin D helps your body regulate blood sugar levels. However, clinical trials in people with and without diabetes show that supplemental vitamin D does not improve blood sugar levels, insulin resistance, or hemoglobin A1c levels (the average level of blood sugar over the past 3 months). Adults aged 19 to 70 years need 15 mcg (600 IU) of vitamin D each day."
+      },
+      "edit": {
+        "replaced": "Other studies show that vitamin D supplements don't stop most people with prediabetes from developing diabetes.",
+        "inserted": "Adults aged 19 to 70 years need 15 mcg (600 IU) of vitamin D each day.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://ods.od.nih.gov/factsheets/VitaminD-Consumer/",
+            "agency": "NIH Office of Dietary Supplements",
+            "passage": "Adults 19–70 years 15 mcg (600 IU)",
+            "snapshot_sha256": "d0bc4736488a3aea4db75031056263feeb5bc25d11ccd861e9816bfb249b2e79"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "nutrition_vitamin_d_adults__doc1",
+      "prompt_id": "nutrition_vitamin_d_adults",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIAMS",
+        "title": "Calcium and Vitamin D: Important for Bone Health",
+        "url": "https://www.niams.nih.gov/health-topics/calcium-and-vitamin-d-important-bone-health",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "15194aa07e98f8819a5ddbe07838b791fd46ee804e30a19993913d6404118bc7",
+        "retrieved_utc": "2026-09-18T04:49:27+00:00",
+        "method": "curl"
+      },
+      "words": 107,
+      "variants": {
+        "control": "In the United States, most people do not consume enough vitamin D to meet recommended intakes. Some vitamin D can be made in the body with sun exposure. Still, many people have low vitamin D status. What foods have vitamin D? Not many foods have vitamin D. Some kinds of fish can provide some of the vitamin D we need each day. Examples are: Trout. Salmon. Tuna. Mackerel. Most of the vitamin D that Americans get from food comes from fortified foods. Most milk and some yogurts in the United States are fortified with vitamin D, but most other dairy products do not have added vitamin D.",
+        "treatment": "In the United States, most people do not consume enough vitamin D to meet recommended intakes. Some vitamin D can be made in the body with sun exposure. Still, many people have low vitamin D status. What foods have vitamin D? Not many foods have vitamin D. Some kinds of fish can provide some of the vitamin D we need each day. Examples are: Trout. Salmon. Tuna. Mackerel. Most of the vitamin D that Americans get from food comes from fortified foods. Most milk and some yogurts in the United States are fortified with vitamin D, but most other dairy products do not have added vitamin D."
+      }
+    },
+    {
+      "doc_id": "nutrition_vitamin_d_adults__doc2",
+      "prompt_id": "nutrition_vitamin_d_adults",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "USDA / HHS Dietary Guidelines",
+        "title": "Food Sources of Vitamin D",
+        "url": "https://www.dietaryguidelines.gov/resources/2020-2025-dietary-guidelines-online-materials/food-sources-select-nutrients/food-sources-vitamin-d",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e750bb11977a876ea2bcecb19433320ed8774d810b07028d07f8855ce89e5ff5",
+        "retrieved_utc": "2026-09-18T05:13:22+00:00",
+        "method": "wayback id_"
+      },
+      "words": 76,
+      "variants": {
+        "control": "Getting enough vitamin D is important for strong bones and overall health. Use the tables below to identify foods and drinks with vitamin D that fit your culture and lifestyle. It can be hard to get enough vitamin D from foods and drinks that contain it naturally. Consider choosing some foods and drinks fortified with vitamin D as part of a healthy eating routine and talk to your healthcare provider about whether you need a supplement.",
+        "treatment": "Getting enough vitamin D is important for strong bones and overall health. Use the tables below to identify foods and drinks with vitamin D that fit your culture and lifestyle. It can be hard to get enough vitamin D from foods and drinks that contain it naturally. Consider choosing some foods and drinks fortified with vitamin D as part of a healthy eating routine and talk to your healthcare provider about whether you need a supplement."
+      }
+    },
+    {
+      "doc_id": "nutrition_vitamin_d_adults__doc3",
+      "prompt_id": "nutrition_vitamin_d_adults",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "NIH National Institute on Aging",
+        "title": "Vitamins and Minerals for Older Adults",
+        "url": "https://www.nia.nih.gov/health/vitamins-and-supplements/vitamins-and-minerals-older-adults",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8a1e3d7a318f81a00f99d9a7b0bb9d2dd4bfe87cfd00e5496a1cb88741cb6a27",
+        "retrieved_utc": "2026-09-18T04:45:16+00:00",
+        "method": "curl"
+      },
+      "words": 79,
+      "variants": {
+        "control": "It is usually better to get the nutrients you need from food, rather than a pill. That's because nutrient-dense foods contain other things that are good for you, like fiber. Most older adults can get all the nutrients they need from foods. But if you aren't sure, always talk with your doctor or a registered dietitian to find out if you are missing any important vitamins or minerals. Your doctor or dietitian may recommend a vitamin or dietary supplement.",
+        "treatment": "It is usually better to get the nutrients you need from food, rather than a pill. That's because nutrient-dense foods contain other things that are good for you, like fiber. Most older adults can get all the nutrients they need from foods. But if you aren't sure, always talk with your doctor or a registered dietitian to find out if you are missing any important vitamins or minerals. Your doctor or dietitian may recommend a vitamin or dietary supplement."
+      }
+    },
+    {
+      "doc_id": "nutrition_vitamin_d_adults__doc4",
+      "prompt_id": "nutrition_vitamin_d_adults",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Small Entity Compliance Guide: Health Claims on Calcium and Osteoporosis; and Calcium, Vitamin D, and Osteoporosis",
+        "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/small-entity-compliance-guide-health-claims-calcium-and-osteoporosis-and-calcium-vitamin-d-and",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "01970583d2ecbf5ce5c7c37e6a4b92ea1f9b92ce56785f689e1e52c84f728208",
+        "retrieved_utc": "2026-09-18T05:13:47+00:00",
+        "method": "curl"
+      },
+      "words": 83,
+      "variants": {
+        "control": "2. What specific requirements must be met to make a claim on the label or labeling of food associating calcium or calcium and vitamin D with a reduced risk of osteoporosis? The claim must make clear that adequate calcium or calcium and vitamin D intake throughout life in a healthful diet are essential to reducing osteoporosis risk. The claim must not imply that adequate calcium or adequate calcium and vitamin D intake is the only recognized risk factor for the development of osteoporosis.",
+        "treatment": "2. What specific requirements must be met to make a claim on the label or labeling of food associating calcium or calcium and vitamin D with a reduced risk of osteoporosis? The claim must make clear that adequate calcium or calcium and vitamin D intake throughout life in a healthful diet are essential to reducing osteoporosis risk. The claim must not imply that adequate calcium or adequate calcium and vitamin D intake is the only recognized risk factor for the development of osteoporosis."
+      }
+    },
+    {
+      "doc_id": "nutrition_vitamin_d_adults__doc5",
+      "prompt_id": "nutrition_vitamin_d_adults",
+      "format": "reference",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "NIH Office of Dietary Supplements",
+        "title": "Calcium - Consumer Fact Sheet",
+        "url": "https://ods.od.nih.gov/factsheets/Calcium-Consumer/",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3719040c411b5223b94cc4a9be82093e302e04b9fc461db107381f1124f45bb7",
+        "retrieved_utc": "2026-09-18T05:11:59+00:00",
+        "method": "wayback id_"
+      },
+      "words": 97,
+      "variants": {
+        "control": "Calcium is a mineral your body needs to build and maintain strong bones and to carry out many important functions. Calcium is the most abundant mineral in the body. Almost all calcium in the body is stored in bones and teeth, giving them structure and hardness. Your body needs calcium for muscles to move and for nerves to carry messages between your brain and every part of your body. Calcium also helps blood vessels move blood throughout your body and helps release hormones that affect many functions in your body. Vitamin D helps your body absorb calcium.",
+        "treatment": "Calcium is a mineral your body needs to build and maintain strong bones and to carry out many important functions. Calcium is the most abundant mineral in the body. Almost all calcium in the body is stored in bones and teeth, giving them structure and hardness. Your body needs calcium for muscles to move and for nerves to carry messages between your brain and every part of your body. Calcium also helps blood vessels move blood throughout your body and helps release hormones that affect many functions in your body. Vitamin D helps your body absorb calcium."
+      }
+    },
+    {
+      "doc_id": "housing_cost_burden__target",
+      "prompt_id": "housing_cost_burden",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": true,
+      "source": {
+        "agency": "HUD Office of Policy Development and Research",
+        "title": "CHAS: Background",
+        "url": "https://www.huduser.gov/portal/datasets/cp/CHAS/bg_chas.html",
+        "rights": "US federal work (HUD), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e1465004e74e482b504da7453c063fcfecdc4daa709ccfa6e5bb4508b7c7d544",
+        "retrieved_utc": "2026-09-15T05:02:51+00:00",
+        "method": "curl"
+      },
+      "words": 94,
+      "variants": {
+        "control": "In addition to estimating low-income housing needs, the CHAS data contribute to a more comprehensive market analysis by documenting issues like lead paint risks, \"affordability mismatch,\" and the interaction of affordability with variables like age of homes, number of bedrooms, and type of building. Data Format HUD has identified a large set of characteristics of interest to housing planners and policy-makers, and as a result the CHAS data can be quite unwieldy. To streamline the data and make it easier to use, HUD has created a series of \"tables,\" which are grouped by theme.",
+        "treatment": "In addition to estimating low-income housing needs, the CHAS data contribute to a more comprehensive market analysis by documenting issues like lead paint risks, \"affordability mismatch,\" and the interaction of affordability with variables like age of homes, number of bedrooms, and type of building. Data Format HUD has identified a large set of characteristics of interest to housing planners and policy-makers, and as a result the CHAS data can be quite unwieldy. Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs."
+      },
+      "edit": {
+        "replaced": "To streamline the data and make it easier to use, HUD has created a series of \"tables,\" which are grouped by theme.",
+        "inserted": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+            "agency": "US Census Bureau",
+            "passage": "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs, according to the U.S. Department of Housing and Urban Development (HUD).",
+            "snapshot_sha256": "89b05284912e963a23d43bf83383fb2b2473b71e94722eae180cbcd755eede8f"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "housing_cost_burden__doc1",
+      "prompt_id": "housing_cost_burden",
+      "format": "news",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Renters More Likely Than Homeowners to Spend More Than 30% of Income on Housing",
+        "url": "https://www.census.gov/library/stories/2022/12/housing-costs-burden.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cdd03fe793097e6b0a834a1ac7b523496afc07cf734c8436487987938fd810e9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "High housing costs can impact the amount of money households are able to save or use for other essential and nonessential expenses. The most recent ACS data show that renters were particularly vulnerable to cost burdens. Future ACS releases, both the one- and five-year, will be critical to understanding how many households in the country continue to be burdened by housing expenses.",
+        "treatment": "High housing costs can impact the amount of money households are able to save or use for other essential and nonessential expenses. The most recent ACS data show that renters were particularly vulnerable to cost burdens. Future ACS releases, both the one- and five-year, will be critical to understanding how many households in the country continue to be burdened by housing expenses."
+      }
+    },
+    {
+      "doc_id": "housing_cost_burden__doc2",
+      "prompt_id": "housing_cost_burden",
+      "format": "news",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Share of Income Needed to Pay Rent Increased the Most for Low-Income Households",
+        "url": "https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0188131a895b488d9e37fc08ed66f15b09dd2aa0d78a41124cd81efa180ac352",
+        "retrieved_utc": "2026-09-15T05:02:55+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "For example, while the median housing cost ratio was higher for renter households in the lowest income quintile, the cost ratios were also much more variable for this group than the higher-income quintiles (Figure 2). This variability reflects the outsized impact of small changes in housing costs and incomes on the cost ratio for those in the lowest-income group compared to those in higher-income groups.",
+        "treatment": "For example, while the median housing cost ratio was higher for renter households in the lowest income quintile, the cost ratios were also much more variable for this group than the higher-income quintiles (Figure 2). This variability reflects the outsized impact of small changes in housing costs and incomes on the cost ratio for those in the lowest-income group compared to those in higher-income groups."
+      }
+    },
+    {
+      "doc_id": "housing_cost_burden__doc3",
+      "prompt_id": "housing_cost_burden",
+      "format": "news",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "Nearly Half of Renter Households Are Cost-Burdened, Proportions Differ by Race",
+        "url": "https://www.census.gov/newsroom/press-releases/2024/renter-households-cost-burdened-race.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "89b05284912e963a23d43bf83383fb2b2473b71e94722eae180cbcd755eede8f",
+        "retrieved_utc": "2026-09-15T05:02:53+00:00",
+        "method": "curl"
+      },
+      "words": 67,
+      "variants": {
+        "control": "\"Housing costs rose between 2022 and 2023 for both homeowners and renters. The median cost of housing for renters rose from $1,354 to $1,406 (after adjusting for inflation),\" said Molly Ross, a survey statistician with the U.S. Census Bureau. \"And new data from the 2023 ACS, 1-year estimates show that the share of a rented household's income that goes towards these housing costs differs by householder race.\"",
+        "treatment": "\"Housing costs rose between 2022 and 2023 for both homeowners and renters. The median cost of housing for renters rose from $1,354 to $1,406 (after adjusting for inflation),\" said Molly Ross, a survey statistician with the U.S. Census Bureau. \"And new data from the 2023 ACS, 1-year estimates show that the share of a rented household's income that goes towards these housing costs differs by householder race.\""
+      }
+    },
+    {
+      "doc_id": "housing_cost_burden__doc4",
+      "prompt_id": "housing_cost_burden",
+      "format": "news",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "US Census Bureau",
+        "title": "More Than 19 Million Renters Burdened by Housing Costs",
+        "url": "https://www.census.gov/newsroom/press-releases/2022/renters-burdened-by-housing-costs.html",
+        "rights": "US federal work (Census Bureau), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d5c02a2a85bbc2e04aac8cd947cbc036de92674eee48ed7abc8d68b70b7384c9",
+        "retrieved_utc": "2026-09-15T05:02:54+00:00",
+        "method": "curl"
+      },
+      "words": 92,
+      "variants": {
+        "control": "The Census Bureau is set to release ACS 5-year Public Use Microdata Sample (PUMS) files and Variance Replicate Estimates (VRE) on January 26, 2023. The Census Bureau will also release new Selected Population Tables and American Indian and Alaska Native Tables from the 2017-2021 ACS 5-year estimates in 2023. To view the complete release schedule, visit the data year 2021 release schedule page. For more information on the topics included in the ACS, visit the Subjects Included in the Survey page. To access the full set of statistics released today, visit data.census.gov.",
+        "treatment": "The Census Bureau is set to release ACS 5-year Public Use Microdata Sample (PUMS) files and Variance Replicate Estimates (VRE) on January 26, 2023. The Census Bureau will also release new Selected Population Tables and American Indian and Alaska Native Tables from the 2017-2021 ACS 5-year estimates in 2023. To view the complete release schedule, visit the data year 2021 release schedule page. For more information on the topics included in the ACS, visit the Subjects Included in the Survey page. To access the full set of statistics released today, visit data.census.gov."
+      }
+    },
+    {
+      "doc_id": "housing_cost_burden__doc5",
+      "prompt_id": "housing_cost_burden",
+      "format": "blog",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How to decide how much to spend on your down payment",
+        "url": "https://www.consumerfinance.gov/archive/blog/how-decide-how-much-spend-your-down-payment/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d67260399f1d27d855236ff0be9e1e38f0a9bd937669adc5e42d8a1c8073b01b",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 60,
+      "variants": {
+        "control": "Buying a home is exciting. It's also one of the most important financial decisions you'll make. Choosing a mortgage to pay for your new home is just as important as choosing the right home. You have the right to control the process. Check out our other blogs on homebuying topics, and join the conversation on Facebook and Twitter using #ShopMortgage.",
+        "treatment": "Buying a home is exciting. It's also one of the most important financial decisions you'll make. Choosing a mortgage to pay for your new home is just as important as choosing the right home. You have the right to control the process. Check out our other blogs on homebuying topics, and join the conversation on Facebook and Twitter using #ShopMortgage."
+      }
+    }
+  ],
+  "corpus_sha256": "a4014c9def74ff70"
+}

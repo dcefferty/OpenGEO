@@ -365,3 +365,33 @@ Screen-level no-cite, reported but not gating under the 2026-11-08 decision:
 
 At a combined yield of 6 of 12, the remaining six batches would keep about 18 more questions.
 That would reach 25 in about four more batches, inside the 8-batch limit.
+
+**2026-11-10 — batch 3 built, before any batch 3 data.** `corpus/corpus_realtext_h4_b3.json`,
+version `realtext-h4-screen-b3`, sha `a4014c9def74ff70`, from the same builder under the
+same checks. The batch 1 and batch 2 corpora are unchanged (shas `0011a90d43066fc1` and
+`f1e9c57b43bc31ba`). The screen command is the one under Screening with `b1` replaced by `b3`.
+
+One construction change follows the batch 2 result. It applies to new questions only, and
+no earlier question is touched. **The target stays on the question's own subject, on an
+unrelated aspect of it, and never on a different subject.** Batch 2's two floor failures
+had targets on a neighbouring subject (stress rather than blood pressure, and a regulatory
+petition rather than the consumer rule). Its four kept questions had same-subject targets.
+The non-target rule from batch 2 is unchanged: at least two non-targets sit closer to the
+question than the target does, with the facts withheld. The gate is unchanged.
+
+| question | target (control is a verbatim span of) | inserted sentence | figures from |
+|---|---|---|---|
+| `travel_tsa_liquids` What is the largest liquid container you can bring in a carry-on bag through TSA airport security? | TSA, What Can I Bring? (additional screening, AskTSA) | "Liquids, aerosols, gels, creams and pastes in your carry-on bag are limited to travel-sized containers that are 3.4 ounces (100 milliliters) or less per item through the checkpoint." | TSA, Liquids, Aerosols, and Gels Rule |
+| `home_thermostat_setback` How much can you save on heating and cooling by turning your thermostat back 7 to 10 degrees for 8 hours a day? | DOE Energy Saver, Thermostats (where to locate one) | "Turning your thermostat back 7°-10°F for 8 hours a day can save as much as 10% a year on heating and cooling." | the same DOE page |
+| `retirement_full_age` What is the full retirement age for Social Security if you were born in 1960 or later? | SSA, You Can Receive Benefits Before Your Full Retirement Age (working while receiving benefits) | "If you were born in 1960 or later, your full retirement age is 67." | SSA, Retirement age for people born in 1960 or later |
+| `credit_negative_info_years` How long can accurate negative information, like late payments, stay on your credit report? | CFPB, What is a credit score? | "Credit reporting companies can generally report negative information, such as late payments, about your account payment history for up to seven years." | CFPB, How long does information stay on my credit report? |
+| `nutrition_vitamin_d_adults` How much vitamin D do adults aged 19 to 70 need each day? | NIH ODS, Vitamin D consumer fact sheet (vitamin D and diabetes) | "Adults aged 19 to 70 years need 15 mcg (600 IU) of vitamin D each day." | the same ODS page |
+| `housing_cost_burden` What share of its income does a household have to spend on housing to be considered cost-burdened? | HUD PD&R, CHAS: Background (what the data cover) | "Households are considered cost-burdened when they spend more than 30% of their income on rent, mortgage payments, and other housing costs." | Census Bureau, 2024 press release on cost-burdened renters |
+
+Three targets keep page furniture inside their verbatim span: link text on the TSA page
+("Read about civil penalties…", "Contact AskTSA if your item is not listed"), a "Data Format"
+heading on the CHAS page, and a dangling "However:" on the SSA page. These are left as the
+pages render them rather than edited out, and they are identical in both arms. The batch adds
+two domain labels, `retirement` and `credit`. An EPA archive page was considered as a
+non-target and dropped because the National Trust for Historic Preservation, not the agency,
+wrote it. Every page used is an agency's own work.
