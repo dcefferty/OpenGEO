@@ -455,3 +455,35 @@ consumer page for the subject. The non-target rule is unchanged, and so is the g
 Five of the six figures come from the target's own page, as in batch 2's smoke alarm question.
 The inserted sentence states what that page already states elsewhere, in a paragraph that
 does not. Every page used is an agency's own work. The new label `emergency_prep` is added.
+
+**2026-11-11 — batch 4 screened: 4 of 6 kept.** Ran the batch 4 screen as specified under
+Screening, on `corpus/corpus_realtext_h4_b4.json` (sha `a88df9e30394fd43`), with the repo
+owner's go-ahead. The batch 4 entry above was committed and pushed before the first call, and
+it merged while the screen was running. That was 720 control-only calls with 0 errors, costing
+$0.78. No treatment row exists. Output is in `results/screen_realtext_h4_b4.jsonl`.
+
+| question | pooled | claude | deepseek | gemini | gpt | grok | cites/ans | decision |
+|---|---|---|---|---|---|---|---|---|
+| `finance_fdic_insurance_limit` | 0.408 | 0.04* | 0.33 | 0.83 | 0.54 | 0.29 | 2.67 | KEEP |
+| `taxes_refund_efile_weeks` | 0.833 | 0.67 | 0.83 | 1.00* | 0.75 | 0.92 | 3.02 | DISCARD |
+| `emergency_water_per_person` | 0.700 | 0.50 | 0.62 | 0.83 | 0.54 | 1.00* | 3.40 | KEEP |
+| `cooking_chicken_safe_temp` | 0.625 | 0.21 | 0.71 | 1.00* | 0.54 | 0.67 | 3.83 | KEEP |
+| `nutrition_sodium_daily_limit` | 0.092 | 0.00* | 0.12 | 0.04* | 0.25 | 0.04* | 3.73 | DISCARD |
+| `credit_free_report_frequency` | 0.525 | 0.12 | 0.58 | 0.92 | 0.17 | 0.83 | 3.26 | KEEP |
+
+\* pinned on that engine (at most 1, or at least 23, of 24 runs cite the target).
+
+The four kept questions are appended to `KEPT` in the builder, which now holds **11 of the
+25** needed. One discard failed at the ceiling (`taxes_refund_efile_weeks`, 0.833) and one at
+the floor (`nutrition_sodium_daily_limit`, 0.092). Batch 4's construction kept 4 of 6, where
+batch 3's kept 1. That is consistent with the batch 4 entry's reading but does not test it.
+Pinning is lighter than in batches 2 and 3: 6 pinned engine cells across the four kept
+questions, against 9 across batch 2's four.
+
+Screen-level no-cite, reported but not gating under the 2026-11-08 decision:
+`anthropic/claude-haiku-4.5` 13.2% (19 of 144), `openai/gpt-5.4-mini` 4.2%,
+`deepseek/deepseek-chat` 4.2%, `google/gemini-3-flash-preview` 0%, `x-ai/grok-4.3` 0%.
+
+**Projection.** Four batches remain. At the combined yield of 11 of 24, they would keep about 11
+more, ending near 22. At batch 4's yield of 4 of 6, they would keep about 16, ending near 27.
+The stopping rule is unchanged.
