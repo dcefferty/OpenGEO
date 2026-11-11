@@ -430,3 +430,28 @@ keep about 12 more, ending near 19 kept after 8 batches. That is short of 25 and
 under the stopping rule the round would not run as a finding. Whether it runs as a sub-floor
 estimate would be the repo owner's decision, logged here before any treatment call. The
 stopping rule is not changed by this entry.
+
+**2026-11-11 — batch 4 built, before any batch 4 data.** `corpus/corpus_realtext_h4_b4.json`,
+version `realtext-h4-screen-b4`, sha `a88df9e30394fd43`, from the same builder under the
+same checks. The batch 1 to 3 corpora are unchanged. The screen command is the one under
+Screening with `b1` replaced by `b4`. Seven new snapshots are added under `corpus/sources/`:
+four FDIC pages, two IRS pages and one EPA page.
+
+One construction change follows the batch 3 result. It applies to new questions only. **Every
+target is a span of the agency's consumer page on the question's own subject**, on a paragraph
+about an unrelated aspect of it. Batch 3's four floor targets were on the right subject but on
+pages framed around something else. Its kept target and its ceiling target were on the
+consumer page for the subject. The non-target rule is unchanged, and so is the gate.
+
+| question | target (control is a verbatim span of) | inserted sentence | figures from |
+|---|---|---|---|
+| `finance_fdic_insurance_limit` How much money does FDIC deposit insurance cover per depositor at each insured bank? | FDIC, Deposit Insurance (banks offering insured accounts) | "The standard insurance amount is $250,000 per depositor, per insured bank, for each account ownership category." | FDIC, Deposit Insurance At A Glance |
+| `taxes_refund_efile_weeks` How long does it typically take to get a federal tax refund after you e-file your return? | IRS, Refunds (replacing a lost refund check) | "The typical time to receive your refund is 3 weeks from the date you e-filed." | the same IRS page |
+| `emergency_water_per_person` How much water should you store per person per day for an emergency? | Ready.gov, Water (treating water of uncertain quality) | "Store at least one gallon of water per person per day for several days, for drinking and sanitation." | the same Ready.gov page |
+| `cooking_chicken_safe_temp` What internal temperature should chicken be cooked to so it is safe to eat? | USDA FSIS, Kitchen Thermometers (how thermistor thermometers work) | "Cook all poultry to a safe minimum internal temperature of 165 °F as measured with a food thermometer." | the same FSIS page |
+| `nutrition_sodium_daily_limit` How much sodium should adults limit themselves to each day? | FDA, Sodium in Your Diet (table salt versus sodium) | "The Dietary Guidelines for Americans recommends adults limit sodium intake to less than 2,300 mg per day." | the same FDA page |
+| `credit_free_report_frequency` How often can you get a free copy of your credit report from each of the national credit bureaus? | FTC, Free Credit Reports (what credit reports are used for) | "You can get your free, weekly report from each credit bureau at AnnualCreditReport.com." | the same FTC page |
+
+Five of the six figures come from the target's own page, as in batch 2's smoke alarm question.
+The inserted sentence states what that page already states elsewhere, in a paragraph that
+does not. Every page used is an agency's own work. The new label `emergency_prep` is added.

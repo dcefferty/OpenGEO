@@ -1,0 +1,996 @@
+{
+  "corpus_version": "realtext-h4-screen-b4",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 4: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "cooking",
+    "credit",
+    "emergency_prep",
+    "finance",
+    "nutrition",
+    "taxes"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "finance_fdic_insurance_limit",
+      "domain": "finance",
+      "question": "How much money does FDIC deposit insurance cover per depositor at each insured bank?",
+      "target_doc_id": "finance_fdic_insurance_limit__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "finance_fdic_insurance_limit__target",
+        "finance_fdic_insurance_limit__doc1",
+        "finance_fdic_insurance_limit__doc2",
+        "finance_fdic_insurance_limit__doc3",
+        "finance_fdic_insurance_limit__doc4",
+        "finance_fdic_insurance_limit__doc5"
+      ],
+      "answer_pattern": "\\$ ?\\d|\\b250\\b|thousand"
+    },
+    {
+      "prompt_id": "taxes_refund_efile_weeks",
+      "domain": "taxes",
+      "question": "How long does it typically take to get a federal tax refund after you e-file your return?",
+      "target_doc_id": "taxes_refund_efile_weeks__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "taxes_refund_efile_weeks__target",
+        "taxes_refund_efile_weeks__doc1",
+        "taxes_refund_efile_weeks__doc2",
+        "taxes_refund_efile_weeks__doc3",
+        "taxes_refund_efile_weeks__doc4",
+        "taxes_refund_efile_weeks__doc5"
+      ],
+      "answer_pattern": "\\b21\\b|twenty-one|three weeks|\\b3 weeks|\\b3-week"
+    },
+    {
+      "prompt_id": "emergency_water_per_person",
+      "domain": "emergency_prep",
+      "question": "How much water should you store per person per day for an emergency?",
+      "target_doc_id": "emergency_water_per_person__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "emergency_water_per_person__target",
+        "emergency_water_per_person__doc1",
+        "emergency_water_per_person__doc2",
+        "emergency_water_per_person__doc3",
+        "emergency_water_per_person__doc4",
+        "emergency_water_per_person__doc5"
+      ],
+      "answer_pattern": "gallons?|\\bliters?\\b|litres?|quarts?|ounces?"
+    },
+    {
+      "prompt_id": "cooking_chicken_safe_temp",
+      "domain": "cooking",
+      "question": "What internal temperature should chicken be cooked to so it is safe to eat?",
+      "target_doc_id": "cooking_chicken_safe_temp__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "cooking_chicken_safe_temp__target",
+        "cooking_chicken_safe_temp__doc1",
+        "cooking_chicken_safe_temp__doc2",
+        "cooking_chicken_safe_temp__doc3",
+        "cooking_chicken_safe_temp__doc4",
+        "cooking_chicken_safe_temp__doc5"
+      ],
+      "answer_pattern": "\\d+ ?°|\\b1[4-7]\\d\\b|degrees|fahrenheit|celsius"
+    },
+    {
+      "prompt_id": "nutrition_sodium_daily_limit",
+      "domain": "nutrition",
+      "question": "How much sodium should adults limit themselves to each day?",
+      "target_doc_id": "nutrition_sodium_daily_limit__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "nutrition_sodium_daily_limit__target",
+        "nutrition_sodium_daily_limit__doc1",
+        "nutrition_sodium_daily_limit__doc2",
+        "nutrition_sodium_daily_limit__doc3",
+        "nutrition_sodium_daily_limit__doc4",
+        "nutrition_sodium_daily_limit__doc5"
+      ],
+      "answer_pattern": "\\bmg\\b|milligrams?|\\b2,?300\\b|\\b1,?500\\b|teaspoons?|\\bgrams?\\b|\\d+ ?%|percent"
+    },
+    {
+      "prompt_id": "credit_free_report_frequency",
+      "domain": "credit",
+      "question": "How often can you get a free copy of your credit report from each of the national credit bureaus?",
+      "target_doc_id": "credit_free_report_frequency__target",
+      "target_format": "blog",
+      "doc_ids": [
+        "credit_free_report_frequency__target",
+        "credit_free_report_frequency__doc1",
+        "credit_free_report_frequency__doc2",
+        "credit_free_report_frequency__doc3",
+        "credit_free_report_frequency__doc4",
+        "credit_free_report_frequency__doc5"
+      ],
+      "answer_pattern": "week|annual|\\byears?\\b|months?|monthly|\\bonce\\b|twelve|\\b12\\b|daily|every day"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "finance_fdic_insurance_limit__target",
+      "prompt_id": "finance_fdic_insurance_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": true,
+      "source": {
+        "agency": "FDIC",
+        "title": "Deposit Insurance",
+        "url": "https://www.fdic.gov/deposit-insurance",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f570584c9bf712e06551dd91bed94145a917d1d509885863ff70e1919e8e6675",
+        "retrieved_utc": "2026-11-11T01:44:42+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "Large and small banks across the country offer deposit accounts backed by FDIC deposit insurance. Coverage is automatic when you open one of these types of accounts at an FDIC-insured bank. If you are in one of the 5.9 million U.S. households without a bank account, and you are looking to open an account, FDIC has resources to help get you started.",
+        "treatment": "Large and small banks across the country offer deposit accounts backed by FDIC deposit insurance. The standard insurance amount is $250,000 per depositor, per insured bank, for each account ownership category. If you are in one of the 5.9 million U.S. households without a bank account, and you are looking to open an account, FDIC has resources to help get you started."
+      },
+      "edit": {
+        "replaced": "Coverage is automatic when you open one of these types of accounts at an FDIC-insured bank.",
+        "inserted": "The standard insurance amount is $250,000 per depositor, per insured bank, for each account ownership category.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.fdic.gov/resources/deposit-insurance/brochures/deposits-at-a-glance",
+            "agency": "FDIC",
+            "passage": "The standard insurance amount is $250,000 per depositor, per insured bank, for each account ownership category.",
+            "snapshot_sha256": "93b156cbee1fb61942136430bd6db263e4de85d49d1e6a4cfd1a9e0c90ac3bd9"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "finance_fdic_insurance_limit__doc1",
+      "prompt_id": "finance_fdic_insurance_limit",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Deposit Insurance FAQs",
+        "url": "https://www.fdic.gov/resources/deposit-insurance/faq",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "df0943738c723e7078195149c914c02c8abc3b95bd4f614de07bfd905f19c428",
+        "retrieved_utc": "2026-11-11T01:44:41+00:00",
+        "method": "curl"
+      },
+      "words": 104,
+      "variants": {
+        "control": "A: Depositors do not need to apply for or purchase FDIC deposit insurance. Coverage is automatic whenever a deposit account is opened at an FDIC-insured bank. If you want your funds insured by the FDIC, simply place your funds in a deposit account at an FDIC-insured bank and make sure that your deposit does not exceed the insurance limit for that ownership category. See \"Are My Accounts Insured by the FDIC?\" for more information about the types of insurable products that are covered by FDIC insurance and the amount of deposit insurance coverage that may be available under FDIC's different ownership rights and capacities.",
+        "treatment": "A: Depositors do not need to apply for or purchase FDIC deposit insurance. Coverage is automatic whenever a deposit account is opened at an FDIC-insured bank. If you want your funds insured by the FDIC, simply place your funds in a deposit account at an FDIC-insured bank and make sure that your deposit does not exceed the insurance limit for that ownership category. See \"Are My Accounts Insured by the FDIC?\" for more information about the types of insurable products that are covered by FDIC insurance and the amount of deposit insurance coverage that may be available under FDIC's different ownership rights and capacities."
+      }
+    },
+    {
+      "doc_id": "finance_fdic_insurance_limit__doc2",
+      "prompt_id": "finance_fdic_insurance_limit",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Deposit Insurance At A Glance",
+        "url": "https://www.fdic.gov/resources/deposit-insurance/brochures/deposits-at-a-glance",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "93b156cbee1fb61942136430bd6db263e4de85d49d1e6a4cfd1a9e0c90ac3bd9",
+        "retrieved_utc": "2026-11-11T01:44:42+00:00",
+        "method": "curl"
+      },
+      "words": 83,
+      "variants": {
+        "control": "Deposit insurance coverage protects depositors against the failure of an insured bank; it does not protect against losses due to theft or fraud, which are addressed by other laws. In the unlikely event of a bank failure, the FDIC acts quickly to ensure that all depositors get prompt access to their insured deposits. FDIC deposit insurance covers the balance of each depositor's account, dollar-for-dollar, up to the insurance limit, including principal and any accrued interest through the date of the insured bank's failure.",
+        "treatment": "Deposit insurance coverage protects depositors against the failure of an insured bank; it does not protect against losses due to theft or fraud, which are addressed by other laws. In the unlikely event of a bank failure, the FDIC acts quickly to ensure that all depositors get prompt access to their insured deposits. FDIC deposit insurance covers the balance of each depositor's account, dollar-for-dollar, up to the insurance limit, including principal and any accrued interest through the date of the insured bank's failure."
+      }
+    },
+    {
+      "doc_id": "finance_fdic_insurance_limit__doc3",
+      "prompt_id": "finance_fdic_insurance_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Understanding Deposit Insurance",
+        "url": "https://www.fdic.gov/resources/deposit-insurance/understanding-deposit-insurance",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1ac6a6f4c35fcfad5ee47df0ca54173f7ff61c80fc500d065d323f233099119f",
+        "retrieved_utc": "2026-11-11T01:44:40+00:00",
+        "method": "curl"
+      },
+      "words": 105,
+      "variants": {
+        "control": "The FDIC maintains the Deposit Insurance Fund (DIF), which: Insures deposits and protects depositors of FDIC-insured banks and Helps fund our resolution activities when banks fail. The DIF is backed by the full faith and credit of the United States government, and it has two sources of funds: Assessments (insurance premiums) that FDIC-insured institutions pay and Interest earned on funds invested in U.S. government obligations. The FDIC buys Treasury notes, and the interest on those notes helps the DIF grow. FDIC deposit insurance only covers deposits, and only if your bank is FDIC-insured. Make sure your bank is FDIC-insured, using the BankFind Suite search tool.",
+        "treatment": "The FDIC maintains the Deposit Insurance Fund (DIF), which: Insures deposits and protects depositors of FDIC-insured banks and Helps fund our resolution activities when banks fail. The DIF is backed by the full faith and credit of the United States government, and it has two sources of funds: Assessments (insurance premiums) that FDIC-insured institutions pay and Interest earned on funds invested in U.S. government obligations. The FDIC buys Treasury notes, and the interest on those notes helps the DIF grow. FDIC deposit insurance only covers deposits, and only if your bank is FDIC-insured. Make sure your bank is FDIC-insured, using the BankFind Suite search tool."
+      }
+    },
+    {
+      "doc_id": "finance_fdic_insurance_limit__doc4",
+      "prompt_id": "finance_fdic_insurance_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Saving for the Unexpected and Your Future",
+        "url": "https://www.fdic.gov/consumer-resource-center/2025-01/saving-unexpected-and-your-future",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0982a073f405468ba4cd06641c553ace40427f7523cc59379d0ee1e799c64854",
+        "retrieved_utc": "2026-09-15T05:19:38+00:00",
+        "method": "curl"
+      },
+      "words": 85,
+      "variants": {
+        "control": "A traditional FDIC-insured savings account is a great place to put money aside for savings goals, as it allows you to withdraw funds easily and earn some interest. These accounts do not come with checks and the bank may limit the number of withdrawals you can make, which helps you avoid the temptation to spend your savings before you're ready. You can even set up automatic transfers from your checking account to keep your savings separate. This separation helps to avoid spending your money frivolously.",
+        "treatment": "A traditional FDIC-insured savings account is a great place to put money aside for savings goals, as it allows you to withdraw funds easily and earn some interest. These accounts do not come with checks and the bank may limit the number of withdrawals you can make, which helps you avoid the temptation to spend your savings before you're ready. You can even set up automatic transfers from your checking account to keep your savings separate. This separation helps to avoid spending your money frivolously."
+      }
+    },
+    {
+      "doc_id": "finance_fdic_insurance_limit__doc5",
+      "prompt_id": "finance_fdic_insurance_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Starting Small Can Lead to Big Savings",
+        "url": "https://www.fdic.gov/consumer-resource-center/2024-01/starting-small-can-lead-big-savings",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d9828ecbd7ddcec08f78ae4cf5f4392e7bca97f020fa31a654e1e9a66632a9bc",
+        "retrieved_utc": "2026-09-15T05:19:39+00:00",
+        "method": "curl"
+      },
+      "words": 86,
+      "variants": {
+        "control": "Consider keeping emergency savings in a separate FDIC-insured savings account instead of a checking account, so that you can better resist the urge to raid the funds for everyday expenses. Be sure to develop a plan to replenish any withdrawals from your emergency fund. For large purchases that you hope to make years from now, consider certificates of deposit or U.S. Savings Bonds. These generally earn more interest than a basic savings account, because you agree to keep the funds untouched for a period of time.",
+        "treatment": "Consider keeping emergency savings in a separate FDIC-insured savings account instead of a checking account, so that you can better resist the urge to raid the funds for everyday expenses. Be sure to develop a plan to replenish any withdrawals from your emergency fund. For large purchases that you hope to make years from now, consider certificates of deposit or U.S. Savings Bonds. These generally earn more interest than a basic savings account, because you agree to keep the funds untouched for a period of time."
+      }
+    },
+    {
+      "doc_id": "taxes_refund_efile_weeks__target",
+      "prompt_id": "taxes_refund_efile_weeks",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": true,
+      "source": {
+        "agency": "IRS",
+        "title": "Refunds",
+        "url": "https://www.irs.gov/refunds",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7ad3128eab317941acf365e37e507ccb0d792cfa250dd453af81c64943837edf",
+        "retrieved_utc": "2026-11-11T01:44:39+00:00",
+        "method": "curl"
+      },
+      "words": 96,
+      "variants": {
+        "control": "If the check is less than a year old - We'll cancel it and mail a new refund check to you. You should receive the new check within 4 weeks from the date we issue it. If the check is more than a year old - We'll mail a new refund check with a CP32 notice. You should receive the check within 4 weeks from the date we issue it. If for any reason we can't reissue the refund, we'll mail a CP32A notice and ask you to contact us to request a replacement refund check.",
+        "treatment": "If the check is less than a year old - We'll cancel it and mail a new refund check to you. You should receive the new check within 4 weeks from the date we issue it. If the check is more than a year old - We'll mail a new refund check with a CP32 notice. The typical time to receive your refund is 3 weeks from the date you e-filed. If for any reason we can't reissue the refund, we'll mail a CP32A notice and ask you to contact us to request a replacement refund check."
+      },
+      "edit": {
+        "replaced": "You should receive the check within 4 weeks from the date we issue it.",
+        "inserted": "The typical time to receive your refund is 3 weeks from the date you e-filed.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.irs.gov/refunds",
+            "agency": "IRS",
+            "passage": "E-filed return - 3 weeks from the date you e-filed",
+            "snapshot_sha256": "7ad3128eab317941acf365e37e507ccb0d792cfa250dd453af81c64943837edf"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "taxes_refund_efile_weeks__doc1",
+      "prompt_id": "taxes_refund_efile_weeks",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Get your refund faster: Tell IRS to direct deposit your refund to one, two, or three accounts",
+        "url": "https://www.irs.gov/refunds/get-your-refund-faster-tell-irs-to-direct-deposit-your-refund-to-one-two-or-three-accounts",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "22b1292e7d2af32eddfa76116c5d9e0679373c651e2f198730d96ec45a553c9d",
+        "retrieved_utc": "2026-11-11T01:44:40+00:00",
+        "method": "curl"
+      },
+      "words": 89,
+      "variants": {
+        "control": "Now, more than ever, you need a reliable, fast, secure, contact-less way to receive your money. The best and fastest way to get your tax refund is to have it electronically deposited for free into your financial account. The IRS program is called direct deposit. You can use it to deposit your refund into one, two or even three accounts. Even if you don't have a checking account, there are other options available for direct deposit. Direct deposit is now also available for returns filed after their due date.",
+        "treatment": "Now, more than ever, you need a reliable, fast, secure, contact-less way to receive your money. The best and fastest way to get your tax refund is to have it electronically deposited for free into your financial account. The IRS program is called direct deposit. You can use it to deposit your refund into one, two or even three accounts. Even if you don't have a checking account, there are other options available for direct deposit. Direct deposit is now also available for returns filed after their due date."
+      }
+    },
+    {
+      "doc_id": "taxes_refund_efile_weeks__doc2",
+      "prompt_id": "taxes_refund_efile_weeks",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Actions taxpayers should take if they missed the deadline",
+        "url": "https://www.irs.gov/newsroom/actions-taxpayers-should-take-if-they-missed-april-filing-and-payment-deadline",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "644c56261876bd9716180111f3790f46b6819cd5fc74bedea0250d53b70428db",
+        "retrieved_utc": "2026-09-19T19:06:07+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "There's no penalty for filing after April 15, if the IRS owes the taxpayer a refund. Taxpayers who choose not to file a tax return because they don't earn enough to meet the filing requirement may miss out on receiving a refund due to potential refundable tax credits, such as the Earned Income Tax Credit and Child Tax Credit.",
+        "treatment": "There's no penalty for filing after April 15, if the IRS owes the taxpayer a refund. Taxpayers who choose not to file a tax return because they don't earn enough to meet the filing requirement may miss out on receiving a refund due to potential refundable tax credits, such as the Earned Income Tax Credit and Child Tax Credit."
+      }
+    },
+    {
+      "doc_id": "taxes_refund_efile_weeks__doc3",
+      "prompt_id": "taxes_refund_efile_weeks",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Statutes of limitations for assessing, collecting and refunding tax",
+        "url": "https://www.irs.gov/filing/statutes-of-limitations-for-assessing-collecting-and-refunding-tax",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "797ee06ce34b5fe96a1f5b5e4e6437f33d6818cec0bc568b4823a67b93e74a41",
+        "retrieved_utc": "2026-09-16T04:57:44+00:00",
+        "method": "curl"
+      },
+      "words": 55,
+      "variants": {
+        "control": "When we assess or collect taxes from you or when we decide on your filed claim for a credit or refund, we mail you a notice or letter. The notice or letter will tell you about the tax year, what actions we're taking and next steps. For more information, see Understanding your notice or letter.",
+        "treatment": "When we assess or collect taxes from you or when we decide on your filed claim for a credit or refund, we mail you a notice or letter. The notice or letter will tell you about the tax year, what actions we're taking and next steps. For more information, see Understanding your notice or letter."
+      }
+    },
+    {
+      "doc_id": "taxes_refund_efile_weeks__doc4",
+      "prompt_id": "taxes_refund_efile_weeks",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "How long should I keep records?",
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c8249b068cf63a19840b40fc5b206b264e5b25c86f34f4623563449e8f2382bb",
+        "retrieved_utc": "2026-09-16T04:57:43+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "The period of limitations is the period of time in which you can amend your tax return to claim a credit or refund, or the IRS can assess additional tax. The information below reflects the periods of limitations that apply to income tax returns. Unless otherwise stated, the years refer to the period after the return was filed. Returns filed before the due date are treated as filed on the due date.",
+        "treatment": "The period of limitations is the period of time in which you can amend your tax return to claim a credit or refund, or the IRS can assess additional tax. The information below reflects the periods of limitations that apply to income tax returns. Unless otherwise stated, the years refer to the period after the return was filed. Returns filed before the due date are treated as filed on the due date."
+      }
+    },
+    {
+      "doc_id": "taxes_refund_efile_weeks__doc5",
+      "prompt_id": "taxes_refund_efile_weeks",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Topic no. 305, Recordkeeping",
+        "url": "https://www.irs.gov/taxtopics/tc305",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "63a2d2db8edd35413fb6befc3b57b740f83b795c0357c52d6ce6f382b9412a22",
+        "retrieved_utc": "2026-09-16T04:57:43+00:00",
+        "method": "curl"
+      },
+      "words": 73,
+      "variants": {
+        "control": "The later of 3 years or 2 years after tax was paid - For filing a claim for credit or refund, generally the period to make the claim is 3 years from the date you filed the original return or 2 years from the date the tax was paid, whichever is later. If no return was filed, the period to file a claim is 2 years from the date the tax was paid.",
+        "treatment": "The later of 3 years or 2 years after tax was paid - For filing a claim for credit or refund, generally the period to make the claim is 3 years from the date you filed the original return or 2 years from the date the tax was paid, whichever is later. If no return was filed, the period to file a claim is 2 years from the date the tax was paid."
+      }
+    },
+    {
+      "doc_id": "emergency_water_per_person__target",
+      "prompt_id": "emergency_water_per_person",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": true,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Water",
+        "url": "https://www.ready.gov/water",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "27f3036469bdb803fdd2764ac56773523e1107abb7185acf306f4069e991ad0e",
+        "retrieved_utc": "2026-09-16T04:57:45+00:00",
+        "method": "curl"
+      },
+      "words": 110,
+      "variants": {
+        "control": "If you have used all of your stored water and there are no other reliable clean water sources, it may become necessary to treat suspicious water. Treat all water of uncertain quality before using it for drinking, food washing or preparation, washing dishes, brushing teeth or making ice. In addition to having a bad odor and taste, contaminated water can contain microorganisms (germs) that cause diseases such as dysentery, cholera, typhoid and hepatitis. There are many ways to treat water. Often the best solution is a combination of methods. Before treating, let any suspended particles settle to the bottom or strain them through coffee filters or layers of clean cloth.",
+        "treatment": "If you have used all of your stored water and there are no other reliable clean water sources, it may become necessary to treat suspicious water. Treat all water of uncertain quality before using it for drinking, food washing or preparation, washing dishes, brushing teeth or making ice. In addition to having a bad odor and taste, contaminated water can contain microorganisms (germs) that cause diseases such as dysentery, cholera, typhoid and hepatitis. There are many ways to treat water. Often the best solution is a combination of methods. Store at least one gallon of water per person per day for several days, for drinking and sanitation."
+      },
+      "edit": {
+        "replaced": "Before treating, let any suspended particles settle to the bottom or strain them through coffee filters or layers of clean cloth.",
+        "inserted": "Store at least one gallon of water per person per day for several days, for drinking and sanitation.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.ready.gov/water",
+            "agency": "FEMA Ready.gov",
+            "passage": "Store at least one gallon of water per person per day for several days, for drinking and sanitation.",
+            "snapshot_sha256": "27f3036469bdb803fdd2764ac56773523e1107abb7185acf306f4069e991ad0e"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "emergency_water_per_person__doc1",
+      "prompt_id": "emergency_water_per_person",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Build A Kit",
+        "url": "https://www.ready.gov/kit",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b359c3e56e4c054c413a69fa65ebba4e5883fb49783180744550e974dc87f5c0",
+        "retrieved_utc": "2026-09-16T04:57:45+00:00",
+        "method": "curl"
+      },
+      "words": 50,
+      "variants": {
+        "control": "After an emergency, you may need to survive on your own for several days. Being prepared means having your own food, water and other supplies to last for several days. A disaster supplies kit is a collection of basic items your household may need in the event of an emergency.",
+        "treatment": "After an emergency, you may need to survive on your own for several days. Being prepared means having your own food, water and other supplies to last for several days. A disaster supplies kit is a collection of basic items your household may need in the event of an emergency."
+      }
+    },
+    {
+      "doc_id": "emergency_water_per_person__doc2",
+      "prompt_id": "emergency_water_per_person",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Prepare Your Pets for Disasters",
+        "url": "https://www.ready.gov/pets",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "17591b95147bf1ec4da2ffe150ddc093201234c9878130f1975ae4c71a5c048f",
+        "retrieved_utc": "2026-09-16T04:57:45+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "Just as you do with your family's emergency supply kit, think first about the basics for survival, such as food and water. Have two kits, one larger kit if you are sheltering in place and one lightweight version for if you need to evacuate. Review your kits regularly to ensure that their contents, especially foods and medicines, are fresh.",
+        "treatment": "Just as you do with your family's emergency supply kit, think first about the basics for survival, such as food and water. Have two kits, one larger kit if you are sheltering in place and one lightweight version for if you need to evacuate. Review your kits regularly to ensure that their contents, especially foods and medicines, are fresh."
+      }
+    },
+    {
+      "doc_id": "emergency_water_per_person__doc3",
+      "prompt_id": "emergency_water_per_person",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Emergency Disinfection of Drinking Water",
+        "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7cfae08b0c1531e5efe754d6a5331c8b420b10524d3e2f3cedaef22ffea4c809",
+        "retrieved_utc": "2026-11-11T01:47:36+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "In an emergency situation where regular water service has been interrupted - like a hurricane, flood, or water pipe breakage - local authorities may recommend using only bottled water, boiled water, or disinfected water until regular water service is restored. The instructions below show you how to boil and disinfect water to kill most disease-causing microorganisms that may be present in the water. However, boiling or disinfection will not destroy other contaminants, such as heavy metals, salts, and most other chemicals.",
+        "treatment": "In an emergency situation where regular water service has been interrupted - like a hurricane, flood, or water pipe breakage - local authorities may recommend using only bottled water, boiled water, or disinfected water until regular water service is restored. The instructions below show you how to boil and disinfect water to kill most disease-causing microorganisms that may be present in the water. However, boiling or disinfection will not destroy other contaminants, such as heavy metals, salts, and most other chemicals."
+      }
+    },
+    {
+      "doc_id": "emergency_water_per_person__doc4",
+      "prompt_id": "emergency_water_per_person",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Food",
+        "url": "https://www.ready.gov/food",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "725b28da5c0486df28047b59da2aaccb17f9b0bfe295fea72f5039760de9953f",
+        "retrieved_utc": "2026-09-16T04:57:45+00:00",
+        "method": "curl"
+      },
+      "words": 68,
+      "variants": {
+        "control": "Without electricity or a cold source food stored in refrigerators and freezers can become unsafe. Bacteria in food grow rapidly at temperatures between 40 and 140 degrees Fahrenheit and if these foods are consumed you can become very sick. Thawed food usually can be eaten if it is still \"refrigerator cold.\" It can be re-frozen if it still contains ice crystals. Remember \"When in doubt, throw it out.\"",
+        "treatment": "Without electricity or a cold source food stored in refrigerators and freezers can become unsafe. Bacteria in food grow rapidly at temperatures between 40 and 140 degrees Fahrenheit and if these foods are consumed you can become very sick. Thawed food usually can be eaten if it is still \"refrigerator cold.\" It can be re-frozen if it still contains ice crystals. Remember \"When in doubt, throw it out.\""
+      }
+    },
+    {
+      "doc_id": "emergency_water_per_person__doc5",
+      "prompt_id": "emergency_water_per_person",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "FEMA Ready.gov",
+        "title": "Home Fires",
+        "url": "https://www.ready.gov/home-fires",
+        "rights": "US federal work (FEMA / US Fire Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3c366cbdea481a0252bdcc73f08f07d5e8e8f66d28afa737720c093a3ebbdf09",
+        "retrieved_utc": "2026-09-19T17:08:24+00:00",
+        "method": "curl"
+      },
+      "words": 85,
+      "variants": {
+        "control": "If your clothes catch fire, stop, drop and roll - stop immediately, drop to the ground and cover your face with your hands. Roll over and over or back and forth until the fire is out. If you or someone else cannot stop, drop and roll, smother the flames with a blanket or towel. Use cool water to treat the burn immediately for three to five minutes. Cover with a clean, dry cloth. Get medical help right away by calling 9-1-1 or the fire department.",
+        "treatment": "If your clothes catch fire, stop, drop and roll - stop immediately, drop to the ground and cover your face with your hands. Roll over and over or back and forth until the fire is out. If you or someone else cannot stop, drop and roll, smother the flames with a blanket or towel. Use cool water to treat the burn immediately for three to five minutes. Cover with a clean, dry cloth. Get medical help right away by calling 9-1-1 or the fire department."
+      }
+    },
+    {
+      "doc_id": "cooking_chicken_safe_temp__target",
+      "prompt_id": "cooking_chicken_safe_temp",
+      "format": "reference",
+      "domain": "cooking",
+      "is_target": true,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Kitchen Thermometers",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/kitchen-thermometers",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6b76cfd56db4ed736986daf37e56ab5b3e6d87899ba9bb851d89ae60b24d87de",
+        "retrieved_utc": "2026-09-18T05:09:57+00:00",
+        "method": "wayback id_"
+      },
+      "words": 88,
+      "variants": {
+        "control": "Thermistor-style food thermometers use a resistor (a ceramic semiconductor bonded in the tip with temperature-sensitive epoxy) to measure temperature. The thickness of the probe is approximately 1/8 of an inch and takes roughly 10 seconds to register the temperature on the digital display. Since the semiconductor is in the tip, thermistors can measure temperature in thin foods, as well as thick foods. Because the center of a food is usually cooler than the outer surface, place the tip in the center of the thickest part of the food.",
+        "treatment": "Thermistor-style food thermometers use a resistor (a ceramic semiconductor bonded in the tip with temperature-sensitive epoxy) to measure temperature. The thickness of the probe is approximately 1/8 of an inch and takes roughly 10 seconds to register the temperature on the digital display. Cook all poultry to a safe minimum internal temperature of 165 °F as measured with a food thermometer. Because the center of a food is usually cooler than the outer surface, place the tip in the center of the thickest part of the food."
+      },
+      "edit": {
+        "replaced": "Since the semiconductor is in the tip, thermistors can measure temperature in thin foods, as well as thick foods.",
+        "inserted": "Cook all poultry to a safe minimum internal temperature of 165 °F as measured with a food thermometer.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/kitchen-thermometers",
+            "agency": "USDA FSIS",
+            "passage": "Cook all poultry to a safe minimum internal temperature of 165 °F as measured with a food thermometer.",
+            "snapshot_sha256": "6b76cfd56db4ed736986daf37e56ab5b3e6d87899ba9bb851d89ae60b24d87de"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "cooking_chicken_safe_temp__doc1",
+      "prompt_id": "cooking_chicken_safe_temp",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Doneness Versus Safety",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/doneness-versus-safety",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8544b9de4bd268c9183e54b49a188ed68cda6d2444dfa838cb58d4cd4e9a22f1",
+        "retrieved_utc": "2026-09-18T04:41:39+00:00",
+        "method": "wayback id_"
+      },
+      "words": 70,
+      "variants": {
+        "control": "Kids popping into the kitchen or dashing by a barbecue grill ask impatiently, \"Is it done yet?\" Is \"done\" the same as \"safe\"? How does the cook know? Appearance and color are not reliable indicators of safety or doneness. Studies have shown that using a food thermometer is the only way to tell if harmful bacteria have been destroyed, yet only about 15% of people consistently use a food thermometer.",
+        "treatment": "Kids popping into the kitchen or dashing by a barbecue grill ask impatiently, \"Is it done yet?\" Is \"done\" the same as \"safe\"? How does the cook know? Appearance and color are not reliable indicators of safety or doneness. Studies have shown that using a food thermometer is the only way to tell if harmful bacteria have been destroyed, yet only about 15% of people consistently use a food thermometer."
+      }
+    },
+    {
+      "doc_id": "cooking_chicken_safe_temp__doc2",
+      "prompt_id": "cooking_chicken_safe_temp",
+      "format": "blog",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA",
+        "title": "Cooking Meat: Is It Done Yet?",
+        "url": "https://www.usda.gov/about-usda/news/blog/cooking-meat-it-done-yet",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "02555eb0d1d3f3e21ac0550f66bea26c0748ac8f35f4bc1492245e58fd042152",
+        "retrieved_utc": "2026-09-18T04:42:26+00:00",
+        "method": "wayback id_"
+      },
+      "words": 73,
+      "variants": {
+        "control": "A meal preparation study (PDF, 1.3 MB) from the U.S. Department of Agriculture's (USDA) Food Safety and Inspection Service (FSIS) revealed that only 55% of people use a food thermometer to verify if their food is safe to consume, despite 88% of participants reporting that they own a thermometer. Instead, participants in the study relied on visual cues such as color, firmness and time. But are visual cues enough to prevent foodborne illness?",
+        "treatment": "A meal preparation study (PDF, 1.3 MB) from the U.S. Department of Agriculture's (USDA) Food Safety and Inspection Service (FSIS) revealed that only 55% of people use a food thermometer to verify if their food is safe to consume, despite 88% of participants reporting that they own a thermometer. Instead, participants in the study relied on visual cues such as color, firmness and time. But are visual cues enough to prevent foodborne illness?"
+      }
+    },
+    {
+      "doc_id": "cooking_chicken_safe_temp__doc3",
+      "prompt_id": "cooking_chicken_safe_temp",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "Grilling Food Safely",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/grilling-food-safely",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9f261f2448e0abc8e4a57780d20ee508b3b74a2d89ee17fe4cbd292986bc91d7",
+        "retrieved_utc": "2026-09-18T05:08:35+00:00",
+        "method": "wayback id_"
+      },
+      "words": 52,
+      "variants": {
+        "control": "Cook food to a safe minimum internal temperature to destroy harmful bacteria. Meat and poultry cooked on a grill tends to brown quickly on the outside, so use a food thermometer to ensure the food has reached a safe minimum internal temperature. NEVER partially grill meat or poultry and finish cooking later.",
+        "treatment": "Cook food to a safe minimum internal temperature to destroy harmful bacteria. Meat and poultry cooked on a grill tends to brown quickly on the outside, so use a food thermometer to ensure the food has reached a safe minimum internal temperature. NEVER partially grill meat or poultry and finish cooking later."
+      }
+    },
+    {
+      "doc_id": "cooking_chicken_safe_temp__doc4",
+      "prompt_id": "cooking_chicken_safe_temp",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Safe Food Handling",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "4b09fb7de151a7cbec60a3fedaf497fbcd8a2ad5a4ad6b34614aff976ded9cf6",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 54,
+      "variants": {
+        "control": "Consuming dangerous foodborne bacteria will usually cause illness within 1 to 3 days of eating the contaminated food. However, sickness can also occur within 20 minutes or up to 6 weeks later. Symptoms of foodborne illness can include: vomiting, diarrhea, and abdominal pain - and flu-like symptoms, such as fever, headache, and body ache.",
+        "treatment": "Consuming dangerous foodborne bacteria will usually cause illness within 1 to 3 days of eating the contaminated food. However, sickness can also occur within 20 minutes or up to 6 weeks later. Symptoms of foodborne illness can include: vomiting, diarrhea, and abdominal pain - and flu-like symptoms, such as fever, headache, and body ache."
+      }
+    },
+    {
+      "doc_id": "cooking_chicken_safe_temp__doc5",
+      "prompt_id": "cooking_chicken_safe_temp",
+      "format": "reference",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "USDA FSIS",
+        "title": "How Temperatures Affect Food",
+        "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/how-temperatures-affect-food",
+        "rights": "US federal work (USDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7fdd239b2ab3b04163f690548417591fcf34111424d1427d486719b6c8abff7a",
+        "retrieved_utc": "2026-09-18T05:08:58+00:00",
+        "method": "wayback id_"
+      },
+      "words": 73,
+      "variants": {
+        "control": "Bacteria exist everywhere in nature. They are in the soil, air, water and the foods we eat. When bacteria have nutrients (food), moisture, time and favorable temperatures, they grow rapidly, increasing in numbers to the point where some can cause illness. Understanding the important role temperature plays in keeping food safe is critical. If we know the temperature at which food has been handled, we can then answer the question, \"Is it safe?\"",
+        "treatment": "Bacteria exist everywhere in nature. They are in the soil, air, water and the foods we eat. When bacteria have nutrients (food), moisture, time and favorable temperatures, they grow rapidly, increasing in numbers to the point where some can cause illness. Understanding the important role temperature plays in keeping food safe is critical. If we know the temperature at which food has been handled, we can then answer the question, \"Is it safe?\""
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium_daily_limit__target",
+      "prompt_id": "nutrition_sodium_daily_limit",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": true,
+      "source": {
+        "agency": "FDA",
+        "title": "Sodium in Your Diet",
+        "url": "https://www.fda.gov/food/nutrition-education-resources-materials/sodium-your-diet",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c6a7157adadf20f088391ca2d2fa72cfc1c019e633436a975b9d226fb332b8f8",
+        "retrieved_utc": "2026-09-14T03:35:12+00:00",
+        "method": "curl"
+      },
+      "words": 50,
+      "variants": {
+        "control": "The words \"table salt\" and \"sodium\" are often used interchangeably, but they do not mean the same thing. Table salt (also known by its chemical name, sodium chloride) is a crystal-like compound that is abundant in nature. Sodium is a mineral, and one of the chemical elements found in salt.",
+        "treatment": "The words \"table salt\" and \"sodium\" are often used interchangeably, but they do not mean the same thing. The Dietary Guidelines for Americans recommends adults limit sodium intake to less than 2,300 mg per day. Sodium is a mineral, and one of the chemical elements found in salt."
+      },
+      "edit": {
+        "replaced": "Table salt (also known by its chemical name, sodium chloride) is a crystal-like compound that is abundant in nature.",
+        "inserted": "The Dietary Guidelines for Americans recommends adults limit sodium intake to less than 2,300 mg per day.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.fda.gov/food/nutrition-education-resources-materials/sodium-your-diet",
+            "agency": "FDA",
+            "passage": "the Dietary Guidelines for Americans recommends adults limit sodium intake to less than 2,300 mg per day",
+            "snapshot_sha256": "c6a7157adadf20f088391ca2d2fa72cfc1c019e633436a975b9d226fb332b8f8"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium_daily_limit__doc1",
+      "prompt_id": "nutrition_sodium_daily_limit",
+      "format": "blog",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Eating Too Much Salt? Ways to Cut Back...Gradually",
+        "url": "https://www.fda.gov/consumers/consumer-updates/eating-too-much-salt-ways-cut-backgradually",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "64a2662944b7df3ae82f08c0020e5ab570714ad3c013a85d27c0503670b4fedd",
+        "retrieved_utc": "2026-09-15T05:19:41+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "Try to cut back on foods high in sodium, such as deli-meat sandwiches, pizza, and burritos and tacos. Remember, it's important to cut back both when eating at home and eating out in restaurants. If you're ordering a standard menu item at a chain restaurant, ask to see the written nutrition information and choose an option lower in sodium.",
+        "treatment": "Try to cut back on foods high in sodium, such as deli-meat sandwiches, pizza, and burritos and tacos. Remember, it's important to cut back both when eating at home and eating out in restaurants. If you're ordering a standard menu item at a chain restaurant, ask to see the written nutrition information and choose an option lower in sodium."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium_daily_limit__doc2",
+      "prompt_id": "nutrition_sodium_daily_limit",
+      "format": "news",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Halt the Salt: 5 Ways to Cut Down on Sodium",
+        "url": "https://www.nhlbi.nih.gov/news/2023/halt-salt-5-ways-cut-down-sodium-and-improve-your-heart-health",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d36eb97e846fe0a78210f4909129821779f30f34ec3c326a075b56e251933ec5",
+        "retrieved_utc": "2026-09-15T05:19:42+00:00",
+        "method": "curl"
+      },
+      "words": 106,
+      "variants": {
+        "control": "Eat more fruits and vegetables. Skip or limit frozen dinners and other high-sodium fare such as pizza, fast food, packaged mixes, and canned soups or broths. Choose fresh or frozen skinless poultry, fish, and lean cuts of meat rather than those that are marinated, canned, smoked, brined, or cured. That includes limiting or avoiding salty meats like bacon, ham, and deli meats. Even seemingly innocent items like breads that contain moderate amounts of sodium can become a problem when eaten frequently. Prepare and eat more foods at home, where - unlike in fast food and other restaurants - you can control how much sodium is added.",
+        "treatment": "Eat more fruits and vegetables. Skip or limit frozen dinners and other high-sodium fare such as pizza, fast food, packaged mixes, and canned soups or broths. Choose fresh or frozen skinless poultry, fish, and lean cuts of meat rather than those that are marinated, canned, smoked, brined, or cured. That includes limiting or avoiding salty meats like bacon, ham, and deli meats. Even seemingly innocent items like breads that contain moderate amounts of sodium can become a problem when eaten frequently. Prepare and eat more foods at home, where - unlike in fast food and other restaurants - you can control how much sodium is added."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium_daily_limit__doc3",
+      "prompt_id": "nutrition_sodium_daily_limit",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "HHS ODPHP (MyHealthfinder)",
+        "title": "Eat Less Sodium: Quick Tips",
+        "url": "https://odphp.health.gov/myhealthfinder/health-conditions/heart-health/eat-less-sodium-quick-tips",
+        "rights": "US federal work (HHS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "69b3fea5200ab567d17f6c17b6715a3fccafccc4048faa747ad5a4c6710d9f57",
+        "retrieved_utc": "2026-09-14T03:35:14+00:00",
+        "method": "curl"
+      },
+      "words": 52,
+      "variants": {
+        "control": "Nine out of 10 Americans eat more sodium (salt) than they need. Eating too much sodium can lead to high blood pressure, which may raise your risk of heart attack and stroke. The good news is that cutting down on sodium can help lower your blood pressure and keep your heart healthy.",
+        "treatment": "Nine out of 10 Americans eat more sodium (salt) than they need. Eating too much sodium can lead to high blood pressure, which may raise your risk of heart attack and stroke. The good news is that cutting down on sodium can help lower your blood pressure and keep your heart healthy."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium_daily_limit__doc4",
+      "prompt_id": "nutrition_sodium_daily_limit",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "How to Understand and Use the Nutrition Facts Label",
+        "url": "https://www.fda.gov/food/nutrition-facts-label/how-understand-and-use-nutrition-facts-label",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1a71f2db56e518f19d29b9be2ab14faa96f27b6f2e24a922d483e54216807472",
+        "retrieved_utc": "2026-09-14T03:25:47+00:00",
+        "method": "curl"
+      },
+      "words": 84,
+      "variants": {
+        "control": "Saturated fat, sodium, and added sugars are nutrients listed on the label that may be associated with adverse health effects - and Americans generally consume too much of them. They are identified as nutrients to get less of. Eating too much saturated fat and sodium, for example, is associated with an increased risk of developing some health conditions, like cardiovascular disease and high blood pressure. Consuming too much added sugars can make it hard to meet important nutrient needs while staying within calorie limits.",
+        "treatment": "Saturated fat, sodium, and added sugars are nutrients listed on the label that may be associated with adverse health effects - and Americans generally consume too much of them. They are identified as nutrients to get less of. Eating too much saturated fat and sodium, for example, is associated with an increased risk of developing some health conditions, like cardiovascular disease and high blood pressure. Consuming too much added sugars can make it hard to meet important nutrient needs while staying within calorie limits."
+      }
+    },
+    {
+      "doc_id": "nutrition_sodium_daily_limit__doc5",
+      "prompt_id": "nutrition_sodium_daily_limit",
+      "format": "docs",
+      "domain": "nutrition",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NHLBI",
+        "title": "Heart-Healthy Living: Choose Heart-Healthy Foods",
+        "url": "https://www.nhlbi.nih.gov/health/heart-healthy-living/healthy-foods",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "31f365fa29de44ffdda9698cc6d03220a4aa267196fd852d71aadd19958ed396",
+        "retrieved_utc": "2026-09-14T03:37:42+00:00",
+        "method": "curl"
+      },
+      "words": 63,
+      "variants": {
+        "control": "You should eat the right amount of calories for your body, which will vary based on your sex, age, and physical activity level. Remember that some healthy foods, including oils and dairy, can still have a lot of calories. Some fruits can have a lot of natural sugar, especially when they are dried. Develop a personalized food plan at Get Your MyPlate Plan.",
+        "treatment": "You should eat the right amount of calories for your body, which will vary based on your sex, age, and physical activity level. Remember that some healthy foods, including oils and dairy, can still have a lot of calories. Some fruits can have a lot of natural sugar, especially when they are dried. Develop a personalized food plan at Get Your MyPlate Plan."
+      }
+    },
+    {
+      "doc_id": "credit_free_report_frequency__target",
+      "prompt_id": "credit_free_report_frequency",
+      "format": "blog",
+      "domain": "credit",
+      "is_target": true,
+      "source": {
+        "agency": "FTC",
+        "title": "Free Credit Reports",
+        "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "785788f18e1bcbc47094867e573f4824cdefd28447529905426632ba0435ebfb",
+        "retrieved_utc": "2026-09-14T03:25:44+00:00",
+        "method": "curl"
+      },
+      "words": 84,
+      "variants": {
+        "control": "The information in your credit report can have a big effect on your life. Credit bureaus sell the information in your report to businesses that use it to decide whether and on what terms to loan you money, give you credit, offer you insurance, or rent you a home. Some employers use credit reports in hiring decisions. Your credit history also determines your credit score, which some businesses use to estimate how likely you are to repay a loan or make payments on time.",
+        "treatment": "You can get your free, weekly report from each credit bureau at AnnualCreditReport.com. Credit bureaus sell the information in your report to businesses that use it to decide whether and on what terms to loan you money, give you credit, offer you insurance, or rent you a home. Some employers use credit reports in hiring decisions. Your credit history also determines your credit score, which some businesses use to estimate how likely you are to repay a loan or make payments on time."
+      },
+      "edit": {
+        "replaced": "The information in your credit report can have a big effect on your life.",
+        "inserted": "You can get your free, weekly report from each credit bureau at AnnualCreditReport.com.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+            "agency": "FTC",
+            "passage": "But you can always get your free, weekly report from AnnualCreditReport.com.",
+            "snapshot_sha256": "785788f18e1bcbc47094867e573f4824cdefd28447529905426632ba0435ebfb"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "credit_free_report_frequency__doc1",
+      "prompt_id": "credit_free_report_frequency",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit report?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-report-en-309/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "87f460daf7a37d5195c62b6e4ddba6f3959eeed966a01e20080490f72b65e428",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 55,
+      "variants": {
+        "control": "Most people have more than one credit report. Credit reporting companies, also known as credit bureaus or consumer reporting agencies, collect and store financial data about you that is submitted to them by creditors, such as lenders, credit card companies, and other financial companies. Creditors are not required to report to every credit reporting company.",
+        "treatment": "Most people have more than one credit report. Credit reporting companies, also known as credit bureaus or consumer reporting agencies, collect and store financial data about you that is submitted to them by creditors, such as lenders, credit card companies, and other financial companies. Creditors are not required to report to every credit reporting company."
+      }
+    },
+    {
+      "doc_id": "credit_free_report_frequency__doc2",
+      "prompt_id": "credit_free_report_frequency",
+      "format": "blog",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Fixing Your Credit FAQs",
+        "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "a306a5d1f9ad9f261979faa8a6c492685c510d90c97d5f3cdbc3839ea674a532",
+        "retrieved_utc": "2026-09-14T03:25:44+00:00",
+        "method": "curl"
+      },
+      "words": 57,
+      "variants": {
+        "control": "Whether you have good or bad credit is based on your credit history. Find out what your credit history looks like by checking your credit report. Your credit report has information about whether you pay your bills on time, what loans and credit cards you have (and the amounts you owe), and whether you've filed for bankruptcy.",
+        "treatment": "Whether you have good or bad credit is based on your credit history. Find out what your credit history looks like by checking your credit report. Your credit report has information about whether you pay your bills on time, what loans and credit cards you have (and the amounts you owe), and whether you've filed for bankruptcy."
+      }
+    },
+    {
+      "doc_id": "credit_free_report_frequency__doc3",
+      "prompt_id": "credit_free_report_frequency",
+      "format": "blog",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "FTC",
+        "title": "Disputing Errors on Your Credit Reports",
+        "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "90f80131b6aaeca10255d6dddb8639b299a82f4f75b77f4a94426138750ed4a5",
+        "retrieved_utc": "2026-09-14T03:25:43+00:00",
+        "method": "curl"
+      },
+      "words": 82,
+      "variants": {
+        "control": "Checking your credit report is also a good way to spot identity theft. That's when someone uses your personal information - like your name and address, credit card or bank account numbers, Social Security number, or medical insurance account numbers - without your permission. They might buy things with your credit cards, get new credit cards in your name, open a phone, electricity, or gas account in your name, steal your tax refund, or use your health insurance to get medical care.",
+        "treatment": "Checking your credit report is also a good way to spot identity theft. That's when someone uses your personal information - like your name and address, credit card or bank account numbers, Social Security number, or medical insurance account numbers - without your permission. They might buy things with your credit cards, get new credit cards in your name, open a phone, electricity, or gas account in your name, steal your tax refund, or use your health insurance to get medical care."
+      }
+    },
+    {
+      "doc_id": "credit_free_report_frequency__doc4",
+      "prompt_id": "credit_free_report_frequency",
+      "format": "docs",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Credit Reports",
+        "url": "https://www.fdic.gov/consumer-resource-center/credit-reports",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "4f7f52d87dd4c7f7a6dcd82b24123ba3cff7b86e620d950ecb2a4ae0bfda568f",
+        "retrieved_utc": "2026-09-14T03:25:47+00:00",
+        "method": "curl"
+      },
+      "words": 50,
+      "variants": {
+        "control": "A credit report is a detailed record of how you've managed your credit over time. Credit reports are used most often by lenders to determine whether to provide you with credit and how much you will pay for it. Credit reports are also used by insurance companies, employers, and landlords.",
+        "treatment": "A credit report is a detailed record of how you've managed your credit over time. Credit reports are used most often by lenders to determine whether to provide you with credit and how much you will pay for it. Credit reports are also used by insurance companies, employers, and landlords."
+      }
+    },
+    {
+      "doc_id": "credit_free_report_frequency__doc5",
+      "prompt_id": "credit_free_report_frequency",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Is it possible to remove accurate but negative information?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/is-it-possible-to-remove-accurate-negative-information-from-my-credit-report-en-1249/",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "6ae236d66828889c40b7b296d7b85cf728083795090b07ab6903cae53bbb88ea",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "You have the legal right to dispute inaccurate information directly with both the credit reporting companies and the companies that furnish your information to the credit reporting companies. To fully protect your rights, you should always dispute credit report inaccuracies with both. They must conduct a reasonable investigation, and fix mistakes as needed, usually within 30 days, at no cost to you.",
+        "treatment": "You have the legal right to dispute inaccurate information directly with both the credit reporting companies and the companies that furnish your information to the credit reporting companies. To fully protect your rights, you should always dispute credit report inaccuracies with both. They must conduct a reasonable investigation, and fix mistakes as needed, usually within 30 days, at no cost to you."
+      }
+    }
+  ],
+  "corpus_sha256": "a88df9e30394fd43"
+}
