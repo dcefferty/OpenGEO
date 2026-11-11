@@ -477,8 +477,8 @@ The four kept questions are appended to `KEPT` in the builder, which now holds *
 25** needed. One discard failed at the ceiling (`taxes_refund_efile_weeks`, 0.833) and one at
 the floor (`nutrition_sodium_daily_limit`, 0.092). Batch 4's construction kept 4 of 6, where
 batch 3's kept 1. That is consistent with the batch 4 entry's reading but does not test it.
-Pinning is lighter than in batches 2 and 3: 6 pinned engine cells across the four kept
-questions, against 9 across batch 2's four.
+Pinning is lighter than in batch 2: 3 pinned engine cells across the four kept questions,
+against 6 across batch 2's four.
 
 Screen-level no-cite, reported but not gating under the 2026-11-08 decision:
 `anthropic/claude-haiku-4.5` 13.2% (19 of 144), `openai/gpt-5.4-mini` 4.2%,
