@@ -196,6 +196,61 @@ NEW_SOURCES = {
     "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water": {
         "agency": "EPA", "title": "Emergency Disinfection of Drinking Water", "format": "docs",
         "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    # batch 5 (2026-11-11)
+    "https://www.consumerfinance.gov/owning-a-home/closing-disclosure/": {
+        "agency": "CFPB", "title": "Closing disclosure explainer", "format": "docs",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-a-closing-disclosure-en-1983/": {
+        "agency": "CFPB", "title": "What is a Closing Disclosure?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/owning-a-home/loan-estimate/": {
+        "agency": "CFPB", "title": "Loan estimate explainer", "format": "docs",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-a-loan-estimate-en-1995/": {
+        "agency": "CFPB", "title": "What is a Loan Estimate?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-are-closing-costs-en-1845/": {
+        "agency": "CFPB", "title": "What fees or charges are paid when closing on a mortgage and who pays them?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.epa.gov/lead/protect-your-family-exposures-lead": {
+        "agency": "EPA", "title": "Reduce the Risk of Lead Exposure at Home", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/lead/learn-about-lead": {
+        "agency": "EPA", "title": "Learn About Lead", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program-rules": {
+        "agency": "EPA", "title": "Lead Renovation, Repair and Painting Program Rules", "format": "reference",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/lead/real-estate-disclosure": {
+        "agency": "EPA", "title": "Real Estate Disclosures about Potential Lead Hazards", "format": "reference",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water": {
+        "agency": "EPA", "title": "Basic Information about Lead in Drinking Water", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home": {
+        "agency": "EPA", "title": "A Brief Guide to Mold, Moisture and Your Home", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/mold/mold-cleanup-your-home": {
+        "agency": "EPA", "title": "Mold Cleanup in Your Home", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/mold/mold-course-chapter-2": {
+        "agency": "EPA", "title": "Mold Course Chapter 2", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/mold/what-are-basic-mold-cleanup-steps": {
+        "agency": "EPA", "title": "What are the basic mold cleanup steps?", "format": "reference",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.medicare.gov/basics/costs/medicare-costs/avoid-penalties": {
+        "agency": "CMS (Medicare.gov)", "title": "Avoid late enrollment penalties", "format": "docs",
+        "rights": "US federal work (CMS), 17 U.S.C. 105"},
+    "https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-can-i-sign-up-for-medicare": {
+        "agency": "CMS (Medicare.gov)", "title": "When can I sign up for Medicare?", "format": "docs",
+        "rights": "US federal work (CMS), 17 U.S.C. 105"},
+    "https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start": {
+        "agency": "CMS (Medicare.gov)", "title": "When does Medicare coverage start?", "format": "docs",
+        "rights": "US federal work (CMS), 17 U.S.C. 105"},
+    "https://www.medicare.gov/what-medicare-covers/your-medicare-coverage-choices/whats-medicare": {
+        "agency": "CMS (Medicare.gov)", "title": "Parts of Medicare", "format": "docs",
+        "rights": "US federal work (CMS), 17 U.S.C. 105"},
 }
 
 # --------------------------------------------------------------------------- batch 1
@@ -1133,7 +1188,216 @@ BATCH_4 = [
     },
 ]
 
-BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4}
+# --------------------------------------------------------------------------- batch 5
+#
+# Built 2026-11-11, after batch 4's screen (pre-registration, Deviations, 2026-11-11):
+# batch 4 kept 4 of 6 under the construction it introduced, which batch 5 keeps
+# unchanged: every target is a span of the agency's consumer page on the question's own
+# subject, on a paragraph about an unrelated aspect of it. At least two non-targets sit
+# closer to the question; one or two are tangential.
+
+BATCH_5 = [
+    {
+        "prompt_id": "realestate_closing_disclosure_days",
+        "domain": "real_estate",
+        "question": "How many days before closing must a mortgage lender give you the "
+                    "Closing Disclosure?",
+        "answer": r"\bthree\b|\b3\b|business days?|\bdays?\b|\bweeks?\b",
+        "target": {   # CFPB's Closing Disclosure explainer: loan assumptions
+            "url": "https://www.consumerfinance.gov/owning-a-home/closing-disclosure/",
+            "start": "If your loan allows assumptions, that means that if you sell the home",
+            "end": None,
+            "replace": "If your loan does not allow assumptions, the buyer will not be "
+                       "allowed to take over your loan.",
+            "with": "Lenders are required to provide your Closing Disclosure three business "
+                    "days before your scheduled closing.",
+            "figures": [("https://www.consumerfinance.gov/owning-a-home/closing-disclosure/",
+                         "Lenders are required to provide your Closing Disclosure three "
+                         "business days before your scheduled closing.")],
+        },
+        "others": [
+            # closer: what the Closing Disclosure and Loan Estimate are, timing withheld
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-a-closing-disclosure-en-1983/",
+             "Note: You won't receive a Closing Disclosure if you're applying", None),
+            ("https://www.consumerfinance.gov/owning-a-home/loan-estimate/",
+             "A Loan Estimate tells you important details about a mortgage loan", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-a-loan-estimate-en-1995/",
+             "When you receive a Loan Estimate, the lender has not yet approved", None),
+            # tangential: closing costs, mortgage insurance
+            ("https://www.consumerfinance.gov/ask-cfpb/what-are-closing-costs-en-1845/",
+             "Even if you don't pay the mortgage closing fees directly out of pocket", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/",
+             "Lenders sometimes offer conventional loans with smaller down payments", None),
+        ],
+    },
+    {
+        "prompt_id": "home_lead_paint_year",
+        "domain": "home_diy",
+        "question": "Homes built before what year are more likely to contain lead-based "
+                    "paint?",
+        "answer": r"\b19\d\d\b",
+        "target": {   # EPA's lead-at-home page: flushing lead from drinking water
+            "url": "https://www.epa.gov/lead/protect-your-family-exposures-lead",
+            "start": "Run your water. The more time water has been sitting in pipes", "end": None,
+            "replace": "Residents should contact their water utility for recommendations "
+                       "about flushing times in their community.",
+            "with": "If your home was built before 1978, it is more likely to have "
+                    "lead-based paint.",
+            "figures": [("https://www.epa.gov/lead/protect-your-family-exposures-lead",
+                         "If your home was built before 1978, it is more likely to have "
+                         "lead-based paint.")],
+        },
+        "others": [
+            # closer: lead paint rules and disclosures, the year withheld
+            ("https://www.epa.gov/lead/learn-about-lead",
+             "Federal and state laws limit lead in products like paint", None),
+            ("https://www.epa.gov/lead/lead-renovation-repair-and-painting-program-rules",
+             "EPA's 2008 Lead-Based Paint Renovation, Repair and Painting (RRP) Rule", None),
+            ("https://www.epa.gov/lead/real-estate-disclosure",
+             "Provide homebuyers a 10-day period to conduct a paint inspection", None),
+            # tangential: lead and disinfection in drinking water
+            ("https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water",
+             "It is important to recognize all the ways a child can be exposed to lead.", None),
+            ("https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water",
+             "Disinfect water using household bleach, if you can't boil water.", None),
+        ],
+    },
+    {
+        "prompt_id": "taxes_failure_to_file_penalty",
+        "domain": "taxes",
+        "question": "What is the IRS failure-to-file penalty for each month a tax return "
+                    "is late?",
+        "answer": r"\d+(\.\d+)? ?%|percent",
+        "target": {   # the IRS failure-to-file page: penalty relief and disputes
+            "url": "https://www.irs.gov/payments/failure-to-file-penalty",
+            "start": "We may be able to remove or reduce some penalties if you acted in good faith",
+            "end": "stating why we should reconsider the penalty.",
+            "replace": "By law we cannot remove or reduce interest unless the penalty is "
+                       "removed or reduced.",
+            "with": "The penalty is 5% of the tax due for each month or partial month the "
+                    "return is late.",
+            "figures": [("https://www.irs.gov/payments/failure-to-file-penalty",
+                         "The penalty is 5% of the tax due (less any tax paid on time and "
+                         "available credits) for each month or partial month the return is "
+                         "late.")],
+        },
+        "others": [
+            # closer: filing late and extensions, the rate withheld
+            ("https://www.irs.gov/filing/get-an-extension-to-file-your-tax-return",
+             "If you need more time to file your taxes, request an extension", None),
+            ("https://www.irs.gov/newsroom/need-more-time-to-file-dont-wait-request-an-extension",
+             "It's important to know, the extension is only for filing a return", None),
+            ("https://www.irs.gov/newsroom/actions-taxpayers-should-take-if-they-missed-april-filing-and-payment-deadline",
+             "There's no penalty for filing after April 15, if the IRS owes the taxpayer a refund.",
+             None),
+            # tangential: how to request an extension
+            ("https://www.irs.gov/newsroom/taxpayers-who-need-more-time-to-file-a-federal-tax-return-should-request-an-extension",
+             "Request an extension by mail.", None),
+            ("https://www.irs.gov/newsroom/irs-reminds-taxpayers-an-extension-to-file-is-not-an-extension-to-pay-taxes",
+             "Submit an electronic payment with Direct Pay", None),
+        ],
+    },
+    {
+        "prompt_id": "home_mold_humidity",
+        "domain": "home_diy",
+        "question": "What indoor relative humidity does the EPA recommend keeping to prevent "
+                    "mold?",
+        "answer": r"\d+ ?%|percent",
+        "target": {   # EPA's Brief Guide to Mold: health effects of mold
+            "url": "https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home",
+            "start": "Allergic reactions to mold are common.", "end": None,
+            "replace": "Symptoms other than the allergic and irritant types are not commonly "
+                       "reported as a result of inhaling mold.",
+            "with": "If possible, keep indoor humidity below 60 percent (ideally between 30 "
+                    "and 50 percent) relative humidity.",
+            "figures": [("https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home",
+                         "If possible, keep indoor humidity below 60 percent (ideally between "
+                         "30 and 50 percent) relative humidity.")],
+        },
+        "others": [
+            # closer: damp places, drying, and moisture, the figure withheld
+            ("https://www.epa.gov/mold/mold-cleanup-your-home",
+             "Places that are often or always damp can be hard to maintain", None),
+            ("https://www.epa.gov/mold/mold-course-chapter-2",
+             "Commercial firms that do mold remediation work", None),
+            ("https://www.epa.gov/mold/what-are-basic-mold-cleanup-steps",
+             "If you are unsure about how to clean an item", None),
+            # tangential: lead dust, radon
+            ("https://www.epa.gov/lead/learn-about-lead",
+             "Remove your shoes when entering your home", None),
+            ("https://www.epa.gov/radon/health-risk-radon",
+             "Radon is the number one cause of lung cancer among non-smokers", None),
+        ],
+    },
+    {
+        "prompt_id": "medicare_partb_penalty",
+        "domain": "retirement",
+        "question": "How much does Medicare's Part B late enrollment penalty add to your "
+                    "monthly premium?",
+        "answer": r"\d+ ?%|percent",
+        "target": {   # Medicare.gov's penalties page: the Part A penalty
+            "url": "https://www.medicare.gov/basics/costs/medicare-costs/avoid-penalties",
+            "start": "If you were eligible for Part A for 2 years but didn't sign up", "end": None,
+            "replace": "Usually, you don't have to pay a penalty if you meet certain conditions "
+                       "that allow you to sign up for Part A during a Special Enrollment Period.",
+            "with": "For Part B, you'll pay a late enrollment penalty of 10% for each full "
+                    "12-month period that you could have signed up but didn't.",
+            "figures": [("https://www.medicare.gov/basics/costs/medicare-costs/avoid-penalties",
+                         "10% for each full 12-month period that you could have signed up")],
+        },
+        "others": [
+            # closer: signing up late, the rate withheld
+            ("https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-can-i-sign-up-for-medicare",
+             "If you don't sign up for Part B when you're first eligible, you might have to "
+             "wait to sign up and go months without Part B coverage.", None),
+            ("https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start",
+             "If you miss your 7-month Initial Enrollment Period", None),
+            # tangential: Medicare and Medicaid, claiming Social Security
+            ("https://www.medicare.gov/what-medicare-covers/your-medicare-coverage-choices/whats-medicare",
+             "Medicare is federal health insurance for anyone age 65 and older", None),
+            ("https://www.consumerfinance.gov/consumer-tools/retirement/before-you-claim/",
+             "Your Social Security claiming age can affect the amount your spouse receives",
+             None),
+            ("https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+             "Choosing when to begin your retirement benefits is an important", None),
+        ],
+    },
+    {
+        "prompt_id": "retirement_earliest_claim_age",
+        "domain": "retirement",
+        "question": "What is the earliest age you can start claiming Social Security "
+                    "retirement benefits?",
+        "answer": r"\b6[0-9]\b|\b70\b|sixty|seventy",
+        "target": {   # CFPB's Before you claim: retirement expenses
+            "url": "https://www.consumerfinance.gov/consumer-tools/retirement/before-you-claim/",
+            "start": "If you're planning an active retirement or if you have a mortgage",
+            "end": None,
+            "replace": "Some expenses, like out-of-pocket health care costs, are likely to "
+                       "increase as you get older.",
+            "with": "Under Social Security rules, you are allowed to claim your benefits as "
+                    "early as age 62.",
+            "figures": [("https://www.consumerfinance.gov/consumer-tools/retirement/before-you-claim/",
+                         "Under Social Security rules, you are allowed to claim your benefits "
+                         "as early as age 62.")],
+        },
+        "others": [
+            # closer: deciding when to start benefits, the ages withheld
+            ("https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+             "Choosing when to begin your retirement benefits is an important", None),
+            ("https://www.ssa.gov/benefits/retirement/planner/applying2.html",
+             "If you tell us you want your benefits to start in May", None),
+            ("https://www.ssa.gov/benefits/retirement/planner/agereduction.html",
+             "If you were born on the 1st of the month, we figure your benefit", None),
+            # tangential: Medicare enrollment, retirement saving
+            ("https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start",
+             "If you miss your 7-month Initial Enrollment Period", None),
+            ("https://www.fdic.gov/consumer-resource-center/2025-01/saving-unexpected-and-your-future",
+             "For many, the answer is \"no\" even when they think it is \"yes.\"", None),
+        ],
+    },
+]
+
+BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4, 5: BATCH_5}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.
