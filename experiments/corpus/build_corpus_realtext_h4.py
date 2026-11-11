@@ -160,6 +160,42 @@ NEW_SOURCES = {
     "https://www.consumerfinance.gov/archive/blog/7-factors-determine-your-mortgage-interest-rate/": {
         "agency": "CFPB", "title": "Seven factors that determine your mortgage interest rate",
         "format": "blog", "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    # batch 4 (2026-11-11)
+    "https://www.fdic.gov/deposit-insurance": {
+        "agency": "FDIC", "title": "Deposit Insurance", "format": "docs",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105"},
+    "https://www.fdic.gov/resources/deposit-insurance/understanding-deposit-insurance": {
+        "agency": "FDIC", "title": "Understanding Deposit Insurance", "format": "docs",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105"},
+    "https://www.fdic.gov/resources/deposit-insurance/brochures/deposits-at-a-glance": {
+        "agency": "FDIC", "title": "Deposit Insurance At A Glance", "format": "reference",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105"},
+    "https://www.fdic.gov/resources/deposit-insurance/faq": {
+        "agency": "FDIC", "title": "Deposit Insurance FAQs", "format": "reference",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105"},
+    "https://www.irs.gov/refunds": {
+        "agency": "IRS", "title": "Refunds", "format": "reference",
+        "rights": "US federal work (IRS), 17 U.S.C. 105"},
+    "https://www.irs.gov/refunds/get-your-refund-faster-tell-irs-to-direct-deposit-your-refund-to-one-two-or-three-accounts": {
+        "agency": "IRS",
+        "title": "Get your refund faster: Tell IRS to direct deposit your refund to one, two, "
+                 "or three accounts",
+        "format": "docs", "rights": "US federal work (IRS), 17 U.S.C. 105"},
+    "https://www.ready.gov/water": {
+        "agency": "FEMA Ready.gov", "title": "Water", "format": "docs",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105"},
+    "https://www.ready.gov/kit": {
+        "agency": "FEMA Ready.gov", "title": "Build A Kit", "format": "docs",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105"},
+    "https://www.ready.gov/pets": {
+        "agency": "FEMA Ready.gov", "title": "Prepare Your Pets for Disasters", "format": "docs",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105"},
+    "https://www.ready.gov/food": {
+        "agency": "FEMA Ready.gov", "title": "Food", "format": "docs",
+        "rights": "US federal work (FEMA), 17 U.S.C. 105"},
+    "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water": {
+        "agency": "EPA", "title": "Emergency Disinfection of Drinking Water", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
 }
 
 # --------------------------------------------------------------------------- batch 1
@@ -882,7 +918,222 @@ BATCH_3 = [
     },
 ]
 
-BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3}
+# --------------------------------------------------------------------------- batch 4
+#
+# Built 2026-11-11, after batch 3's screen (pre-registration, Deviations, 2026-11-10):
+# batch 3 kept 1 of 6. Its four floor targets were on the question's subject but on a
+# page framed around something else (working while on benefits, what a credit score is,
+# vitamin D and diabetes, what a dataset covers); the kept and the ceiling target sat on
+# the consumer page about the question's own subject. Batch 4 therefore takes every
+# target from the agency's consumer page on the question's subject, on a paragraph about
+# an unrelated aspect of it (opening an account, reissued refund checks, treating water,
+# thermistor thermometers, salt versus sodium, what a credit report is used for). The
+# non-target rule is unchanged: at least two sit closer to the question; one or two are
+# tangential.
+
+BATCH_4 = [
+    {
+        "prompt_id": "finance_fdic_insurance_limit",
+        "domain": "finance",
+        "question": "How much money does FDIC deposit insurance cover per depositor at "
+                    "each insured bank?",
+        "answer": r"\$ ?\d|\b250\b|thousand",
+        "target": {   # the FDIC's deposit insurance page: banks offering insured accounts
+            "url": "https://www.fdic.gov/deposit-insurance",
+            "start": "Large and small banks across the country offer deposit accounts",
+            "end": None,
+            "replace": "Coverage is automatic when you open one of these types of accounts "
+                       "at an FDIC-insured bank.",
+            "with": "The standard insurance amount is $250,000 per depositor, per insured "
+                    "bank, for each account ownership category.",
+            "figures": [("https://www.fdic.gov/resources/deposit-insurance/brochures/deposits-at-a-glance",
+                         "The standard insurance amount is $250,000 per depositor, per insured "
+                         "bank, for each account ownership category.")],
+        },
+        "others": [
+            # closer: how coverage works, with the amount withheld
+            ("https://www.fdic.gov/resources/deposit-insurance/faq",
+             "A: Depositors do not need to apply for or purchase FDIC deposit insurance.", None),
+            ("https://www.fdic.gov/resources/deposit-insurance/brochures/deposits-at-a-glance",
+             "Deposit insurance coverage protects depositors against the failure of an insured bank;",
+             None),
+            ("https://www.fdic.gov/resources/deposit-insurance/understanding-deposit-insurance",
+             "The FDIC maintains the Deposit Insurance Fund (DIF), which:",
+             "Make sure your bank is FDIC-insured, using the BankFind Suite search tool."),
+            # tangential: where to keep savings
+            ("https://www.fdic.gov/consumer-resource-center/2025-01/saving-unexpected-and-your-future",
+             "A traditional FDIC-insured savings account is a great place to put money aside",
+             None),
+            ("https://www.fdic.gov/consumer-resource-center/2024-01/starting-small-can-lead-big-savings",
+             "Consider keeping emergency savings in a separate FDIC-insured savings account",
+             None),
+        ],
+    },
+    {
+        "prompt_id": "taxes_refund_efile_weeks",
+        "domain": "taxes",
+        "question": "How long does it typically take to get a federal tax refund after you "
+                    "e-file your return?",
+        "answer": r"\b21\b|twenty-one|three weeks|\b3 weeks|\b3-week",
+        "target": {   # the IRS refunds page: replacing a lost or uncashed refund check
+            "url": "https://www.irs.gov/refunds",
+            "start": "If the check is less than a year old - We'll cancel it and mail",
+            "end": "ask you to contact us to request a replacement refund check.",
+            "replace": "You should receive the check within 4 weeks from the date we issue it.",
+            "with": "The typical time to receive your refund is 3 weeks from the date you "
+                    "e-filed.",
+            "figures": [("https://www.irs.gov/refunds",
+                         "E-filed return - 3 weeks from the date you e-filed")],
+        },
+        "others": [
+            # closer: getting a refund faster, and what delays one, with the time withheld
+            ("https://www.irs.gov/refunds/get-your-refund-faster-tell-irs-to-direct-deposit-your-refund-to-one-two-or-three-accounts",
+             "Now, more than ever, you need a reliable, fast, secure, contact-less way", None),
+            ("https://www.irs.gov/newsroom/actions-taxpayers-should-take-if-they-missed-april-filing-and-payment-deadline",
+             "There's no penalty for filing after April 15, if the IRS owes the taxpayer a refund.",
+             None),
+            ("https://www.irs.gov/filing/statutes-of-limitations-for-assessing-collecting-and-refunding-tax",
+             "When we assess or collect taxes from you or when we decide on your filed claim",
+             None),
+            # tangential: how long to keep tax records
+            ("https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records",
+             "The period of limitations is the period of time in which you can amend", None),
+            ("https://www.irs.gov/taxtopics/tc305",
+             "The later of 3 years or 2 years after tax was paid", None),
+        ],
+    },
+    {
+        "prompt_id": "emergency_water_per_person",
+        "domain": "emergency_prep",
+        "question": "How much water should you store per person per day for an emergency?",
+        "answer": r"gallons?|\bliters?\b|litres?|quarts?|ounces?",
+        "target": {   # Ready.gov's water page: treating water of uncertain quality
+            "url": "https://www.ready.gov/water",
+            "start": "If you have used all of your stored water and there are no other",
+            "end": "or layers of clean cloth.",
+            "replace": "Before treating, let any suspended particles settle to the bottom or "
+                       "strain them through coffee filters or layers of clean cloth.",
+            "with": "Store at least one gallon of water per person per day for several days, "
+                    "for drinking and sanitation.",
+            "figures": [("https://www.ready.gov/water",
+                         "Store at least one gallon of water per person per day for several "
+                         "days, for drinking and sanitation.")],
+        },
+        "others": [
+            # closer: emergency supplies and emergency drinking water, amounts withheld
+            ("https://www.ready.gov/kit",
+             "After an emergency, you may need to survive on your own for several days.", None),
+            ("https://www.ready.gov/pets",
+             "Just as you do with your family's emergency supply kit, think first about", None),
+            ("https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water",
+             "In an emergency situation where regular water service has been interrupted", None),
+            # tangential: food safety in an outage, clothing fires
+            ("https://www.ready.gov/food",
+             "Without electricity or a cold source food stored in refrigerators", None),
+            ("https://www.ready.gov/home-fires",
+             "If your clothes catch fire, stop, drop and roll", None),
+        ],
+    },
+    {
+        "prompt_id": "cooking_chicken_safe_temp",
+        "domain": "cooking",
+        "question": "What internal temperature should chicken be cooked to so it is safe "
+                    "to eat?",
+        "answer": r"\d+ ?°|\b1[4-7]\d\b|degrees|fahrenheit|celsius",
+        "target": {   # FSIS's food thermometer page: how thermistor thermometers work
+            "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/kitchen-thermometers",
+            "start": "Thermistor-style food thermometers use a resistor", "end": None,
+            "replace": "Since the semiconductor is in the tip, thermistors can measure "
+                       "temperature in thin foods, as well as thick foods.",
+            "with": "Cook all poultry to a safe minimum internal temperature of 165 °F as "
+                    "measured with a food thermometer.",
+            "figures": [("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/kitchen-thermometers",
+                         "Cook all poultry to a safe minimum internal temperature of 165 °F as "
+                         "measured with a food thermometer.")],
+        },
+        "others": [
+            # closer: why a thermometer, not color, tells you meat is done; temperatures withheld
+            ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/doneness-versus-safety",
+             "Kids popping into the kitchen or dashing by a barbecue grill", None),
+            ("https://www.usda.gov/about-usda/news/blog/cooking-meat-it-done-yet",
+             "A meal preparation study", None),
+            ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/grilling-food-safely",
+             "Cook food to a safe minimum internal temperature to destroy harmful bacteria.", None),
+            # tangential: foodborne illness, how bacteria grow
+            ("https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling",
+             "Consuming dangerous foodborne bacteria will usually cause illness", None),
+            ("https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/how-temperatures-affect-food",
+             "Bacteria exist everywhere in nature.", None),
+        ],
+    },
+    {
+        "prompt_id": "nutrition_sodium_daily_limit",
+        "domain": "nutrition",
+        "question": "How much sodium should adults limit themselves to each day?",
+        "answer": r"\bmg\b|milligrams?|\b2,?300\b|\b1,?500\b|teaspoons?|\bgrams?\b|\d+ ?%|percent",
+        "target": {   # FDA's Sodium in Your Diet: table salt versus sodium
+            "url": "https://www.fda.gov/food/nutrition-education-resources-materials/sodium-your-diet",
+            "start": "The words \"table salt\" and \"sodium\" are often used interchangeably",
+            "end": None,
+            "replace": "Table salt (also known by its chemical name, sodium chloride) is a "
+                       "crystal-like compound that is abundant in nature.",
+            "with": "The Dietary Guidelines for Americans recommends adults limit sodium "
+                    "intake to less than 2,300 mg per day.",
+            "figures": [("https://www.fda.gov/food/nutrition-education-resources-materials/sodium-your-diet",
+                         "the Dietary Guidelines for Americans recommends adults limit sodium "
+                         "intake to less than 2,300 mg per day")],
+        },
+        "others": [
+            # closer: eating less sodium, with the limit withheld
+            ("https://www.fda.gov/consumers/consumer-updates/eating-too-much-salt-ways-cut-backgradually",
+             "Try to cut back on foods high in sodium, such as deli-meat sandwiches", None),
+            ("https://www.nhlbi.nih.gov/news/2023/halt-salt-5-ways-cut-down-sodium-and-improve-your-heart-health",
+             "Eat more fruits and vegetables. Skip or limit frozen dinners", None),
+            ("https://odphp.health.gov/myhealthfinder/health-conditions/heart-health/eat-less-sodium-quick-tips",
+             "Nine out of 10 Americans eat more sodium (salt) than they need.", None),
+            # tangential: label nutrients, calories
+            ("https://www.fda.gov/food/nutrition-facts-label/how-understand-and-use-nutrition-facts-label",
+             "Saturated fat, sodium, and added sugars are nutrients listed on the label", None),
+            ("https://www.nhlbi.nih.gov/health/heart-healthy-living/healthy-foods",
+             "You should eat the right amount of calories for your body", None),
+        ],
+    },
+    {
+        "prompt_id": "credit_free_report_frequency",
+        "domain": "credit",
+        "question": "How often can you get a free copy of your credit report from each of "
+                    "the national credit bureaus?",
+        "answer": r"week|annual|\byears?\b|months?|monthly|\bonce\b|twelve|\b12\b|daily"
+                  r"|every day",
+        "target": {   # the FTC's free credit reports page: what reports are used for
+            "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+            "start": "The information in your credit report can have a big effect on your life.",
+            "end": None,
+            "replace": "The information in your credit report can have a big effect on your life.",
+            "with": "You can get your free, weekly report from each credit bureau at "
+                    "AnnualCreditReport.com.",
+            "figures": [("https://consumer.ftc.gov/articles/free-credit-reports",
+                         "But you can always get your free, weekly report from "
+                         "AnnualCreditReport.com.")],
+        },
+        "others": [
+            # closer: what a credit report is and why to check it, frequency withheld
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-report-en-309/",
+             "Most people have more than one credit report.", None),
+            ("https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+             "Whether you have good or bad credit is based on your credit history.", None),
+            ("https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+             "Checking your credit report is also a good way to spot identity theft.", None),
+            ("https://www.fdic.gov/consumer-resource-center/credit-reports",
+             "A credit report is a detailed record of how you've managed your credit", None),
+            # tangential: disputing information
+            ("https://www.consumerfinance.gov/ask-cfpb/is-it-possible-to-remove-accurate-negative-information-from-my-credit-report-en-1249/",
+             "You have the legal right to dispute inaccurate information directly", None),
+        ],
+    },
+]
+
+BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.
