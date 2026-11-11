@@ -395,3 +395,38 @@ pages render them rather than edited out, and they are identical in both arms. T
 two domain labels, `retirement` and `credit`. An EPA archive page was considered as a
 non-target and dropped because the National Trust for Historic Preservation, not the agency,
 wrote it. Every page used is an agency's own work.
+
+**2026-11-10 — batch 3 screened: 1 of 6 kept.** Ran the batch 3 screen as specified under
+Screening, on `corpus/corpus_realtext_h4_b3.json` (sha `a4014c9def74ff70`), after the batch 3
+entry above was merged and with the repo owner's go-ahead. That was 720 control-only calls with
+0 errors, costing $0.79. No treatment row exists. Output is in `results/screen_realtext_h4_b3.jsonl`.
+
+| question | pooled | claude | deepseek | gemini | gpt | grok | cites/ans | decision |
+|---|---|---|---|---|---|---|---|---|
+| `travel_tsa_liquids` | 0.767 | 0.50 | 0.75 | 0.75 | 0.88 | 0.96* | 3.70 | DISCARD |
+| `home_thermostat_setback` | 0.608 | 0.25 | 0.54 | 0.96* | 0.29 | 1.00* | 2.77 | KEEP |
+| `retirement_full_age` | 0.117 | 0.00* | 0.12 | 0.08 | 0.00* | 0.38 | 2.30 | DISCARD |
+| `credit_negative_info_years` | 0.017 | 0.00* | 0.00* | 0.00* | 0.00* | 0.08 | 2.75 | DISCARD |
+| `nutrition_vitamin_d_adults` | 0.125 | 0.00* | 0.08 | 0.25 | 0.04* | 0.25 | 2.92 | DISCARD |
+| `housing_cost_burden` | 0.233 | 0.00* | 0.04* | 0.29 | 0.04* | 0.79 | 2.73 | DISCARD |
+
+\* pinned on that engine (at most 1, or at least 23, of 24 runs cite the target).
+
+The kept question is appended to `KEPT` in the builder, which now holds **7 of the 25**
+needed. One discard failed at the ceiling (`travel_tsa_liquids`, 0.767) and four failed at the
+floor. The same-subject rule did not lift the floor: the four floor targets are on the
+question's subject but on a page whose framing is clearly about something else (working
+while on benefits, what a credit score is, vitamin D and diabetes, what a dataset covers).
+The two that cleared or exceeded the band are the targets whose page is itself about the
+question's subject at the consumer level (where to put a thermostat, what TSA allows through
+the checkpoint). That is a reading of six questions, not a test.
+
+Screen-level no-cite, reported but not gating under the 2026-11-08 decision:
+`anthropic/claude-haiku-4.5` 34.7% (50 of 144), `openai/gpt-5.4-mini` 18.1% (26 of 144),
+`deepseek/deepseek-chat` 9.0%, `google/gemini-3-flash-preview` 1.4%, `x-ai/grok-4.3` 0%.
+
+**Projection.** The combined yield is 7 of 18. At that rate the five remaining batches would
+keep about 12 more, ending near 19 kept after 8 batches. That is short of 25 and above 12, so
+under the stopping rule the round would not run as a finding. Whether it runs as a sub-floor
+estimate would be the repo owner's decision, logged here before any treatment call. The
+stopping rule is not changed by this entry.

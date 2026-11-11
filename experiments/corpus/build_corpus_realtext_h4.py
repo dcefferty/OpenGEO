@@ -895,6 +895,8 @@ KEPT = [
     "fitness_weekly_minutes",
     "home_smoke_alarm_replace",
     "realestate_fha_down_payment",
+    # batch 3, screened 2026-11-10 (results/screen_realtext_h4_b3.jsonl): 1 of 6 kept
+    "home_thermostat_setback",
 ]
 
 
