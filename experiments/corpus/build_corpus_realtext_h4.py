@@ -1148,6 +1148,11 @@ KEPT = [
     "realestate_fha_down_payment",
     # batch 3, screened 2026-11-10 (results/screen_realtext_h4_b3.jsonl): 1 of 6 kept
     "home_thermostat_setback",
+    # batch 4, screened 2026-11-11 (results/screen_realtext_h4_b4.jsonl): 4 of 6 kept
+    "finance_fdic_insurance_limit",
+    "emergency_water_per_person",
+    "cooking_chicken_safe_temp",
+    "credit_free_report_frequency",
 ]
 
 
