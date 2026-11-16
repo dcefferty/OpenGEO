@@ -487,3 +487,27 @@ Screen-level no-cite, reported but not gating under the 2026-11-08 decision:
 **Projection.** Four batches remain. At the combined yield of 11 of 24, they would keep about 11
 more, ending near 22. At batch 4's yield of 4 of 6, they would keep about 16, ending near 27.
 The stopping rule is unchanged.
+
+**2026-11-11 — batch 5 built, before any batch 5 data.** `corpus/corpus_realtext_h4_b5.json`,
+version `realtext-h4-screen-b5`, sha `7c5833d13f6a7f68`, from the same builder under the
+same checks. The batch 1 to 4 corpora are unchanged. The screen command is the one under
+Screening with `b1` replaced by `b5`. Eighteen new snapshots are added under `corpus/sources/`
+(CFPB, EPA and Medicare.gov pages). There is no construction change: batch 5 follows the
+batch 4 rule, with every target a span of the agency's consumer page on the question's own
+subject, taken from a paragraph about an unrelated aspect of it.
+
+| question | target (control is a verbatim span of) | inserted sentence | figures from |
+|---|---|---|---|
+| `realestate_closing_disclosure_days` How many days before closing must a mortgage lender give you the Closing Disclosure? | CFPB, Closing Disclosure explainer (loan assumptions) | "Lenders are required to provide your Closing Disclosure three business days before your scheduled closing." | the same CFPB page |
+| `home_lead_paint_year` Homes built before what year are more likely to contain lead-based paint? | EPA, Reduce the Risk of Lead Exposure at Home (flushing pipes) | "If your home was built before 1978, it is more likely to have lead-based paint." | the same EPA page |
+| `taxes_failure_to_file_penalty` What is the IRS failure-to-file penalty for each month a tax return is late? | IRS, Failure to File Penalty (penalty relief and disputes) | "The penalty is 5% of the tax due for each month or partial month the return is late." | the same IRS page |
+| `home_mold_humidity` What indoor relative humidity does the EPA recommend keeping to prevent mold? | EPA, A Brief Guide to Mold, Moisture and Your Home (health effects) | "If possible, keep indoor humidity below 60 percent (ideally between 30 and 50 percent) relative humidity." | the same EPA page |
+| `medicare_partb_penalty` How much does Medicare's Part B late enrollment penalty add to your monthly premium? | Medicare.gov, Avoid late enrollment penalties (the Part A penalty) | "For Part B, you'll pay a late enrollment penalty of 10% for each full 12-month period that you could have signed up but didn't." | the same Medicare.gov page |
+| `retirement_earliest_claim_age` What is the earliest age you can start claiming Social Security retirement benefits? | CFPB, Before you claim (retirement expenses) | "Under Social Security rules, you are allowed to claim your benefits as early as age 62." | the same CFPB page |
+
+Every figure comes from the target's own page. Every page used is an agency's own work.
+Two rough edges are left as the pages render them, identical in both arms: a "Dispute a
+penalty" heading inside the IRS target, and one FDIC non-target that opens mid-answer ("For
+many, the answer is 'no'…"). The Medicare target sits closer to its question than the other
+five, because that page is entirely about penalties: its unrelated aspect is the Part A
+penalty.

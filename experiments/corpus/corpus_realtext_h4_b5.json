@@ -1,0 +1,993 @@
+{
+  "corpus_version": "realtext-h4-screen-b5",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 5: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "home_diy",
+    "real_estate",
+    "retirement",
+    "taxes"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "realestate_closing_disclosure_days",
+      "domain": "real_estate",
+      "question": "How many days before closing must a mortgage lender give you the Closing Disclosure?",
+      "target_doc_id": "realestate_closing_disclosure_days__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "realestate_closing_disclosure_days__target",
+        "realestate_closing_disclosure_days__doc1",
+        "realestate_closing_disclosure_days__doc2",
+        "realestate_closing_disclosure_days__doc3",
+        "realestate_closing_disclosure_days__doc4",
+        "realestate_closing_disclosure_days__doc5"
+      ],
+      "answer_pattern": "\\bthree\\b|\\b3\\b|business days?|\\bdays?\\b|\\bweeks?\\b"
+    },
+    {
+      "prompt_id": "home_lead_paint_year",
+      "domain": "home_diy",
+      "question": "Homes built before what year are more likely to contain lead-based paint?",
+      "target_doc_id": "home_lead_paint_year__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_lead_paint_year__target",
+        "home_lead_paint_year__doc1",
+        "home_lead_paint_year__doc2",
+        "home_lead_paint_year__doc3",
+        "home_lead_paint_year__doc4",
+        "home_lead_paint_year__doc5"
+      ],
+      "answer_pattern": "\\b19\\d\\d\\b"
+    },
+    {
+      "prompt_id": "taxes_failure_to_file_penalty",
+      "domain": "taxes",
+      "question": "What is the IRS failure-to-file penalty for each month a tax return is late?",
+      "target_doc_id": "taxes_failure_to_file_penalty__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "taxes_failure_to_file_penalty__target",
+        "taxes_failure_to_file_penalty__doc1",
+        "taxes_failure_to_file_penalty__doc2",
+        "taxes_failure_to_file_penalty__doc3",
+        "taxes_failure_to_file_penalty__doc4",
+        "taxes_failure_to_file_penalty__doc5"
+      ],
+      "answer_pattern": "\\d+(\\.\\d+)? ?%|percent"
+    },
+    {
+      "prompt_id": "home_mold_humidity",
+      "domain": "home_diy",
+      "question": "What indoor relative humidity does the EPA recommend keeping to prevent mold?",
+      "target_doc_id": "home_mold_humidity__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_mold_humidity__target",
+        "home_mold_humidity__doc1",
+        "home_mold_humidity__doc2",
+        "home_mold_humidity__doc3",
+        "home_mold_humidity__doc4",
+        "home_mold_humidity__doc5"
+      ],
+      "answer_pattern": "\\d+ ?%|percent"
+    },
+    {
+      "prompt_id": "medicare_partb_penalty",
+      "domain": "retirement",
+      "question": "How much does Medicare's Part B late enrollment penalty add to your monthly premium?",
+      "target_doc_id": "medicare_partb_penalty__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "medicare_partb_penalty__target",
+        "medicare_partb_penalty__doc1",
+        "medicare_partb_penalty__doc2",
+        "medicare_partb_penalty__doc3",
+        "medicare_partb_penalty__doc4",
+        "medicare_partb_penalty__doc5"
+      ],
+      "answer_pattern": "\\d+ ?%|percent"
+    },
+    {
+      "prompt_id": "retirement_earliest_claim_age",
+      "domain": "retirement",
+      "question": "What is the earliest age you can start claiming Social Security retirement benefits?",
+      "target_doc_id": "retirement_earliest_claim_age__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "retirement_earliest_claim_age__target",
+        "retirement_earliest_claim_age__doc1",
+        "retirement_earliest_claim_age__doc2",
+        "retirement_earliest_claim_age__doc3",
+        "retirement_earliest_claim_age__doc4",
+        "retirement_earliest_claim_age__doc5"
+      ],
+      "answer_pattern": "\\b6[0-9]\\b|\\b70\\b|sixty|seventy"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "realestate_closing_disclosure_days__target",
+      "prompt_id": "realestate_closing_disclosure_days",
+      "format": "docs",
+      "domain": "real_estate",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "Closing disclosure explainer",
+        "url": "https://www.consumerfinance.gov/owning-a-home/closing-disclosure/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c63192e0af7f742050135c9219d850a8390a5a7c2679af6f6463143c7904ca59",
+        "retrieved_utc": "2026-11-11T04:54:52+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "If your loan allows assumptions, that means that if you sell the home, the buyer may be allowed to take over your loan on the same terms, instead of having to get a new loan. If your loan does not allow assumptions, the buyer will not be allowed to take over your loan. Most loans do not allow assumptions.",
+        "treatment": "If your loan allows assumptions, that means that if you sell the home, the buyer may be allowed to take over your loan on the same terms, instead of having to get a new loan. Lenders are required to provide your Closing Disclosure three business days before your scheduled closing. Most loans do not allow assumptions."
+      },
+      "edit": {
+        "replaced": "If your loan does not allow assumptions, the buyer will not be allowed to take over your loan.",
+        "inserted": "Lenders are required to provide your Closing Disclosure three business days before your scheduled closing.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/owning-a-home/closing-disclosure/",
+            "agency": "CFPB",
+            "passage": "Lenders are required to provide your Closing Disclosure three business days before your scheduled closing.",
+            "snapshot_sha256": "c63192e0af7f742050135c9219d850a8390a5a7c2679af6f6463143c7904ca59"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "realestate_closing_disclosure_days__doc1",
+      "prompt_id": "realestate_closing_disclosure_days",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a Closing Disclosure?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-closing-disclosure-en-1983/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ba487bdd4de213fabdb2ff7a0e84de92ad3800e5ad2a0dd4a846feeff1d9a3df",
+        "retrieved_utc": "2026-11-11T04:54:52+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "Note: You won't receive a Closing Disclosure if you're applying for a reverse mortgage. For those loans, you will receive two forms-a HUD-1 Settlement Statement and a final Truth in Lending Disclosure-instead of the Closing Disclosure. If you are applying for a HELOC, a manufactured housing loan that is not secured by real estate, or a loan through certain types of homebuyer assistance programs, you will not receive a HUD-1 or a Closing Disclosure, but you should receive a Truth-in-Lending disclosure.",
+        "treatment": "Note: You won't receive a Closing Disclosure if you're applying for a reverse mortgage. For those loans, you will receive two forms-a HUD-1 Settlement Statement and a final Truth in Lending Disclosure-instead of the Closing Disclosure. If you are applying for a HELOC, a manufactured housing loan that is not secured by real estate, or a loan through certain types of homebuyer assistance programs, you will not receive a HUD-1 or a Closing Disclosure, but you should receive a Truth-in-Lending disclosure."
+      }
+    },
+    {
+      "doc_id": "realestate_closing_disclosure_days__doc2",
+      "prompt_id": "realestate_closing_disclosure_days",
+      "format": "docs",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Loan estimate explainer",
+        "url": "https://www.consumerfinance.gov/owning-a-home/loan-estimate/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "79362efc2709517e0f0a3c6a943cd98b22f2bdf3435505c322cf8f94e8b06f41",
+        "retrieved_utc": "2026-11-11T04:56:30+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "A Loan Estimate tells you important details about a mortgage loan you have requested. Use this tool to review your Loan Estimate to make sure it reflects what you discussed with the lender. If something looks different from what you expected, ask why. Request multiple Loan Estimates from different lenders so you can compare and choose the loan that's right for you.",
+        "treatment": "A Loan Estimate tells you important details about a mortgage loan you have requested. Use this tool to review your Loan Estimate to make sure it reflects what you discussed with the lender. If something looks different from what you expected, ask why. Request multiple Loan Estimates from different lenders so you can compare and choose the loan that's right for you."
+      }
+    },
+    {
+      "doc_id": "realestate_closing_disclosure_days__doc3",
+      "prompt_id": "realestate_closing_disclosure_days",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a Loan Estimate?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-loan-estimate-en-1995/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f5e54579a257894a897701a9bbf3fdc3bc4e46a24643a948e1137dbd63213d6f",
+        "retrieved_utc": "2026-11-11T04:56:31+00:00",
+        "method": "curl"
+      },
+      "words": 51,
+      "variants": {
+        "control": "When you receive a Loan Estimate, the lender has not yet approved or denied your loan application. The Loan Estimate shows you what loan terms the lender expects to offer if you decide to move forward. If you decide to move forward, the lender will ask you for additional financial information.",
+        "treatment": "When you receive a Loan Estimate, the lender has not yet approved or denied your loan application. The Loan Estimate shows you what loan terms the lender expects to offer if you decide to move forward. If you decide to move forward, the lender will ask you for additional financial information."
+      }
+    },
+    {
+      "doc_id": "realestate_closing_disclosure_days__doc4",
+      "prompt_id": "realestate_closing_disclosure_days",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What fees or charges are paid when closing on a mortgage and who pays them?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-are-closing-costs-en-1845/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7b1e3d7dad9fc5470e9bed77f075e91f2b4dff595265a9175adfa8d14ab8b333",
+        "retrieved_utc": "2026-11-11T04:56:31+00:00",
+        "method": "curl"
+      },
+      "words": 58,
+      "variants": {
+        "control": "Even if you don't pay the mortgage closing fees directly out of pocket, you might end up paying them indirectly. Sometimes, you can negotiate with the seller for a \"credit\" towards your closing costs, but the seller will usually require you to pay a higher price for the home in order to cover the costs of this credit.",
+        "treatment": "Even if you don't pay the mortgage closing fees directly out of pocket, you might end up paying them indirectly. Sometimes, you can negotiate with the seller for a \"credit\" towards your closing costs, but the seller will usually require you to pay a higher price for the home in order to cover the costs of this credit."
+      }
+    },
+    {
+      "doc_id": "realestate_closing_disclosure_days__doc5",
+      "prompt_id": "realestate_closing_disclosure_days",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is private mortgage insurance?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ed3c6d7fa1e57d6e7ead34edb4c571803b2a54435dd22199a15b875281b6fffa",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 57,
+      "variants": {
+        "control": "Lenders sometimes offer conventional loans with smaller down payments that do not require PMI. As a tradeoff, you usually pay a higher interest rate for these loans. Paying a higher interest rate can be more or less expensive than the PMI, depending on a number of factors, including how long you plan to stay in the home.",
+        "treatment": "Lenders sometimes offer conventional loans with smaller down payments that do not require PMI. As a tradeoff, you usually pay a higher interest rate for these loans. Paying a higher interest rate can be more or less expensive than the PMI, depending on a number of factors, including how long you plan to stay in the home."
+      }
+    },
+    {
+      "doc_id": "home_lead_paint_year__target",
+      "prompt_id": "home_lead_paint_year",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": true,
+      "source": {
+        "agency": "EPA",
+        "title": "Reduce the Risk of Lead Exposure at Home",
+        "url": "https://www.epa.gov/lead/protect-your-family-exposures-lead",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "650f0f8167b6a2e58e80f08d4a89b71b87382aac138dcec5b70a586cfefb0faf",
+        "retrieved_utc": "2026-11-11T04:55:28+00:00",
+        "method": "curl"
+      },
+      "words": 82,
+      "variants": {
+        "control": "Run your water. The more time water has been sitting in pipes, the more lead it may contain. Before drinking, flush your home's pipes by running the tap, taking a shower, doing laundry or doing a load of dishes. The amount of time to run the water will depend on whether your home has a lead service line or not, and the length of the lead service line. Residents should contact their water utility for recommendations about flushing times in their community.",
+        "treatment": "Run your water. The more time water has been sitting in pipes, the more lead it may contain. Before drinking, flush your home's pipes by running the tap, taking a shower, doing laundry or doing a load of dishes. The amount of time to run the water will depend on whether your home has a lead service line or not, and the length of the lead service line. If your home was built before 1978, it is more likely to have lead-based paint."
+      },
+      "edit": {
+        "replaced": "Residents should contact their water utility for recommendations about flushing times in their community.",
+        "inserted": "If your home was built before 1978, it is more likely to have lead-based paint.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.epa.gov/lead/protect-your-family-exposures-lead",
+            "agency": "EPA",
+            "passage": "If your home was built before 1978, it is more likely to have lead-based paint.",
+            "snapshot_sha256": "650f0f8167b6a2e58e80f08d4a89b71b87382aac138dcec5b70a586cfefb0faf"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "home_lead_paint_year__doc1",
+      "prompt_id": "home_lead_paint_year",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Learn About Lead",
+        "url": "https://www.epa.gov/lead/learn-about-lead",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0ed076ab6921611c6faf9d7e305cf4524d15342cfc6a54e25aaab553e9587984",
+        "retrieved_utc": "2026-11-11T04:55:29+00:00",
+        "method": "curl"
+      },
+      "words": 56,
+      "variants": {
+        "control": "Federal and state laws limit lead in products like paint, water pipes and gasoline, so we are exposed to less lead. But lead can still pose health risks, especially for young children who put their hands and objects in their mouths. Find more information about sources of lead exposure and preventative actions to protect your family.",
+        "treatment": "Federal and state laws limit lead in products like paint, water pipes and gasoline, so we are exposed to less lead. But lead can still pose health risks, especially for young children who put their hands and objects in their mouths. Find more information about sources of lead exposure and preventative actions to protect your family."
+      }
+    },
+    {
+      "doc_id": "home_lead_paint_year__doc2",
+      "prompt_id": "home_lead_paint_year",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Lead Renovation, Repair and Painting Program Rules",
+        "url": "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program-rules",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b36c5427e2af257a52e226b14364655849ca08de2e9334b7a20b8a37257d2e34",
+        "retrieved_utc": "2026-11-11T04:55:29+00:00",
+        "method": "curl"
+      },
+      "words": 85,
+      "variants": {
+        "control": "EPA's 2008 Lead-Based Paint Renovation, Repair and Painting (RRP) Rule (as amended in 2010 and 2011), aims to protect the public from lead-based paint hazards associated with renovation, repair and painting activities. These activities can create hazardous lead dust when surfaces with lead paint, even from many decades ago, are disturbed. The rule requires workers to be certified and trained in the use of lead-safe work practices, and requires renovation, repair, and painting firms to be EPA-certified. These requirements became fully effective April 22, 2010.",
+        "treatment": "EPA's 2008 Lead-Based Paint Renovation, Repair and Painting (RRP) Rule (as amended in 2010 and 2011), aims to protect the public from lead-based paint hazards associated with renovation, repair and painting activities. These activities can create hazardous lead dust when surfaces with lead paint, even from many decades ago, are disturbed. The rule requires workers to be certified and trained in the use of lead-safe work practices, and requires renovation, repair, and painting firms to be EPA-certified. These requirements became fully effective April 22, 2010."
+      }
+    },
+    {
+      "doc_id": "home_lead_paint_year__doc3",
+      "prompt_id": "home_lead_paint_year",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Real Estate Disclosures about Potential Lead Hazards",
+        "url": "https://www.epa.gov/lead/real-estate-disclosure",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "fd36894be77342541e804b656924216cd954abd443615a1a380e961f398f1852",
+        "retrieved_utc": "2026-11-11T04:55:29+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "Provide homebuyers a 10-day period to conduct a paint inspection or risk assessment for lead-based paint or lead-based paint hazards. Parties may mutually agree, in writing, to lengthen or shorten the time period for inspection. Homebuyers may waive this inspection opportunity. If a homebuyer is a concerned about possible lead-based paint, they may hire a certified inspector to conduct a lead-based paint inspection before committing to buy. Use EPA's Lead-Based Paint Professional Locator to find a certified inspector in your area.",
+        "treatment": "Provide homebuyers a 10-day period to conduct a paint inspection or risk assessment for lead-based paint or lead-based paint hazards. Parties may mutually agree, in writing, to lengthen or shorten the time period for inspection. Homebuyers may waive this inspection opportunity. If a homebuyer is a concerned about possible lead-based paint, they may hire a certified inspector to conduct a lead-based paint inspection before committing to buy. Use EPA's Lead-Based Paint Professional Locator to find a certified inspector in your area."
+      }
+    },
+    {
+      "doc_id": "home_lead_paint_year__doc4",
+      "prompt_id": "home_lead_paint_year",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Basic Information about Lead in Drinking Water",
+        "url": "https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1707286d662eed1845a4f88b3636fffddbcf4dc503042caae5f2615760e609e2",
+        "retrieved_utc": "2026-11-11T04:56:31+00:00",
+        "method": "curl"
+      },
+      "words": 106,
+      "variants": {
+        "control": "It is important to recognize all the ways a child can be exposed to lead. Children are exposed to lead in paint, dust, soil, air, and food, as well as drinking water. If the level of lead in a child's blood is at or above the CDC action level of 3.5 micrograms per deciliter, it may be due to lead exposures from a combination of sources. EPA estimates that drinking water can make up 20 percent or more of a person's total exposure to lead. Infants who consume mostly mixed formula can receive 40 percent to 60 percent of their exposure to lead from drinking water.",
+        "treatment": "It is important to recognize all the ways a child can be exposed to lead. Children are exposed to lead in paint, dust, soil, air, and food, as well as drinking water. If the level of lead in a child's blood is at or above the CDC action level of 3.5 micrograms per deciliter, it may be due to lead exposures from a combination of sources. EPA estimates that drinking water can make up 20 percent or more of a person's total exposure to lead. Infants who consume mostly mixed formula can receive 40 percent to 60 percent of their exposure to lead from drinking water."
+      }
+    },
+    {
+      "doc_id": "home_lead_paint_year__doc5",
+      "prompt_id": "home_lead_paint_year",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Emergency Disinfection of Drinking Water",
+        "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7cfae08b0c1531e5efe754d6a5331c8b420b10524d3e2f3cedaef22ffea4c809",
+        "retrieved_utc": "2026-11-11T01:47:36+00:00",
+        "method": "curl"
+      },
+      "words": 73,
+      "variants": {
+        "control": "Disinfect water using household bleach, if you can't boil water. Only use regular, unscented chlorine bleach products that are suitable for disinfection and sanitization as indicated on the label. The label may say that the active ingredient contains 6 or 8.25% of sodium hypochlorite. Do not use scented, color safe, or bleaches with added cleaners.If water is cloudy, let it settle and filter it through a clean cloth, paper towel, or coffee filter.",
+        "treatment": "Disinfect water using household bleach, if you can't boil water. Only use regular, unscented chlorine bleach products that are suitable for disinfection and sanitization as indicated on the label. The label may say that the active ingredient contains 6 or 8.25% of sodium hypochlorite. Do not use scented, color safe, or bleaches with added cleaners.If water is cloudy, let it settle and filter it through a clean cloth, paper towel, or coffee filter."
+      }
+    },
+    {
+      "doc_id": "taxes_failure_to_file_penalty__target",
+      "prompt_id": "taxes_failure_to_file_penalty",
+      "format": "reference",
+      "domain": "taxes",
+      "is_target": true,
+      "source": {
+        "agency": "IRS",
+        "title": "Failure to file penalty",
+        "url": "https://www.irs.gov/payments/failure-to-file-penalty",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ade5f3effec3a4bd2fc234cdbfba5f9775d14948da5c2b6ab5a0fc36cc342fbc",
+        "retrieved_utc": "2026-09-19T19:06:06+00:00",
+        "method": "curl"
+      },
+      "words": 96,
+      "variants": {
+        "control": "We may be able to remove or reduce some penalties if you acted in good faith and can show reasonable cause for why you weren't able to meet your tax obligations. By law we cannot remove or reduce interest unless the penalty is removed or reduced. For more information, see Penalty relief. Dispute a penalty If you disagree with the amount you owe, you may dispute the penalty. Call us at the toll-free number at the top right corner of your notice or letter or write us a letter stating why we should reconsider the penalty.",
+        "treatment": "We may be able to remove or reduce some penalties if you acted in good faith and can show reasonable cause for why you weren't able to meet your tax obligations. The penalty is 5% of the tax due for each month or partial month the return is late. For more information, see Penalty relief. Dispute a penalty If you disagree with the amount you owe, you may dispute the penalty. Call us at the toll-free number at the top right corner of your notice or letter or write us a letter stating why we should reconsider the penalty."
+      },
+      "edit": {
+        "replaced": "By law we cannot remove or reduce interest unless the penalty is removed or reduced.",
+        "inserted": "The penalty is 5% of the tax due for each month or partial month the return is late.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.irs.gov/payments/failure-to-file-penalty",
+            "agency": "IRS",
+            "passage": "The penalty is 5% of the tax due (less any tax paid on time and available credits) for each month or partial month the return is late.",
+            "snapshot_sha256": "ade5f3effec3a4bd2fc234cdbfba5f9775d14948da5c2b6ab5a0fc36cc342fbc"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "taxes_failure_to_file_penalty__doc1",
+      "prompt_id": "taxes_failure_to_file_penalty",
+      "format": "docs",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Get an extension to file your tax return",
+        "url": "https://www.irs.gov/filing/get-an-extension-to-file-your-tax-return",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "477428b8f4382e3136aafb714f462956b1327cd0e7178bac55de15a637e4e923",
+        "retrieved_utc": "2026-09-19T19:06:05+00:00",
+        "method": "curl"
+      },
+      "words": 50,
+      "variants": {
+        "control": "If you need more time to file your taxes, request an extension by the April tax filing due date. This gives you until October 15 to file without penalties. Make sure you pay any tax you owe by the April filing date. The extension is only for filing your return.",
+        "treatment": "If you need more time to file your taxes, request an extension by the April tax filing due date. This gives you until October 15 to file without penalties. Make sure you pay any tax you owe by the April filing date. The extension is only for filing your return."
+      }
+    },
+    {
+      "doc_id": "taxes_failure_to_file_penalty__doc2",
+      "prompt_id": "taxes_failure_to_file_penalty",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Need more time to file? Don't wait, request an extension",
+        "url": "https://www.irs.gov/newsroom/need-more-time-to-file-dont-wait-request-an-extension",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a46c577b14eaccb50668f5354e86bca2e74137af8cc77ada185aa6fd70c06e4d",
+        "retrieved_utc": "2026-09-19T19:06:05+00:00",
+        "method": "curl"
+      },
+      "words": 61,
+      "variants": {
+        "control": "It's important to know, the extension is only for filing a return and not for extra time to pay, if taxes are owed. Taxpayers are still obligated to pay taxes due on April 15, 2026, to avoid penalties and interest. There are options available for people who can't pay the full balance before the deadline, but they shouldn't delay any longer.",
+        "treatment": "It's important to know, the extension is only for filing a return and not for extra time to pay, if taxes are owed. Taxpayers are still obligated to pay taxes due on April 15, 2026, to avoid penalties and interest. There are options available for people who can't pay the full balance before the deadline, but they shouldn't delay any longer."
+      }
+    },
+    {
+      "doc_id": "taxes_failure_to_file_penalty__doc3",
+      "prompt_id": "taxes_failure_to_file_penalty",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Actions taxpayers should take if they missed the deadline",
+        "url": "https://www.irs.gov/newsroom/actions-taxpayers-should-take-if-they-missed-april-filing-and-payment-deadline",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "644c56261876bd9716180111f3790f46b6819cd5fc74bedea0250d53b70428db",
+        "retrieved_utc": "2026-09-19T19:06:07+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "There's no penalty for filing after April 15, if the IRS owes the taxpayer a refund. Taxpayers who choose not to file a tax return because they don't earn enough to meet the filing requirement may miss out on receiving a refund due to potential refundable tax credits, such as the Earned Income Tax Credit and Child Tax Credit.",
+        "treatment": "There's no penalty for filing after April 15, if the IRS owes the taxpayer a refund. Taxpayers who choose not to file a tax return because they don't earn enough to meet the filing requirement may miss out on receiving a refund due to potential refundable tax credits, such as the Earned Income Tax Credit and Child Tax Credit."
+      }
+    },
+    {
+      "doc_id": "taxes_failure_to_file_penalty__doc4",
+      "prompt_id": "taxes_failure_to_file_penalty",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "Taxpayers who need more time should request an extension",
+        "url": "https://www.irs.gov/newsroom/taxpayers-who-need-more-time-to-file-a-federal-tax-return-should-request-an-extension",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4edec8500adcb75293efa8060aefe3028cc9a9aa3736fda29ae4ca4b41360e5b",
+        "retrieved_utc": "2026-09-19T19:06:05+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "Request an extension by mail. File Form 4868, Application for Automatic Extension of Time To File U.S. Individual Income Tax Return. You can file by mail, online with an IRS e-filing partner or through a tax professional. Estimate how much tax you owe for the year on the extension form. Subtract the taxes you already paid for the filing year and pay the balance owed.",
+        "treatment": "Request an extension by mail. File Form 4868, Application for Automatic Extension of Time To File U.S. Individual Income Tax Return. You can file by mail, online with an IRS e-filing partner or through a tax professional. Estimate how much tax you owe for the year on the extension form. Subtract the taxes you already paid for the filing year and pay the balance owed."
+      }
+    },
+    {
+      "doc_id": "taxes_failure_to_file_penalty__doc5",
+      "prompt_id": "taxes_failure_to_file_penalty",
+      "format": "news",
+      "domain": "taxes",
+      "is_target": false,
+      "source": {
+        "agency": "IRS",
+        "title": "An extension to file is not an extension to pay taxes",
+        "url": "https://www.irs.gov/newsroom/irs-reminds-taxpayers-an-extension-to-file-is-not-an-extension-to-pay-taxes",
+        "rights": "US federal work (IRS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "cca0f6d33bd37ec8dfe813d314e1c70c5c2a39e3c83f7057bbd7020efd0e4496",
+        "retrieved_utc": "2026-09-19T19:06:07+00:00",
+        "method": "curl"
+      },
+      "words": 57,
+      "variants": {
+        "control": "Submit an electronic payment with Direct Pay, Electronic Federal Tax Payment System or by debit, credit card or digital wallet and select Form 4868 or extension as the payment type. Taxpayers don't need to file Form 4868 when making an electronic payment and indicating it's for an extension. The IRS will automatically count it as an extension.",
+        "treatment": "Submit an electronic payment with Direct Pay, Electronic Federal Tax Payment System or by debit, credit card or digital wallet and select Form 4868 or extension as the payment type. Taxpayers don't need to file Form 4868 when making an electronic payment and indicating it's for an extension. The IRS will automatically count it as an extension."
+      }
+    },
+    {
+      "doc_id": "home_mold_humidity__target",
+      "prompt_id": "home_mold_humidity",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": true,
+      "source": {
+        "agency": "EPA",
+        "title": "A Brief Guide to Mold, Moisture and Your Home",
+        "url": "https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c0c17a44c22519424ae4d5a5f2dd3ec4f2f93bd0877d90356ba9ed8bb9a93c12",
+        "retrieved_utc": "2026-11-11T04:57:33+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "Allergic reactions to mold are common. They can be immediate or delayed. Molds can also cause asthma attacks in people with asthma who are allergic to mold. In addition, mold exposure can irritate the eyes, skin, nose, throat, and lungs of both mold-allergic and non-allergic people. Symptoms other than the allergic and irritant types are not commonly reported as a result of inhaling mold. Research on mold and health effects is ongoing.",
+        "treatment": "Allergic reactions to mold are common. They can be immediate or delayed. Molds can also cause asthma attacks in people with asthma who are allergic to mold. In addition, mold exposure can irritate the eyes, skin, nose, throat, and lungs of both mold-allergic and non-allergic people. If possible, keep indoor humidity below 60 percent (ideally between 30 and 50 percent) relative humidity. Research on mold and health effects is ongoing."
+      },
+      "edit": {
+        "replaced": "Symptoms other than the allergic and irritant types are not commonly reported as a result of inhaling mold.",
+        "inserted": "If possible, keep indoor humidity below 60 percent (ideally between 30 and 50 percent) relative humidity.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home",
+            "agency": "EPA",
+            "passage": "If possible, keep indoor humidity below 60 percent (ideally between 30 and 50 percent) relative humidity.",
+            "snapshot_sha256": "c0c17a44c22519424ae4d5a5f2dd3ec4f2f93bd0877d90356ba9ed8bb9a93c12"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "home_mold_humidity__doc1",
+      "prompt_id": "home_mold_humidity",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Mold Cleanup in Your Home",
+        "url": "https://www.epa.gov/mold/mold-cleanup-your-home",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d967d6371b9a5e474d01149df793afa823fad2fe415702560d78d447b35acf47",
+        "retrieved_utc": "2026-11-11T04:57:33+00:00",
+        "method": "curl"
+      },
+      "words": 60,
+      "variants": {
+        "control": "Places that are often or always damp can be hard to maintain completely free of mold. If there's some mold in the shower or elsewhere in the bathroom that seems to reappear, increasing ventilation (running a fan or opening a window) and cleaning more frequently will usually prevent mold from recurring, or at least keep the mold to a minimum.",
+        "treatment": "Places that are often or always damp can be hard to maintain completely free of mold. If there's some mold in the shower or elsewhere in the bathroom that seems to reappear, increasing ventilation (running a fan or opening a window) and cleaning more frequently will usually prevent mold from recurring, or at least keep the mold to a minimum."
+      }
+    },
+    {
+      "doc_id": "home_mold_humidity__doc2",
+      "prompt_id": "home_mold_humidity",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Mold Course Chapter 2",
+        "url": "https://www.epa.gov/mold/mold-course-chapter-2",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "90731945525788afd3de60bd211da6710312b26cb68bdfc684e2b23b04996ed5",
+        "retrieved_utc": "2026-11-11T04:57:33+00:00",
+        "method": "curl"
+      },
+      "words": 68,
+      "variants": {
+        "control": "Commercial firms that do mold remediation work or work on water- and fire-damaged buildings often use large fans, dehumidifiers and other equipment to dry wet buildings and items quickly before mold has a chance to grow. This action can save money in the long run, because if the building or furnishings are dried completely and quickly, mold will not grow, and a mold remediation will not be needed.",
+        "treatment": "Commercial firms that do mold remediation work or work on water- and fire-damaged buildings often use large fans, dehumidifiers and other equipment to dry wet buildings and items quickly before mold has a chance to grow. This action can save money in the long run, because if the building or furnishings are dried completely and quickly, mold will not grow, and a mold remediation will not be needed."
+      }
+    },
+    {
+      "doc_id": "home_mold_humidity__doc3",
+      "prompt_id": "home_mold_humidity",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "What are the basic mold cleanup steps?",
+        "url": "https://www.epa.gov/mold/what-are-basic-mold-cleanup-steps",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "008132d488ba2e89b7b7f21f4213874c00737cf1b6649d1beb2c20546245a636",
+        "retrieved_utc": "2026-11-11T04:57:34+00:00",
+        "method": "curl"
+      },
+      "words": 71,
+      "variants": {
+        "control": "If you are unsure about how to clean an item, or if the item is expensive or of sentimental value, you may wish to consult a specialist. Specialists in furniture repair, restoration, painting, art restoration and conservation, carpet and rug cleaning, water damage, and fire or water restoration are commonly listed in phone books. Be sure to ask for and check references. Look for specialists who are affiliated with professional organizations.",
+        "treatment": "If you are unsure about how to clean an item, or if the item is expensive or of sentimental value, you may wish to consult a specialist. Specialists in furniture repair, restoration, painting, art restoration and conservation, carpet and rug cleaning, water damage, and fire or water restoration are commonly listed in phone books. Be sure to ask for and check references. Look for specialists who are affiliated with professional organizations."
+      }
+    },
+    {
+      "doc_id": "home_mold_humidity__doc4",
+      "prompt_id": "home_mold_humidity",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Learn About Lead",
+        "url": "https://www.epa.gov/lead/learn-about-lead",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0ed076ab6921611c6faf9d7e305cf4524d15342cfc6a54e25aaab553e9587984",
+        "retrieved_utc": "2026-11-11T04:55:29+00:00",
+        "method": "curl"
+      },
+      "words": 54,
+      "variants": {
+        "control": "Remove your shoes when entering your home to prevent tracking in lead from soil or worksites. In some cases, changing your clothes at work and washing your clothes before coming into contact with family members can provide added protection, depending on the amount of lead you are exposed to at work or through hobbies.",
+        "treatment": "Remove your shoes when entering your home to prevent tracking in lead from soil or worksites. In some cases, changing your clothes at work and washing your clothes before coming into contact with family members can provide added protection, depending on the amount of lead you are exposed to at work or through hobbies."
+      }
+    },
+    {
+      "doc_id": "home_mold_humidity__doc5",
+      "prompt_id": "home_mold_humidity",
+      "format": "reference",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Health Risk of Radon",
+        "url": "https://www.epa.gov/radon/health-risk-radon",
+        "rights": "US federal work (EPA / ENERGY STAR), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4e6a7a2050f3dad508740a336d98231565a723d09a1ab696cc7ec941c8f69040",
+        "retrieved_utc": "2026-09-19T19:22:07+00:00",
+        "method": "curl"
+      },
+      "words": 67,
+      "variants": {
+        "control": "Radon is the number one cause of lung cancer among non-smokers, according to EPA estimates. Overall, radon is the second leading cause of lung cancer. Radon is responsible for about 21,000 lung cancer deaths every year. About 2,900 of these deaths occur among people who have never smoked. On January 13, 2005, Dr. Richard H. Carmona, the U.S. Surgeon General, issued a national health advisory on radon.",
+        "treatment": "Radon is the number one cause of lung cancer among non-smokers, according to EPA estimates. Overall, radon is the second leading cause of lung cancer. Radon is responsible for about 21,000 lung cancer deaths every year. About 2,900 of these deaths occur among people who have never smoked. On January 13, 2005, Dr. Richard H. Carmona, the U.S. Surgeon General, issued a national health advisory on radon."
+      }
+    },
+    {
+      "doc_id": "medicare_partb_penalty__target",
+      "prompt_id": "medicare_partb_penalty",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": true,
+      "source": {
+        "agency": "CMS (Medicare.gov)",
+        "title": "Avoid late enrollment penalties",
+        "url": "https://www.medicare.gov/basics/costs/medicare-costs/avoid-penalties",
+        "rights": "US federal work (CMS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8864e5f89719b4bf63943c13dd4f1b608fafc70264873009a57dc826487c8083",
+        "retrieved_utc": "2026-11-11T04:55:31+00:00",
+        "method": "curl"
+      },
+      "words": 61,
+      "variants": {
+        "control": "If you were eligible for Part A for 2 years but didn't sign up, you'll have to pay the higher premium for 4 years. Usually, you don't have to pay a penalty if you meet certain conditions that allow you to sign up for Part A during a Special Enrollment Period. Find out if you're eligible for a Special Enrollment Period.",
+        "treatment": "If you were eligible for Part A for 2 years but didn't sign up, you'll have to pay the higher premium for 4 years. For Part B, you'll pay a late enrollment penalty of 10% for each full 12-month period that you could have signed up but didn't. Find out if you're eligible for a Special Enrollment Period."
+      },
+      "edit": {
+        "replaced": "Usually, you don't have to pay a penalty if you meet certain conditions that allow you to sign up for Part A during a Special Enrollment Period.",
+        "inserted": "For Part B, you'll pay a late enrollment penalty of 10% for each full 12-month period that you could have signed up but didn't.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.medicare.gov/basics/costs/medicare-costs/avoid-penalties",
+            "agency": "CMS (Medicare.gov)",
+            "passage": "10% for each full 12-month period that you could have signed up",
+            "snapshot_sha256": "8864e5f89719b4bf63943c13dd4f1b608fafc70264873009a57dc826487c8083"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "medicare_partb_penalty__doc1",
+      "prompt_id": "medicare_partb_penalty",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "CMS (Medicare.gov)",
+        "title": "When can I sign up for Medicare?",
+        "url": "https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-can-i-sign-up-for-medicare",
+        "rights": "US federal work (CMS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "590e9c2752e085a1d1d740362074cb7beac1a292252962622ed750e8e890fcd0",
+        "retrieved_utc": "2026-11-11T04:56:32+00:00",
+        "method": "curl"
+      },
+      "words": 53,
+      "variants": {
+        "control": "If you don't sign up for Part B when you're first eligible, you might have to wait to sign up and go months without Part B coverage. You might also pay a monthly penalty for as long as you have Part B. The penalty goes up the longer you wait to sign up.",
+        "treatment": "If you don't sign up for Part B when you're first eligible, you might have to wait to sign up and go months without Part B coverage. You might also pay a monthly penalty for as long as you have Part B. The penalty goes up the longer you wait to sign up."
+      }
+    },
+    {
+      "doc_id": "medicare_partb_penalty__doc2",
+      "prompt_id": "medicare_partb_penalty",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "CMS (Medicare.gov)",
+        "title": "When does Medicare coverage start?",
+        "url": "https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start",
+        "rights": "US federal work (CMS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "87d5f8abfc4fa0b60b127976d28a8d440644b54366159029971468c55af5aa91",
+        "retrieved_utc": "2026-11-11T04:57:36+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "If you miss your 7-month Initial Enrollment Period, you may have to wait to sign up and pay a monthly late enrollment penalty for as long as you have Part B coverage. The penalty goes up the longer you wait. You may also have to pay a penalty if you have to pay a Part A premium, also called \"Premium-Part A.\" Learn more about how to avoid late enrollment penalties.",
+        "treatment": "If you miss your 7-month Initial Enrollment Period, you may have to wait to sign up and pay a monthly late enrollment penalty for as long as you have Part B coverage. The penalty goes up the longer you wait. You may also have to pay a penalty if you have to pay a Part A premium, also called \"Premium-Part A.\" Learn more about how to avoid late enrollment penalties."
+      }
+    },
+    {
+      "doc_id": "medicare_partb_penalty__doc3",
+      "prompt_id": "medicare_partb_penalty",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "CMS (Medicare.gov)",
+        "title": "Parts of Medicare",
+        "url": "https://www.medicare.gov/what-medicare-covers/your-medicare-coverage-choices/whats-medicare",
+        "rights": "US federal work (CMS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0727d9cd1c9a0fcdd20ce3dc3d3e8ef6cb012b7d759ad7473e0d16bf7da49fab",
+        "retrieved_utc": "2026-11-11T04:56:32+00:00",
+        "method": "curl"
+      },
+      "words": 79,
+      "variants": {
+        "control": "Medicare is federal health insurance for anyone age 65 and older, and some people under 65 with certain disabilities or conditions. Medicaid is a joint federal and state program that provides health coverage for certain low-income people, families and children, pregnant women, the elderly, and people with disabilities. In some states, Medicaid also helps cover medical costs for other adults. Medicaid offers benefits, like nursing facility services, home health services, and assistance paying for Medicare premiums and other costs.",
+        "treatment": "Medicare is federal health insurance for anyone age 65 and older, and some people under 65 with certain disabilities or conditions. Medicaid is a joint federal and state program that provides health coverage for certain low-income people, families and children, pregnant women, the elderly, and people with disabilities. In some states, Medicaid also helps cover medical costs for other adults. Medicaid offers benefits, like nursing facility services, home health services, and assistance paying for Medicare premiums and other costs."
+      }
+    },
+    {
+      "doc_id": "medicare_partb_penalty__doc4",
+      "prompt_id": "medicare_partb_penalty",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Planning your Social Security claiming age",
+        "url": "https://www.consumerfinance.gov/consumer-tools/retirement/before-you-claim/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "556229f0f377ecc2efdce4df557b492afdbb7fedd14c67c83c8300c2e39e68d8",
+        "retrieved_utc": "2026-09-18T05:10:16+00:00",
+        "method": "curl"
+      },
+      "words": 76,
+      "variants": {
+        "control": "Your Social Security claiming age can affect the amount your spouse receives after you die. Surviving spouses can take their own benefit or keep their spouse's benefit, whichever is higher. If you are married, and are the higher earner in the household, claiming at your full benefit age ensures your spouse receives the higher benefit. Talk to your spouse about your claiming options so you can make this important decision together. Learn more about spousal benefits.",
+        "treatment": "Your Social Security claiming age can affect the amount your spouse receives after you die. Surviving spouses can take their own benefit or keep their spouse's benefit, whichever is higher. If you are married, and are the higher earner in the household, claiming at your full benefit age ensures your spouse receives the higher benefit. Talk to your spouse about your claiming options so you can make this important decision together. Learn more about spousal benefits."
+      }
+    },
+    {
+      "doc_id": "medicare_partb_penalty__doc5",
+      "prompt_id": "medicare_partb_penalty",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Delayed Retirement Credits",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "672366e967d0db63e78dde4793c79e2aff4d169c0d5f106d79ebac7f304c7077",
+        "retrieved_utc": "2026-09-18T04:44:01+00:00",
+        "method": "wayback id_"
+      },
+      "words": 63,
+      "variants": {
+        "control": "Choosing when to begin your retirement benefits is an important and personal decision. No matter your age, be sure to explore our website to learn your choices and make the best decision. Sometimes, the month you choose to start benefits could mean higher benefit payments for you and your family. Here's some additional information that may help you decide what's right for you:",
+        "treatment": "Choosing when to begin your retirement benefits is an important and personal decision. No matter your age, be sure to explore our website to learn your choices and make the best decision. Sometimes, the month you choose to start benefits could mean higher benefit payments for you and your family. Here's some additional information that may help you decide what's right for you:"
+      }
+    },
+    {
+      "doc_id": "retirement_earliest_claim_age__target",
+      "prompt_id": "retirement_earliest_claim_age",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "Planning your Social Security claiming age",
+        "url": "https://www.consumerfinance.gov/consumer-tools/retirement/before-you-claim/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "556229f0f377ecc2efdce4df557b492afdbb7fedd14c67c83c8300c2e39e68d8",
+        "retrieved_utc": "2026-09-18T05:10:16+00:00",
+        "method": "curl"
+      },
+      "words": 86,
+      "variants": {
+        "control": "If you're planning an active retirement or if you have a mortgage or other debt, retirement could be more expensive than you expect. Some expenses, like out-of-pocket health care costs, are likely to increase as you get older. You can protect your retirement lifestyle by reducing your largest expenses. You can also increase your income by claiming at your full Social Security benefit age or later. If you claim earlier, your monthly benefit could be reduced by as much as 30 percent. Create a retirement budget.",
+        "treatment": "If you're planning an active retirement or if you have a mortgage or other debt, retirement could be more expensive than you expect. Under Social Security rules, you are allowed to claim your benefits as early as age 62. You can protect your retirement lifestyle by reducing your largest expenses. You can also increase your income by claiming at your full Social Security benefit age or later. If you claim earlier, your monthly benefit could be reduced by as much as 30 percent. Create a retirement budget."
+      },
+      "edit": {
+        "replaced": "Some expenses, like out-of-pocket health care costs, are likely to increase as you get older.",
+        "inserted": "Under Social Security rules, you are allowed to claim your benefits as early as age 62.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/consumer-tools/retirement/before-you-claim/",
+            "agency": "CFPB",
+            "passage": "Under Social Security rules, you are allowed to claim your benefits as early as age 62.",
+            "snapshot_sha256": "556229f0f377ecc2efdce4df557b492afdbb7fedd14c67c83c8300c2e39e68d8"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "retirement_earliest_claim_age__doc1",
+      "prompt_id": "retirement_earliest_claim_age",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Delayed Retirement Credits",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/delayret.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "672366e967d0db63e78dde4793c79e2aff4d169c0d5f106d79ebac7f304c7077",
+        "retrieved_utc": "2026-09-18T04:44:01+00:00",
+        "method": "wayback id_"
+      },
+      "words": 63,
+      "variants": {
+        "control": "Choosing when to begin your retirement benefits is an important and personal decision. No matter your age, be sure to explore our website to learn your choices and make the best decision. Sometimes, the month you choose to start benefits could mean higher benefit payments for you and your family. Here's some additional information that may help you decide what's right for you:",
+        "treatment": "Choosing when to begin your retirement benefits is an important and personal decision. No matter your age, be sure to explore our website to learn your choices and make the best decision. Sometimes, the month you choose to start benefits could mean higher benefit payments for you and your family. Here's some additional information that may help you decide what's right for you:"
+      }
+    },
+    {
+      "doc_id": "retirement_earliest_claim_age__doc2",
+      "prompt_id": "retirement_earliest_claim_age",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "You Can Receive Benefits Before Your Full Retirement Age",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/applying2.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f38f69186baf87781692e511b185cd6495888b59a633139a43b4bb23898aa8a4",
+        "retrieved_utc": "2026-09-18T05:11:03+00:00",
+        "method": "wayback id_"
+      },
+      "words": 52,
+      "variants": {
+        "control": "If you tell us you want your benefits to start in May, you will receive your first benefit check in June. (If you want to receive your first benefit check in May, you need to be eligible for benefits in April AND tell us you want your benefits to start that month.)",
+        "treatment": "If you tell us you want your benefits to start in May, you will receive your first benefit check in June. (If you want to receive your first benefit check in May, you need to be eligible for benefits in April AND tell us you want your benefits to start that month.)"
+      }
+    },
+    {
+      "doc_id": "retirement_earliest_claim_age__doc3",
+      "prompt_id": "retirement_earliest_claim_age",
+      "format": "reference",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "Social Security Administration",
+        "title": "Retirement Age and Benefit Reduction",
+        "url": "https://www.ssa.gov/benefits/retirement/planner/agereduction.html",
+        "rights": "US federal work (Social Security Administration), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "16a6e8c055d25aac5bf09a64614d1e7a3ddc8d1d38e7806378c8eae5c95cc47f",
+        "retrieved_utc": "2026-09-18T04:42:56+00:00",
+        "method": "wayback id_"
+      },
+      "words": 55,
+      "variants": {
+        "control": "If you were born on the 1st of the month, we figure your benefit (and your full retirement age) as if your birthday was in the previous month. If you were born on January 1st, we figure your benefit (and your full retirement age) as if your birthday was in December of the previous year.",
+        "treatment": "If you were born on the 1st of the month, we figure your benefit (and your full retirement age) as if your birthday was in the previous month. If you were born on January 1st, we figure your benefit (and your full retirement age) as if your birthday was in December of the previous year."
+      }
+    },
+    {
+      "doc_id": "retirement_earliest_claim_age__doc4",
+      "prompt_id": "retirement_earliest_claim_age",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "CMS (Medicare.gov)",
+        "title": "When does Medicare coverage start?",
+        "url": "https://www.medicare.gov/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start",
+        "rights": "US federal work (CMS), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "87d5f8abfc4fa0b60b127976d28a8d440644b54366159029971468c55af5aa91",
+        "retrieved_utc": "2026-11-11T04:57:36+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "If you miss your 7-month Initial Enrollment Period, you may have to wait to sign up and pay a monthly late enrollment penalty for as long as you have Part B coverage. The penalty goes up the longer you wait. You may also have to pay a penalty if you have to pay a Part A premium, also called \"Premium-Part A.\" Learn more about how to avoid late enrollment penalties.",
+        "treatment": "If you miss your 7-month Initial Enrollment Period, you may have to wait to sign up and pay a monthly late enrollment penalty for as long as you have Part B coverage. The penalty goes up the longer you wait. You may also have to pay a penalty if you have to pay a Part A premium, also called \"Premium-Part A.\" Learn more about how to avoid late enrollment penalties."
+      }
+    },
+    {
+      "doc_id": "retirement_earliest_claim_age__doc5",
+      "prompt_id": "retirement_earliest_claim_age",
+      "format": "docs",
+      "domain": "retirement",
+      "is_target": false,
+      "source": {
+        "agency": "FDIC",
+        "title": "Saving for the Unexpected and Your Future",
+        "url": "https://www.fdic.gov/consumer-resource-center/2025-01/saving-unexpected-and-your-future",
+        "rights": "US federal work (FDIC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0982a073f405468ba4cd06641c553ace40427f7523cc59379d0ee1e799c64854",
+        "retrieved_utc": "2026-09-15T05:19:38+00:00",
+        "method": "curl"
+      },
+      "words": 96,
+      "variants": {
+        "control": "For many, the answer is \"no\" even when they think it is \"yes.\" Options to save include workplace retirement plans, and Individual Retirement Accounts (IRAs) offered by many banks and investment companies. As with other savings goals, it is important to understand why you are saving and how much you need to save. Financial needs change through all stages of our lives. Start by determining what your expected retirement income will be and compare it to the expenses and debt you think you will have in retirement. Read Saving for Retirement for more tips to consider.",
+        "treatment": "For many, the answer is \"no\" even when they think it is \"yes.\" Options to save include workplace retirement plans, and Individual Retirement Accounts (IRAs) offered by many banks and investment companies. As with other savings goals, it is important to understand why you are saving and how much you need to save. Financial needs change through all stages of our lives. Start by determining what your expected retirement income will be and compare it to the expenses and debt you think you will have in retirement. Read Saving for Retirement for more tips to consider."
+      }
+    }
+  ],
+  "corpus_sha256": "7c5833d13f6a7f68"
+}
