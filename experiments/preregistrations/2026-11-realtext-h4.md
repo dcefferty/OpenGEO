@@ -544,3 +544,32 @@ a combined yield of 11 of 30 so far. At that yield they would keep about 7 more,
 18. Under the stopping rule the round would not then run as a finding. With 12 or more kept it
 may run as a sub-floor estimate, at the repo owner's decision, logged here before any
 treatment call. The stopping rule is unchanged by this entry.
+
+**2026-11-17 — batch 6 built, before any batch 6 data.** After the batch 5 entry above, the
+repo owner chose to continue screening through batches 6 to 8 as the stopping rule specifies,
+rather than stop at 11. `corpus/corpus_realtext_h4_b6.json`, version `realtext-h4-screen-b6`,
+sha `b46beac66274ad0e`, comes from the same builder under the same checks. The batch 1 to 5
+corpora are unchanged. The screen command is the one under Screening with `b1` replaced by
+`b6`. Thirty-three new snapshots are added under `corpus/sources/` (CFPB, FDA, NOAA National
+Weather Service, EPA, NIA and NHLBI pages). There is no construction change: batch 6 follows
+the batch 4 rule, with every target a span of the agency's consumer page on the question's own
+subject, taken from a paragraph about an unrelated aspect of it. Each question has three
+closer non-targets and two tangential ones.
+
+| question | target (control is a verbatim span of) | inserted sentence | figures from |
+|---|---|---|---|
+| `finance_lost_debit_card_report` How soon must you tell your bank about a lost or stolen debit card to limit your liability to $50? | CFPB, How do I get my money back after I discover an unauthorized transaction (when no temporary credit is owed) | "If you report a lost or stolen debit card within two business days, you can't be held responsible for more than $50." | the same CFPB page |
+| `credit_billing_dispute_window` How long do you have to send your credit card company a written notice disputing a billing error? | CFPB, How do I dispute a charge on my credit card bill? (what happens after a dispute) | "You must send a written billing error notice within 60 days after the charge appeared on your statement." | the same CFPB page |
+| `cooking_fridge_temperature` What temperature should you keep your refrigerator at to keep food safe? | FDA, Refrigerator Thermometers (pathogens in raw foods) | "To ensure that your refrigerator is doing its job, it's important to keep its temperature at 40 °F or below." | the same FDA page |
+| `emergency_lightning_wait` How long should you wait after the last thunder before going back outside? | NWS, Lightning Safety home page (strike statistics, site overview) | "Stay in safe shelter at least 30 minutes after you hear the last sound of thunder." | NWS, Lightning Safety Tips |
+| `home_well_testing_frequency` How often should you test a private drinking water well? | EPA, Protect Your Home's Water (wells after a natural disaster) | "Test your private well annually for total coliform bacteria, nitrates, total dissolved solids, and pH levels." | the same EPA page |
+| `health_sleep_older_adults` How many hours of sleep do older adults need each night? | NIA, Sleep and Older Adults (sleep apnea) | "Older adults need about the same amount of sleep as all adults - seven to nine hours each night." | the same NIA page |
+
+Every page used is an agency's own work. Five of the six figures come from the target's own
+page; the lightning figure comes from the NWS tips page, which is also one of that question's
+non-targets with the figure sentence left out. Two inserted sentences shorten their source
+(the debit card one drops "or the amount of any unauthorized transactions, whichever is less";
+the dispute one drops "calendar"), and neither changes the figure. Rough edges are left as the
+pages render them, identical in both arms: one heading inside the lightning tips span, and in
+the fridge target the next sentence's "these foods" now follows the inserted sentence rather
+than the list it referred to.
