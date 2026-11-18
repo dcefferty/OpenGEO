@@ -1,0 +1,996 @@
+{
+  "corpus_version": "realtext-h4-screen-b6",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 6: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "blog",
+    "docs",
+    "news",
+    "reference"
+  ],
+  "domains": [
+    "cooking",
+    "credit",
+    "emergency_prep",
+    "finance",
+    "health",
+    "home_diy"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "finance_lost_debit_card_report",
+      "domain": "finance",
+      "question": "How soon must you tell your bank about a lost or stolen debit card to limit your liability to $50?",
+      "target_doc_id": "finance_lost_debit_card_report__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "finance_lost_debit_card_report__target",
+        "finance_lost_debit_card_report__doc1",
+        "finance_lost_debit_card_report__doc2",
+        "finance_lost_debit_card_report__doc3",
+        "finance_lost_debit_card_report__doc4",
+        "finance_lost_debit_card_report__doc5"
+      ],
+      "answer_pattern": "\\btwo\\b|\\b2\\b|48 hours|\\bhours?\\b"
+    },
+    {
+      "prompt_id": "credit_billing_dispute_window",
+      "domain": "credit",
+      "question": "How long do you have to send your credit card company a written notice disputing a billing error?",
+      "target_doc_id": "credit_billing_dispute_window__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "credit_billing_dispute_window__target",
+        "credit_billing_dispute_window__doc1",
+        "credit_billing_dispute_window__doc2",
+        "credit_billing_dispute_window__doc3",
+        "credit_billing_dispute_window__doc4",
+        "credit_billing_dispute_window__doc5"
+      ],
+      "answer_pattern": "\\b60\\b|sixty|\\bdays?\\b|\\bweeks?\\b|\\bmonths?\\b"
+    },
+    {
+      "prompt_id": "cooking_fridge_temperature",
+      "domain": "cooking",
+      "question": "What temperature should you keep your refrigerator at to keep food safe?",
+      "target_doc_id": "cooking_fridge_temperature__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "cooking_fridge_temperature__target",
+        "cooking_fridge_temperature__doc1",
+        "cooking_fridge_temperature__doc2",
+        "cooking_fridge_temperature__doc3",
+        "cooking_fridge_temperature__doc4",
+        "cooking_fridge_temperature__doc5"
+      ],
+      "answer_pattern": "°|degrees?|fahrenheit|celsius|\\b40\\b"
+    },
+    {
+      "prompt_id": "emergency_lightning_wait",
+      "domain": "emergency_prep",
+      "question": "How long should you wait after the last thunder before going back outside?",
+      "target_doc_id": "emergency_lightning_wait__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "emergency_lightning_wait__target",
+        "emergency_lightning_wait__doc1",
+        "emergency_lightning_wait__doc2",
+        "emergency_lightning_wait__doc3",
+        "emergency_lightning_wait__doc4",
+        "emergency_lightning_wait__doc5"
+      ],
+      "answer_pattern": "\\bminutes?\\b|\\bhours?\\b|\\b30\\b|thirty|half an hour"
+    },
+    {
+      "prompt_id": "home_well_testing_frequency",
+      "domain": "home_diy",
+      "question": "How often should you test a private drinking water well?",
+      "target_doc_id": "home_well_testing_frequency__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "home_well_testing_frequency__target",
+        "home_well_testing_frequency__doc1",
+        "home_well_testing_frequency__doc2",
+        "home_well_testing_frequency__doc3",
+        "home_well_testing_frequency__doc4",
+        "home_well_testing_frequency__doc5"
+      ],
+      "answer_pattern": "\\byears?\\b|annual\\w*|\\byearly\\b|\\bmonths?\\b|every (?:\\w+ )?(?:years?|months?)|once a"
+    },
+    {
+      "prompt_id": "health_sleep_older_adults",
+      "domain": "health",
+      "question": "How many hours of sleep do older adults need each night?",
+      "target_doc_id": "health_sleep_older_adults__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "health_sleep_older_adults__target",
+        "health_sleep_older_adults__doc1",
+        "health_sleep_older_adults__doc2",
+        "health_sleep_older_adults__doc3",
+        "health_sleep_older_adults__doc4",
+        "health_sleep_older_adults__doc5"
+      ],
+      "answer_pattern": "\\bhours?\\b|\\b[5-9]\\b|\\bseven\\b|\\beight\\b|\\bnine\\b"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "finance_lost_debit_card_report__target",
+      "prompt_id": "finance_lost_debit_card_report",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "How do I get my money back after I discover an unauthorized transaction or money missing from my bank account?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-get-my-money-back-after-i-discover-an-unauthorized-transaction-or-money-missing-from-my-bank-account-en-1017/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8151c30aa8c15e0000dac2a039e481c710d93aeaf746a39b9c7d284ae47ca151",
+        "retrieved_utc": "2026-11-17T08:05:35+00:00",
+        "method": "curl"
+      },
+      "words": 73,
+      "variants": {
+        "control": "In some situations, however, your bank or credit union does not have to issue a temporary credit. For example, it can require you to provide written confirmation of the error if you initially provided the information by telephone. If you are asked to follow up in writing and you do not do so within ten business days, the bank or credit union is not required to temporarily credit your account during its investigation.",
+        "treatment": "In some situations, however, your bank or credit union does not have to issue a temporary credit. If you report a lost or stolen debit card within two business days, you can't be held responsible for more than $50. If you are asked to follow up in writing and you do not do so within ten business days, the bank or credit union is not required to temporarily credit your account during its investigation."
+      },
+      "edit": {
+        "replaced": "For example, it can require you to provide written confirmation of the error if you initially provided the information by telephone.",
+        "inserted": "If you report a lost or stolen debit card within two business days, you can't be held responsible for more than $50.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-get-my-money-back-after-i-discover-an-unauthorized-transaction-or-money-missing-from-my-bank-account-en-1017/",
+            "agency": "CFPB",
+            "passage": "If you notify your bank or credit union within two business days of discovering the loss or theft of the card, the bank or credit union can't hold you responsible for more than the amount of any unauthorized transactions or $50, whichever is less.",
+            "snapshot_sha256": "8151c30aa8c15e0000dac2a039e481c710d93aeaf746a39b9c7d284ae47ca151"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "finance_lost_debit_card_report__doc1",
+      "prompt_id": "finance_lost_debit_card_report",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Am I responsible for unauthorized charges if my credit cards are lost or stolen?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/am-i-responsible-for-unauthorized-charges-if-my-credit-cards-are-lost-or-stolen-en-29/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9cc568f2cd077808d269455140565d37e5f4e120b8954feccd6f03a60ec2bd7b",
+        "retrieved_utc": "2026-11-17T08:06:04+00:00",
+        "method": "curl"
+      },
+      "words": 99,
+      "variants": {
+        "control": "Check your credit card agreement to review your rights regarding unauthorized charges. You can find or request your agreement by visiting your credit card company's website or by visiting the CFPB's Credit Card Agreement Database. If there is unauthorized use of your card before you report it missing, the most you will owe for unauthorized charges on the card is $50. Many cardholder agreements say you are not responsible for any charges in this circumstance. If you have not lost the card itself, but someone steals and uses your account number, you generally have no liability for unauthorized use.",
+        "treatment": "Check your credit card agreement to review your rights regarding unauthorized charges. You can find or request your agreement by visiting your credit card company's website or by visiting the CFPB's Credit Card Agreement Database. If there is unauthorized use of your card before you report it missing, the most you will owe for unauthorized charges on the card is $50. Many cardholder agreements say you are not responsible for any charges in this circumstance. If you have not lost the card itself, but someone steals and uses your account number, you generally have no liability for unauthorized use."
+      }
+    },
+    {
+      "doc_id": "finance_lost_debit_card_report__doc2",
+      "prompt_id": "finance_lost_debit_card_report",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What should I do if my prepaid card or PIN is lost or stolen or I see unauthorized charges?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-if-my-government-benefit-card-or-payroll-card-is-lost-or-stolen-or-if-i-discover-unauthorized-charges-en-405/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3bf1a7036e36fc98d8d638de14ad2f5936d8d26ede3b688ebfd9fbd651012d07",
+        "retrieved_utc": "2026-11-17T08:06:22+00:00",
+        "method": "curl"
+      },
+      "words": 89,
+      "variants": {
+        "control": "Contact the card provider right away if your card or your PIN is lost or stolen or if you see unauthorized charges. If you have registered your prepaid card, or if your card is a payroll card or a certain type of government benefit card, you have certain error resolution rights that protect you from unauthorized transactions under federal law. Some prepaid card providers give some additional protections for loss or theft, but you should check your card provider's website or your cardholder agreement to find out the specifics.",
+        "treatment": "Contact the card provider right away if your card or your PIN is lost or stolen or if you see unauthorized charges. If you have registered your prepaid card, or if your card is a payroll card or a certain type of government benefit card, you have certain error resolution rights that protect you from unauthorized transactions under federal law. Some prepaid card providers give some additional protections for loss or theft, but you should check your card provider's website or your cardholder agreement to find out the specifics."
+      }
+    },
+    {
+      "doc_id": "finance_lost_debit_card_report__doc3",
+      "prompt_id": "finance_lost_debit_card_report",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is an unauthorized use of a credit card?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-an-unauthorized-use-of-a-credit-card-en-26/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4a611dfe79919353b6031c99eed8d4334740c9d8fb2b269fc44801212073a1c3",
+        "retrieved_utc": "2026-11-17T08:07:27+00:00",
+        "method": "curl"
+      },
+      "words": 91,
+      "variants": {
+        "control": "For example, if you lose your card and someone finds it and uses it, that would be an unauthorized use. However, if you give your card to someone to use, you have authorized the use. If the person uses the card for a different purpose, that may still be considered an authorized use. You would still be responsible for the charge, until you notify your card issuer that the person is no longer authorized to use the card. In that case, the card company may issue you a new credit card.",
+        "treatment": "For example, if you lose your card and someone finds it and uses it, that would be an unauthorized use. However, if you give your card to someone to use, you have authorized the use. If the person uses the card for a different purpose, that may still be considered an authorized use. You would still be responsible for the charge, until you notify your card issuer that the person is no longer authorized to use the card. In that case, the card company may issue you a new credit card."
+      }
+    },
+    {
+      "doc_id": "finance_lost_debit_card_report__doc4",
+      "prompt_id": "finance_lost_debit_card_report",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How are prepaid cards, debit cards, and credit cards different?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-are-prepaid-cards-debit-cards-and-credit-cards-different-en-433/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b446d15d9b042b0fd15a704b3dee1ebada0385752c603d5397a2f8b32f66d990",
+        "retrieved_utc": "2026-11-17T08:06:04+00:00",
+        "method": "curl"
+      },
+      "words": 80,
+      "variants": {
+        "control": "Generally, with prepaid cards and debit cards, you can't spend more than you have loaded on the card or than you have in your account. If you try to spend more, the transaction is denied. However, some bank and credit union accounts allow you to make overdrafts, and so do some prepaid cards. Overdrafts allow you to overspend, and then you must replace the money. Plus, you have to pay an overdraft fee for each transaction that overdraws your account.",
+        "treatment": "Generally, with prepaid cards and debit cards, you can't spend more than you have loaded on the card or than you have in your account. If you try to spend more, the transaction is denied. However, some bank and credit union accounts allow you to make overdrafts, and so do some prepaid cards. Overdrafts allow you to overspend, and then you must replace the money. Plus, you have to pay an overdraft fee for each transaction that overdraws your account."
+      }
+    },
+    {
+      "doc_id": "finance_lost_debit_card_report__doc5",
+      "prompt_id": "finance_lost_debit_card_report",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How can I avoid debit card overdrafts?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-can-i-avoid-debit-card-overdrafts-en-1053/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f0940d9c3c10efcb70c7312d9e179bbb19848c930b1bb8e1008fbc073b9cfd8a",
+        "retrieved_utc": "2026-11-17T08:06:04+00:00",
+        "method": "curl"
+      },
+      "words": 103,
+      "variants": {
+        "control": "Many banks and credit unions also offer an overdraft line of credit to consumers who qualify for such credit. If you qualify and overdraw your checking account, the overdraft will be covered by the line of credit. In essence, this gives you the ability to borrow money to cover an overdraft. There usually is a fee charged when this occurs. In addition, you will be charged interest on the amount you borrow to cover the overdraft. That fee and the interest charged are usually lower than the fee charged per overdrawn item in connection with a bank or credit union's standard overdraft practices.",
+        "treatment": "Many banks and credit unions also offer an overdraft line of credit to consumers who qualify for such credit. If you qualify and overdraw your checking account, the overdraft will be covered by the line of credit. In essence, this gives you the ability to borrow money to cover an overdraft. There usually is a fee charged when this occurs. In addition, you will be charged interest on the amount you borrow to cover the overdraft. That fee and the interest charged are usually lower than the fee charged per overdrawn item in connection with a bank or credit union's standard overdraft practices."
+      }
+    },
+    {
+      "doc_id": "credit_billing_dispute_window__target",
+      "prompt_id": "credit_billing_dispute_window",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "How do I dispute a charge on my credit card bill?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-a-charge-on-my-credit-card-bill-en-61/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8e5b0a5c5d052c192591e1101616479c21b98d53a19123daac0e38503c89305d",
+        "retrieved_utc": "2026-11-17T08:07:03+00:00",
+        "method": "curl"
+      },
+      "words": 87,
+      "variants": {
+        "control": "If you already paid the charge that you're disputing, you can still dispute it. But you probably won't get the money back until the credit card company has decided that you were right. If the card company finds you are correct, the charge must be removed from your bill. If the card company says that you are incorrect and the bill is correct, the card company must tell you why in writing. It must also tell you how much you owe and when your payment is due.",
+        "treatment": "If you already paid the charge that you're disputing, you can still dispute it. But you probably won't get the money back until the credit card company has decided that you were right. You must send a written billing error notice within 60 days after the charge appeared on your statement. If the card company says that you are incorrect and the bill is correct, the card company must tell you why in writing. It must also tell you how much you owe and when your payment is due."
+      },
+      "edit": {
+        "replaced": "If the card company finds you are correct, the charge must be removed from your bill.",
+        "inserted": "You must send a written billing error notice within 60 days after the charge appeared on your statement.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-a-charge-on-my-credit-card-bill-en-61/",
+            "agency": "CFPB",
+            "passage": "To protect your rights you must also send a written billing error notice to the card company within 60 calendar days after the charge appeared on your statement.",
+            "snapshot_sha256": "8e5b0a5c5d052c192591e1101616479c21b98d53a19123daac0e38503c89305d"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "credit_billing_dispute_window__doc1",
+      "prompt_id": "credit_billing_dispute_window",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How can I get a refund on a product or service I purchased with my credit card?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-can-i-get-a-refund-on-a-product-or-service-i-purchased-with-my-credit-card-en-1969/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "849bb6d2aa17abf3424f5d4705cb79b4d952a6015f707ff98e88cb74a22129a1",
+        "retrieved_utc": "2026-11-17T08:07:03+00:00",
+        "method": "curl"
+      },
+      "words": 99,
+      "variants": {
+        "control": "First, reach out to the company that sold the product or service to you. Explain the issue-for example, the product you received was defective or wasn't what you ordered. Ask the company to refund the money or undo the charge. The seller might fix the problem. If not, you have a few ways to proceed. When should I dispute a charge for something I bought with my credit card? Contact your credit card company to see whether you can dispute a charge. In some cases, the credit card company can reverse the charge. This is sometimes called a chargeback.",
+        "treatment": "First, reach out to the company that sold the product or service to you. Explain the issue-for example, the product you received was defective or wasn't what you ordered. Ask the company to refund the money or undo the charge. The seller might fix the problem. If not, you have a few ways to proceed. When should I dispute a charge for something I bought with my credit card? Contact your credit card company to see whether you can dispute a charge. In some cases, the credit card company can reverse the charge. This is sometimes called a chargeback."
+      }
+    },
+    {
+      "doc_id": "credit_billing_dispute_window__doc2",
+      "prompt_id": "credit_billing_dispute_window",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Can they charge me interest on a charge I told them I did not make?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/can-they-charge-me-interest-on-a-charge-i-told-them-i-did-not-make-en-63/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e5a7b671bfc4d29b2aa88c3c00f95f44bfeeb94fcc23b48e9babef73dd10e962",
+        "retrieved_utc": "2026-11-17T08:07:27+00:00",
+        "method": "curl"
+      },
+      "words": 64,
+      "variants": {
+        "control": "If you have given the card issuer written notice of the billing dispute, you do not have to pay the amount in dispute while the card issuer is investigating, and the card issuer cannot charge interest on that amount. In addition, if you pay your entire bill except for the disputed amount, you will still be entitled to a grace period on new purchases.",
+        "treatment": "If you have given the card issuer written notice of the billing dispute, you do not have to pay the amount in dispute while the card issuer is investigating, and the card issuer cannot charge interest on that amount. In addition, if you pay your entire bill except for the disputed amount, you will still be entitled to a grace period on new purchases."
+      }
+    },
+    {
+      "doc_id": "credit_billing_dispute_window__doc3",
+      "prompt_id": "credit_billing_dispute_window",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "When I went to use my credit card the store told me the charge was not authorized. What does that mean?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/when-i-went-to-use-my-credit-card-the-store-told-me-the-charge-was-not-147authorized148-what-does-that-mean-what-can-i-do-en-32/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7d5b948aad38802305122204289a38c6f585f93f695274bd61119a658331aa15",
+        "retrieved_utc": "2026-11-17T08:07:04+00:00",
+        "method": "curl"
+      },
+      "words": 99,
+      "variants": {
+        "control": "If a charge is not authorized, it usually means that there is a problem with the account or that you are at, near, or over your credit limit. Usually, when you use your credit card at a store the merchant obtains authorization from the card issuer. This authorization tells the merchant that your account is valid and that sufficient credit is available to cover the purchase. However, sometimes the merchant is unable to connect with your card issuer because of a technological glitch. You should call the card issuer to find out the reason the charge was not authorized.",
+        "treatment": "If a charge is not authorized, it usually means that there is a problem with the account or that you are at, near, or over your credit limit. Usually, when you use your credit card at a store the merchant obtains authorization from the card issuer. This authorization tells the merchant that your account is valid and that sufficient credit is available to cover the purchase. However, sometimes the merchant is unable to connect with your card issuer because of a technological glitch. You should call the card issuer to find out the reason the charge was not authorized."
+      }
+    },
+    {
+      "doc_id": "credit_billing_dispute_window__doc4",
+      "prompt_id": "credit_billing_dispute_window",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Can my credit card company change the terms of my account?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/can-my-credit-card-company-change-the-terms-of-my-account-en-70/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2070e9abdd100ea485ce477c06132189807c124a3f0ec27e06ffc89b3d42916c",
+        "retrieved_utc": "2026-11-17T08:07:04+00:00",
+        "method": "curl"
+      },
+      "words": 105,
+      "variants": {
+        "control": "For many changes, you have the right to opt out of the newly changed terms. However, if you opt out, the card company might close your account. If your account is closed, you do not have to pay the balance in full immediately after the account is closed, but you are still responsible for making payments until the balance is paid in full. Depending on the card company's policies, your minimum payment may increase. The amount of the new payment cannot be more than the amount needed to pay the balance off in five years or double your prior minimum periodic payment, whichever is higher.",
+        "treatment": "For many changes, you have the right to opt out of the newly changed terms. However, if you opt out, the card company might close your account. If your account is closed, you do not have to pay the balance in full immediately after the account is closed, but you are still responsible for making payments until the balance is paid in full. Depending on the card company's policies, your minimum payment may increase. The amount of the new payment cannot be more than the amount needed to pay the balance off in five years or double your prior minimum periodic payment, whichever is higher."
+      }
+    },
+    {
+      "doc_id": "credit_billing_dispute_window__doc5",
+      "prompt_id": "credit_billing_dispute_window",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How does my credit card company calculate the amount of interest I owe?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-does-my-credit-card-company-calculate-the-amount-of-interest-i-owe-en-51/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d4ec7b5c64dbca1f3b2af8abeb69bbb574c7bdaa5439978f6f105f85f6f4f5d3",
+        "retrieved_utc": "2026-11-17T08:07:04+00:00",
+        "method": "curl"
+      },
+      "words": 58,
+      "variants": {
+        "control": "Many issuers calculate the interest you owe daily, based on the average daily balance. The interest charged daily is called the daily periodic rate. Since interest is accruing daily, not monthly, this means that if you don't have a grace period, the sooner you pay off all or some of your balance, the less interest you will pay.",
+        "treatment": "Many issuers calculate the interest you owe daily, based on the average daily balance. The interest charged daily is called the daily periodic rate. Since interest is accruing daily, not monthly, this means that if you don't have a grace period, the sooner you pay off all or some of your balance, the less interest you will pay."
+      }
+    },
+    {
+      "doc_id": "cooking_fridge_temperature__target",
+      "prompt_id": "cooking_fridge_temperature",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": true,
+      "source": {
+        "agency": "FDA",
+        "title": "Refrigerator Thermometers - Cold Facts about Food Safety",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3a81b6ed0e547be876b34662d8f9741f4441ed7473fe468f2161b0c931e356ed",
+        "retrieved_utc": "2026-11-17T08:08:30+00:00",
+        "method": "curl"
+      },
+      "words": 66,
+      "variants": {
+        "control": "Many pathogenic organisms are present in raw or undercooked meat, poultry, seafood, milk, and eggs; unclean water; and even on fruits and vegetables. Keeping these foods properly chilled will slow the growth of bacteria; following the other recommended food handling practices (clean your hands, surfaces and produce, separate raw foods from ready-to-eat foods, and cook to safe temperatures) will further reduce your risk of getting sick.",
+        "treatment": "To ensure that your refrigerator is doing its job, it's important to keep its temperature at 40 °F or below. Keeping these foods properly chilled will slow the growth of bacteria; following the other recommended food handling practices (clean your hands, surfaces and produce, separate raw foods from ready-to-eat foods, and cook to safe temperatures) will further reduce your risk of getting sick."
+      },
+      "edit": {
+        "replaced": "Many pathogenic organisms are present in raw or undercooked meat, poultry, seafood, milk, and eggs; unclean water; and even on fruits and vegetables.",
+        "inserted": "To ensure that your refrigerator is doing its job, it's important to keep its temperature at 40 °F or below.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety",
+            "agency": "FDA",
+            "passage": "To ensure that your refrigerator is doing its job, it's important to keep its temperature at 40 °F or below; the freezer should be at 0 °F.",
+            "snapshot_sha256": "3a81b6ed0e547be876b34662d8f9741f4441ed7473fe468f2161b0c931e356ed"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "cooking_fridge_temperature__doc1",
+      "prompt_id": "cooking_fridge_temperature",
+      "format": "news",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Are You Storing Food Safely?",
+        "url": "https://www.fda.gov/consumers/consumer-updates/are-you-storing-food-safely",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c080129e32b4e67ebac25f216573167477d7f12c85c38041e301d59cb65cf1c3",
+        "retrieved_utc": "2026-11-17T08:09:24+00:00",
+        "method": "curl"
+      },
+      "words": 92,
+      "variants": {
+        "control": "Freezer burn does not mean food is unsafe. Freezer burn is a food-quality issue, not a food safety issue. It appears as grayish-brown leathery spots on frozen food. It can occur when food is not securely wrapped in air-tight packaging, and causes dry spots in foods. Refrigerator/freezer thermometers should be monitored. Refrigerator/freezer thermometers may be purchased in the housewares section of department, appliance, culinary, and grocery stores. Place one in your refrigerator and one in your freezer, in the front in an easy-to-read location. Check the temperature regularly-at least once a week.",
+        "treatment": "Freezer burn does not mean food is unsafe. Freezer burn is a food-quality issue, not a food safety issue. It appears as grayish-brown leathery spots on frozen food. It can occur when food is not securely wrapped in air-tight packaging, and causes dry spots in foods. Refrigerator/freezer thermometers should be monitored. Refrigerator/freezer thermometers may be purchased in the housewares section of department, appliance, culinary, and grocery stores. Place one in your refrigerator and one in your freezer, in the front in an easy-to-read location. Check the temperature regularly-at least once a week."
+      }
+    },
+    {
+      "doc_id": "cooking_fridge_temperature__doc2",
+      "prompt_id": "cooking_fridge_temperature",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "What You Need to Know About Egg Safety",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/what-you-need-know-about-egg-safety",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3fe08e4bee99bc1482a383844f8e83b5f4df6107ff678ff8ca28123271ae6d98",
+        "retrieved_utc": "2026-11-17T08:09:25+00:00",
+        "method": "curl"
+      },
+      "words": 64,
+      "variants": {
+        "control": "Use frozen eggs within 1 year. Eggs should not be frozen in their shells. To freeze whole eggs, beat yolks and whites together. Egg whites can also be frozen by themselves. Refrigerate leftover cooked egg dishes and use within 3 to 4 days. When refrigerating a large amount of a hot egg-containing leftover, divide it into several shallow containers so it will cool quickly.",
+        "treatment": "Use frozen eggs within 1 year. Eggs should not be frozen in their shells. To freeze whole eggs, beat yolks and whites together. Egg whites can also be frozen by themselves. Refrigerate leftover cooked egg dishes and use within 3 to 4 days. When refrigerating a large amount of a hot egg-containing leftover, divide it into several shallow containers so it will cool quickly."
+      }
+    },
+    {
+      "doc_id": "cooking_fridge_temperature__doc3",
+      "prompt_id": "cooking_fridge_temperature",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Selecting and Serving Produce Safely",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-produce-safely",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "164314a1ec0fe18efcc02eca98cc81a95ddc992aa4739f8f495e2892596f68c2",
+        "retrieved_utc": "2026-11-17T08:09:25+00:00",
+        "method": "curl"
+      },
+      "words": 51,
+      "variants": {
+        "control": "When buying pre-cut, bagged or packaged produce - such as half of a watermelon or bagged salad greens - choose only those items that are refrigerated or surrounded by ice. Bag fresh fruits and vegetables separately from raw meat, poultry, and seafood when packing them to take home from the market",
+        "treatment": "When buying pre-cut, bagged or packaged produce - such as half of a watermelon or bagged salad greens - choose only those items that are refrigerated or surrounded by ice. Bag fresh fruits and vegetables separately from raw meat, poultry, and seafood when packing them to take home from the market"
+      }
+    },
+    {
+      "doc_id": "cooking_fridge_temperature__doc4",
+      "prompt_id": "cooking_fridge_temperature",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Safe Food Handling",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling",
+        "rights": "US federal work, public domain (17 U.S.C. 105)",
+        "rights_evidence": null,
+        "snapshot_sha256": "4b09fb7de151a7cbec60a3fedaf497fbcd8a2ad5a4ad6b34614aff976ded9cf6",
+        "retrieved_utc": "2026-09-14T03:25:46+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "The food supply in the United States is among the safest in the world. However, when certain disease-causing bacteria or pathogens contaminate food, they can cause foodborne illness, often called \"food poisoning.\" The Federal government estimates that there are about 48 million cases of foodborne illness annually - the equivalent of sickening 1 in 6 Americans each year. And each year, these illnesses result in an estimated 128,000 hospitalizations and 3,000 deaths.",
+        "treatment": "The food supply in the United States is among the safest in the world. However, when certain disease-causing bacteria or pathogens contaminate food, they can cause foodborne illness, often called \"food poisoning.\" The Federal government estimates that there are about 48 million cases of foodborne illness annually - the equivalent of sickening 1 in 6 Americans each year. And each year, these illnesses result in an estimated 128,000 hospitalizations and 3,000 deaths."
+      }
+    },
+    {
+      "doc_id": "cooking_fridge_temperature__doc5",
+      "prompt_id": "cooking_fridge_temperature",
+      "format": "docs",
+      "domain": "cooking",
+      "is_target": false,
+      "source": {
+        "agency": "FDA",
+        "title": "Food Safety in Your Kitchen",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/food-safety-your-kitchen",
+        "rights": "US federal work (FDA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7ce2ff4b4c352172872043186df70fcf7e65003e57d7998e1b795e11c8d2c5c6",
+        "retrieved_utc": "2026-11-17T08:08:30+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "When you prepare meals and snacks for yourself, your family, and your friends, it is important to follow simple food safety tips to help prevent foodborne illness, also known as \"food poisoning.\" Whether you are a home cook, a professional chef, or a recipe writer, there are some easy steps you can take to help keep your food safe all the way from the grocery store to the kitchen table.",
+        "treatment": "When you prepare meals and snacks for yourself, your family, and your friends, it is important to follow simple food safety tips to help prevent foodborne illness, also known as \"food poisoning.\" Whether you are a home cook, a professional chef, or a recipe writer, there are some easy steps you can take to help keep your food safe all the way from the grocery store to the kitchen table."
+      }
+    },
+    {
+      "doc_id": "emergency_lightning_wait__target",
+      "prompt_id": "emergency_lightning_wait",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": true,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Lightning Safety",
+        "url": "https://www.weather.gov/safety/lightning",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5c635e029017cfd7c185536ca17a43167173ae1348e6984c03a2471b66c56f01",
+        "retrieved_utc": "2026-11-17T08:08:25+00:00",
+        "method": "curl"
+      },
+      "words": 96,
+      "variants": {
+        "control": "Lightning strikes the United States about 25 million times a year. Although most lightning occurs in the summer, people can be struck at any time of year. Lightning kills about 20 people in the United States each year, and hundreds more are severely injured. This website will teach you how to stay safe and offer insight into the science of lightning. You'll find animated books about lightning, safety tips for all kinds of situations, games for kids and resources for teachers. You'll learn about lightning victims and survivors. Explore our site, and come and visit often!",
+        "treatment": "Lightning strikes the United States about 25 million times a year. Although most lightning occurs in the summer, people can be struck at any time of year. Lightning kills about 20 people in the United States each year, and hundreds more are severely injured. Stay in safe shelter at least 30 minutes after you hear the last sound of thunder. You'll find animated books about lightning, safety tips for all kinds of situations, games for kids and resources for teachers. You'll learn about lightning victims and survivors. Explore our site, and come and visit often!"
+      },
+      "edit": {
+        "replaced": "This website will teach you how to stay safe and offer insight into the science of lightning.",
+        "inserted": "Stay in safe shelter at least 30 minutes after you hear the last sound of thunder.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.weather.gov/safety/lightning-tips",
+            "agency": "NOAA National Weather Service",
+            "passage": "Stay in safe shelter at least 30 minutes after you hear the last sound of thunder.",
+            "snapshot_sha256": "7cd26e083afe05cb3b1bf41e561225ec29b74e94d4bf67a532c83b8c6bfaf09d"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "emergency_lightning_wait__doc1",
+      "prompt_id": "emergency_lightning_wait",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Lightning Safety: When Thunder Roars, Go Indoors",
+        "url": "https://www.weather.gov/safety/lightning-safety",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7a47c296b43f6e8950601751898d3ac6c3c3d96fd6acff8b9fa8d2660e115070",
+        "retrieved_utc": "2026-11-17T08:08:25+00:00",
+        "method": "curl"
+      },
+      "words": 87,
+      "variants": {
+        "control": "There is no safe place outside when thunderstorms are in the area. If you hear thunder, you are likely within striking distance of the storm. Just remember, When Thunder Roars, Go Indoors. Too many people wait far too long to get to a safe place when thunderstorms approach. Unfortunately, these delayed actions lead to many of the lightning deaths and injuries in the United States. Below are tips on how to stay safe indoors and outdoors as well as brochures and other tools to teach lightning safety.",
+        "treatment": "There is no safe place outside when thunderstorms are in the area. If you hear thunder, you are likely within striking distance of the storm. Just remember, When Thunder Roars, Go Indoors. Too many people wait far too long to get to a safe place when thunderstorms approach. Unfortunately, these delayed actions lead to many of the lightning deaths and injuries in the United States. Below are tips on how to stay safe indoors and outdoors as well as brochures and other tools to teach lightning safety."
+      }
+    },
+    {
+      "doc_id": "emergency_lightning_wait__doc2",
+      "prompt_id": "emergency_lightning_wait",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Lightning Safety Tips and Resources",
+        "url": "https://www.weather.gov/safety/lightning-tips",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7cd26e083afe05cb3b1bf41e561225ec29b74e94d4bf67a532c83b8c6bfaf09d",
+        "retrieved_utc": "2026-11-17T08:08:26+00:00",
+        "method": "curl"
+      },
+      "words": 95,
+      "variants": {
+        "control": "Stay off corded phones, computers and other electrical equipment that put you in direct contact with electricity. Avoid plumbing, including sinks, baths and faucets. Stay away from windows and doors, and stay off porches. Do not lie on concrete floors, and do not lean against concrete walls. Last Resort Outdoor Risk Reduction Tips If you are caught outside with no safe shelter anywhere nearby the following actions may reduce your risk: Immediately get off elevated areas such as hills, mountain ridges or peaks Never lie flat on the ground Never shelter under an isolated tree",
+        "treatment": "Stay off corded phones, computers and other electrical equipment that put you in direct contact with electricity. Avoid plumbing, including sinks, baths and faucets. Stay away from windows and doors, and stay off porches. Do not lie on concrete floors, and do not lean against concrete walls. Last Resort Outdoor Risk Reduction Tips If you are caught outside with no safe shelter anywhere nearby the following actions may reduce your risk: Immediately get off elevated areas such as hills, mountain ridges or peaks Never lie flat on the ground Never shelter under an isolated tree"
+      }
+    },
+    {
+      "doc_id": "emergency_lightning_wait__doc3",
+      "prompt_id": "emergency_lightning_wait",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "How Lightning Strikes",
+        "url": "https://www.weather.gov/safety/lightning-struck",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f254f007363b587a2b5bc36bbf639f551f56bfe80997fd1d1f5f2d5ff2d6dfe0",
+        "retrieved_utc": "2026-11-17T08:08:27+00:00",
+        "method": "curl"
+      },
+      "words": 80,
+      "variants": {
+        "control": "Lightning can travel long distances in wires or other metal surfaces. Metal does not attract lightning, but it provides a path for the lightning to follow. Most indoor lightning casualties and some outdoor casualties are due to conduction. Whether inside or outside, anyone in contact with anything connected to metal wires, plumbing, or metal surfaces that extend outside is at risk. This includes anything that plugs into an electrical outlet, water faucets and showers, corded phones, and windows and doors.",
+        "treatment": "Lightning can travel long distances in wires or other metal surfaces. Metal does not attract lightning, but it provides a path for the lightning to follow. Most indoor lightning casualties and some outdoor casualties are due to conduction. Whether inside or outside, anyone in contact with anything connected to metal wires, plumbing, or metal surfaces that extend outside is at risk. This includes anything that plugs into an electrical outlet, water faucets and showers, corded phones, and windows and doors."
+      }
+    },
+    {
+      "doc_id": "emergency_lightning_wait__doc4",
+      "prompt_id": "emergency_lightning_wait",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Understanding Lightning",
+        "url": "https://www.weather.gov/safety/lightning-science",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6315a50a6ad2e4971ceee1bd43c2a0e3fb77e23c76ee8ad7bfbb426d96593f1f",
+        "retrieved_utc": "2026-11-17T08:08:26+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "Lightning is a giant spark of electricity in the atmosphere or between the atmosphere and the ground. In the initial stages of development, air acts as an insulator between the positive and negative charges in the cloud and between the cloud and the ground; however, when the differences in charges becomes too great, this insulating capacity of the air breaks down and there is a rapid discharge of electricity that we know as lightning. There's so much to learn about lightning.",
+        "treatment": "Lightning is a giant spark of electricity in the atmosphere or between the atmosphere and the ground. In the initial stages of development, air acts as an insulator between the positive and negative charges in the cloud and between the cloud and the ground; however, when the differences in charges becomes too great, this insulating capacity of the air breaks down and there is a rapid discharge of electricity that we know as lightning. There's so much to learn about lightning."
+      }
+    },
+    {
+      "doc_id": "emergency_lightning_wait__doc5",
+      "prompt_id": "emergency_lightning_wait",
+      "format": "blog",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Lightning Survivor Stories",
+        "url": "https://www.weather.gov/safety/lightning-survivor",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "39f033164ebcd0a7b4c01ff17818808437ed681f80656b64d3c1ed9df2400ba7",
+        "retrieved_utc": "2026-11-17T08:08:28+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "Lightning Strike and Electric Shock Survivors, International, (LSESSI) is a support group for survivors of lightning and electrical injury, their friends and families. The group provides information and support to survivors, their families and their physicians about the consequences of the injury and how to deal with it. They also have written materials. You can email the group at lightnin@nternet.net; phone 910-346-4708.",
+        "treatment": "Lightning Strike and Electric Shock Survivors, International, (LSESSI) is a support group for survivors of lightning and electrical injury, their friends and families. The group provides information and support to survivors, their families and their physicians about the consequences of the injury and how to deal with it. They also have written materials. You can email the group at lightnin@nternet.net; phone 910-346-4708."
+      }
+    },
+    {
+      "doc_id": "home_well_testing_frequency__target",
+      "prompt_id": "home_well_testing_frequency",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": true,
+      "source": {
+        "agency": "EPA",
+        "title": "Protect Your Home's Water",
+        "url": "https://www.epa.gov/privatewells/protect-your-homes-water",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1f4d26a2143d05415cd4a59b397b90e68827410d6644202eab54cfdb7e4b2237",
+        "retrieved_utc": "2026-11-17T08:08:28+00:00",
+        "method": "curl"
+      },
+      "words": 78,
+      "variants": {
+        "control": "Flooding, earth quakes, landslides, and other natural disasters can impact the safety of your drinking water by allowing contaminants to enter your private well system. If you suspect your drinking water well may be contaminated after a flood or another natural disaster, contact your local or state health department or environmental agency for advice on inspecting and testing your well. If possible, use a contractor with experience in servicing drinking water wells to inspect and test your well.",
+        "treatment": "Flooding, earth quakes, landslides, and other natural disasters can impact the safety of your drinking water by allowing contaminants to enter your private well system. If you suspect your drinking water well may be contaminated after a flood or another natural disaster, contact your local or state health department or environmental agency for advice on inspecting and testing your well. Test your private well annually for total coliform bacteria, nitrates, total dissolved solids, and pH levels."
+      },
+      "edit": {
+        "replaced": "If possible, use a contractor with experience in servicing drinking water wells to inspect and test your well.",
+        "inserted": "Test your private well annually for total coliform bacteria, nitrates, total dissolved solids, and pH levels.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.epa.gov/privatewells/protect-your-homes-water",
+            "agency": "EPA",
+            "passage": "Test your private well annually for total coliform bacteria, nitrates, total dissolved solids, and pH levels.",
+            "snapshot_sha256": "1f4d26a2143d05415cd4a59b397b90e68827410d6644202eab54cfdb7e4b2237"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "home_well_testing_frequency__doc1",
+      "prompt_id": "home_well_testing_frequency",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Learn About Private Water Wells",
+        "url": "https://www.epa.gov/privatewells/learn-about-private-water-wells",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3bb4031ec24fd5206d52f17eb5a3f42bae497118b3dcfd98f1adef8a6ac73852",
+        "retrieved_utc": "2026-11-17T08:08:28+00:00",
+        "method": "curl"
+      },
+      "words": 68,
+      "variants": {
+        "control": "Proper well location and construction are key to the safety of your well water. The well should be located so rainwater flows away from it. Rainwater can pick up harmful bacteria and chemicals on the land's surface. If this water pools near your well, it can seep into it and potentially cause health problems. The Center for Disease Control (CDC) has an excellent web page on well siting.",
+        "treatment": "Proper well location and construction are key to the safety of your well water. The well should be located so rainwater flows away from it. Rainwater can pick up harmful bacteria and chemicals on the land's surface. If this water pools near your well, it can seep into it and potentially cause health problems. The Center for Disease Control (CDC) has an excellent web page on well siting."
+      }
+    },
+    {
+      "doc_id": "home_well_testing_frequency__doc2",
+      "prompt_id": "home_well_testing_frequency",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Potential Well Water Contaminants and Their Impacts",
+        "url": "https://www.epa.gov/privatewells/potential-well-water-contaminants-and-their-impacts",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "aebbe88cd71c061a6a9f945fbe8c7e81e4737ccc2060618fcd690dca7353ee12",
+        "retrieved_utc": "2026-11-17T08:08:28+00:00",
+        "method": "curl"
+      },
+      "words": 76,
+      "variants": {
+        "control": "Drinking water can expose people to a variety of harmful pollutants and pathogens. Public water systems use water treatment and monitoring to protect consumers from such contaminants. Generally, private wells do not receive the same services that wells supplying the public do. Well owner's are responsible for protecting their drinking water. To do so, a well owner must be aware of their well's potential for contamination and the possible health effects those potential contaminants can have.",
+        "treatment": "Drinking water can expose people to a variety of harmful pollutants and pathogens. Public water systems use water treatment and monitoring to protect consumers from such contaminants. Generally, private wells do not receive the same services that wells supplying the public do. Well owner's are responsible for protecting their drinking water. To do so, a well owner must be aware of their well's potential for contamination and the possible health effects those potential contaminants can have."
+      }
+    },
+    {
+      "doc_id": "home_well_testing_frequency__doc3",
+      "prompt_id": "home_well_testing_frequency",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Protect Your Private Well",
+        "url": "https://www.epa.gov/privatewells/protect-your-private-well",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7ed243f43bd2fb4f39800b3dc7eed20ad50c444a9a48bc5a57f0bc0c8273d9f8",
+        "retrieved_utc": "2026-11-17T08:08:30+00:00",
+        "method": "curl"
+      },
+      "words": 69,
+      "variants": {
+        "control": "Many Americans receive their drinking water from a private well. These wells are not regulated by EPA or required to follow EPA's standards. If you use a private well, there are steps you can take to protect your water and ensure the safety of your drinking water. This info-graphic shows home-owners steps they can take to keep their protect their water, remediate their wells, and prevent drinking water contamination.",
+        "treatment": "Many Americans receive their drinking water from a private well. These wells are not regulated by EPA or required to follow EPA's standards. If you use a private well, there are steps you can take to protect your water and ensure the safety of your drinking water. This info-graphic shows home-owners steps they can take to keep their protect their water, remediate their wells, and prevent drinking water contamination."
+      }
+    },
+    {
+      "doc_id": "home_well_testing_frequency__doc4",
+      "prompt_id": "home_well_testing_frequency",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Basic Information about Lead in Drinking Water",
+        "url": "https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1707286d662eed1845a4f88b3636fffddbcf4dc503042caae5f2615760e609e2",
+        "retrieved_utc": "2026-11-11T04:56:31+00:00",
+        "method": "curl"
+      },
+      "words": 84,
+      "variants": {
+        "control": "Homes may have internal plumbing materials containing lead. Since you cannot see, taste, or smell lead dissolved in water, testing is the only sure way of telling whether there are harmful quantities of lead in your drinking water. A list of certified laboratories are available from your state or local drinking water authority. Testing costs between $20 and $100. Contact your water supplier as they may have useful information, including whether the service connector used in your home or area is made of lead.",
+        "treatment": "Homes may have internal plumbing materials containing lead. Since you cannot see, taste, or smell lead dissolved in water, testing is the only sure way of telling whether there are harmful quantities of lead in your drinking water. A list of certified laboratories are available from your state or local drinking water authority. Testing costs between $20 and $100. Contact your water supplier as they may have useful information, including whether the service connector used in your home or area is made of lead."
+      }
+    },
+    {
+      "doc_id": "home_well_testing_frequency__doc5",
+      "prompt_id": "home_well_testing_frequency",
+      "format": "docs",
+      "domain": "home_diy",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Emergency Disinfection of Drinking Water",
+        "url": "https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7cfae08b0c1531e5efe754d6a5331c8b420b10524d3e2f3cedaef22ffea4c809",
+        "retrieved_utc": "2026-11-11T01:47:36+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "In an emergency situation where regular water service has been interrupted - like a hurricane, flood, or water pipe breakage - local authorities may recommend using only bottled water, boiled water, or disinfected water until regular water service is restored. The instructions below show you how to boil and disinfect water to kill most disease-causing microorganisms that may be present in the water. However, boiling or disinfection will not destroy other contaminants, such as heavy metals, salts, and most other chemicals.",
+        "treatment": "In an emergency situation where regular water service has been interrupted - like a hurricane, flood, or water pipe breakage - local authorities may recommend using only bottled water, boiled water, or disinfected water until regular water service is restored. The instructions below show you how to boil and disinfect water to kill most disease-causing microorganisms that may be present in the water. However, boiling or disinfection will not destroy other contaminants, such as heavy metals, salts, and most other chemicals."
+      }
+    },
+    {
+      "doc_id": "health_sleep_older_adults__target",
+      "prompt_id": "health_sleep_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": true,
+      "source": {
+        "agency": "NIH (NIA)",
+        "title": "Sleep and Older Adults",
+        "url": "https://www.nia.nih.gov/health/sleep/sleep-and-older-adults",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c1a4138a44c929fb6867150d0b36c7684b163b5fecf8ca3f839ca0ee95c0fd59",
+        "retrieved_utc": "2026-11-17T08:10:30+00:00",
+        "method": "curl"
+      },
+      "words": 77,
+      "variants": {
+        "control": "Sleep apnea causes you to stop breathing for a few seconds repeatedly during sleep. Throat muscles relax during sleep, and in people with sleep apnea, this relaxation of the muscles blocks their airway. Snoring can be a sign, but not everyone who snores has sleep apnea. To treat sleep apnea, a continuous-positive-airway-pressure (CPAP) device may be used while sleeping. Sleeping in a position that keeps airways open or getting a dental device or surgery also may help.",
+        "treatment": "Sleep apnea causes you to stop breathing for a few seconds repeatedly during sleep. Older adults need about the same amount of sleep as all adults - seven to nine hours each night. Snoring can be a sign, but not everyone who snores has sleep apnea. To treat sleep apnea, a continuous-positive-airway-pressure (CPAP) device may be used while sleeping. Sleeping in a position that keeps airways open or getting a dental device or surgery also may help."
+      },
+      "edit": {
+        "replaced": "Throat muscles relax during sleep, and in people with sleep apnea, this relaxation of the muscles blocks their airway.",
+        "inserted": "Older adults need about the same amount of sleep as all adults - seven to nine hours each night.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.nia.nih.gov/health/sleep/sleep-and-older-adults",
+            "agency": "NIH (NIA)",
+            "passage": "Older adults need about the same amount of sleep as all adults - seven to nine hours each night.",
+            "snapshot_sha256": "c1a4138a44c929fb6867150d0b36c7684b163b5fecf8ca3f839ca0ee95c0fd59"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "health_sleep_older_adults__doc1",
+      "prompt_id": "health_sleep_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH (NHLBI)",
+        "title": "What Are Sleep Deprivation and Deficiency?",
+        "url": "https://www.nhlbi.nih.gov/health/sleep-deprivation",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9314c2f38b4ad462bc39b2dd7d455279c29c5fe890889ae8644bd1d036b7ab2a",
+        "retrieved_utc": "2026-11-17T08:11:06+00:00",
+        "method": "curl"
+      },
+      "words": 85,
+      "variants": {
+        "control": "Sleeping is a basic human need, like eating, drinking, and breathing. Like these other needs, sleeping is vital for good health and well-being throughout your lifetime. According to the Centers for Disease Control and Prevention, about 1 in 3 adults in the United States reported not getting enough rest or sleep every day. Nearly 40% of adults report falling asleep during the day without meaning to at least once a month. Also, an estimated 50 to 70 million Americans have chronic, or ongoing, sleep disorders.",
+        "treatment": "Sleeping is a basic human need, like eating, drinking, and breathing. Like these other needs, sleeping is vital for good health and well-being throughout your lifetime. According to the Centers for Disease Control and Prevention, about 1 in 3 adults in the United States reported not getting enough rest or sleep every day. Nearly 40% of adults report falling asleep during the day without meaning to at least once a month. Also, an estimated 50 to 70 million Americans have chronic, or ongoing, sleep disorders."
+      }
+    },
+    {
+      "doc_id": "health_sleep_older_adults__doc2",
+      "prompt_id": "health_sleep_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH (NIA)",
+        "title": "Sleep Problems and Menopause: What Can I Do?",
+        "url": "https://www.nia.nih.gov/health/sleep-problems-and-menopause-what-can-i-do",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7ba99ec30ec01c709ce95231c27445c747c49be6c354db0256c16ca082e3a0e4",
+        "retrieved_utc": "2026-11-17T08:10:43+00:00",
+        "method": "curl"
+      },
+      "words": 56,
+      "variants": {
+        "control": "Not getting enough sleep can affect all areas of life. Lack of sleep can make you feel irritable or depressed, might cause you to be more forgetful than normal, and could lead to more falls or accidents. And research now suggests that waking from sleep itself may trigger hot flashes, rather than the other way around.",
+        "treatment": "Not getting enough sleep can affect all areas of life. Lack of sleep can make you feel irritable or depressed, might cause you to be more forgetful than normal, and could lead to more falls or accidents. And research now suggests that waking from sleep itself may trigger hot flashes, rather than the other way around."
+      }
+    },
+    {
+      "doc_id": "health_sleep_older_adults__doc3",
+      "prompt_id": "health_sleep_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH (NHLBI)",
+        "title": "What Is Insomnia?",
+        "url": "https://www.nhlbi.nih.gov/health/insomnia",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "dcc7e1919b607b77eefa38bee04bb0e61579386dd57bd194331365b5a9c02660",
+        "retrieved_utc": "2026-11-17T08:11:08+00:00",
+        "method": "curl"
+      },
+      "words": 102,
+      "variants": {
+        "control": "Insomnia is a common sleep disorder. With insomnia, you may have trouble falling asleep, staying asleep, or getting good quality sleep. This happens even if you have the time and the right environment to sleep well. Insomnia can get in the way of your daily activities and may make you feel sleepy during the day. Short-term insomnia may be caused by stress or changes in your schedule or environment. It can last for a few days or weeks. Chronic (long-term) insomnia occurs 3 or more nights a week, lasts more than 3 months, and cannot be fully explained by another health problem.",
+        "treatment": "Insomnia is a common sleep disorder. With insomnia, you may have trouble falling asleep, staying asleep, or getting good quality sleep. This happens even if you have the time and the right environment to sleep well. Insomnia can get in the way of your daily activities and may make you feel sleepy during the day. Short-term insomnia may be caused by stress or changes in your schedule or environment. It can last for a few days or weeks. Chronic (long-term) insomnia occurs 3 or more nights a week, lasts more than 3 months, and cannot be fully explained by another health problem."
+      }
+    },
+    {
+      "doc_id": "health_sleep_older_adults__doc4",
+      "prompt_id": "health_sleep_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH (NHLBI)",
+        "title": "Why Is Sleep Important?",
+        "url": "https://www.nhlbi.nih.gov/health/sleep/why-sleep-important",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f23693aba0bb7f546bd589a3928522f14b8c666f9ff752b9ab8316766ced2516",
+        "retrieved_utc": "2026-11-17T08:11:07+00:00",
+        "method": "curl"
+      },
+      "words": 60,
+      "variants": {
+        "control": "During sleep, you breathe less often and less deeply and take in less oxygen. These changes can cause problems in people who have health problems such as asthma or chronic obstructive pulmonary disease (COPD). Asthma symptoms are usually worse during early morning sleep. Likewise, breathing problems in people who have lung diseases such as COPD can become worse during sleep.",
+        "treatment": "During sleep, you breathe less often and less deeply and take in less oxygen. These changes can cause problems in people who have health problems such as asthma or chronic obstructive pulmonary disease (COPD). Asthma symptoms are usually worse during early morning sleep. Likewise, breathing problems in people who have lung diseases such as COPD can become worse during sleep."
+      }
+    },
+    {
+      "doc_id": "health_sleep_older_adults__doc5",
+      "prompt_id": "health_sleep_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH (NIA)",
+        "title": "Tips for Getting and Staying Active as You Age",
+        "url": "https://www.nia.nih.gov/health/exercise-and-physical-activity/tips-getting-and-staying-active-you-age",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c7396b7884f2bd77d433ae348cedff27a8db446fe23116d7199a25990dc2f0fb",
+        "retrieved_utc": "2026-11-17T08:11:26+00:00",
+        "method": "curl"
+      },
+      "words": 82,
+      "variants": {
+        "control": "It's important to increase your amount of physical activity gradually over a period of weeks to months. To reduce the risk of injury, start with lower-intensity activities that are appropriate for your current fitness level. Then increase the frequency, intensity, and duration of activities over time. Working your way up slowly and steadily can also help to build confidence, motivation, and a regular routine. When there is a break in your routine, perhaps due to illness or travel, work back up gradually.",
+        "treatment": "It's important to increase your amount of physical activity gradually over a period of weeks to months. To reduce the risk of injury, start with lower-intensity activities that are appropriate for your current fitness level. Then increase the frequency, intensity, and duration of activities over time. Working your way up slowly and steadily can also help to build confidence, motivation, and a regular routine. When there is a break in your routine, perhaps due to illness or travel, work back up gradually."
+      }
+    }
+  ],
+  "corpus_sha256": "b46beac66274ad0e"
+}

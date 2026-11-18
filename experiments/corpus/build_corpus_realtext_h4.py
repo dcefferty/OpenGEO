@@ -251,6 +251,106 @@ NEW_SOURCES = {
     "https://www.medicare.gov/what-medicare-covers/your-medicare-coverage-choices/whats-medicare": {
         "agency": "CMS (Medicare.gov)", "title": "Parts of Medicare", "format": "docs",
         "rights": "US federal work (CMS), 17 U.S.C. 105"},
+    # batch 6 (2026-11-17)
+    "https://www.consumerfinance.gov/ask-cfpb/how-do-i-get-my-money-back-after-i-discover-an-unauthorized-transaction-or-money-missing-from-my-bank-account-en-1017/": {
+        "agency": "CFPB", "title": "How do I get my money back after I discover an unauthorized transaction or money missing from my bank account?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/am-i-responsible-for-unauthorized-charges-if-my-credit-cards-are-lost-or-stolen-en-29/": {
+        "agency": "CFPB", "title": "Am I responsible for unauthorized charges if my credit cards are lost or stolen?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-if-my-government-benefit-card-or-payroll-card-is-lost-or-stolen-or-if-i-discover-unauthorized-charges-en-405/": {
+        "agency": "CFPB", "title": "What should I do if my prepaid card or PIN is lost or stolen or I see unauthorized charges?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-an-unauthorized-use-of-a-credit-card-en-26/": {
+        "agency": "CFPB", "title": "What is an unauthorized use of a credit card?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/how-are-prepaid-cards-debit-cards-and-credit-cards-different-en-433/": {
+        "agency": "CFPB", "title": "How are prepaid cards, debit cards, and credit cards different?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/how-can-i-avoid-debit-card-overdrafts-en-1053/": {
+        "agency": "CFPB", "title": "How can I avoid debit card overdrafts?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-a-charge-on-my-credit-card-bill-en-61/": {
+        "agency": "CFPB", "title": "How do I dispute a charge on my credit card bill?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/how-can-i-get-a-refund-on-a-product-or-service-i-purchased-with-my-credit-card-en-1969/": {
+        "agency": "CFPB", "title": "How can I get a refund on a product or service I purchased with my credit card?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/can-they-charge-me-interest-on-a-charge-i-told-them-i-did-not-make-en-63/": {
+        "agency": "CFPB", "title": "Can they charge me interest on a charge I told them I did not make?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/when-i-went-to-use-my-credit-card-the-store-told-me-the-charge-was-not-147authorized148-what-does-that-mean-what-can-i-do-en-32/": {
+        "agency": "CFPB", "title": "When I went to use my credit card the store told me the charge was not authorized. What does that mean?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/can-my-credit-card-company-change-the-terms-of-my-account-en-70/": {
+        "agency": "CFPB", "title": "Can my credit card company change the terms of my account?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/how-does-my-credit-card-company-calculate-the-amount-of-interest-i-owe-en-51/": {
+        "agency": "CFPB", "title": "How does my credit card company calculate the amount of interest I owe?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety": {
+        "agency": "FDA", "title": "Refrigerator Thermometers - Cold Facts about Food Safety", "format": "docs",
+        "rights": "US federal work (FDA), 17 U.S.C. 105"},
+    "https://www.fda.gov/consumers/consumer-updates/are-you-storing-food-safely": {
+        "agency": "FDA", "title": "Are You Storing Food Safely?", "format": "news",
+        "rights": "US federal work (FDA), 17 U.S.C. 105"},
+    "https://www.fda.gov/food/buy-store-serve-safe-food/what-you-need-know-about-egg-safety": {
+        "agency": "FDA", "title": "What You Need to Know About Egg Safety", "format": "docs",
+        "rights": "US federal work (FDA), 17 U.S.C. 105"},
+    "https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-produce-safely": {
+        "agency": "FDA", "title": "Selecting and Serving Produce Safely", "format": "docs",
+        "rights": "US federal work (FDA), 17 U.S.C. 105"},
+    "https://www.fda.gov/food/buy-store-serve-safe-food/food-safety-your-kitchen": {
+        "agency": "FDA", "title": "Food Safety in Your Kitchen", "format": "docs",
+        "rights": "US federal work (FDA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/lightning": {
+        "agency": "NOAA National Weather Service", "title": "Lightning Safety", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/lightning-tips": {
+        "agency": "NOAA National Weather Service", "title": "Lightning Safety Tips and Resources", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/lightning-safety": {
+        "agency": "NOAA National Weather Service", "title": "Lightning Safety: When Thunder Roars, Go Indoors", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/lightning-struck": {
+        "agency": "NOAA National Weather Service", "title": "How Lightning Strikes", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/lightning-science": {
+        "agency": "NOAA National Weather Service", "title": "Understanding Lightning", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/lightning-survivor": {
+        "agency": "NOAA National Weather Service", "title": "Lightning Survivor Stories", "format": "blog",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.epa.gov/privatewells/protect-your-homes-water": {
+        "agency": "EPA", "title": "Protect Your Home's Water", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/privatewells/learn-about-private-water-wells": {
+        "agency": "EPA", "title": "Learn About Private Water Wells", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/privatewells/potential-well-water-contaminants-and-their-impacts": {
+        "agency": "EPA", "title": "Potential Well Water Contaminants and Their Impacts", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/privatewells/protect-your-private-well": {
+        "agency": "EPA", "title": "Protect Your Private Well", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/sleep/sleep-and-older-adults": {
+        "agency": "NIH (NIA)", "title": "Sleep and Older Adults", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/sleep-problems-and-menopause-what-can-i-do": {
+        "agency": "NIH (NIA)", "title": "Sleep Problems and Menopause: What Can I Do?", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/exercise-and-physical-activity/tips-getting-and-staying-active-you-age": {
+        "agency": "NIH (NIA)", "title": "Tips for Getting and Staying Active as You Age", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nhlbi.nih.gov/health/sleep-deprivation": {
+        "agency": "NIH (NHLBI)", "title": "What Are Sleep Deprivation and Deficiency?", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nhlbi.nih.gov/health/insomnia": {
+        "agency": "NIH (NHLBI)", "title": "What Is Insomnia?", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nhlbi.nih.gov/health/sleep/why-sleep-important": {
+        "agency": "NIH (NHLBI)", "title": "Why Is Sleep Important?", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
 }
 
 # --------------------------------------------------------------------------- batch 1
@@ -1397,7 +1497,240 @@ BATCH_5 = [
     },
 ]
 
-BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4, 5: BATCH_5}
+
+# --------------------------------------------------------------------------- batch 6
+#
+# Built 2026-11-17, after batch 5's screen (pre-registration, Deviations, 2026-11-17):
+# batch 5 kept 0 of 6, with three of its questions within 0.02 of the band, which reads
+# as variation between questions rather than a failed construction. Batch 6 therefore
+# keeps the batch 4 construction unchanged: every target is a span of the agency's
+# consumer page on the question's own subject, on a paragraph about an unrelated aspect
+# of it. Three non-targets sit closer to the question; two are tangential.
+
+BATCH_6 = [
+    {
+        "prompt_id": "finance_lost_debit_card_report",
+        "domain": "finance",
+        "question": "How soon must you tell your bank about a lost or stolen debit card to "
+                    "limit your liability to $50?",
+        "answer": r"\btwo\b|\b2\b|48 hours|\bhours?\b",
+        "target": {   # CFPB's unauthorized-transaction answer: temporary credit exceptions
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-get-my-money-back-after-i-discover-an-unauthorized-transaction-or-money-missing-from-my-bank-account-en-1017/",
+            "start": "In some situations, however, your bank or credit union does not have to "
+                     "issue a temporary credit.",
+            "end": None,
+            "replace": "For example, it can require you to provide written confirmation of "
+                       "the error if you initially provided the information by telephone.",
+            "with": "If you report a lost or stolen debit card within two business days, you "
+                    "can't be held responsible for more than $50.",
+            "figures": [("https://www.consumerfinance.gov/ask-cfpb/how-do-i-get-my-money-back-after-i-discover-an-unauthorized-transaction-or-money-missing-from-my-bank-account-en-1017/",
+                         "If you notify your bank or credit union within two business days of "
+                         "discovering the loss or theft of the card, the bank or credit union "
+                         "can't hold you responsible for more than the amount of any "
+                         "unauthorized transactions or $50, whichever is less.")],
+        },
+        "others": [
+            # closer: lost cards and unauthorized use, the reporting window withheld
+            ("https://www.consumerfinance.gov/ask-cfpb/am-i-responsible-for-unauthorized-charges-if-my-credit-cards-are-lost-or-stolen-en-29/",
+             "Check your credit card agreement to review your rights regarding unauthorized",
+             "you generally have no liability for unauthorized use."),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-if-my-government-benefit-card-or-payroll-card-is-lost-or-stolen-or-if-i-discover-unauthorized-charges-en-405/",
+             "Contact the card provider right away if your card or your PIN is lost",
+             "check your card provider's website or your cardholder agreement to find out "
+             "the specifics."),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-an-unauthorized-use-of-a-credit-card-en-26/",
+             "For example, if you lose your card and someone finds it and uses it",
+             "the card company may issue you a new credit card."),
+            # tangential: how debit cards work, overdraft
+            ("https://www.consumerfinance.gov/ask-cfpb/how-are-prepaid-cards-debit-cards-and-credit-cards-different-en-433/",
+             "Generally, with prepaid cards and debit cards, you can't spend more", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/how-can-i-avoid-debit-card-overdrafts-en-1053/",
+             "Many banks and credit unions also offer an overdraft line of credit", None),
+        ],
+    },
+    {
+        "prompt_id": "credit_billing_dispute_window",
+        "domain": "credit",
+        "question": "How long do you have to send your credit card company a written notice "
+                    "disputing a billing error?",
+        "answer": r"\b60\b|sixty|\bdays?\b|\bweeks?\b|\bmonths?\b",
+        "target": {   # CFPB's dispute answer: what happens after the dispute
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-a-charge-on-my-credit-card-bill-en-61/",
+            "start": "If you already paid the charge that you're disputing",
+            "end": "It must also tell you how much you owe and when your payment is due.",
+            "replace": "If the card company finds you are correct, the charge must be removed "
+                       "from your bill.",
+            "with": "You must send a written billing error notice within 60 days after the "
+                    "charge appeared on your statement.",
+            "figures": [("https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-a-charge-on-my-credit-card-bill-en-61/",
+                         "To protect your rights you must also send a written billing error "
+                         "notice to the card company within 60 calendar days after the charge "
+                         "appeared on your statement.")],
+        },
+        "others": [
+            # closer: disputes, chargebacks and declined charges, the window withheld
+            ("https://www.consumerfinance.gov/ask-cfpb/how-can-i-get-a-refund-on-a-product-or-service-i-purchased-with-my-credit-card-en-1969/",
+             "First, reach out to the company that sold the product or service to you.",
+             "This is sometimes called a chargeback."),
+            ("https://www.consumerfinance.gov/ask-cfpb/can-they-charge-me-interest-on-a-charge-i-told-them-i-did-not-make-en-63/",
+             "If you have given the card issuer written notice of the billing dispute",
+             "you will still be entitled to a grace period on new purchases."),
+            ("https://www.consumerfinance.gov/ask-cfpb/when-i-went-to-use-my-credit-card-the-store-told-me-the-charge-was-not-147authorized148-what-does-that-mean-what-can-i-do-en-32/",
+             "If a charge is not authorized, it usually means",
+             "to find out the reason the charge was not authorized."),
+            # tangential: changed terms, interest
+            ("https://www.consumerfinance.gov/ask-cfpb/can-my-credit-card-company-change-the-terms-of-my-account-en-70/",
+             "For many changes, you have the right to opt out of the newly changed terms.",
+             None),
+            ("https://www.consumerfinance.gov/ask-cfpb/how-does-my-credit-card-company-calculate-the-amount-of-interest-i-owe-en-51/",
+             "Many issuers calculate the interest you owe daily", None),
+        ],
+    },
+    {
+        "prompt_id": "cooking_fridge_temperature",
+        "domain": "cooking",
+        "question": "What temperature should you keep your refrigerator at to keep food "
+                    "safe?",
+        "answer": r"°|degrees?|fahrenheit|celsius|\b40\b",
+        "target": {   # FDA's refrigerator-thermometer page: pathogens in raw foods
+            "url": "https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety",
+            "start": "Many pathogenic organisms are present in raw or undercooked meat",
+            "end": None,
+            "replace": "Many pathogenic organisms are present in raw or undercooked meat, "
+                       "poultry, seafood, milk, and eggs; unclean water; and even on fruits "
+                       "and vegetables.",
+            "with": "To ensure that your refrigerator is doing its job, it's important to "
+                    "keep its temperature at 40 °F or below.",
+            "figures": [("https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety",
+                         "To ensure that your refrigerator is doing its job, it's important to "
+                         "keep its temperature at 40 °F or below; the freezer should be at "
+                         "0 °F.")],
+        },
+        "others": [
+            # closer: refrigerator storage and thermometers, the setting withheld
+            ("https://www.fda.gov/consumers/consumer-updates/are-you-storing-food-safely",
+             "Freezer burn does not mean food is unsafe.",
+             "Check the temperature regularly-at least once a week."),
+            ("https://www.fda.gov/food/buy-store-serve-safe-food/what-you-need-know-about-egg-safety",
+             "Use frozen eggs within 1 year.",
+             "divide it into several shallow containers so it will cool quickly."),
+            ("https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-produce-safely",
+             "When buying pre-cut, bagged or packaged produce",
+             "when packing them to take home from the market"),
+            # tangential: foodborne illness, kitchen safety
+            ("https://www.fda.gov/food/buy-store-serve-safe-food/safe-food-handling",
+             "The food supply in the United States is among the safest in the world.", None),
+            ("https://www.fda.gov/food/buy-store-serve-safe-food/food-safety-your-kitchen",
+             "When you prepare meals and snacks for yourself, your family, and your friends",
+             None),
+        ],
+    },
+    {
+        "prompt_id": "emergency_lightning_wait",
+        "domain": "emergency_prep",
+        "question": "How long should you wait after the last thunder before going back "
+                    "outside?",
+        "answer": r"\bminutes?\b|\bhours?\b|\b30\b|thirty|half an hour",
+        "target": {   # NWS lightning safety home page: strike statistics, site overview
+            "url": "https://www.weather.gov/safety/lightning",
+            "start": "Lightning strikes the United States about 25 million times a year.",
+            "end": "Explore our site, and come and visit often!",
+            "replace": "This website will teach you how to stay safe and offer insight into "
+                       "the science of lightning.",
+            "with": "Stay in safe shelter at least 30 minutes after you hear the last sound "
+                    "of thunder.",
+            "figures": [("https://www.weather.gov/safety/lightning-tips",
+                         "Stay in safe shelter at least 30 minutes after you hear the last "
+                         "sound of thunder.")],
+        },
+        "others": [
+            # closer: sheltering from lightning, the waiting time withheld
+            ("https://www.weather.gov/safety/lightning-safety",
+             "There is no safe place outside when thunderstorms are in the area.", None),
+            ("https://www.weather.gov/safety/lightning-tips",
+             "Stay off corded phones, computers and other electrical equipment",
+             "Never shelter under an isolated tree"),
+            ("https://www.weather.gov/safety/lightning-struck",
+             "Lightning can travel long distances in wires or other metal surfaces.", None),
+            # tangential: how lightning forms, survivors
+            ("https://www.weather.gov/safety/lightning-science",
+             "Lightning is a giant spark of electricity in the atmosphere", None),
+            ("https://www.weather.gov/safety/lightning-survivor",
+             "Lightning Strike and Electric Shock Survivors, International", None),
+        ],
+    },
+    {
+        "prompt_id": "home_well_testing_frequency",
+        "domain": "home_diy",
+        "question": "How often should you test a private drinking water well?",
+        "answer": r"\byears?\b|annual\w*|\byearly\b|\bmonths?\b|every (?:\w+ )?(?:years?|"
+                  r"months?)|once a",
+        "target": {   # EPA's private-well page: wells after a natural disaster
+            "url": "https://www.epa.gov/privatewells/protect-your-homes-water",
+            "start": "Flooding, earth quakes, landslides, and other natural disasters",
+            "end": None,
+            "replace": "If possible, use a contractor with experience in servicing drinking "
+                       "water wells to inspect and test your well.",
+            "with": "Test your private well annually for total coliform bacteria, nitrates, "
+                    "total dissolved solids, and pH levels.",
+            "figures": [("https://www.epa.gov/privatewells/protect-your-homes-water",
+                         "Test your private well annually for total coliform bacteria, "
+                         "nitrates, total dissolved solids, and pH levels.")],
+        },
+        "others": [
+            # closer: well siting, contaminants and owner responsibility, frequency withheld
+            ("https://www.epa.gov/privatewells/learn-about-private-water-wells",
+             "Proper well location and construction are key to the safety", None),
+            ("https://www.epa.gov/privatewells/potential-well-water-contaminants-and-their-impacts",
+             "Drinking water can expose people to a variety of harmful pollutants", None),
+            ("https://www.epa.gov/privatewells/protect-your-private-well",
+             "Many Americans receive their drinking water from a private well.",
+             "and prevent drinking water contamination."),
+            # tangential: lead in tap water, emergency disinfection
+            ("https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water",
+             "Homes may have internal plumbing materials containing lead.", None),
+            ("https://www.epa.gov/ground-water-and-drinking-water/emergency-disinfection-drinking-water",
+             "In an emergency situation where regular water service has been interrupted",
+             None),
+        ],
+    },
+    {
+        "prompt_id": "health_sleep_older_adults",
+        "domain": "health",
+        "question": "How many hours of sleep do older adults need each night?",
+        "answer": r"\bhours?\b|\b[5-9]\b|\bseven\b|\beight\b|\bnine\b",
+        "target": {   # NIA's sleep and older adults page: sleep apnea
+            "url": "https://www.nia.nih.gov/health/sleep/sleep-and-older-adults",
+            "start": "Sleep apnea causes you to stop breathing for a few seconds",
+            "end": None,
+            "replace": "Throat muscles relax during sleep, and in people with sleep apnea, "
+                       "this relaxation of the muscles blocks their airway.",
+            "with": "Older adults need about the same amount of sleep as all adults - seven "
+                    "to nine hours each night.",
+            "figures": [("https://www.nia.nih.gov/health/sleep/sleep-and-older-adults",
+                         "Older adults need about the same amount of sleep as all adults - "
+                         "seven to nine hours each night.")],
+        },
+        "others": [
+            # closer: not getting enough sleep, insomnia, the amount withheld
+            ("https://www.nhlbi.nih.gov/health/sleep-deprivation",
+             "Sleeping is a basic human need, like eating, drinking, and breathing.",
+             "have chronic, or ongoing, sleep disorders."),
+            ("https://www.nia.nih.gov/health/sleep-problems-and-menopause-what-can-i-do",
+             "Not getting enough sleep can affect all areas of life.", None),
+            ("https://www.nhlbi.nih.gov/health/insomnia",
+             "Insomnia is a common sleep disorder.",
+             "cannot be fully explained by another health problem."),
+            # tangential: breathing during sleep, staying active
+            ("https://www.nhlbi.nih.gov/health/sleep/why-sleep-important",
+             "During sleep, you breathe less often and less deeply", None),
+            ("https://www.nia.nih.gov/health/exercise-and-physical-activity/tips-getting-and-staying-active-you-age",
+             "It's important to increase your amount of physical activity gradually", None),
+        ],
+    },
+]
+
+BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4, 5: BATCH_5, 6: BATCH_6}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.
