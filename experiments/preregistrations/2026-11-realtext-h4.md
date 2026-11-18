@@ -573,3 +573,32 @@ the dispute one drops "calendar"), and neither changes the figure. Rough edges a
 pages render them, identical in both arms: one heading inside the lightning tips span, and in
 the fridge target the next sentence's "these foods" now follows the inserted sentence rather
 than the list it referred to.
+
+**2026-11-18 — batch 6 screened: 2 of 6 kept.** Ran the batch 6 screen as specified under
+Screening, on `corpus/corpus_realtext_h4_b6.json` (sha `b46beac66274ad0e`), after the batch 6
+entry above was merged and with the repo owner's go-ahead. That was 720 control-only calls
+with 0 errors, costing $0.82. No treatment row exists. Output is in
+`results/screen_realtext_h4_b6.jsonl`.
+
+| question | pooled | claude | deepseek | gemini | gpt | grok | cites/ans | decision |
+|---|---|---|---|---|---|---|---|---|
+| `finance_lost_debit_card_report` | 0.083 | 0.00* | 0.12 | 0.25 | 0.00* | 0.04* | 2.29 | DISCARD |
+| `credit_billing_dispute_window` | 0.642 | 0.00* | 0.79 | 0.88 | 0.54 | 1.00* | 2.23 | KEEP |
+| `cooking_fridge_temperature` | 0.917 | 0.67 | 1.00* | 1.00* | 0.92 | 1.00* | 2.54 | DISCARD |
+| `emergency_lightning_wait` | 0.175 | 0.00* | 0.33 | 0.25 | 0.08 | 0.21 | 1.98 | DISCARD |
+| `home_well_testing_frequency` | 1.000 | 1.00* | 1.00* | 1.00* | 1.00* | 1.00* | 3.64 | DISCARD |
+| `health_sleep_older_adults` | 0.575 | 0.08 | 0.96* | 0.75 | 0.33 | 0.75 | 3.22 | KEEP |
+
+\* pinned on that engine (at most 1, or at least 23, of 24 runs cite the target).
+
+`KEPT` is now **13 of the 25** needed. Two discards failed at the floor and two at the ceiling.
+The well-testing target was cited in every run; its page is EPA's main private-well page, and
+every non-target was a narrower well page. Screen-level no-cite, reported but not gating under
+the 2026-11-08 decision: `anthropic/claude-haiku-4.5` 10.4% (15 of 144), `x-ai/grok-4.3` 0.7%,
+the other three 0%.
+
+**Projection.** Two batches remain. Reaching 25 would need all 12 of their questions, against
+a combined yield of 13 of 36 so far, so the round will not reach the floor. At that yield the
+last two batches would keep about 4 more, ending near 17. With 13 kept, the threshold for a
+sub-floor estimate (12) is already met; whether to run one remains the repo owner's decision,
+logged here before any treatment call. The stopping rule is unchanged by this entry.

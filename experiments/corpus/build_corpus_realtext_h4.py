@@ -1751,6 +1751,9 @@ KEPT = [
     "cooking_chicken_safe_temp",
     "credit_free_report_frequency",
     # batch 5, screened 2026-11-17 (results/screen_realtext_h4_b5.jsonl): 0 of 6 kept
+    # batch 6, screened 2026-11-18 (results/screen_realtext_h4_b6.jsonl): 2 of 6 kept
+    "credit_billing_dispute_window",
+    "health_sleep_older_adults",
 ]
 
 
