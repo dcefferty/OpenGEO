@@ -602,3 +602,30 @@ a combined yield of 13 of 36 so far, so the round will not reach the floor. At t
 last two batches would keep about 4 more, ending near 17. With 13 kept, the threshold for a
 sub-floor estimate (12) is already met; whether to run one remains the repo owner's decision,
 logged here before any treatment call. The stopping rule is unchanged by this entry.
+
+**2026-11-18 — batch 7 built, before any batch 7 data.** After the batch 6 entry above, the
+repo owner chose to continue screening through batches 7 and 8 rather than stop at 13.
+`corpus/corpus_realtext_h4_b7.json`, version `realtext-h4-screen-b7`, sha `38b9838d0f94fef5`,
+comes from the same builder under the same checks. The batch 1 to 6 corpora are unchanged.
+The screen command is the one under Screening with `b1` replaced by `b7`. Thirty-one new
+snapshots are added under `corpus/sources/` (CFPB, NOAA National Weather Service, OSHA and
+SEC Investor.gov pages); four more pages were already held. There is no construction change:
+every target is a span of the agency's consumer page on the question's own subject, taken from
+a paragraph about an unrelated aspect of it, with three closer non-targets and two tangential
+ones.
+
+| question | target (control is a verbatim span of) | inserted sentence | figures from |
+|---|---|---|---|
+| `credit_debt_collector_call_limit` How many times can a debt collector call you about a debt before it is presumed to be harassment? | CFPB, How often can a debt collector call me? (student loans and other channels) | "The debt collector is presumed to violate the law if they place a telephone call to you about a particular debt more than seven times within a seven-day period, or within seven days after a telephone conversation with you about it." | the same CFPB page |
+| `emergency_flood_water_depth` How many inches of moving water does it take to knock a person off their feet? | NWS, Flood Safety: During a Flood (evacuation and electrical safety) | "It only takes 6 inches of moving water to knock you off your feet." | the same NWS page |
+| `workplace_heat_new_worker_first_day` Under OSHA's guidance, how much of a normal workday should a new worker spend working in the heat on their first day? | OSHA, Heat - Protecting New Workers (no worker can be assumed fit) | "New workers should work only 20 percent of the normal duration on their first day." | the same OSHA page |
+| `health_heat_stroke_temperature` What body temperature is a sign of heat stroke? | NWS, Heat-Related Illnesses (heat cramps) | "A body temperature above 103°F is a symptom of heat stroke." | the same NWS page |
+| `realestate_pmi_down_payment` How big a down payment do you need to avoid private mortgage insurance on a conventional loan? | CFPB, What is private mortgage insurance? (who PMI protects) | "When you pay 20 percent down, PMI is not required with a conventional loan." | the same CFPB page |
+| `finance_sipc_coverage_limit` How much does SIPC protect per customer if a brokerage firm fails? | SEC Investor.gov, SIPC glossary entry (non-member firms) | "Your cash and securities may be protected up to $500,000, including $250,000 for cash." | the same Investor.gov page |
+
+Every figure comes from the target's own page. Every page used is an agency's own work; SIPC
+itself is not a government entity, but the page quoted is the SEC's. Two inserted sentences
+paraphrase their source rather than quote it: the debt collector one joins the page's lead-in
+and its two bulleted conditions into one sentence, and the heat stroke one restates "body
+temperature above 103°F" from the page's heat stroke symptom list. Neither changes a figure.
+The PMI target page was already a tangential non-target in batch 5, for a different question.
