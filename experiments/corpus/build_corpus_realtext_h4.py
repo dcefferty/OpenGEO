@@ -1417,6 +1417,7 @@ KEPT = [
     "emergency_water_per_person",
     "cooking_chicken_safe_temp",
     "credit_free_report_frequency",
+    # batch 5, screened 2026-11-17 (results/screen_realtext_h4_b5.jsonl): 0 of 6 kept
 ]
 
 

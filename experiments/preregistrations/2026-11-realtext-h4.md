@@ -511,3 +511,36 @@ penalty" heading inside the IRS target, and one FDIC non-target that opens mid-a
 many, the answer is 'no'…"). The Medicare target sits closer to its question than the other
 five, because that page is entirely about penalties: its unrelated aspect is the Part A
 penalty.
+
+**2026-11-17 — batch 5 screened: 0 of 6 kept.** Ran the batch 5 screen as specified under
+Screening, on `corpus/corpus_realtext_h4_b5.json` (sha `7c5833d13f6a7f68`), after the batch 5
+entry above was merged and with the repo owner's go-ahead. That was 720 control-only calls
+with 0 errors, costing $0.73. No treatment row exists. Output is in
+`results/screen_realtext_h4_b5.jsonl`.
+
+| question | pooled | claude | deepseek | gemini | gpt | grok | cites/ans | decision |
+|---|---|---|---|---|---|---|---|---|
+| `realestate_closing_disclosure_days` | 0.242 | 0.00* | 0.08 | 0.62 | 0.04* | 0.46 | 2.27 | DISCARD |
+| `home_lead_paint_year` | 0.058 | 0.00* | 0.00* | 0.00* | 0.00* | 0.29 | 2.55 | DISCARD |
+| `taxes_failure_to_file_penalty` | 0.758 | 0.42 | 0.71 | 1.00* | 0.67 | 1.00* | 3.08 | DISCARD |
+| `home_mold_humidity` | 0.233 | 0.00* | 0.04* | 0.71 | 0.04* | 0.38 | 2.26 | DISCARD |
+| `medicare_partb_penalty` | 0.108 | 0.00* | 0.12 | 0.29 | 0.00* | 0.12 | 2.13 | DISCARD |
+| `retirement_earliest_claim_age` | 0.992 | 0.96* | 1.00* | 1.00* | 1.00* | 1.00* | 2.63 | DISCARD |
+
+\* pinned on that engine (at most 1, or at least 23, of 24 runs cite the target).
+
+`KEPT` is unchanged at **11 of the 25** needed. Four discards failed at the floor and two at the
+ceiling. Three of the six fell within 0.02 of the band (0.242, 0.233 and 0.758). The gate is
+applied as written, with no rounding. The same construction that kept 4 of 6 in batch 4 kept
+none here. That makes batch 4's result look like variation between questions rather than an
+effect of the construction, though two batches cannot separate the two.
+
+Screen-level no-cite, reported but not gating under the 2026-11-08 decision:
+`deepseek/deepseek-chat` 15.3% (22 of 144), `anthropic/claude-haiku-4.5` 12.5% (18 of 144),
+`openai/gpt-5.4-mini` 1.4%, `google/gemini-3-flash-preview` 0%, `x-ai/grok-4.3` 0%.
+
+**Projection.** Three batches remain. Reaching 25 would need 14 of their 18 questions, against
+a combined yield of 11 of 30 so far. At that yield they would keep about 7 more, ending near
+18. Under the stopping rule the round would not then run as a finding. With 12 or more kept it
+may run as a sub-floor estimate, at the repo owner's decision, logged here before any
+treatment call. The stopping rule is unchanged by this entry.
