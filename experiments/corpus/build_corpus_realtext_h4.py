@@ -351,6 +351,100 @@ NEW_SOURCES = {
     "https://www.nhlbi.nih.gov/health/sleep/why-sleep-important": {
         "agency": "NIH (NHLBI)", "title": "Why Is Sleep Important?", "format": "docs",
         "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    # batch 7 (2026-11-18)
+    "https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/": {
+        "agency": "CFPB", "title": "How often can a debt collector call me?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/are-there-laws-that-limit-what-debt-collectors-can-say-or-do-en-329/": {
+        "agency": "CFPB", "title": "Are there laws that limit what debt collectors can say or do?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-when-a-debt-collector-contacts-me-en-1695/": {
+        "agency": "CFPB", "title": "What should I do when a debt collector contacts me?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-may-happen-if-i-ignore-or-avoid-a-debt-collector-en-1427/": {
+        "agency": "CFPB", "title": "What may happen if I ignore or avoid a debt collector?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-collector-and-why-are-they-contacting-me-en-330/": {
+        "agency": "CFPB", "title": "What is a debt collector and why are they contacting me?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-the-best-way-to-negotiate-a-settlement-with-a-debt-collector-en-1447/": {
+        "agency": "CFPB", "title": "What is the best way to negotiate a settlement with a debt collector?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/flood-during": {
+        "agency": "NOAA National Weather Service", "title": "Flood Safety: During a Flood", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/flood-after": {
+        "agency": "NOAA National Weather Service", "title": "Flood Safety: After a Flood", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/flood-watch-warning": {
+        "agency": "NOAA National Weather Service", "title": "Understand Flood Alerts", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/flood-hazards": {
+        "agency": "NOAA National Weather Service", "title": "Flood Hazards", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/flood-turn-around-dont-drown": {
+        "agency": "NOAA National Weather Service", "title": "Turn Around Don't Drown", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/flood-before": {
+        "agency": "NOAA National Weather Service", "title": "Flood Safety: Before a Flood", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.osha.gov/heat-exposure/protecting-new-workers": {
+        "agency": "OSHA", "title": "Heat - Protecting New Workers", "format": "docs",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105"},
+    "https://www.osha.gov/heat-exposure/illness-first-aid": {
+        "agency": "OSHA", "title": "Heat - Heat-Related Illnesses and First Aid", "format": "docs",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105"},
+    "https://www.osha.gov/heat-exposure/personal-risk-factors": {
+        "agency": "OSHA", "title": "Heat - Personal Risk Factors", "format": "docs",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105"},
+    "https://www.osha.gov/heat-exposure/water-rest-shade": {
+        "agency": "OSHA", "title": "Heat - Water. Rest. Shade.", "format": "docs",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105"},
+    "https://www.osha.gov/heat-exposure/hazards": {
+        "agency": "OSHA", "title": "Heat - Heat Hazard Recognition", "format": "docs",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105"},
+    "https://www.osha.gov/heat-exposure/planning": {
+        "agency": "OSHA", "title": "Heat - Planning and Supervision", "format": "docs",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/heat-illness": {
+        "agency": "NOAA National Weather Service", "title": "Heat-Related Illnesses", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/heat": {
+        "agency": "NOAA National Weather Service", "title": "Heat Safety", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/heat-survivors": {
+        "agency": "NOAA National Weather Service", "title": "Heat Survivor Stories", "format": "blog",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/heat-during": {
+        "agency": "NOAA National Weather Service", "title": "Heat Safety Tips and Resources", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/heat-ww": {
+        "agency": "NOAA National Weather Service", "title": "Heat Watch vs. Warning", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/heat-index": {
+        "agency": "NOAA National Weather Service", "title": "Heat Forecast Tools", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/when-can-i-remove-private-mortgage-insurance-pmi-from-my-loan-en-202/": {
+        "agency": "CFPB", "title": "When can I remove private mortgage insurance (PMI) from my loan?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-an-fha-loan-en-121/": {
+        "agency": "CFPB", "title": "What is a loan-to-value ratio?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.investor.gov/introduction-investing/investing-basics/glossary/securities-investor-protection-corporation-sipc": {
+        "agency": "SEC (Investor.gov)", "title": "Securities Investor Protection Corporation (SIPC)", "format": "reference",
+        "rights": "US federal work (SEC), 17 U.S.C. 105"},
+    "https://www.investor.gov/introduction-investing/investing-basics/what-risk": {
+        "agency": "SEC (Investor.gov)", "title": "What is Risk?", "format": "docs",
+        "rights": "US federal work (SEC), 17 U.S.C. 105"},
+    "https://www.investor.gov/protect-your-investments": {
+        "agency": "SEC (Investor.gov)", "title": "Protect Your Investments", "format": "docs",
+        "rights": "US federal work (SEC), 17 U.S.C. 105"},
+    "https://www.investor.gov/introduction-investing/getting-started/working-investment-professional": {
+        "agency": "SEC (Investor.gov)", "title": "Working with an Investment Professional", "format": "docs",
+        "rights": "US federal work (SEC), 17 U.S.C. 105"},
+    "https://www.investor.gov/introduction-investing/investing-basics/investment-products/stocks": {
+        "agency": "SEC (Investor.gov)", "title": "Stocks", "format": "docs",
+        "rights": "US federal work (SEC), 17 U.S.C. 105"},
 }
 
 # --------------------------------------------------------------------------- batch 1
@@ -1730,7 +1824,239 @@ BATCH_6 = [
     },
 ]
 
-BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4, 5: BATCH_5, 6: BATCH_6}
+
+# --------------------------------------------------------------------------- batch 7
+#
+# Built 2026-11-18, after batch 6's screen (pre-registration, Deviations, 2026-11-18),
+# which kept 2 of 6, and the repo owner's choice to continue through batch 8. The batch 4
+# construction is unchanged: every target is a span of the agency's consumer page on the
+# question's own subject, on a paragraph about an unrelated aspect of it. Three
+# non-targets sit closer to the question; two are tangential.
+
+BATCH_7 = [
+    {
+        "prompt_id": "credit_debt_collector_call_limit",
+        "domain": "credit",
+        "question": "How many times can a debt collector call you about a debt before it "
+                    "is presumed to be harassment?",
+        "answer": r"\bseven\b|\b7\b|\bweek\w*|\bdays?\b|\bonce\b|\btwice\b|"
+                  r"\btimes (?:a|per|in|within)\b",
+        "target": {   # CFPB's call-frequency answer: student loans and other channels
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+            "start": "The limits generally apply per debt but in the case of student loan debt",
+            "end": "which have other protections.",
+            "replace": "The limits generally apply per debt but in the case of student loan "
+                       "debt - depending on the facts - multiple debts could be counted "
+                       "together as one \"particular debt,\" so the limits would apply to "
+                       "those debts as a group.",
+            "with": "The debt collector is presumed to violate the law if they place a "
+                    "telephone call to you about a particular debt more than seven times "
+                    "within a seven-day period, or within seven days after a telephone "
+                    "conversation with you about it.",
+            "figures": [
+                ("https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+                 "The debt collector is presumed to violate the law if they place a "
+                 "telephone call to you about a particular debt:"),
+                ("https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+                 "More than seven times within a seven-day period, or"),
+                ("https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+                 "Within seven days after engaging in a telephone conversation with you "
+                 "about the particular debt."),
+            ],
+        },
+        "others": [
+            # closer: when collectors may call, harassment, the call limit withheld
+            ("https://www.consumerfinance.gov/ask-cfpb/are-there-laws-that-limit-what-debt-collectors-can-say-or-do-en-329/",
+             "Time and place. Generally, debt collectors may not contact you", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-when-a-debt-collector-contacts-me-en-1695/",
+             "While talking with a debt collector can be helpful",
+             "a more convenient time or place you specify."),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-may-happen-if-i-ignore-or-avoid-a-debt-collector-en-1427/",
+             "There are federal protections to prohibit harassment",
+             "including filing a lawsuit against you."),
+            # tangential: who collectors are, negotiating a settlement
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-collector-and-why-are-they-contacting-me-en-330/",
+             "A debt collector is generally a person or company that regularly collects",
+             "or debt buyers."),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-the-best-way-to-negotiate-a-settlement-with-a-debt-collector-en-1447/",
+             "First, review your current financial obligations.", None),
+        ],
+    },
+    {
+        "prompt_id": "emergency_flood_water_depth",
+        "domain": "emergency_prep",
+        "question": "How many inches of moving water does it take to knock a person off "
+                    "their feet?",
+        "answer": r"\binch\w*|\bfeet\b|\bfoot\b|\b6\b|\bsix\b|\b12\b|\btwelve\b|\b2\b|"
+                  r"\btwo\b",
+        "target": {   # NWS flood safety, during a flood: evacuation and electrical safety
+            "url": "https://www.weather.gov/safety/flood-during",
+            "start": "Obey Evacuation Orders: If told to evacuate, do so immediately.",
+            "end": "Stay out of water that may have electricity in it!",
+            "replace": "If you see sparks or hear buzzing, crackling, snapping or popping "
+                       "noises--get out!",
+            "with": "It only takes 6 inches of moving water to knock you off your feet.",
+            "figures": [("https://www.weather.gov/safety/flood-during",
+                         "It only takes 6 inches of moving water to knock you off your feet.")],
+        },
+        "others": [
+            # closer: flood waters, warnings and flash floods, the depth withheld
+            ("https://www.weather.gov/safety/flood-after",
+             "Avoid Flood Waters: Standing water hides many dangers", None),
+            ("https://www.weather.gov/safety/flood-watch-warning",
+             "Flash Flood Warning: Take Action!", None),
+            ("https://www.weather.gov/safety/flood-hazards",
+             "There are many reasons that flash floods occur", None),
+            # tangential: road signs, flood insurance
+            ("https://www.weather.gov/safety/flood-turn-around-dont-drown",
+             "Incident management signs are a specific type of Temporary Traffic Control",
+             None),
+            ("https://www.weather.gov/safety/flood-before",
+             "3. Since standard homeowners insurance doesn't cover flooding", None),
+        ],
+    },
+    {
+        "prompt_id": "workplace_heat_new_worker_first_day",
+        "domain": "workplace_safety",
+        "question": "Under OSHA's guidance, how much of a normal workday should a new "
+                    "worker spend working in the heat on their first day?",
+        "answer": r"\d+ ?(%|percent)|\bpercent\b|\bhours?\b|\bminutes?\b|\bfifth\b|"
+                  r"\bhalf\b",
+        "target": {   # OSHA's protecting-new-workers page: no worker can be assumed fit
+            "url": "https://www.osha.gov/heat-exposure/protecting-new-workers",
+            "start": "Employers should not assume that new workers can work safely",
+            "end": None,
+            "replace": "It is not possible to know which new workers are at risk.",
+            "with": "New workers should work only 20 percent of the normal duration on "
+                    "their first day.",
+            "figures": [("https://www.osha.gov/heat-exposure/protecting-new-workers",
+                         "New workers should work only 20 percent of the normal duration on "
+                         "their first day.")],
+        },
+        "others": [
+            # closer: new workers' risk, personal factors, breaks, the schedule withheld
+            ("https://www.osha.gov/heat-exposure/illness-first-aid",
+             "Workers who are new to working in warm environments are at increased risk",
+             None),
+            ("https://www.osha.gov/heat-exposure/personal-risk-factors",
+             "Employers should recognize that not all workers tolerate heat the same way.",
+             "whether they can work safely in the heat."),
+            ("https://www.osha.gov/heat-exposure/water-rest-shade",
+             "When heat stress is high, employers should require workers to take breaks.",
+             None),
+            # tangential: measuring heat, the heat plan
+            ("https://www.osha.gov/heat-exposure/hazards",
+             "Workplace environmental heat should be measured on-site using WBGT meters.",
+             None),
+            ("https://www.osha.gov/heat-exposure/planning",
+             "Heat conditions can change rapidly and management commitment", None),
+        ],
+    },
+    {
+        "prompt_id": "health_heat_stroke_temperature",
+        "domain": "health",
+        "question": "What body temperature is a sign of heat stroke?",
+        "answer": r"°|degrees?|fahrenheit|celsius|\b10[0-9]\b",
+        "target": {   # NWS heat illness page: heat cramps
+            "url": "https://www.weather.gov/safety/heat-illness",
+            "start": "Heat cramps may be the first sign of heat-related illness",
+            "end": "then stop giving water.",
+            "replace": "Symptoms: Painful muscle cramps and spasms usually in legs and "
+                       "abdomen.",
+            "with": "A body temperature above 103°F is a symptom of heat stroke.",
+            "figures": [("https://www.weather.gov/safety/heat-illness",
+                         "Symptoms: Throbbing headache; confusion; slurred speech; nausea; "
+                         "dizziness; body temperature above 103°F; hot, red, dry or damp "
+                         "skin; rapid and strong pulse; fainting; loss of consciousness.")],
+        },
+        "others": [
+            # closer: who is vulnerable, a survivor's account, staying cool, no temperature
+            ("https://www.weather.gov/safety/heat",
+             "Heat can be very taxing on the body", None),
+            ("https://www.weather.gov/safety/heat-survivors",
+             "When I was on vacation in North Carolina's Outer Banks", None),
+            ("https://www.weather.gov/safety/heat-during",
+             "Eat light, cool, easy-to-digest foods such as fruit or salads.",
+             "before increasing consumption of fluids."),
+            # tangential: heat warnings, heat stress tools
+            ("https://www.weather.gov/safety/heat-ww",
+             "Extreme Heat Warning-Take Action!", None),
+            ("https://www.weather.gov/safety/heat-index",
+             "The National Weather Service (NWS) has multiple tools to assess", None),
+        ],
+    },
+    {
+        "prompt_id": "realestate_pmi_down_payment",
+        "domain": "real_estate",
+        "question": "How big a down payment do you need to avoid private mortgage "
+                    "insurance on a conventional loan?",
+        "answer": r"\d+ ?(%|percent)|\bpercent\b|\bfifth\b",
+        "target": {   # CFPB's PMI answer: who PMI protects
+            "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/",
+            "start": "PMI is arranged by the lender and provided by private insurance companies.",
+            "end": "But it can increase the cost of your loan.",
+            "replace": "PMI can help you qualify for a loan that you might not otherwise be "
+                       "able to get.",
+            "with": "When you pay 20 percent down, PMI is not required with a conventional "
+                    "loan.",
+            "figures": [("https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/",
+                         "When you pay 20 percent down, PMI is not required with a "
+                         "conventional loan.")],
+        },
+        "others": [
+            # closer: mortgage insurance, removing PMI, down payment costs, threshold withheld
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-mortgage-insurance-and-how-does-it-work-en-1953/",
+             "If you get a conventional loan, your lender could arrange for mortgage "
+             "insurance", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/when-can-i-remove-private-mortgage-insurance-pmi-from-my-loan-en-202/",
+             "You have the right to remove PMI for many mortgages",
+             "contact your servicer. If your lender is paying for your mortgage insurance, "
+             "different rules apply."),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-kind-of-down-payment-do-i-need-how-does-the-amount-of-down-payment-i-make-affect-the-terms-of-my-mortgage-loan-en-120/",
+             "Don't forget to factor in all the upfront costs", None),
+            # tangential: loan-to-value, closing costs
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-an-fha-loan-en-121/",
+             "Lenders will use the LTV to determine how much you can borrow", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-are-closing-costs-en-1845/",
+             "Even if you don't pay the mortgage closing fees directly out of pocket", None),
+        ],
+    },
+    {
+        "prompt_id": "finance_sipc_coverage_limit",
+        "domain": "finance",
+        "question": "How much does SIPC protect per customer if a brokerage firm fails?",
+        "answer": r"\$|\b500\b|\b250\b|thousand|dollars?|million",
+        "target": {   # SEC's SIPC glossary entry: non-member firms
+            "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/securities-investor-protection-corporation-sipc",
+            "start": "SIPC Protection does not apply when investors place their cash",
+            "end": "to find out whether a firm is a member of SIPC:",
+            "replace": "Always make sure that the brokerage firm and its clearing firm are "
+                       "members of SIPC.",
+            "with": "Your cash and securities may be protected up to $500,000, including "
+                    "$250,000 for cash.",
+            "figures": [("https://www.investor.gov/introduction-investing/investing-basics/glossary/securities-investor-protection-corporation-sipc",
+                         "then your cash and securities held by the brokerage firm may be "
+                         "protected up to $500,000, including a $250,000 limit for cash.")],
+        },
+        "others": [
+            # closer: company failure, monitoring accounts, reading statements, no amount
+            ("https://www.investor.gov/introduction-investing/investing-basics/what-risk",
+             "With a stock, you are purchasing a piece of ownership in a company.", None),
+            ("https://www.investor.gov/protect-your-investments",
+             "Monitor your investment accounts for any suspicious activity.", None),
+            ("https://www.investor.gov/introduction-investing/getting-started/working-investment-professional",
+             "If you have a brokerage or advisory account, read every statement promptly",
+             None),
+            # tangential: stock fees, savings
+            ("https://www.investor.gov/introduction-investing/investing-basics/investment-products/stocks",
+             "Buying and selling stocks entails fees.", None),
+            ("https://www.investor.gov/introduction-investing/investing-basics/save-and-invest/save-rainy-day",
+             "Savings are usually put into safe places", None),
+        ],
+    },
+]
+
+BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4, 5: BATCH_5, 6: BATCH_6, 7: BATCH_7}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.

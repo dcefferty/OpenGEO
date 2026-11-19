@@ -1,0 +1,1007 @@
+{
+  "corpus_version": "realtext-h4-screen-b7",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 7: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "blog",
+    "docs",
+    "reference"
+  ],
+  "domains": [
+    "credit",
+    "emergency_prep",
+    "finance",
+    "health",
+    "real_estate",
+    "workplace_safety"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "credit_debt_collector_call_limit",
+      "domain": "credit",
+      "question": "How many times can a debt collector call you about a debt before it is presumed to be harassment?",
+      "target_doc_id": "credit_debt_collector_call_limit__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "credit_debt_collector_call_limit__target",
+        "credit_debt_collector_call_limit__doc1",
+        "credit_debt_collector_call_limit__doc2",
+        "credit_debt_collector_call_limit__doc3",
+        "credit_debt_collector_call_limit__doc4",
+        "credit_debt_collector_call_limit__doc5"
+      ],
+      "answer_pattern": "\\bseven\\b|\\b7\\b|\\bweek\\w*|\\bdays?\\b|\\bonce\\b|\\btwice\\b|\\btimes (?:a|per|in|within)\\b"
+    },
+    {
+      "prompt_id": "emergency_flood_water_depth",
+      "domain": "emergency_prep",
+      "question": "How many inches of moving water does it take to knock a person off their feet?",
+      "target_doc_id": "emergency_flood_water_depth__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "emergency_flood_water_depth__target",
+        "emergency_flood_water_depth__doc1",
+        "emergency_flood_water_depth__doc2",
+        "emergency_flood_water_depth__doc3",
+        "emergency_flood_water_depth__doc4",
+        "emergency_flood_water_depth__doc5"
+      ],
+      "answer_pattern": "\\binch\\w*|\\bfeet\\b|\\bfoot\\b|\\b6\\b|\\bsix\\b|\\b12\\b|\\btwelve\\b|\\b2\\b|\\btwo\\b"
+    },
+    {
+      "prompt_id": "workplace_heat_new_worker_first_day",
+      "domain": "workplace_safety",
+      "question": "Under OSHA's guidance, how much of a normal workday should a new worker spend working in the heat on their first day?",
+      "target_doc_id": "workplace_heat_new_worker_first_day__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "workplace_heat_new_worker_first_day__target",
+        "workplace_heat_new_worker_first_day__doc1",
+        "workplace_heat_new_worker_first_day__doc2",
+        "workplace_heat_new_worker_first_day__doc3",
+        "workplace_heat_new_worker_first_day__doc4",
+        "workplace_heat_new_worker_first_day__doc5"
+      ],
+      "answer_pattern": "\\d+ ?(%|percent)|\\bpercent\\b|\\bhours?\\b|\\bminutes?\\b|\\bfifth\\b|\\bhalf\\b"
+    },
+    {
+      "prompt_id": "health_heat_stroke_temperature",
+      "domain": "health",
+      "question": "What body temperature is a sign of heat stroke?",
+      "target_doc_id": "health_heat_stroke_temperature__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "health_heat_stroke_temperature__target",
+        "health_heat_stroke_temperature__doc1",
+        "health_heat_stroke_temperature__doc2",
+        "health_heat_stroke_temperature__doc3",
+        "health_heat_stroke_temperature__doc4",
+        "health_heat_stroke_temperature__doc5"
+      ],
+      "answer_pattern": "°|degrees?|fahrenheit|celsius|\\b10[0-9]\\b"
+    },
+    {
+      "prompt_id": "realestate_pmi_down_payment",
+      "domain": "real_estate",
+      "question": "How big a down payment do you need to avoid private mortgage insurance on a conventional loan?",
+      "target_doc_id": "realestate_pmi_down_payment__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "realestate_pmi_down_payment__target",
+        "realestate_pmi_down_payment__doc1",
+        "realestate_pmi_down_payment__doc2",
+        "realestate_pmi_down_payment__doc3",
+        "realestate_pmi_down_payment__doc4",
+        "realestate_pmi_down_payment__doc5"
+      ],
+      "answer_pattern": "\\d+ ?(%|percent)|\\bpercent\\b|\\bfifth\\b"
+    },
+    {
+      "prompt_id": "finance_sipc_coverage_limit",
+      "domain": "finance",
+      "question": "How much does SIPC protect per customer if a brokerage firm fails?",
+      "target_doc_id": "finance_sipc_coverage_limit__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "finance_sipc_coverage_limit__target",
+        "finance_sipc_coverage_limit__doc1",
+        "finance_sipc_coverage_limit__doc2",
+        "finance_sipc_coverage_limit__doc3",
+        "finance_sipc_coverage_limit__doc4",
+        "finance_sipc_coverage_limit__doc5"
+      ],
+      "answer_pattern": "\\$|\\b500\\b|\\b250\\b|thousand|dollars?|million"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "credit_debt_collector_call_limit__target",
+      "prompt_id": "credit_debt_collector_call_limit",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "How often can a debt collector call me?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7da576ffe07df7fa859e4a37c7cab86041ef448b9080ed3dbd2433d653cc3601",
+        "retrieved_utc": "2026-11-18T18:17:47+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "The limits generally apply per debt but in the case of student loan debt - depending on the facts - multiple debts could be counted together as one \"particular debt,\" so the limits would apply to those debts as a group. Keep in mind that these presumptions only apply to telephone calls placed by the debt collector to you and don't apply to other forms of communication, including text messages, emails, in-person interactions, or social media messages, which have other protections.",
+        "treatment": "The debt collector is presumed to violate the law if they place a telephone call to you about a particular debt more than seven times within a seven-day period, or within seven days after a telephone conversation with you about it. Keep in mind that these presumptions only apply to telephone calls placed by the debt collector to you and don't apply to other forms of communication, including text messages, emails, in-person interactions, or social media messages, which have other protections."
+      },
+      "edit": {
+        "replaced": "The limits generally apply per debt but in the case of student loan debt - depending on the facts - multiple debts could be counted together as one \"particular debt,\" so the limits would apply to those debts as a group.",
+        "inserted": "The debt collector is presumed to violate the law if they place a telephone call to you about a particular debt more than seven times within a seven-day period, or within seven days after a telephone conversation with you about it.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+            "agency": "CFPB",
+            "passage": "The debt collector is presumed to violate the law if they place a telephone call to you about a particular debt:",
+            "snapshot_sha256": "7da576ffe07df7fa859e4a37c7cab86041ef448b9080ed3dbd2433d653cc3601"
+          },
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+            "agency": "CFPB",
+            "passage": "More than seven times within a seven-day period, or",
+            "snapshot_sha256": "7da576ffe07df7fa859e4a37c7cab86041ef448b9080ed3dbd2433d653cc3601"
+          },
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/how-often-can-a-debt-collector-call-me-en-2110/",
+            "agency": "CFPB",
+            "passage": "Within seven days after engaging in a telephone conversation with you about the particular debt.",
+            "snapshot_sha256": "7da576ffe07df7fa859e4a37c7cab86041ef448b9080ed3dbd2433d653cc3601"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "credit_debt_collector_call_limit__doc1",
+      "prompt_id": "credit_debt_collector_call_limit",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "Are there laws that limit what debt collectors can say or do?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/are-there-laws-that-limit-what-debt-collectors-can-say-or-do-en-329/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5286b956c88e78c05497c8f48ecb9e4f18c7ae94542a686d059f7284463b1726",
+        "retrieved_utc": "2026-11-18T18:17:47+00:00",
+        "method": "curl"
+      },
+      "words": 98,
+      "variants": {
+        "control": "Time and place. Generally, debt collectors may not contact you at an unusual time or place, or at a time or place they know or should know is inconvenient to you. They are generally prohibited from contacting you before 8 a.m. or after 9 p.m. Also, if a debt collector knows or has reason to know that you're not allowed to receive personal communications at work, they're not allowed to contact you there. If they call you when it's inconvenient for you to speak with them, you can tell them that and they're required to terminate the call.",
+        "treatment": "Time and place. Generally, debt collectors may not contact you at an unusual time or place, or at a time or place they know or should know is inconvenient to you. They are generally prohibited from contacting you before 8 a.m. or after 9 p.m. Also, if a debt collector knows or has reason to know that you're not allowed to receive personal communications at work, they're not allowed to contact you there. If they call you when it's inconvenient for you to speak with them, you can tell them that and they're required to terminate the call."
+      }
+    },
+    {
+      "doc_id": "credit_debt_collector_call_limit__doc2",
+      "prompt_id": "credit_debt_collector_call_limit",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What should I do when a debt collector contacts me?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-when-a-debt-collector-contacts-me-en-1695/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e32cb63489a4f51b2e5d63f07207574c1b96183227cc40258002eb45329a9d7d",
+        "retrieved_utc": "2026-11-18T18:17:48+00:00",
+        "method": "curl"
+      },
+      "words": 79,
+      "variants": {
+        "control": "While talking with a debt collector can be helpful, it's also important to know that you have protections against repetitious, excessive and threatening communications. Under the Fair Debt Collection Practices Act, debt collectors violate the law when they harass, oppress, or abuse you. For example, if the debt collector is calling you at an inconvenient time or place, you have the right to ask the debt collector to call you at a more convenient time or place you specify.",
+        "treatment": "While talking with a debt collector can be helpful, it's also important to know that you have protections against repetitious, excessive and threatening communications. Under the Fair Debt Collection Practices Act, debt collectors violate the law when they harass, oppress, or abuse you. For example, if the debt collector is calling you at an inconvenient time or place, you have the right to ask the debt collector to call you at a more convenient time or place you specify."
+      }
+    },
+    {
+      "doc_id": "credit_debt_collector_call_limit__doc3",
+      "prompt_id": "credit_debt_collector_call_limit",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What may happen if I ignore or avoid a debt collector?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-may-happen-if-i-ignore-or-avoid-a-debt-collector-en-1427/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b30ed7713424b790fd81a0d679b03e48af67936521ac4c20d605087c28d0107f",
+        "retrieved_utc": "2026-11-18T18:17:49+00:00",
+        "method": "curl"
+      },
+      "words": 98,
+      "variants": {
+        "control": "There are federal protections to prohibit harassment or abusive communications by a debt collector. Ignoring or avoiding a debt collector, though, is unlikely to make the debt collector stop contacting you. They may find other ways to contact you, including filing a lawsuit. While being contacted by a debt collector might feel overwhelming, talking with them can help you get more information about the debt. Ignoring or avoiding the debt collector is also unlikely to make them stop contacting you, and they may use other methods to try to collect the debt, including filing a lawsuit against you.",
+        "treatment": "There are federal protections to prohibit harassment or abusive communications by a debt collector. Ignoring or avoiding a debt collector, though, is unlikely to make the debt collector stop contacting you. They may find other ways to contact you, including filing a lawsuit. While being contacted by a debt collector might feel overwhelming, talking with them can help you get more information about the debt. Ignoring or avoiding the debt collector is also unlikely to make them stop contacting you, and they may use other methods to try to collect the debt, including filing a lawsuit against you."
+      }
+    },
+    {
+      "doc_id": "credit_debt_collector_call_limit__doc4",
+      "prompt_id": "credit_debt_collector_call_limit",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a debt collector and why are they contacting me?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-debt-collector-and-why-are-they-contacting-me-en-330/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d7d6cdaaa6511f40ffc333bd3ca0920e11c5386b992c427172fbe91baf8ff58e",
+        "retrieved_utc": "2026-11-18T18:17:48+00:00",
+        "method": "curl"
+      },
+      "words": 92,
+      "variants": {
+        "control": "A debt collector is generally a person or company that regularly collects debts owed to others or who has the primary purpose of collecting debts. They're likely contacting you because they're trying to reach a person who may owe a specific debt. Debt collectors can include collection agencies or lawyers who collect debts as part of their business. There are also companies that buy past-due debts from creditors or other businesses and then try to collect them. These companies are also often called debt collection agencies, debt collection companies, or debt buyers.",
+        "treatment": "A debt collector is generally a person or company that regularly collects debts owed to others or who has the primary purpose of collecting debts. They're likely contacting you because they're trying to reach a person who may owe a specific debt. Debt collectors can include collection agencies or lawyers who collect debts as part of their business. There are also companies that buy past-due debts from creditors or other businesses and then try to collect them. These companies are also often called debt collection agencies, debt collection companies, or debt buyers."
+      }
+    },
+    {
+      "doc_id": "credit_debt_collector_call_limit__doc5",
+      "prompt_id": "credit_debt_collector_call_limit",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is the best way to negotiate a settlement with a debt collector?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-the-best-way-to-negotiate-a-settlement-with-a-debt-collector-en-1447/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a4c00b9098fb66b06b4372489386e6ecd734654926f7d110e32e2f352b118236",
+        "retrieved_utc": "2026-11-18T18:17:49+00:00",
+        "method": "curl"
+      },
+      "words": 78,
+      "variants": {
+        "control": "First, review your current financial obligations. Write down your monthly take-home pay and your monthly expenses , including the amount you want to repay each month. Try to allow some income left over to cover unexpected expenses and emergencies. Keep in mind that falling behind on other bills, even if you're paying off this debt, could cause you more problems. If you're struggling, a non-profit credit counselor can help you create a budget and work with the collectors.",
+        "treatment": "First, review your current financial obligations. Write down your monthly take-home pay and your monthly expenses , including the amount you want to repay each month. Try to allow some income left over to cover unexpected expenses and emergencies. Keep in mind that falling behind on other bills, even if you're paying off this debt, could cause you more problems. If you're struggling, a non-profit credit counselor can help you create a budget and work with the collectors."
+      }
+    },
+    {
+      "doc_id": "emergency_flood_water_depth__target",
+      "prompt_id": "emergency_flood_water_depth",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": true,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Flood Safety: During a Flood",
+        "url": "https://www.weather.gov/safety/flood-during",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "8b8dd010192d0bdc4fba6e27e4437614e0519f484e483900b6d7bf7d392350aa",
+        "retrieved_utc": "2026-11-18T18:17:45+00:00",
+        "method": "curl"
+      },
+      "words": 69,
+      "variants": {
+        "control": "Obey Evacuation Orders: If told to evacuate, do so immediately. Lock your home when you leave. If you have time, disconnect utilities and appliances. Practice Electrical Safety: Don't go into a basement, or any room, if water covers the electrical outlets or if cords are submerged. If you see sparks or hear buzzing, crackling, snapping or popping noises--get out! Stay out of water that may have electricity in it!",
+        "treatment": "Obey Evacuation Orders: If told to evacuate, do so immediately. Lock your home when you leave. If you have time, disconnect utilities and appliances. Practice Electrical Safety: Don't go into a basement, or any room, if water covers the electrical outlets or if cords are submerged. It only takes 6 inches of moving water to knock you off your feet. Stay out of water that may have electricity in it!"
+      },
+      "edit": {
+        "replaced": "If you see sparks or hear buzzing, crackling, snapping or popping noises--get out!",
+        "inserted": "It only takes 6 inches of moving water to knock you off your feet.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.weather.gov/safety/flood-during",
+            "agency": "NOAA National Weather Service",
+            "passage": "It only takes 6 inches of moving water to knock you off your feet.",
+            "snapshot_sha256": "8b8dd010192d0bdc4fba6e27e4437614e0519f484e483900b6d7bf7d392350aa"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "emergency_flood_water_depth__doc1",
+      "prompt_id": "emergency_flood_water_depth",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Flood Safety: After a Flood",
+        "url": "https://www.weather.gov/safety/flood-after",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7687c81b1dde6b024330db919b1ea4c4a7ba1e768a37b6d9f0d7e2aad4e24964",
+        "retrieved_utc": "2026-11-18T18:17:46+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "Avoid Flood Waters: Standing water hides many dangers including toxins and chemicals. There may be sharp objects under the water or the road could have collapsed. If it is likely your home will flood, don't wait for evacuation order, get out! Talk to friends and family about emergency visits. If you have pets, take them with you or get them somewhere safe.",
+        "treatment": "Avoid Flood Waters: Standing water hides many dangers including toxins and chemicals. There may be sharp objects under the water or the road could have collapsed. If it is likely your home will flood, don't wait for evacuation order, get out! Talk to friends and family about emergency visits. If you have pets, take them with you or get them somewhere safe."
+      }
+    },
+    {
+      "doc_id": "emergency_flood_water_depth__doc2",
+      "prompt_id": "emergency_flood_water_depth",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Understand Flood Alerts",
+        "url": "https://www.weather.gov/safety/flood-watch-warning",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "44a0af620871db94a686959a5d87a1278dfcaddd55edf6192692fbc246f35e71",
+        "retrieved_utc": "2026-11-18T18:17:46+00:00",
+        "method": "curl"
+      },
+      "words": 64,
+      "variants": {
+        "control": "Flash Flood Warning: Take Action! A Flash Flood Warning is issued when a flash flood is imminent or occurring. If you are in a flood prone area move immediately to high ground. A flash flood is a sudden violent flood that can take from minutes to hours to develop. It is even possible to experience a flash flood in areas not immediately receiving rain.",
+        "treatment": "Flash Flood Warning: Take Action! A Flash Flood Warning is issued when a flash flood is imminent or occurring. If you are in a flood prone area move immediately to high ground. A flash flood is a sudden violent flood that can take from minutes to hours to develop. It is even possible to experience a flash flood in areas not immediately receiving rain."
+      }
+    },
+    {
+      "doc_id": "emergency_flood_water_depth__doc3",
+      "prompt_id": "emergency_flood_water_depth",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Flood Hazards",
+        "url": "https://www.weather.gov/safety/flood-hazards",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c2e270774131350aaf847f0427ea60f734aa58e7acb6dcc2854e66f33dce7278",
+        "retrieved_utc": "2026-11-18T18:17:46+00:00",
+        "method": "curl"
+      },
+      "words": 93,
+      "variants": {
+        "control": "There are many reasons that flash floods occur, but one of the most common is the result of copious amounts of rainfall from thunderstorms that cause flash flooding. This can also occur when slow-moving or multiple thunderstorms move over the same area. These sudden downpours can rapidly change the water levels in a stream or creek and turn small waterways into violent, raging rivers. Urban areas are especially prone to flash floods due to the large amounts of concrete and asphalt surfaces that do not allow water to penetrate into the soil easily.",
+        "treatment": "There are many reasons that flash floods occur, but one of the most common is the result of copious amounts of rainfall from thunderstorms that cause flash flooding. This can also occur when slow-moving or multiple thunderstorms move over the same area. These sudden downpours can rapidly change the water levels in a stream or creek and turn small waterways into violent, raging rivers. Urban areas are especially prone to flash floods due to the large amounts of concrete and asphalt surfaces that do not allow water to penetrate into the soil easily."
+      }
+    },
+    {
+      "doc_id": "emergency_flood_water_depth__doc4",
+      "prompt_id": "emergency_flood_water_depth",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Turn Around Don't Drown",
+        "url": "https://www.weather.gov/safety/flood-turn-around-dont-drown",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c9e354d3d90ebec7b79c576bec4e67cf6879f1fac7d191bc35919171ec9684bb",
+        "retrieved_utc": "2026-11-18T18:17:44+00:00",
+        "method": "curl"
+      },
+      "words": 92,
+      "variants": {
+        "control": "Incident management signs are a specific type of Temporary Traffic Control (TTC) sign deployed in response to short-term events which impede the normal flow of traffic such as accidents, natural disasters, hazardous material spills, or other unplanned incidents. The \"Flooding Ahead Turn Around Don't Drown®\" incident management sign is intended for use at locations where stream waters flooding across a road have made passage dangerous. The location may be a road which dips down to the level of a stream channel or a bridge or culvert which cannot pass high flood flows.",
+        "treatment": "Incident management signs are a specific type of Temporary Traffic Control (TTC) sign deployed in response to short-term events which impede the normal flow of traffic such as accidents, natural disasters, hazardous material spills, or other unplanned incidents. The \"Flooding Ahead Turn Around Don't Drown®\" incident management sign is intended for use at locations where stream waters flooding across a road have made passage dangerous. The location may be a road which dips down to the level of a stream channel or a bridge or culvert which cannot pass high flood flows."
+      }
+    },
+    {
+      "doc_id": "emergency_flood_water_depth__doc5",
+      "prompt_id": "emergency_flood_water_depth",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Flood Safety: Before a Flood",
+        "url": "https://www.weather.gov/safety/flood-before",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "088207ac2349a01ccef0ba1166de8ef4157c2fd142d06c6db4fb833d3de00bf2",
+        "retrieved_utc": "2026-11-18T18:17:45+00:00",
+        "method": "curl"
+      },
+      "words": 81,
+      "variants": {
+        "control": "3. Since standard homeowners insurance doesn't cover flooding, ensure coverage by contacting your insurance company or agent to purchase flood insurance. This must be done before there is even a threat of flooding as insurance companies stop issuing policies if there is a threat of flooding. (i.e. an approaching hurricane). Many flood insurance policies take at least 30 days to go into effect so even if you can buy it as a storm is approaching, it may not protect your investment.",
+        "treatment": "3. Since standard homeowners insurance doesn't cover flooding, ensure coverage by contacting your insurance company or agent to purchase flood insurance. This must be done before there is even a threat of flooding as insurance companies stop issuing policies if there is a threat of flooding. (i.e. an approaching hurricane). Many flood insurance policies take at least 30 days to go into effect so even if you can buy it as a storm is approaching, it may not protect your investment."
+      }
+    },
+    {
+      "doc_id": "workplace_heat_new_worker_first_day__target",
+      "prompt_id": "workplace_heat_new_worker_first_day",
+      "format": "docs",
+      "domain": "workplace_safety",
+      "is_target": true,
+      "source": {
+        "agency": "OSHA",
+        "title": "Heat - Protecting New Workers",
+        "url": "https://www.osha.gov/heat-exposure/protecting-new-workers",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ddde6d5c14c58b993ca8b0c56157a3d9bd5c4516efff03a2389de134a58f5db7",
+        "retrieved_utc": "2026-11-18T18:17:42+00:00",
+        "method": "curl"
+      },
+      "words": 52,
+      "variants": {
+        "control": "Employers should not assume that new workers can work safely in warm or hot conditions. Even young, seemingly \"fit\" workers can be susceptible to heat-related illness. It is not possible to know which new workers are at risk. That's why all new workers should be protected and monitored closely in the heat.",
+        "treatment": "Employers should not assume that new workers can work safely in warm or hot conditions. Even young, seemingly \"fit\" workers can be susceptible to heat-related illness. New workers should work only 20 percent of the normal duration on their first day. That's why all new workers should be protected and monitored closely in the heat."
+      },
+      "edit": {
+        "replaced": "It is not possible to know which new workers are at risk.",
+        "inserted": "New workers should work only 20 percent of the normal duration on their first day.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.osha.gov/heat-exposure/protecting-new-workers",
+            "agency": "OSHA",
+            "passage": "New workers should work only 20 percent of the normal duration on their first day.",
+            "snapshot_sha256": "ddde6d5c14c58b993ca8b0c56157a3d9bd5c4516efff03a2389de134a58f5db7"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "workplace_heat_new_worker_first_day__doc1",
+      "prompt_id": "workplace_heat_new_worker_first_day",
+      "format": "docs",
+      "domain": "workplace_safety",
+      "is_target": false,
+      "source": {
+        "agency": "OSHA",
+        "title": "Heat - Heat-Related Illnesses and First Aid",
+        "url": "https://www.osha.gov/heat-exposure/illness-first-aid",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "db4bfc3bd196c27a323abc06f9f95ddcd7a19e8f361d6801b29af22fdd6b01ae",
+        "retrieved_utc": "2026-11-18T18:17:42+00:00",
+        "method": "curl"
+      },
+      "words": 60,
+      "variants": {
+        "control": "Workers who are new to working in warm environments are at increased risk of heat-related illness. See the Protecting New Workers section of this website for more details. Especially during a worker's first few days, absolutely all symptoms should be taken seriously. Workers who develop symptoms should be allowed to stop working. They should receive evaluation for possible heat-related illness.",
+        "treatment": "Workers who are new to working in warm environments are at increased risk of heat-related illness. See the Protecting New Workers section of this website for more details. Especially during a worker's first few days, absolutely all symptoms should be taken seriously. Workers who develop symptoms should be allowed to stop working. They should receive evaluation for possible heat-related illness."
+      }
+    },
+    {
+      "doc_id": "workplace_heat_new_worker_first_day__doc2",
+      "prompt_id": "workplace_heat_new_worker_first_day",
+      "format": "docs",
+      "domain": "workplace_safety",
+      "is_target": false,
+      "source": {
+        "agency": "OSHA",
+        "title": "Heat - Personal Risk Factors",
+        "url": "https://www.osha.gov/heat-exposure/personal-risk-factors",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "bbffae338f815b77204e4a37c8c406913cfd050ab65acd87c7183de62f47379a",
+        "retrieved_utc": "2026-11-18T18:17:43+00:00",
+        "method": "curl"
+      },
+      "words": 88,
+      "variants": {
+        "control": "Employers should recognize that not all workers tolerate heat the same way. Workplace controls should focus on making jobs safe for all the employees. An occupational medical monitoring program can identify workers who are at increased risk of heat illness, while maintaining the confidentiality of workers' health information. When heat hazards are present, workers should receive training about personal factors that can make them more susceptible to heat-related illness. When in doubt, workers should talk to their healthcare provider about whether they can work safely in the heat.",
+        "treatment": "Employers should recognize that not all workers tolerate heat the same way. Workplace controls should focus on making jobs safe for all the employees. An occupational medical monitoring program can identify workers who are at increased risk of heat illness, while maintaining the confidentiality of workers' health information. When heat hazards are present, workers should receive training about personal factors that can make them more susceptible to heat-related illness. When in doubt, workers should talk to their healthcare provider about whether they can work safely in the heat."
+      }
+    },
+    {
+      "doc_id": "workplace_heat_new_worker_first_day__doc3",
+      "prompt_id": "workplace_heat_new_worker_first_day",
+      "format": "docs",
+      "domain": "workplace_safety",
+      "is_target": false,
+      "source": {
+        "agency": "OSHA",
+        "title": "Heat - Water. Rest. Shade.",
+        "url": "https://www.osha.gov/heat-exposure/water-rest-shade",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e88d6e3db313f99d59546911cdb0ec20e4e8c528e08460b3cebabb1a34de08f5",
+        "retrieved_utc": "2026-11-18T18:17:41+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "When heat stress is high, employers should require workers to take breaks. The length and frequency of rest breaks should increase as heat stress rises. In general, workers should be taking hourly breaks whenever heat stress exceeds the limits shown in Table 2 under Determination of Whether the Work is Too Hot section on the Heat Hazard Recognition page.",
+        "treatment": "When heat stress is high, employers should require workers to take breaks. The length and frequency of rest breaks should increase as heat stress rises. In general, workers should be taking hourly breaks whenever heat stress exceeds the limits shown in Table 2 under Determination of Whether the Work is Too Hot section on the Heat Hazard Recognition page."
+      }
+    },
+    {
+      "doc_id": "workplace_heat_new_worker_first_day__doc4",
+      "prompt_id": "workplace_heat_new_worker_first_day",
+      "format": "docs",
+      "domain": "workplace_safety",
+      "is_target": false,
+      "source": {
+        "agency": "OSHA",
+        "title": "Heat - Heat Hazard Recognition",
+        "url": "https://www.osha.gov/heat-exposure/hazards",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d4080322cebd22fd255752fc45fc868b4d5833325c622aafcc1611d078e10f40",
+        "retrieved_utc": "2026-11-18T18:17:42+00:00",
+        "method": "curl"
+      },
+      "words": 77,
+      "variants": {
+        "control": "Workplace environmental heat should be measured on-site using WBGT meters. Use of heat index is a less desirable substitute. While local weather reports based on meteorological data from observation stations can be useful, the readings from these stations may not reflect the conditions at the specific worksite. Heat conditions at the worksite may be different for multiple reasons, from cloud cover and humidity to local heat sinks. The potential error increases with distance from the weather station.",
+        "treatment": "Workplace environmental heat should be measured on-site using WBGT meters. Use of heat index is a less desirable substitute. While local weather reports based on meteorological data from observation stations can be useful, the readings from these stations may not reflect the conditions at the specific worksite. Heat conditions at the worksite may be different for multiple reasons, from cloud cover and humidity to local heat sinks. The potential error increases with distance from the weather station."
+      }
+    },
+    {
+      "doc_id": "workplace_heat_new_worker_first_day__doc5",
+      "prompt_id": "workplace_heat_new_worker_first_day",
+      "format": "docs",
+      "domain": "workplace_safety",
+      "is_target": false,
+      "source": {
+        "agency": "OSHA",
+        "title": "Heat - Planning and Supervision",
+        "url": "https://www.osha.gov/heat-exposure/planning",
+        "rights": "US federal work (OSHA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a27e69d9ff1be665cfa6ec35256ce7beb211ca0fceef20ba8162717c53ccbaea",
+        "retrieved_utc": "2026-11-18T18:17:43+00:00",
+        "method": "curl"
+      },
+      "words": 64,
+      "variants": {
+        "control": "Heat conditions can change rapidly and management commitment to adjusting heat stress controls is critical to prevent heat illness. An individual at the worksite should be responsible for monitoring conditions and implementing the employer's heat plan throughout the workday. This individual can be a foreman, jobsite supervisor, plant manager, safety director, or anyone else with the proper training. Proper training includes knowing how to:",
+        "treatment": "Heat conditions can change rapidly and management commitment to adjusting heat stress controls is critical to prevent heat illness. An individual at the worksite should be responsible for monitoring conditions and implementing the employer's heat plan throughout the workday. This individual can be a foreman, jobsite supervisor, plant manager, safety director, or anyone else with the proper training. Proper training includes knowing how to:"
+      }
+    },
+    {
+      "doc_id": "health_heat_stroke_temperature__target",
+      "prompt_id": "health_heat_stroke_temperature",
+      "format": "docs",
+      "domain": "health",
+      "is_target": true,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat-Related Illnesses",
+        "url": "https://www.weather.gov/safety/heat-illness",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c5508828c20662e11a8956d3c3aac12c147e6a5b373349ff42ffd88289ab0724",
+        "retrieved_utc": "2026-11-18T18:19:32+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "Heat cramps may be the first sign of heat-related illness, and may lead to heat exhaustion or stroke. Symptoms: Painful muscle cramps and spasms usually in legs and abdomen. Heavy sweating. First Aid: Apply firm pressure on cramping muscles or gently massage to relieve spasm. Give sips of water unless the person complains of nausea, then stop giving water.",
+        "treatment": "Heat cramps may be the first sign of heat-related illness, and may lead to heat exhaustion or stroke. A body temperature above 103°F is a symptom of heat stroke. Heavy sweating. First Aid: Apply firm pressure on cramping muscles or gently massage to relieve spasm. Give sips of water unless the person complains of nausea, then stop giving water."
+      },
+      "edit": {
+        "replaced": "Symptoms: Painful muscle cramps and spasms usually in legs and abdomen.",
+        "inserted": "A body temperature above 103°F is a symptom of heat stroke.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.weather.gov/safety/heat-illness",
+            "agency": "NOAA National Weather Service",
+            "passage": "Symptoms: Throbbing headache; confusion; slurred speech; nausea; dizziness; body temperature above 103°F; hot, red, dry or damp skin; rapid and strong pulse; fainting; loss of consciousness.",
+            "snapshot_sha256": "c5508828c20662e11a8956d3c3aac12c147e6a5b373349ff42ffd88289ab0724"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "health_heat_stroke_temperature__doc1",
+      "prompt_id": "health_heat_stroke_temperature",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat Safety",
+        "url": "https://www.weather.gov/safety/heat",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "69dbb5f184c16d16b407589e345e16c6b376c8417542ac7a4086a16d3be42a39",
+        "retrieved_utc": "2026-11-18T18:19:32+00:00",
+        "method": "curl"
+      },
+      "words": 78,
+      "variants": {
+        "control": "Heat can be very taxing on the body and can lead to heat related illnesses or make existing health conditions worse. Everyone can be vulnerable to heat, but some more so than others. According to The Impacts Of Climate Change On Human Health In The United States: A Scientific Assessment the following groups are particularly vulnerable to heat; check in with friends and relatives who fall in one of these populations, especially if they don't have air conditioning.",
+        "treatment": "Heat can be very taxing on the body and can lead to heat related illnesses or make existing health conditions worse. Everyone can be vulnerable to heat, but some more so than others. According to The Impacts Of Climate Change On Human Health In The United States: A Scientific Assessment the following groups are particularly vulnerable to heat; check in with friends and relatives who fall in one of these populations, especially if they don't have air conditioning."
+      }
+    },
+    {
+      "doc_id": "health_heat_stroke_temperature__doc2",
+      "prompt_id": "health_heat_stroke_temperature",
+      "format": "blog",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat Survivor Stories",
+        "url": "https://www.weather.gov/safety/heat-survivors",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e848fc2e7396d23faf2a6011c1ec516edd63be24dd56bf6a5ccffd36202f6dda",
+        "retrieved_utc": "2026-11-18T18:19:33+00:00",
+        "method": "curl"
+      },
+      "words": 92,
+      "variants": {
+        "control": "When I was on vacation in North Carolina's Outer Banks, I was riding my bike up the road with the sun beating down on me. The combination of the heat and the blacktop created a difficult situation for me: dizziness and fatigue. I went to see a doctor who told me I had heat exhaustion and was low in salt. He advised rest and salty foods like peanuts. I did as I was told and felt okay after a few hours. I'm careful now to avoid exercise in the hot summer sun.",
+        "treatment": "When I was on vacation in North Carolina's Outer Banks, I was riding my bike up the road with the sun beating down on me. The combination of the heat and the blacktop created a difficult situation for me: dizziness and fatigue. I went to see a doctor who told me I had heat exhaustion and was low in salt. He advised rest and salty foods like peanuts. I did as I was told and felt okay after a few hours. I'm careful now to avoid exercise in the hot summer sun."
+      }
+    },
+    {
+      "doc_id": "health_heat_stroke_temperature__doc3",
+      "prompt_id": "health_heat_stroke_temperature",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat Safety Tips and Resources",
+        "url": "https://www.weather.gov/safety/heat-during",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6587fae1f2cc9eec6ce1982e0266aaa9dc744dbe772fe09b3abc82091d7282f5",
+        "retrieved_utc": "2026-11-18T18:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 77,
+      "variants": {
+        "control": "Eat light, cool, easy-to-digest foods such as fruit or salads. If you pack food, put it in a cooler or carry an ice pack. Don't leave it sitting in the sun. Meats and dairy products can spoil quickly in hot weather. Drink plenty of water, non-alcoholic and decaffeinated fluids, even if you don't feel thirsty. If you are on a fluid-restrictive diet or have a problem with fluid retention, consult a physician before increasing consumption of fluids.",
+        "treatment": "Eat light, cool, easy-to-digest foods such as fruit or salads. If you pack food, put it in a cooler or carry an ice pack. Don't leave it sitting in the sun. Meats and dairy products can spoil quickly in hot weather. Drink plenty of water, non-alcoholic and decaffeinated fluids, even if you don't feel thirsty. If you are on a fluid-restrictive diet or have a problem with fluid retention, consult a physician before increasing consumption of fluids."
+      }
+    },
+    {
+      "doc_id": "health_heat_stroke_temperature__doc4",
+      "prompt_id": "health_heat_stroke_temperature",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat Watch vs. Warning",
+        "url": "https://www.weather.gov/safety/heat-ww",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4a6708ff94c1077c227441f439d459573501a78a7cc7c0056d57541dd3e1d775",
+        "retrieved_utc": "2026-11-18T18:19:35+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "Extreme Heat Warning-Take Action! An Extreme Heat Warning is issued when extremely dangerous heat conditions are expected or occurring. Avoid outdoor activities, especially during the heat of the day. If you must be outside, be sure to drink plenty of water and take frequent breaks in the shade. Stay indoors in an air-conditioned space as much as possible, including overnight. Check on family and neighbors.",
+        "treatment": "Extreme Heat Warning-Take Action! An Extreme Heat Warning is issued when extremely dangerous heat conditions are expected or occurring. Avoid outdoor activities, especially during the heat of the day. If you must be outside, be sure to drink plenty of water and take frequent breaks in the shade. Stay indoors in an air-conditioned space as much as possible, including overnight. Check on family and neighbors."
+      }
+    },
+    {
+      "doc_id": "health_heat_stroke_temperature__doc5",
+      "prompt_id": "health_heat_stroke_temperature",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat Forecast Tools",
+        "url": "https://www.weather.gov/safety/heat-index",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "a03ffa58e8601f45d786a5be39e6784daa22b4b78b8e2b29734ccbd3c6767443",
+        "retrieved_utc": "2026-11-18T18:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 68,
+      "variants": {
+        "control": "The National Weather Service (NWS) has multiple tools to assess the potential for heat stress due to extreme temperatures. The following tools can inform the issuance of NWS official heat watches, warnings, and advisories. Each of these tools integrate other weather parameters to provide a deeper level of information beyond what the actual air temperature can tell us. View the NWS Heat Tools reference sheet for more details.",
+        "treatment": "The National Weather Service (NWS) has multiple tools to assess the potential for heat stress due to extreme temperatures. The following tools can inform the issuance of NWS official heat watches, warnings, and advisories. Each of these tools integrate other weather parameters to provide a deeper level of information beyond what the actual air temperature can tell us. View the NWS Heat Tools reference sheet for more details."
+      }
+    },
+    {
+      "doc_id": "realestate_pmi_down_payment__target",
+      "prompt_id": "realestate_pmi_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is private mortgage insurance?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "ed3c6d7fa1e57d6e7ead34edb4c571803b2a54435dd22199a15b875281b6fffa",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 77,
+      "variants": {
+        "control": "PMI is arranged by the lender and provided by private insurance companies. It insures the lender against loss caused by borrowers failing to make loan payments. Make no mistake: If you fall behind on your mortgage payments, PMI does not protect you and you can still lose your home through foreclosure. PMI can help you qualify for a loan that you might not otherwise be able to get. But it can increase the cost of your loan.",
+        "treatment": "PMI is arranged by the lender and provided by private insurance companies. It insures the lender against loss caused by borrowers failing to make loan payments. Make no mistake: If you fall behind on your mortgage payments, PMI does not protect you and you can still lose your home through foreclosure. When you pay 20 percent down, PMI is not required with a conventional loan. But it can increase the cost of your loan."
+      },
+      "edit": {
+        "replaced": "PMI can help you qualify for a loan that you might not otherwise be able to get.",
+        "inserted": "When you pay 20 percent down, PMI is not required with a conventional loan.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-private-mortgage-insurance-en-122/",
+            "agency": "CFPB",
+            "passage": "When you pay 20 percent down, PMI is not required with a conventional loan.",
+            "snapshot_sha256": "ed3c6d7fa1e57d6e7ead34edb4c571803b2a54435dd22199a15b875281b6fffa"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "realestate_pmi_down_payment__doc1",
+      "prompt_id": "realestate_pmi_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is mortgage insurance and how does it work?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-mortgage-insurance-and-how-does-it-work-en-1953/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6bbbfb76355e4b25e159d81225c22f6850d67fe04898fe4d325e56747c883f0c",
+        "retrieved_utc": "2026-09-15T05:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 66,
+      "variants": {
+        "control": "If you get a conventional loan, your lender could arrange for mortgage insurance with a private company. Private mortgage insurance (PMI) rates vary by down payment amount and credit score but are generally cheaper than FHA rates for borrowers with good credit. Most private mortgage insurance is paid monthly, with little or no initial payment required at closing. Under certain circumstances, you can cancel your PMI.",
+        "treatment": "If you get a conventional loan, your lender could arrange for mortgage insurance with a private company. Private mortgage insurance (PMI) rates vary by down payment amount and credit score but are generally cheaper than FHA rates for borrowers with good credit. Most private mortgage insurance is paid monthly, with little or no initial payment required at closing. Under certain circumstances, you can cancel your PMI."
+      }
+    },
+    {
+      "doc_id": "realestate_pmi_down_payment__doc2",
+      "prompt_id": "realestate_pmi_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "When can I remove private mortgage insurance (PMI) from my loan?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/when-can-i-remove-private-mortgage-insurance-pmi-from-my-loan-en-202/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "12ea11df1cca60a5103b95673474c39eb57d534fb84a68cab50d22189e680908",
+        "retrieved_utc": "2026-11-18T18:19:30+00:00",
+        "method": "curl"
+      },
+      "words": 107,
+      "variants": {
+        "control": "You have the right to remove PMI for many mortgages, once you have paid down your mortgage to a specified point. Ending PMI reduces your monthly costs. Some lenders and servicers may allow removal of PMI under their own standards. The information below describes the legal requirements that apply to mortgages for single-family principal residences that closed on or after July 29, 1999. Mortgages through the Federal Housing Administration (FHA) or Department of Veterans Affairs (VA) have different requirements. For answers to questions about mortgage insurance on an FHA or VA loan, contact your servicer. If your lender is paying for your mortgage insurance, different rules apply.",
+        "treatment": "You have the right to remove PMI for many mortgages, once you have paid down your mortgage to a specified point. Ending PMI reduces your monthly costs. Some lenders and servicers may allow removal of PMI under their own standards. The information below describes the legal requirements that apply to mortgages for single-family principal residences that closed on or after July 29, 1999. Mortgages through the Federal Housing Administration (FHA) or Department of Veterans Affairs (VA) have different requirements. For answers to questions about mortgage insurance on an FHA or VA loan, contact your servicer. If your lender is paying for your mortgage insurance, different rules apply."
+      }
+    },
+    {
+      "doc_id": "realestate_pmi_down_payment__doc3",
+      "prompt_id": "realestate_pmi_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What kind of down payment do I need?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-kind-of-down-payment-do-i-need-how-does-the-amount-of-down-payment-i-make-affect-the-terms-of-my-mortgage-loan-en-120/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5ad99bc5bc2e4258200ccc6d021eb57db59cee54474be7a19062b8d5dde8ab01",
+        "retrieved_utc": "2026-09-15T05:19:35+00:00",
+        "method": "curl"
+      },
+      "words": 79,
+      "variants": {
+        "control": "Don't forget to factor in all the upfront costs you will have in addition to the down payment. Think about all the costs that you'll likely have to deal with during the purchase process and immediately afterward. For example, you may want to pay points to lower your interest rate. You'll also have to pay closing costs, which sometimes can be substantial. And don't forget about the cost of moving and making any repairs that are needed right away.",
+        "treatment": "Don't forget to factor in all the upfront costs you will have in addition to the down payment. Think about all the costs that you'll likely have to deal with during the purchase process and immediately afterward. For example, you may want to pay points to lower your interest rate. You'll also have to pay closing costs, which sometimes can be substantial. And don't forget about the cost of moving and making any repairs that are needed right away."
+      }
+    },
+    {
+      "doc_id": "realestate_pmi_down_payment__doc4",
+      "prompt_id": "realestate_pmi_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a loan-to-value ratio?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-an-fha-loan-en-121/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5b6383a6586879f4a6495e0a0b25e323ddf9a193c8a76ef73121e0452e129fa6",
+        "retrieved_utc": "2026-11-18T18:19:30+00:00",
+        "method": "curl"
+      },
+      "words": 50,
+      "variants": {
+        "control": "Lenders will use the LTV to determine how much you can borrow, and the interest rate you will be offered. Higher-risk borrowers, those with a higher LTV, will usually be offered a higher interest rate. You may be able to get a better interest rate with a larger down payment.",
+        "treatment": "Lenders will use the LTV to determine how much you can borrow, and the interest rate you will be offered. Higher-risk borrowers, those with a higher LTV, will usually be offered a higher interest rate. You may be able to get a better interest rate with a larger down payment."
+      }
+    },
+    {
+      "doc_id": "realestate_pmi_down_payment__doc5",
+      "prompt_id": "realestate_pmi_down_payment",
+      "format": "reference",
+      "domain": "real_estate",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What fees or charges are paid when closing on a mortgage and who pays them?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-are-closing-costs-en-1845/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7b1e3d7dad9fc5470e9bed77f075e91f2b4dff595265a9175adfa8d14ab8b333",
+        "retrieved_utc": "2026-11-11T04:56:31+00:00",
+        "method": "curl"
+      },
+      "words": 58,
+      "variants": {
+        "control": "Even if you don't pay the mortgage closing fees directly out of pocket, you might end up paying them indirectly. Sometimes, you can negotiate with the seller for a \"credit\" towards your closing costs, but the seller will usually require you to pay a higher price for the home in order to cover the costs of this credit.",
+        "treatment": "Even if you don't pay the mortgage closing fees directly out of pocket, you might end up paying them indirectly. Sometimes, you can negotiate with the seller for a \"credit\" towards your closing costs, but the seller will usually require you to pay a higher price for the home in order to cover the costs of this credit."
+      }
+    },
+    {
+      "doc_id": "finance_sipc_coverage_limit__target",
+      "prompt_id": "finance_sipc_coverage_limit",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": true,
+      "source": {
+        "agency": "SEC (Investor.gov)",
+        "title": "Securities Investor Protection Corporation (SIPC)",
+        "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/securities-investor-protection-corporation-sipc",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "959fbf7dadfea8fcf87cefb5a0668c48b6332bab9f8698a5df61ba9cda8867f0",
+        "retrieved_utc": "2026-11-18T18:20:39+00:00",
+        "method": "curl"
+      },
+      "words": 80,
+      "variants": {
+        "control": "SIPC Protection does not apply when investors place their cash or securities in the hands of a non-SIPC member. SIPC only protects customers of its member firms. Always make sure that the brokerage firm and its clearing firm are members of SIPC. Firms are required by law to tell you if they're not. You can also search SIPC's Membership Database or contact its Membership Department at the address below to find out whether a firm is a member of SIPC:",
+        "treatment": "SIPC Protection does not apply when investors place their cash or securities in the hands of a non-SIPC member. SIPC only protects customers of its member firms. Your cash and securities may be protected up to $500,000, including $250,000 for cash. Firms are required by law to tell you if they're not. You can also search SIPC's Membership Database or contact its Membership Department at the address below to find out whether a firm is a member of SIPC:"
+      },
+      "edit": {
+        "replaced": "Always make sure that the brokerage firm and its clearing firm are members of SIPC.",
+        "inserted": "Your cash and securities may be protected up to $500,000, including $250,000 for cash.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/securities-investor-protection-corporation-sipc",
+            "agency": "SEC (Investor.gov)",
+            "passage": "then your cash and securities held by the brokerage firm may be protected up to $500,000, including a $250,000 limit for cash.",
+            "snapshot_sha256": "959fbf7dadfea8fcf87cefb5a0668c48b6332bab9f8698a5df61ba9cda8867f0"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "finance_sipc_coverage_limit__doc1",
+      "prompt_id": "finance_sipc_coverage_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "SEC (Investor.gov)",
+        "title": "What is Risk?",
+        "url": "https://www.investor.gov/introduction-investing/investing-basics/what-risk",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b0c18f76ee46c56e718c783ecaa0f9a0411d64833288a40de82e2a7dcd0d950b",
+        "retrieved_utc": "2026-11-18T18:20:41+00:00",
+        "method": "curl"
+      },
+      "words": 90,
+      "variants": {
+        "control": "With a stock, you are purchasing a piece of ownership in a company. With a bond, you are loaning money to a company. Returns from both of these investments require that that the company stays in business. If a company goes bankrupt and its assets are liquidated, common stockholders are the last in line to share in the proceeds. If there are assets, the company's bondholders will be paid first, then holders of preferred stock. If you are a common stockholder, you get whatever is left, which may be nothing.",
+        "treatment": "With a stock, you are purchasing a piece of ownership in a company. With a bond, you are loaning money to a company. Returns from both of these investments require that that the company stays in business. If a company goes bankrupt and its assets are liquidated, common stockholders are the last in line to share in the proceeds. If there are assets, the company's bondholders will be paid first, then holders of preferred stock. If you are a common stockholder, you get whatever is left, which may be nothing."
+      }
+    },
+    {
+      "doc_id": "finance_sipc_coverage_limit__doc2",
+      "prompt_id": "finance_sipc_coverage_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "SEC (Investor.gov)",
+        "title": "Protect Your Investments",
+        "url": "https://www.investor.gov/protect-your-investments",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d5fe23b0a2b113cc99da47b8b4298c4f5b81c67ec95eeec2a1ed3b3c39becc4d",
+        "retrieved_utc": "2026-11-18T18:20:42+00:00",
+        "method": "curl"
+      },
+      "words": 57,
+      "variants": {
+        "control": "Monitor your investment accounts for any suspicious activity. You should confirm that you authorized all of the transactions that appear in your account statements and trade confirmations. Also, look out for any changes to your account information that you do not recognize (e.g., a change to your address, phone number, e-mail address, account number, or bank information).",
+        "treatment": "Monitor your investment accounts for any suspicious activity. You should confirm that you authorized all of the transactions that appear in your account statements and trade confirmations. Also, look out for any changes to your account information that you do not recognize (e.g., a change to your address, phone number, e-mail address, account number, or bank information)."
+      }
+    },
+    {
+      "doc_id": "finance_sipc_coverage_limit__doc3",
+      "prompt_id": "finance_sipc_coverage_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "SEC (Investor.gov)",
+        "title": "Working with an Investment Professional",
+        "url": "https://www.investor.gov/introduction-investing/getting-started/working-investment-professional",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "bd197e4db236f7f5fc5b0deceefaadec4c26cc1515fbac9bfc094bd22ea6c505",
+        "retrieved_utc": "2026-11-18T18:20:41+00:00",
+        "method": "curl"
+      },
+      "words": 84,
+      "variants": {
+        "control": "If you have a brokerage or advisory account, read every statement promptly -- it may not be fun to look at it when the market is down, but it is your most important protection against unauthorized transactions. If you do not object promptly after receiving notification of a transaction, you might not be able to contest it later. You should object in writing to better protect your rights. That's why it's important to read your statement and object right away if something is wrong.",
+        "treatment": "If you have a brokerage or advisory account, read every statement promptly -- it may not be fun to look at it when the market is down, but it is your most important protection against unauthorized transactions. If you do not object promptly after receiving notification of a transaction, you might not be able to contest it later. You should object in writing to better protect your rights. That's why it's important to read your statement and object right away if something is wrong."
+      }
+    },
+    {
+      "doc_id": "finance_sipc_coverage_limit__doc4",
+      "prompt_id": "finance_sipc_coverage_limit",
+      "format": "docs",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "SEC (Investor.gov)",
+        "title": "Stocks",
+        "url": "https://www.investor.gov/introduction-investing/investing-basics/investment-products/stocks",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9d676a03c77ca95c58fd6b72122906a8f5c25b302874207d689491bd87914174",
+        "retrieved_utc": "2026-11-18T18:20:40+00:00",
+        "method": "curl"
+      },
+      "words": 78,
+      "variants": {
+        "control": "Buying and selling stocks entails fees. A direct stock plan or a dividend reinvestment plan may charge you a fee for that service. Brokers who buy and sell stocks for you charge a commission. A discount brokerage charges lower commissions than what you would pay at a full-service brokerage. But generally you have to research and choose investments by yourself. A full-service brokerage costs more, but the higher commissions pay for investment advice based on that firm's research.",
+        "treatment": "Buying and selling stocks entails fees. A direct stock plan or a dividend reinvestment plan may charge you a fee for that service. Brokers who buy and sell stocks for you charge a commission. A discount brokerage charges lower commissions than what you would pay at a full-service brokerage. But generally you have to research and choose investments by yourself. A full-service brokerage costs more, but the higher commissions pay for investment advice based on that firm's research."
+      }
+    },
+    {
+      "doc_id": "finance_sipc_coverage_limit__doc5",
+      "prompt_id": "finance_sipc_coverage_limit",
+      "format": "reference",
+      "domain": "finance",
+      "is_target": false,
+      "source": {
+        "agency": "SEC Office of Investor Education and Advocacy",
+        "title": "Save for a Rainy Day",
+        "url": "https://www.investor.gov/introduction-investing/investing-basics/save-and-invest/save-rainy-day",
+        "rights": "US federal work (SEC), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0bc49579ed5193e3408242fd26804eeb87c2b5f8458c9261e2f3a50130e605dc",
+        "retrieved_utc": "2026-09-15T05:21:40+00:00",
+        "method": "curl"
+      },
+      "words": 60,
+      "variants": {
+        "control": "Savings are usually put into safe places that allow you access to your money at any time. Examples include savings accounts, checking accounts, and certificates of deposit. Your money may be insured by the Federal Deposit Insurance Corporation (FDIC) or National Credit Union Administration (NCUA). But there's a tradeoff between security and availability; your money earns a low interest rate.",
+        "treatment": "Savings are usually put into safe places that allow you access to your money at any time. Examples include savings accounts, checking accounts, and certificates of deposit. Your money may be insured by the Federal Deposit Insurance Corporation (FDIC) or National Credit Union Administration (NCUA). But there's a tradeoff between security and availability; your money earns a low interest rate."
+      }
+    }
+  ],
+  "corpus_sha256": "38b9838d0f94fef5"
+}
