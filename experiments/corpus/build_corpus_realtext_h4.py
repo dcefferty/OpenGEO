@@ -445,6 +445,100 @@ NEW_SOURCES = {
     "https://www.investor.gov/introduction-investing/investing-basics/investment-products/stocks": {
         "agency": "SEC (Investor.gov)", "title": "Stocks", "format": "docs",
         "rights": "US federal work (SEC), 17 U.S.C. 105"},
+    # batch 8 (2026-11-21)
+    "https://www.consumerfinance.gov/ask-cfpb/i-paid-off-my-entire-bill-when-it-was-due-last-month-and-still-got-charged-interest-how-can-that-be-en-48/": {
+        "agency": "CFPB", "title": "I paid off my entire bill when it was due last month and still got charged interest. How can that be?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-44/": {
+        "agency": "CFPB", "title": "What is a credit card interest rate? What does APR mean?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-a-grace-period-for-a-credit-card-en-47/": {
+        "agency": "CFPB", "title": "What is a grace period for a credit card?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/what-is-the-difference-between-a-fixed-apr-and-a-variable-apr-en-45/": {
+        "agency": "CFPB", "title": "What is the difference between a fixed APR and a variable APR?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.consumerfinance.gov/ask-cfpb/when-can-my-credit-card-company-increase-my-interest-rate-what-can-i-do-to-get-the-rate-back-down-en-69/": {
+        "agency": "CFPB", "title": "When can my credit card company increase my interest rate?", "format": "reference",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105"},
+    "https://www.epa.gov/sunsafety/sun-safety-tips": {
+        "agency": "EPA", "title": "Sun Safety Tips for Families", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/sunsafety/uv-index-2": {
+        "agency": "EPA", "title": "UV Index", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/sunsafety/sun-health-effects": {
+        "agency": "EPA", "title": "Sun Safety and Health Effects", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.epa.gov/sunsafety/health-effects-uv-radiation": {
+        "agency": "EPA", "title": "Health Effects of UV Radiation", "format": "docs",
+        "rights": "US federal work (EPA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/hurricane": {
+        "agency": "NOAA National Weather Service", "title": "Hurricane Safety", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/hurricane-action": {
+        "agency": "NOAA National Weather Service", "title": "Hurricane Safety: When a Hurricane Threatens", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/hurricane-plan": {
+        "agency": "NOAA National Weather Service", "title": "Hurricane Safety: Prepare Before Hurricane Season", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/hurricane-after": {
+        "agency": "NOAA National Weather Service", "title": "Hurricane Safety: After a Hurricane", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/hurricane-survivors": {
+        "agency": "NOAA National Weather Service", "title": "Hurricane Survivor Stories", "format": "blog",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/hearing-and-hearing-loss/hearing-loss-common-problem-older-adults": {
+        "agency": "NIH NIA", "title": "Hearing Loss: A Common Problem for Older Adults", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nidcd.nih.gov/health/age-related-hearing-loss": {
+        "agency": "NIH NIDCD", "title": "Age-Related Hearing Loss (Presbycusis)", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nidcd.nih.gov/health/hearing-aids": {
+        "agency": "NIH NIDCD", "title": "Hearing Aids", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nidcd.nih.gov/health/tinnitus": {
+        "agency": "NIH NIDCD", "title": "Tinnitus", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nidcd.nih.gov/health/sudden-deafness": {
+        "agency": "NIH NIDCD", "title": "Sudden Deafness", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nidcd.nih.gov/health/cochlear-implants": {
+        "agency": "NIH NIDCD", "title": "Cochlear Implants", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/cold": {
+        "agency": "NOAA National Weather Service", "title": "Cold Safety", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/cold-during": {
+        "agency": "NOAA National Weather Service", "title": "Cold Safety: During Extreme Cold", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/cold-wind-chill-chart": {
+        "agency": "NOAA National Weather Service", "title": "Wind Chill Chart", "format": "reference",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/winter-during": {
+        "agency": "NOAA National Weather Service", "title": "Winter Safety: During a Winter Storm", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/winter-before": {
+        "agency": "NOAA National Weather Service", "title": "Winter Safety: Before a Winter Storm", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.weather.gov/safety/winter": {
+        "agency": "NOAA National Weather Service", "title": "Winter Weather Safety", "format": "docs",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/falls-and-falls-prevention/falls-and-fractures-older-adults-causes-and-prevention": {
+        "agency": "NIH NIA", "title": "Falls and Fractures in Older Adults: Causes and Prevention", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/falls-and-falls-prevention/older-adults-and-balance-problems": {
+        "agency": "NIH NIA", "title": "Older Adults and Balance Problems", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/falls-and-falls-prevention/preventing-falls-home-room-room": {
+        "agency": "NIH NIA", "title": "Preventing Falls at Home: Room by Room", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nidcd.nih.gov/health/balance-disorders": {
+        "agency": "NIH NIDCD", "title": "Balance Disorders", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
+    "https://www.nia.nih.gov/health/osteoporosis/osteoporosis": {
+        "agency": "NIH NIA", "title": "Osteoporosis", "format": "docs",
+        "rights": "US federal work (NIH), 17 U.S.C. 105"},
 }
 
 # --------------------------------------------------------------------------- batch 1
@@ -2056,7 +2150,227 @@ BATCH_7 = [
     },
 ]
 
-BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4, 5: BATCH_5, 6: BATCH_6, 7: BATCH_7}
+# --------------------------------------------------------------------------- batch 8
+#
+# Built 2026-11-21, after batch 7's screen (pre-registration, Deviations, 2026-11-21),
+# which kept 2 of 6. This is the last batch the stopping rule allows. The batch 4
+# construction is unchanged: every target is a span of the agency's consumer page on the
+# question's own subject, on a paragraph about an unrelated aspect of it. Three
+# non-targets sit closer to the question; two are tangential.
+
+BATCH_8 = [
+    {
+        "prompt_id": "credit_bill_delivery_days",
+        "domain": "credit",
+        "question": "How many days before the payment due date must a credit card bill be "
+                    "mailed or delivered to you?",
+        "answer": r"\b21\b|twenty-one|\bdays?\b|\bweeks?\b",
+        "target": {   # CFPB's grace-period answer: losing the grace period
+            "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-grace-period-for-a-credit-card-en-47/",
+            "start": "If your card gives a grace period and you are not carrying a balance",
+            "end": None,
+            "replace": "If you lose your grace period by not paying your balance in full by "
+                       "the due date, you will be charged interest on the unpaid portion of "
+                       "the balance.",
+            "with": "Credit card companies must establish procedures to assure that their "
+                    "bills are mailed or delivered to you at least 21 days before the "
+                    "payment is due.",
+            "figures": [("https://www.consumerfinance.gov/ask-cfpb/what-is-a-grace-period-for-a-credit-card-en-47/",
+                         "Credit card companies must establish procedures to assure that "
+                         "their bills are mailed or delivered to you at least 21 days before "
+                         "the payment is due.")],
+        },
+        "others": [
+            # closer: billing and interest, paying by the due date, the delivery rule withheld
+            ("https://www.consumerfinance.gov/ask-cfpb/i-paid-off-my-entire-bill-when-it-was-due-last-month-and-still-got-charged-interest-how-can-that-be-en-48/",
+             "When you carry a balance on your credit card",
+             "request a copy from your credit card company."),
+            ("https://www.consumerfinance.gov/ask-cfpb/how-does-my-credit-card-company-calculate-the-amount-of-interest-i-owe-en-51/",
+             "If your card has a grace period, you can avoid paying interest on purchases "
+             "if you pay off your card balance in full each month", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-44/",
+             "For credit cards, the interest rates are typically stated as a yearly rate.",
+             "if you pay your balance in full each month by the due date."),
+            # tangential: fixed and variable APRs, lowering a raised rate
+            ("https://www.consumerfinance.gov/ask-cfpb/what-is-the-difference-between-a-fixed-apr-and-a-variable-apr-en-45/",
+             "A fixed-rate APR or fixed APR sets an APR", None),
+            ("https://www.consumerfinance.gov/ask-cfpb/when-can-my-credit-card-company-increase-my-interest-rate-what-can-i-do-to-get-the-rate-back-down-en-69/",
+             "The card issuer may - and in some circumstances must - compare the rate", None),
+        ],
+    },
+    {
+        "prompt_id": "health_sunscreen_minimum_spf",
+        "domain": "health",
+        "question": "What is the minimum SPF a sunscreen should have, according to the EPA?",
+        "answer": r"\bSPF\b|\b15\b|\b30\b|\b50\b|sun protection factor",
+        "target": {   # EPA's sun safety tips: how common skin cancer is
+            "url": "https://www.epa.gov/sunsafety/sun-safety-tips",
+            "start": "Most people are not aware that skin cancer, while largely preventable",
+            "end": None,
+            "replace": "More than 3.5 million new cases of skin cancer are diagnosed "
+                       "annually.",
+            "with": "Sunscreen should have a Sun Protection Factor (SPF) of at least 15.",
+            "figures": [("https://www.epa.gov/sunsafety/sun-safety-tips",
+                         "Sunscreen should have a Sun Protection Factor (SPF) of at least 15 "
+                         "and provide broad-spectrum protection from both ultraviolet A (UVA) "
+                         "and ultraviolet B (UVB) rays.")],
+        },
+        "others": [
+            # closer: the UV Index, UV health effects, skin cancer, the SPF withheld
+            ("https://www.epa.gov/sunsafety/uv-index-2",
+             "The Ultraviolet (UV) Index predicts the UV radiation levels", None),
+            ("https://www.epa.gov/sunsafety/sun-health-effects",
+             "Understanding sun safety is necessary to protect yourself",
+             "eye damage such as cataracts, and immune system suppression."),
+            ("https://www.epa.gov/sunsafety/health-effects-uv-radiation",
+             "Each year, more new cases of skin cancer are diagnosed in the U.S.", None),
+            # tangential: staying cool in a heat wave, heat warnings
+            ("https://www.weather.gov/safety/heat-during",
+             "Slow down. Reduce, eliminate or reschedule strenuous activities", None),
+            ("https://www.weather.gov/safety/heat-ww",
+             "Extreme Heat Warning-Take Action!", None),
+        ],
+    },
+    {
+        "prompt_id": "emergency_major_hurricane_wind",
+        "domain": "emergency_prep",
+        "question": "What wind speed makes a hurricane a major hurricane?",
+        "answer": r"mph|miles per hour|\b1[0-9][0-9]\b|knots?|categor\w*|\bmajor\b",
+        "target": {   # NWS hurricane safety: storm surge and inland flooding
+            "url": "https://www.weather.gov/safety/hurricane",
+            "start": "Storm surge is the abnormal rise of water generated by a storm's winds.",
+            "end": "This flooding can persist for several days after a storm has dissipated.",
+            "replace": "Storm surge can travel several miles inland, especially along bays, "
+                       "rivers, and estuaries.",
+            "with": "A major hurricane is classified as one with winds of 111 mph or "
+                    "greater.",
+            "figures": [("https://www.weather.gov/safety/hurricane",
+                         "Over a typical 2-year period, the U.S. coastline is struck by an "
+                         "average of 3 hurricanes, 1 of which is classified as a major "
+                         "hurricane (winds of 111 mph or greater).")],
+        },
+        "others": [
+            # closer: securing a home, the season's checklist, after the storm, the speed withheld
+            ("https://www.weather.gov/safety/hurricane-action",
+             "Secure your home: Cover all of your home's windows.",
+             "for the latest storm news."),
+            ("https://www.weather.gov/safety/hurricane-plan",
+             "The best time to prepare for a hurricane is before hurricane season begins",
+             "or by checking the evacuation site website."),
+            ("https://www.weather.gov/safety/hurricane-after",
+             "Once home, drive only if necessary and avoid flooded roads",
+             "or if the authorities have not declared it safe."),
+            # tangential: a survivor's story, flash floods
+            ("https://www.weather.gov/safety/hurricane-survivors",
+             "In November of 2012, Hurricane Sandy hit our forested property", None),
+            ("https://www.weather.gov/safety/flood-hazards",
+             "There are many reasons that flash floods occur", None),
+        ],
+    },
+    {
+        "prompt_id": "health_hearing_loss_older_adults",
+        "domain": "health",
+        "question": "About what share of older adults have hearing loss?",
+        "answer": r"one-third|one in three|\bthirds?\b|\d+ ?(?:%|percent)|\bpercent\b|"
+                  r"\bhalf\b|\b1 in 3\b",
+        "target": {   # NIA's hearing loss page: loud noise as a cause
+            "url": "https://www.nia.nih.gov/health/hearing-and-hearing-loss/hearing-loss-common-problem-older-adults",
+            "start": "Loud noise is one of the most common causes of hearing loss.",
+            "end": None,
+            "replace": "Noise from lawn mowers, snow blowers, or loud music can damage the "
+                       "inner ear and result in permanent hearing loss.",
+            "with": "About one-third of older adults have hearing loss, and the chance of "
+                    "developing hearing loss increases with age.",
+            "figures": [("https://www.nia.nih.gov/health/hearing-and-hearing-loss/hearing-loss-common-problem-older-adults",
+                         "About one-third of older adults have hearing loss, and the chance "
+                         "of developing hearing loss increases with age.")],
+        },
+        "others": [
+            # closer: age-related hearing loss, hearing aids, tinnitus, the share withheld
+            ("https://www.nidcd.nih.gov/health/age-related-hearing-loss",
+             "Many things affect our hearing as we age.", None),
+            ("https://www.nidcd.nih.gov/health/hearing-aids",
+             "A hearing aid is a small electronic device that you wear", None),
+            ("https://www.nidcd.nih.gov/health/tinnitus",
+             "The causes of tinnitus are unclear", None),
+            # tangential: sudden deafness, cochlear implants
+            ("https://www.nidcd.nih.gov/health/sudden-deafness",
+             "People with SSHL often discover the hearing loss upon waking up", None),
+            ("https://www.nidcd.nih.gov/health/cochlear-implants",
+             "A cochlear implant is a small, complex electronic device", None),
+        ],
+    },
+    {
+        "prompt_id": "emergency_hypothermia_body_temp",
+        "domain": "emergency_prep",
+        "question": "Below what body temperature does a person have hypothermia?",
+        "answer": r"°|\bdegrees?\b|\b9[0-9]\b|\b3[0-9]\b|fahrenheit|celsius",
+        "target": {   # NWS cold safety, during extreme cold: people who live alone, medicines
+            "url": "https://www.weather.gov/safety/cold-during",
+            "start": "If you live alone, ask a family member or neighbor to check on you daily",
+            "end": "reserpine, and tricyclic antidepressants.",
+            "replace": "If you live alone, ask a family member or neighbor to check on you "
+                       "daily or have a camera installed that a family member can view on "
+                       "their computer.",
+            "with": "When your body temperature sinks below 95°F, you have hypothermia, a "
+                    "serious health hazard that occurs when body temperature is lowered too "
+                    "much. Get medical attention immediately.",
+            "figures": [("https://www.weather.gov/safety/cold-during",
+                         "When your body temperature sinks below 95°F, you have hypothermia, "
+                         "a serious health hazard that occurs when body temperature is "
+                         "lowered too much.")],
+        },
+        "others": [
+            # closer: extreme cold, wind chill and frostbite, winter exertion, the temperature withheld
+            ("https://www.weather.gov/safety/cold",
+             "Extremely cold air comes every winter", None),
+            ("https://www.weather.gov/safety/cold-wind-chill-chart",
+             "The air temperature has to be BELOW freezing for frostbite", None),
+            ("https://www.weather.gov/safety/winter-during",
+             "Exercise: From time to time, move arms, legs, fingers and toes", None),
+            # tangential: winter driving, winter storms
+            ("https://www.weather.gov/safety/winter-before",
+             "Before you leave the house, especially before a longer trip in winter", None),
+            ("https://www.weather.gov/safety/winter",
+             "(En Espanol) Winter storms can bring snow, sleet, and freezing rain", None),
+        ],
+    },
+    {
+        "prompt_id": "health_falls_older_adults_share",
+        "domain": "health",
+        "question": "What share of people age 65 and older fall each year?",
+        "answer": r"one in (?:four|three|five)|\b1 in [3-5]\b|\bquarter\b|\bthirds?\b|"
+                  r"\d+ ?(?:%|percent)|\bpercent\b",
+        "target": {   # NIA's falls page: icy surfaces and footwear
+            "url": "https://www.nia.nih.gov/health/falls-and-falls-prevention/falls-and-fractures-older-adults-causes-and-prevention",
+            "start": "Take extra caution when walking on wet or icy surfaces.",
+            "end": "in shoes and slippers with smooth soles.",
+            "replace": "Use an ice melt product or sand to clear icy areas by your doors and "
+                       "walkways.",
+            "with": "More than one in four people age 65 years or older fall each year.",
+            "figures": [("https://www.nia.nih.gov/health/falls-and-falls-prevention/falls-and-fractures-older-adults-causes-and-prevention",
+                         "More than one in four people age 65 years or older fall each year.")],
+        },
+        "others": [
+            # closer: balance problems, falls at home, dizziness, the share withheld
+            ("https://www.nia.nih.gov/health/falls-and-falls-prevention/older-adults-and-balance-problems",
+             "Many older adults experience problems with balance and dizziness.", None),
+            ("https://www.nia.nih.gov/health/falls-and-falls-prevention/preventing-falls-home-room-room",
+             "Many falls happen at home",
+             "Don't let anything you're carrying block your view of the steps."),
+            ("https://www.nidcd.nih.gov/health/balance-disorders",
+             "Talk to your doctor about whether it's safe to drive", None),
+            # tangential: osteoporosis, strength training
+            ("https://www.nia.nih.gov/health/osteoporosis/osteoporosis",
+             "Osteoporosis weakens bones to the point that they can break easily.",
+             "when more bone is broken down than replaced."),
+            ("https://www.nia.nih.gov/health/exercise-and-physical-activity/four-types-exercise-can-improve-your-health-and-physical",
+             "Muscle-strengthening activities improve physical function", None),
+        ],
+    },
+]
+
+BATCHES = {1: BATCH_1, 2: BATCH_2, 3: BATCH_3, 4: BATCH_4, 5: BATCH_5, 6: BATCH_6, 7: BATCH_7, 8: BATCH_8}
 
 # prompt_ids that cleared the screen, in the order they enter the round corpus. Empty
 # until batch 1 is screened; filled in by a dated commit that cites the screen output.
