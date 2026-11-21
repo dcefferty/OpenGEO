@@ -629,3 +629,34 @@ paraphrase their source rather than quote it: the debt collector one joins the p
 and its two bulleted conditions into one sentence, and the heat stroke one restates "body
 temperature above 103°F" from the page's heat stroke symptom list. Neither changes a figure.
 The PMI target page was already a tangential non-target in batch 5, for a different question.
+
+**2026-11-21 — batch 7 screened: 2 of 6 kept.** Ran the batch 7 screen as specified under
+Screening, on `corpus/corpus_realtext_h4_b7.json` (sha `38b9838d0f94fef5`), after the batch 7
+entry above was merged and with the repo owner's go-ahead. That was 720 control-only calls
+with 0 errors, costing $0.79. No treatment row exists. Output is in
+`results/screen_realtext_h4_b7.jsonl`.
+
+| question | pooled | claude | deepseek | gemini | gpt | grok | cites/ans | decision |
+|---|---|---|---|---|---|---|---|---|
+| `credit_debt_collector_call_limit` | 0.942 | 0.96* | 0.75 | 1.00* | 1.00* | 1.00* | 3.04 | DISCARD |
+| `emergency_flood_water_depth` | 0.475 | 0.00* | 0.29 | 0.83 | 0.50 | 0.75 | 3.24 | KEEP |
+| `workplace_heat_new_worker_first_day` | 0.992 | 0.96* | 1.00* | 1.00* | 1.00* | 1.00* | 2.92 | DISCARD |
+| `health_heat_stroke_temperature` | 0.950 | 0.79 | 1.00* | 1.00* | 1.00* | 0.96* | 3.30 | DISCARD |
+| `realestate_pmi_down_payment` | 0.525 | 0.04* | 0.96* | 1.00* | 0.12 | 0.50 | 3.13 | KEEP |
+| `finance_sipc_coverage_limit` | 0.967 | 1.00* | 0.83 | 1.00* | 1.00* | 1.00* | 2.12 | DISCARD |
+
+\* pinned on that engine (at most 1, or at least 23, of 24 runs cite the target).
+
+`KEPT` is now **15 of the 25** needed. All four discards failed at the ceiling. In each of them
+the target came from the one page that most directly answers the question (the CFPB call-limit
+answer, OSHA's new-worker page, the NWS heat-illness page, the SIPC glossary entry), and the
+non-targets were narrower or adjacent pages. Batch 6's 1.000 discard (private-well testing) had
+the same shape. This is recorded as a reading of the screen, not as a change: the batch 4
+construction stays fixed for batch 8. Screen-level no-cite, reported but not gating under the
+2026-11-08 decision: `anthropic/claude-haiku-4.5` 20.1% (29 of 144), `deepseek/deepseek-chat`
+2.8%, `x-ai/grok-4.3` 0.7%, the other two 0%.
+
+**Projection.** One batch remains. It cannot bring the round to 25; at most it ends at 21, and at
+the combined yield of 15 of 42 it would keep about 2, ending near 17. The sub-floor threshold
+(12) is met; whether to run a sub-floor estimate remains the repo owner's decision, logged here
+before any treatment call. The stopping rule is unchanged by this entry.
