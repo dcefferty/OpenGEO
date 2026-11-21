@@ -629,3 +629,64 @@ paraphrase their source rather than quote it: the debt collector one joins the p
 and its two bulleted conditions into one sentence, and the heat stroke one restates "body
 temperature above 103°F" from the page's heat stroke symptom list. Neither changes a figure.
 The PMI target page was already a tangential non-target in batch 5, for a different question.
+
+**2026-11-21 — batch 7 screened: 2 of 6 kept.** Ran the batch 7 screen as specified under
+Screening, on `corpus/corpus_realtext_h4_b7.json` (sha `38b9838d0f94fef5`), after the batch 7
+entry above was merged and with the repo owner's go-ahead. That was 720 control-only calls
+with 0 errors, costing $0.79. No treatment row exists. Output is in
+`results/screen_realtext_h4_b7.jsonl`.
+
+| question | pooled | claude | deepseek | gemini | gpt | grok | cites/ans | decision |
+|---|---|---|---|---|---|---|---|---|
+| `credit_debt_collector_call_limit` | 0.942 | 0.96* | 0.75 | 1.00* | 1.00* | 1.00* | 3.04 | DISCARD |
+| `emergency_flood_water_depth` | 0.475 | 0.00* | 0.29 | 0.83 | 0.50 | 0.75 | 3.24 | KEEP |
+| `workplace_heat_new_worker_first_day` | 0.992 | 0.96* | 1.00* | 1.00* | 1.00* | 1.00* | 2.92 | DISCARD |
+| `health_heat_stroke_temperature` | 0.950 | 0.79 | 1.00* | 1.00* | 1.00* | 0.96* | 3.30 | DISCARD |
+| `realestate_pmi_down_payment` | 0.525 | 0.04* | 0.96* | 1.00* | 0.12 | 0.50 | 3.13 | KEEP |
+| `finance_sipc_coverage_limit` | 0.967 | 1.00* | 0.83 | 1.00* | 1.00* | 1.00* | 2.12 | DISCARD |
+
+\* pinned on that engine (at most 1, or at least 23, of 24 runs cite the target).
+
+`KEPT` is now **15 of the 25** needed. All four discards failed at the ceiling. In each of them
+the target came from the one page that most directly answers the question (the CFPB call-limit
+answer, OSHA's new-worker page, the NWS heat-illness page, the SIPC glossary entry), and the
+non-targets were narrower or adjacent pages. Batch 6's 1.000 discard (private-well testing) had
+the same shape. This is recorded as a reading of the screen, not as a change: the batch 4
+construction stays fixed for batch 8. Screen-level no-cite, reported but not gating under the
+2026-11-08 decision: `anthropic/claude-haiku-4.5` 20.1% (29 of 144), `deepseek/deepseek-chat`
+2.8%, `x-ai/grok-4.3` 0.7%, the other two 0%.
+
+**Projection.** One batch remains. It cannot bring the round to 25; at most it ends at 21, and at
+the combined yield of 15 of 42 it would keep about 2, ending near 17. The sub-floor threshold
+(12) is met; whether to run a sub-floor estimate remains the repo owner's decision, logged here
+before any treatment call. The stopping rule is unchanged by this entry.
+
+**2026-11-21 — batch 8 built, before any batch 8 data.** This is the last batch the stopping
+rule allows, and the repo owner's 2026-11-18 choice to continue covers it.
+`corpus/corpus_realtext_h4_b8.json`, version `realtext-h4-screen-b8`, sha `532dd5411934c7e2`,
+comes from the same builder under the same checks. The batch 1 to 7 corpora are unchanged.
+The screen command is the one under Screening with `b1` replaced by `b8`. Thirty-one new
+snapshots are added under `corpus/sources/` (CFPB, EPA, NOAA National Weather Service, NIH NIA
+and NIH NIDCD pages); five more pages were already held. There is no construction change:
+every target is a span of the agency's consumer page on the question's own subject, taken from
+a paragraph about an unrelated aspect of it, with three closer non-targets and two tangential
+ones. No question screened in an earlier batch was reused; candidates already screened (the
+Medicare Part B penalty in batch 5, caffeine and radon in batch 1) were passed over.
+
+| question | target (control is a verbatim span of) | inserted sentence | figures from |
+|---|---|---|---|
+| `credit_bill_delivery_days` How many days before the payment due date must a credit card bill be mailed or delivered to you? | CFPB, What is a grace period for a credit card? (losing the grace period) | "Credit card companies must establish procedures to assure that their bills are mailed or delivered to you at least 21 days before the payment is due." | the same CFPB page |
+| `health_sunscreen_minimum_spf` What is the minimum SPF a sunscreen should have, according to the EPA? | EPA, Sun Safety Tips for Families (how common skin cancer is) | "Sunscreen should have a Sun Protection Factor (SPF) of at least 15." | the same EPA page |
+| `emergency_major_hurricane_wind` What wind speed makes a hurricane a major hurricane? | NWS, Hurricane Safety (storm surge and inland flooding) | "A major hurricane is classified as one with winds of 111 mph or greater." | the same NWS page |
+| `health_hearing_loss_older_adults` About what share of older adults have hearing loss? | NIA, Hearing Loss: A Common Problem for Older Adults (loud noise as a cause) | "About one-third of older adults have hearing loss, and the chance of developing hearing loss increases with age." | the same NIA page |
+| `emergency_hypothermia_body_temp` Below what body temperature does a person have hypothermia? | NWS, Cold Safety: During Extreme Cold (people who live alone, medicines) | "When your body temperature sinks below 95°F, you have hypothermia, a serious health hazard that occurs when body temperature is lowered too much. Get medical attention immediately." | the same NWS page |
+| `health_falls_older_adults_share` What share of people age 65 and older fall each year? | NIA, Falls and Fractures in Older Adults (icy surfaces and footwear) | "More than one in four people age 65 years or older fall each year." | the same NIA page |
+
+Every figure comes from the target's own page, and every page used is an agency's own work.
+Two inserted sentences shorten or restate their source rather than quote it whole: the
+sunscreen one stops before the page's broad-spectrum clause, and the hurricane one restates
+the page's parenthetical "classified as a major hurricane (winds of 111 mph or greater)" as a
+sentence. Neither changes a figure. The hypothermia insertion is two consecutive sentences of
+the page, quoted verbatim. Five of the six targets are on the page that most directly answers
+the question, which batch 7's entry read as the ceiling pattern; that is stated here so the
+screen can be read against it, and is not a reason to change the construction.

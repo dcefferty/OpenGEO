@@ -1,0 +1,992 @@
+{
+  "corpus_version": "realtext-h4-screen-b8",
+  "intervention": "H4 on verbatim federal text: the target's control is a real page span; treatment replaces one sentence with a sourced statement of the answer",
+  "conditions": [
+    "control",
+    "treatment"
+  ],
+  "note": "screening batch 8: run the control arm only",
+  "n_prompts": 6,
+  "n_docs": 36,
+  "formats": [
+    "blog",
+    "docs",
+    "reference"
+  ],
+  "domains": [
+    "credit",
+    "emergency_prep",
+    "health"
+  ],
+  "prompts": [
+    {
+      "prompt_id": "credit_bill_delivery_days",
+      "domain": "credit",
+      "question": "How many days before the payment due date must a credit card bill be mailed or delivered to you?",
+      "target_doc_id": "credit_bill_delivery_days__target",
+      "target_format": "reference",
+      "doc_ids": [
+        "credit_bill_delivery_days__target",
+        "credit_bill_delivery_days__doc1",
+        "credit_bill_delivery_days__doc2",
+        "credit_bill_delivery_days__doc3",
+        "credit_bill_delivery_days__doc4",
+        "credit_bill_delivery_days__doc5"
+      ],
+      "answer_pattern": "\\b21\\b|twenty-one|\\bdays?\\b|\\bweeks?\\b"
+    },
+    {
+      "prompt_id": "health_sunscreen_minimum_spf",
+      "domain": "health",
+      "question": "What is the minimum SPF a sunscreen should have, according to the EPA?",
+      "target_doc_id": "health_sunscreen_minimum_spf__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "health_sunscreen_minimum_spf__target",
+        "health_sunscreen_minimum_spf__doc1",
+        "health_sunscreen_minimum_spf__doc2",
+        "health_sunscreen_minimum_spf__doc3",
+        "health_sunscreen_minimum_spf__doc4",
+        "health_sunscreen_minimum_spf__doc5"
+      ],
+      "answer_pattern": "\\bSPF\\b|\\b15\\b|\\b30\\b|\\b50\\b|sun protection factor"
+    },
+    {
+      "prompt_id": "emergency_major_hurricane_wind",
+      "domain": "emergency_prep",
+      "question": "What wind speed makes a hurricane a major hurricane?",
+      "target_doc_id": "emergency_major_hurricane_wind__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "emergency_major_hurricane_wind__target",
+        "emergency_major_hurricane_wind__doc1",
+        "emergency_major_hurricane_wind__doc2",
+        "emergency_major_hurricane_wind__doc3",
+        "emergency_major_hurricane_wind__doc4",
+        "emergency_major_hurricane_wind__doc5"
+      ],
+      "answer_pattern": "mph|miles per hour|\\b1[0-9][0-9]\\b|knots?|categor\\w*|\\bmajor\\b"
+    },
+    {
+      "prompt_id": "health_hearing_loss_older_adults",
+      "domain": "health",
+      "question": "About what share of older adults have hearing loss?",
+      "target_doc_id": "health_hearing_loss_older_adults__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "health_hearing_loss_older_adults__target",
+        "health_hearing_loss_older_adults__doc1",
+        "health_hearing_loss_older_adults__doc2",
+        "health_hearing_loss_older_adults__doc3",
+        "health_hearing_loss_older_adults__doc4",
+        "health_hearing_loss_older_adults__doc5"
+      ],
+      "answer_pattern": "one-third|one in three|\\bthirds?\\b|\\d+ ?(?:%|percent)|\\bpercent\\b|\\bhalf\\b|\\b1 in 3\\b"
+    },
+    {
+      "prompt_id": "emergency_hypothermia_body_temp",
+      "domain": "emergency_prep",
+      "question": "Below what body temperature does a person have hypothermia?",
+      "target_doc_id": "emergency_hypothermia_body_temp__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "emergency_hypothermia_body_temp__target",
+        "emergency_hypothermia_body_temp__doc1",
+        "emergency_hypothermia_body_temp__doc2",
+        "emergency_hypothermia_body_temp__doc3",
+        "emergency_hypothermia_body_temp__doc4",
+        "emergency_hypothermia_body_temp__doc5"
+      ],
+      "answer_pattern": "°|\\bdegrees?\\b|\\b9[0-9]\\b|\\b3[0-9]\\b|fahrenheit|celsius"
+    },
+    {
+      "prompt_id": "health_falls_older_adults_share",
+      "domain": "health",
+      "question": "What share of people age 65 and older fall each year?",
+      "target_doc_id": "health_falls_older_adults_share__target",
+      "target_format": "docs",
+      "doc_ids": [
+        "health_falls_older_adults_share__target",
+        "health_falls_older_adults_share__doc1",
+        "health_falls_older_adults_share__doc2",
+        "health_falls_older_adults_share__doc3",
+        "health_falls_older_adults_share__doc4",
+        "health_falls_older_adults_share__doc5"
+      ],
+      "answer_pattern": "one in (?:four|three|five)|\\b1 in [3-5]\\b|\\bquarter\\b|\\bthirds?\\b|\\d+ ?(?:%|percent)|\\bpercent\\b"
+    }
+  ],
+  "documents": [
+    {
+      "doc_id": "credit_bill_delivery_days__target",
+      "prompt_id": "credit_bill_delivery_days",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": true,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a grace period for a credit card?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-grace-period-for-a-credit-card-en-47/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2bfbc3374473786299ee10f6417c3fe6a43f338c835d1771d8c8adf0fe8c36e0",
+        "retrieved_utc": "2026-11-21T06:37:05+00:00",
+        "method": "curl"
+      },
+      "words": 84,
+      "variants": {
+        "control": "If your card gives a grace period and you are not carrying a balance, then you can avoid paying interest on new purchases if you pay your balance in full by the due date. If you lose your grace period by not paying your balance in full by the due date, you will be charged interest on the unpaid portion of the balance. You will also be charged interest on purchases in the new billing cycle starting on the date each purchase is made.",
+        "treatment": "If your card gives a grace period and you are not carrying a balance, then you can avoid paying interest on new purchases if you pay your balance in full by the due date. Credit card companies must establish procedures to assure that their bills are mailed or delivered to you at least 21 days before the payment is due. You will also be charged interest on purchases in the new billing cycle starting on the date each purchase is made."
+      },
+      "edit": {
+        "replaced": "If you lose your grace period by not paying your balance in full by the due date, you will be charged interest on the unpaid portion of the balance.",
+        "inserted": "Credit card companies must establish procedures to assure that their bills are mailed or delivered to you at least 21 days before the payment is due.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-grace-period-for-a-credit-card-en-47/",
+            "agency": "CFPB",
+            "passage": "Credit card companies must establish procedures to assure that their bills are mailed or delivered to you at least 21 days before the payment is due.",
+            "snapshot_sha256": "2bfbc3374473786299ee10f6417c3fe6a43f338c835d1771d8c8adf0fe8c36e0"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "credit_bill_delivery_days__doc1",
+      "prompt_id": "credit_bill_delivery_days",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "I paid off my entire bill when it was due last month and still got charged interest. How can that be?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/i-paid-off-my-entire-bill-when-it-was-due-last-month-and-still-got-charged-interest-how-can-that-be-en-48/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1e2ca3a8ca32100ff4b3ca1f078f88dd58b0ec3aee3e6d8d02dd8b526a3f6b54",
+        "retrieved_utc": "2026-11-21T06:37:04+00:00",
+        "method": "curl"
+      },
+      "words": 108,
+      "variants": {
+        "control": "When you carry a balance on your credit card, most card companies charge you interest from your billing date until the time they receive your payment. Different credit card companies have different rules for when they charge interest. In general, once a credit card company starts to charge interest, it keeps charging interest until it receives your payment. Your cardholder agreement should tell you the rules for your credit card. You should be able to find a copy of the agreement on the credit card company's website, or you can look it up by the company's name. You can also request a copy from your credit card company.",
+        "treatment": "When you carry a balance on your credit card, most card companies charge you interest from your billing date until the time they receive your payment. Different credit card companies have different rules for when they charge interest. In general, once a credit card company starts to charge interest, it keeps charging interest until it receives your payment. Your cardholder agreement should tell you the rules for your credit card. You should be able to find a copy of the agreement on the credit card company's website, or you can look it up by the company's name. You can also request a copy from your credit card company."
+      }
+    },
+    {
+      "doc_id": "credit_bill_delivery_days__doc2",
+      "prompt_id": "credit_bill_delivery_days",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "How does my credit card company calculate the amount of interest I owe?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/how-does-my-credit-card-company-calculate-the-amount-of-interest-i-owe-en-51/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d4ec7b5c64dbca1f3b2af8abeb69bbb574c7bdaa5439978f6f105f85f6f4f5d3",
+        "retrieved_utc": "2026-11-17T08:07:04+00:00",
+        "method": "curl"
+      },
+      "words": 106,
+      "variants": {
+        "control": "If your card has a grace period, you can avoid paying interest on purchases if you pay off your card balance in full each month by the due date. When you pay less than the full balance but more than the minimum required, the card issuer must generally apply the amount you pay over the minimum first to the balance with the highest interest rate and any remaining portion to the other balances in descending order based on the applicable interest rate. It is generally up to the card issuer to decide to which balance it will apply the minimum amount portion of your total payment.",
+        "treatment": "If your card has a grace period, you can avoid paying interest on purchases if you pay off your card balance in full each month by the due date. When you pay less than the full balance but more than the minimum required, the card issuer must generally apply the amount you pay over the minimum first to the balance with the highest interest rate and any remaining portion to the other balances in descending order based on the applicable interest rate. It is generally up to the card issuer to decide to which balance it will apply the minimum amount portion of your total payment."
+      }
+    },
+    {
+      "doc_id": "credit_bill_delivery_days__doc3",
+      "prompt_id": "credit_bill_delivery_days",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is a credit card interest rate? What does APR mean?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-44/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "22f3a25ea360ca32a0080287bf7d8e297a4bb3528a015145b6ffbc4cf5dbe4e6",
+        "retrieved_utc": "2026-11-21T06:37:34+00:00",
+        "method": "curl"
+      },
+      "words": 54,
+      "variants": {
+        "control": "For credit cards, the interest rates are typically stated as a yearly rate. This is called the annual percentage rate (APR). How can you avoid paying interest on credit card purchases? On most cards, you can avoid paying interest on purchases if you pay your balance in full each month by the due date.",
+        "treatment": "For credit cards, the interest rates are typically stated as a yearly rate. This is called the annual percentage rate (APR). How can you avoid paying interest on credit card purchases? On most cards, you can avoid paying interest on purchases if you pay your balance in full each month by the due date."
+      }
+    },
+    {
+      "doc_id": "credit_bill_delivery_days__doc4",
+      "prompt_id": "credit_bill_delivery_days",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "What is the difference between a fixed APR and a variable APR?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-the-difference-between-a-fixed-apr-and-a-variable-apr-en-45/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3d6c08df666c1d5352479b87986024502aef1118e6dc278787b55f5d2f7f2ac7",
+        "retrieved_utc": "2026-11-21T06:37:35+00:00",
+        "method": "curl"
+      },
+      "words": 62,
+      "variants": {
+        "control": "A fixed-rate APR or fixed APR sets an APR that does not fluctuate with changes to an index. This does not mean that the interest rate will never change, but the issuer generally must notify you before the change occurs, and in most circumstances can apply the higher rate only to purchases and other transactions you make after you get the notice.",
+        "treatment": "A fixed-rate APR or fixed APR sets an APR that does not fluctuate with changes to an index. This does not mean that the interest rate will never change, but the issuer generally must notify you before the change occurs, and in most circumstances can apply the higher rate only to purchases and other transactions you make after you get the notice."
+      }
+    },
+    {
+      "doc_id": "credit_bill_delivery_days__doc5",
+      "prompt_id": "credit_bill_delivery_days",
+      "format": "reference",
+      "domain": "credit",
+      "is_target": false,
+      "source": {
+        "agency": "CFPB",
+        "title": "When can my credit card company increase my interest rate?",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/when-can-my-credit-card-company-increase-my-interest-rate-what-can-i-do-to-get-the-rate-back-down-en-69/",
+        "rights": "US federal work (CFPB), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "981ae3db80bdcf51a71fec014e7c83ee291190f7fa607864eae71def36ae9acf",
+        "retrieved_utc": "2026-11-21T06:37:05+00:00",
+        "method": "curl"
+      },
+      "words": 69,
+      "variants": {
+        "control": "The card issuer may - and in some circumstances must - compare the rate you're being charged with the rate the card issuer would charge you today if you applied for a new card. If your rate is higher than what you would be charged as a new customer, the card issuer must reduce your rate. However, this rate will not necessarily be as low as your original rate.",
+        "treatment": "The card issuer may - and in some circumstances must - compare the rate you're being charged with the rate the card issuer would charge you today if you applied for a new card. If your rate is higher than what you would be charged as a new customer, the card issuer must reduce your rate. However, this rate will not necessarily be as low as your original rate."
+      }
+    },
+    {
+      "doc_id": "health_sunscreen_minimum_spf__target",
+      "prompt_id": "health_sunscreen_minimum_spf",
+      "format": "docs",
+      "domain": "health",
+      "is_target": true,
+      "source": {
+        "agency": "EPA",
+        "title": "Sun Safety Tips for Families",
+        "url": "https://www.epa.gov/sunsafety/sun-safety-tips",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4642f87051cf96b913eab71963961b4129f1ac2e5f75c214d20285377455d89a",
+        "retrieved_utc": "2026-11-21T06:37:03+00:00",
+        "method": "curl"
+      },
+      "words": 72,
+      "variants": {
+        "control": "Most people are not aware that skin cancer, while largely preventable, is the most common form of cancer in the United States. More than 3.5 million new cases of skin cancer are diagnosed annually. By following some simple steps, you can still enjoy your time in the sun and protect yourself from overexposure. The U.S. Environmental Protection Agency (EPA) recommends these action steps to help you and your family be Sun Safe.",
+        "treatment": "Most people are not aware that skin cancer, while largely preventable, is the most common form of cancer in the United States. Sunscreen should have a Sun Protection Factor (SPF) of at least 15. By following some simple steps, you can still enjoy your time in the sun and protect yourself from overexposure. The U.S. Environmental Protection Agency (EPA) recommends these action steps to help you and your family be Sun Safe."
+      },
+      "edit": {
+        "replaced": "More than 3.5 million new cases of skin cancer are diagnosed annually.",
+        "inserted": "Sunscreen should have a Sun Protection Factor (SPF) of at least 15.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.epa.gov/sunsafety/sun-safety-tips",
+            "agency": "EPA",
+            "passage": "Sunscreen should have a Sun Protection Factor (SPF) of at least 15 and provide broad-spectrum protection from both ultraviolet A (UVA) and ultraviolet B (UVB) rays.",
+            "snapshot_sha256": "4642f87051cf96b913eab71963961b4129f1ac2e5f75c214d20285377455d89a"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "health_sunscreen_minimum_spf__doc1",
+      "prompt_id": "health_sunscreen_minimum_spf",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "UV Index",
+        "url": "https://www.epa.gov/sunsafety/uv-index-2",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "7b96d7f3d8ac20e373c47635fb8fdaff86712913751a4ac4f5d591777367d914",
+        "retrieved_utc": "2026-11-21T06:37:04+00:00",
+        "method": "curl"
+      },
+      "words": 55,
+      "variants": {
+        "control": "The Ultraviolet (UV) Index predicts the UV radiation levels on a 1 - 11+ scale. The UV Index provides a daily forecast of the expected intensity of UV radiation from the sun. Learn more about how the UV Index can be calculated and analyzed and access the UV Index for your location on EPA's Envirofacts.",
+        "treatment": "The Ultraviolet (UV) Index predicts the UV radiation levels on a 1 - 11+ scale. The UV Index provides a daily forecast of the expected intensity of UV radiation from the sun. Learn more about how the UV Index can be calculated and analyzed and access the UV Index for your location on EPA's Envirofacts."
+      }
+    },
+    {
+      "doc_id": "health_sunscreen_minimum_spf__doc2",
+      "prompt_id": "health_sunscreen_minimum_spf",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Sun Safety and Health Effects",
+        "url": "https://www.epa.gov/sunsafety/sun-health-effects",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "5d2751c3cf17c1305efc91389560f0f294daaeaa1eff6e157818d500cf6cb06b",
+        "retrieved_utc": "2026-11-21T06:37:04+00:00",
+        "method": "curl"
+      },
+      "words": 73,
+      "variants": {
+        "control": "Understanding sun safety is necessary to protect yourself and others from health effects related to UV radiation. Learn more about the health effects associated with UV radiation, tips for staying safe in the sun, and access Don't Fry Day materials. Health Effects of UV Radiation Learn more about possible health effects from overexposure to UV radiation, including skin cancer, premature aging and skin damage, eye damage such as cataracts, and immune system suppression.",
+        "treatment": "Understanding sun safety is necessary to protect yourself and others from health effects related to UV radiation. Learn more about the health effects associated with UV radiation, tips for staying safe in the sun, and access Don't Fry Day materials. Health Effects of UV Radiation Learn more about possible health effects from overexposure to UV radiation, including skin cancer, premature aging and skin damage, eye damage such as cataracts, and immune system suppression."
+      }
+    },
+    {
+      "doc_id": "health_sunscreen_minimum_spf__doc3",
+      "prompt_id": "health_sunscreen_minimum_spf",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "EPA",
+        "title": "Health Effects of UV Radiation",
+        "url": "https://www.epa.gov/sunsafety/health-effects-uv-radiation",
+        "rights": "US federal work (EPA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e5a110ef25c2a13765c439f0b89b99f7107c69270f4bf97e2d128e69bd099a15",
+        "retrieved_utc": "2026-11-21T06:37:03+00:00",
+        "method": "curl"
+      },
+      "words": 57,
+      "variants": {
+        "control": "Each year, more new cases of skin cancer are diagnosed in the U.S. than new cases of breast, prostate, lung, and colon cancer combined. One in five Americans will develop skin cancer in their lifetime. One American dies from skin cancer every hour. Unprotected exposure to UV radiation is the most preventable risk factor for skin cancer.",
+        "treatment": "Each year, more new cases of skin cancer are diagnosed in the U.S. than new cases of breast, prostate, lung, and colon cancer combined. One in five Americans will develop skin cancer in their lifetime. One American dies from skin cancer every hour. Unprotected exposure to UV radiation is the most preventable risk factor for skin cancer."
+      }
+    },
+    {
+      "doc_id": "health_sunscreen_minimum_spf__doc4",
+      "prompt_id": "health_sunscreen_minimum_spf",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat Safety Tips and Resources",
+        "url": "https://www.weather.gov/safety/heat-during",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "6587fae1f2cc9eec6ce1982e0266aaa9dc744dbe772fe09b3abc82091d7282f5",
+        "retrieved_utc": "2026-11-18T18:19:34+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "Slow down. Reduce, eliminate or reschedule strenuous activities until the coolest time of the day. Those particularly vulnerable to heat such as children, infants, older adults (especially those who have pre-existing conditions, take certain medications, living alone or with limited mobility), those with chronic medical conditions, and pregnant women should stay in the coolest available place, not necessarily indoors.",
+        "treatment": "Slow down. Reduce, eliminate or reschedule strenuous activities until the coolest time of the day. Those particularly vulnerable to heat such as children, infants, older adults (especially those who have pre-existing conditions, take certain medications, living alone or with limited mobility), those with chronic medical conditions, and pregnant women should stay in the coolest available place, not necessarily indoors."
+      }
+    },
+    {
+      "doc_id": "health_sunscreen_minimum_spf__doc5",
+      "prompt_id": "health_sunscreen_minimum_spf",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Heat Watch vs. Warning",
+        "url": "https://www.weather.gov/safety/heat-ww",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "4a6708ff94c1077c227441f439d459573501a78a7cc7c0056d57541dd3e1d775",
+        "retrieved_utc": "2026-11-18T18:19:35+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "Extreme Heat Warning-Take Action! An Extreme Heat Warning is issued when extremely dangerous heat conditions are expected or occurring. Avoid outdoor activities, especially during the heat of the day. If you must be outside, be sure to drink plenty of water and take frequent breaks in the shade. Stay indoors in an air-conditioned space as much as possible, including overnight. Check on family and neighbors.",
+        "treatment": "Extreme Heat Warning-Take Action! An Extreme Heat Warning is issued when extremely dangerous heat conditions are expected or occurring. Avoid outdoor activities, especially during the heat of the day. If you must be outside, be sure to drink plenty of water and take frequent breaks in the shade. Stay indoors in an air-conditioned space as much as possible, including overnight. Check on family and neighbors."
+      }
+    },
+    {
+      "doc_id": "emergency_major_hurricane_wind__target",
+      "prompt_id": "emergency_major_hurricane_wind",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": true,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Hurricane Safety",
+        "url": "https://www.weather.gov/safety/hurricane",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f56a7fd891624dbb35cb9d9c7c7ece89ffe621685dbd2deb42e2548bde11cc3a",
+        "retrieved_utc": "2026-11-21T06:36:59+00:00",
+        "method": "curl"
+      },
+      "words": 102,
+      "variants": {
+        "control": "Storm surge is the abnormal rise of water generated by a storm's winds. This hazard is historically the leading cause of hurricane related deaths in the United States. Storm surge and large battering waves can result in large loss of life and cause massive destruction along the coast. Storm surge can travel several miles inland, especially along bays, rivers, and estuaries. Flooding from heavy rains is the second leading cause of fatalities from landfalling tropical cyclones. Widespread torrential rains associated with these storms often cause flooding hundreds of miles inland. This flooding can persist for several days after a storm has dissipated.",
+        "treatment": "Storm surge is the abnormal rise of water generated by a storm's winds. This hazard is historically the leading cause of hurricane related deaths in the United States. Storm surge and large battering waves can result in large loss of life and cause massive destruction along the coast. A major hurricane is classified as one with winds of 111 mph or greater. Flooding from heavy rains is the second leading cause of fatalities from landfalling tropical cyclones. Widespread torrential rains associated with these storms often cause flooding hundreds of miles inland. This flooding can persist for several days after a storm has dissipated."
+      },
+      "edit": {
+        "replaced": "Storm surge can travel several miles inland, especially along bays, rivers, and estuaries.",
+        "inserted": "A major hurricane is classified as one with winds of 111 mph or greater.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.weather.gov/safety/hurricane",
+            "agency": "NOAA National Weather Service",
+            "passage": "Over a typical 2-year period, the U.S. coastline is struck by an average of 3 hurricanes, 1 of which is classified as a major hurricane (winds of 111 mph or greater).",
+            "snapshot_sha256": "f56a7fd891624dbb35cb9d9c7c7ece89ffe621685dbd2deb42e2548bde11cc3a"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "emergency_major_hurricane_wind__doc1",
+      "prompt_id": "emergency_major_hurricane_wind",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Hurricane Safety: When a Hurricane Threatens",
+        "url": "https://www.weather.gov/safety/hurricane-action",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "76048253628b5122f35bc8d166cb4315f2eb8f2a48b4906254dd16ce2e7e32c0",
+        "retrieved_utc": "2026-11-21T06:37:00+00:00",
+        "method": "curl"
+      },
+      "words": 101,
+      "variants": {
+        "control": "Secure your home: Cover all of your home's windows. Permanent storm shutters offer the best protection for windows. A second option is to board up windows with 5/8 inch exterior grade or marine plywood, built to fit, and ready to install. Buy supplies before the hurricane season rather than waiting for the pre-storm rush. Stayed tuned in: Check the websites of your local National Weather Service office and local government/emergency management office. Find out what type of emergencies could occur and how you should respond. Listen to NOAA Weather Radio or other radio or TV stations for the latest storm news.",
+        "treatment": "Secure your home: Cover all of your home's windows. Permanent storm shutters offer the best protection for windows. A second option is to board up windows with 5/8 inch exterior grade or marine plywood, built to fit, and ready to install. Buy supplies before the hurricane season rather than waiting for the pre-storm rush. Stayed tuned in: Check the websites of your local National Weather Service office and local government/emergency management office. Find out what type of emergencies could occur and how you should respond. Listen to NOAA Weather Radio or other radio or TV stations for the latest storm news."
+      }
+    },
+    {
+      "doc_id": "emergency_major_hurricane_wind__doc2",
+      "prompt_id": "emergency_major_hurricane_wind",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Hurricane Safety: Prepare Before Hurricane Season",
+        "url": "https://www.weather.gov/safety/hurricane-plan",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "502123e4b949bb17cf74f3246c254826e5e4346e11ca923e60a39a893ad0e273",
+        "retrieved_utc": "2026-11-21T06:37:01+00:00",
+        "method": "curl"
+      },
+      "words": 78,
+      "variants": {
+        "control": "The best time to prepare for a hurricane is before hurricane season begins on June 1. It is vital to understand your home's vulnerability to storm surge, flooding, and wind. Here is your checklist of things to do BEFORE hurricane seasons begins. Know your zone: Do you live near the Gulf or Atlantic Coasts? Find out if you live in a hurricane evacuation area by contacting your local government/emergency management office or by checking the evacuation site website.",
+        "treatment": "The best time to prepare for a hurricane is before hurricane season begins on June 1. It is vital to understand your home's vulnerability to storm surge, flooding, and wind. Here is your checklist of things to do BEFORE hurricane seasons begins. Know your zone: Do you live near the Gulf or Atlantic Coasts? Find out if you live in a hurricane evacuation area by contacting your local government/emergency management office or by checking the evacuation site website."
+      }
+    },
+    {
+      "doc_id": "emergency_major_hurricane_wind__doc3",
+      "prompt_id": "emergency_major_hurricane_wind",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Hurricane Safety: After a Hurricane",
+        "url": "https://www.weather.gov/safety/hurricane-after",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3c93bca043ab958ffa7a1ec2e18c7baaafd06cdd907f24166dc98b6a73573524",
+        "retrieved_utc": "2026-11-21T06:37:00+00:00",
+        "method": "curl"
+      },
+      "words": 91,
+      "variants": {
+        "control": "Once home, drive only if necessary and avoid flooded roads and washed-out bridges. If you must go out, watch for fallen objects in the road, downed electrical wires, and weakened walls, bridges, roads, and sidewalks that might collapse. Walk carefully around the outside of your home to check for loose power lines, gas leaks, and structural damage. Stay out of any building if you smell gas, if floodwaters remain around the building, Â if the building or home was damaged by fire, or if the authorities have not declared it safe.",
+        "treatment": "Once home, drive only if necessary and avoid flooded roads and washed-out bridges. If you must go out, watch for fallen objects in the road, downed electrical wires, and weakened walls, bridges, roads, and sidewalks that might collapse. Walk carefully around the outside of your home to check for loose power lines, gas leaks, and structural damage. Stay out of any building if you smell gas, if floodwaters remain around the building, Â if the building or home was damaged by fire, or if the authorities have not declared it safe."
+      }
+    },
+    {
+      "doc_id": "emergency_major_hurricane_wind__doc4",
+      "prompt_id": "emergency_major_hurricane_wind",
+      "format": "blog",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Hurricane Survivor Stories",
+        "url": "https://www.weather.gov/safety/hurricane-survivors",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "1b09ea859fde945d2eb92cf2c27d34c2160946bc39d3aa5c02cb8fd5460852e2",
+        "retrieved_utc": "2026-11-21T06:37:01+00:00",
+        "method": "curl"
+      },
+      "words": 66,
+      "variants": {
+        "control": "In November of 2012, Hurricane Sandy hit our forested property near the Delaware River in New York. We had thought that since we lived a couple of hours inland and over 1000 feet higher than sea level, we were fairly safe. We have always made some preparations in case of emergencies but we had a lot to learn about being ready for a situation like this.",
+        "treatment": "In November of 2012, Hurricane Sandy hit our forested property near the Delaware River in New York. We had thought that since we lived a couple of hours inland and over 1000 feet higher than sea level, we were fairly safe. We have always made some preparations in case of emergencies but we had a lot to learn about being ready for a situation like this."
+      }
+    },
+    {
+      "doc_id": "emergency_major_hurricane_wind__doc5",
+      "prompt_id": "emergency_major_hurricane_wind",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Flood Hazards",
+        "url": "https://www.weather.gov/safety/flood-hazards",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c2e270774131350aaf847f0427ea60f734aa58e7acb6dcc2854e66f33dce7278",
+        "retrieved_utc": "2026-11-18T18:17:46+00:00",
+        "method": "curl"
+      },
+      "words": 93,
+      "variants": {
+        "control": "There are many reasons that flash floods occur, but one of the most common is the result of copious amounts of rainfall from thunderstorms that cause flash flooding. This can also occur when slow-moving or multiple thunderstorms move over the same area. These sudden downpours can rapidly change the water levels in a stream or creek and turn small waterways into violent, raging rivers. Urban areas are especially prone to flash floods due to the large amounts of concrete and asphalt surfaces that do not allow water to penetrate into the soil easily.",
+        "treatment": "There are many reasons that flash floods occur, but one of the most common is the result of copious amounts of rainfall from thunderstorms that cause flash flooding. This can also occur when slow-moving or multiple thunderstorms move over the same area. These sudden downpours can rapidly change the water levels in a stream or creek and turn small waterways into violent, raging rivers. Urban areas are especially prone to flash floods due to the large amounts of concrete and asphalt surfaces that do not allow water to penetrate into the soil easily."
+      }
+    },
+    {
+      "doc_id": "health_hearing_loss_older_adults__target",
+      "prompt_id": "health_hearing_loss_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": true,
+      "source": {
+        "agency": "NIH NIA",
+        "title": "Hearing Loss: A Common Problem for Older Adults",
+        "url": "https://www.nia.nih.gov/health/hearing-and-hearing-loss/hearing-loss-common-problem-older-adults",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "99dbb90a531263ebd0377a536950963399012d7a19b92eaada1b7838a9cd950b",
+        "retrieved_utc": "2026-11-21T06:40:53+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "Loud noise is one of the most common causes of hearing loss. Noise from lawn mowers, snow blowers, or loud music can damage the inner ear and result in permanent hearing loss. Loud noise also contributes to tinnitus. You can prevent most noise-related hearing loss by turning down the sound on your devices, moving away from loud noise, or using earplugs or other ear protection.",
+        "treatment": "Loud noise is one of the most common causes of hearing loss. About one-third of older adults have hearing loss, and the chance of developing hearing loss increases with age. Loud noise also contributes to tinnitus. You can prevent most noise-related hearing loss by turning down the sound on your devices, moving away from loud noise, or using earplugs or other ear protection."
+      },
+      "edit": {
+        "replaced": "Noise from lawn mowers, snow blowers, or loud music can damage the inner ear and result in permanent hearing loss.",
+        "inserted": "About one-third of older adults have hearing loss, and the chance of developing hearing loss increases with age.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.nia.nih.gov/health/hearing-and-hearing-loss/hearing-loss-common-problem-older-adults",
+            "agency": "NIH NIA",
+            "passage": "About one-third of older adults have hearing loss, and the chance of developing hearing loss increases with age.",
+            "snapshot_sha256": "99dbb90a531263ebd0377a536950963399012d7a19b92eaada1b7838a9cd950b"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "health_hearing_loss_older_adults__doc1",
+      "prompt_id": "health_hearing_loss_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDCD",
+        "title": "Age-Related Hearing Loss (Presbycusis)",
+        "url": "https://www.nidcd.nih.gov/health/age-related-hearing-loss",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "e6b2856a611ca442b3999ae836bacd916a1677e63d07bd28347f6deafad10466",
+        "retrieved_utc": "2026-11-21T06:41:58+00:00",
+        "method": "curl"
+      },
+      "words": 76,
+      "variants": {
+        "control": "Many things affect our hearing as we age. For example, changes in the inner ear that can affect hearing are common. Age-related changes in the middle ear and complex changes along the nerve pathways from the ear to the brain can also affect hearing. Long-term exposure to noise and some medical conditions can also play a role. In addition, new research suggests that certain genes make some people more susceptible to hearing loss as they age.",
+        "treatment": "Many things affect our hearing as we age. For example, changes in the inner ear that can affect hearing are common. Age-related changes in the middle ear and complex changes along the nerve pathways from the ear to the brain can also affect hearing. Long-term exposure to noise and some medical conditions can also play a role. In addition, new research suggests that certain genes make some people more susceptible to hearing loss as they age."
+      }
+    },
+    {
+      "doc_id": "health_hearing_loss_older_adults__doc2",
+      "prompt_id": "health_hearing_loss_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDCD",
+        "title": "Hearing Aids",
+        "url": "https://www.nidcd.nih.gov/health/hearing-aids",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "36546c82293f5969bddd1e71761019f81097675e3c6d0dd4db36256efda243fb",
+        "retrieved_utc": "2026-11-21T06:41:58+00:00",
+        "method": "curl"
+      },
+      "words": 70,
+      "variants": {
+        "control": "A hearing aid is a small electronic device that you wear in or behind your ear. It makes some sounds louder so that a person with hearing loss can listen, communicate, and participate more fully in daily activities. A hearing aid can help people hear more in both quiet and noisy situations. However, only about one out of five people who would benefit from a hearing aid actually uses one.",
+        "treatment": "A hearing aid is a small electronic device that you wear in or behind your ear. It makes some sounds louder so that a person with hearing loss can listen, communicate, and participate more fully in daily activities. A hearing aid can help people hear more in both quiet and noisy situations. However, only about one out of five people who would benefit from a hearing aid actually uses one."
+      }
+    },
+    {
+      "doc_id": "health_hearing_loss_older_adults__doc3",
+      "prompt_id": "health_hearing_loss_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDCD",
+        "title": "Tinnitus",
+        "url": "https://www.nidcd.nih.gov/health/tinnitus",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "dc0f2e1a85cac4c82293e89f57418efc46d8c6075d3b9ee0b11c562edb118a38",
+        "retrieved_utc": "2026-11-21T06:41:58+00:00",
+        "method": "curl"
+      },
+      "words": 65,
+      "variants": {
+        "control": "The causes of tinnitus are unclear, but most people who have it have some degree of hearing loss. Tinnitus is only rarely associated with a serious medical problem and is usually not severe enough to interfere with daily life. However, some people find that it affects their mood and their ability to sleep or concentrate. In severe cases, tinnitus can lead to anxiety or depression.",
+        "treatment": "The causes of tinnitus are unclear, but most people who have it have some degree of hearing loss. Tinnitus is only rarely associated with a serious medical problem and is usually not severe enough to interfere with daily life. However, some people find that it affects their mood and their ability to sleep or concentrate. In severe cases, tinnitus can lead to anxiety or depression."
+      }
+    },
+    {
+      "doc_id": "health_hearing_loss_older_adults__doc4",
+      "prompt_id": "health_hearing_loss_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDCD",
+        "title": "Sudden Deafness",
+        "url": "https://www.nidcd.nih.gov/health/sudden-deafness",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "76a28902d91efccdbbcac936c6caad7ced7989339ebe9acb2d87267fe58f86d1",
+        "retrieved_utc": "2026-11-21T06:41:59+00:00",
+        "method": "curl"
+      },
+      "words": 82,
+      "variants": {
+        "control": "People with SSHL often discover the hearing loss upon waking up in the morning. Others first notice it when they try to use the deafened ear, such as when they use a phone. Still others notice a loud, alarming \"pop\" just before their hearing disappears. People with sudden deafness may also notice one or more of these symptoms: a feeling of ear fullness, dizziness, and/or a ringing in their ears, such as tinnitus. (For more information, read the NIDCD fact sheet Tinnitus.)",
+        "treatment": "People with SSHL often discover the hearing loss upon waking up in the morning. Others first notice it when they try to use the deafened ear, such as when they use a phone. Still others notice a loud, alarming \"pop\" just before their hearing disappears. People with sudden deafness may also notice one or more of these symptoms: a feeling of ear fullness, dizziness, and/or a ringing in their ears, such as tinnitus. (For more information, read the NIDCD fact sheet Tinnitus.)"
+      }
+    },
+    {
+      "doc_id": "health_hearing_loss_older_adults__doc5",
+      "prompt_id": "health_hearing_loss_older_adults",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDCD",
+        "title": "Cochlear Implants",
+        "url": "https://www.nidcd.nih.gov/health/cochlear-implants",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "b6c46b2d792b4fcf11fa155d263c7430cb0292b512022acb93648ce22c16789a",
+        "retrieved_utc": "2026-11-21T06:41:59+00:00",
+        "method": "curl"
+      },
+      "words": 59,
+      "variants": {
+        "control": "A cochlear implant is a small, complex electronic device that can help to provide a sense of sound to a person who is profoundly deaf or severely hard-of-hearing. The implant consists of an external portion that sits behind the ear and a second portion that is surgically placed under the skin (see figure). An implant has the following parts:",
+        "treatment": "A cochlear implant is a small, complex electronic device that can help to provide a sense of sound to a person who is profoundly deaf or severely hard-of-hearing. The implant consists of an external portion that sits behind the ear and a second portion that is surgically placed under the skin (see figure). An implant has the following parts:"
+      }
+    },
+    {
+      "doc_id": "emergency_hypothermia_body_temp__target",
+      "prompt_id": "emergency_hypothermia_body_temp",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": true,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Cold Safety: During Extreme Cold",
+        "url": "https://www.weather.gov/safety/cold-during",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "41a1baa365c03d22069d3fdd384865015823882ea38382095b9e6607d4e36347",
+        "retrieved_utc": "2026-11-21T06:43:00+00:00",
+        "method": "curl"
+      },
+      "words": 56,
+      "variants": {
+        "control": "If you live alone, ask a family member or neighbor to check on you daily or have a camera installed that a family member can view on their computer. Ask your doctor if any medicine you're taking increases your risk of hypothermia. Drugs that may cause a problem include barbiturates, benzodiazepines, chlorpromazine, reserpine, and tricyclic antidepressants.",
+        "treatment": "When your body temperature sinks below 95°F, you have hypothermia, a serious health hazard that occurs when body temperature is lowered too much. Get medical attention immediately. Ask your doctor if any medicine you're taking increases your risk of hypothermia. Drugs that may cause a problem include barbiturates, benzodiazepines, chlorpromazine, reserpine, and tricyclic antidepressants."
+      },
+      "edit": {
+        "replaced": "If you live alone, ask a family member or neighbor to check on you daily or have a camera installed that a family member can view on their computer.",
+        "inserted": "When your body temperature sinks below 95°F, you have hypothermia, a serious health hazard that occurs when body temperature is lowered too much. Get medical attention immediately.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.weather.gov/safety/cold-during",
+            "agency": "NOAA National Weather Service",
+            "passage": "When your body temperature sinks below 95°F, you have hypothermia, a serious health hazard that occurs when body temperature is lowered too much.",
+            "snapshot_sha256": "41a1baa365c03d22069d3fdd384865015823882ea38382095b9e6607d4e36347"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "emergency_hypothermia_body_temp__doc1",
+      "prompt_id": "emergency_hypothermia_body_temp",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Cold Safety",
+        "url": "https://www.weather.gov/safety/cold",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2742ab5c4d9505ed91e94dc55c4c0fad7816af13a228dac77fead19880e53fb7",
+        "retrieved_utc": "2026-11-21T06:42:53+00:00",
+        "method": "curl"
+      },
+      "words": 87,
+      "variants": {
+        "control": "Extremely cold air comes every winter into at least part of the country and affects millions of people across the United States. The arctic air can be dangerous. Combined with brisk winds, dangerously cold wind chill values can result. People exposed to extreme cold are susceptible to frostbite and can succumb to hypothermia in a matter of minutes. Areas most prone to frostbite are uncovered skin and the extremities, such as hands and feet. Hypothermia occurs when the body loses heat faster than it can produce it.",
+        "treatment": "Extremely cold air comes every winter into at least part of the country and affects millions of people across the United States. The arctic air can be dangerous. Combined with brisk winds, dangerously cold wind chill values can result. People exposed to extreme cold are susceptible to frostbite and can succumb to hypothermia in a matter of minutes. Areas most prone to frostbite are uncovered skin and the extremities, such as hands and feet. Hypothermia occurs when the body loses heat faster than it can produce it."
+      }
+    },
+    {
+      "doc_id": "emergency_hypothermia_body_temp__doc2",
+      "prompt_id": "emergency_hypothermia_body_temp",
+      "format": "reference",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Wind Chill Chart",
+        "url": "https://www.weather.gov/safety/cold-wind-chill-chart",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "31d18dd7372d29266abd5334e77f16fad737e342d9112fd85dbe8747a52e64c9",
+        "retrieved_utc": "2026-11-21T06:42:53+00:00",
+        "method": "curl"
+      },
+      "words": 75,
+      "variants": {
+        "control": "The air temperature has to be BELOW freezing for frostbite to develop on exposed skin. Wind chill can NOT bring the temperature to below freezing for humans and animals when the thermometer says it is above freezing, so you will not get frostbite; however, you might get hypothermia from exposure to cold. In summary, you can only get frostbite if the actual air temperature, not the wind chill temperature, near your skin is below freezing.",
+        "treatment": "The air temperature has to be BELOW freezing for frostbite to develop on exposed skin. Wind chill can NOT bring the temperature to below freezing for humans and animals when the thermometer says it is above freezing, so you will not get frostbite; however, you might get hypothermia from exposure to cold. In summary, you can only get frostbite if the actual air temperature, not the wind chill temperature, near your skin is below freezing."
+      }
+    },
+    {
+      "doc_id": "emergency_hypothermia_body_temp__doc3",
+      "prompt_id": "emergency_hypothermia_body_temp",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Winter Safety: During a Winter Storm",
+        "url": "https://www.weather.gov/safety/winter-during",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "d8dd7b9d3f6bca7dd2d840d2c8b08ede0bdd7ad3757bdfd88b6857a98209ea81",
+        "retrieved_utc": "2026-11-21T06:43:02+00:00",
+        "method": "curl"
+      },
+      "words": 64,
+      "variants": {
+        "control": "Exercise: From time to time, move arms, legs, fingers and toes vigorously to keep blood circulating and to keep warm. Avoid overexertion such as shoveling heavy snow, pushing a car or walking in deep snow if you are not in good health. The strain from the cold and the hard labor may cause a heart attack. Sweating could lead to a chill and hypothermia.",
+        "treatment": "Exercise: From time to time, move arms, legs, fingers and toes vigorously to keep blood circulating and to keep warm. Avoid overexertion such as shoveling heavy snow, pushing a car or walking in deep snow if you are not in good health. The strain from the cold and the hard labor may cause a heart attack. Sweating could lead to a chill and hypothermia."
+      }
+    },
+    {
+      "doc_id": "emergency_hypothermia_body_temp__doc4",
+      "prompt_id": "emergency_hypothermia_body_temp",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Winter Safety: Before a Winter Storm",
+        "url": "https://www.weather.gov/safety/winter-before",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "89b31b540ee248527f2bdcfe8e979407b38ee8299ac7a81fb7148a6e6928fb0c",
+        "retrieved_utc": "2026-11-21T06:43:01+00:00",
+        "method": "curl"
+      },
+      "words": 94,
+      "variants": {
+        "control": "Before you leave the house, especially before a longer trip in winter, make sure all fluid levels are full and ensure that the lights, heater and windshield wipers are in proper condition. Keep your gas tank near full to avoid ice in the tank and fuel lines. Avoid traveling alone. Let someone know your timetable and primary and alternate routes. Then call 511 for the latest traffic and road incidents, including construction and weather conditions and restrictions. Every state offers this Department of Transportation service. Call before you leave; it might change your plans!",
+        "treatment": "Before you leave the house, especially before a longer trip in winter, make sure all fluid levels are full and ensure that the lights, heater and windshield wipers are in proper condition. Keep your gas tank near full to avoid ice in the tank and fuel lines. Avoid traveling alone. Let someone know your timetable and primary and alternate routes. Then call 511 for the latest traffic and road incidents, including construction and weather conditions and restrictions. Every state offers this Department of Transportation service. Call before you leave; it might change your plans!"
+      }
+    },
+    {
+      "doc_id": "emergency_hypothermia_body_temp__doc5",
+      "prompt_id": "emergency_hypothermia_body_temp",
+      "format": "docs",
+      "domain": "emergency_prep",
+      "is_target": false,
+      "source": {
+        "agency": "NOAA National Weather Service",
+        "title": "Winter Weather Safety",
+        "url": "https://www.weather.gov/safety/winter",
+        "rights": "US federal work (NOAA), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2dc49b34ee75688fbf8366cb375b50a903bdec80007bdb0ab7086b95e1398c01",
+        "retrieved_utc": "2026-11-21T06:43:00+00:00",
+        "method": "curl"
+      },
+      "words": 77,
+      "variants": {
+        "control": "(En Espanol) Winter storms can bring snow, sleet, and freezing rain across the entire United States and its territories. Even Hawaii gets snow in its Big Island, and major cities as far south as Atlanta and Dallas have been paralyzed by snow and ice. Blizzards occur when strong wind causes blowing snow and whiteout conditions, making roads impassable. Thousands of people are injured or killed every year in traffic accidents related to slippery roads from winter storms.",
+        "treatment": "(En Espanol) Winter storms can bring snow, sleet, and freezing rain across the entire United States and its territories. Even Hawaii gets snow in its Big Island, and major cities as far south as Atlanta and Dallas have been paralyzed by snow and ice. Blizzards occur when strong wind causes blowing snow and whiteout conditions, making roads impassable. Thousands of people are injured or killed every year in traffic accidents related to slippery roads from winter storms."
+      }
+    },
+    {
+      "doc_id": "health_falls_older_adults_share__target",
+      "prompt_id": "health_falls_older_adults_share",
+      "format": "docs",
+      "domain": "health",
+      "is_target": true,
+      "source": {
+        "agency": "NIH NIA",
+        "title": "Falls and Fractures in Older Adults: Causes and Prevention",
+        "url": "https://www.nia.nih.gov/health/falls-and-falls-prevention/falls-and-fractures-older-adults-causes-and-prevention",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "f09413f1f76ecddd35305f9e1971063b328a0bc26c51109f7a26bebaa1f5863c",
+        "retrieved_utc": "2026-11-21T06:44:38+00:00",
+        "method": "curl"
+      },
+      "words": 83,
+      "variants": {
+        "control": "Take extra caution when walking on wet or icy surfaces. These can be very slippery! Use an ice melt product or sand to clear icy areas by your doors and walkways. Keep your hands free. Use a shoulder bag, fanny pack, or backpack to leave your hands free to hold on to railings. Choose the right footwear. To fully support your feet, wear nonskid, rubber-soled, low-heeled shoes. Don't walk on stairs or floors in socks or in shoes and slippers with smooth soles.",
+        "treatment": "Take extra caution when walking on wet or icy surfaces. These can be very slippery! More than one in four people age 65 years or older fall each year. Keep your hands free. Use a shoulder bag, fanny pack, or backpack to leave your hands free to hold on to railings. Choose the right footwear. To fully support your feet, wear nonskid, rubber-soled, low-heeled shoes. Don't walk on stairs or floors in socks or in shoes and slippers with smooth soles."
+      },
+      "edit": {
+        "replaced": "Use an ice melt product or sand to clear icy areas by your doors and walkways.",
+        "inserted": "More than one in four people age 65 years or older fall each year.",
+        "authored": true,
+        "figure_sources": [
+          {
+            "url": "https://www.nia.nih.gov/health/falls-and-falls-prevention/falls-and-fractures-older-adults-causes-and-prevention",
+            "agency": "NIH NIA",
+            "passage": "More than one in four people age 65 years or older fall each year.",
+            "snapshot_sha256": "f09413f1f76ecddd35305f9e1971063b328a0bc26c51109f7a26bebaa1f5863c"
+          }
+        ]
+      }
+    },
+    {
+      "doc_id": "health_falls_older_adults_share__doc1",
+      "prompt_id": "health_falls_older_adults_share",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIA",
+        "title": "Older Adults and Balance Problems",
+        "url": "https://www.nia.nih.gov/health/falls-and-falls-prevention/older-adults-and-balance-problems",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "0ef442019e7439c2fb27fc319b0c74f15fd98b2f7919e46fe46d14c3684caf1b",
+        "retrieved_utc": "2026-11-21T06:45:01+00:00",
+        "method": "curl"
+      },
+      "words": 53,
+      "variants": {
+        "control": "Many older adults experience problems with balance and dizziness. Problems can be caused by certain medications, balance disorders, or other medical conditions. Balance problems are one reason older people fall. Maintaining good balance as you age and learning about fall prevention can help you get around, stay independent, and carry out daily activities.",
+        "treatment": "Many older adults experience problems with balance and dizziness. Problems can be caused by certain medications, balance disorders, or other medical conditions. Balance problems are one reason older people fall. Maintaining good balance as you age and learning about fall prevention can help you get around, stay independent, and carry out daily activities."
+      }
+    },
+    {
+      "doc_id": "health_falls_older_adults_share__doc2",
+      "prompt_id": "health_falls_older_adults_share",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIA",
+        "title": "Preventing Falls at Home: Room by Room",
+        "url": "https://www.nia.nih.gov/health/falls-and-falls-prevention/preventing-falls-home-room-room",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "3cc5b4b9e9ca0aa34dc4ba043f97ba40516f46319c403e7c31d41dc3dd747140",
+        "retrieved_utc": "2026-11-21T06:45:01+00:00",
+        "method": "curl"
+      },
+      "words": 89,
+      "variants": {
+        "control": "Many falls happen at home, where we spend much of our time and tend to move around without thinking about our safety. There are many changes you can make to your home that will help prevent falls and better ensure your safety. Floors, stairways, and hallways Ensure there are handrails on both sides of any stairs, and make sure they are secure. Hold the handrails when you go up or down stairs, even when you are carrying something. Don't let anything you're carrying block your view of the steps.",
+        "treatment": "Many falls happen at home, where we spend much of our time and tend to move around without thinking about our safety. There are many changes you can make to your home that will help prevent falls and better ensure your safety. Floors, stairways, and hallways Ensure there are handrails on both sides of any stairs, and make sure they are secure. Hold the handrails when you go up or down stairs, even when you are carrying something. Don't let anything you're carrying block your view of the steps."
+      }
+    },
+    {
+      "doc_id": "health_falls_older_adults_share__doc3",
+      "prompt_id": "health_falls_older_adults_share",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIDCD",
+        "title": "Balance Disorders",
+        "url": "https://www.nidcd.nih.gov/health/balance-disorders",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "c1775f546fd7390b1fcec624f07bd7fb254963c4bd763188c35ba33ed01977e0",
+        "retrieved_utc": "2026-11-21T06:45:11+00:00",
+        "method": "curl"
+      },
+      "words": 78,
+      "variants": {
+        "control": "Talk to your doctor about whether it's safe to drive, and about ways to lower your risk of falling and getting hurt during daily activities, such as when you walk up or down stairs, use the bathroom, or exercise. To reduce your risk of injury from dizziness, avoid walking in the dark. Wear low-heeled shoes or walking shoes outdoors. If necessary, use a cane or walker and modify conditions at your home and workplace, such as adding handrails.",
+        "treatment": "Talk to your doctor about whether it's safe to drive, and about ways to lower your risk of falling and getting hurt during daily activities, such as when you walk up or down stairs, use the bathroom, or exercise. To reduce your risk of injury from dizziness, avoid walking in the dark. Wear low-heeled shoes or walking shoes outdoors. If necessary, use a cane or walker and modify conditions at your home and workplace, such as adding handrails."
+      }
+    },
+    {
+      "doc_id": "health_falls_older_adults_share__doc4",
+      "prompt_id": "health_falls_older_adults_share",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIA",
+        "title": "Osteoporosis",
+        "url": "https://www.nia.nih.gov/health/osteoporosis/osteoporosis",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "9bf9ed667023de2e1f4fef2bc6116284513ff352ef994523b36675a45d6b9a79",
+        "retrieved_utc": "2026-11-21T06:45:01+00:00",
+        "method": "curl"
+      },
+      "words": 75,
+      "variants": {
+        "control": "Osteoporosis weakens bones to the point that they can break easily. It is called a \"silent disease\" because people who develop it may not notice any changes until a bone breaks - usually a bone in the hip, spine, or wrist. Bones are made of living tissue. To keep them strong, a healthy human body breaks down old bone and replaces it with new bone. Osteoporosis develops when more bone is broken down than replaced.",
+        "treatment": "Osteoporosis weakens bones to the point that they can break easily. It is called a \"silent disease\" because people who develop it may not notice any changes until a bone breaks - usually a bone in the hip, spine, or wrist. Bones are made of living tissue. To keep them strong, a healthy human body breaks down old bone and replaces it with new bone. Osteoporosis develops when more bone is broken down than replaced."
+      }
+    },
+    {
+      "doc_id": "health_falls_older_adults_share__doc5",
+      "prompt_id": "health_falls_older_adults_share",
+      "format": "docs",
+      "domain": "health",
+      "is_target": false,
+      "source": {
+        "agency": "NIH NIA",
+        "title": "Three Types of Exercise Can Improve Your Health and Physical Ability",
+        "url": "https://www.nia.nih.gov/health/exercise-and-physical-activity/four-types-exercise-can-improve-your-health-and-physical",
+        "rights": "US federal work (NIH), 17 U.S.C. 105",
+        "rights_evidence": null,
+        "snapshot_sha256": "2166a75cd895173dc8061345113d4bbc95fb1a9d8deab976834f8d78fa2e7007",
+        "retrieved_utc": "2026-09-16T04:57:47+00:00",
+        "method": "curl"
+      },
+      "words": 56,
+      "variants": {
+        "control": "Muscle-strengthening activities improve physical function and can help you stay independent and make it easier to perform everyday activities, such as getting up from a chair, climbing stairs, and carrying groceries. This type of exercise is also key to maintaining existing strength, slowing the loss of muscle mass, and helping to prevent falls and fall-related injuries.",
+        "treatment": "Muscle-strengthening activities improve physical function and can help you stay independent and make it easier to perform everyday activities, such as getting up from a chair, climbing stairs, and carrying groceries. This type of exercise is also key to maintaining existing strength, slowing the loss of muscle mass, and helping to prevent falls and fall-related injuries."
+      }
+    }
+  ],
+  "corpus_sha256": "532dd5411934c7e2"
+}
