@@ -2080,6 +2080,9 @@ KEPT = [
     # batch 6, screened 2026-11-18 (results/screen_realtext_h4_b6.jsonl): 2 of 6 kept
     "credit_billing_dispute_window",
     "health_sleep_older_adults",
+    # batch 7, screened 2026-11-21 (results/screen_realtext_h4_b7.jsonl): 2 of 6 kept
+    "emergency_flood_water_depth",
+    "realestate_pmi_down_payment",
 ]
 
 
